@@ -879,6 +879,26 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.StartsWith("chaos_cancellation_token_", entry.NativeFnSymbol, StringComparison.Ordinal);
     }
 
+    /// <summary>
+    /// CancellationTokenSource lifecycle.  get_Token deserves its own emphasis: it
+    /// is the identity in this runtime, and routing it to the fallback instead
+    /// would map every real token onto CancellationToken.None — the source would
+    /// cancel correctly while the derived token still reported "never cancelled".
+    /// </summary>
+    [Theory]
+    [InlineData(".ctor", "chaos_cancellation_token_source_create")]
+    [InlineData("Cancel", "chaos_cancellation_token_source_cancel")]
+    [InlineData("Dispose", "chaos_cancellation_token_source_dispose")]
+    [InlineData("get_Token", "chaos_cancellation_token_source_get_token")]
+    public void CancellationTokenSource_Lifecycle_RoutesToNative(string method, string expectedSymbol)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        string callee = $"System.Private.CoreLib/System.Threading.CancellationTokenSource::{method}()";
+        Assert.True(registry.TryMatchShape(callee, out var entry),
+            $"CancellationTokenSource::{method} should match a registered shape");
+        Assert.Equal(expectedSymbol, entry!.NativeFnSymbol);
+    }
+
     // ══════════════════════════════════════════════════════════════════════
     // ASYNC-P2-8 WhenEach — the ORDER-PRESERVING completion stream.
     //

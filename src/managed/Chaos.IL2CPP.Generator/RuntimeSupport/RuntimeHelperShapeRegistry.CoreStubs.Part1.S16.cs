@@ -1568,6 +1568,56 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Phase 3: CancellationTokenSource lifecycle.
+        ///
+        /// create / Cancel / Dispose / get_Token.  A managed CancellationTokenSource
+        /// is identified by its source id in this runtime, and get_Token is the
+        /// identity (0 = CancellationToken.None).
+        ///
+        /// <para>
+        /// <b>get_Token must not be routed to the fallback.</b>  Returning 0 there
+        /// would turn every real token into CancellationToken.None — the source
+        /// would cancel correctly and the token derived from it would still report
+        /// "never cancelled", so the acceptance counter-example
+        /// (Task.Delay(10s, cts.Token) + Cancel() completing in ~10ms) would wait
+        /// the full 10 seconds while every individual call looked wired.
+        /// </para>
+        /// </summary>
+        private static void RegisterCancellationTokenSource(RuntimeHelperShapeRegistry registry)
+        {
+            // .ctor() — creates a source, returns its id.
+            registry.Register("System.Threading.CancellationTokenSource", ".ctor", [],
+                ShapeKind.SimpleForward, "chaos_cancellation_token_source_create",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateInt32AbiSlot(),
+                EmptyRawArgumentIndices);
+
+            // Cancel() — fires all registered callbacks.
+            registry.Register("System.Threading.CancellationTokenSource", "Cancel", [],
+                ShapeKind.SimpleForward, "chaos_cancellation_token_source_cancel",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // Dispose() — cancels the timer and invalidates the source.
+            registry.Register("System.Threading.CancellationTokenSource", "Dispose", [],
+                ShapeKind.SimpleForward, "chaos_cancellation_token_source_dispose",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // get_Token — identity in this runtime (token IS its source id).
+            registry.Register("System.Threading.CancellationTokenSource", "get_Token", [],
+                ShapeKind.SimpleForward, "chaos_cancellation_token_source_get_token",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+        }
+
+        /// <summary>
         /// Decimal
         /// </summary>
         private static void RegisterDecimal(RuntimeHelperShapeRegistry registry)

@@ -266,3 +266,48 @@ extern "C" void chaos_cancellation_token_throw_if_cancellation_requested(
     // error detail is not surfaced here — the cancellation model only
     // requires the task to transition to a canceled-rather-than-faulted state.
 }
+
+// ── CancellationTokenSource lifecycle (extern "C" for codegen) ──
+// A managed CancellationTokenSource is identified by its source id; the C++
+// CTS object is a handle into the runtime's table.
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_source_create(void) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_INT32>(
+        chaos::il2cpp::runtime_core::threading::CancellationTokenSourceCreate());
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_source_create_with_timer(
+    CHAOS_IL2CPP_INT32 due_time_ms) noexcept
+{
+    if (due_time_ms < 0) return 0;
+    return static_cast<CHAOS_IL2CPP_INT32>(
+        chaos::il2cpp::runtime_core::threading::CancellationTokenSourceCreateWithTimer(
+            static_cast<uint32_t>(due_time_ms)));
+}
+
+extern "C" void chaos_cancellation_token_source_cancel(
+    CHAOS_IL2CPP_INT32 source_id) noexcept
+{
+    if (source_id == 0) return;
+    chaos::il2cpp::runtime_core::threading::CancellationTokenSourceCancel(
+        static_cast<uint32_t>(source_id));
+}
+
+extern "C" void chaos_cancellation_token_source_dispose(
+    CHAOS_IL2CPP_INT32 source_id) noexcept
+{
+    if (source_id == 0) return;
+    chaos::il2cpp::runtime_core::threading::CancellationTokenSourceDispose(
+        static_cast<uint32_t>(source_id));
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_source_get_token(
+    CHAOS_IL2CPP_INT32 source_id) noexcept
+{
+    // In this runtime a CancellationToken IS its source id (0 = None), so the
+    // accessor is the identity.  It exists as a named entry point because
+    // generated code calls the managed accessor and must not be routed to the
+    // fallback (which would return 0 and silently degrade a real token to None).
+    return source_id;
+}
