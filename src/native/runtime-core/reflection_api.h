@@ -264,6 +264,48 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetRaiseMethod(CHAOS_IL2CPP_INTPTR evt) 
 CHAOS_IL2CPP_INT32  ChaosReflectionEventGetIsMulticast(CHAOS_IL2CPP_INTPTR evt) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionEventGetHashCodeVersion(CHAOS_IL2CPP_INTPTR evt) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionEventEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
+
+/* ── PropertyInfo / ParameterInfo / MemberInfo / MethodBase remaining ──
+ * Custom-modifier queries return the empty set (the descriptors record no
+ * modifier list, matching a member with no modifiers). Paths that genuinely
+ * cannot be answered under AOT (MemberInfo.Module for unresolved members,
+ * GetCurrentMethod, GetMethodBody) report unresolved with the reason recorded.
+ */
+CHAOS_IL2CPP_INT32  ChaosReflectionPropertyGetHashCodeVersion(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionPropertyEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetAccessors(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetConstantValue(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetRawConstantValue(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR prop) noexcept;
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetCustomAttributesData(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetCustomAttributes(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamIsDefined(CHAOS_IL2CPP_INTPTR param, CHAOS_IL2CPP_INTPTR attribute_type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetRawDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetHasDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetRealObject(CHAOS_IL2CPP_INTPTR param) noexcept;
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionMemberGetCustomAttributesData(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMemberGetCustomAttributes(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMemberIsDefined(CHAOS_IL2CPP_INTPTR member, CHAOS_IL2CPP_INTPTR attribute_type_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMemberGetMemberType(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMemberGetModule(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMemberGetIsCollectible(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMemberHasSameMetadataDefinitionAs(CHAOS_IL2CPP_INTPTR member, CHAOS_IL2CPP_INTPTR other) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMemberGetHashCodeVersion(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMemberEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
+
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetCallingConvention(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetContainsGenericParameters(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetGenericArgumentsForBase(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetCurrentMethod(void) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetMethodBody(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetHashCodeBase(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodEqualsBase(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
 // ── Additional reflection API functions (implemented in reflection_api.cpp) ──
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR type_handle) noexcept;

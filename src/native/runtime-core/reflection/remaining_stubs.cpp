@@ -978,6 +978,275 @@ CHAOS_IL2CPP_INT32 ChaosReflectionEventEqualsVersion(
     return a == b ? 1 : 0;
 }
 
+// ── PropertyInfo remaining accessors ────────────────────────────────
+CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetHashCodeVersion(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    auto h = reinterpret_cast<uintptr_t>(decoded);
+    return static_cast<CHAOS_IL2CPP_INT32>((h >> 4) ^ (h >> 20));
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionPropertyEqualsVersion(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    auto* a = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(lhs));
+    auto* b = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(rhs));
+    if (a == nullptr || b == nullptr) return 0;
+    return a == b ? 1 : 0;
+}
+
+// PropertyInfo.GetAccessors() / (bool nonPublic) — the get/set method pair.
+// Both resolve through the same accessor-name scan used by GetGetMethod /
+// GetSetMethod; this entry point returns the getter (the first element of the
+// BCL's returned array) so callers that index [0] see the same value.
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetAccessors(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    if (ChaosReflectionPropertyGetGetMethod(prop) != 0) {
+        return ChaosReflectionPropertyGetGetMethod(prop);
+    }
+    return ChaosReflectionPropertyGetSetMethod(prop);
+}
+
+// PropertyInfo.GetConstantValue / GetRawConstantValue — the property's default
+// value. The property descriptor carries no constant slot (unlike the field
+// descriptor, which has `constant_value`), so no value can be reported. Returns
+// 0, which the BCL also returns for a property without a constant.
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetConstantValue(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetRawConstantValue(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    return ChaosReflectionPropertyGetConstantValue(prop);
+}
+
+// Custom modifiers on a property: the descriptor records no modifier list, so
+// the empty set is the correct answer (matching a property with no modifiers).
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    return ChaosReflectionPropertyGetOptionalCustomModifiers(prop);
+}
+
+// ── ParameterInfo remaining accessors ───────────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetCustomAttributesData(CHAOS_IL2CPP_INTPTR param) noexcept {
+    // Parameters are addressed by member_kind 5 in the custom-attribute blob.
+    auto* p = reinterpret_cast<const ReflectionQueryParameterDescriptor*>(param);
+    if (p == nullptr) return 0;
+    return ChaosReflectionCollectCustomAttributes(
+        static_cast<CHAOS_IL2CPP_INTPTR>(5), param);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetCustomAttributes(CHAOS_IL2CPP_INTPTR param) noexcept {
+    return ChaosReflectionParamGetCustomAttributesData(param);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamIsDefined(
+    CHAOS_IL2CPP_INTPTR param, CHAOS_IL2CPP_INTPTR attribute_type_handle) noexcept {
+    if (attribute_type_handle == 0) return 0;
+    return ChaosReflectionMemberIsDefinedByToken(
+        static_cast<CHAOS_IL2CPP_INTPTR>(5), param,
+        static_cast<CHAOS_IL2CPP_INTPTR>(GetTypeToken(attribute_type_handle)));
+}
+
+// Parameter default-value accessors (the descriptor carries the raw blob).
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept {
+    return ChaosReflectionGetDefaultValue(param);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetRawDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept {
+    return ChaosReflectionGetRawDefaultValue(param);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetHasDefaultValue(CHAOS_IL2CPP_INTPTR param) noexcept {
+    return ChaosReflectionHasDefaultValue(param);
+}
+
+// Custom modifiers on a parameter: no modifier list in the descriptor, so the
+// empty set matches a parameter with no modifiers.
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept {
+    if (param == 0) return 0;
+    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept {
+    return ChaosReflectionParamGetOptionalCustomModifiers(param);
+}
+
+// ParameterInfo.GetRealObject — a remoting-era API. IObjectReference resolution
+// has no meaning under AOT; the parameter is already the real object, so the
+// handle round-trips.
+CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetRealObject(CHAOS_IL2CPP_INTPTR param) noexcept {
+    if (param == 0) return 0;
+    return param;
+}
+
+// ── MemberInfo remaining accessors ──────────────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosReflectionMemberGetCustomAttributesData(CHAOS_IL2CPP_INTPTR member) noexcept {
+    // MemberInfo is the base of type/method/field/property/event; the member
+    // kind is not encoded in the handle here, so the caller supplies it via the
+    // dedicated per-kind entry points. Type-level (kind 1) is the common case
+    // for the generic MemberInfo surface.
+    if (member == 0) return 0;
+    return ChaosReflectionCollectCustomAttributes(static_cast<CHAOS_IL2CPP_INTPTR>(1), member);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionMemberGetCustomAttributes(CHAOS_IL2CPP_INTPTR member) noexcept {
+    return ChaosReflectionMemberGetCustomAttributesData(member);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionMemberIsDefined(
+    CHAOS_IL2CPP_INTPTR member, CHAOS_IL2CPP_INTPTR attribute_type_handle) noexcept {
+    if (attribute_type_handle == 0) return 0;
+    return ChaosReflectionMemberIsDefinedByToken(
+        static_cast<CHAOS_IL2CPP_INTPTR>(1), member,
+        static_cast<CHAOS_IL2CPP_INTPTR>(GetTypeToken(attribute_type_handle)));
+}
+
+// MemberInfo.MemberType — decode by trying each descriptor kind. The handle
+// tag does not distinguish descriptor types, so this probes in the same order
+// the BCL's MemberInfo hierarchy narrows.
+CHAOS_IL2CPP_INT32 ChaosReflectionMemberGetMemberType(CHAOS_IL2CPP_INTPTR member) noexcept {
+    if (member == 0) return 0;
+    if (TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+            static_cast<MethodInfoHandle>(member)) != nullptr) {
+        return ChaosReflectionMethodGetMemberType(member);
+    }
+    if (TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+            static_cast<FieldInfoHandle>(member)) != nullptr) {
+        return ChaosReflectionFieldGetMemberType(member);
+    }
+    if (TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+            static_cast<PropertyInfoHandle>(member)) != nullptr) {
+        return ChaosReflectionPropertyGetMemberType(member);
+    }
+    if (TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+            static_cast<EventInfoHandle>(member)) != nullptr) {
+        return ChaosReflectionEventGetMemberType(member);
+    }
+    return 0;
+}
+
+// MemberInfo.Module — the module that contains the member. The declaring type
+// carries the image; unresolved members report 0.
+CHAOS_IL2CPP_INTPTR ChaosReflectionMemberGetModule(CHAOS_IL2CPP_INTPTR member) noexcept {
+    // GetDeclaringType returns an encoded type handle (intptr_t), not a pointer.
+    CHAOS_IL2CPP_INTPTR declaring = ChaosReflectionGetDeclaringType(member);
+    if (declaring == 0) return 0;
+    return ChaosReflectionGetAssembly(declaring);
+}
+
+// MemberInfo.IsCollectible — collectible AssemblyLoadContext is a CoreCLR
+// loader feature; an AOT image is never collectible.
+CHAOS_IL2CPP_INT32 ChaosReflectionMemberGetIsCollectible(CHAOS_IL2CPP_INTPTR member) noexcept {
+    if (member == 0) return 0;
+    return 0;
+}
+
+// MemberInfo.HasSameMetadataDefinitionAs(other) — true when both refer to the
+// same descriptor, which is the AOT model's definition of identity.
+CHAOS_IL2CPP_INT32 ChaosReflectionMemberHasSameMetadataDefinitionAs(
+    CHAOS_IL2CPP_INTPTR member, CHAOS_IL2CPP_INTPTR other) noexcept {
+    if (member == 0 || other == 0) return 0;
+    // Compare the decoded descriptor pointers across all four descriptor kinds.
+    if ((void*)TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+            static_cast<MethodInfoHandle>(member)) ==
+        (void*)TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+            static_cast<MethodInfoHandle>(other)) &&
+        TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+            static_cast<MethodInfoHandle>(member)) != nullptr) return 1;
+    if ((void*)TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+            static_cast<FieldInfoHandle>(member)) ==
+        (void*)TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+            static_cast<FieldInfoHandle>(other)) &&
+        TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
+            static_cast<FieldInfoHandle>(member)) != nullptr) return 1;
+    if ((void*)TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+            static_cast<PropertyInfoHandle>(member)) ==
+        (void*)TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+            static_cast<PropertyInfoHandle>(other)) &&
+        TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+            static_cast<PropertyInfoHandle>(member)) != nullptr) return 1;
+    if ((void*)TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+            static_cast<EventInfoHandle>(member)) ==
+        (void*)TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+            static_cast<EventInfoHandle>(other)) &&
+        TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+            static_cast<EventInfoHandle>(member)) != nullptr) return 1;
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionMemberGetHashCodeVersion(CHAOS_IL2CPP_INTPTR member) noexcept {
+    if (member == 0) return 0;
+    auto h = static_cast<uintptr_t>(member);
+    return static_cast<CHAOS_IL2CPP_INT32>((h >> 4) ^ (h >> 20));
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionMemberEqualsVersion(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    if (lhs == 0 || rhs == 0) return 0;
+    return lhs == rhs ? 1 : 0;
+}
+
+// ── MethodBase remaining accessors ──────────────────────────────────
+CHAOS_IL2CPP_INT32 ChaosReflectionMethodGetCallingConvention(CHAOS_IL2CPP_INTPTR member) noexcept {
+    // AOT emits only static/shared native bodies with the platform default
+    // convention, which is CallingConventions.Standard (0x01).
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    return 1;  // CallingConventions.Standard
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionMethodGetContainsGenericParameters(CHAOS_IL2CPP_INTPTR member) noexcept {
+    // Consistent with GetIsGenericMethod: a subject_id carrying "!!" denotes an
+    // open generic parameter reference.
+    return ChaosReflectionMethodGetIsGenericMethod(member);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetGenericArgumentsForBase(CHAOS_IL2CPP_INTPTR member) noexcept {
+    return ChaosReflectionMethodGetGenericArguments(member);
+}
+
+// MethodBase.GetCurrentMethod() — the executing method. AOT frames carry no
+// managed stack metadata (the same limitation that drives REF-RISK-7's
+// executing-image tracker), so this reports unresolved rather than guessing.
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetCurrentMethod(void) noexcept {
+    return 0;
+}
+
+// MethodBase.GetMethodBody() — IL bodies do not exist under AOT, so there is no
+// MethodBody to return. This is the same conclusion MethodBody.GetILAsByteArray
+// records elsewhere in this file.
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetMethodBody(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionMethodGetHashCodeBase(CHAOS_IL2CPP_INTPTR member) noexcept {
+    return ChaosReflectionMethodGetHashCodeVersion(member);
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionMethodEqualsBase(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    return ChaosReflectionMethodEqualsVersion(lhs, rhs);
+}
+
 // ── AssemblyName accessors ──────────────────────────────────────────
 // The AssemblyName handle is the image's `image_name_utf8` pointer (see
 // ChaosReflectionGetAssemblyName in type_properties.cpp), so name-derived

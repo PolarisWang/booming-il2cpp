@@ -317,6 +317,44 @@ public static class Classifier
         ["EventInfo.get_IsMulticast"] = new[] { "ChaosReflectionEventGetIsMulticast" },
         ["EventInfo.GetHashCode"] = new[] { "ChaosReflectionEventGetHashCodeVersion" },
         ["EventInfo.Equals"] = new[] { "ChaosReflectionEventEqualsVersion" },
+
+        // ── PropertyInfo / ParameterInfo / MemberInfo / MethodBase rest ─
+        ["PropertyInfo.GetHashCode"] = new[] { "ChaosReflectionPropertyGetHashCodeVersion" },
+        ["PropertyInfo.Equals"] = new[] { "ChaosReflectionPropertyEqualsVersion" },
+        ["PropertyInfo.GetAccessors"] = new[] { "ChaosReflectionPropertyGetAccessors" },
+        ["PropertyInfo.GetConstantValue"] = new[] { "ChaosReflectionPropertyGetConstantValue" },
+        ["PropertyInfo.GetRawConstantValue"] = new[] { "ChaosReflectionPropertyGetRawConstantValue" },
+        ["PropertyInfo.GetOptionalCustomModifiers"] = new[] { "ChaosReflectionPropertyGetOptionalCustomModifiers" },
+        ["PropertyInfo.GetRequiredCustomModifiers"] = new[] { "ChaosReflectionPropertyGetRequiredCustomModifiers" },
+
+        ["ParameterInfo.get_CustomAttributes"] = new[] { "ChaosReflectionParamGetCustomAttributesData" },
+        ["ParameterInfo.GetCustomAttributes"] = new[] { "ChaosReflectionParamGetCustomAttributes" },
+        ["ParameterInfo.GetCustomAttributesData"] = new[] { "ChaosReflectionParamGetCustomAttributesData" },
+        ["ParameterInfo.IsDefined"] = new[] { "ChaosReflectionParamIsDefined" },
+        ["ParameterInfo.get_DefaultValue"] = new[] { "ChaosReflectionParamGetDefaultValue" },
+        ["ParameterInfo.get_RawDefaultValue"] = new[] { "ChaosReflectionParamGetRawDefaultValue" },
+        ["ParameterInfo.get_HasDefaultValue"] = new[] { "ChaosReflectionParamGetHasDefaultValue" },
+        ["ParameterInfo.GetOptionalCustomModifiers"] = new[] { "ChaosReflectionParamGetOptionalCustomModifiers" },
+        ["ParameterInfo.GetRequiredCustomModifiers"] = new[] { "ChaosReflectionParamGetRequiredCustomModifiers" },
+        ["ParameterInfo.GetRealObject"] = new[] { "ChaosReflectionParamGetRealObject" },
+
+        ["MemberInfo.get_CustomAttributes"] = new[] { "ChaosReflectionMemberGetCustomAttributesData" },
+        ["MemberInfo.GetCustomAttributes"] = new[] { "ChaosReflectionMemberGetCustomAttributes" },
+        ["MemberInfo.IsDefined"] = new[] { "ChaosReflectionMemberIsDefined" },
+        ["MemberInfo.get_MemberType"] = new[] { "ChaosReflectionMemberGetMemberType" },
+        ["MemberInfo.get_Module"] = new[] { "ChaosReflectionMemberGetModule" },
+        ["MemberInfo.get_IsCollectible"] = new[] { "ChaosReflectionMemberGetIsCollectible" },
+        ["MemberInfo.HasSameMetadataDefinitionAs"] = new[] { "ChaosReflectionMemberHasSameMetadataDefinitionAs" },
+        ["MemberInfo.GetHashCode"] = new[] { "ChaosReflectionMemberGetHashCodeVersion" },
+        ["MemberInfo.Equals"] = new[] { "ChaosReflectionMemberEqualsVersion" },
+
+        ["MethodBase.get_CallingConvention"] = new[] { "ChaosReflectionMethodGetCallingConvention" },
+        ["MethodBase.get_ContainsGenericParameters"] = new[] { "ChaosReflectionMethodGetContainsGenericParameters" },
+        ["MethodBase.GetGenericArguments"] = new[] { "ChaosReflectionMethodGetGenericArgumentsForBase" },
+        ["MethodBase.GetCurrentMethod"] = new[] { "ChaosReflectionMethodGetCurrentMethod" },
+        ["MethodBase.GetMethodBody"] = new[] { "ChaosReflectionMethodGetMethodBody" },
+        ["MethodBase.GetHashCode"] = new[] { "ChaosReflectionMethodGetHashCodeBase" },
+        ["MethodBase.Equals"] = new[] { "ChaosReflectionMethodEqualsBase" },
     };
 
     /// <summary>
