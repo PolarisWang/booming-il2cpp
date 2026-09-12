@@ -41,6 +41,16 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionCreateInstance(CHAOS_IL2CPP_INTPTR type_handl
 CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(CHAOS_IL2CPP_INTPTR method_handle, CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR args);
 CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(CHAOS_IL2CPP_INTPTR method_handle, CHAOS_IL2CPP_INTPTR type_args);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attribute_type_handle);
+
+/* ── Custom-attribute collection (CustomAttributeExtensions family) ──
+ * Returns a pointer to [count:uint32][attr_type_token:uint32, ...] describing
+ * every custom attribute on the given member. member_kind is 1..5
+ * (Type/Method/Field/Property/Param), matching ChaosGetCustomAttributeFromBlob.
+ * Returns a shared empty list (count=0) when the member has no attributes.
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionCollectCustomAttributes(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMemberHasAnyAttribute(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMemberIsDefinedByToken(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attribute_type_token) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
 CHAOS_IL2CPP_INTPTR ChaosStringConcatWithFormattedInt32(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INT32 value);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
