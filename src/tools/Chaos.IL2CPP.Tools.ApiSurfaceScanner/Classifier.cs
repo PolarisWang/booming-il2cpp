@@ -419,6 +419,22 @@ public static class Classifier
     };
 
     /// <summary>
+    /// Types whose entire operation surface is served by a single native
+    /// dispatch pair. Every member of these types is a convenience overload that
+    /// funnels into the same two entry points, so they are all `real`.
+    ///
+    /// CustomAttributeExtensions: every GetCustomAttribute(s)/IsDefined overload
+    /// normalizes to (member, attribute type) and routes either to
+    /// ChaosReflectionCollectCustomAttributes or ChaosReflectionMemberIsDefined
+    /// ByToken — see RuntimeHelperShapeRegistry.CoreStubs.Part2.S1/S6, which
+    /// register the Assembly/MemberInfo/Module/ParameterInfo receivers.
+    /// </summary>
+    private static readonly HashSet<string> WholeTypeRealViaDispatch = new(StringComparer.Ordinal)
+    {
+        "CustomAttributeExtensions",
+    };
+
+    /// <summary>
     /// Whole-type APIs that are structurally impossible under AOT.
     /// </summary>
     private static readonly HashSet<string> NotSupportedWholeTypes = new(StringComparer.Ordinal)
@@ -1014,6 +1030,16 @@ public static class Classifier
                 e.RealKind = "fact";        // design §3.2: performance is a Phase 4 gate
                 e.Evidence.NativeImpl = string.Join(", ", nativeSyms);
                 e.Rationale = "Native symbol exists in reflection_api.h";
+                continue;
+            }
+
+            // 1b. Types whose whole surface dispatches to a shared native pair.
+            if (WholeTypeRealViaDispatch.Contains(e.TypeName))
+            {
+                e.TierValue = Tier.Real;
+                e.RealKind = "fact";
+                e.Evidence.NativeImpl = "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken";
+                e.Rationale = "Overload dispatches to the shared collection/IsDefined native APIs";
                 continue;
             }
 

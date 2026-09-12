@@ -1,6 +1,6 @@
 {
   "$schema": "reflection-api-coverage-matrix/v1",
-  "generatedAt": "2026-09-12T08:18:11.6758908+00:00",
+  "generatedAt": "2026-09-12T08:19:34.6166715+00:00",
   "summary": {
     "generatedFrom": [
       "Microsoft.NETCore.App.Ref",
@@ -11,8 +11,8 @@
     "byTier": {
       "data-carrier": 76,
       "not-supported": 158,
-      "real": 260,
-      "real-planned": 140,
+      "real": 296,
+      "real-planned": 104,
       "enum-surface": 193
     },
     "byType": {
@@ -3066,11 +3066,13 @@
       "signature": "Attribute GetCustomAttribute(Assembly, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3080,11 +3082,13 @@
       "signature": "Attribute GetCustomAttribute(MemberInfo, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3094,11 +3098,13 @@
       "signature": "Attribute GetCustomAttribute(MemberInfo, Type, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3108,11 +3114,13 @@
       "signature": "Attribute GetCustomAttribute(Module, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3122,11 +3130,13 @@
       "signature": "Attribute GetCustomAttribute(ParameterInfo, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3136,11 +3146,13 @@
       "signature": "Attribute GetCustomAttribute(ParameterInfo, Type, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3150,11 +3162,13 @@
       "signature": "T GetCustomAttribute(Assembly)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3164,11 +3178,13 @@
       "signature": "T GetCustomAttribute(MemberInfo)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3178,11 +3194,13 @@
       "signature": "T GetCustomAttribute(MemberInfo, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3192,11 +3210,13 @@
       "signature": "T GetCustomAttribute(Module)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3206,11 +3226,13 @@
       "signature": "T GetCustomAttribute(ParameterInfo)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3220,11 +3242,13 @@
       "signature": "T GetCustomAttribute(ParameterInfo, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3234,11 +3258,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(Assembly)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3248,11 +3274,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(Assembly, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3262,11 +3290,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(MemberInfo)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3276,11 +3306,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(MemberInfo, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3290,11 +3322,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(MemberInfo, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3304,11 +3338,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(MemberInfo, Type, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3318,11 +3354,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(Module)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3332,11 +3370,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(Module, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3346,11 +3386,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(ParameterInfo)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3360,11 +3402,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(ParameterInfo, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3374,11 +3418,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(ParameterInfo, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3388,11 +3434,13 @@
       "signature": "IEnumerable<Attribute> GetCustomAttributes(ParameterInfo, Type, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3402,11 +3450,13 @@
       "signature": "IEnumerable<T> GetCustomAttributes(Assembly)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3416,11 +3466,13 @@
       "signature": "IEnumerable<T> GetCustomAttributes(MemberInfo)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3430,11 +3482,13 @@
       "signature": "IEnumerable<T> GetCustomAttributes(MemberInfo, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3444,11 +3498,13 @@
       "signature": "IEnumerable<T> GetCustomAttributes(Module)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3458,11 +3514,13 @@
       "signature": "IEnumerable<T> GetCustomAttributes(ParameterInfo)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3472,11 +3530,13 @@
       "signature": "IEnumerable<T> GetCustomAttributes(ParameterInfo, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3486,11 +3546,13 @@
       "signature": "Boolean IsDefined(Assembly, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3500,11 +3562,13 @@
       "signature": "Boolean IsDefined(MemberInfo, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3514,11 +3578,13 @@
       "signature": "Boolean IsDefined(MemberInfo, Type, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3528,11 +3594,13 @@
       "signature": "Boolean IsDefined(Module, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3542,11 +3610,13 @@
       "signature": "Boolean IsDefined(ParameterInfo, Type)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -3556,11 +3626,13 @@
       "signature": "Boolean IsDefined(ParameterInfo, Type, Boolean)",
       "isStatic": true,
       "isPublic": true,
-      "tier": "real-planned",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Metadata exists in Tier-2 descriptor; native accessor not yet implemented"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
