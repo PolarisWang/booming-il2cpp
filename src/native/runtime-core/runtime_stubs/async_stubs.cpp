@@ -12,6 +12,21 @@
 #include <chaos/native_types.h>
 #include <chaos/async.h>
 #include <chaos/async_iterator.h>
+// REQUIRED, not optional. chaos/native_types.h defines CHAOS_IL2CPP_NEW_GC in
+// terms of runtime_core::GcAllocateFast, but only DECLARES that macro's target;
+// the definition is CHAOS_IL2CPP_FORCEINLINE in gc_alloc_stubs.h. Without this
+// header the compiler cannot inline the call and emits a real external
+// reference that nothing in the link provides:
+//
+//   async_stubs.obj : error LNK2019: unresolved external symbol
+//     "...GcAllocateFast(unsigned __int64)" referenced in function
+//     async_task_create_gc
+//   chaos_entry.exe : fatal error LNK1120: 1 unresolved externals
+//
+// async_task_create_gc (below) is the only user of the macro in this TU. The
+// sibling runtime_stubs that call GcAllocateFast (e.g. object_stubs.cpp) already
+// pull this in, which is exactly why only this translation unit failed to link.
+#include "core/gc_alloc_stubs.h"
 #include "async_stubs.h"
 #include "exception_helpers.h"
 #include "exception_jmp.h"
