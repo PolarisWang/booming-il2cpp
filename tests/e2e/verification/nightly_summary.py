@@ -180,7 +180,16 @@ def generate_summary(delta_data: dict[str, Any]) -> str:
             dur_str = f"{dur:.4f}" if dur else "—"
             gap = a.get("totalCoverageGap", 0)
             hu = a.get("hotupdate", {})
-            hu_str = "✅" if hu.get("chunksPatchFailed", 0) == 0 and hu.get("totalFailed", 0) == 0 else "❌"
+            # ENG-34919: truth-first.  A chunk with a clean nominal pass but zero
+            # real (non-smoke) methods verified is NOT evidence hotupdate works.
+            _hu_real = (hu.get("realPassed", 0) or 0) + (hu.get("realFailed", 0) or 0)
+            _hu_smoke = (hu.get("smokePassed", 0) or 0) + (hu.get("smokeFailed", 0) or 0)
+            if hu.get("chunksPatchFailed", 0) != 0 or hu.get("totalFailed", 0) != 0:
+                hu_str = "❌"
+            elif _hu_real == 0 and _hu_smoke > 0:
+                hu_str = "🟡"           # all-smoke: nothing genuinely verified
+            else:
+                hu_str = "✅"
 
             # Aggregate build status across chunks
             asm_chunks = {k: v for k, v in chunks.items() if k.startswith(name + "/")}

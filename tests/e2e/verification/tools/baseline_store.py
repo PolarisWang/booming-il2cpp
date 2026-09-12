@@ -183,6 +183,12 @@ def _extract_hotupdate(results_dir: Path) -> dict[str, Any]:
         "revertPassed": d.get("revertPassed", 0),
         "patchFailed": bool(d.get("patchFailed", False)),
         "crash": bool(d.get("crash", False)),
+        # ── real-vs-smoke split (ENG-34919) ──
+        "realPassed": d.get("realPassed", 0),
+        "realFailed": d.get("realFailed", 0),
+        "smokePassed": d.get("smokePassed", 0),
+        "smokeFailed": d.get("smokeFailed", 0),
+        "realSmokeAnnotated": d.get("realSmokeAnnotated", False),
     }
 
 

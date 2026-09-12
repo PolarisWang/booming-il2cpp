@@ -823,6 +823,47 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
     # Compute per-method revert pass count
     revert_passed = sum(1 for r in reverted_fact if r.get("passed"))
 
+    # ── Phase 4c: Classify hotupdate results by real-vs-smoke (ENG-34919) ──
+    # Read fact-results.json to obtain per-method resultKind classification.
+    # Methods with resultKind=="real" are genuinely verified; "smoke"/"unassertable"
+    # are UNVERIFIED placeholders.  Uses si (slot index) as join key — same
+    # kSubjectSlotMap ordering as the hotupdate baselineFact.
+    _si_result_kind: dict[int, str] = {}
+    _fact_results_path = ctx.chunk_dir / "results" / "fact-results.json"
+    if _fact_results_path.exists():
+        try:
+            _fr = json.loads(_fact_results_path.read_text(encoding="utf-8"))
+            for _rec in _fr.get("aot") or []:
+                _si = _rec.get("si")
+                _rk = _rec.get("resultKind")
+                if _si is not None and _rk is not None:
+                    _si_result_kind[_si] = _rk
+        except Exception as _exc:
+            print(f"  [hotupdate] WARNING: failed to read fact-results.json: {_exc}")
+
+    real_passed = 0
+    real_failed = 0
+    smoke_passed = 0
+    smoke_failed = 0
+    unverified_subject_ids: list[str] = []
+    for _rec in hotupdate_data.get("baselineFact") or []:
+        _si = _rec.get("si")
+        _rk = _si_result_kind.get(_si) if _si is not None else None
+        if _rk is None:
+            _rk = "smoke"  # conservative default: no fact annotation = UNVERIFIED
+        _p = bool(_rec.get("passed", False))
+        if _rk == "real":
+            if _p: real_passed += 1
+            else:  real_failed += 1
+        else:
+            if _p: smoke_passed += 1
+            else:  smoke_failed += 1
+            if _p:
+                unverified_subject_ids.append(f"si:{_si}")
+
+    real_total = real_passed + real_failed
+    smoke_total = smoke_passed + smoke_failed
+
     ctx.results_dir.mkdir(parents=True, exist_ok=True)
     result_path = ctx.results_dir / "hotupdate.json"
     result_data = {
@@ -841,6 +882,17 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         "crash": hotupdate_data.get("_crash", False),
         "hasBaselineBenchmark": len(baseline_benchmark) > 0,
         "hasPatchedBenchmark": len(patched_benchmark) > 0,
+        # ── real-vs-smoke split (ENG-34919): how many hotupdate passes are
+        #    genuinely verified (resultKind=="real") vs UNVERIFIED placeholders.
+        #    Annotation only — does NOT affect the pass/fail status below.
+        "realSmokeAnnotated": bool(_si_result_kind),   # fact-results.json was read
+        "realPassed": real_passed,
+        "realFailed": real_failed,
+        "smokePassed": smoke_passed,
+        "smokeFailed": smoke_failed,
+        "realTotal": real_total,
+        "smokeTotal": smoke_total,
+        "unverifiedSubjects": unverified_subject_ids,
         "details": hotupdate_data,
         "stderr": stderr[:500] if stderr else "",
     }

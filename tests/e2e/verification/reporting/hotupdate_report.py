@@ -65,6 +65,8 @@ def collect(translation_root: Path, stale_days: float) -> dict:
         chunks: list[dict] = []
         dll_pass, dll_fail, dll_sem_changed = 0, 0, 0
         dll_patch_failed, dll_crash = 0, 0
+        dll_real_pass, dll_real_fail = 0, 0
+        dll_smoke_pass, dll_smoke_fail = 0, 0
         has_data = False
 
         for c in s.get("chunkSummaries") or []:
@@ -82,6 +84,10 @@ def collect(translation_root: Path, stale_days: float) -> dict:
                 has_data = True
                 dll_pass += passed or 0
                 dll_fail += failed or 0
+                dll_real_pass += hu.get("realPassed", 0) or 0
+                dll_real_fail += hu.get("realFailed", 0) or 0
+                dll_smoke_pass += hu.get("smokePassed", 0) or 0
+                dll_smoke_fail += hu.get("smokeFailed", 0) or 0
                 if hu.get("semanticChangedCount"):
                     dll_sem_changed += hu["semanticChangedCount"]
                 if hu.get("patchFailed"):
@@ -101,6 +107,14 @@ def collect(translation_root: Path, stale_days: float) -> dict:
                 "assertFailed": hu.get("assertFailed", 0),
                 "semanticChangedCount": hu.get("semanticChangedCount", 0),
                 "truncated": hu.get("truncated"),
+                # ── real-vs-smoke split (ENG-34919) ──
+                "realPassed": hu.get("realPassed", 0),
+                "realFailed": hu.get("realFailed", 0),
+                "smokePassed": hu.get("smokePassed", 0),
+                "smokeFailed": hu.get("smokeFailed", 0),
+                "realTotal": hu.get("realTotal", 0),
+                "smokeTotal": hu.get("smokeTotal", 0),
+                "unverifiedSubjects": hu.get("unverifiedSubjects", []),
             })
 
         if not has_data:
@@ -114,6 +128,10 @@ def collect(translation_root: Path, stale_days: float) -> dict:
             "chunksWithHotupdate": len(chunks),
             "totalPassed": dll_pass,
             "totalFailed": dll_fail,
+            "realPassed": dll_real_pass,
+            "realFailed": dll_real_fail,
+            "smokePassed": dll_smoke_pass,
+            "smokeFailed": dll_smoke_fail,
             "semanticChangedCount": dll_sem_changed,
             "patchFailedChunks": dll_patch_failed,
             "crashChunks": dll_crash,
@@ -123,6 +141,11 @@ def collect(translation_root: Path, stale_days: float) -> dict:
     tot_pass = sum(d["totalPassed"] for d in dlls)
     tot_fail = sum(d["totalFailed"] for d in dlls)
     tot_chunks = sum(d["chunksWithHotupdate"] for d in dlls)
+    tot_real_pass = sum(d["realPassed"] for d in dlls)
+    tot_real_fail = sum(d["realFailed"] for d in dlls)
+    tot_smoke_pass = sum(d["smokePassed"] for d in dlls)
+    tot_smoke_fail = sum(d["smokeFailed"] for d in dlls)
+    tot_real = tot_real_pass + tot_real_fail
 
     return {
         "schemaVersion": SCHEMA_VERSION,
@@ -135,6 +158,16 @@ def collect(translation_root: Path, stale_days: float) -> dict:
             "totalFailed": tot_fail,
             "overallPassRate": round(tot_pass / (tot_pass + tot_fail) * 100, 2)
                 if (tot_pass + tot_fail) else None,
+            # ── real-vs-smoke split (ENG-34919) ──
+            "realPassed": tot_real_pass,
+            "realFailed": tot_real_fail,
+            "smokePassed": tot_smoke_pass,
+            "smokeFailed": tot_smoke_fail,
+            "realTotal": tot_real,
+            "smokeTotal": tot_smoke_pass + tot_smoke_fail,
+            # Genuine pass rate = real methods only.  None when no real method
+            # was exercised (all-smoke: the chunk's hotupdate proves nothing).
+            "realPassRate": round(tot_real_pass / tot_real * 100, 2) if tot_real else None,
             "semanticChangedTotal": sum(d["semanticChangedCount"] for d in dlls),
             "dllsWithPatchFailures": sum(1 for d in dlls if d["patchFailedChunks"]),
             "dllsWithCrashes": sum(1 for d in dlls if d["crashChunks"]),
@@ -146,6 +179,7 @@ def collect(translation_root: Path, stale_days: float) -> dict:
 
 def render_markdown(r: dict) -> str:
     t = r["totals"]
+    real_pr = t.get("realPassRate")
     lines = [
         "# Hotupdate 报告（跨 DLL 汇总）",
         "",
@@ -155,8 +189,11 @@ def render_markdown(r: dict) -> str:
         "",
         f"- DLL 有 hotupdate 数据：{t['dllCount']}",
         f"- Chunk 覆盖：{t['chunksWithHotupdate']}",
-        f"- 通过/失败：{t['totalPassed']} / {t['totalFailed']}"
+        f"- 通过/失败（名义）：{t['totalPassed']} / {t['totalFailed']}"
         f"（{t['overallPassRate']}%）",
+        f"- **真实验证 through/fail**：{t['realPassed']} / {t['realFailed']}"
+        f"{f'（{real_pr}%）' if real_pr is not None else '（无真实方法）'}",
+        f"- UNVERIFIED（smoke 占位）：{t['smokePassed']} passed / {t['smokeFailed']} failed",
         f"- Semantic changes：{t['semanticChangedTotal']}",
         f"- Patch 失败的 DLL：{t['dllsWithPatchFailures']}",
         f"- Crash 的 DLL：{t['dllsWithCrashes']}",
@@ -164,13 +201,13 @@ def render_markdown(r: dict) -> str:
         "",
         "## 逐 DLL",
         "",
-        "| DLL | Chunks | 通过/失败 | 通过率 | Sem变化 | Patch失败 | Crash | 年龄(天) |",
-        "|-----|--------|---------|-------|--------|----------|-------|---------|",
+        "| DLL | Chunks | 通过/失败(名义) | 真实通过 | 真实失败 | Smoke占位 | Sem变化 | Patch失败 | Crash | 年龄(天) |",
+        "|-----|--------|----------------|---------|---------|----------|--------|----------|-------|---------|",
     ]
     for d in sorted(r["dlls"], key=lambda x: x["assemblyName"]):
         pf = f"{d['totalPassed']}/{d['totalFailed']}"
-        pr = round(d["totalPassed"] / (d["totalPassed"] + d["totalFailed"]) * 100, 1) \
-            if (d["totalPassed"] + d["totalFailed"]) else "—"
+        rp = f"{d['realPassed']}/{d['realFailed']}"
+        sp = f"{d['smokePassed']}/{d['smokeFailed']}"
         flags = []
         if d["stale"]:
             flags.append("⏰")
@@ -180,9 +217,25 @@ def render_markdown(r: dict) -> str:
             flags.append("🔥")
         lines.append(
             f"| {d['assemblyName']} | {d['chunksWithHotupdate']} | "
-            f"{pf} | {pr}% | {d['semanticChangedCount']} | "
+            f"{pf} | {rp} | {sp} | "
+            f"{d['semanticChangedCount']} | "
             f"{d['patchFailedChunks']} | {d['crashChunks']} | "
             f"{d['ageDays'] or '—'} {' '.join(flags)} |")
+
+    # ⚠️ Real-vs-smoke note
+    t_real = t.get("realPassed", 0) + t.get("realFailed", 0)
+    t_smoke = t.get("smokePassed", 0) + t.get("smokeFailed", 0)
+    total_nominal = t.get("totalPassed", 0) + t.get("totalFailed", 0)
+    if t_smoke > 0:
+        pct = round(t_smoke / total_nominal * 100, 1) if total_nominal else 0
+        lines.extend([
+            "",
+            "---",
+            "",
+            f"> ⚠️ 全部 hotupdate 结果中 **{pct}%**（{t_smoke}/{total_nominal}）",
+            "来自 UNVERIFIED 占位方法（smoke），未被真实热更验证。",
+            f"> 经真实验证的方法通过率为 {t.get('realPassRate', 'N/A')}%。",
+        ])
 
     return "\n".join(lines) + "\n"
 
@@ -210,10 +263,14 @@ def main(argv: list[str] | None = None) -> int:
         Path(args.markdown).write_text(render_markdown(report), encoding="utf-8")
 
     t = report["totals"]
+    real_pr = t.get("realPassRate")
     print(f"hotupdate-report -> {args.output}")
     print(f"  DLLs          {t['dllCount']}")
     print(f"  chunks        {t['chunksWithHotupdate']}")
     print(f"  passed/failed  {t['totalPassed']}/{t['totalFailed']} ({t['overallPassRate']}%)")
+    print(f"  real passed/fail {t['realPassed']}/{t['realFailed']} "
+          f"(rate: {f'{real_pr}%' if real_pr is not None else 'n/a — no real methods'})")
+    print(f"  smoke passed/fail {t['smokePassed']}/{t['smokeFailed']}")
     print(f"  stale         {t['staleDlls']}")
     return 0
 

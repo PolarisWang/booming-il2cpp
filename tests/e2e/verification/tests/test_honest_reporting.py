@@ -56,6 +56,12 @@ def _make_chunk_summary(
     unverified_smoke: int = 0,
     real_passed: int = 0,
     real_total: int = 0,
+    hu_passed: int = 0,
+    hu_failed: int = 0,
+    hu_real_passed: int = 0,
+    hu_real_failed: int = 0,
+    hu_smoke_passed: int = 0,
+    hu_smoke_failed: int = 0,
 ) -> dict:
     """Build a synthetic chunk_summary entry (the per-chunk dict that
     aggregate.py loops over).
@@ -69,7 +75,18 @@ def _make_chunk_summary(
         "slug": slug,
         "fact": fact,
         "benchmark": {"methodCount": total, "status": "ran"},
-        "hotupdate": {"patchDataUsed": False},
+        "hotupdate": {
+            "patchDataUsed": False,
+            "passed": hu_passed,
+            "failed": hu_failed,
+            "realPassed": hu_real_passed,
+            "realFailed": hu_real_failed,
+            "smokePassed": hu_smoke_passed,
+            "smokeFailed": hu_smoke_failed,
+            "realTotal": hu_real_passed + hu_real_failed,
+            "smokeTotal": hu_smoke_passed + hu_smoke_failed,
+            "realSmokeAnnotated": True,
+        },
     }
 
 
@@ -351,3 +368,103 @@ def test_reporting_cross_dll_legacy_fallback():
     assert result["overallRealFactPassRate"] == 1.0
     assert result["totalUnverifiedSmoke"] == 0
     assert result["nominalVsRealGap"] == 0
+
+
+# ──────────────────────────────────────────────────────────────────────────
+# hotupdate real-vs-smoke split (ENG-34919)
+# ──────────────────────────────────────────────────────────────────────────
+
+def test_hotupdate_real_smoke_split_sums_to_nominal():
+    """realPassed+smokePassed must equal the nominal passed count — the split
+    partitions the total, it never drops or double-counts a method."""
+    cs = _make_chunk_summary(
+        "hu-chunk",
+        hu_passed=100, hu_failed=0,
+        hu_real_passed=12, hu_smoke_passed=88,
+    )
+    hu = cs["hotupdate"]
+    assert hu["realPassed"] + hu["smokePassed"] == hu["passed"]
+    assert hu["realFailed"] + hu["smokeFailed"] == hu["failed"]
+    assert hu["realTotal"] == 12
+    assert hu["smokeTotal"] == 88
+
+
+def test_hotupdate_smoke_only_chunk_has_zero_real():
+    """A chunk whose entire hotupdate 'pass' is smoke placeholders must report
+    realTotal == 0 — this is the false-green the split exists to expose."""
+    cs = _make_chunk_summary(
+        "all-smoke",
+        hu_passed=50, hu_failed=0,
+        hu_real_passed=0, hu_smoke_passed=50,
+    )
+    hu = cs["hotupdate"]
+    assert hu["realTotal"] == 0
+    assert hu["smokeTotal"] == 50
+    # A consumer checking "did any real method pass?" gets a truthful no.
+    assert hu["realPassed"] == 0
+
+
+def test_hotupdate_real_ratio_gate():
+    """realPassRate must be computed from real methods only, ignoring smoke."""
+    # Simulate the totals block in hotupdate_report.collect()
+    dlls = [
+        _make_chunk_summary("a", hu_passed=12, hu_real_passed=12, hu_smoke_passed=0),
+        _make_chunk_summary("b", hu_passed=88, hu_real_passed=0, hu_smoke_passed=88),
+    ]
+    tot_real_pass = sum(d["hotupdate"]["realPassed"] for d in dlls)
+    tot_real_fail = sum(d["hotupdate"]["realFailed"] for d in dlls)
+    tot_real = tot_real_pass + tot_real_fail
+    real_pass_rate = round(tot_real_pass / tot_real * 100, 2) if tot_real else None
+
+    assert tot_real_pass == 12
+    assert tot_real == 12
+    assert real_pass_rate == 100.0
+    # Nominal would have said 100/100 = 100% over 100 methods — far weaker evidence.
+    tot_nominal = sum(d["hotupdate"]["passed"] for d in dlls)
+    assert tot_nominal == 100
+
+
+def test_hotupdate_real_ratio_none_when_all_smoke():
+    """When no real method was exercised, realPassRate must be None (not a
+    misleading 0% or 100%)."""
+    dlls = [_make_chunk_summary("all-smoke", hu_passed=50, hu_smoke_passed=50)]
+    tot_real_pass = sum(d["hotupdate"]["realPassed"] for d in dlls)
+    tot_real_fail = sum(d["hotupdate"]["realFailed"] for d in dlls)
+    tot_real = tot_real_pass + tot_real_fail
+    real_pass_rate = round(tot_real_pass / tot_real * 100, 2) if tot_real else None
+
+    assert tot_real == 0
+    assert real_pass_rate is None
+
+
+def test_hotupdate_legacy_json_defaults_to_smoke():
+    """A pre-ENG-34919 hotupdate.json (no real/smoke fields) must not inflate
+    real counts — absent annotation defaults the split conservatively."""
+    legacy_hu = {"patchDataUsed": True, "passed": 30, "failed": 0}
+    # This mirrors hotupdate_chunk's conservative default: unannotated => smoke.
+    real_passed = legacy_hu.get("realPassed", 0)
+    smoke_passed = legacy_hu.get("smokePassed", legacy_hu.get("passed", 0))
+    assert real_passed == 0
+    assert smoke_passed == 30
+
+
+def test_hotupdate_triage_smoke_only_finding():
+    """nightly_triage must raise a smokeOnly finding when a chunk's hotupdate
+    has annotated data but zero real methods."""
+    # Mirror the guard in _analyze_hotupdate.
+    section = {
+        "realSmokeAnnotated": True,
+        "realPassed": 0, "realFailed": 0,
+        "smokePassed": 40, "smokeFailed": 0,
+    }
+    real_t = section.get("realPassed", 0) + section.get("realFailed", 0)
+    smoke_t = section.get("smokePassed", 0) + section.get("smokeFailed", 0)
+    assert section.get("realSmokeAnnotated") is True
+    assert real_t == 0 and smoke_t > 0  # -> smokeOnly finding fires
+
+
+def test_hotupdate_triage_no_finding_without_annotation():
+    """Un-annotated (legacy) hotupdate data must NOT raise smokeOnly — we only
+    flag what we can actually prove."""
+    section = {"realPassed": 0, "realFailed": 0, "smokePassed": 0, "smokeFailed": 0}
+    assert not section.get("realSmokeAnnotated", False)

@@ -262,6 +262,17 @@ def _analyze_hotupdate(cur_cb: ChunkBaseline, hist: list[Baseline]) -> list[Find
                 confirmed=_beyond_band(cur_sem, _noise_band(hist_sem)),
                 note="语义变化检测异常",
             ))
+    # ENG-34919: A chunk whose hotupdate "passed" is entirely smoke placeholders
+    # has no genuine evidence — surface it rather than letting a green count hide it.
+    if section.get("realSmokeAnnotated"):
+        real_t = (section.get("realPassed", 0) or 0) + (section.get("realFailed", 0) or 0)
+        smoke_t = (section.get("smokePassed", 0) or 0) + (section.get("smokeFailed", 0) or 0)
+        if real_t == 0 and smoke_t > 0:
+            out.append(Finding(
+                domain="hotupdate", chunk=cur_cb.key, metric="smokeOnly",
+                current=float(smoke_t), baseline=0.0, delta_pct=1.0, confirmed=True,
+                note=f"hotupdate 全部 {smoke_t} 项均为 UNVERIFIED 占位，无真实验证",
+            ))
     return out
 
 

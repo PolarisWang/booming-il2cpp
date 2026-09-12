@@ -375,6 +375,15 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "crash": hu_data.get("crash", False),
                 "assertFailed": hu_data.get("assertFailed", 0),
                 "semanticChangedCount": hu_data.get("semanticChangedCount", 0),
+                # ── real-vs-smoke split (ENG-34919) ──
+                "realPassed": hu_data.get("realPassed", 0),
+                "realFailed": hu_data.get("realFailed", 0),
+                "smokePassed": hu_data.get("smokePassed", 0),
+                "smokeFailed": hu_data.get("smokeFailed", 0),
+                "realTotal": hu_data.get("realTotal", 0),
+                "smokeTotal": hu_data.get("smokeTotal", 0),
+                "unverifiedSubjects": hu_data.get("unverifiedSubjects", []),
+                "realSmokeAnnotated": hu_data.get("realSmokeAnnotated", False),
             }
         else:
             summary["hotupdate"] = {"status": "no_results"}
@@ -606,6 +615,18 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
     total_hu_failed = sum(
         s.get("hotupdate", {}).get("failed", 0) for s in hu_relevant
     )
+    total_hu_real_passed = sum(
+        s.get("hotupdate", {}).get("realPassed", 0) for s in hu_relevant
+    )
+    total_hu_real_failed = sum(
+        s.get("hotupdate", {}).get("realFailed", 0) for s in hu_relevant
+    )
+    total_hu_smoke_passed = sum(
+        s.get("hotupdate", {}).get("smokePassed", 0) for s in hu_relevant
+    )
+    total_hu_smoke_failed = sum(
+        s.get("hotupdate", {}).get("smokeFailed", 0) for s in hu_relevant
+    )
     # Count hotupdate skip-status breakdowns for observability
     hotupdate_skip_statuses: dict[str, int] = {}
     for s in chunk_summaries:
@@ -720,6 +741,11 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 "chunksWithRevertFailure": chunks_with_revert_failure,
                 "totalPassed": total_hu_passed,
                 "totalFailed": total_hu_failed,
+                # ── real-vs-smoke split (ENG-34919) ──
+                "realPassed": total_hu_real_passed,
+                "realFailed": total_hu_real_failed,
+                "smokePassed": total_hu_smoke_passed,
+                "smokeFailed": total_hu_smoke_failed,
                 "skipBreakdown": hotupdate_skip_statuses,
             },
         },
