@@ -99,6 +99,20 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
             pass
 
     # persist summary JSON
+    #
+    # TWO copies, deliberately.
+    #
+    # `nightly-result.json` is the shared, well-known name and stays for
+    # backward compatibility — but it is a SINGLE file that every run
+    # overwrites, and the agents accumulate many runs (run-state/ held 13
+    # entries spanning hours). A publisher reading it can therefore report a
+    # different run's numbers: build 277 published 0/45 while its own
+    # run-state recorded 21 chunks passed, because by the time it read the
+    # summary another run had replaced it.
+    #
+    # `run-<run_id>.json` is this run's own, never overwritten. The publish step
+    # prefers it (the run id is in provenance) and falls back to the shared
+    # name only when there is no per-run copy, which covers older payloads.
     out_dir = Path(config.report_dir) / "summary"
     out_dir.mkdir(parents=True, exist_ok=True)
     payload = {
@@ -115,11 +129,14 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
         "runId": config.run_id,
         "nativeConfig": config.native_config,
     }
-    try:
-        (out_dir / "nightly-result.json").write_text(
-            json.dumps(payload, indent=2), encoding="utf-8")
-    except OSError:
-        pass
+    blob = json.dumps(payload, indent=2)
+    for name in ("nightly-result.json", f"run-{config.run_id}.json"):
+        try:
+            (out_dir / name).write_text(blob, encoding="utf-8")
+        except OSError as e:
+            # Loud: a summary that silently fails to land is how the published
+            # numbers drift from what actually ran.
+            print(f"  [summary] FAILED to write {name}: {e}", flush=True)
 
     # Also emit an old-compatible human-readable summary markdown (what consumers
     # watching nightly-reports read).  This closes the reviewer's L2 gap: nightly
@@ -160,16 +177,37 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
 
     # ── Persist baseline snapshot for triage ──
     # Best-effort: never let a failed baseline write interrupt the nightly.
+    #
+    # But NOT silent. This used to be a bare `except Exception: pass`, and run
+    # 20260912_045412-c3d475811 is missing from baseline/index.json while its
+    # neighbours (044157, 060525, 064426) are present — the snapshot write
+    # failed and nothing said so. That run is exactly the one whose published
+    # result (0/45) disagreed with its own run-state (21 chunks passed), so the
+    # one piece of evidence that would have explained the discrepancy was lost
+    # to a swallowed exception. Record the failure loudly; still never raise.
     try:
         from verification._path import build_root
         from verification.tools.baseline_store import record_from_run
-        record_from_run(
+        _snap = record_from_run(
             run_id=config.run_id,
             report_dir=config.report_dir,
             results_base=build_root(),
             native_config=config.native_config,
         )
-    except Exception:
-        pass
+        if _snap is None:
+            # record_from_run returns None when it found nothing to snapshot —
+            # the chunk results tree was empty or unreadable. That is a real
+            # signal, not a no-op: it means the baseline for this run is absent.
+            print(f"  [baseline] NOT RECORDED for {config.run_id}: no chunk results "
+                  f"found under {build_root()} — trends will have a gap here",
+                  flush=True)
+        else:
+            print(f"  [baseline] recorded {_snap.name}", flush=True)
+    except Exception as e:
+        import traceback
+        print(f"  [baseline] FAILED for {config.run_id}: "
+              f"{type(e).__name__}: {e}", flush=True)
+        print("  [baseline] " + traceback.format_exc().replace("\n", "\n  [baseline] "),
+              flush=True)
 
     return summ
