@@ -541,6 +541,24 @@ public sealed class CSharpSerializer
         {
             var csType = MapToCSharpType(cleanType);
 
+            // CLR arrays (T[]) construct with `new T[] { ... }` regardless of
+            // whether the element type has an Add method, so handle them before
+            // the collection-type check. Previously every array fell through to
+            // default(T)! — i.e. null — which made an empty array probe result
+            // assert as null and reject a correct empty-array implementation
+            // (BCL returns Type[0], not null, for "no items").
+            if (cleanType.EndsWith("[]", StringComparison.Ordinal))
+            {
+                var arrayElementType = ExtractElementType(cleanType)
+                    ?? cleanType[..^2];  // T[] → T
+                var arrayElementExprs = root.EnumerateArray()
+                    .Select(e => DeserializeToExpression(
+                        e.GetRawText(),
+                        CSharpSerializer.StripAssemblyQualification(arrayElementType)))
+                    .ToArray();
+                return $"new {csType} {{ {string.Join(", ", arrayElementExprs)} }}";
+            }
+
             // Only use collection initializer for types known to support it
             // (parameterless ctor + Add method). ReadOnlyCollection<T> does NOT
             // support collection initializer — fall back to default for everything
