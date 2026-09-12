@@ -242,6 +242,27 @@ public static class Classifier
         ["AssemblyName.get_CultureName"] = new[] { "ChaosReflectionAssemblyNameGetCultureName" },
         ["AssemblyName.ToString"] = new[] { "ChaosReflectionAssemblyNameToString" },
         ["AssemblyName.ReferenceMatchesDefinition"] = new[] { "ChaosReflectionAssemblyNameReferenceMatchesDefinition" },
+
+        // ── Assembly identity / metadata accessors ─────────────────────
+        ["Assembly.get_ManifestModule"] = new[] { "ChaosReflectionAssemblyGetManifestModule" },
+        ["Assembly.get_Modules"] = new[] { "ChaosReflectionAssemblyGetModulesList" },
+        ["Assembly.get_ExportedTypes"] = new[] { "ChaosReflectionAssemblyGetExportedTypesProperty" },
+        ["Assembly.get_DefinedTypes"] = new[] { "ChaosReflectionAssemblyGetDefinedTypes" },
+        ["Assembly.GetAssembly"] = new[] { "ChaosReflectionAssemblyGetAssemblyForType" },
+        ["Assembly.GetModule"] = new[] { "ChaosReflectionAssemblyGetModuleByName" },
+        ["Assembly.GetLoadedModules"] = new[] { "ChaosReflectionAssemblyGetLoadedModules" },
+        ["Assembly.ToString"] = new[] { "ChaosReflectionAssemblyToString" },
+        ["Assembly.GetCustomAttributesData"] = new[] { "ChaosReflectionAssemblyGetCustomAttributesData" },
+        ["Assembly.GetCustomAttributes"] = new[] { "ChaosReflectionAssemblyGetCustomAttributes" },
+        ["Assembly.get_CustomAttributes"] = new[] { "ChaosReflectionAssemblyGetCustomAttributesData" },
+        ["Assembly.IsDefined"] = new[] { "ChaosReflectionAssemblyIsDefined" },
+        ["Assembly.get_IsFullyTrusted"] = new[] { "ChaosReflectionAssemblyGetIsFullyTrusted" },
+        ["Assembly.get_GlobalAssemblyCache"] = new[] { "ChaosReflectionAssemblyGetGlobalAssemblyCache" },
+        ["Assembly.get_ReflectionOnly"] = new[] { "ChaosReflectionAssemblyGetReflectionOnly" },
+        ["Assembly.get_SecurityRuleSet"] = new[] { "ChaosReflectionAssemblyGetSecurityRuleSet" },
+        ["Assembly.get_HostContext"] = new[] { "ChaosReflectionAssemblyGetHostContext" },
+        ["Assembly.GetHashCode"] = new[] { "ChaosReflectionAssemblyGetHashCode" },
+        ["Assembly.Equals"] = new[] { "ChaosReflectionAssemblyEqualsVersion" },
     };
 
     /// <summary>

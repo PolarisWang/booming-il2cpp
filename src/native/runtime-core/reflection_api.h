@@ -170,6 +170,31 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetFullName(CHAOS_IL2CPP_INTPTR n
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureName(CHAOS_IL2CPP_INTPTR name) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameToString(CHAOS_IL2CPP_INTPTR name) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyNameReferenceMatchesDefinition(CHAOS_IL2CPP_INTPTR reference, CHAOS_IL2CPP_INTPTR definition) noexcept;
+
+/* ── Assembly identity / metadata accessors ──────────────────────────
+ * An Assembly handle is an encoded ReflectionQueryImageHandle. Under AOT an
+ * image is a single statically-linked artifact: one image == one module, no
+ * loader, no GAC, no filesystem presence. The identity predicates below report
+ * the same values CoreCLR returns for that case.
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetManifestModule(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetModulesList(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetExportedTypesProperty(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetDefinedTypes(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetAssemblyForType(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetModuleByName(CHAOS_IL2CPP_INTPTR assembly_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetLoadedModules(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyToString(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetCustomAttributesData(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetCustomAttributes(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyIsDefined(CHAOS_IL2CPP_INTPTR assembly_handle, CHAOS_IL2CPP_INTPTR attribute_type_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyGetIsFullyTrusted(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyGetGlobalAssemblyCache(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyGetReflectionOnly(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyGetSecurityRuleSet(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INT64  ChaosReflectionAssemblyGetHostContext(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyGetHashCode(CHAOS_IL2CPP_INTPTR assembly_handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
 // ── Additional reflection API functions (implemented in reflection_api.cpp) ──
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
