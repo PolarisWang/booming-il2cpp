@@ -24,6 +24,8 @@
 
 #include <cstdint>
 #include <new>
+#include <mutex>
+#include <vector>
 
 extern "C" {
 
@@ -626,6 +628,128 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) 
 CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept
 {
     return WhenAllAnyManagedArray(tasks_handle, /*when_all=*/false);
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Task.WhenEach (Phase 2 / ASYNC-P2-8)
+// ══════════════════════════════════════════════════════════════════════════════
+//
+// ORDER-PRESERVING completion stream.  Semantics differ from both combinators
+// above, which is why this cannot reuse WhenAllAnyInternal:
+//
+//   WhenAll  — yields ONCE, after every task completed.
+//   WhenAny  — yields ONCE, when the first task completed.
+//   WhenEach — yields ONCE PER TASK, in COMPLETION order.
+//
+// Design: the returned handle owns a queue and a completion signal.  Every child
+// is registered with a continuation at construction, so no completion can be
+// missed in the window between the caller draining one element and re-arming for
+// the next.  A child that completes synchronously during registration is appended
+// inline (the continuation runs under the same lock), so ordering is by actual
+// completion, not by registration.
+namespace {
+
+// One element of the completion-ordered stream.
+struct WhenEachState {
+    std::mutex mtx;
+    std::vector<CHAOS_IL2CPP_INTPTR> ready;   // completed task handles, FIFO by completion
+    CHAOS_IL2CPP_INT32 remaining = 0;         // tasks not yet completed
+    bool faulted = false;
+    CHAOS_IL2CPP_INTPTR exception = 0;        // first observed exception, if any
+    bool owns_children = false;
+};
+
+/// Records the just-completed child into the ready queue.  The continuation
+/// receives the task handle as a parameter, which is what we must queue.
+static void WhenEachContinuation(CHAOS_IL2CPP_INTPTR task_handle, void* user) noexcept
+{
+    auto* st = static_cast<WhenEachState*>(user);
+    if (st == nullptr) return;
+    std::lock_guard<std::mutex> lock(st->mtx);
+    if (st->remaining > 0) --st->remaining;
+    if (task_handle != 0) {
+        st->ready.push_back(task_handle);
+    }
+}
+
+} // anonymous namespace
+
+/// Task.WhenEach(Task[]) — returns a handle to a completion-ordered queue.
+///
+/// The handle is NOT an AsyncTask: the consumer drains it repeatedly rather than
+/// awaiting it once.  Every child is registered up front so completions that
+/// happen while the consumer is between elements are still queued.
+CHAOS_IL2CPP_INTPTR chaos_task_when_each_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept
+{
+    if (tasks_handle == 0) return 0;
+    auto* arr = get_managed_array(tasks_handle);
+    if (arr == nullptr) return 0;
+    CHAOS_IL2CPP_INT32 n = static_cast<CHAOS_IL2CPP_INT32>(arr->length);
+    if (n <= 0) return 0;
+
+    auto* elements = accessor_get_elements(
+        const_cast<ManagedArrayAccessor*>(arr));
+
+    auto* st = new (std::nothrow) WhenEachState();
+    if (st == nullptr) return 0;
+    st->remaining = n;
+    try {
+        st->ready.reserve(static_cast<size_t>(n));
+    } catch (...) {
+        delete st;
+        return 0;
+    }
+
+    for (CHAOS_IL2CPP_INT32 i = 0; i < n; ++i) {
+        CHAOS_IL2CPP_INTPTR child = elements[i];
+        if (child == static_cast<CHAOS_IL2CPP_INTPTR>(0)) {
+            // A null element still occupies a slot in the stream; account for it so
+            // the terminator stays exact rather than hanging on a phantom completion.
+            std::lock_guard<std::mutex> lock(st->mtx);
+            if (st->remaining > 0) --st->remaining;
+            continue;
+        }
+        // A synchronously-completed child fires this inline, appending under the
+        // lock; an asynchronous one appends from whichever thread completes it.
+        // Either way the FIFO reflects real completion order.
+        async_task_on_completed(child, WhenEachContinuation, st);
+    }
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(st);
+}
+
+/// True when the WhenEach stream still has elements to hand out (queued now, or
+/// awaiting completion).  The consumer polls this to decide whether another
+/// MoveNextAsync will produce a value.
+CHAOS_IL2CPP_INT32 chaos_task_when_each_may_have_next(CHAOS_IL2CPP_INTPTR stream) noexcept
+{
+    if (stream == 0) return 0;
+    auto* st = reinterpret_cast<WhenEachState*>(stream);
+    std::lock_guard<std::mutex> lock(st->mtx);
+    return (!st->ready.empty() || st->remaining > 0) ? 1 : 0;
+}
+
+/// Pops the next completed task handle in COMPLETION order.  Returns 0 when the
+/// queue is momentarily empty; the caller should await rather than conclude the
+/// stream ended — use chaos_task_when_each_may_have_next for that decision.
+CHAOS_IL2CPP_INTPTR chaos_task_when_each_try_dequeue(CHAOS_IL2CPP_INTPTR stream) noexcept
+{
+    if (stream == 0) return 0;
+    auto* st = reinterpret_cast<WhenEachState*>(stream);
+    std::lock_guard<std::mutex> lock(st->mtx);
+    if (st->ready.empty()) return 0;
+    CHAOS_IL2CPP_INTPTR next = st->ready.front();
+    st->ready.erase(st->ready.begin());
+    return next;
+}
+
+/// Releases a stream once the consumer is done with it (e.g. on DisposeAsync or
+/// when the enumerable is abandoned).  Safe to call with 0.
+void chaos_task_when_each_destroy(CHAOS_IL2CPP_INTPTR stream) noexcept
+{
+    if (stream == 0) return;
+    auto* st = reinterpret_cast<WhenEachState*>(stream);
+    delete st;
 }
 
 // ══════════════════════════════════════════════════════════════════════════════

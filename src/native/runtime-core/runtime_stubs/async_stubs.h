@@ -83,6 +83,26 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2
 CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
 
+// ── Task.WhenEach (Phase 2 / ASYNC-P2-8) ──
+// ORDER-PRESERVING completion stream.  Unlike WhenAll (awaits everything, then
+// yields the aggregate once) and WhenAny (yields the first completed task once),
+// WhenEach yields EACH task as it completes, so a consumer awaiting the returned
+// IAsyncEnumerable observes completion ORDER.
+//
+// Returns a handle to a queue-backed completion source that is re-armed after each
+// element is consumed.  Every task in the array is registered with a completion
+// continuation at call time, so no completion can be lost between caller drains.
+// Returns 0 on invalid arguments or allocation failure.
+CHAOS_IL2CPP_INTPTR chaos_task_when_each_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
+
+// Consumer side of the WhenEach stream.  A caller drains it element by element:
+// while when_each_may_have_next() is non-zero, when_each_try_dequeue() returns the
+// next completed task in completion order (0 if the queue is momentarily empty —
+// await, don't conclude the stream ended).  when_each_destroy frees the stream.
+CHAOS_IL2CPP_INT32 chaos_task_when_each_may_have_next(CHAOS_IL2CPP_INTPTR stream) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_when_each_try_dequeue(CHAOS_IL2CPP_INTPTR stream) noexcept;
+void chaos_task_when_each_destroy(CHAOS_IL2CPP_INTPTR stream) noexcept;
+
 // ── Task.ContinueWith native combinator (Phase 2 P2-2) ──
 // Registers `continuation` (a DelegateObject taking the antecedent task handle
 // and returning a native int) to run when `antecedent` completes — whether it

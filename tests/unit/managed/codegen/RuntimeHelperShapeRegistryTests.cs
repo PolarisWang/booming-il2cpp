@@ -822,6 +822,86 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.Null(descriptor!.Resolver(planner, callee, Array.Empty<string>()));
     }
 
+    // ══════════════════════════════════════════════════════════════════════
+    // ASYNC-P2-8 WhenEach — the ORDER-PRESERVING completion stream.
+    //
+    // Distinct from WhenAll/WhenAny: those are one-shot aggregates. WhenEach
+    // returns IAsyncEnumerable<Task> that yields as each task completes, in
+    // COMPLETION order. The native side therefore must not reuse
+    // chaos_task_when_all_array (all) or chaos_task_when_any_array (first only).
+    //
+    // The callee spellings are copied VERBATIM from what the pipeline emits —
+    // the contracts artifact lists Task::WhenEach/1 (3 overloads) and
+    // Task::WhenEach`1/1 (3 overloads).  Hand-written spellings diverge from
+    // the pipeline (P2-4/P2-5 lesson), so these name the real surface shape.
+    // ══════════════════════════════════════════════════════════════════════
+
+    [Fact]
+    public void WhenEach_ArrayOverload_RoutesToItsOwnNativeCombinator()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenEach:"
+            + "System.Collections.Generic.IAsyncEnumerable`1<System.Threading.Tasks.Task>(System.Threading.Tasks.Task[])";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"WhenEach callee '{callee}' should match a WhenEach registry descriptor");
+        Assert.Equal("WhenEach", descriptor.MethodName);
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+
+        // Routing is the claim under test.  The destination must be the WhenEach
+        // combinator — NOT when_all (which awaits everything before yielding) and
+        // NOT when_any (which yields once).  Either would be a silently different
+        // enumerable that still looks like a successful registration.
+        Assert.Equal("chaos_task_when_each_array", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_task_when_each_array", resolution.CppSource);
+        Assert.DoesNotContain("when_all", resolution.CppSource);
+        Assert.DoesNotContain("when_any", resolution.CppSource);
+    }
+
+    [Fact]
+    public void WhenEach_GenericArrayOverload_RoutesToItsOwnNativeCombinator()
+    {
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenEach<System.Int32>:"
+            + "System.Collections.Generic.IAsyncEnumerable`1<System.Threading.Tasks.Task`1<System.Int32>>"
+            + "(System.Threading.Tasks.Task`1<System.Int32>[])";
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _),
+            $"generic WhenEach callee '{callee}' should match a WhenEach registry descriptor");
+
+        var planner = new NativeAotLoweringPlanner();
+        var resolution = descriptor.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_when_each_array", resolution!.DirectNativeSymbol);
+    }
+
+    /// <summary>
+    /// WhenEach must not swallow WhenAll/WhenAny, and vice versa.  The three
+    /// descriptors share the "System.Threading.Tasks.Task" type prefix, so an
+    /// over-broad method-name guard would cross-route them and silently change
+    /// aggregate semantics.
+    /// </summary>
+    [Fact]
+    public void WhenEach_DoesNotCapture_WhenAllOrWhenAny()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        const string whenAllCallee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:"
+            + "System.Threading.Tasks.Task(System.Threading.Tasks.Task[])";
+        const string whenAnyCallee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:"
+            + "System.Threading.Tasks.Task(System.Threading.Tasks.Task[])";
+
+        Assert.True(registry.TryMatchGenericShape(whenAllCallee, out var allDesc, out _));
+        Assert.Equal("WhenAll", allDesc.MethodName);
+
+        Assert.True(registry.TryMatchGenericShape(whenAnyCallee, out var anyDesc, out _));
+        Assert.Equal("WhenAny", anyDesc.MethodName);
+    }
+
     [Fact]
     public void BuildDefault_TryMatchShape_GcGetTotalMemory_ReturnsEntry()
     {

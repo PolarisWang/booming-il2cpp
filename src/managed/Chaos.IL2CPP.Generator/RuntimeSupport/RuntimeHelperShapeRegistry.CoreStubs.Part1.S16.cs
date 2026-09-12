@@ -1353,6 +1353,66 @@ public sealed partial class NativeAotLoweringPlanner
                             DirectNativeSymbol: native);
                     }));
             }
+
+            // Task.WhenEach(Task[]) / Task.WhenEach<TResult>(Task<TResult>[]) — the
+            // ORDER-PRESERVING completion stream.
+            //
+            // Not a variant of the two above: WhenEach returns IAsyncEnumerable<Task>
+            // that yields each task AS IT COMPLETES, so a caller awaiting the
+            // enumerable observes completion ORDER.  Routing it to when_all would
+            // defer every element until the last task finished; routing it to
+            // when_any would yield exactly once.  Both are silently different
+            // programs that still look like a successful registration — which is
+            // why the registry test asserts the destination symbol by name and
+            // asserts the other two are absent.
+            //
+            // The native side owns the queue semantics (a re-armed completion
+            // source drained in completion order); codegen only has to name it.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                MethodName: "WhenEach",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    // Same array-only guard as WhenAll/WhenAny: the native shim
+                    // unpacks a contiguous managed array.  The IEnumerable<Task>
+                    // overload has no native model and must fall through to the
+                    // interpreter rather than be silently approximated.
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1 || !paramTypes[0].Contains("[]", StringComparison.Ordinal))
+                        return null;
+
+                    // The name may carry a generic argument list
+                    // (`::WhenEach<System.Int32>(`), so accept `(` or `<` after the
+                    // `::WhenEach` anchor — the same shape WhenAll/WhenAny needed.
+                    var whenEachAnchor = "::WhenEach";
+                    var weIdx = callee.IndexOf(whenEachAnchor, StringComparison.Ordinal);
+                    if (weIdx >= 0)
+                    {
+                        var afterName = callee[(weIdx + whenEachAnchor.Length)..];
+                        // Accept `(` (no return type), `<` (generic args), or `:` (return type)
+                        // after the method name.
+                        if (!afterName.StartsWith('(') && !afterName.StartsWith('<') && !afterName.StartsWith(':'))
+                            return null;
+                    }
+                    else if (!callee.Contains("Task[]", StringComparison.Ordinal))
+                    {
+                        return null;
+                    }
+
+                    const string WhenEachNative = "chaos_task_when_each_array";
+                    var weSymbol = GetExternalRuntimeHelperSymbol(callee);
+                    var weSrc = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", weSymbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                    [
+                        $"    return {WhenEachNative}(chaos_arg_0);",
+                    ]);
+                    return new GenericShapeResolution(weSrc, weSymbol,
+                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                            new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ReferenceType }),
+                        CreateNativeIntAbiSlot(),
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: WhenEachNative);
+                }));
         }
 
         /// <summary>
