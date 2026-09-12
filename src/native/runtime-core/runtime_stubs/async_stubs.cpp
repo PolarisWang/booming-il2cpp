@@ -631,6 +631,44 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) 
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
+// TaskFactory.ContinueWhenAll / ContinueWhenAny (Phase 2)
+// ══════════════════════════════════════════════════════════════════════════════
+//
+// A composition, not a new mechanism: build the aggregate over the task array
+// with the existing combinator, then register the continuation on that
+// aggregate through the existing ContinueWith delivery path.
+//
+// Getting this wrong in the obvious way is worth calling out.  Registering the
+// continuation on EACH CHILD would fire it once per task (N times for
+// ContinueWhenAll) instead of once — a program that looks like it works on a
+// single-element array and multiplies side effects on any other.  The
+// continuation is therefore registered on the AGGREGATE, which completes
+// exactly once by construction.
+static CHAOS_IL2CPP_INTPTR ContinueWhenInternal(
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INTPTR continuation,
+    bool when_all) noexcept
+{
+    if (continuation == 0) return 0;
+    CHAOS_IL2CPP_INTPTR aggregate = when_all
+        ? chaos_task_when_all_array(tasks_handle)
+        : chaos_task_when_any_array(tasks_handle);
+    if (aggregate == 0) return 0;
+    return chaos_task_continue_with(aggregate, continuation);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_task_continue_when_all_array(
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INTPTR continuation) noexcept
+{
+    return ContinueWhenInternal(tasks_handle, continuation, /*when_all=*/true);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_task_continue_when_any_array(
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INTPTR continuation) noexcept
+{
+    return ContinueWhenInternal(tasks_handle, continuation, /*when_all=*/false);
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
 // Task.WhenEach (Phase 2 / ASYNC-P2-8)
 // ══════════════════════════════════════════════════════════════════════════════
 //

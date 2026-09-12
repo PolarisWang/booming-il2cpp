@@ -1416,6 +1416,73 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// TaskFactory.ContinueWhenAll / ContinueWhenAny — the array overloads.
+        ///
+        /// Composition rather than new mechanism: the native entry point builds the
+        /// WhenAll/WhenAny aggregate over the task array and registers the
+        /// continuation on THAT aggregate (see chaos_task_continue_when_*_array).
+        ///
+        /// <para>
+        /// The distinction that matters is which object the continuation observes.
+        /// Registering it on each CHILD would fire it once per task — for
+        /// ContinueWhenAll that is N invocations where the caller asked for one.
+        /// It looks correct on a single-element array and multiplies side effects
+        /// on every other, so the guard here routes the whole array through the
+        /// aggregate and the native test pins the invocation count.
+        /// </para>
+        ///
+        /// <para>
+        /// Only the <c>(Task[], Action&lt;Task[]&gt;)</c>-shaped overloads are routed:
+        /// exactly two parameters, the first an array and the second a delegate.
+        /// The <c>TaskCreationOptions</c> / <c>CancellationToken</c> / state-object
+        /// variants carry arguments with no native model and return null, falling
+        /// to the interpreter — the honest outcome, same precedent as StartNew.
+        /// </para>
+        /// </summary>
+        private static void RegisterTaskFactoryContinueWhen(RuntimeHelperShapeRegistry registry)
+        {
+            IEnumerable<(string Method, string Native)> continuations =
+            [
+                (Method: "ContinueWhenAll", Native: "chaos_task_continue_when_all_array"),
+                (Method: "ContinueWhenAny", Native: "chaos_task_continue_when_any_array"),
+            ];
+            foreach (var (method, native) in continuations)
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Threading.Tasks.TaskFactory",
+                    MethodName: method,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        // (Task[] tasks, Action<Task[]> continuation) — two params,
+                        // the array first and a delegate second.  Anything else
+                        // (options / token / state / IEnumerable overloads) has no
+                        // native model.
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        if (paramTypes.Count != 2) return null;
+                        if (!paramTypes[0].Contains("[]", StringComparison.Ordinal)) return null;
+                        if (!IsAnyContinuationDelegate(paramTypes[1])) return null;
+
+                        var cwSymbol = GetExternalRuntimeHelperSymbol(callee);
+                        var cwSrc = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", cwSymbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            $"    return {native}(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(cwSrc, cwSymbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact[2]
+                                {
+                                    CreateNativeIntAbiSlot(),
+                                    CreateNativeIntAbiSlot(),
+                                }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: native);
+                    }));
+            }
+        }
+
+        /// <summary>
         /// Decimal
         /// </summary>
         private static void RegisterDecimal(RuntimeHelperShapeRegistry registry)

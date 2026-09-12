@@ -114,6 +114,21 @@ void chaos_task_when_each_destroy(CHAOS_IL2CPP_INTPTR stream) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
     CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation) noexcept;
 
+// ── TaskFactory.ContinueWhenAll / ContinueWhenAny (Phase 2) ──
+// Compose the existing aggregate combinators with the ContinueWith delivery
+// path: build the WhenAll/WhenAny aggregate over `tasks_handle` (a managed
+// Task[] handle) and register `continuation` on it.  The continuation observes
+// the AGGREGATE, so for ContinueWhenAll it runs once every task finished, and
+// for ContinueWhenAny once the first finished — the aggregate's own result
+// (the [1,2,3]-style array, or the 1-based winner index) is what it receives.
+//
+// Returns a NEW task handle resolving with the continuation's result, or 0 on
+// invalid arguments.
+CHAOS_IL2CPP_INTPTR chaos_task_continue_when_all_array(
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INTPTR continuation) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_continue_when_any_array(
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INTPTR continuation) noexcept;
+
 // ── TaskFactory native surface (Phase 2 P2-5) ──
 // Task.get_Factory.  The runtime has no TaskFactory object model and does not
 // need one: the default factory's StartNew queues on the default scheduler,
