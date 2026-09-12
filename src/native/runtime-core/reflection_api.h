@@ -51,6 +51,28 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(CHAOS_IL2CPP_INTPTR member
 CHAOS_IL2CPP_INTPTR ChaosReflectionCollectCustomAttributes(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionMemberHasAnyAttribute(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionMemberIsDefinedByToken(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attribute_type_token) noexcept;
+
+/* ── PropertyInfo / EventInfo descriptor accessors ───────────────────
+ * Backed by the Tier-2 property/event descriptors. The accessor-method
+ * lookups (GetGetMethod/GetSetMethod/GetAddMethod) resolve "get_X"/"set_X"/
+ * "add_X" inside the declaring type's method table, since the descriptor
+ * itself carries no accessor handles.
+ */
+CHAOS_IL2CPP_INT32  ChaosReflectionPropertyGetAttributes(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionPropertyGetIsSpecialName(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionPropertyGetIsStatic(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionPropertyGetMemberType(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetPropertyType(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetName(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetGetMethod(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetSetMethod(CHAOS_IL2CPP_INTPTR prop) noexcept;
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetName(CHAOS_IL2CPP_INTPTR evt) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetEventHandlerType(CHAOS_IL2CPP_INTPTR evt) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionEventGetAttributes(CHAOS_IL2CPP_INTPTR evt) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionEventGetIsStatic(CHAOS_IL2CPP_INTPTR evt) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionEventGetMemberType(CHAOS_IL2CPP_INTPTR evt) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetAddMethod(CHAOS_IL2CPP_INTPTR evt) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
 CHAOS_IL2CPP_INTPTR ChaosStringConcatWithFormattedInt32(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INT32 value);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR type_handle) noexcept;

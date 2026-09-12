@@ -89,6 +89,9 @@ struct ReflectionQueryPropertyDescriptor {
 static constexpr CHAOS_IL2CPP_UINT32 kPropertyFlagIsStatic = 1u << 0;
 static constexpr CHAOS_IL2CPP_UINT32 kPropertyFlagCanRead  = 1u << 1;
 static constexpr CHAOS_IL2CPP_UINT32 kPropertyFlagCanWrite = 1u << 2;
+// PropertyAttributes.SpecialName (ECMA-335 0x0200) — set for accessor-like
+// properties the compiler names with a leading/trailing marker.
+static constexpr CHAOS_IL2CPP_UINT32 kPropertyFlagIsSpecialName = 1u << 3;
 
 struct ReflectionQueryEventDescriptor {
     const char* subject_id_utf8;

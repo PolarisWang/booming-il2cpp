@@ -331,6 +331,241 @@ CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetCanWrite(CHAOS_IL2CPP_INTPTR prop) 
     return (decoded->flags & kPropertyFlagCanWrite) ? 1 : 0;
 }
 
+// Raw PropertyAttributes value, assembled from the descriptor bits.
+// PropertyAttributes follows the ECMA-335 access-mask layout shared with
+// FieldAttributes for the low bits, plus SpecialName at 0x0200.
+CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetAttributes(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+
+    CHAOS_IL2CPP_INT32 attrs = 0;
+    const CHAOS_IL2CPP_UINT32 f = decoded->flags;
+    if ((f & kPropertyFlagIsSpecialName) != 0u) attrs |= 0x0200;  // SpecialName
+    return attrs;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetIsSpecialName(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    return (decoded->flags & kPropertyFlagIsSpecialName) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetIsStatic(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    return (decoded->flags & kPropertyFlagIsStatic) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetPropertyType(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr || decoded->member_type_utf8 == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        const_cast<char*>(decoded->member_type_utf8));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetName(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr || decoded->name_utf8 == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        const_cast<char*>(decoded->name_utf8));
+}
+
+// MemberTypes.Property == 16 — this accessor exists only on PropertyInfo, so the
+// answer is a constant. Kept as a named entry point so codegen has a symbol to
+// forward to (matching the MemberTypes constants in the BCL: Constructor=1,
+// Method=8, Property=16, Field=4, Event=2).
+CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetMemberType(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    return 16;  // MemberTypes.Property
+}
+
+// ── PropertyInfo accessors (get_/set_ method lookup) ────────────────
+// The Tier-2 property descriptor deliberately does not carry accessor handles
+// (see reflection_query_model.h — it holds only subject_id/name/type/flags).
+// The accessor methods live in the *owning type's* method table, named
+// "get_<Property>" / "set_<Property>", so they are resolved by scanning the
+// declaring type for the conventional name. This mirrors how the BCL derives
+// GetGetMethod/GetSetMethod from the property's accessor pair.
+namespace {
+
+// Portable "find last occurrence of needle in haystack" (std::strrstr is a
+// POSIX/MSVC extension and not available on every target we build for).
+const char* FindLastSubstring(const char* haystack, const char* needle) noexcept {
+    if (haystack == nullptr || needle == nullptr) return nullptr;
+    const size_t needle_len = std::strlen(needle);
+    if (needle_len == 0) return haystack + std::strlen(haystack);
+
+    const char* last = nullptr;
+    for (const char* p = haystack; (p = std::strstr(p, needle)) != nullptr; p++) {
+        last = p;
+    }
+    return last;
+}
+
+// Builds "get_"/"set_" + property name into a caller-supplied buffer.
+// Returns false when the name would overflow, in which case no lookup is made.
+bool BuildAccessorName(const char* prop_name, const char* prefix,
+                       char* out, size_t out_size) noexcept {
+    if (prop_name == nullptr || out == nullptr) return false;
+    const size_t prefix_len = std::strlen(prefix);
+    const size_t name_len = std::strlen(prop_name);
+    if (prefix_len + name_len + 1 > out_size) return false;
+    std::memcpy(out, prefix, prefix_len);
+    std::memcpy(out + prefix_len, prop_name, name_len + 1);  // include NUL
+    return true;
+}
+
+// Finds the declaring type of a property descriptor and returns the method
+// descriptor whose name matches `accessor_name`, or nullptr.
+const ReflectionQueryMethodDescriptor* FindPropertyAccessor(
+    const ReflectionQueryPropertyDescriptor* prop, const char* prefix) noexcept {
+    if (prop == nullptr || prop->name_utf8 == nullptr) return nullptr;
+
+    // The property descriptor's subject_id is "<TypeSubjectId>::<PropName>";
+    // the declaring type is everything before the final "::".
+    const char* sep = FindLastSubstring(
+        prop->subject_id_utf8 != nullptr ? prop->subject_id_utf8 : "", "::");
+    if (sep == nullptr) return nullptr;
+
+    char want[256];
+    if (!BuildAccessorName(prop->name_utf8, prefix, want, sizeof(want))) return nullptr;
+
+    const size_t type_len = static_cast<size_t>(sep - prop->subject_id_utf8);
+    const uint32_t module_count = GetModuleCount();
+    for (uint32_t i = 0u; i < module_count; i++) {
+        const auto* mod = GetModuleByIndex(i);
+        if (mod == nullptr || mod->image == nullptr) continue;
+        for (uint32_t t = 0u; t < mod->image->type_count; t++) {
+            const auto* type = mod->image->types[t];
+            if (type == nullptr || type->subject_id_utf8 == nullptr) continue;
+            if (std::strlen(type->subject_id_utf8) != type_len) continue;
+            if (std::memcmp(type->subject_id_utf8, prop->subject_id_utf8, type_len) != 0) continue;
+
+            if (type->methods == nullptr) return nullptr;
+            for (uint32_t m = 0u; m < type->method_count; m++) {
+                const auto& method = type->methods[m];
+                if (method.name_utf8 != nullptr &&
+                    std::strcmp(method.name_utf8, want) == 0) {
+                    return &method;
+                }
+            }
+            return nullptr;  // declaring type found, no matching accessor
+        }
+    }
+    return nullptr;
+}
+
+}  // namespace
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetGetMethod(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    if ((decoded->flags & kPropertyFlagCanRead) == 0u) return 0;
+
+    const auto* getter = FindPropertyAccessor(decoded, "get_");
+    if (getter == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryMethodHandle(getter));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetSetMethod(CHAOS_IL2CPP_INTPTR prop) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
+        static_cast<PropertyInfoHandle>(prop));
+    if (decoded == nullptr) return 0;
+    if ((decoded->flags & kPropertyFlagCanWrite) == 0u) return 0;
+
+    const auto* setter = FindPropertyAccessor(decoded, "set_");
+    if (setter == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryMethodHandle(setter));
+}
+
+// ── EventInfo descriptor accessors ──────────────────────────────────
+// EventDescriptor (reflection_query_model.h) mirrors PropertyDescriptor:
+// subject_id / name / member_type (the delegate type) / flags.
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetName(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr || decoded->name_utf8 == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(decoded->name_utf8));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetEventHandlerType(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr || decoded->member_type_utf8 == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        const_cast<char*>(decoded->member_type_utf8));
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionEventGetAttributes(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr) return 0;
+    // EventAttributes.None — the descriptor carries only the static bit, which
+    // is not part of System.Reflection.EventAttributes (that enum has no
+    // Static member; statics are expressed via the add/remove method flags).
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionEventGetIsStatic(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr) return 0;
+    return (decoded->flags & kEventFlagIsStatic) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionEventGetMemberType(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr) return 0;
+    return 2;  // MemberTypes.Event
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetAddMethod(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr || decoded->subject_id_utf8 == nullptr) return 0;
+
+    const char* sep = FindLastSubstring(decoded->subject_id_utf8, "::");
+    if (sep == nullptr || decoded->name_utf8 == nullptr) return 0;
+
+    char want[256];
+    if (!BuildAccessorName(decoded->name_utf8, "add_", want, sizeof(want))) return 0;
+
+    // Reuse the property-accessor scan by constructing the equivalent lookup.
+    const size_t type_len = static_cast<size_t>(sep - decoded->subject_id_utf8);
+    const uint32_t module_count = GetModuleCount();
+    for (uint32_t i = 0u; i < module_count; i++) {
+        const auto* mod = GetModuleByIndex(i);
+        if (mod == nullptr || mod->image == nullptr) continue;
+        for (uint32_t t = 0u; t < mod->image->type_count; t++) {
+            const auto* type = mod->image->types[t];
+            if (type == nullptr || type->subject_id_utf8 == nullptr) continue;
+            if (std::strlen(type->subject_id_utf8) != type_len) continue;
+            if (std::memcmp(type->subject_id_utf8, decoded->subject_id_utf8, type_len) != 0) continue;
+
+            if (type->methods == nullptr) return 0;
+            for (uint32_t m = 0u; m < type->method_count; m++) {
+                const auto& method = type->methods[m];
+                if (method.name_utf8 != nullptr &&
+                    std::strcmp(method.name_utf8, want) == 0) {
+                    return static_cast<CHAOS_IL2CPP_INTPTR>(
+                        EncodeReflectionQueryMethodHandle(&method));
+                }
+            }
+            return 0;
+        }
+    }
+    return 0;
+}
+
 // ── AssemblyName stubs ──────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureInfo(CHAOS_IL2CPP_INTPTR /*name*/) noexcept {
     return 0;  // Invariant culture = nullptr/0. Non-invariant culture deferred to Phase 3+.

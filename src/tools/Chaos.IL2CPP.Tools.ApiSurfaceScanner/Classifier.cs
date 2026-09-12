@@ -158,6 +158,24 @@ public static class Classifier
         ["MethodBase.get_IsConstructor"] = new[] { "ChaosReflectionMethodGetIsConstructor" },
         ["MethodBase.get_Attributes"] = new[] { "ChaosReflectionMethodGetAttributes" },
         ["MethodBase.get_MethodImplementationFlags"] = new[] { "ChaosReflectionMethodGetImplementationFlags" },
+
+        // ── Property / Event descriptor accessors (Phase 3 cont.) ──────
+        ["PropertyInfo.get_Attributes"] = new[] { "ChaosReflectionPropertyGetAttributes" },
+        ["PropertyInfo.get_IsSpecialName"] = new[] { "ChaosReflectionPropertyGetIsSpecialName" },
+        ["PropertyInfo.get_MemberType"] = new[] { "ChaosReflectionPropertyGetMemberType" },
+        ["PropertyInfo.get_PropertyType"] = new[] { "ChaosReflectionPropertyGetPropertyType" },
+        ["PropertyInfo.GetGetMethod"] = new[] { "ChaosReflectionPropertyGetGetMethod" },
+        ["PropertyInfo.GetSetMethod"] = new[] { "ChaosReflectionPropertyGetSetMethod" },
+        ["PropertyInfo.get_GetMethod"] = new[] { "ChaosReflectionPropertyGetGetMethod" },
+        ["PropertyInfo.get_SetMethod"] = new[] { "ChaosReflectionPropertyGetSetMethod" },
+
+        ["EventInfo.get_Attributes"] = new[] { "ChaosReflectionEventGetAttributes" },
+        ["EventInfo.get_EventHandlerType"] = new[] { "ChaosReflectionEventGetEventHandlerType" },
+        ["EventInfo.get_IsSpecialName"] = new[] { "ChaosReflectionEventGetIsStatic" },
+        ["EventInfo.get_MemberType"] = new[] { "ChaosReflectionEventGetMemberType" },
+        ["EventInfo.GetAddMethod"] = new[] { "ChaosReflectionEventGetAddMethod" },
+        ["EventInfo.get_AddMethod"] = new[] { "ChaosReflectionEventGetAddMethod" },
+        ["EventInfo.get_Name"] = new[] { "ChaosReflectionEventGetName" },
     };
 
     /// <summary>
