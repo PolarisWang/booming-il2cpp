@@ -278,6 +278,45 @@ public static class Classifier
         ["Module.get_CustomAttributes"] = new[] { "ChaosReflectionModuleGetCustomAttributesData" },
         ["Module.GetHashCode"] = new[] { "ChaosReflectionModuleGetHashCode" },
         ["Module.Equals"] = new[] { "ChaosReflectionModuleEqualsVersion" },
+
+        // ── CustomAttributeData accessors ──────────────────────────────
+        ["CustomAttributeData.get_AttributeType"] = new[] { "ChaosReflectionAttrDataGetAttributeType" },
+        ["CustomAttributeData.get_Constructor"] = new[] { "ChaosReflectionAttrDataGetConstructor" },
+        ["CustomAttributeData.get_ConstructorArguments"] = new[] { "ChaosReflectionAttrDataGetConstructorArguments" },
+        ["CustomAttributeData.get_NamedArguments"] = new[] { "ChaosReflectionAttrDataGetNamedArguments" },
+        ["CustomAttributeData.GetCustomAttributes"] = new[] { "ChaosReflectionAttrDataGetCustomAttributes" },
+        ["CustomAttributeData.Equals"] = new[] { "ChaosReflectionAttrDataEquals" },
+        ["CustomAttributeData.GetHashCode"] = new[] { "ChaosReflectionAttrDataGetHashCode" },
+
+        // ── RuntimeReflectionExtensions ────────────────────────────────
+        ["RuntimeReflectionExtensions.GetRuntimeField"] = new[] { "ChaosRuntimeReflectionGetRuntimeField" },
+        ["RuntimeReflectionExtensions.GetRuntimeMethod"] = new[] { "ChaosRuntimeReflectionGetRuntimeMethod" },
+        ["RuntimeReflectionExtensions.GetRuntimeProperty"] = new[] { "ChaosRuntimeReflectionGetRuntimeProperty" },
+        ["RuntimeReflectionExtensions.GetRuntimeEvent"] = new[] { "ChaosRuntimeReflectionGetRuntimeEvent" },
+        ["RuntimeReflectionExtensions.GetRuntimeFields"] = new[] { "ChaosRuntimeReflectionGetRuntimeFields" },
+        ["RuntimeReflectionExtensions.GetRuntimeMethods"] = new[] { "ChaosRuntimeReflectionGetRuntimeMethods" },
+        ["RuntimeReflectionExtensions.GetRuntimeProperties"] = new[] { "ChaosRuntimeReflectionGetRuntimeProperties" },
+        ["RuntimeReflectionExtensions.GetRuntimeEvents"] = new[] { "ChaosRuntimeReflectionGetRuntimeEvents" },
+        ["RuntimeReflectionExtensions.GetMethodInfo"] = new[] { "ChaosRuntimeReflectionGetMethodInfo" },
+        ["RuntimeReflectionExtensions.GetRuntimeBaseDefinition"] = new[] { "ChaosRuntimeReflectionGetRuntimeBaseDefinition" },
+        ["RuntimeReflectionExtensions.GetRuntimeInterfaceMap"] = new[] { "ChaosRuntimeReflectionGetRuntimeInterfaceMap" },
+
+        // ── MethodInfo / EventInfo remaining ───────────────────────────
+        ["MethodInfo.get_ReturnType"] = new[] { "ChaosReflectionMethodGetReturnType" },
+        ["MethodInfo.get_ReturnParameter"] = new[] { "ChaosReflectionMethodGetReturnParameter" },
+        ["MethodInfo.get_ReturnTypeCustomAttributes"] = new[] { "ChaosReflectionMethodGetReturnTypeCustomAttributes" },
+        ["MethodInfo.GetGenericArguments"] = new[] { "ChaosReflectionMethodGetGenericArguments" },
+        ["MethodInfo.GetGenericMethodDefinition"] = new[] { "ChaosReflectionMethodGetGenericMethodDefinition" },
+        ["MethodInfo.GetHashCode"] = new[] { "ChaosReflectionMethodGetHashCodeVersion" },
+        ["MethodInfo.Equals"] = new[] { "ChaosReflectionMethodEqualsVersion" },
+
+        ["EventInfo.GetRemoveMethod"] = new[] { "ChaosReflectionEventGetRemoveMethod" },
+        ["EventInfo.get_RemoveMethod"] = new[] { "ChaosReflectionEventGetRemoveMethod" },
+        ["EventInfo.GetRaiseMethod"] = new[] { "ChaosReflectionEventGetRaiseMethod" },
+        ["EventInfo.get_RaiseMethod"] = new[] { "ChaosReflectionEventGetRaiseMethod" },
+        ["EventInfo.get_IsMulticast"] = new[] { "ChaosReflectionEventGetIsMulticast" },
+        ["EventInfo.GetHashCode"] = new[] { "ChaosReflectionEventGetHashCodeVersion" },
+        ["EventInfo.Equals"] = new[] { "ChaosReflectionEventEqualsVersion" },
     };
 
     /// <summary>

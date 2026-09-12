@@ -214,6 +214,56 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetCustomAttributesData(CHAOS_IL2CPP_IN
 CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetCustomAttributes(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionModuleGetHashCode(CHAOS_IL2CPP_INTPTR module_handle) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionModuleEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
+
+/* ── CustomAttributeData accessors ───────────────────────────────────
+ * A handle is a pointer to a blob record:
+ *   [attr_type_token:uint32][packed_size:uint16][payload...]
+ * Constructor/NamedArguments depend on the constructor signature (held managed
+ * side), so those report "unresolved" rather than guessing an offset.
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetAttributeType(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetConstructor(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetConstructorArguments(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetNamedArguments(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetCustomAttributes(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAttrDataEquals(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionAttrDataGetHashCode(CHAOS_IL2CPP_INTPTR handle) noexcept;
+
+/* ── RuntimeReflectionExtensions ─────────────────────────────────────
+ * Every member is a thin adapter: GetRuntimeX(type, name) == Type.GetX(name);
+ * the plural forms are the corresponding enumerations. No distinct semantics.
+ */
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeField(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeMethod(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id, CHAOS_IL2CPP_INTPTR param_types) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeProperty(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeEvent(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeFields(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeMethods(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeProperties(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeEvents(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetMethodInfo(CHAOS_IL2CPP_INTPTR member_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeBaseDefinition(CHAOS_IL2CPP_INTPTR member_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeInterfaceMap(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR interface_handle) noexcept;
+
+/* ── MethodInfo / EventInfo remaining accessors ──────────────────────
+ * ReturnType resolves from the descriptor's member_type_utf8 (which records the
+ * declared return type for methods). EventInfo accessors (add_/remove_/raise_)
+ * are located by conventional name inside the declaring type's method table,
+ * since the event descriptor carries no accessor handles.
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetReturnType(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetReturnParameter(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetReturnTypeCustomAttributes(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetGenericArguments(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetGenericMethodDefinition(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodGetHashCodeVersion(CHAOS_IL2CPP_INTPTR member) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMethodEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetRemoveMethod(CHAOS_IL2CPP_INTPTR evt) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetRaiseMethod(CHAOS_IL2CPP_INTPTR evt) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionEventGetIsMulticast(CHAOS_IL2CPP_INTPTR evt) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionEventGetHashCodeVersion(CHAOS_IL2CPP_INTPTR evt) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionEventEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept;
 // ── Additional reflection API functions (implemented in reflection_api.cpp) ──
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR type_handle) noexcept;

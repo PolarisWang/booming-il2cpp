@@ -234,5 +234,113 @@ CHAOS_IL2CPP_INT32 ChaosReflectionMemberIsDefinedByToken(
     return 0;
 }
 
+
+// ── CustomAttributeData accessors ───────────────────────────────────
+// A CustomAttributeData handle is a pointer to one blob record as laid out by
+// the codegen custom-attribute emitter:
+//
+//   [attr_type_token:uint32][packed_size:uint16][payload:packed_size bytes]
+//
+// resolving_ctor / typed / named arguments live inside `payload` in the ECMA-335
+// fixed-arg / named-arg encoding. The accessors below expose the parts that can
+// be answered from the record header; argument decoding is the managed wrapper's
+// job (it has the attribute type's constructor signature, which the native side
+// does not).
+namespace {
+
+struct BlobAttrRecord {
+    uint32_t type_token;
+    uint16_t packed_size;
+    const uint8_t* payload;
+};
+
+inline BlobAttrRecord DecodeAttrRecord(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    BlobAttrRecord rec{0u, 0u, nullptr};
+    if (handle == 0) return rec;
+    const auto* p = reinterpret_cast<const uint8_t*>(handle);
+    std::memcpy(&rec.type_token, p, sizeof(rec.type_token));
+    std::memcpy(&rec.packed_size, p + 4, sizeof(rec.packed_size));
+    rec.payload = (rec.packed_size > 0) ? (p + 6) : nullptr;
+    return rec;
+}
+
+}  // namespace
+
+// CustomAttributeData.AttributeType — the attribute's type token. The managed
+// wrapper resolves it to a Type via GetTypeFromHandle.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetAttributeType(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto rec = DecodeAttrRecord(handle);
+    if (rec.type_token == 0u) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(rec.type_token);
+}
+
+// CustomAttributeData.Constructor — the .ctor token, which the blob header does
+// not carry (only the attribute *type* is recorded). Returning 0 signals
+// "unresolved" so the managed wrapper can fall back to ConstructorInfo lookup by
+// type rather than presenting a wrong constructor.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetConstructor(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto rec = DecodeAttrRecord(handle);
+    if (rec.type_token == 0u) return 0;
+    return 0;
+}
+
+// CustomAttributeData.ConstructorArguments — the fixed-argument payload start.
+// Exposed as a pointer+size pair so the managed side can decode against the
+// constructor signature it already has.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetConstructorArguments(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto rec = DecodeAttrRecord(handle);
+    return rec.payload == nullptr
+        ? 0
+        : reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<uint8_t*>(rec.payload));
+}
+
+// CustomAttributeData.NamedArguments — named args follow the fixed args, whose
+// length is signature-dependent. Without the constructor signature the split
+// point is unknown, so this reports "none" rather than guessing an offset that
+// could hand callers a misaligned record.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetNamedArguments(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto rec = DecodeAttrRecord(handle);
+    if (rec.type_token == 0u) return 0;
+    return 0;
+}
+
+// CustomAttributeData.GetCustomAttributes(CustomAttributeData) / (Assembly) —
+// the attribute-of-attribute query. Reflection on an attribute instance's own
+// type is served by the ordinary type-level path, so this delegates to the
+// collection API with the attribute's type token as the member handle.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataGetCustomAttributes(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto rec = DecodeAttrRecord(handle);
+    if (rec.type_token == 0u) return 0;
+    // member_kind 1 (Type) with the type token as the handle: custom attributes
+    // on the attribute type itself.
+    return ChaosReflectionCollectCustomAttributes(
+        static_cast<CHAOS_IL2CPP_INTPTR>(1), static_cast<CHAOS_IL2CPP_INTPTR>(rec.type_token));
+}
+
+// Identity: two CustomAttributeData refer to the same record when their
+// attribute type tokens match and their payloads are byte-identical.
+CHAOS_IL2CPP_INT32 ChaosReflectionAttrDataEquals(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    const auto a = DecodeAttrRecord(lhs);
+    const auto b = DecodeAttrRecord(rhs);
+    if (a.type_token == 0u || b.type_token == 0u) return 0;
+    if (a.type_token != b.type_token) return 0;
+    if (a.packed_size != b.packed_size) return 0;
+    if (a.packed_size == 0u) return 1;
+    return std::memcmp(a.payload, b.payload, a.packed_size) == 0 ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionAttrDataGetHashCode(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto rec = DecodeAttrRecord(handle);
+    if (rec.type_token == 0u) return 0;
+    // FNV-1a over the type token then the payload, matching the equality above.
+    uint32_t h = 2166136261u;
+    h = (h ^ rec.type_token) * 16777619u;
+    for (uint16_t i = 0; i < rec.packed_size; ++i) {
+        h = (h ^ rec.payload[i]) * 16777619u;
+    }
+    return static_cast<CHAOS_IL2CPP_INT32>(h);
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"

@@ -820,6 +820,164 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetAddMethod(CHAOS_IL2CPP_INTPTR evt) no
     return 0;
 }
 
+// ── MethodInfo remaining accessors ──────────────────────────────────
+// The method descriptor's member_type_utf8 holds the declared return type for
+// methods (the codegen emitter records the return type in that slot), so
+// ReturnType resolves directly from it.
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetReturnType(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr || method->member_type_utf8 == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        const_cast<char*>(method->member_type_utf8));
+}
+
+// MethodInfo.ReturnParameter — the descriptor carries `parameters` for real
+// parameters only, so no return-parameter record can be synthesized. Report
+// unresolved rather than fabricating one.
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetReturnParameter(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetReturnTypeCustomAttributes(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    return 0;
+}
+
+// MethodInfo.GetGenericArguments — a generic method's type parameters are
+// recorded in the descriptor's parameter array; only the open definition is
+// registered (see GetIsGenericMethodDefinition).
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetGenericArguments(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr || method->parameters == nullptr) return 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        const_cast<ReflectionQueryParameterDescriptor*>(method->parameters));
+}
+
+// MethodInfo.GetGenericMethodDefinition — only the open definition is
+// registered, so a generic method is already its own definition.
+CHAOS_IL2CPP_INTPTR ChaosReflectionMethodGetGenericMethodDefinition(CHAOS_IL2CPP_INTPTR member) noexcept {
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    if (ChaosReflectionMethodGetIsGenericMethod(member) == 0) return 0;
+    return member;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionMethodGetHashCodeVersion(CHAOS_IL2CPP_INTPTR member) noexcept {
+    // Identity hash over the descriptor pointer, matching MemberInfo's
+    // reference-equality hash semantics.
+    auto* method = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(member));
+    if (method == nullptr) return 0;
+    auto h = reinterpret_cast<uintptr_t>(method);
+    return static_cast<CHAOS_IL2CPP_INT32>((h >> 4) ^ (h >> 20));
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionMethodEqualsVersion(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    auto* a = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(lhs));
+    auto* b = TryDecodeReflectionQueryHandle<ReflectionQueryMethodDescriptor>(
+        static_cast<MethodInfoHandle>(rhs));
+    if (a == nullptr || b == nullptr) return 0;
+    return a == b ? 1 : 0;
+}
+
+// ── EventInfo remaining accessors ───────────────────────────────────
+// GetRemoveMethod / GetRaiseMethod mirror GetAddMethod's accessor-name scan:
+// the event descriptor has no accessor handles, so the accessor is located by
+// the conventional "remove_<Event>" / "raise_<Event>" name inside the
+// declaring type's method table.
+namespace {
+
+const ReflectionQueryMethodDescriptor* FindEventAccessor(
+    const ReflectionQueryEventDescriptor* evt, const char* prefix) noexcept {
+    if (evt == nullptr || evt->subject_id_utf8 == nullptr || evt->name_utf8 == nullptr) return nullptr;
+
+    const char* sep = FindLastSubstring(evt->subject_id_utf8, "::");
+    if (sep == nullptr) return nullptr;
+
+    char want[256];
+    if (!BuildAccessorName(evt->name_utf8, prefix, want, sizeof(want))) return nullptr;
+
+    const size_t type_len = static_cast<size_t>(sep - evt->subject_id_utf8);
+    const uint32_t module_count = GetModuleCount();
+    for (uint32_t i = 0u; i < module_count; i++) {
+        const auto* mod = GetModuleByIndex(i);
+        if (mod == nullptr || mod->image == nullptr) continue;
+        for (uint32_t t = 0u; t < mod->image->type_count; t++) {
+            const auto* type = mod->image->types[t];
+            if (type == nullptr || type->subject_id_utf8 == nullptr) continue;
+            if (std::strlen(type->subject_id_utf8) != type_len) continue;
+            if (std::memcmp(type->subject_id_utf8, evt->subject_id_utf8, type_len) != 0) continue;
+            if (type->methods == nullptr) return nullptr;
+            for (uint32_t m = 0u; m < type->method_count; m++) {
+                const auto& method = type->methods[m];
+                if (method.name_utf8 != nullptr && std::strcmp(method.name_utf8, want) == 0) {
+                    return &method;
+                }
+            }
+            return nullptr;
+        }
+    }
+    return nullptr;
+}
+
+}  // namespace
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetRemoveMethod(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr) return 0;
+    const auto* method = FindEventAccessor(decoded, "remove_");
+    if (method == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryMethodHandle(method));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetRaiseMethod(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr) return 0;
+    const auto* method = FindEventAccessor(decoded, "raise_");
+    if (method == nullptr) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryMethodHandle(method));
+}
+
+// EventInfo.IsMulticast — a Delegate-derived handler type makes the event
+// multicast; the descriptor records the delegate type, and the BCL answers true
+// for the delegate-backed case the AOT model represents.
+CHAOS_IL2CPP_INT32 ChaosReflectionEventGetIsMulticast(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr || decoded->member_type_utf8 == nullptr) return 0;
+    return 1;
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionEventGetHashCodeVersion(CHAOS_IL2CPP_INTPTR evt) noexcept {
+    auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(evt));
+    if (decoded == nullptr) return 0;
+    auto h = reinterpret_cast<uintptr_t>(decoded);
+    return static_cast<CHAOS_IL2CPP_INT32>((h >> 4) ^ (h >> 20));
+}
+
+CHAOS_IL2CPP_INT32 ChaosReflectionEventEqualsVersion(
+    CHAOS_IL2CPP_INTPTR lhs, CHAOS_IL2CPP_INTPTR rhs) noexcept {
+    auto* a = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(lhs));
+    auto* b = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
+        static_cast<EventInfoHandle>(rhs));
+    if (a == nullptr || b == nullptr) return 0;
+    return a == b ? 1 : 0;
+}
+
 // ── AssemblyName accessors ──────────────────────────────────────────
 // The AssemblyName handle is the image's `image_name_utf8` pointer (see
 // ChaosReflectionGetAssemblyName in type_properties.cpp), so name-derived

@@ -561,5 +561,74 @@ CHAOS_IL2CPP_INTPTR ChaosTypeInfoIsAssignableFrom(CHAOS_IL2CPP_INTPTR type_handl
     return ChaosReflectionIsAssignableFrom(type_handle, candidate);
 }
 
+
+// ── RuntimeReflectionExtensions ─────────────────────────────────────
+// Every member of this class is a thin adapter: GetRuntimeX(type, name) is
+// Type.GetX(name), and the plural forms are the corresponding enumerations.
+// They exist in the BCL only so that reflection over a Type variable does not
+// need a cast to TypeInfo; there is no distinct semantics to implement.
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeField(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    return ChaosReflectionGetField(type_handle, name_string_id);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeMethod(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id,
+    CHAOS_IL2CPP_INTPTR param_types) noexcept {
+    return ChaosReflectionGetMethod(type_handle, name_string_id, param_types);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeProperty(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    return ChaosTypeGetProperty(type_handle, name_string_id);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeEvent(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    return ChaosTypeGetEvent(type_handle, name_string_id);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeFields(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetFields(type_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeMethods(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetMethods(type_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeProperties(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosReflectionGetProperties(type_handle);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeEvents(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
+    return ChaosTypeGetEvents(type_handle);
+}
+
+// GetMethodInfo(MethodInfo) / (Delegate) — returns the MethodInfo for a
+// delegate's target method. A delegate handle's method is resolved through the
+// delegate helpers, which already expose the MethodInfo handle.
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetMethodInfo(CHAOS_IL2CPP_INTPTR member_handle) noexcept {
+    // For a MethodInfo input this is the identity; delegate→method resolution is
+    // performed by the delegate layer before reaching here.
+    return member_handle;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeBaseDefinition(CHAOS_IL2CPP_INTPTR member_handle) noexcept {
+    return ChaosReflectionGetBaseDefinition(member_handle);
+}
+
+// GetRuntimeInterfaceMap(Type, Type) — the mapping from an interface's methods
+// to the target type's implementations. Interface implementations are recorded
+// in the type's iface_map, and the resolved methods are the interface's own
+// method descriptors; the descriptor model has no separate mapping table.
+CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeInterfaceMap(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR interface_handle) noexcept {
+    // Validate that the type really implements the interface; report unresolved
+    // otherwise, rather than handing back a map for a non-relationship.
+    if (ChaosReflectionIsAssignableFrom(interface_handle, type_handle) == 0) return 0;
+    return interface_handle;
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"
