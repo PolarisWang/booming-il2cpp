@@ -34,25 +34,6 @@ killed_keys: set[str] = set()
 
 
 
-# ── TEMP DIAG (revert): trace every verdict write so a phantom FAIL can be
-#    attributed to its writer. Writes one line per verdict to a file next to
-#    run-state so it survives the run and can be read afterwards.
-def _diag_verdict(config, key, phase_label, status, error_class, exit_code, origin):
-    import os, time, traceback
-    try:
-        d = Path(config.report_dir) / "diag"
-        d.mkdir(parents=True, exist_ok=True)
-        f = d / "verdicts.log"
-        stack = " <- ".join(
-            f"{getattr(fr, 'name', getattr(fr, 'function', '?'))}:{fr.lineno}"
-            for fr in traceback.extract_stack()[-6:-1])
-        with open(f, "a", encoding="utf-8") as fh:
-            fh.write(
-                f"{time.time():.3f}\t{os.getpid()}\t{phase_label}\t{key}\t"
-                f"{status}\t{error_class}\texit={exit_code}\t{origin}\t{stack}\n")
-    except Exception as _e:
-        import sys as _s
-        print(f"[diag] WRITE FAILED: {type(_e).__name__}: {_e}", file=_s.stderr)
 
 def _proc_alive(pid: int) -> bool:
     """Cheap liveness probe.
@@ -321,8 +302,6 @@ def run_phase(config, phase_label: str, stages: list[str], items: list[ItemRunti
                 rt, proc, obs = running.pop(key)
                 obs.close() if hasattr(obs, "close") else None
                 print(f"  [{phase_label}] STALLED {key} (reaper kill)", flush=True)
-                _diag_verdict(config, key, phase_label, "stalled", "timeout",
-                              -15, "reaper-kill")
                 result.chunk_results[key] = {"status": "stalled", "error_class": "timeout",
                                              "exit_code": -15, "phase": phase_label}
                 continue
@@ -361,10 +340,6 @@ def run_phase(config, phase_label: str, stages: list[str], items: list[ItemRunti
                                         exit_code=ret)
                     print(f"  [{phase_label}] FAIL  {rt.item.key} ({error_class}, "
                           f"exit={ret})", flush=True)
-
-            _diag_verdict(config, rt.item.key, phase_label, rt.status,
-                          rt.error_class, rt.exit_code,
-                          f"main-loop retry_count={rt.retry_count} dur={dur:.0f}")
             result.chunk_results[rt.item.key] = {
                 "status": rt.status,
                 "error_class": rt.error_class if rt.error_class != "none" else "none",
@@ -401,10 +376,6 @@ def run_phases(config, worklist: list[WorkItem]) -> NightlyResult:
     print(f"\n{'='*64}\n  Phase A — build + fact ({len(items)} chunks)\n{'='*64}", flush=True)
     phase_a = run_phase(config, "A", ["build", "fact"], items, provided_stages=None)
     results_a = phase_a.chunk_results
-    _diag_verdict(config, "PHASE_A_RETURNED", "A", "n/a", "n/a", None,
-                  f"n_results={len(results_a)}")
-    _diag_verdict(config, "PHASE_A_RETURNED_snapshot", "A", "n/a", "n/a", None,
-                  "|".join(f"{k}={v.get('status')}" for k, v in sorted(results_a.items())))
     for rt in items:
         k = rt.item.key
         info = results_a.get(k) or {}
