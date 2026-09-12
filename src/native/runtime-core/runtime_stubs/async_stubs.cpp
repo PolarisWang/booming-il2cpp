@@ -376,13 +376,6 @@ CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, 
     return ts->try_set_exception(exception);
 }
 
-void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept
-{
-    if (tcs_handle == 0) return;
-    auto* ts = reinterpret_cast<chaos::il2cpp::common::TaskSource*>(tcs_handle);
-    ts->try_set_canceled();
-}
-
 CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept
 {
     if (tcs_handle == 0) return 0;

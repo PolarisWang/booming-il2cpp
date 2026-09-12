@@ -70,7 +70,7 @@ TEST(AsyncStress, HundredThousandTaskLifecycles)
 
         // Complete every task in the chunk; the continuation count is the
         // evidence that each task actually reached a terminal state.
-        for (auto* t : tasks) {
+        for (CHAOS_IL2CPP_INTPTR t : tasks) {
             auto* src = new TaskSource();
             src->task = require_async_task(t);
             async_task_on_completed(t, OnTaskCompleted, nullptr);
