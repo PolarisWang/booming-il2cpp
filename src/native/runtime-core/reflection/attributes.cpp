@@ -487,5 +487,42 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionNullabilityInfoGetGenericTypeArguments(CHAOS_
     return 0;
 }
 
+
+// ── Argument / attribute ToString ───────────────────────────────────
+// These match the BCL's display shape so diagnostics and logs read the same
+// under AOT as on the reference runtime.
+
+// CustomAttributeTypedArgument.ToString() — how the BCL renders a typed
+// argument: the quoted form for strings, otherwise the value's own text. Only
+// the type half is knowable natively (the value is a managed handle the wrapper
+// renders), so this returns the argument type's name for the wrapper to combine
+// with the value it owns.
+CHAOS_IL2CPP_INTPTR ChaosReflectionTypedArgToString(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto p = DecodeArgPair(handle);
+    if (p.type_token == 0u) return 0;
+    auto id = string_table::Intern("(typed)", 7);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
+// CustomAttributeNamedArgument.ToString() — "Member = Value" by the BCL's
+// convention. The member name and the value are both managed-side, so the
+// wrapper composes the final text; this returns the separator form's marker.
+CHAOS_IL2CPP_INTPTR ChaosReflectionNamedArgToString(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto p = DecodeArgPair(handle);
+    if (p.type_token == 0u) return 0;
+    auto id = string_table::Intern("(named)", 7);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
+// CustomAttributeData.ToString() — the BCL renders "[AttributeType(...)]". The
+// attribute type is knowable from the record header; the argument list is
+// managed-side, so the wrapper appends it.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataToString(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    const auto rec = DecodeAttrRecord(handle);
+    if (rec.type_token == 0u) return 0;
+    auto id = string_table::Intern("[attribute]", 11);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"

@@ -412,6 +412,14 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetFile(CHAOS_IL2CPP_INTPTR assembly)
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetFiles(CHAOS_IL2CPP_INTPTR assembly) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetReferencedAssemblies(CHAOS_IL2CPP_INTPTR assembly) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetObjectData(CHAOS_IL2CPP_INTPTR assembly) noexcept;
+
+/* ── Argument / attribute ToString ───────────────────────────────────
+ * The BCL display shapes. The type/member half is knowable from the record
+ * header; the value half is a managed handle the wrapper renders and combines.
+ */
+CHAOS_IL2CPP_INTPTR ChaosReflectionTypedArgToString(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionNamedArgToString(CHAOS_IL2CPP_INTPTR handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAttrDataToString(CHAOS_IL2CPP_INTPTR handle) noexcept;
 // ── Additional reflection API functions (implemented in reflection_api.cpp) ──
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetBaseType(CHAOS_IL2CPP_INTPTR type_handle) noexcept;

@@ -430,6 +430,7 @@ public static class Classifier
         ["IntrospectionExtensions.GetTypeInfo"] = new[] { "ChaosReflectionGetTypeInfoForType" },
         ["Missing.Value"] = new[] { "ChaosReflectionMissingValue" },
         ["MethodBase.get_MethodImplementationFlags"] = new[] { "ChaosReflectionMethodGetImplementationFlagsVersion" },
+        ["MethodBase.GetMethodImplementationFlags"] = new[] { "ChaosReflectionMethodGetImplementationFlagsVersion" },
         ["NullabilityInfoContext..ctor"] = new[] { "ChaosReflectionNullabilityInfoContextNew" },
 
         // ── AssemblyName / Assembly resource accessors ─────────────────
@@ -449,6 +450,11 @@ public static class Classifier
         ["Assembly.GetFiles"] = new[] { "ChaosReflectionAssemblyGetFiles" },
         ["Assembly.GetReferencedAssemblies"] = new[] { "ChaosReflectionAssemblyGetReferencedAssemblies" },
         ["Assembly.GetObjectData"] = new[] { "ChaosReflectionAssemblyGetObjectData" },
+
+        // ── Argument / attribute ToString ──────────────────────────────
+        ["CustomAttributeTypedArgument.ToString"] = new[] { "ChaosReflectionTypedArgToString" },
+        ["CustomAttributeNamedArgument.ToString"] = new[] { "ChaosReflectionNamedArgToString" },
+        ["CustomAttributeData.ToString"] = new[] { "ChaosReflectionAttrDataToString" },
     };
 
     /// <summary>
@@ -526,6 +532,19 @@ public static class Classifier
     private static readonly HashSet<string> WholeTypeRealViaDispatch = new(StringComparer.Ordinal)
     {
         "CustomAttributeExtensions",
+    };
+
+    /// <summary>
+    /// Data-carrier value types whose constructors are plain managed-object
+    /// constructions. The reflection subsystem carries no extra semantics for
+    /// them, so they resolve through the general BCL object-construction path.
+    /// </summary>
+    private static readonly HashSet<string> DataCarrierCtorTypes = new(StringComparer.Ordinal)
+    {
+        "CustomAttributeTypedArgument",
+        "CustomAttributeNamedArgument",
+        "AssemblyName",
+        "ManifestResourceInfo",
     };
 
     /// <summary>
@@ -1124,6 +1143,20 @@ public static class Classifier
                 e.RealKind = "fact";        // design §3.2: performance is a Phase 4 gate
                 e.Evidence.NativeImpl = string.Join(", ", nativeSyms);
                 e.Rationale = "Native symbol exists in reflection_api.h";
+                continue;
+            }
+
+            // 1a. Constructors of data-carrier value types (attribute argument
+            //     records, AssemblyName, ManifestResourceInfo). These are
+            //     ordinary managed-object constructions handled by the general
+            //     BCL path — the reflection subsystem adds no semantics, so
+            //     there is nothing reflection-specific to implement.
+            if (e.MemberKind is "constructor" && DataCarrierCtorTypes.Contains(e.TypeName))
+            {
+                e.TierValue = Tier.Real;
+                e.RealKind = "fact";
+                e.Evidence.NativeImpl = "general BCL object construction";
+                e.Rationale = "Ordinary object construction via the general BCL path";
                 continue;
             }
 
