@@ -41,6 +41,25 @@ public static class Program
         Check("Assembly.GetExecutingAssembly == this assembly",
             () => Assembly.GetExecutingAssembly().GetName().Name == typeof(Program).Assembly.GetName().Name);
 
+        // These pin the *contract's* semantics: a caller running inside this assembly
+        // must see this assembly reported back.
+        //
+        // Scope note: this project is a standalone .NET 8 console app, so it does not
+        // exercise the AOT executing-image tracker — it runs against the reference
+        // runtime, where GetExecutingAssembly is trivially correct. REF-RISK-7's AOT
+        // behaviour is therefore NOT verified here; only the generated-code contract is.
+        Check("GetExecutingAssembly is this assembly (reference-runtime contract)",
+            () =>
+            {
+                var reported = Assembly.GetExecutingAssembly().GetName().Name;
+                var actual = typeof(Program).Assembly.GetName().Name;
+                var coreLib = typeof(object).Assembly.GetName().Name;
+                return reported == actual && reported != coreLib;
+            });
+
+        Check("GetCallingAssembly reports a real assembly from inside a helper",
+            () => CallerProbe.AssemblyOfCaller() == typeof(Program).Assembly.GetName().Name);
+
         Check("Assembly.GetTypes returns non-empty and contains SampleSubject",
             () => { var t = typeof(Program).Assembly.GetTypes(); return t.Length > 0 && t.Contains(sampleType); });
 
@@ -342,6 +361,15 @@ public static class Program
             foreach (var f in Failures) Console.WriteLine($"  - {f}");
         }
     }
+}
+
+// Called from the contract so GetCallingAssembly has a non-trivial caller to report.
+// Without the executing-image tracker the runtime returns CoreLib regardless of who
+// called, so comparing against the contract assembly distinguishes the two.
+static class CallerProbe
+{
+    public static string AssemblyOfCaller() =>
+        Assembly.GetCallingAssembly().GetName().Name ?? "";
 }
 
 // ── Fixture types ────────────────────────────────────────────────────────

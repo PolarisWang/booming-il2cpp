@@ -70,6 +70,7 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("#include <chaos/type_info.h>  // MethodTable, TypeInfoV0 (complete type)");
         sb.AppendLine("#include \"generated_code_compat.h\"  // PureTypeHeader for delegate type definitions");
         sb.AppendLine("#include \"ChaosGeneratedRuntimePrelude.h\"  // chaos_managed_array for array-compat checks");
+        sb.AppendLine("#include \"reflection_query_model.h\"  // ReflectionQueryImageDescriptor for the REF-RISK-7 image handle");
         sb.AppendLine();
 
         // chaos_valuetype_* definitions — these are opaque 32-bit value types in the
@@ -850,6 +851,31 @@ public sealed partial class NativeAotLoweringPlanner
         // string and skip the rest).  Scan sb for chaos_valuetype_* references
         // lacking a corresponding typedef and append them.
         AppendMissingValueTypeTypedefsForHeader(sb);
+
+        // ── REF-RISK-7: per-TU executing-image handle ──────────────────
+        // A method that calls Assembly.GetCallingAssembly()/GetExecutingAssembly()
+        // publishes its own image through this helper, so those accessors report a
+        // real caller instead of falling back to CoreLib.
+        //
+        // kReflImage is this TU's image descriptor. Its handle is the descriptor
+        // address with the reflection-query tag bit set — the same encoding
+        // EncodeReflectionQueryImageHandle applies at runtime, reproduced inline so
+        // the header does not need the full reflection_query_model.h API.
+        // The declaration must sit in the same namespace as the definition
+        // (chaos::il2cpp::codegen::<Assembly>): the definition is emitted there, and
+        // a namespace-qualified declaration at global scope mangles to a different
+        // symbol, leaving the reference unresolved at link time.
+        sb.AppendLine("namespace chaos::il2cpp::codegen::" + codegenNamespace + " {");
+        sb.AppendLine("// Image this TU publishes as the executing/calling assembly (REF-RISK-7).");
+        sb.AppendLine("extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kReflImage;");
+        sb.AppendLine("static inline CHAOS_IL2CPP_INTPTR chaos_executing_image_handle() noexcept {");
+        sb.AppendLine("    const CHAOS_IL2CPP_UINTPTR tag =");
+        sb.AppendLine("        static_cast<CHAOS_IL2CPP_UINTPTR>(1) << ((sizeof(CHAOS_IL2CPP_UINTPTR) * 8u) - 1u);");
+        sb.AppendLine("    return static_cast<CHAOS_IL2CPP_INTPTR>(");
+        sb.AppendLine("        reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kReflImage) | tag);");
+        sb.AppendLine("}");        sb.AppendLine("}  // namespace chaos::il2cpp::codegen::" + codegenNamespace);
+
+        sb.AppendLine();
 
         // ── Comprehensive extern declarations for ALL emitted external-runtime
         // symbols ──

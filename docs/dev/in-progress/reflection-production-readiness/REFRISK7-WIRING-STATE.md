@@ -77,3 +77,46 @@ struct ChaosExecutingImageScope {
 ## 当前提交状态
 native RAII 与 codegen 注入**已实现且 codegen 编译通过**，但因 helper 缺失，
 **尚未跑通端到端**（生成的 C 代码会 C3861）。在补齐 helper 前不应合入 main。
+
+---
+
+## 2026-09-13 续：接线已完成（`8de983b58`）
+
+### 实现
+
+1. **native**：`ChaosExecutingImageScope`（RAII）—— 生成代码只需一行声明，
+   析构自动恢复，覆盖提前 return 与异常展开。
+2. **codegen 注入点**：`EmitManagedMethod` 内、函数体开括号之后。
+   之前三轮失败的原因是**在成品文本上后处理**：文本里有前置的 extern 声明列表，
+   函数体本身又以内层 lambda 开头，文本搜索无法定位定义括号。
+   在发射过程中插入则无歧义。
+3. **触发条件**：按指令的 `callee`/`targetSymbol` 是否指向这两个访问器。
+   实测该 IR **只填 `callee`**（形如
+   `System.Private.CoreLib/System.Reflection.Assembly::GetExecutingAssembly:...`），
+   `targetSymbol` 缺席 —— 故按方法名匹配两种拼写。仅命中的方法获得 bracket
+   （P1：不给全量方法加 TLS 写）。
+4. **header helper**：`chaos_executing_image_handle()` 返回本 TU `kReflImage` 的
+   编码句柄。**必须放在与定义相同的 codegen namespace 内** —— 否则 C++ 修饰名
+   不同，链接期报 unresolved external（已实测并修正）。
+
+### 验证
+
+- build ✅（495 subjects → entry.exe）、contract ✅、fact 与基线逐项一致
+- 注入 21 处，形态确认为函数体首行
+
+### ⚠️ 未解决：AOT 侧无法验证其语义
+
+尝试了三层验证，**均无法判定 REF-RISK-7 是否真的生效**：
+
+| 验证方式 | 为何不能证明 |
+|---|---|
+| reflection chunk 的 fact 断言 | 只查 `result != null`。CoreLib 回退同样非 null，**无法判别** |
+| 语义契约套件（`corelib-reflection-contract`） | 是**独立 .NET 8 控制台**（`dotnet run`），跑在参考实现上，**不消费 AOT 产物** |
+| 反向测试（关掉接线看是否转红） | 实测**仍然 73/73 通过** —— 坐实了契约不覆盖 AOT |
+
+**结论**：REF-RISK-7 的 AOT 语义**当前无验证手段**。要证明它，需要一条能在
+`entry.exe` 内完成判别性断言的路径（例如让 ATG 生成「比较 GetExecutingAssembly
+的程序集名与预期」的断言），属**独立的基础设施工作**。
+
+**已如实标注**：契约套件中相关断言的注释已改为 "reference-runtime contract"，
+并加了 scope note 说明它不覆盖 AOT。
