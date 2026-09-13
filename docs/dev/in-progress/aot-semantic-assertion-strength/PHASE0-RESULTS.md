@@ -62,3 +62,55 @@ public long GetExecutingAssembly_3__0()
 - **判别式需要一次实测**：拿到 AOT 下 `Assembly.GetName().Name` 与
   `typeof(int).Assembly` 的真实值后，谓词可一次写对
 - 本项**不应在判别式未验证的情况下合入** —— 一个"永远为真"的断言比没有断言更糟
+
+---
+
+## 根因定位（实测，2026-09-13 续）
+
+反向验证失败的真因**不在判别式**，而在 **runner 的失败归因逻辑**。
+
+### 证据链
+
+1. 接线关闭的产物中，该 subject 记录为 `passed=true, value=0`
+2. 但我的断言成功时 `return 1L` —— **`value=0` 说明断言失败、未走到 return**
+3. `stderr` 中 **没有任何 `[ASSERT FAIL]`** —— 断言抛出的 `AssertionException`
+   被 dispatcher 的异常处理吞掉了
+
+### runner 的判定逻辑（`TestProject.RuntimeEntry.cpp.scriban:427-431`）
+
+```cpp
+#ifndef CHAOS_IL2CPP_JIT_MODE
+        bool assertFailed = !caught &&
+            (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0);
+        Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset();
+#else
+        bool assertFailed = false;
+#endif
+        bool passed = !caught && !assertFailed;
+```
+
+`assertFailed` 需要 `!caught`；而断言抛异常时 `caught=true`，
+`passed = !caught && ...` 也应为 `false`。**但实测 `passed=true`** ——
+说明该 subject 走的不是这条分支（或 `caught` 未被置位）。
+
+### 关键结论
+
+**runner 对「断言失败」的归因与实测不符** —— 这本身就是
+"验证不可信"的又一层体现，且**比本任务的原始目标更基础**：
+
+- 原目标：让断言能判别语义（**机制已建成**）
+- 新发现：即使断言判别正确，**runner 可能仍报 passed**
+
+**在 runner 归因修好之前，任何"强断言"都无法可靠地产生红灯。**
+
+## 建议
+
+本项**扩围为两个阶段**，且顺序必须调整：
+
+| 阶段 | 内容 | 理由 |
+|---|---|---|
+| **P-1（前置）** | 修 runner 的断言失败归因 | 否则强断言无效 |
+| **P0** | 判别性期望表（**已完成**，待 P-1 后验证） | 机制就绪 |
+| **P1** | 反向验证 | P-1 + P0 就绪后一次通过 |
+
+**未合入**：在归因修复前，判别式无法被证明有效；一个不可靠的红灯与假绿同样有害。
