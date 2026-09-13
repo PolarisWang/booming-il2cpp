@@ -173,6 +173,68 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // ── Task<T> / TaskAwaiter<T> / ValueTaskAwaiter<T> 等 ——
+            // 统一补全所有泛型变体：`1[[T]] 和 `1<`1> 等嵌套泛型格式。
+            // 用 backtick 前缀确保匹配到带泛型参的 callee。
+            foreach (var (prefix, method, native, returnsVoid) in new[]
+            {
+                // Task<T>::GetAwaiter() -> TaskAwaiter<T>
+                ("System.Threading.Tasks.Task`1", "GetAwaiter", "ChaosAsyncTaskGetAwaiter", false),
+                // TaskAwaiter<T>::get_IsCompleted()
+                ("System.Runtime.CompilerServices.TaskAwaiter`1", "get_IsCompleted", "ChaosAsyncTaskAwaiterGetIsCompleted", false),
+                // TaskAwaiter<T>::GetResult() -> T
+                ("System.Runtime.CompilerServices.TaskAwaiter`1", "GetResult", "ChaosAsyncTaskAwaiterGetResultValue", false),
+                // ValueTask<T>::GetAwaiter() -> ValueTaskAwaiter<T>
+                ("System.Threading.Tasks.ValueTask`1", "GetAwaiter", "chaos_value_task_get_awaiter", false),
+                // ValueTaskAwaiter<T>::GetResult() -> T
+                ("System.Runtime.CompilerServices.ValueTaskAwaiter`1", "GetResult", "ChaosAsyncTaskAwaiterGetResultValue", false),
+                // ValueTaskAwaiter (non-generic) ::GetResult() -> void
+                ("System.Runtime.CompilerServices.ValueTaskAwaiter", "GetResult", "ChaosAsyncTaskAwaiterGetResultVoid", true),
+            })
+            {
+                // Capture into locals: a closure over the foreach variable would
+                // see the LAST tuple for every iteration on older C# semantics.
+                string pfx = prefix, mth = method, nat = native;
+                bool isVoid = returnsVoid;
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: pfx,
+                    MethodName: mth,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var symbol = GetExternalRuntimeHelperSymbol(callee);
+                        return new GenericShapeResolution("", symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot()),
+                            isVoid ? CreateVoidAbiSlot() : CreateNativeIntAbiSlot(),
+                            EmptyRawArgumentIndices,
+                            DirectNativeSymbol: nat);
+                    }));
+            }
+
+            // ── ValueTask / ValueTask<T> ::ConfigureAwait(bool) -> ConfiguredValueTaskAwaitable ──
+            // 两个变体（非泛型 + 泛型），共用同一个 SimpleForward 路径。
+            foreach (var vtp in new[] { "System.Threading.Tasks.ValueTask", "System.Threading.Tasks.ValueTask`1" })
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: vtp,
+                    MethodName: "ConfigureAwait",
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        if (paramTypes.Count != 1 || paramTypes[0] != "System.Boolean") return null;
+                        var symbol = GetExternalRuntimeHelperSymbol(callee);
+                        return new GenericShapeResolution("", symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact[2]
+                                {
+                                    CreateNativeIntAbiSlot(),
+                                    CreateInt32AbiSlot(),
+                                }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0, 1 });
+                    }));
+            }
+
             // ── Task.FromResult / FromException / FromCanceled ──
             // Already-completed task factories.  FromResult carries a value;
             // FromException/FromCanceled produce a faulted task whose await
