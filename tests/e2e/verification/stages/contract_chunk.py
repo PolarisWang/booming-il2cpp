@@ -31,6 +31,11 @@ _CONTRACTS_ROOT = _REPO_ROOT / "tests" / "contracts" / "managed"
 # are written for more chunks.
 _CONTRACT_DIRS: dict[str, str] = {
     "system": "corelib-system-contract",
+    # Reflection: real semantic assertions over the APIs the coverage matrix marks
+    # tier=real. Unlike the ATG smoke tests (which feed null / uninitialized inputs),
+    # this project supplies valid inputs and asserts the returned semantics, so it
+    # verifies behaviour the generated tests cannot reach.
+    "reflection": "corelib-reflection-contract",
 }
 
 

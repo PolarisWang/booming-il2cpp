@@ -154,24 +154,21 @@ public sealed partial class NativeReferenceProofEmitter
         return true;
     }
 
+    /// <summary>
+    /// Body for a reflection entry point that has no AOT-native implementation.
+    ///
+    /// These paths previously wrote a zero/null return value, which is
+    /// indistinguishable from a genuine zero result: a caller could not tell a
+    /// missing implementation from an empty answer. The reflection subsystem
+    /// requires unreachable operations to fail loudly, so every one of them now
+    /// raises NotSupportedException rather than fabricating a value.
+    ///
+    /// The return type is ignored: every arm produces the same raise, so the
+    /// emitted shape no longer depends on the managed signature.
+    /// </summary>
     private static string BuildReflectionResidualHelperStatements(string managedReturnType)
     {
-        return managedReturnType switch
-        {
-            "System.Void" => "// reflection residual stub: no managed metadata engine",
-            "System.Boolean" => "*static_cast<bool*>(return_value_ptr) = false;",
-            "System.Byte" => "*static_cast<CHAOS_IL2CPP_UINT8*>(return_value_ptr) = 0u;",
-            "System.SByte" => "*static_cast<CHAOS_IL2CPP_INT8*>(return_value_ptr) = 0;",
-            "System.Int16" => "*static_cast<CHAOS_IL2CPP_INT16*>(return_value_ptr) = 0;",
-            "System.UInt16" => "*static_cast<CHAOS_IL2CPP_UINT16*>(return_value_ptr) = 0u;",
-            "System.Int32" => "*static_cast<CHAOS_IL2CPP_INT32*>(return_value_ptr) = 0;",
-            "System.UInt32" => "*static_cast<CHAOS_IL2CPP_UINT32*>(return_value_ptr) = 0u;",
-            "System.Int64" => "*static_cast<CHAOS_IL2CPP_INT64*>(return_value_ptr) = 0;",
-            "System.UInt64" => "*static_cast<CHAOS_IL2CPP_UINT64*>(return_value_ptr) = 0u;",
-            "System.Single" => "*static_cast<float*>(return_value_ptr) = 0.0f;",
-            "System.Double" => "*static_cast<double*>(return_value_ptr) = 0.0;",
-            "System.IntPtr" or "System.UIntPtr" => "*static_cast<CHAOS_IL2CPP_INTPTR*>(return_value_ptr) = 0;",
-            _ => "*request->return_value = nullptr;",
-        };
+        _ = managedReturnType;
+        return "    chaos::il2cpp::runtime_core::RaiseManagedException(\"System.NotSupportedException\", \"reflection API not available under AOT\");" + "\n";
     }
 }

@@ -121,13 +121,19 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 `f3ae90e24`（参数数据对象 296→350）、`d6427ab6d`（Module/接口映射 350→389）、
 `6e39a059e`（修复 module.cpp 声明/定义不匹配）、`4fb7d3437`（389→400，归零）。
 
-### 遗留工作（按优先级）
+### 遗留工作（按优先级，2026-09-13 收口核对）
 
-1. 🔴 **REF-RISK-7 codegen 接线** —— native 基建已就位，需在 codegen 发射方法体时插入 `ChaosReflectionPushExecutingImage`/`PopExecutingImage`。**注意 P1 约束**：应仅对实际引用该访问器的方法插入，避免全量方法热路径开销。
-2. 🟡 **158 项 `not-supported` 需实际抛 `NotSupportedException`** —— 判定已明确，实施（含测试先行）仍待做。
-3. 🟡 flag 位全量重建使 descriptor 携带新位。
-4. 🟡 修复 ATG 参数生成（为反射类型产出有效输入）以解锁 425 个 `[UNVERIFIED]`。
-5. 🟡 将语义断言接入 Chaos AOT 路径。
+| # | 项 | 状态 |
+|---|---|---|
+| 1 | 🔴 REF-RISK-7 codegen 接线 | **部分** —— native RAII 支架已就位（`ChaosExecutingImageScope`）；codegen 注入点经三修未果（记入 `REFRISK7-WIRING-STATE.md`），需专项设计 |
+| 2 | 🟡 not-supported 抛异常 | **已完成** —— residual stub 各分支统一改为 `RaiseManagedException("System.NotSupportedException", ...)`；⚠️ 该路径不在本 chunk 触发，效果需在 ReferenceProof 管线验证 |
+| 3 | ~~🟡 flag 位全量重建~~ | ✅ **已完成**（实测 descriptor 已携带新位，如 `11u`=public\|static\|literal） |
+| 4 | 🟡 ATG 参数生成 | **已完成主体** —— `[UNVERIFIED]` 396 → **52**，其余多为不可修（Binder 类） |
+| 5 | 🟡 语义断言接入 AOT | ✅ **已完成** —— contract stage 接入 pipeline，**71/71 通过** |
+
+**额外完成：矩阵校准** —— `TypeDelegator` 原判 `not-supported` 的假设被实测证伪
+（真实实例下 27/29 通过），改为 `real`。
+→ `real` **400 → 447（80.1%）**，`not-supported` 158 → **111**，`unclassified` 归零。
 
 ### 🎯 重大进展：注册/签名契约修复（2026-09-13 续，`ffa17f3c4`）
 
