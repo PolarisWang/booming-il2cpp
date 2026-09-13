@@ -1015,7 +1015,11 @@ public sealed partial class NativeAotLoweringPlanner
             // Search for the first terminator AFTER the prefix; the prefix itself contains a
             // space, so we must not use IndexOfAny from pos (it would match inside the keyword).
             int nameStart = pos + structPrefix.Length;
-            int end = content.IndexOfAny(new[] { ' ', '{', ';' }, nameStart);
+            // A line break must terminate the name too: a struct declared as
+            // "struct chaos_valuetype_X" + newline + "{" puts the newline BEFORE the
+            // brace, so omitting it captures "X\n" and the type is never recognised
+            // as already declared.
+            int end = content.IndexOfAny(new[] { ' ', '{', ';', '\n', '\r', ':' }, nameStart);
             if (end < 0) end = content.Length;
             if (end <= nameStart) { pos = end + 1; continue; }
             existing.Add(content.Substring(nameStart, end - nameStart));
