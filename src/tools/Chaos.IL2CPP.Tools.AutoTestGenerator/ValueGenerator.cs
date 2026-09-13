@@ -842,6 +842,16 @@ public sealed class ValueGenerator
         if (IsResolvableValueType(typeName))
             return null;
 
+        // Some reference types have a well-known non-null default that is far more
+        // useful than GetUninitializedObject. System.String is the important one:
+        // GetUninitializedObject(typeof(string)) returns NULL (the runtime refuses to
+        // allocate a zeroed string object), so every reflection call taking a string
+        // argument was invoked with null and threw ArgumentNullException. The probe
+        // then recorded an "input produced an exception" outcome that verified
+        // nothing. Supplying a real value lets the call exercise the member itself.
+        if (NonNullStringDefaultTypes.Contains(typeName))
+            return "\"\"";
+
         // Non-generic qualified reference types only (e.g. System.Collections.Queue).
         // Try parameterless ctor via reflection.
         try
@@ -868,6 +878,17 @@ public sealed class ValueGenerator
             return null;
         }
     }
+
+    /// <summary>
+    /// Reference types whose GetUninitializedObject result is null but which have an
+    /// obvious non-null default. System.String is the canonical case: the runtime
+    /// returns null for a zero-initialised string, so passing it as a reflection
+    /// argument only ever exercises the callee's null guard.
+    /// </summary>
+    private static readonly HashSet<string> NonNullStringDefaultTypes = new(StringComparer.Ordinal)
+    {
+        "System.String",
+    };
 
     private static bool IsResolvableValueType(string typeName)
     {
