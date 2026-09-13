@@ -384,6 +384,62 @@ public sealed partial class NativeAotLoweringPlanner
             ));
         }
 
+        /// <summary>
+        /// Register Convert.ToDecimal inline shapes for the integral / floating-point / bool
+        /// value-type overloads.
+        ///
+        /// Only ToDecimal(Double) and ToDecimal(String) had SimpleForward registrations, so the
+        /// other overloads (byte/sbyte/short/ushort/int/uint/long/ulong/float/bool/char) had no
+        /// shape at all and fell through to the codegen catch-all
+        /// (ChaosExternalRuntimeFallback), which returns 0 — i.e. a null DecimalCarrier*, so the
+        /// caller's decimal value silently read as 0.
+        ///
+        /// The emitted expression must return a real DecimalCarrier*:
+        ///   • integral  → ChaosDecimalFromInt32 / ChaosDecimalFromInt64 (both exist as natives;
+        ///                 the 64-bit ones avoid truncating long/ulong to 32 bits)
+        ///   • floating  → ChaosDecimalFromDouble (the existing double→Decimal native)
+        ///   • boolean   → ChaosDecimalFromBool (a raw static_cast of the 0/1 carrier to a
+        ///                 DecimalCarrier* would reinterpret the carrier as a pointer)
+        ///   • char      → ChaosDecimalFromInt32 (an unsigned 16-bit code point)
+        ///
+        /// The remaining overloads (DateTime, object, string+IFormatProvider,
+        /// object+IFormatProvider, decimal) deliberately stay out of the inline path so they keep
+        /// flowing through the native Convert dispatch instead of being silently coerced.
+        /// </summary>
+        private static void RegisterConvertToDecimalInline(RuntimeHelperShapeRegistry registry)
+        {
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Convert",
+                MethodName: "ToDecimal",
+                Resolver: (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1) return null;
+                    switch (paramTypes[0])
+                    {
+                        case "System.Boolean":
+                            return "ChaosDecimalFromBool(static_cast<CHAOS_IL2CPP_INT32>({0}))";
+                        case "System.Single":
+                        case "System.Double":
+                            return "ChaosDecimalFromDouble(static_cast<CHAOS_IL2CPP_FLOAT64>({0}))";
+                        case "System.Char":
+                            return "ChaosDecimalFromInt32(static_cast<CHAOS_IL2CPP_INT32>({0}))";
+                        case "System.Int64":
+                        case "System.UInt64":
+                            return "ChaosDecimalFromInt64(static_cast<CHAOS_IL2CPP_INT64>({0}))";
+                        case "System.Byte":
+                        case "System.SByte":
+                        case "System.Int16":
+                        case "System.UInt16":
+                        case "System.Int32":
+                        case "System.UInt32":
+                            return "ChaosDecimalFromInt32(static_cast<CHAOS_IL2CPP_INT32>({0}))";
+                        default:
+                            return null;
+                    }
+                }
+            ));
+        }
+
         private static void RegisterCryptoStubs(RuntimeHelperShapeRegistry registry)
         {
             // ── SHA family: HashData(byte[]) -> byte[] ────────────────
