@@ -593,8 +593,13 @@ public sealed partial class NativeAotEmitter
             // ArgumentOutOfRangeException — the emitter crashes on any header
             // whose value-type struct appears before a spaced token.
             int nameStart = pos + structPrefix.Length;
-            int end = headerContent.IndexOfAny(new[] { ' ', '{', ';' }, nameStart);
-            if (end < 0) break;
+            // A line break must terminate the name: an emitted struct is
+            // "struct chaos_valuetype_X" followed by a newline and then '{', so
+            // omitting the line break captures "X\n" — which never matches the
+            // referenced symbol "chaos_valuetype_X", making the type look
+            // undeclared and producing a conflicting typedef (C2371).
+            int end = headerContent.IndexOfAny(new[] { ' ', '{', ';', '\n', '\r', ':' }, nameStart);
+            if (end < 0) continue;
             // Store bare symbol name (strip "struct " prefix) for comparison
             // with typedef names and references.
             result.Add(headerContent.Substring(nameStart, end - nameStart));
