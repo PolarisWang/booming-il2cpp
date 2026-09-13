@@ -34,6 +34,7 @@ extern "C" {
 #include "char_stubs.h"
 #include "convert_stubs.h"
 #include "guid_stubs.h"
+#include "version_stubs.h"
 #include "random_stubs.h"
 #include "hashcode_stubs.h"
 #include "interlocked_stubs.h"

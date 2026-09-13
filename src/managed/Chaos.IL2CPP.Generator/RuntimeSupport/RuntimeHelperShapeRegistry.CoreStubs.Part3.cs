@@ -120,6 +120,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterGuidctor(registry);
             RegisterGuidctor_1(registry);
             RegisterGuidParse(registry);
+            RegisterVersionParse(registry);
             RegisterRandomctor(registry);
             RegisterHashCodeToHashCode_1(registry);
 

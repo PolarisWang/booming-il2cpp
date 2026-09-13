@@ -279,5 +279,29 @@ public sealed partial class NativeAotLoweringPlanner
 
         }
 
+        /// <summary>
+        /// System.Version.Parse(string) — parse "M.m[.b[.r]]" into a Version object.
+        ///
+        /// System.Version is a reference type carried as a NativeInt handle, so the
+        /// return slot is NativeInt + ReferenceType (matching System.Random /
+        /// System.Exception).  Without this registration codegen emitted a call to
+        /// chaos_external_runtime_System_Private_CoreLib_System_Version__Parse_*
+        /// that nothing declared → C3861 in the page-split TUs.
+        /// </summary>
+        private static void RegisterVersionParse(RuntimeHelperShapeRegistry registry)
+        {
+            registry.Register("System.Version", "Parse", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosVersionParse",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType)),
+                new AotCoreIrAbiSlotArtifact
+                {
+                    CarrierKindCode = AotCoreIrAbiCarrierKind.NativeInt,
+                    TypeShape = AotCoreIrTypeShapeKind.ReferenceType,
+                    TypeSubjectId = "System.Private.CoreLib/System.Version"
+                },
+                new HashSet<int> { 0 });
+        }
+
     }
 }
