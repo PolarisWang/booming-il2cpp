@@ -18,6 +18,15 @@ CHAOS_IL2CPP_INTPTR chaos_async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR yield_awai
 CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
 void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
 
+// ── Hot BCL no-ops ──
+// IDisposable::Dispose() lowered to a native no-op (the GC owns the lifetime,
+// not managed Dispose). Registered as ShapeKind.SimpleForward with the native
+// symbol `chaos_noop_void`, so generated code calls this identifier DIRECTLY
+// and unqualified. The definition lives in async_stubs.cpp; without a
+// declaration reachable from the generated TU it fails to compile with
+// C3861: 'chaos_noop_void': identifier not found.
+extern "C" void chaos_noop_void(CHAOS_IL2CPP_INTPTR dispose_target) noexcept;
+
 // TaskAwaiter stubs (DirectNativeSymbol for async state machine dispatch).
 // Generated code calls these when lowering async Task.GetResult() patterns.
 void ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
