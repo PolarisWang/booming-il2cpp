@@ -442,6 +442,13 @@ public sealed class CSharpExpressionBuilder
         // GetTypeInfo() extension so the expression's static type is TypeInfo.
         ["System.Reflection.TypeInfo"] =               new(FactoryKind.CustomExpr, 0,
             "typeof(ReflectionSubjectSample).GetTypeInfo()"),
+
+        // TypeDelegator wraps a Type and forwards every member query to it.
+        // A GetUninitializedObject instance has a null wrapped Type, so all 50 of
+        // its members threw NullReferenceException and were recorded as UNVERIFIED.
+        // Its only constructor takes a Type, so a real instance is one call away.
+        ["System.Reflection.TypeDelegator"] =          new(FactoryKind.CustomExpr, 0,
+            "new global::System.Reflection.TypeDelegator(typeof(ReflectionSubjectSample))"),
     };
 
     public CSharpExpressionBuilder(CSharpSerializer serializer)
