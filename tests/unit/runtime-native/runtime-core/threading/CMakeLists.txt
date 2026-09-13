@@ -196,6 +196,16 @@ chaos_native_add_test(test_async_iterator
     LABELS "unit;threading"
 )
 
+# parallel_for_test — T1.4: Parallel.For range partitioner semantics.
+# Compiles parallel.cpp directly so the test drives the real
+# chaos_parallel_for_range_int rather than a stale prebuilt copy (same reason as
+# the rwlock_upgrade / async_task_state registrations above).
+chaos_native_add_test(test_parallel_for
+    parallel_for_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/parallel.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp

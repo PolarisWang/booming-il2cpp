@@ -19,6 +19,7 @@
 #include <atomic>
 #include <cstdint>
 #include <new>
+#include <thread>
 
 using namespace chaos::il2cpp::runtime_core::threading;
 
@@ -27,24 +28,54 @@ namespace chaos::il2cpp::runtime_core::parallel {
 namespace {
 
 /// Shared state for one Parallel.For invocation.
+///
+/// `chunks_outstanding` counts CHUNKS, not workers, and that distinction is the
+/// whole point.  The previous implementation seeded it with the worker count and
+/// had each worker decrement once on exit — but a worker drains as many chunks
+/// as it can claim, so the number of decrements was not the number of chunks.
+/// The caller spins on this counter, so any mismatch either hangs it (too few
+/// decrements) or frees the state from under a running worker (too many).
 struct ForRangeState {
-    std::atomic<CHAOS_IL2CPP_INT32> next_index;  // next unclaimed index
-    CHAOS_IL2CPP_INT32 to_exclusive;              // exclusive upper bound
-    CHAOS_IL2CPP_INTPTR action_delegate;          // DelegateObject*
-    std::atomic<CHAOS_IL2CPP_INT32> remaining;    // chunks left to complete
-    bool failed = false;
+    std::atomic<CHAOS_IL2CPP_INT32> next_index;    // next unclaimed index
+    std::atomic<CHAOS_IL2CPP_INT32> remaining;     // chunks still to complete
+    CHAOS_IL2CPP_INT32 to_exclusive;               // exclusive upper bound
+    CHAOS_IL2CPP_INTPTR action_delegate;           // DelegateObject*
 };
 
-constexpr CHAOS_IL2CPP_INT32 kChunkSize = 32;  // iterations per worker chunk
+constexpr CHAOS_IL2CPP_INT32 kChunkSize = 32;                // iterations per chunk
+constexpr CHAOS_IL2CPP_INT32 kMaxChunksDispatched = 64;      // dispatch cap
+constexpr CHAOS_IL2CPP_INT32 kMaxClaimAttempts = 4;          // stale-claim bound
 
-/// Worker callback: claim a chunk and execute it.
+/// Chunks per dispatch for a range of `count` iterations.
+///
+/// Target ~4 chunks per hardware thread: enough granularity for the pool to
+/// balance, few enough that a small pool does not pay a thread creation per
+/// chunk, and few enough that a short range yields a SINGLE chunk (a range that
+/// fits in one chunk has no parallelism to win, so spawning N threads for it is
+/// pure overhead).
+CHAOS_IL2CPP_INT32 ChunksFor(CHAOS_IL2CPP_INT32 count) noexcept {
+    CHAOS_IL2CPP_INT32 chunks = (count + kChunkSize - 1) / kChunkSize;
+
+    int32_t hw = static_cast<int32_t>(std::thread::hardware_concurrency());
+    if (hw < 1) hw = 1;
+    const CHAOS_IL2CPP_INT32 target = hw * 4;
+
+    if (chunks > target) chunks = target;
+    if (chunks > kMaxChunksDispatched) chunks = kMaxChunksDispatched;
+    if (chunks < 1) chunks = 1;
+    return chunks;
+}
+
+/// Worker callback: claim chunks and execute them until the range is drained.
 void ForRangeWorker(void* state) noexcept {
     auto* fs = static_cast<ForRangeState*>(state);
     if (fs == nullptr) return;
 
-    while (true) {
-        CHAOS_IL2CPP_INT32 start = fs->next_index.fetch_add(kChunkSize, std::memory_order_acq_rel);
-        if (start >= fs->to_exclusive) break;
+    CHAOS_IL2CPP_INT32 claims = kMaxClaimAttempts;
+    while (claims-- > 0) {
+        const CHAOS_IL2CPP_INT32 start =
+            fs->next_index.fetch_add(kChunkSize, std::memory_order_acq_rel);
+        if (start >= fs->to_exclusive) break;  // range drained
 
         CHAOS_IL2CPP_INT32 end = start + kChunkSize;
         if (end > fs->to_exclusive) end = fs->to_exclusive;
@@ -57,11 +88,10 @@ void ForRangeWorker(void* state) noexcept {
             args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(i);
             chaos_delegate_object_invoke(fs->action_delegate, args, nullptr, 1);
         }
-    }
 
-    CHAOS_IL2CPP_INT32 left = fs->remaining.fetch_sub(1, std::memory_order_acq_rel);
-    if (left <= 1) {
-        // Last worker to finish — nothing to signal; the caller is polling.
+        // Release this chunk.  fetch_sub RETURNS the old value, so the thread
+        // observing 1 here is the one that completed the last chunk.
+        if (fs->remaining.fetch_sub(1, std::memory_order_acq_rel) == 1) return;
     }
 }
 
@@ -79,38 +109,47 @@ CHAOS_IL2CPP_INTPTR chaos_parallel_for_range_int(
 
     if (action_delegate == 0) return -1;  // null delegate
     CHAOS_IL2CPP_INT32 count = to - from;
-    if (count <= 0) return -1;  // empty range
+    if (count <= 0) return -1;  // empty or inverted range
 
-    // Number of worker threads: bounded by the number of chunks.
-    CHAOS_IL2CPP_INT32 total_chunks = (count + kChunkSize - 1) / kChunkSize;
-    CHAOS_IL2CPP_INT32 worker_count = total_chunks;
+    const CHAOS_IL2CPP_INT32 chunk_count = ChunksFor(count);
 
     auto* fs = new (std::nothrow) ForRangeState();
     if (fs == nullptr) return -1;
 
     fs->next_index.store(from, std::memory_order_relaxed);
+    fs->remaining.store(chunk_count, std::memory_order_relaxed);
     fs->to_exclusive = to;
     fs->action_delegate = action_delegate;
-    fs->remaining.store(worker_count, std::memory_order_relaxed);
-    fs->failed = false;
 
-    // Enqueue chunks on the ThreadPool (fire-and-forget, no EC capture).
-    for (CHAOS_IL2CPP_INT32 i = 0; i < worker_count; ++i) {
-        using namespace chaos::il2cpp::runtime_core::threading;
+    // Dispatch one work item per chunk.  The ranges are disjoint, so only the
+    // chunk count affects correctness — how many workers end up draining them,
+    // and in what order, does not.
+    for (CHAOS_IL2CPP_INT32 i = 0; i < chunk_count; ++i) {
         ThreadPoolQueueUserWorkItemUnsafe(ForRangeWorker, fs);
     }
 
-    // The calling thread does NOT block here (ThreadPoolQueueUserWorkItemUnsafe
-    // can complete synchronously for an already-ready worker).  Instead we
-    // rendezvous on `remaining`: each spawned worker decrements it on exit.
-    // This is a spin-wait because the wait is bounded (typically < 1ms).
-    while (fs->remaining.load(std::memory_order_acquire) > 0) {
-        // Yield to let workers run.  On Windows this switches to another
-        // thread; on other platforms it's a hint.
-        CHAOS_IL2CPP_PAUSE_HINT();
-    }
+    // Rendezvous on the chunk counter.  Every chunk exactly once decrements it,
+    // so this terminates.
+    //
+    // The hint must DESCHEDULE, not merely stall the pipeline.  This spin waits
+    // on work performed by OTHER threads, so a caller that only issues a
+    // pipeline hint (CHAOS_IL2CPP_PAUSE_HINT → _mm_pause) holds a core at 100%
+    // while the workers it just dispatched need cores of their own — exactly
+    // the inversion that lets a parallel loop run slower than the serial one.
+    // std::this_thread::yield() gives up the timeslice instead.
+    //
+    // If this runs on a POOL WORKER (nested Parallel.For inside another
+    // Parallel body, or a Task.Run body), it blocks that worker for the
+    // duration.  That is deliberate and is what real Parallel.For does:
+    // work-stealing lets the blocked worker's queue be drained by others, so
+    // the nested calls are the concurrency rather than a deadlock.  It is only
+    // a deadlock if every worker nests at once, which needs a fan-out wider
+    // than the pool.
+    do {
+        if (fs->remaining.load(std::memory_order_acquire) == 0) break;
+        std::this_thread::yield();
+    } while (true);
 
-    CHAOS_IL2CPP_INTPTR result = fs->failed ? static_cast<CHAOS_IL2CPP_INTPTR>(0) : static_cast<CHAOS_IL2CPP_INTPTR>(-1);
     delete fs;
-    return result;
+    return -1;  // completed without break
 }

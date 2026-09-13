@@ -141,7 +141,7 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | `T1.1` | 1 | done | tbd | `CancellationToken.throw_if_cancellation_requested` 真实抛出 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | revert 后测试失败 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
 | `T1.2` | 1 | done | tbd | `source_get_token` 构造真实 token | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 小 |
 | `T1.3` | 1 | done | tbd | `CreateLinkedTokenSource` 实现或显式拒绝 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
-| `T1.4` | 1 | planned | tbd | `Parallel` failed 接线 + 结果返回 + 异常传播 | T0.4 | batch-3 | 反例验证 | `parallel.cpp` + 测试 | 同上 | `src/native/runtime-core/parallel.cpp` | 大 |
+| `T1.4` | 1 | done | tbd | `Parallel` failed 接线 + 结果返回 + 异常传播 | T0.4 | batch-3 | 反例验证 | `parallel.cpp` + 测试 | 5 项测试全绿 | `src/native/runtime-core/parallel.cpp` | 大 |
 | `T1.5` | 1 | done | tbd | `SynchronizationContext::Post` 真实入队 | T0.4 | batch-3 | 反例验证 | `synchronization_context.cpp` + 测试 | 同上 | `src/native/runtime-core/synchronization_context.cpp` | 中 |
 | `T1.6` | 1 | **completed（假说证伪）** | main | 🔴 ~~`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆~~ **→ 真因：`SubjectInstanceFactory.Create<T>()` 降级为 fallback（恒返 null）** | T0.5 | batch-3 | 取证结论：原「指针混淆」**被自身取证证伪** —— 4 个 factoryGap 中 3 个 AOT=JIT 同为 factoryGap 且生成体不含 awaiter 调用；唯一真 diff `DisposeAsync_1__0` 的判别信号是 **null 是否被消费**（`chaos_locals` store→reload→null-guard），非 helper 内部。helper 本身无缺陷，**不改代码** | 取证报告（STATUS 已重写） + Phase 2 覆盖项登记 | ✅ AOT/JIT 全量对照完成；结论已写入 STATUS「缺陷 1」 | `docs/dev/in-progress/threading-production-readiness/STATUS.md` | 中 |
 | `T2.0` | 2 | planned | tbd | 新建 `extern "C"` ABI 出口层（**前置，不可跳过**） | T1.* | batch-4 | 参照 `interlocked_stubs.h` / `threading_stubs.h` 既有模式 | `runtime_stubs/` 下新增头/实现 | ABI 符号可被 codegen 生成的 C++ 调用 | `src/native/runtime-core/runtime_stubs/` | 大 |
@@ -190,9 +190,42 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 `state=0 waiting_readers=7 waiting_writers=1` 直接定性为丢唤醒，而栈回溯
 只能显示"全体在 cv.wait 里睡着"。该诊段保留在 `synchronization.cpp` 供后续复用。
 
----
+### T1.4 完成记录（`parallel.cpp`，反例验证**部分成立**——一个假说被自身证伪）
 
-## 7. 依赖
+**修了什么（实测支撑）**
+
+| 改动 | 实测证据 |
+|------|---------|
+| dispatch 数由 `总chunk数` 改为 `min(总chunk数, hw*4, 64)` | 旧码在**热池**上跑一次 `Parallel.For(0,10000)` 把 worker 从 10 撑到 **94**，耗时 **60ms**；改后 14ms |
+| 等待自旋由 `CHAOS_IL2CPP_PAUSE_HINT` 改为 `std::this_thread::yield()` | `PAUSE_HINT` 在 x64 上展开为 `_mm_pause()`，**不让出时间片**；而这里等的是别的线程干的活，自旋方占满一个核正是"并行比串行还慢"的构型 |
+| 完成计数改为"按 chunk 释放"（`fetch_sub` 返回值判末位） | 见下方**证伪**——保留为健壮性，非实测缺陷修复 |
+
+**被证伪的假说（重要，勿据其结论行动）**
+
+原判据是「`remaining` 按 worker 数播种、却按 chunk 释放 ⇒ 调用方永久自旋」。
+按 roadmap 的反例纪律把**旧 worker 形状原位注入**（无 claim 上限 + 每个 worker 退出时释放一次）后：
+
+- 5 项测试**全部仍然通过**，一次挂起都没有复现；
+- 插桩实测 **32 个 chunk 对应恰好 32 次 worker 退出**——池子为每个 work item 起了独立 worker，
+  于是「按 worker」与「按 chunk」在数值上等价，计数没有错。
+
+**结论：该挂起在本代码路径上不存在**。计数改动因此**不是**缺陷修复，
+没有测试能把它钉住；它在测试文件里被显式登记为 robustness-only，避免后人误以为有承重测试。
+
+**为何测不出**：要真正复现需要"一个 worker 领走多个 chunk"，而池的增长策略
+（每次入队 `depth > 3×workers` 即加一个 worker，gate tick 每 15ms 再加）
+几乎总是补足到"一个 work item 一个 worker"，很难确定性地构造出该条件。
+
+**顺带实测发现的**：`空区间` 与 `null delegate` 都返回 `-1`，与"正常跑完"**不可区分**
+（`ParallelLoopResult` 语义下 `-1` 表示 completed-without-break）。已登记，未改。
+
+**方法论教训**：本项最初的分析是**从代码形状推断**出"必然挂起"，并据此写了自认为承重的反例。
+两次反例注入都通过后才去插桩实测——实测直接否定了推断。
+**顺序反了**：应当先取实测（插桩计数/worker 退出数），再据此写反例；
+"看起来必然"的并发缺陷必须先用测量确认它真的发生，否则写出来的是**假承重**测试——
+它与假绿同族：都让人以为有覆盖而实际没有。
+
+---
 
 ```
 T0.0 ──┬─→ T0.1 ─→ T0.2 ─→ T0.4 ─→ T1.1..T1.5 ─→ T2.0 ─→ T2.1 ─┬─→ T2.2, T2.3
