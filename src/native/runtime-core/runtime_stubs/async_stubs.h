@@ -143,6 +143,19 @@ CHAOS_IL2CPP_INTPTR async_task_create_gc() noexcept;
 // fallback that would replace a real inner task with a null handle.
 CHAOS_IL2CPP_INTPTR chaos_task_unwrap(CHAOS_IL2CPP_INTPTR outer) noexcept;
 
+// ── Phase 6 / E2: Parallel.For range partitioner ──
+// Partitions [from, to) across the ThreadPool and invokes the Action<int>
+// delegate's native method_ptr directly.  Returns -1
+// (ParallelLoopResult.lowestBreakIteration for a completed-without-break run).
+//
+// Declared HERE because the generated TU includes async_stubs.h and calls this
+// identifier DIRECTLY (DirectNativeSymbol); without a reachable declaration the
+// generated code fails with C3861 'chaos_parallel_for_range_int': identifier
+// not found.  Same requirement class as chaos_noop_void above.
+CHAOS_IL2CPP_INTPTR chaos_parallel_for_range_int(
+    CHAOS_IL2CPP_INT32 from, CHAOS_IL2CPP_INT32 to,
+    CHAOS_IL2CPP_INTPTR action_delegate) noexcept;
+
 // ── Task.ContinueWith native combinator (Phase 2 P2-2) ──
 // Registers `continuation` (a DelegateObject taking the antecedent task handle
 // and returning a native int) to run when `antecedent` completes — whether it
