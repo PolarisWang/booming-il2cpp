@@ -34,12 +34,17 @@ CHAOS_IL2CPP_INTPTR ChaosJsonSerializeInt32(CHAOS_IL2CPP_INT32 value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosJsonSerializeInt64(CHAOS_IL2CPP_INT64 value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosJsonSerializeString(CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosJsonSerializeBool(CHAOS_IL2CPP_INT32 value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeDouble(double value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeSingle(float value) noexcept;
 
 // ── Precompiled JSON deserialization stubs ───────────────────
 // Parse JSON strings back to primitive values using atoi/strtol.
 CHAOS_IL2CPP_INT32 ChaosJsonDeserializeInt32(CHAOS_IL2CPP_INTPTR jsonStr) noexcept;
 CHAOS_IL2CPP_INT64 ChaosJsonDeserializeInt64(CHAOS_IL2CPP_INTPTR jsonStr) noexcept;
 CHAOS_IL2CPP_INT32 ChaosJsonDeserializeBool(CHAOS_IL2CPP_INTPTR jsonStr) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosJsonDeserializeString(CHAOS_IL2CPP_INTPTR jsonStr) noexcept;
+double ChaosJsonDeserializeDouble(CHAOS_IL2CPP_INTPTR jsonStr) noexcept;
+float ChaosJsonDeserializeSingle(CHAOS_IL2CPP_INTPTR jsonStr) noexcept;
 
 // ── AnsiStringMarshaller stubs ───────────────────────────────
 // Source-generated marshalling for [DllImport] with CharSet.Ansi.

@@ -12,15 +12,64 @@
 //   Both are allocated in the CHAOS_IL2CPP_MALLOC string_table pool, which is
 //   immutable/permanent → permanently rooted, no GC collection, no new
 //   allocation domain introduced.
-#include <chaos/native_types.h>
+//
+// char[] overloads (Add/Get(char[],int,int)) decode the UTF-16 window to UTF-8
+// before interning, so the same content reached via either overload yields the
+// same interned reference.
+#include <cstdint>
 #include <cstring>
+#include <cstdlib>
 
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
-#include "exception_helpers.h"  // RaiseNullReferenceException / RaiseManagedException
+#include "exception_helpers.h"
 #include "string_table.h"
 
 namespace chaos::il2cpp::runtime_core {
+
+// ── UTF-16 → UTF-8 conversion helpers ─────────────────────────────
+
+/// Simple worst-case buffer for UTF-16-to-UTF-8 conversion.
+/// The char[] window is at most INT32_MAX characters; UTF-8 expansion is
+/// at most 3 bytes per BMP code unit (no surrogates), so 3×len + 1 suffices.
+static char* utf16_window_to_utf8(const CHAOS_IL2CPP_UINT16* src,
+                                   CHAOS_IL2CPP_INT32 start,
+                                   CHAOS_IL2CPP_INT32 len)
+{
+    if (len <= 0) return nullptr;
+    const auto cap = static_cast<size_t>(len) * 3 + 1;
+    auto* buf = static_cast<char*>(CHAOS_IL2CPP_MALLOC(cap));
+    if (buf == nullptr) return nullptr;
+
+    size_t wi = 0;
+    for (CHAOS_IL2CPP_INT32 i = 0; i < len && wi + 3 < cap; ++i)
+    {
+        const auto u = static_cast<uint32_t>(src[static_cast<size_t>(start) + i]);
+        if (u < 0x80U)       { buf[wi++] = static_cast<char>(u); }
+        else if (u < 0x800U) { buf[wi++] = static_cast<char>(0xC0 | (u >> 6));
+                               buf[wi++] = static_cast<char>(0x80 | (u & 0x3F)); }
+        else                 { buf[wi++] = static_cast<char>(0xE0 | (u >> 12));
+                               buf[wi++] = static_cast<char>(0x80 | ((u >> 6) & 0x3F));
+                               buf[wi++] = static_cast<char>(0x80 | (u & 0x3F)); }
+    }
+    buf[wi] = '\0';
+
+    return buf;  // Caller frees via CHAOS_IL2CPP_FREE. Returns the oversized
+                  // buffer (at most 3×len+1) rather than reallocating to exact
+                  // size, avoiding a copy + a null-terminator bug.
+}
+
+/// Decode the source char[] into its UTF-16 element array.
+static const CHAOS_IL2CPP_UINT16* resolve_char_array_data(CHAOS_IL2CPP_INTPTR key)
+{
+    // Could be a codegen StubArrayHeader* or a real ManagedArrayAccessor*.
+    // Both have `length` as the second field; element data is contiguous
+    // after the header.  For char[], elements are 2-byte UTF-16 code units.
+    const auto* hdr = reinterpret_cast<const StubArrayHeader*>(key);
+    (void)hdr->length;  // validate the pointer is readable
+    return reinterpret_cast<const CHAOS_IL2CPP_UINT16*>(
+        reinterpret_cast<const uint8_t*>(key) + sizeof(StubArrayHeader));
+}
 
 /// Resolve a managed String argument to its {utf8_data, byte_count} view without
 /// allocating. Handles both representations:
@@ -133,6 +182,89 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetString(
     {
         return 0;  // absent → null.
     }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
+}  // extern "C"
+
+// ── char[] overloads (AddChars / GetChars) ───────────────────────
+
+}  // namespace chaos::il2cpp::runtime_core
+
+namespace chaos::il2cpp::runtime_core {
+extern "C" {
+
+CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddChars(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR key,
+    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) noexcept
+{
+    if (this_ptr == 0) { RaiseNullReferenceException(); return 0; }
+    if (key == 0)
+    {
+        RaiseManagedException("System.ArgumentNullException",
+                              "Value cannot be null. (Parameter 'key')");
+        return 0;
+    }
+    if (start < 0 || len < 0)
+    {
+        RaiseManagedException("System.ArgumentOutOfRangeException",
+                              "start and len must be non-negative.");
+        return 0;
+    }
+
+    const auto* u16 = resolve_char_array_data(key);
+    auto* utf8 = utf16_window_to_utf8(u16, start, len);
+    if (utf8 == nullptr) return 0;
+
+    const auto byte_len = static_cast<CHAOS_IL2CPP_UINT32>(std::strlen(utf8));
+    string_table::StringId id = 0;
+
+    if (byte_len == 0)
+    {
+        constexpr uint64_t kFnvOffsetBasis = 14695981039346656037ULL;
+        constexpr uint64_t kFnvEmpty = (kFnvOffsetBasis & ~(1ULL << 63)) | 1ULL;
+        id = kFnvEmpty;
+    }
+    else
+    {
+        id = string_table::Intern(utf8, byte_len);
+    }
+
+    CHAOS_IL2CPP_FREE(utf8);
+    if (id == string_table::kStringIdNull) return 0;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetChars(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR key,
+    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) noexcept
+{
+    using namespace chaos::il2cpp::runtime_core;
+    if (this_ptr == 0) { RaiseNullReferenceException(); return 0; }
+    if (key == 0) return 0;  // null array → null result (the string overload
+                              // also returns 0 for null input — contrast with
+                              // Add which throws ArgumentNullException).
+
+    const auto* u16 = resolve_char_array_data(key);
+    auto* utf8 = utf16_window_to_utf8(u16, start, len);
+    if (utf8 == nullptr) return 0;
+
+    const auto byte_len = static_cast<CHAOS_IL2CPP_UINT32>(std::strlen(utf8));
+    string_table::StringId id = 0;
+
+    if (byte_len == 0)
+    {
+        constexpr uint64_t kFnvOffsetBasis = 14695981039346656037ULL;
+        constexpr uint64_t kFnvEmpty = (kFnvOffsetBasis & ~(1ULL << 63)) | 1ULL;
+        id = kFnvEmpty;
+    }
+    else
+    {
+        id = string_table::Find(utf8, byte_len);
+    }
+
+    CHAOS_IL2CPP_FREE(utf8);
+    if (id == string_table::kStringIdNull) return 0;
     return static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
 }
 

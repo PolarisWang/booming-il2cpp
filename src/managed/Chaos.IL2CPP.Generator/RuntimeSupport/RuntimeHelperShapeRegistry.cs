@@ -657,11 +657,18 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterJsonSerialize("System.UInt64", "ChaosJsonSerializeInt64");
             RegisterJsonSerialize("System.Boolean", "ChaosJsonSerializeBool");
             RegisterJsonSerialize("System.String", "ChaosJsonSerializeString");
+            RegisterJsonSerialize("System.Double", "ChaosJsonSerializeDouble");
+            RegisterJsonSerialize("System.Single", "ChaosJsonSerializeSingle");
 
             // ── Deserialize<T> stubs ──
             RegisterJsonDeserialize("System.Int32", "ChaosJsonDeserializeInt32");
             RegisterJsonDeserialize("System.Int64", "ChaosJsonDeserializeInt64");
             RegisterJsonDeserialize("System.Boolean", "ChaosJsonDeserializeBool");
+            RegisterJsonDeserialize("System.String", "ChaosJsonDeserializeString");
+            // Double/Single Deserialize stubs are omitted: RegisterJsonDeserialize wraps
+            // the return in static_cast<CHAOS_IL2CPP_INTPTR> which bitcasts floating-point
+            // through the integer return slot, silently corrupting the value.
+            // These types fall through to the interpreter path instead, which is correct.
 
             // ── Dictionary<K,V>::TryAdd (smoke-test stub) ──
             registry.RegisterGeneric(new GenericShapeDescriptor(

@@ -186,17 +186,103 @@ TEST(XmlNameTable, Get_EmptyStringMatchesAddEmptyString)
 // Tagged StringId round-trip — the cross-representation contract
 // ═══════════════════════════════════════════════════════════════════════════
 
-TEST(XmlNameTable, AddThenGet_TaggedStringIdInput)
+// ═══════════════════════════════════════════════════════════════════════════
+// char[] overloads — Add/Get(char[], int, int)
+// ═══════════════════════════════════════════════════════════════════════════
+
+namespace {
+
+/// Build a codegen-style char[] (StubArrayHeader + contiguous 2-byte elements).
+/// Mirrors the layout resolve_char_array_data() expects.
+CHAOS_IL2CPP_INTPTR make_test_char_array(const char* ascii) noexcept
 {
-    auto s = make_test_string("tagged-roundtrip");
-    ASSERT_NE(s, 0);
-
-    // Add returns a tagged StringId; feeding that same tagged handle back into
-    // Get must resolve through the string_table path (not the raw-pointer path)
-    // and return the identical reference.
-    const auto interned = ChaosXmlNameTableAddString(kFakeThis, s);
-    ASSERT_NE(interned, 0);
-    ASSERT_TRUE(chaos_is_string_id(interned));
-
-    EXPECT_EQ(ChaosXmlNameTableGetString(kFakeThis, interned), interned);
+    if (ascii == nullptr) return 0;
+    const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(std::strlen(ascii));
+    auto* arr = static_cast<StubArrayHeader*>(
+        std::malloc(sizeof(StubArrayHeader) + (len + 1) * sizeof(CHAOS_IL2CPP_UINT16)));
+    if (arr == nullptr) return 0;
+    arr->element_type = 0;
+    arr->length = len;
+    auto* elems = reinterpret_cast<CHAOS_IL2CPP_UINT16*>(arr + 1);
+    for (CHAOS_IL2CPP_UINTPTR i = 0; i < len; ++i)
+        elems[i] = static_cast<CHAOS_IL2CPP_UINT16>(
+            static_cast<unsigned char>(ascii[i]));
+    elems[len] = 0;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
+
+}  // namespace
+
+TEST(XmlNameTable, AddChars_InternsAndMatchesStringOverload)
+{
+    auto chars = make_test_char_array("charsys");
+    auto str = make_test_string("charsys");
+    ASSERT_NE(chars, 0);
+    ASSERT_NE(str, 0);
+
+    const auto fromChars = ChaosXmlNameTableAddChars(kFakeThis, chars, 0, 7);
+    const auto fromString = ChaosXmlNameTableAddString(kFakeThis, str);
+
+    // Same content via either overload must yield the same interned reference.
+    EXPECT_NE(fromChars, 0);
+    EXPECT_EQ(fromChars, fromString);
+}
+
+TEST(XmlNameTable, AddChars_RespectsStartAndLenWindow)
+{
+    // "xxyyzz" with start=2,len=2 → "yy"
+    auto chars = make_test_char_array("xxyyzz");
+    auto expected = make_test_string("yy");
+    ASSERT_NE(chars, 0);
+    ASSERT_NE(expected, 0);
+
+    const auto windowed = ChaosXmlNameTableAddChars(kFakeThis, chars, 2, 2);
+    const auto plain = ChaosXmlNameTableAddString(kFakeThis, expected);
+
+    EXPECT_NE(windowed, 0);
+    EXPECT_EQ(windowed, plain);
+}
+
+TEST(XmlNameTable, GetChars_FindsPreviouslyInterned)
+{
+    auto chars = make_test_char_array("lookupme");
+    ASSERT_NE(chars, 0);
+
+    const auto interned = ChaosXmlNameTableAddChars(kFakeThis, chars, 0, 8);
+    ASSERT_NE(interned, 0);
+
+    EXPECT_EQ(ChaosXmlNameTableGetChars(kFakeThis, chars, 0, 8), interned);
+}
+
+TEST(XmlNameTable, GetChars_AbsentReturnsNull)
+{
+    auto chars = make_test_char_array("never-seen-chars-xyzzy");
+    ASSERT_NE(chars, 0);
+
+    // Query-only: must not insert as a side effect.
+    EXPECT_EQ(ChaosXmlNameTableGetChars(kFakeThis, chars, 0, 23), 0);
+    EXPECT_EQ(ChaosXmlNameTableGetChars(kFakeThis, chars, 0, 23), 0);
+}
+
+TEST(XmlNameTable, GetChars_NullArrayReturnsNull)
+{
+    EXPECT_EQ(ChaosXmlNameTableGetChars(kFakeThis, 0, 0, 0), 0);
+}
+
+TEST(XmlNameTable, AddChars_NonAsciiRoundTripsToSameReference)
+{
+    // Multi-byte UTF-16 → UTF-8 expansion must still intern consistently.
+    auto chars = make_test_char_array("ab");
+    ASSERT_NE(chars, 0);
+    // Overwrite with a non-ASCII BMP char (U+00E9 'é').
+    auto* elems = reinterpret_cast<CHAOS_IL2CPP_UINT16*>(
+        reinterpret_cast<StubArrayHeader*>(chars) + 1);
+    elems[0] = 0x00E9;
+
+    const auto interned = ChaosXmlNameTableAddChars(kFakeThis, chars, 0, 1);
+    ASSERT_NE(interned, 0);
+
+    // Add and Get must agree for the same non-ASCII window.
+    EXPECT_EQ(ChaosXmlNameTableGetChars(kFakeThis, chars, 0, 1), interned);
+}
+

@@ -728,6 +728,26 @@ public sealed partial class NativeAotLoweringPlanner
                 stringRetAbi,
                 new HashSet<int> { 0, 1 });
 
+            // Concrete NameTable.Add(char[], int, int) -> string  → ChaosXmlNameTableAddChars
+            var charArrayAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.Char[]", AotCoreIrTypeShapeKind.ReferenceType);
+            var intAbi = CreateInt32AbiSlot();
+            var charArrayRawIndices = new HashSet<int> { 0, 1, 2, 3 };
+            registry.Register(
+                "System.Xml.NameTable",
+                "Add",
+                new[] { "System.Char[]", "System.Int32", "System.Int32" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableAddChars",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                {
+                    thisAbi,
+                    charArrayAbi,
+                    intAbi,
+                    intAbi,
+                }),
+                stringRetAbi,
+                charArrayRawIndices);
+
             // Concrete NameTable.Get(string) -> string?  → ChaosXmlNameTableGetString
             registry.Register(
                 "System.Xml.NameTable",
@@ -741,6 +761,92 @@ public sealed partial class NativeAotLoweringPlanner
                 }),
                 stringRetAbi,
                 new HashSet<int> { 0, 1 });
+
+            // Concrete NameTable.Get(char[], int, int) -> string?  → ChaosXmlNameTableGetChars
+            registry.Register(
+                "System.Xml.NameTable",
+                "Get",
+                new[] { "System.Char[]", "System.Int32", "System.Int32" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableGetChars",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                {
+                    thisAbi,
+                    charArrayAbi,
+                    intAbi,
+                    intAbi,
+                }),
+                stringRetAbi,
+                charArrayRawIndices);
+
+            // ── Abstract base class XmlNameTable virtual dispatch ──
+            // When codegen sees an XmlNameTable-typed `this`, the concrete
+            // NameTable registrations won't match (they're typed to NameTable).
+            // Register the abstract base subject IDs so those calls route through
+            // the native stubs too.
+            var baseStringAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+            var baseThisAbi = CreateNativeIntAbiSlot(
+                "System.Xml/System.Xml.XmlNameTable", AotCoreIrTypeShapeKind.ReferenceType);
+
+            // XmlNameTable.Add(string) → routes to ChaosXmlNameTableAddString
+            registry.Register(
+                "System.Xml.XmlNameTable",
+                "Add",
+                new[] { "System.String" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableAddString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    baseThisAbi,
+                    baseStringAbi,
+                }),
+                stringRetAbi,
+                new HashSet<int> { 0, 1 });
+
+            // XmlNameTable.Get(string) → routes to ChaosXmlNameTableGetString
+            registry.Register(
+                "System.Xml.XmlNameTable",
+                "Get",
+                new[] { "System.String" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableGetString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    baseThisAbi,
+                    baseStringAbi,
+                }),
+                stringRetAbi,
+                new HashSet<int> { 0, 1 });
+
+            // XmlNameTable.Add(char[], int, int) → routes to ChaosXmlNameTableAddChars
+            registry.Register(
+                "System.Xml.XmlNameTable",
+                "Add",
+                new[] { "System.Char[]", "System.Int32", "System.Int32" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableAddChars",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                {
+                    baseThisAbi,
+                    charArrayAbi,
+                    intAbi,
+                    intAbi,
+                }),
+                stringRetAbi,
+                charArrayRawIndices);
+
+            // XmlNameTable.Get(char[], int, int) → routes to ChaosXmlNameTableGetChars
+            registry.Register(
+                "System.Xml.XmlNameTable",
+                "Get",
+                new[] { "System.Char[]", "System.Int32", "System.Int32" },
+                ShapeKind.SimpleForward, "ChaosXmlNameTableGetChars",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                {
+                    baseThisAbi,
+                    charArrayAbi,
+                    intAbi,
+                    intAbi,
+                }),
+                stringRetAbi,
+                charArrayRawIndices);
         }
 
     }
