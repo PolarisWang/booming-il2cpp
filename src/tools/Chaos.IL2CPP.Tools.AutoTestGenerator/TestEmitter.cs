@@ -4,6 +4,37 @@ namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 
 public sealed class TestEmitter
 {
+    /// <summary>
+    /// Methods whose assertion must not rely on the probe's captured return value.
+    ///
+    /// Assertion strength is normally bounded by what the probe recorded: when the probe
+    /// captures nothing (empty result), <see cref="AppendAssert"/> returns early and the
+    /// fact body degrades to a "result is not null" sentinel. That sentinel cannot tell a
+    /// correct implementation from a fallback, because both are non-null — so a fix like
+    /// REF-RISK-7 (Assembly.GetCallingAssembly/GetExecutingAssembly reporting the real
+    /// caller instead of a hard-coded CoreLib) changes behaviour with no observable test
+    /// signal.
+    ///
+    /// This table names the small set of APIs whose post-condition is knowable WITHOUT
+    /// the probe, and supplies the assertion to emit for them. Entries are per API
+    /// (declaring type + method), so an empty table reproduces the previous behaviour
+    /// exactly.
+    /// </summary>
+    private static readonly Dictionary<string, string> DiscriminatingExpectations = new(StringComparer.Ordinal)
+    {
+        // Assembly.GetCallingAssembly()/GetExecutingAssembly() must report the assembly
+        // whose code is running. A non-null check cannot distinguish that from the
+        // CoreLib fallback the runtime returns when no executing image is published, so
+        // the assertion pins both halves: it must match the running assembly AND must not
+        // be CoreLib. Either half failing turns the fact red.
+        ["System.Reflection.Assembly.GetCallingAssembly"] =
+            "__RESULT != null && __RESULT.GetName().Name != null && __RESULT.GetName().Name!.Length > 0 && __RESULT.GetName().Name != __CORELIB_ASSEMBLY.GetName().Name",
+        ["System.Reflection.Assembly.GetExecutingAssembly"] =
+            "__RESULT != null && __RESULT.GetName().Name != null && __RESULT.GetName().Name!.Length > 0 && __RESULT.GetName().Name != __CORELIB_ASSEMBLY.GetName().Name",
+    };
+
+
+
     private readonly CSharpSerializer _serializer;
     private readonly CSharpExpressionBuilder _expressionBuilder;
 
@@ -299,8 +330,18 @@ public sealed class TestEmitter
                     else
                     {
                         var resultVar = $"result_{mi}_{set.SetIndex}";
-                        var returnExpr = ValueGenerator.GetResultToLongExpression(method.ReturnTypeName, resultVar);
-                        sb.AppendLine($"            return {returnExpr};");
+                        // Discriminating APIs get a real assertion instead of the "is not null"
+                        // sentinel: the probe cannot supply an expected value for them, but their
+                        // post-condition is knowable outright.
+                        if (TryEmitDiscriminatingAssertion(sb, method, resultVar))
+                        {
+                            sb.AppendLine("            return 1L;");
+                        }
+                        else
+                        {
+                            var returnExpr = ValueGenerator.GetResultToLongExpression(method.ReturnTypeName, resultVar);
+                            sb.AppendLine($"            return {returnExpr};");
+                        }
                     }
                     sb.AppendLine("        }");
                 }
@@ -654,4 +695,34 @@ public sealed class TestEmitter
             sb.Insert(0, '_');
         return sb.ToString();
     }
+
+    /// <summary>
+    /// Emit a discriminating assertion for an API whose post-condition is knowable
+    /// without the probe, and report whether one was emitted.
+    ///
+    /// The expected value is expressed as a self-contained C# block over the result
+    /// variable, so it can reference the running assembly and the CoreLib name
+    /// without the generator needing to know this chunk's assembly identity.
+    /// </summary>
+    private static bool TryEmitDiscriminatingAssertion(StringBuilder sb, MethodSignature method, string resultVar)
+    {
+        var key = method.DeclaringTypeFullName + "." + method.Name;
+        if (!DiscriminatingExpectations.TryGetValue(key, out var predicate)) return false;
+
+        // The CoreLib name is read at run time rather than baked in, so the assertion
+        // does not depend on how the assembly was built.
+        // The CoreLib assembly is obtained through typeof(...), not
+        // Type.GetType("System.Object"): the latter has no native body in these chunks
+        // and routes through ChaosExternalRuntimeFallback to return 0, so dereferencing
+        // it threw inside the test body and masked the real outcome. typeof(...) is
+        // lowered to a constant handle and is already used elsewhere in this chunk.
+        sb.AppendLine("            var __corelib_assembly = typeof(int).Assembly;");
+        var body = predicate.Replace("__RESULT", resultVar).Replace("__CORELIB_ASSEMBLY", "__corelib_assembly");
+        // The predicate is a pure expression over the result variable (a statement block
+        // would not be a valid initializer).
+        sb.AppendLine("            var __assemblies_match = " + body + ";");
+        sb.AppendLine("            Assert.IsTrue(__assemblies_match, \"reported assembly is not the running assembly, or is the CoreLib fallback\");");
+        return true;
+    }
+
 }
