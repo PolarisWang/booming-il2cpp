@@ -79,11 +79,18 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // YieldAwaitable.YieldAwaiter.GetResult() — same void-slot hazard as
+            // the TaskAwaiter / ValueTaskAwaiter GetResult registrations below:
+            // the lowering always writes `const auto chaos_result = <call>()`,
+            // so a void return slot yields C3313/C3536.  The native helper is
+            // void; the generated TU sees only an injected declaration, so the
+            // slot type does not change the expression type — it only decides
+            // whether the generated wrapper compiles.
             registry.Register("System.Runtime.CompilerServices.YieldAwaitable+YieldAwaiter", "GetResult", [],
                 ShapeKind.SimpleForward, "chaos_async_yield_get_result",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot()),
-                CreateVoidAbiSlot(),
+                CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
             // ── Task.Delay / TaskAwaiter (non-generic Task await path) ──
@@ -166,11 +173,31 @@ public sealed partial class NativeAotLoweringPlanner
             // TaskAwaiter, whose GetResult returns void.  It must still
             // propagate a fault, so it routes to the void-returning helper
             // rather than sharing the value-returning one above.
+            // ── Non-generic TaskAwaiter.GetResult (void) ──
+            // `await someTask` (no result) lowers against the non-generic
+            // TaskAwaiter, whose GetResult returns void.  It must still
+            // propagate a fault, so it routes to the void-returning helper
+            // rather than sharing the value-returning one above.
+            //
+            // The return slot is CreateNativeIntAbiSlot() and NOT
+            // CreateVoidAbiSlot(): the lowering always emits
+            //   const auto chaos_result = <call>(...);
+            //   _sN = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+            // for every call, even when the managed method is void.  With a
+            // void slot the generated C++ declares `const auto chaos_result`
+            // over a void expression → C3313 ("variable cannot have the type
+            // 'const void'") + C3536.  The native helper genuinely returns
+            // void and the generated TU sees only an injected declaration, so
+            // the expression type is void regardless; the three-state
+            // fault/cancel propagation still happens inside the helper, and
+            // GetResult is only reached after the awaiter reports completion.
+            // This mirrors the ValueTaskAwaiter registration below, which hit
+            // the same wall in commit 7a89c72d7.
             registry.Register("System.Runtime.CompilerServices.TaskAwaiter", "GetResult", [],
                 ShapeKind.SimpleForward, "ChaosAsyncTaskAwaiterGetResultVoid",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot()),
-                CreateVoidAbiSlot(),
+                CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
             // ── Task<T> / TaskAwaiter<T> / ValueTaskAwaiter<T> 等 ——
@@ -188,11 +215,13 @@ public sealed partial class NativeAotLoweringPlanner
                 ("System.Threading.Tasks.ValueTask`1", "GetAwaiter", "chaos_value_task_get_awaiter", false),
                 // ValueTaskAwaiter<T>::GetResult() -> T
                 ("System.Runtime.CompilerServices.ValueTaskAwaiter`1", "GetResult", "ChaosAsyncTaskAwaiterGetResultValue", false),
-                // ValueTaskAwaiter (non-generic) ::GetResult() -> returns INTPTR (0).
-                // The void version produces C2440 because the generated wrapper
-                // assigns the call result to a slot variable even when GetResult
-                // is void.  Return 0 instead — fault propagation is handled by
-                // the GetResultVoid native helper already.
+                // ValueTaskAwaiter (non-generic) ::GetResult().  Returns
+                // CHAOS_IL2CPP_INTPTR, not void: the lowering wraps every call
+                // as `const auto chaos_result = ...` + a cast to INTPTR, so a
+                // void-typed call cannot compile (C2440, and C3313/C3536 in the
+                // `const auto` form).  Fault propagation lives entirely inside
+                // the native helper, so discarding its (void) return here loses
+                // nothing.
                 ("System.Runtime.CompilerServices.ValueTaskAwaiter", "GetResult", "ChaosAsyncTaskAwaiterGetResultVoid", false),
             })
             {

@@ -26,6 +26,12 @@
 // block.
 #include "threading_stubs.h"
 
+// cancellation_token_stubs.h pulls <chaos/native_types.h>, which transitively
+// includes <chaos/config.h> and every C++ std header (<thread>, <mutex>, ...).
+// It MUST therefore also be included OUTSIDE extern "C" — same C2039 hazard on
+// the global ::terminate as threading_stubs.h above.
+#include "cancellation_token_stubs.h"
+
 extern "C" {
 
 #include "array_stubs.h"
