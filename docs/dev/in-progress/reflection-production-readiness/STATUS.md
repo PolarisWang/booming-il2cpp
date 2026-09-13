@@ -129,6 +129,39 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 4. 🟡 修复 ATG 参数生成（为反射类型产出有效输入）以解锁 425 个 `[UNVERIFIED]`。
 5. 🟡 将语义断言接入 Chaos AOT 路径。
 
+### 🎯 重大进展：注册/签名契约修复（2026-09-13 续，`ffa17f3c4`）
+
+**发现两个「注册 arity 与 native 签名不匹配」的缺陷**，导致生成的 C++ 无法编译
+（C2660）——这些方法**从未真正执行过**：
+
+| 入口 | 注册 slot | native 参数 |
+|---|---|---|
+| `CustomAttributeExtensions.GetCustomAttributes` | 1 | 2 |
+| `IsDefined(MemberInfo\|Module\|ParameterInfo, Type)` | 2 | 3 |
+
+修复：native 侧新增与注册 arity 一致的入口（内部转发到既有多参实现），
+codegen 注册重指向；并给 `ValueGenerator` 的参数路径补上反射类型真实实例表。
+
+**效果（本阶段最大单次提升）**：
+
+| 指标 | 修前 | 修后 |
+|---|---|---|
+| `[UNVERIFIED]` | 316 | **52** |
+| `real` verified | 60 | **198** |
+| subjects | 437 | **495** |
+| build | 通过 | 通过 |
+
+失败 16 → 33：新增项多为**首次真正执行**才暴露的真实差异（此前被签名不匹配挡在桩外）。
+
+**33 项失败分类**：
+- **A1（14 项）**：测试传 `default(T)`（null）却期望非 null 结果。BCL 对 null target
+  抛 `ArgumentNullException`，我的实现返回 0 —— **非实现缺陷**，是测试输入问题。
+- **其它（19 项）**：确为**真实实现缺口**，BCL 返回非 null 而我返回 null。已核实的代表：
+  - `ParameterInfo.GetModifiedParameterType` —— BCL 返回非 null
+  - `Module.GetTypes` —— BCL 返回 2594 项
+  - `MemberInfo.HasSameMetadataDefinitionAs(self)` —— BCL 返回 True
+  这些此前走桩（返回 0 被当 smoke 通过），现在真正执行才显形。
+
 ### 🎯 阻断解除 + UNVERIFIED 甄别（2026-09-13）
 
 **阻断解除**（`c16ade90a`）：反射 chunk build 恢复通过（470→437 subjects → entry.exe）。
