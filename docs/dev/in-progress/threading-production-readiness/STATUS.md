@@ -119,6 +119,64 @@ Phase 0 拆 4 个 T0.x + 检查点。
 **处置**：Phase 0 新增 **T0.1 清除源树陈旧 fact.json**；验收读取根**钉死为产物根**，
 并加 mtime/runId 一致性断言。详见 `design-v1-01.md` §7.1。
 
+## 🟡 T0.3 取证结论（2026-09-13）—— 假说**成立**，且比预想更系统
+
+**`BuildMethodSourceSafe` 确实吞掉一切异常并静默降级为空 stub。**
+
+| 项 | 事实 | 证据 |
+|---|---|---|
+| 捕获类型 | `catch (Exception)`，**无过滤器** | `NativeAotLoweringPlanner.Methods.ModuleData.Helpers.cs:551-575` |
+| 捕获后行为 | 吞掉 + 记 stderr + 计数 + **降级为空 stub + 不重抛** | 同上；降级走 `BuildAotUnreachableMethodStub`（:492-524） |
+| 调用点 | **所有 AOT-reachable 方法**，无命名空间豁免 | `Helpers.cs:599`（唯一调用点），经 `Methods.cs:1108,1115` 单/并行两条路径 |
+| 降级产物 | 语法完整、**可编译可链接**的 `extern "C"` 空函数（非 void 返 `{}`） | `Helpers.cs:492-524` |
+| 内层还有一层吞 | `NotSupportedException`/`InvalidOperationException` 也被吞 | `ExceptionEmission.EmitInstruction.cs:58-67` |
+
+### 🔴 关键：信号被写出，但**没有任何消费者**
+
+存在三条痕迹，但**均无门禁读取**：
+
+1. stderr：`[codegen] WARNING: codegen failed for {SubjectId}, emitting stub.`
+2. 汇总日志：`[CODGEN-FAIL] total={CodegenFailureCount} ... by exception type / by chunk`
+3. 生成 C++ 符号：`extern "C" const int kCodegenFailureCount = N;`（仅 `>0` 时 emit）
+
+**全仓 grep `kCodegenFailureCount` 的消费者**：`src/native/`（0）、`src/tools/`（TPG，0）、
+`tests/e2e/verification/**/*.py`（0）。现存反假绿门禁 `fake_green_gate.py:32-51`
+只检查 `kUnsupportedAsyncIteratorCount` / `ChaosExternalRuntimeFallback(` / 「全部是 stub」——
+**不覆盖 `kCodegenFailureCount`**。
+
+⇒ **`kCodegenFailureCount > 0` 不会让 `build.status` 变红。**
+
+### 项目自己已经知道这件事
+
+代码注释里写了两次：
+
+- `NativeAotLoweringPlanner.ModuleRegistration.Dispatch.cs:228-231`：
+  > Emission runs behind `BuildMethodSourceSafe`, which catches EVERY exception and
+  > substitutes an unreachable stub. A throw from the emission site is swallowed and
+  > the build stays green. The non-throwing channel is the only one that actually reaches
+  > the outside world.
+- `Methods.cs:412-418` 几乎同文
+- `AsyncBoxPointerDetectorRegressionTests.cs:1-35`：该类**曾实吞 4 次** `CodegenFailureCount` 且构建保持绿（实测先例）
+
+### 对本计划的影响（🔴 阻断级）
+
+**T0.0 拿到 `build.status=passed` 不构成「threading 翻译正确」的证据。**
+若 codegen 降级了部分方法，Phase 0 的验收会**再次**是假绿 —— 与 T0.1 修的
+`reporting.py` 假绿向量是**两条独立的假绿通路**。
+
+**处置（写入 Phase 0）**：
+- T0.2 重建后**必须同时读** `[CODGEN-FAIL] total=` 汇总行与 `kCodegenFailureCount` 符号
+- 若 `total > 0` ⇒ Phase 0 **未完成**，先定位被降级的方法再谈验收
+- Phase 4（制度化）的 T4.1 门禁**必须**把 `kCodegenFailureCount` 纳入阈值
+
+### 未查清（诚实标注，未实测）
+
+- **未实测** threading 域是否真的触发了降级（本任务只读，未构造 threading 输入）
+- **未验证** `build.status=passed` 与 `kCodegenFailureCount` 之间是否存在**间接**关联
+  （确认了无直接消费者，未逐行读完整个 build stage）
+- `CodegenFailureCount++`（`Helpers.cs:561`）在 `Parallel.For` 路径下**非原子**
+  （无 `Interlocked`），若并发丢计数则数值可能低估 —— 未实测严重程度
+
 ## 下一步入口
 
 见上方「下一步」—— `roadmap-v1-01.md` 已产出，启动 **T0.0**。

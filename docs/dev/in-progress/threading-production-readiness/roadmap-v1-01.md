@@ -131,7 +131,7 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | `T0.0` | 0 | ready | main | 实测 build 错误（**完整重建**，非读日志） | — | — | 主工作区跑，不切 worktree | 实测错误文本 + 错误类型判定 | 拿到真实编译错误，判定是否 crt_stubs | 只读，无写出 | 中 |
 | `T0.1` | 0 | planned | tbd | 清除源树陈旧假绿产物 | T0.0 | batch-1 | `rm -f` 显式列举，禁用 `git clean` | 三个 chunk 源树 `results/fact.json` 已删 | 源树下三路径均不存在 | `tests/e2e/translation/System.Private.CoreLib/chunks/threading*/results/` | 小 |
-| `T0.2` | 0 | planned | tbd | 重建三个 threading chunk | T0.1 | batch-1 | 重建后记录构建耗时（判定单/双 worktree） | 产物根 `fact.json` × 3 | `build.status=passed`；fact.json mtime > provenance.json | `artifacts/foundation-dll/`（不入仓库） | 大 |
+| `T0.2` | 0 | planned | tbd | 重建三个 threading chunk | T0.1 | batch-1 | 重建后记录构建耗时（判定单/双 worktree）；**必须读 `[CODGEN-FAIL] total=` 与 `kCodegenFailureCount`** | 产物根 `fact.json` × 3 + codegen 降级计数 | `build.status=passed` **且** `kCodegenFailureCount` 已查（>0 则未完成）；fact.json mtime > provenance.json | `artifacts/foundation-dll/`（不入仓库） | 大 |
 | `T0.3` | 0 | planned | tbd | 取证 `BuildMethodSourceSafe` 是否吞 threading 异常 | T0.0 | batch-1 | 独立取证，不依赖 T0.2 结果 | 取证报告 | 明确结论：吞 / 不吞 | `src/managed/Chaos.IL2CPP.Generator/`（只读优先） | 中 |
 | `T0.4` | 0 | planned | tbd | 新建 threading native test workflow | T0.2 | batch-2 | 独立 workflow，不进 ci-framework；首跑 `continue-on-error` | `.github/workflows/threading-native-tests.yml` | CI 跑出 244 用例结果 | `.github/workflows/threading-native-tests.yml` | 中 |
 | `T1.1` | 1 | planned | tbd | `CancellationToken.throw_if_cancellation_requested` 真实抛出 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | revert 后测试失败 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
@@ -150,7 +150,7 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | `T3.3` | 3 | planned | tbd | 移除热路径 fprintf | T2.5 | batch-7 | — | `thread_pool.cpp` 等 | 热路径无 fprintf | 同上 | 小 |
 | `T3.4` | 3 | planned | tbd | 文档不符修正 | T2.5 | batch-8 | — | wiki / STATUS 文档 | 文档与实现一致 | `wiki/`、`docs/` | 小 |
 | `T3.5` | 3 | planned | tbd | benchmark 填充 | T2.5 | batch-8 | 4 个空模板 HTML | benchmark 数据 | timing > 0 | `tests/e2e/verification/reporting/` | 中 |
-| `T4.1` | 4 | planned | tbd | threading chunk 门禁阈值 + 回归告警 | T3.* | batch-9 | — | 阈值配置 + 告警接入 | 阈值生效；告警可触发 | `.github/workflows/`、验证管线配置 | 中 |
+| `T4.1` | 4 | planned | tbd | threading chunk 门禁阈值 + 回归告警 | T3.* | batch-9 | **必须把 `kCodegenFailureCount` 纳入阈值**（当前零消费者，见 STATUS T0.3 结论） | 阈值配置 + 告警接入 | 阈值生效；告警可触发；`kCodegenFailureCount>0` 能阻断 | `.github/workflows/`、验证管线配置 | 中 |
 
 **status 说明**：`T0.0` = `ready`（无前置依赖，可立即启动）；其余 `planned`。
 
@@ -183,6 +183,7 @@ T0.0 ──┬─→ T0.1 ─→ T0.2 ─→ T0.4 ─→ T1.1..T1.5 ─→ T2.0 
 | T0.0 实际是完整重建 | 无构建日志可读 | 耗时不符预期 | 按「完整重建」预估耗时 |
 | 重建后意外转绿 | 错误为暂态 | 根因推断落空 | 转绿**不等于**推断正确；必须回溯确认生效改动 |
 | **假绿向量（源树残留）** | 陈旧 `fact.json` 未清 | chunk 实际 `build.status=error` 却被判通过 | T0.1 清除 + 验收读取根钉死 + mtime/runId 断言 |
+| **🔴 假绿向量（codegen 静默降级）** | `BuildMethodSourceSafe` 吞异常降级为空 stub | `build.status=passed` 但方法体是空的 | **T0.3 已确证存在**（无过滤器 catch + 信号零消费者）；T0.2 必须读 `[CODGEN-FAIL]`/`kCodegenFailureCount`；T4.1 纳入门禁 |
 | 主工作区被并发 agent 抹除 | 已有 agent 改 `Part1.S16.cs`（threading 注册表本身） | 改动丢失、注册状态漂移 | T0.0 后**立即切 worktree**；commit 前 `git diff --cached` |
 | worktree 冷构建成本超预期 | 无共享 `artifacts/` | T0.2 起步耗时不可控 | T0.2 记录耗时；> 30 分钟退化单 worktree |
 | Phase 2 接线后 real% 不升 | 存在第二道断点 | 最大杠杆动作失效 | 专项取证；**三次规则**后转 dev-brainstorm |
