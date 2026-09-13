@@ -114,3 +114,74 @@ public long GetExecutingAssembly_3__0()
 | **P1** | 反向验证 | P-1 + P0 就绪后一次通过 |
 
 **未合入**：在归因修复前，判别式无法被证明有效；一个不可靠的红灯与假绿同样有害。
+
+---
+
+## 三层缺陷链（最终定位，2026-09-13）
+
+追查反向验证失败的过程中，暴露出**三层各自独立的验证缺陷**。任一层存在，
+"强断言"都无法可靠产生红灯：
+
+### 层 1：断言框架的失败标记是 ThreadStatic
+
+`src/reference/Chaos.TestFramework.Sdk/Assert.cs:12`
+
+```csharp
+[ThreadStatic] private static int s_exitCode;
+internal static void RecordFailure() => s_exitCode = 1;
+internal static int Complete() { int c = s_exitCode; s_exitCode = 0; return c; }
+```
+
+`Assert.Fail`（:250）设 `s_exitCode = 1` 后抛 `AssertionException`。
+若失败发生在与 `Complete()` **不同的线程**，`Complete()` 读到的是那个线程的 0。
+
+### 层 2：runner 的归因表达式把 caught 与 assertFailed 耦合
+
+`TestProject.RuntimeEntry.cpp.scriban:427-431`
+
+```cpp
+bool assertFailed = !caught && (Assert_Complete() != 0);
+bool passed = !caught && !assertFailed;
+```
+
+`assertFailed` 要求 `!caught`。当断言抛出的异常在 dispatcher 内被吞掉、
+`caught` 保持 false 时，判定**完全依赖** `Assert_Complete()` —— 即层 1 的
+ThreadStatic 读值。
+
+### 层 3：JIT 模式直接不检测断言失败
+
+同文件 `#else` 分支：
+
+```cpp
+#else
+        bool assertFailed = false;      // JIT 模式恒 false
+#endif
+```
+
+**JIT 路径下断言失败永远不会被上报。**
+
+### 实测印证
+
+接线关闭的产物中该 subject 为 `passed=true, value=0`：
+- `value=0` 证明断言失败、未走到 `return 1L`
+- `passed=true` 与 `passed = !caught && !assertFailed` 矛盾，
+  除非 `caught=false` 且 `Complete()=0` —— 正是层 1 + 层 2 的组合。
+- `stderr` 无 `[ASSERT FAIL]`，与"异常被吞"一致。
+
+## 影响面（超出本任务）
+
+这不只影响反射线：**任何 subject 的断言失败都可能被报成 passed**。
+`fact_chunk.py` 已经把 `assertFailed` 当作"genuine verification failure"的判据
+（见其注释），但该判据的上游本身就不可靠。
+
+## 结论与建议
+
+本任务（让验证能观测 AOT 语义）**被这三层阻断**。正确顺序：
+
+| 阶段 | 内容 | 状态 |
+|---|---|---|
+| **P-1** | 修三层归因缺陷（ThreadStatic → 进程级；解耦 caught/assertFailed；补 JIT 分支） | **未开始** |
+| **P0** | 判别性期望表 | ✅ **机制已完成**（本分支） |
+| **P1** | 反向验证 | 待 P-1 |
+
+**未合入 main**：判别式在归因修好前无法被证明有效。WIP 保留在本分支。
