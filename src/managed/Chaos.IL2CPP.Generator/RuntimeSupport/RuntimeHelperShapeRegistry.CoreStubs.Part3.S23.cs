@@ -610,23 +610,70 @@ public sealed partial class NativeAotLoweringPlanner
 
                             registry.Register("System.UInt32", "Parse",
                                 new string[] { "System.String", "System.Globalization.NumberStyles" },
-                                ShapeKind.SimpleForward, "ChaosParseUInt32",
+                                ShapeKind.SimpleForward, "ChaosParseUInt32Styles",
                                 new List<AotCoreIrAbiSlotArtifact> { stringSlot, int32Slot },
                                 uint32ReturnSlot,
                                 new HashSet<int> { 0 });
 
                             registry.Register("System.UInt32", "Parse",
                                 new string[] { "System.String", "System.IFormatProvider" },
-                                ShapeKind.SimpleForward, "ChaosParseUInt32",
+                                ShapeKind.SimpleForward, "ChaosParseUInt32Provider",
                                 new List<AotCoreIrAbiSlotArtifact> { stringSlot, nativeIntSlot },
                                 uint32ReturnSlot,
                                 new HashSet<int> { 0 });
 
                             registry.Register("System.UInt32", "Parse",
                                 new string[] { "System.String", "System.Globalization.NumberStyles", "System.IFormatProvider" },
-                                ShapeKind.SimpleForward, "ChaosParseUInt32",
+                                ShapeKind.SimpleForward, "ChaosParseUInt32StylesProvider",
                                 new List<AotCoreIrAbiSlotArtifact> { stringSlot, int32Slot, nativeIntSlot },
                                 uint32ReturnSlot,
+                                new HashSet<int> { 0 });
+                        }
+
+                        // ── System.UInt64::Parse — all 4 documented overloads ─────────────
+                        // The UInt64 sibling of the UInt32 block above.  Without these
+                        // registrations codegen emitted calls to
+                        // chaos_external_runtime_System_Private_CoreLib_System_UInt64__Parse_*
+                        // that nothing ever declared → C3861 in the page-split TUs.
+                        // The return slot is Int64-carried (UInt64 shares the 64-bit
+                        // carrier); the extra parameters are accepted and discarded.
+                        {
+                            var uint64ReturnSlot = new AotCoreIrAbiSlotArtifact
+                            {
+                                CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                                TypeShape = AotCoreIrTypeShapeKind.ValueType,
+                            };
+                            var u64StringSlot = CreateNativeIntAbiSlot(
+                                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+                            var u64Int32Slot = CreateInt32AbiSlot();
+                            var u64NativeIntSlot = CreateNativeIntAbiSlot(
+                                "System.Object", AotCoreIrTypeShapeKind.ReferenceType);
+
+                            registry.Register("System.UInt64", "Parse", new string[] { "System.String" },
+                                ShapeKind.SimpleForward, "ChaosParseUInt64",
+                                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(u64StringSlot),
+                                uint64ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.UInt64", "Parse",
+                                new string[] { "System.String", "System.Globalization.NumberStyles" },
+                                ShapeKind.SimpleForward, "ChaosParseUInt64Styles",
+                                new List<AotCoreIrAbiSlotArtifact> { u64StringSlot, u64Int32Slot },
+                                uint64ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.UInt64", "Parse",
+                                new string[] { "System.String", "System.IFormatProvider" },
+                                ShapeKind.SimpleForward, "ChaosParseUInt64Provider",
+                                new List<AotCoreIrAbiSlotArtifact> { u64StringSlot, u64NativeIntSlot },
+                                uint64ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.UInt64", "Parse",
+                                new string[] { "System.String", "System.Globalization.NumberStyles", "System.IFormatProvider" },
+                                ShapeKind.SimpleForward, "ChaosParseUInt64StylesProvider",
+                                new List<AotCoreIrAbiSlotArtifact> { u64StringSlot, u64Int32Slot, u64NativeIntSlot },
+                                uint64ReturnSlot,
                                 new HashSet<int> { 0 });
                         }
 

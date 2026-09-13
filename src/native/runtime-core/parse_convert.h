@@ -31,11 +31,26 @@ CHAOS_IL2CPP_INT32  ChaosParseInt32(CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INT64  ChaosParseInt64(CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) noexcept;
 
-// ── UInt32::Parse ────────────────────────────────────────────────────
-// The unsigned sibling of ChaosParseInt32.  Separate entry point (rather than
-// reusing ChaosParseInt32) so the carrier stays an unsigned 32-bit value and
-// values above Int32::MaxValue do not wrap to negative.
+// ── UInt32::Parse / UInt64::Parse ────────────────────────────────────
+// The unsigned siblings of ChaosParseInt32/Int64.  Separate entry points
+// (rather than reusing the signed ones) so the carrier stays unsigned and
+// values above the signed max do not wrap to negative.
+//
+// Each managed overload gets its OWN symbol: the SimpleForward shape emitter
+// forwards every argument of the managed call (ChaosParseUInt64(args...)), so a
+// multi-arg overload pointed at a 1-arg native produces a C3861 in the
+// page-split TUs.  The extra parameters are accepted and discarded.
 CHAOS_IL2CPP_UINT32 ChaosParseUInt32(CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_UINT32 ChaosParseUInt32Styles(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept;
+CHAOS_IL2CPP_UINT32 ChaosParseUInt32Provider(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_UINT32 ChaosParseUInt32StylesProvider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+
+CHAOS_IL2CPP_UINT64 ChaosParseUInt64(CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_UINT64 ChaosParseUInt64Styles(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept;
+CHAOS_IL2CPP_UINT64 ChaosParseUInt64Provider(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_UINT64 ChaosParseUInt64StylesProvider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
 
 // ── Decimal arithmetic (DecimalCarrier* via intptr) ────────────
 CHAOS_IL2CPP_INT32 ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;

@@ -28,6 +28,23 @@ double                 ChaosParseDouble(CHAOS_IL2CPP_INTPTR str) noexcept;
 CHAOS_IL2CPP_INT32     ChaosParseInt32(CHAOS_IL2CPP_INTPTR str) noexcept;
 CHAOS_IL2CPP_INT64     ChaosParseInt64(CHAOS_IL2CPP_INTPTR str) noexcept;
 
+// ── UInt32::Parse / UInt64::Parse (all overloads) ───────────────────
+// Each managed overload has its own symbol because the SimpleForward shape
+// emitter forwards every argument of the managed call
+// (ChaosParseUInt32X(args...)); the extra NumberStyles / IFormatProvider
+// parameters are accepted and discarded by the native side.  Declaring them
+// here is what makes the page-split TUs able to call them at all.
+CHAOS_IL2CPP_UINT32    ChaosParseUInt32(CHAOS_IL2CPP_INTPTR str) noexcept;
+CHAOS_IL2CPP_UINT32    ChaosParseUInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles) noexcept;
+CHAOS_IL2CPP_UINT32    ChaosParseUInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_UINT32    ChaosParseUInt32StylesProvider(
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_UINT64    ChaosParseUInt64(CHAOS_IL2CPP_INTPTR str) noexcept;
+CHAOS_IL2CPP_UINT64    ChaosParseUInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles) noexcept;
+CHAOS_IL2CPP_UINT64    ChaosParseUInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_UINT64    ChaosParseUInt64StylesProvider(
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+
 // ── Format primitive to string ─────────────────────────────────────
 // Returns a newly allocated managed string (or 0 on OOM).
 CHAOS_IL2CPP_INTPTR    ChaosFormatDouble(double value) noexcept;

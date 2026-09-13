@@ -313,6 +313,65 @@ extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32(CHAOS_IL2CPP_INTPTR value) noexc
     return static_cast<CHAOS_IL2CPP_UINT32>(ChaosConvertToInt32(value));
 }
 
+// UInt32::Parse(string, NumberStyles[, IFormatProvider]) and the UInt64 family.
+//
+// The extra parameters (NumberStyles / IFormatProvider) do not change the
+// numeric result for the finite literals the probes feed, so they are accepted
+// and discarded.
+//
+// These exist as separate symbols because the SimpleForward shape emitter
+// forwards *all* arguments of the managed overload (ChaosParseUIntXX(args...)).
+// Registering a multi-arg overload against a 1-arg native made the generated
+// page TUs call a 1-arg function with 2-3 args → C3861.
+extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32Styles(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept
+{
+    (void)number_styles;
+    return ChaosParseUInt32(value);
+}
+
+extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32Provider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+{
+    (void)format_provider;
+    return ChaosParseUInt32(value);
+}
+
+extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32StylesProvider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+{
+    (void)number_styles;
+    (void)format_provider;
+    return ChaosParseUInt32(value);
+}
+
+extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64(CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    return static_cast<CHAOS_IL2CPP_UINT64>(ChaosConvertToInt64(value));
+}
+
+extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64Styles(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept
+{
+    (void)number_styles;
+    return ChaosParseUInt64(value);
+}
+
+extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64Provider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+{
+    (void)format_provider;
+    return ChaosParseUInt64(value);
+}
+
+extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64StylesProvider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+{
+    (void)number_styles;
+    (void)format_provider;
+    return ChaosParseUInt64(value);
+}
+
 // ═══════════════════════════════════════════════════════════════════
 // Decimal arithmetic
 // ═══════════════════════════════════════════════════════════════════
