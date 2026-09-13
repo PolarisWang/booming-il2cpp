@@ -485,8 +485,18 @@ public sealed partial class NativeAotLoweringPlanner
         if (_wrapInTryCatch)
         {
             builder.AppendLine("} catch (const chaos_managed_exception&) {");
-            if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
-                builder.AppendLine("    return {};");
+            // C# semantics: an uncaught managed exception propagates out of the method.
+            // This catch previously swallowed it and returned a default value, which
+            // made every assertion failure invisible to the runner (converted into
+            // "returned 0" -> passed=true). Managed exceptions must keep propagating;
+            // the runner's __except handler turns them into caught=true ->
+            // passed=false, which is what a failed assertion should look like.
+            // The wrapper still serves its Phase-4 purpose for NON-managed C++
+            // exceptions (unregistered external-runtime symbols): those are of a
+            // different type and keep hitting the __except handler too, marking the
+            // subject failed — also correct, since a call into a missing implementation
+            // is not a passing subject.
+            builder.AppendLine("    throw;  // RethrowManagedExceptions: C# semantics — propagate");
             builder.AppendLine("}");
         }
         builder.AppendLine("}");
