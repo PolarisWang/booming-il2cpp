@@ -1156,7 +1156,10 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
         ["System.Int32"] = "\"1234567\"",
         ["System.UInt32"] = "\"3456789012\"",
         ["System.Int64"] = "\"1234567890123\"",
-        ["System.UInt64"] = "\"12345678901234567890\"",
+        // UInt64: the literal MUST fit in System.UInt64 (max 18446744073709551615).
+        // A longer value makes UInt64.Parse throw OverflowException in BOTH the managed
+        // probe and AOT, producing a test that can never pass.
+        ["System.UInt64"] = "\"1234567890123456789\"",
         // Int128/UInt128: the literal must stay within C#'s integer-literal range,
         // otherwise the generated Assert.AreEqual emits a constant the compiler
         // rejects with CS1021 (Integral constant is too large).

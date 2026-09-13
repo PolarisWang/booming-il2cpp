@@ -303,6 +303,14 @@ public sealed partial class NativeAotLoweringPlanner
                         RegisterConvertNumericInline(registry, "ToSingle", "CHAOS_IL2CPP_FLOAT32");
                         RegisterConvertNumericInline(registry, "ToDouble", "CHAOS_IL2CPP_FLOAT64");
 
+                        // ── Convert.ToDecimal numeric/bool overloads — inline direct-native calls ──
+                        // Only ToDecimal(Double) / ToDecimal(String) had SimpleForward registrations;
+                        // every integral overload (byte/sbyte/short/ushort/int/uint/long/ulong/char)
+                        // and ToDecimal(bool) had no shape and fell through to the codegen catch-all
+                        // (ChaosExternalRuntimeFallback → 0 = null DecimalCarrier*), so the caller's
+                        // decimal silently read as 0.  See RegisterConvertToDecimalInline.
+                        RegisterConvertToDecimalInline(registry);
+
                         // ── Convert.ToXxx(System.String) — inline direct-native calls ──────────
                         // The ATG-probed semantics for Convert.ToInt32(default(string)) etc. are
                         // "null → 0 / invalid → FormatException", matching ChaosConvertToInt32
