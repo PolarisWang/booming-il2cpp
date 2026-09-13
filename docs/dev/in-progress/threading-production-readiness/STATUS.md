@@ -18,25 +18,31 @@ child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
 dispatch_model: sequential
-recommended_next_child: T0.0
-latest_stop_point: roadmap 已产出，等待启动 T0.0
+recommended_next_child: T0.0b
+latest_stop_point: T0.0 实测完成（根因非 crt_stubs），Phase 0 形状已修正，待切 worktree 后启动 T0.0b
 ```
 
 ## 最近摘要
 
 对抗性审查（3 阻断级 + 6 需修正 + 12 确认无误）**已全部闭环**，
-`roadmap-v1-01.md` 已产出：**22 个子任务 / 5 个阶段 / `dispatch_model: sequential`**。
+`roadmap-v1-01.md` 已产出：**24 个子任务 / 5 个阶段 / `dispatch_model: sequential`**。
 
 用户拍板：**Phase 2 保留在 roadmap 内**（不拆出独立任务）；
 Phase 0 拆 4 个 T0.x + 检查点。
 
-**发现的最严重问题**：源树陈旧 `fact.json` 构成**活着的假绿向量**
-（`reporting.py:57` 读源树而非产物根），已转为 **T0.1** 并钉死验收读取根。
+**T0.0 实测（2026-09-13）**：`0/1 passed`，550s。错误**非 crt_stubs**，而是
+**C3861 声明缺口**（`chaos_cancellation_token_*` 定义与注册都在，仅缺 header 声明）
++ **C3313/C3536**（`chaos_result` 为 `const void`，独立第二缺陷）。
+⇒ Phase 0 新增 **T0.0b / T0.0c**，且 worktree 需**立即**切出（T0.0 已证明必须先改代码）。
+
+**T0.3 取证**：`BuildMethodSourceSafe` 确证吞异常降级为空 stub，
+`kCodegenFailureCount` 信号**全仓零消费者** ⇒ 第三条假绿通路。
+
+**假绿向量（源树残留）**：`reporting.py:57` 读源树而非产物根，已转为 **T0.1**。
 
 ## 下一步
 
-**启动 `T0.0`** —— 主工作区执行，完整重建，拿实测编译错误。
-完成后**立即切 worktree**（`EnterWorktree(name=threading-phase0)`），再进 T0.1。
+**立即切 worktree**（`EnterWorktree(name=threading-phase0)`），随后启动 **T0.0b**。
 
 ## 问题来源
 
@@ -176,6 +182,56 @@ Phase 0 拆 4 个 T0.x + 检查点。
   （确认了无直接消费者，未逐行读完整个 build stage）
 - `CodegenFailureCount++`（`Helpers.cs:561`）在 `Parallel.For` 路径下**非原子**
   （无 `Interlocked`），若并发丢计数则数值可能低估 —— 未实测严重程度
+
+## 🔴 T0.0 实测结论（2026-09-13）—— 报告推断作废，根因是声明缺口
+
+**跑法**：主工作区 `chunk_pipeline --chunk threading --stages build --native-config check`。
+**结果**：`0/1 passed`，Duration **550s**。
+
+### 实测错误（非 crt_stubs）
+
+```
+native-aot.generated.cpp(9127,5)  error C3861: 'chaos_cancellation_token_source_cancel': identifier not found
+native-aot.generated.cpp(9132,5)  error C3861: 'chaos_cancellation_token_source_dispose': identifier not found
+native-aot.generated.cpp(9142,5)  error C3861: 'chaos_cancellation_token_throw_if_cancellation_requested': identifier not found
+page2.cpp(3561,27)                error C3313: 'chaos_result': variable cannot have the type 'const void'
+page2.cpp(3562,42)                error C3536: 'chaos_result': cannot be used before it is initialized
+page2.cpp(3677,3) / 3908,3 / 3968,3 / 4420,3 / 4535,3 / 4798,3  error C3861: (同上三符号，重复命中)
+```
+
+**⇒ 设计 §0 的「陈旧 crt_stubs」推断作废。** 实证错误是 **C3861 声明缺口 + 2 个 C3313/C3536 类型错误**。
+
+### 根因（已定位到行）
+
+| 环节 | 状态 | 证据 |
+|---|---|---|
+| native **定义** | ✅ 存在 | `src/native/runtime-core/cancellation_token.cpp:255,289,297`（均为 `extern "C"`） |
+| ShapeRegistry **注册** | ✅ 存在 | `RuntimeHelperShapeRegistry.CoreStubs.Part1.S16.cs:1697,1731,1739`（`ShapeKind.SimpleForward`） |
+| **header 声明** | ❌ **不存在** | `grep -rln "chaos_cancellation_token" src/native/ --include=*.h` → **零命中** |
+
+`cancellation_token.h` 存在但只声明**内部 C++ 句柄 API**（`uint32_t CancellationTokenSourceCancel(uint32_t)`），
+**不是** codegen 用的 `chaos_*` ABI 名。
+
+**对照先例**：`chaos_monitor_enter` 能编译，是因为它声明在
+`src/native/runtime-core/runtime_stubs/threading_stubs.h`。
+`runtime_stubs/` 下**没有**任何 cancellation 相关的头 ⇒ 三个符号全部悬空。
+
+⇒ **同族于记忆 `c3861-codegen-handoff`**：定义与注册都在，唯独缺 codegen 可见的声明。
+
+### 对 Phase 0 形状的影响（🔴 阻断级）
+
+1. **报告推断作废**，Phase 0 不再是「重建陈旧产物」那么简单 —— 需要**补声明**（代码改动）
+2. **T0.2「清残留 → 重建」的顺序要改**：光重建不会让 chunk 转绿，必须**先补 header 声明**
+3. **C3313/C3536（`chaos_result` 是 `const void`）是独立第二缺陷** —— 与 cancellation 无关，
+   需单独定位（很可能是某个返回 `void` 的 SimpleForward 被赋给了变量）
+4. **worktree 切出点前移**：原设计「T0.0 只读取证、不产生改动」**不再成立** ——
+   T0.0 已证明必须先改代码。切 worktree 应**立即**进行，不等 T0.2
+
+### 与 T0.3 的关系（重要）
+
+T0.3 确证的假绿机制**没有**在这里生效 —— 若 `BuildMethodSourceSafe` 吞掉了这些方法，
+就不会有 C3861。说明这些调用点**在 stub 降级之外**，或者异常发生在更早的阶段。
+**两条假绿通路 + 这条真实失败并存**，Phase 0 需同时处理。
 
 ## 下一步入口
 

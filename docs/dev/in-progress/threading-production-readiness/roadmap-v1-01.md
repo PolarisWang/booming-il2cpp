@@ -129,8 +129,10 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 
 | task_id | phase | status | owner | purpose | depends_on | batch_id | requirements | deliverables | exit_criteria | conflict_scope | estimated_effort |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| `T0.0` | 0 | ready | main | 实测 build 错误（**完整重建**，非读日志） | — | — | 主工作区跑，不切 worktree | 实测错误文本 + 错误类型判定 | 拿到真实编译错误，判定是否 crt_stubs | 只读，无写出 | 中 |
-| `T0.1` | 0 | planned | tbd | 清除源树陈旧假绿产物 | T0.0 | batch-1 | `rm -f` 显式列举，禁用 `git clean` | 三个 chunk 源树 `results/fact.json` 已删 | 源树下三路径均不存在 | `tests/e2e/translation/System.Private.CoreLib/chunks/threading*/results/` | 小 |
+| `T0.0` | 0 | **completed** | main | 实测 build 错误（**完整重建**，非读日志） | — | — | 主工作区跑，不切 worktree | 实测错误文本 + 错误类型判定 | ✅ 已完成：**非 crt_stubs**；C3861 声明缺口 + C3313/C3536 | 只读，无写出 | 中 |
+| `T0.0b` | 0 | ready | tbd | 🔴 **补 `chaos_cancellation_token_*` 的 codegen 可见声明** | T0.0 | batch-0 | 定义/注册都在（`cancellation_token.cpp:255,289,297` / `S16.cs:1697,1731,1739`），**仅缺 header 声明**；参照 `runtime_stubs/threading_stubs.h` 既有模式 | `runtime_stubs/` 下新增声明头 | C3861 三个符号消失 | `src/native/runtime-core/runtime_stubs/` | 中 |
+| `T0.0c` | 0 | ready | tbd | 🔴 定位 `chaos_result` 为 `const void`（C3313/C3536） | T0.0 | batch-0 | 与 cancellation **无关的第二缺陷**；疑似返回 void 的 SimpleForward 被赋给变量 | 根因定位 + 修复 | C3313/C3536 消失 | `src/managed/Chaos.IL2CPP.Generator/` | 中 |
+| `T0.1` | 0 | planned | tbd | 清除源树陈旧假绿产物 | T0.0b | batch-1 | `rm -f` 显式列举，禁用 `git clean` | 三个 chunk 源树 `results/fact.json` 已删 | 源树下三路径均不存在 | `tests/e2e/translation/System.Private.CoreLib/chunks/threading*/results/` | 小 |
 | `T0.2` | 0 | planned | tbd | 重建三个 threading chunk | T0.1 | batch-1 | 重建后记录构建耗时（判定单/双 worktree）；**必须读 `[CODGEN-FAIL] total=` 与 `kCodegenFailureCount`** | 产物根 `fact.json` × 3 + codegen 降级计数 | `build.status=passed` **且** `kCodegenFailureCount` 已查（>0 则未完成）；fact.json mtime > provenance.json | `artifacts/foundation-dll/`（不入仓库） | 大 |
 | `T0.3` | 0 | planned | tbd | 取证 `BuildMethodSourceSafe` 是否吞 threading 异常 | T0.0 | batch-1 | 独立取证，不依赖 T0.2 结果 | 取证报告 | 明确结论：吞 / 不吞 | `src/managed/Chaos.IL2CPP.Generator/`（只读优先） | 中 |
 | `T0.4` | 0 | planned | tbd | 新建 threading native test workflow | T0.2 | batch-2 | 独立 workflow，不进 ci-framework；首跑 `continue-on-error` | `.github/workflows/threading-native-tests.yml` | CI 跑出 244 用例结果 | `.github/workflows/threading-native-tests.yml` | 中 |
