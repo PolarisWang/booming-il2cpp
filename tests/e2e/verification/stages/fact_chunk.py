@@ -235,26 +235,25 @@ def _stub_gap_method_ids(ctx: ChunkContext) -> frozenset[str]:
 
     P0-B (json-xml-production-readiness): TestEmitter now emits ``// AOT-STUB-GAP``
     immediately before every ``[UNVERIFIED]`` external-assembly stub comment.
-    That lets the fact layer distinguish:
+    This function scans CombinedSubjects.cs for the marker and records the
+    **methodSubjectId** of the owning method from the proximity context.
 
-      * ``smoke``   — the method HAS an AOT body but produced no assertion value
-                      (a genuine coverage gap in the *test*).
-      * ``stubGap`` — ATG positively knows the method has no AOT body, so the
-                      call was never executed (a coverage gap in the
-                      *implementation*, and an infrastructure fact, not a defect
-                      in the method under test).
+    The generated code is shaped like::
 
-    Without this distinction both collapse into ``smoke`` and the report cannot
-    tell "not implemented" apart from "not asserted" — the exact ambiguity that
-    made the JSON/XML real-verified numbers unreadable.
+        [Fact]
+        [HotUpdate]
+        public long SomeMethod_0()
+        {
+            // AOT-STUB-GAP
+            // [UNVERIFIED] AOT stub: ...
+            return 42L;
+        }
 
-    Markers are attributed to a method by proximity: the ``// AOT-STUB-GAP``
-    line appears in the same generated ``[Fact]`` body as the owning
-    generatedMethodId.  Because the marker is a whole-line comment emitted
-    directly above the ``[UNVERIFIED]`` line inside that body, we walk the file
-    tracking the most recent ``generatedMethodId`` assignment and bind it.
+    We walk backward from the marker line to find the nearest ``public long``
+    method signature, then reconstruct the canonical CombinedSubjects subject ID
+    from the class context and method name.
 
-    Returns a frozenset of generatedMethodId strings carrying the marker.
+    Returns a frozenset of methodSubjectId strings carrying the marker.
     """
     combined_cs = ctx.chunk_dir / "managed" / "combined" / "CombinedSubjects.cs"
     if not combined_cs.exists():
@@ -267,28 +266,39 @@ def _stub_gap_method_ids(ctx: ChunkContext) -> frozenset[str]:
     if "AOT-STUB-GAP" not in text:
         return frozenset()
 
-    # The generated file emits, per method, a body shaped roughly like:
-    #     public long <methodSuffix>()          // [Fact][HotUpdate]
-    #     {
-    #         ...
-    #         // AOT-STUB-GAP
-    #         // [UNVERIFIED] AOT stub: ...
-    #         return 42L;
-    #     }
-    # The method's generatedMethodId is recorded in the surrounding metadata
-    # block.  We bind a marker to the nearest *preceding* method identity token.
-    # Accept either an explicit `generatedMethodId` literal or the method-index
-    # local name, whichever the emitter produced in this file generation.
+    lines = text.split("\n")
     gap_ids: set[str] = set()
-    current_id: str | None = None
-    id_re = re.compile(r'generatedMethodId\s*=\s*"([^"]+)"')
-    for line in text.splitlines():
-        m = id_re.search(line)
-        if m:
-            current_id = m.group(1)
+
+    # Walk each marker line, backward-search to the containing method.
+    for i, line in enumerate(lines):
+        if "AOT-STUB-GAP" not in line:
             continue
-        if "AOT-STUB-GAP" in line and current_id is not None:
-            gap_ids.add(current_id)
+        # Scan backward from line i to find the method signature.
+        for j in range(i - 1, -1, -1):
+            m = re.search(r'public long (\w+)\(\)', lines[j])
+            if m:
+                method_name = m.group(1)
+                # Scan further back for the enclosing class and namespace.
+                # Take the FIRST (nearest) class hit, then the namespace.
+                ns_name = ""
+                class_name = ""
+                for k in range(j - 1, -1, -1):
+                    if not class_name:
+                        cm = re.search(r'\bclass\s+(\w+)', lines[k])
+                        if cm:
+                            class_name = cm.group(1)
+                            continue
+                    nm = re.search(r'\bnamespace\s+(\S+)', lines[k])
+                    if nm:
+                        ns_name = nm.group(1)
+                        break
+                subject_id = (
+                    "CombinedSubjects/"
+                    f"{ns_name}.{class_name}::{method_name}:System.Int64()"
+                )
+                gap_ids.add(subject_id)
+                break
+
     return frozenset(gap_ids)
 
 

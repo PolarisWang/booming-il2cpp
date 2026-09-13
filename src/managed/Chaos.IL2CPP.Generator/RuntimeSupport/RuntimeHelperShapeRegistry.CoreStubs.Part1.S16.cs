@@ -188,12 +188,15 @@ public sealed partial class NativeAotLoweringPlanner
                 ("System.Threading.Tasks.ValueTask`1", "GetAwaiter", "chaos_value_task_get_awaiter", false),
                 // ValueTaskAwaiter<T>::GetResult() -> T
                 ("System.Runtime.CompilerServices.ValueTaskAwaiter`1", "GetResult", "ChaosAsyncTaskAwaiterGetResultValue", false),
-                // ValueTaskAwaiter (non-generic) ::GetResult() -> returns INTPTR (0).
-                // The void version produces C2440 because the generated wrapper
-                // assigns the call result to a slot variable even when GetResult
-                // is void.  Return 0 instead — fault propagation is handled by
-                // the GetResultVoid native helper already.
-                ("System.Runtime.CompilerServices.ValueTaskAwaiter", "GetResult", "ChaosAsyncTaskAwaiterGetResultVoid", false),
+                // ValueTaskAwaiter (non-generic) ::GetResult() -> returns void.
+                // The void version produced C3313 (const void chaos_result = ...)
+                // because returnsVoid=false made the codegen path assign the
+                // call result to an eval-stack slot via `const auto chaos_result =`,
+                // but ChaosAsyncTaskAwaiterGetResultVoid returns void.
+                // Fix: mark returnsVoid=true so the void-aware emission path
+                // emits a bare call without result assignment. Fault propagation
+                // is handled by the GetResultVoid native helper already.
+                ("System.Runtime.CompilerServices.ValueTaskAwaiter", "GetResult", "ChaosAsyncTaskAwaiterGetResultVoid", true),
             })
             {
                 // Capture into locals: a closure over the foreach variable would
