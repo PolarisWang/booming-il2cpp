@@ -145,10 +145,22 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 | A3 未初始化实例/无效输入 | 66 | **可修** | 已修 string（-30），余见下 |
 | A4 其它 | 37 | 待分类 | — |
 
-**已修**（`762431682`）：`ValueGenerator` 对 `System.String` 用 `Create<string>()`
+**已修 2（`6638f8580`）**：`TypeDelegator` 用 `Create<T>()`（未初始化实例，内部 Type
+字段为 null）作主体 → 50 个成员全以 NRE 收场。实测其唯一构造函数接受一个 Type 且
+构造后完全可用（`new TypeDelegator(typeof(string)).GetMethods().Length == 165`），
+遂提供真实实例工厂。
+→ `[UNVERIFIED]` **366 → 316**，`real` verified **34 → 60**。
+
+**已修 1**（`762431682`）：`ValueGenerator` 对 `System.String` 用 `Create<string>()`
 （= `GetUninitializedObject`，**恒为 null**）而非有效串，导致 127 个
 ArgumentNullException 里的一批只走到 null 守卫。
 → `[UNVERIFIED]` **396 → 366**，`real` verified **32 → 34**。
+
+**经核查：`Binder`（23 项）不可修，正确归 not-supported**
+`Binder` 是 abstract，其唯一实现 `System.OleAutBinder` 为**内部类型**，测试代码无法
+构造。这 23 项抛的 `InvalidOperationException` 来自 `SubjectInstanceFactory` 自身的
+"无法构造"路径（`ProbeEmitter.cs:396`），不是被测方法的行为。判定为 `not-supported`
+是**正确**的，无需修复。
 
 **剩余可修项（已定位，未实施）**：
 - **FieldInfo.GetValue / PropertyInfo.GetValue 返回 0**：`abi_reflection.cpp:97`
