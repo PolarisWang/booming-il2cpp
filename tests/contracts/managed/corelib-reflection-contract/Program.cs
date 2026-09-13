@@ -41,6 +41,22 @@ public static class Program
         Check("Assembly.GetExecutingAssembly == this assembly",
             () => Assembly.GetExecutingAssembly().GetName().Name == typeof(Program).Assembly.GetName().Name);
 
+        // REF-RISK-7: a non-null check alone cannot tell the executing-image tracker
+        // from the old hard-coded CoreLib fallback (both are non-null). These assertions
+        // pin the identity: the assembly reported must be the one whose code is running,
+        // and it must not be CoreLib masquerading as the caller.
+        Check("REF-RISK-7: GetExecutingAssembly is this assembly, not the CoreLib fallback",
+            () =>
+            {
+                var reported = Assembly.GetExecutingAssembly().GetName().Name;
+                var actual = typeof(Program).Assembly.GetName().Name;
+                var coreLib = typeof(object).Assembly.GetName().Name;
+                return reported == actual && reported != coreLib;
+            });
+
+        Check("REF-RISK-7: GetCallingAssembly reports a real assembly from inside a helper",
+            () => CallerProbe.AssemblyOfCaller() == typeof(Program).Assembly.GetName().Name);
+
         Check("Assembly.GetTypes returns non-empty and contains SampleSubject",
             () => { var t = typeof(Program).Assembly.GetTypes(); return t.Length > 0 && t.Contains(sampleType); });
 
@@ -342,6 +358,15 @@ public static class Program
             foreach (var f in Failures) Console.WriteLine($"  - {f}");
         }
     }
+}
+
+// Called from the contract so GetCallingAssembly has a non-trivial caller to report.
+// Without the executing-image tracker the runtime returns CoreLib regardless of who
+// called, so comparing against the contract assembly distinguishes the two.
+static class CallerProbe
+{
+    public static string AssemblyOfCaller() =>
+        Assembly.GetCallingAssembly().GetName().Name ?? "";
 }
 
 // ── Fixture types ────────────────────────────────────────────────────────
