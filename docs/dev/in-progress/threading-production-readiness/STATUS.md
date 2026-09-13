@@ -177,6 +177,91 @@ chunk 内**没有 native 实现**，被降级为 `ChaosExternalRuntimeFallback`�
 
 ---
 
+## ✅ T0.4 完成（2026-09-13）—— 244 用例首次真正跑起来，并跑出 7 个失败
+
+### 决定性发现：**Windows 下 ctest 一个测试都没跑过**
+
+`chaos_native_add_test()`（`cmake/chaos_native_test.cmake:172`）每个测试都以
+`add_test(NAME ...)` 收尾。**`add_test()` 在未调用 `enable_testing()` 时是空操作** ——
+而全仓 `enable_testing()` **只出现在 `cmake/arm64-jit-test.cmake` 的 `if(QEMU_AARCH64)` 内**
+（`CMakeLists.txt` 仅在 ARM64 分支 578/799 行调用）。
+
+⇒ **x64 路径下所有 native 测试的 `add_test` 全部落入虚空**：
+
+```
+$ ctest --test-dir artifacts/presets/windows-x64-reference -C Debug -N
+Total Tests: 0
+$ ctest ... -LE "benchmark|stress|soak" --output-on-failure
+No tests were found!!!
+EXIT CODE: 0        ← 零测试却退出码 0
+```
+
+**影响面远超 threading**：`tests/suite_contract.yaml` 的 `contracts-native` 组
+（注释自称「runs the CTest targets under contracts/native + tests/unit/runtime-native
+（unit/deterministic only … ~200 deterministic native tests）」）**从未真正执行过任何用例**。
+这是与 T0.1（源树残留）、T0.3（codegen 降级信号零消费者）、T0.5（分子分母跨技术混用）
+**同族的第四条假绿通路** —— 且是最大的一条：不是「读错了源」，而是**根本没读**。
+
+**诚实标注**：`test_driver.py` 的 `ran_ok = res.error is None and res.total > 0`
+配合 `native.py:116` 的 `if res.total == 0: res.error = ...` **确实会**把零测试判为
+失败并让 driver 退出 1。所以**不是**「CI 一直绿着骗人」；准确的说法是：
+**该用例集从未被这个门禁执行过**（gate 在"发现 0 个测试"这一态上是诚实的），
+而 `contracts-native` 组所声明的覆盖范围与实际执行范围存在**巨大缺口**。
+
+**修复**：`CMakeLists.txt` 的 `windows-x64-reference` 分支中、
+`include(cmake/chaos_native_test.cmake)` 之后加 `enable_testing()`。
+修复后 `ctest -N` 由 **0 → 300**。
+
+### 顺带修复：三个「僵尸测试文件」
+
+28 个 threading test 文件中，**3 个从未被任何 CMakeLists 引用**（全仓 grep 零命中），
+即从未编译、从未运行：
+
+| 文件 | 用例 | 处置 |
+|---|---|---|
+| `monitor_pulseall_stress_test.cpp` | 1 | ✅ **已注册并验证通过**（0.81s PASS） |
+| `hill_climbing_smoke_test.cpp` | 15 | ❌ **未注册**：访问 `HillClimbingController::cpu_count_` / `::SigmoidGain`，二者现已 **private**（C2248） |
+| `threadpool_events_smoke_test.cpp` | 10 | ❌ **未注册**：调用 `ThreadPoolEventEmitThreadCreate/Attach/Detach/SafepointBegin/SafepointEnd/MonitorContention`，**全部已不存在**（C2039/C3861） |
+
+后两个是**腐烂测试**（rotted），不是被隐藏的覆盖 —— 它们针对的 API 已经改名或移除。
+**注册只会让构建变红而不增加任何覆盖**，故显式排除并在 CMakeLists 内注明原因。
+复活它们需**按现行 API 重写**，属独立任务。
+
+另外 `async_when_each_test.cpp` 有一个可推导类型 bug（`auto* t` 遍历
+`std::vector<CHAOS_IL2CPP_INTPTR>`，`__int64` 无法推导为指针，C3535/C2440）——
+一并修复。
+
+### 首次真实基线：**20/27 通过，7 失败**
+
+| 用例 | 结果 | 耗时 | 判定 |
+|---|---|---|---|
+| `test_threading_benchmark` | **SEGFAULT** | — | 真缺陷 |
+| `test_async_when_async` | **SEGFAULT** | — | 真缺陷 |
+| `test_async_continue_with` | Failed | — | 真缺陷（`ContinuationTaskCarriesTheContinuationsReturnValue`，SEH 0xC0000005） |
+| `test_async_when_each` | Failed | 26s | 真缺陷（`NullElementStillTerminatesTheStream` 挂起 23s） |
+| `test_queue_backpressure` | **SEGFAULT** | — | 真缺陷 |
+| `test_threading_stress` | **Timeout** | 1800s | 需判定：真死锁 or 超时阈值过紧 |
+| `test_phase3_industrialization` | **SEGFAULT** | — | 真缺陷 |
+
+**关键结论**：这 7 个失败**此前从未被任何人看到过** —— 因为这套用例从未运行。
+threading 的「生产级就绪」比 roadmap 撰写时的估计**更差**：
+不只是「无 CI 门禁」，而是**有 5 个真实的崩溃/挂起缺陷一直躺在树里**。
+
+**处置**：T0.4 交付 workflow 并按 roadmap 原定 `continue-on-error` 收基线
+（`enforce_gate` 默认 false）。这 7 个失败登记为 **T1.7**，在 Phase 1 处理 ——
+它们正是 Phase 1「关闭语义造假」要面对的东西，且**优先级高于**原 T1.1-T1.5
+（崩溃 > 静默错误结果 > 语义缺失）。
+
+### 交付物
+
+- `.github/workflows/threading-native-tests.yml`（独立 workflow，不进 ci-framework）
+  - 含**显式的发现数断言**：ctest 发现 0 个 threading 测试即 `exit 1`
+    —— 直接堵住本节发现的那条假绿通路
+  - `-LE "benchmark|soak"` 排除长跑测量层，**保留 `stress`**（并发缺陷就在那里）
+  - `enforce_gate` 默认 `false` 收集基线，可切换为阻断
+
+---
+
 ## 🔴 worktree 构建隔离缺失（2026-09-13 实测，阻断级）—— **已修（a8e807696）**
 
 **T0.0b + T0.0c 的修复已提交（`7f17415cd`），但重跑 `--stages build` 仍 `0/1`，

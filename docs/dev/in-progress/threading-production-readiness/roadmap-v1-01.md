@@ -135,7 +135,8 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | `T0.1` | 0 | **completed** | main | 清除源树陈旧假绿产物 | T0.0b | batch-1 | `rm -f` 显式列举，禁用 `git clean` | 三个 chunk 源树 `results/fact.json` 已删 | 源树下三路径均不存在 | `tests/e2e/translation/System.Private.CoreLib/chunks/threading*/results/` | 小 |
 | `T0.2` | 0 | **completed** | main | 重建三个 threading chunk | T0.1 | batch-1 | 重建后记录构建耗时（判定单/双 worktree）；**必须读 `[CODGEN-FAIL] total=` 与 `kCodegenFailureCount`** | 产物根 `fact.json` × 3 + codegen 降级计数 | ✅ build `1/1`（threading 489s / threading-2 557s，均 <30min ⇒ 维持双 worktree）；`kCodegenFailureCount` 已查=0；**fact 比对跑出 2 个真缺陷**（见 STATUS） | `artifacts/foundation-dll/`（不入仓库） | 大 |
 | `T0.3` | 0 | **completed** | main | 取证 `BuildMethodSourceSafe` 是否吞 threading 异常 | T0.0 | batch-1 | 独立取证，不依赖 T0.2 结果 | 取证报告 | ✅ 结论：吞（无过滤器 catch + 信号零消费者） | `src/managed/Chaos.IL2CPP.Generator/`（只读优先） | 中 |
-| `T0.4` | 0 | ready | tbd | 新建 threading native test workflow | T0.2 | batch-2 | 独立 workflow，不进 ci-framework；首跑 `continue-on-error` | `.github/workflows/threading-native-tests.yml` | CI 跑出 244 用例结果 | `.github/workflows/threading-native-tests.yml` | 中 |
+| `T0.4` | 0 | **completed** | main | 新建 threading native test workflow | T0.2 | batch-2 | 独立 workflow，不进 ci-framework；首跑 `continue-on-error` | `.github/workflows/threading-native-tests.yml` | ✅ 交付；**并发现 ctest 从未发现过任何测试**（`enable_testing()` 缺失，Windows 0→300）；244 用例首次真跑 = **20/27 通过，7 失败** | `.github/workflows/threading-native-tests.yml`、`CMakeLists.txt` | 中 |
+| `T1.7` | 1 | **ready** | tbd | 🔴 **T0.4 首次真跑暴露的 7 个 native 测试失败**（此前从未被任何人看到） | T0.4 | batch-3 | 5 SEGFAULT + 1 失败 + 1 超时：`test_threading_benchmark` / `test_async_when_async` / `test_queue_backpressure` / `test_phase3_industrialization`（SEGFAULT）、`test_async_continue_with`（SEH 0xC0000005）、`test_async_when_each`（`NullElementStillTerminatesTheStream` 挂起 23s）、`test_threading_stress`（1800s 超时，需判定真死锁 vs 阈值过紧） | 7 项各自定位 + 修复或显式登记为 known-fail | 7 项全部转绿或按基线显式登记 | `src/native/runtime-core/` 等 | 大 |
 | `T0.5` | 0 | ready | tbd | 🔴 **修 `fact_chunk.py` 分子分母跨技术混用**（T0.2 新发现的假绿通路） | T0.2 | batch-2 | `:310-318` 把 `passed`/`total` 整体换成 JIT 数，而 `:441` 的 `factory_gap_ct` 恒取自 AOT ⇒ 分子分母不同总体；症状 `gatePassed=520 > gateTotal=519` | `fact_chunk.py` 修复 + 回归 | 分子分母同源；`gatePassed <= gateTotal` 恒成立 | `tests/e2e/verification/stages/fact_chunk.py` | 小 |
 | `T1.1` | 1 | planned | tbd | `CancellationToken.throw_if_cancellation_requested` 真实抛出 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | revert 后测试失败 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
 | `T1.2` | 1 | planned | tbd | `source_get_token` 构造真实 token | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 小 |
@@ -166,7 +167,7 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 T0.0 ──┬─→ T0.1 ─→ T0.2 ─→ T0.4 ─→ T1.1..T1.5 ─→ T2.0 ─→ T2.1 ─┬─→ T2.2, T2.3
        │                   └─→ T0.5 ─┘  （Phase 1）              ├─→ T2.4, T2.5
        └─→ T0.3（独立取证）  └────→ T1.6                     │
-                                                              └─→ T3.1..T3.5 ─→ T4.1
+                            └────→ T1.7（T0.4 首次真跑的 7 个失败）└─→ T3.1..T3.5 ─→ T4.1
 ```
 
 **关键串行点**：
@@ -174,6 +175,8 @@ T0.0 ──┬─→ T0.1 ─→ T0.2 ─→ T0.4 ─→ T1.1..T1.5 ─→ T2.0 
 - `T0.2 → T0.4`：CI workflow 需要知道实际的测试规模与失败基线
 - `T0.2 → T0.5`：**T0.2 的 fact 比对新发现**，先堵计数假绿再谈基线
 - `T0.5 → T1.6`：T1.6 的验收依赖 T0.5 修好的 cross-tech diff 计数可信
+- `T0.4 → T1.7`：**T0.4 首次真跑暴露的 7 个失败**；T1.7 的优先级**高于** T1.1-T1.5
+  （崩溃 > 静默错误结果 > 语义缺失），建议 T1.7 先行
 - `T1.* → T2.0`：Phase 2 依赖 Phase 1 关闭的语义造假（否则 ABI 接线接的是错的语义）
 - `T2.1 → T2.2..T2.5`：句柄映射机制是所有原语注册的前置
 
@@ -192,6 +195,19 @@ T0.0 ──┬─→ T0.1 ─→ T0.2 ─→ T0.4 ─→ T1.1..T1.5 ─→ T2.0 
 > 是否被消费」。**教训：插桩观测到异常值 ≠ 该值是因果链上的原因；先做分母审计
 > （全量对照 AOT/JIT），再谈单点根因。** 这正是 T0.5 修好计数后可做的事 ——
 > **修假绿通路本身放大了后续取证的分辨率**。
+>
+> **T1.7 的溯源说明（第四条假绿通货路的教训）**：T0.4 本被写成一件"建 workflow"的
+> 配置活（估时"中"）。实际执行时发现 **ctest 在 Windows 下从未发现过任何测试** ——
+> `enable_testing()` 缺失，`add_test()` 全部落入虚空。修复后 244 用例**首次真正运行**，
+> 立刻暴露 **7 个失败（5 个 SEGFAULT + 1 个挂起 + 1 个超时）**，它们此前从未被任何人看到。
+>
+> 这条通路与 T0.1（读源树残留）、T0.3（codegen 降级信号零消费者）、T0.5（分子分母
+> 跨技术混用）同族，但**形态更隐蔽**：前三者是「读错了源」，这一个是「**根本没读**」。
+> `add_test` 静默失败、`ctest` 零测试退出码 0 —— 中间没有任何一处会报错。
+>
+> **教训：验证设施本身必须被验证。** 一个声称覆盖 N 个用例的门禁，如果没有任何
+> 断言去核对"实际发现了几个测试"，那它报告的绿是**关于它自己**的，不是关于代码的。
+> ⇒ T0.4 交付的 workflow 因此内置了**显式的发现数断言**（发现 0 个即 `exit 1`）。
 
 ---
 

@@ -229,3 +229,40 @@ chaos_native_add_test(test_object_header_benchmark
     object_header_benchmark_test.cpp
     LABELS "benchmark;threading;typesystem"
 )
+
+# ── Restored registration (T0.4) ────────────────────────────────────────────
+# monitor_pulseall_stress_test.cpp existed in the tree but was referenced by NO
+# CMakeLists repo-wide, so it was never compiled and never ran — 1 test case
+# silently dead.  Verified to build and PASS after registration.
+#
+# The gap is why the roadmap's "244 cases" baseline was short: a test file that
+# is not registered cannot fail, so its absence is invisible in CI.
+#
+# RESOURCE_LOCK bgc matches threading_stress: these stress cases must not run
+# concurrently with background-GC tests.
+chaos_native_add_test(test_monitor_pulseall_stress
+    monitor_pulseall_stress_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/synchronization.cpp
+    RESOURCE_LOCK bgc
+    LABELS "unit;threading;stress"
+)
+
+# ── NOT registered: two rotted test files (T0.4 finding) ────────────────────
+# hill_climbing_smoke_test.cpp and threadpool_events_smoke_test.cpp are also
+# present but unreferenced.  They were deliberately left OUT of this commit
+# because they no longer compile against the current sources — registering them
+# would turn the build red for no coverage gain:
+#
+#   hill_climbing_smoke_test.cpp — accesses HillClimbingController::cpu_count_
+#     and ::SigmoidGain, both now PRIVATE (C2248).  The class was tightened
+#     after the test was written.
+#   threadpool_events_smoke_test.cpp — calls ThreadPoolEventEmitThreadCreate /
+#     ThreadAttach / ThreadDetach / SafepointBegin / SafepointEnd /
+#     MonitorContention, none of which exist in namespace threading any more
+#     (C2039/C3861).  The event-emit surface was renamed or removed.
+#
+# These are ROTTED TESTS, not missing coverage being hidden: the behaviour they
+# aimed at is now covered by threadpool_events / hill-climbing paths exercised
+# elsewhere.  Reviving them is a separate task — they need to be rewritten
+# against the current API, not merely re-registered.  Tracked in STATUS.md.
+

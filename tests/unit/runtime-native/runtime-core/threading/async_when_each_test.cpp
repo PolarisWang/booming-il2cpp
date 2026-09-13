@@ -206,7 +206,9 @@ TEST(AsyncWhenEach, YieldsEveryChildExactlyOnce)
 
     ASSERT_EQ(seen.size(), static_cast<size_t>(kCount));
     // No duplicates, and every original handle present.
-    for (auto* t : tasks)
+    // `tasks` holds CHAOS_IL2CPP_INTPTR handles (an integer type), so this must
+    // be `auto` — `auto*` fails to deduce a pointer from __int64 (C3535/C2440).
+    for (auto t : tasks)
         EXPECT_EQ(std::count(seen.begin(), seen.end(), t), 1)
             << "handle yielded more than once (or never)";
     EXPECT_EQ(chaos_task_when_each_may_have_next(stream), 0);

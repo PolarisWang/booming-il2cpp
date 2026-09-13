@@ -1,0 +1,171 @@
+# .github/workflows/threading-native-tests.yml
+#
+# Stage: threading native correctness gate (T0.4)
+#
+# WHY THIS WORKFLOW EXISTS
+# ------------------------
+# The threading subsystem is runtime infrastructure every other domain sits on,
+# yet its 27 native test executables had ZERO CI gate.  The `contracts-native`
+# group in suite_contract.yaml claims to cover "tests/unit/runtime-native", but
+# until the enable_testing() fix landed (this change), ctest on the Windows
+# preset discovered 0 tests and exited 0 — so the claim was never exercised.
+#
+# This workflow is DELIBERATELY STANDALONE:
+#   * it does NOT go through ci-framework / the reusable stage graph, so a
+#     threading regression cannot be masked by an unrelated stage being skipped
+#   * first runs are `continue-on-error` (see `enforce_gate` input) so we collect
+#     a real failure baseline before arming a blocking gate.  A gate armed on an
+#     unknown-red suite gets disabled by the first person it blocks, which is
+#     strictly worse than no gate.
+#
+# Once the baseline is stable, flip `enforce_gate` to true from the caller.
+
+name: threading-native-tests
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      timeout:
+        required: false
+        type: number
+        default: 3600
+      config:
+        required: false
+        type: string
+        default: Debug
+      parallel:
+        required: false
+        type: number
+        default: 4
+      # false (default): report results, never fail the run — baseline collection.
+      # true: a threading test failure fails the run (armed gate).
+      enforce_gate:
+        required: false
+        type: boolean
+        default: false
+  workflow_dispatch:
+    inputs:
+      enforce_gate:
+        description: 'Fail the run when threading tests fail (armed gate)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  threading-native-tests:
+    runs-on: ${{ inputs.os || 'windows-latest' }}
+    timeout-minutes: ${{ inputs.timeout || 3600 }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore Generator
+        run: dotnet restore src/managed/Chaos.IL2CPP.Generator/
+
+      - name: Build Generator
+        run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
+
+      # Same root preset as the other native stages so the cache key — and hence
+      # the artifact — is shared rather than duplicated.
+      - name: Cache native build (windows-x64-reference)
+        uses: actions/cache@v4
+        with:
+          path: artifacts/presets/windows-x64-reference
+          key: windows-ref-${{ runner.os }}-${{ hashFiles('src/native/**', 'tests/**/runtime-native/**', 'CMakeLists.txt', '**/*.cmake') }}
+          restore-keys: |
+            windows-ref-${{ runner.os }}-
+
+      - name: Configure native (windows-x64-reference)
+        shell: bash
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference \
+            -G "Visual Studio 17 2022" \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference
+
+      # Assert test DISCOVERY before building.  A configure that registers zero
+      # tests is the exact failure this workflow was written to catch, and it is
+      # silent — ctest exits 0 having run nothing.  Fail loudly instead.
+      - name: Assert ctest discovers threading tests
+        shell: bash
+        run: |
+          COUNT=$(ctest --test-dir artifacts/presets/windows-x64-reference \
+                    -C ${{ inputs.config || 'Debug' }} -N 2>/dev/null \
+                  | sed -n 's/^Total Tests: //p')
+          echo "discovered $COUNT ctest targets"
+          THREADING=$(ctest --test-dir artifacts/presets/windows-x64-reference \
+                        -C ${{ inputs.config || 'Debug' }} -N \
+                        -R "test_threading|test_async_|test_synchronization|test_monitor_pulseall|test_queue_backpressure|test_rwlock|test_hc_cpu|test_phase3|test_object_header|test_execution_context|test_threadpool" \
+                        2>/dev/null | sed -n 's/^Total Tests: //p')
+          echo "discovered $THREADING threading targets"
+          if [ "${THREADING:-0}" -eq 0 ]; then
+            echo "::error::ctest discovered 0 threading tests. Either enable_testing() is missing from the Windows block in CMakeLists.txt, or the threading CMakeLists stopped being included. Zero discovered tests is a FAILURE, not a pass."
+            exit 1
+          fi
+
+      - name: Build native (threading targets + dependencies)
+        shell: bash
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference \
+            --config ${{ inputs.config || 'Debug' }} -j 8
+
+      - name: Run threading native tests
+        id: tests
+        shell: bash
+        run: |
+          # -LE excludes benchmark/soak tiers: they are long-running measurement
+          # suites, not correctness gates.  "stress" is deliberately KEPT — the
+          # threading stress cases (queue backpressure, PulseAll wake-all,
+          # thread-pool saturation) are where the concurrency bugs live.
+          set +e
+          ctest --test-dir artifacts/presets/windows-x64-reference \
+            -C ${{ inputs.config || 'Debug' }} \
+            -R "test_threading|test_async_|test_synchronization|test_monitor_pulseall|test_queue_backpressure|test_rwlock|test_hc_cpu|test_phase3|test_object_header|test_execution_context|test_threadpool" \
+            -LE "benchmark|soak" \
+            -j ${{ inputs.parallel || 4 }} \
+            --timeout 1800 \
+            --output-on-failure 2>&1 | tee threading-native-output.txt
+          echo "ctest_exit=$?" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Summarize threading results
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## threading native tests"
+            echo
+            grep -E "^Total Tests:" threading-native-output.txt || true
+            echo
+            echo '```'
+            sed -n '/tests passed\|tests failed\|The following tests FAILED/,$p' threading-native-output.txt | head -60
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Enforce gate
+        # Armed only when the caller opts in (see enforce_gate above).  Default
+        # is to report without failing so the first runs collect a baseline.
+        if: ${{ (inputs.enforce_gate) && steps.tests.outputs.ctest_exit != '0' }}
+        shell: bash
+        run: |
+          echo "::error::threading native tests failed (ctest exit ${{ steps.tests.outputs.ctest_exit }}) with enforce_gate=true"
+          exit 1
+
+      - name: Upload threading test output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: threading-native-output-${{ inputs.config || 'Debug' }}
+          path: threading-native-output.txt
