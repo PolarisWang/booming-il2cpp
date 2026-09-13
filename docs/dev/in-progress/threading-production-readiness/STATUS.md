@@ -42,7 +42,54 @@ Phase 0 拆 4 个 T0.x + 检查点。
 
 ## 下一步
 
-**立即切 worktree**（`EnterWorktree(name=threading-phase0)`），随后启动 **T0.0b**。
+**🔴 阻塞中**：worktree 无法构建。见下节「worktree 构建隔离缺失」。
+
+---
+
+## 🔴 worktree 构建隔离缺失（2026-09-13 实测，阻断级）
+
+**T0.0b + T0.0c 的修复已提交（`7f17415cd`），但重跑 `--stages build` 仍 `0/1`，
+错误逐条未变。根因不是修复无效，而是 worktree 的改动对构建完全不可见。**
+
+### 证据链（逐层实测）
+
+| 环节 | 事实 | 证据 |
+|---|---|---|
+| native include 路径 | 指向 **主检出**，非 worktree | `chaos_entry.vcxproj:89` 的 `AdditionalIncludeDirectories` 首项 = `D:\agent\chaos-il2cpp\src\native\runtime-core` |
+| 主检出有无我的头 | **无** | `ls /d/agent/chaos-il2cpp/src/native/runtime-core/runtime_stubs/cancellation_token_stubs.h` → 不存在 |
+| 全仓声明位置 | 只在 `.cpp` 里 | `grep -rln chaos_cancellation_token_source_cancel src/native/` → 仅 `cancellation_token.cpp` |
+| codegen 工具根 | 解析到**主检出** | `tool_helpers._repo_root()` 从 `tool_helpers.py` 自身位置上溯；该文件在 `tests/e2e/verification/_pipeline/`，即主树 ⇒ 返回 `D:\agent\chaos-il2cpp` |
+| 工具新鲜度判定 | 比的是**主树的 Generator 源码**，故判「已是最新」而跳过重建 | `ensure_tool_built` → `_referenced_projects` → `_project_sources` 全部经 `_tool_dir()`（主树）解析 |
+| 后果 | TPG 跑的是 **15:26 的旧 Generator.dll**，不含 14:59 的 C# 修复 | TPG bin 内 DLL mtime `15:26:57` vs 我的 .cs mtime `14:59:53` |
+
+**关键句**：`_repo_root()` 的注释写着「Walks up so it is robust to where the
+_pipeline package is relocated」——它锚定的是**代码所在的那棵树**，而 worktree 里的
+`tests/e2e/verification/` 是主树的一份副本，但**工具本体、include 路径、构建产物全在主树**。
+
+### 结论
+
+**worktree 隔离在此仓库对「验证管线驱动的构建」不成立。**
+`EnterWorktree` 隔离了 git 工作区，但**没有隔离**：
+
+1. native 编译期 include 路径（硬编码主检出绝对路径）
+2. codegen 工具链（TPG/Generator DLL 及其新鲜度判定）
+3. `artifacts/` 产物根（本来就按主树解析）
+
+⇒ 在 worktree 里改 native 头/Generator 源码，**构建不会看到**，
+且**不会报错**——只会继续用主树的旧代码，症状与「修复无效」完全一致。
+这是一个**新的假绿/假红向量**：改动看似落地、构建照常输出、结果与改动无关。
+
+### 处置（待用户拍板）
+
+| 方案 | 内容 | 代价 |
+|---|---|---|
+| **A. 修复 worktree 的根解析**（推荐） | 改 `_repo_root()` / include 路径生成，使其锚定**当前工作区**而非主检出 | 动验证管线 + CMake 生成；影响面超出 threading |
+| **B. 放弃 worktree，回主工作区开发** | 承认隔离不可用，Phase 0 全部在主树做，靠 `git diff --cached` + 频繁提交防并发覆盖 | 回到 `parallel-agent-clean-checkout-clobber` 的暴露面 |
+| **C. worktree 只写代码，构建在主树跑** | worktree 出 patch → 主树 apply → 主树构建 | 手工同步，易漂移；等于没有隔离 |
+
+**在处置拍板前，T0.2（重建三 chunk）无法推进。**
+
+---
 
 ## 问题来源
 
