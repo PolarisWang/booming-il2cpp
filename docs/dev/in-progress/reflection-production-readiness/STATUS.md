@@ -129,6 +129,37 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 4. 🟡 修复 ATG 参数生成（为反射类型产出有效输入）以解锁 425 个 `[UNVERIFIED]`。
 5. 🟡 将语义断言接入 Chaos AOT 路径。
 
+### 🎯 阻断解除 + UNVERIFIED 甄别（2026-09-13）
+
+**阻断解除**（`c16ade90a`）：反射 chunk build 恢复通过（470→437 subjects → entry.exe）。
+根因是 `NativeAotEmitter.Shared.cs` 的 post-scan 在**同一集合里混了两种键格式**
+（typedef 扫描存全名 `chaos_valuetype_X`、struct 扫描存裸名 `X`），导致 struct 定义
+的类型永远匹配不上引用名，反复补出冲突 typedef（C2371）。
+
+**UNVERIFIED 甄别**：396 项按成因分为四类
+
+| 类别 | 数量 | 性质 | 处置 |
+|---|---|---|---|
+| A1 参数为 null/default → ANE | 238 | **BCL 同样会抛**，非缺陷 | 保留 UNVERIFIED（正确行为） |
+| A2 not-supported 类型（TypeDelegator/IReflect） | 55 | 结构不可行 | 归 Phase 2 的 not-supported 实施 |
+| A3 未初始化实例/无效输入 | 66 | **可修** | 已修 string（-30），余见下 |
+| A4 其它 | 37 | 待分类 | — |
+
+**已修**（`762431682`）：`ValueGenerator` 对 `System.String` 用 `Create<string>()`
+（= `GetUninitializedObject`，**恒为 null**）而非有效串，导致 127 个
+ArgumentNullException 里的一批只走到 null 守卫。
+→ `[UNVERIFIED]` **396 → 366**，`real` verified **32 → 34**。
+
+**剩余可修项（已定位，未实施）**：
+- **FieldInfo.GetValue / PropertyInfo.GetValue 返回 0**：`abi_reflection.cpp:97`
+  的 `FieldGetValue` 只从 `object_instance + header_size` memcpy，**忽略字段偏移**，
+  且对静态字段（`object_instance == null`）直接返回 INVALID_ARGUMENT。
+  **架构限制**：`ReflectionQueryFieldDescriptor` 无 offset 字段。
+  可行路径：复用 `GcTypeLayout.cs` 已有的 `offsetof` 偏移表（当前仅 GC 指针字段、
+  注册进 `GcLayoutRegistry`）——需扩展其语义到普通字段，属设计工作。
+- **PropertyInfo.GetSetMethod 对只读属性返回非 null**：我的实现回退到 getter，
+  语义不对（只读属性的 SetMethod 应为 null）。
+
 ### 🎯 验证真实性突破：real 16/29 → 45/58（2026-09-12 续）
 
 **根因**：ATG 对反射成员类型统一用 `SubjectInstanceFactory.Create<T>()`
