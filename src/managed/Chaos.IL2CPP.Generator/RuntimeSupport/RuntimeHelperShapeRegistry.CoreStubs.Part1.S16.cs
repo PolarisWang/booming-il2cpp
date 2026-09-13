@@ -1973,10 +1973,16 @@ public sealed partial class NativeAotLoweringPlanner
                         if (paramTypes[1] != "System.IntPtr") return null;
 
                         var symbol = GetExternalRuntimeHelperSymbol(callee);
+                        // ChaosDelegateInitialize returns void (it is a constructor:
+                        // it writes the target/method into an already-allocated
+                        // delegate object).  The generated wrapper must still yield a
+                        // value for the ABI slot, so call it and return the delegate
+                        // handle — returning the void call directly is C2440.
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
                         [
-                            "    return ChaosDelegateInitialize(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                            "    ChaosDelegateInitialize(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                            "    return chaos_arg_0;",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
