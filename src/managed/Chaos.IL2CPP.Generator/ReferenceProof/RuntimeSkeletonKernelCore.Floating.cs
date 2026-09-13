@@ -83,17 +83,70 @@ internal static partial class RuntimeSkeletonKernelCore
         }
 
         var unaryHelperName = TryResolveFloatingUnaryHelperName(descriptor, suffix);
-        if (unaryHelperName is null)
+        if (unaryHelperName is not null)
         {
-            return false;
+            return TryCreateStaticUnaryPlan(
+                descriptor,
+                backend,
+                "bool",
+                $"{GetHelperNamespace()}::{unaryHelperName}(request->arg0)",
+                out plan);
         }
 
-        return TryCreateStaticUnaryPlan(
-            descriptor,
-            backend,
-            "bool",
-            $"{GetHelperNamespace()}::{unaryHelperName}(request->arg0)",
-            out plan);
+        // ── IEEE 754-2019 arithmetic (CopySign / MaxNumber / MinNumber / Round / …) ──
+        var scalar = descriptor.ScalarCppType;
+        var ns = GetHelperNamespace();
+        var pfx = descriptor.HelperPrefix;
+
+        // Binary ops (T, T) → T
+        if (suffix == $"CopySign:{managedTypeName}({managedTypeName},{managedTypeName})")
+            return TryCreateStaticBinaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}CopySign(request->arg0, request->arg1)", out plan);
+        if (suffix == $"MaxNumber:{managedTypeName}({managedTypeName},{managedTypeName})")
+            return TryCreateStaticBinaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}MaxNumber(request->arg0, request->arg1)", out plan);
+        if (suffix == $"MinNumber:{managedTypeName}({managedTypeName},{managedTypeName})")
+            return TryCreateStaticBinaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}MinNumber(request->arg0, request->arg1)", out plan);
+        if (suffix == $"MaxMagnitude:{managedTypeName}({managedTypeName},{managedTypeName})")
+            return TryCreateStaticBinaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}MaxMagnitude(request->arg0, request->arg1)", out plan);
+        if (suffix == $"MinMagnitude:{managedTypeName}({managedTypeName},{managedTypeName})")
+            return TryCreateStaticBinaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}MinMagnitude(request->arg0, request->arg1)", out plan);
+        if (suffix == $"MaxMagnitudeNumber:{managedTypeName}({managedTypeName},{managedTypeName})")
+            return TryCreateStaticBinaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}MaxMagnitudeNumber(request->arg0, request->arg1)", out plan);
+        if (suffix == $"MinMagnitudeNumber:{managedTypeName}({managedTypeName},{managedTypeName})")
+            return TryCreateStaticBinaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}MinMagnitudeNumber(request->arg0, request->arg1)", out plan);
+
+        // Unary ops (T) → T
+        if (suffix == $"Ceiling:{managedTypeName}({managedTypeName})")
+            return TryCreateStaticUnaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}Ceiling(request->arg0)", out plan);
+        if (suffix == $"Floor:{managedTypeName}({managedTypeName})")
+            return TryCreateStaticUnaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}Floor(request->arg0)", out plan);
+        if (suffix == $"Truncate:{managedTypeName}({managedTypeName})")
+            return TryCreateStaticUnaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}Truncate(request->arg0)", out plan);
+        if (suffix == $"Round:{managedTypeName}({managedTypeName})")
+            return TryCreateStaticUnaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}RoundToEven(request->arg0)", out plan);
+        if (suffix == $"Sqrt:{managedTypeName}({managedTypeName})")
+            return TryCreateStaticUnaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}Sqrt(request->arg0)", out plan);
+        if (suffix == $"Abs:{managedTypeName}({managedTypeName})")
+            return TryCreateStaticUnaryPlan(descriptor, backend, scalar,
+                $"{ns}::{pfx}Abs(request->arg0)", out plan);
+
+        // Unary ops (T) → int32
+        if (suffix == $"Sign:System.Int32({managedTypeName})")
+            return TryCreateStaticUnaryPlan(descriptor, backend, "CHAOS_IL2CPP_INT32",
+                $"{ns}::{pfx}Sign(request->arg0)", out plan);
+
+        return false;
     }
 
 

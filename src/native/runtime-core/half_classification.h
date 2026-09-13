@@ -29,6 +29,22 @@ bool HalfOperatorLessThanOrEqual(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UI
 bool HalfOperatorGreaterThan(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 bool HalfOperatorGreaterThanOrEqual(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
 
+// ── IEEE 754-2019 arithmetic (IFloatingPointIeee754<Half>) ──────────────
+CHAOS_IL2CPP_UINT16 HalfCopySign(CHAOS_IL2CPP_UINT16 magnitude, CHAOS_IL2CPP_UINT16 sign);
+CHAOS_IL2CPP_UINT16 HalfMaxNumber(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
+CHAOS_IL2CPP_UINT16 HalfMinNumber(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
+CHAOS_IL2CPP_UINT16 HalfMaxMagnitude(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
+CHAOS_IL2CPP_UINT16 HalfMinMagnitude(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
+CHAOS_IL2CPP_UINT16 HalfMaxMagnitudeNumber(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
+CHAOS_IL2CPP_UINT16 HalfMinMagnitudeNumber(CHAOS_IL2CPP_UINT16 left_value, CHAOS_IL2CPP_UINT16 right_value);
+CHAOS_IL2CPP_UINT16 HalfCeiling(CHAOS_IL2CPP_UINT16 value);
+CHAOS_IL2CPP_UINT16 HalfFloor(CHAOS_IL2CPP_UINT16 value);
+CHAOS_IL2CPP_UINT16 HalfTruncate(CHAOS_IL2CPP_UINT16 value);
+CHAOS_IL2CPP_UINT16 HalfRoundToEven(CHAOS_IL2CPP_UINT16 value);
+CHAOS_IL2CPP_UINT16 HalfSqrt(CHAOS_IL2CPP_UINT16 value);
+CHAOS_IL2CPP_UINT16 HalfAbs(CHAOS_IL2CPP_UINT16 value);
+CHAOS_IL2CPP_INT32  HalfSign(CHAOS_IL2CPP_UINT16 value);
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_HALF_CLASSIFICATION_H_

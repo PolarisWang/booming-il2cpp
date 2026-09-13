@@ -1,5 +1,8 @@
 #include <chaos/native_types.h>
 
+#include "half_classification.h"
+#include "../runtime_stubs/convert_half.h"  // ChaosConvertToInt16FromDouble (float->binary16)
+
 namespace chaos::il2cpp::runtime_core {
 
 static float VectorMinElement(float left_value, float right_value) { return CHAOS_IL2CPP_FMIN(left_value, right_value); }
@@ -399,5 +402,85 @@ CHAOS_IL2CPP_INT32 TimeOnlyCompareTicksValue(CHAOS_IL2CPP_INT64 left_value, CHAO
 }
 
 bool TimeOnlyEqualsTicksValue(CHAOS_IL2CPP_INT64 left_value, CHAOS_IL2CPP_INT64 right_value) { return left_value == right_value; }
+
+// ══════════════════════════════════════════════════════════════════════
+//  Half IEEE 754-2019 arithmetic  (IFloatingPointIeee754<Half>)
+// ══════════════════════════════════════════════════════════════════════
+
+static CHAOS_IL2CPP_UINT16 FloatToHalfValue(float value) {
+    return ChaosConvertToInt16FromDouble(static_cast<CHAOS_IL2CPP_FLOAT64>(value));
+}
+
+CHAOS_IL2CPP_UINT16 HalfCopySign(CHAOS_IL2CPP_UINT16 magnitude, CHAOS_IL2CPP_UINT16 sign) {
+    return static_cast<CHAOS_IL2CPP_UINT16>((magnitude & 0x7FFFu) | (sign & 0x8000u));
+}
+
+CHAOS_IL2CPP_UINT16 HalfAbs(CHAOS_IL2CPP_UINT16 value) {
+    return static_cast<CHAOS_IL2CPP_UINT16>(value & 0x7FFFu);
+}
+
+namespace {
+
+CHAOS_IL2CPP_UINT16 HalfNumberExtremum(
+    CHAOS_IL2CPP_UINT16 l, CHAOS_IL2CPP_UINT16 r, bool want_max) {
+    const bool ln = HalfIsNaN(l), rn = HalfIsNaN(r);
+    if (ln && rn) return l;
+    if (ln) return r;
+    if (rn) return l;
+    if (want_max) return HalfOperatorLessThan(r, l) ? l : r;
+    return HalfOperatorLessThan(l, r) ? l : r;
+}
+
+CHAOS_IL2CPP_UINT16 HalfMagnitudeExtremum(
+    CHAOS_IL2CPP_UINT16 l, CHAOS_IL2CPP_UINT16 r, bool want_max) {
+    const CHAOS_IL2CPP_UINT16 la = HalfAbs(l), ra = HalfAbs(r);
+    if (want_max) return HalfOperatorLessThan(ra, la) ? l : r;
+    return HalfOperatorLessThan(la, ra) ? l : r;
+}
+
+constexpr CHAOS_IL2CPP_UINT16 kHalfQNaN = 0x7E00u;
+
+}  // namespace
+
+CHAOS_IL2CPP_UINT16 HalfMaxNumber(CHAOS_IL2CPP_UINT16 l, CHAOS_IL2CPP_UINT16 r) { return HalfNumberExtremum(l, r, true); }
+CHAOS_IL2CPP_UINT16 HalfMinNumber(CHAOS_IL2CPP_UINT16 l, CHAOS_IL2CPP_UINT16 r) { return HalfNumberExtremum(l, r, false); }
+CHAOS_IL2CPP_UINT16 HalfMaxMagnitude(CHAOS_IL2CPP_UINT16 l, CHAOS_IL2CPP_UINT16 r) {
+    if (HalfIsNaN(l) || HalfIsNaN(r)) return kHalfQNaN;
+    return HalfMagnitudeExtremum(l, r, true);
+}
+CHAOS_IL2CPP_UINT16 HalfMinMagnitude(CHAOS_IL2CPP_UINT16 l, CHAOS_IL2CPP_UINT16 r) {
+    if (HalfIsNaN(l) || HalfIsNaN(r)) return kHalfQNaN;
+    return HalfMagnitudeExtremum(l, r, false);
+}
+CHAOS_IL2CPP_UINT16 HalfMaxMagnitudeNumber(CHAOS_IL2CPP_UINT16 l, CHAOS_IL2CPP_UINT16 r) {
+    const bool ln = HalfIsNaN(l), rn = HalfIsNaN(r);
+    return (ln && rn) ? l : (ln ? r : (rn ? l : HalfMagnitudeExtremum(l, r, true)));
+}
+CHAOS_IL2CPP_UINT16 HalfMinMagnitudeNumber(CHAOS_IL2CPP_UINT16 l, CHAOS_IL2CPP_UINT16 r) {
+    const bool ln = HalfIsNaN(l), rn = HalfIsNaN(r);
+    return (ln && rn) ? l : (ln ? r : (rn ? l : HalfMagnitudeExtremum(l, r, false)));
+}
+CHAOS_IL2CPP_UINT16 HalfCeiling(CHAOS_IL2CPP_UINT16 v) {
+    return HalfIsFinite(v) ? FloatToHalfValue(CHAOS_IL2CPP_CEIL(HalfToFloatValue(v))) : v;
+}
+CHAOS_IL2CPP_UINT16 HalfFloor(CHAOS_IL2CPP_UINT16 v) {
+    return HalfIsFinite(v) ? FloatToHalfValue(CHAOS_IL2CPP_FLOOR(HalfToFloatValue(v))) : v;
+}
+CHAOS_IL2CPP_UINT16 HalfTruncate(CHAOS_IL2CPP_UINT16 v) {
+    return HalfIsFinite(v) ? FloatToHalfValue(CHAOS_IL2CPP_TRUNC(HalfToFloatValue(v))) : v;
+}
+CHAOS_IL2CPP_UINT16 HalfRoundToEven(CHAOS_IL2CPP_UINT16 v) {
+    if (!HalfIsFinite(v)) return v;
+    return FloatToHalfValue(CHAOS_IL2CPP_NEARBYINT(HalfToFloatValue(v)));
+}
+CHAOS_IL2CPP_UINT16 HalfSqrt(CHAOS_IL2CPP_UINT16 v) {
+    if (HalfIsNaN(v)) return v;
+    if (HalfIsNegative(v) && !HalfIsZero(v)) return kHalfQNaN;
+    return FloatToHalfValue(CHAOS_IL2CPP_SQRT(HalfToFloatValue(v)));
+}
+CHAOS_IL2CPP_INT32 HalfSign(CHAOS_IL2CPP_UINT16 v) {
+    if (HalfIsNaN(v) || HalfIsZero(v)) return 0;
+    return HalfIsNegative(v) ? -1 : 1;
+}
 
 }  // namespace chaos::il2cpp::runtime_core

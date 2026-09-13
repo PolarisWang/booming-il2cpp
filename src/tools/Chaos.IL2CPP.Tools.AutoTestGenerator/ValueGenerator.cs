@@ -1075,6 +1075,90 @@ public sealed class ValueGenerator
         // System.Enum.TryParse(Type, string, out object) above already exercises
         // real enum parsing with correctly-typed DayOfWeek literals, so this
         // generic overload is left on the default single-value probe.
-        return;
+        // ── Delegate to the Parse-family injector ──
+        AddParseFamilyValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+    }
+
+    /// <summary>
+    /// Primitive types whose <c>Parse</c>/<c>TryParse</c> take a string that must
+    /// hold a value valid for THAT type.  Feeding <c>"hello"</c> or <c>""</c> to
+    /// <c>Int16.Parse</c> throws <see cref="FormatException"/>, so the managed probe
+    /// records <c>HasException=true</c> and the emitter marks the whole method
+    /// <c>[UNVERIFIED]</c> — the generated <c>[Fact]</c> never calls the method and
+    /// returns the 42L sentinel, making fact.json report it as "smoke".
+    ///
+    /// The map below supplies a literal that genuinely parses for each type, so the
+    /// AOT implementation is exercised and a real value is asserted.
+    /// </summary>
+    private static readonly Dictionary<string, string> ParseableLiteral = new(StringComparer.Ordinal)
+    {
+        ["System.Boolean"] = "\"true\"",
+        ["System.Byte"] = "\"200\"",
+        ["System.SByte"] = "\"-100\"",
+        ["System.Int16"] = "\"12345\"",
+        ["System.UInt16"] = "\"54321\"",
+        ["System.Int32"] = "\"1234567\"",
+        ["System.UInt32"] = "\"3456789012\"",
+        ["System.Int64"] = "\"1234567890123\"",
+        ["System.UInt64"] = "\"12345678901234567890\"",
+        // Int128/UInt128: the literal must stay within C#'s integer-literal range,
+        // otherwise the generated Assert.AreEqual emits a constant the compiler
+        // rejects with CS1021 (Integral constant is too large).
+        ["System.Int128"] = "\"42\"",
+        ["System.UInt128"] = "\"42\"",
+        ["System.Single"] = "\"3.14\"",
+        ["System.Double"] = "\"3.14159\"",
+        ["System.Decimal"] = "\"123.456\"",
+        ["System.Char"] = "\"A\"",
+        ["System.IntPtr"] = "\"42\"",
+        ["System.UIntPtr"] = "\"42\"",
+        ["System.DateTime"] = "\"2024-01-15\"",
+        ["System.DateTimeOffset"] = "\"2024-01-15T10:30:00+00:00\"",
+        ["System.TimeSpan"] = "\"01:02:03\"",
+        ["System.Guid"] = "\"6F9619FF-8B86-D011-B42D-00C04FC964FF\"",
+        ["System.Half"] = "\"1.5\"",
+        ["System.Version"] = "\"1.2.3\"",
+        ["System.Numerics.BigInteger"] = "\"123456789012345678901234567890\"",
+    };
+
+    /// <summary>
+    /// Inject a value set containing a literal that really parses for numeric /
+    /// primitive <c>Parse</c> and <c>TryParse</c> overloads.
+    ///
+    /// Scope is deliberately narrow — first parameter is <c>System.String</c> and the
+    /// declaring type has an entry in <see cref="ParseableLiteral"/>.  The literal is
+    /// placed in that first slot; remaining parameters keep their defaults (a default
+    /// <c>NumberStyles</c> or <c>IFormatProvider</c> is valid, not an error).
+    /// </summary>
+    private static void AddParseFamilyValueSets(
+        MethodSignature method,
+        string[] paramTypes,
+        List<ValueSet> sets,
+        HashSet<string> usedSignatures,
+        int methodIndex)
+    {
+        if (method.Name is not ("Parse" or "TryParse")) return;
+        if (paramTypes.Length == 0 || paramTypes[0] != "System.String") return;
+        if (!ParseableLiteral.TryGetValue(method.DeclaringTypeFullName, out var literal)) return;
+
+        // Build [literal, default, default, ...].  The arity MUST equal the method's
+        // parameter count exactly: ProbeEmitter indexes ArgumentExpressions[pi] for
+        // every parameter, and a short set throws IndexOutOfRange — which the
+        // per-type catch in Program.cs turns into a whole-type skip.
+        var args = paramTypes
+            .Select((t, i) => i == 0 ? literal : $"default({CSharpSerializer.ToCSharpTypeName(t)})")
+            .ToArray();
+        AddUnique(sets, usedSignatures, methodIndex, args);
+
+        // A second, culturally-invariant variant for the (string, IFormatProvider)
+        // overload shape — InvariantCulture makes the parse deterministic.
+        for (int i = 1; i < paramTypes.Length; i++)
+        {
+            if (paramTypes[i] != "System.IFormatProvider") continue;
+            var ciArgs = (string[])args.Clone();
+            ciArgs[i] = "System.Globalization.CultureInfo.InvariantCulture";
+            AddUnique(sets, usedSignatures, methodIndex, ciArgs);
+            break;
+        }
     }
 }
