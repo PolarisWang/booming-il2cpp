@@ -102,6 +102,18 @@ def _hu_stats(hr: Path):
                 revert=d.get("totalReverted", d.get("revertPassed", 0)))
 
 
+def _contract_stats(hr: Path):
+    """Read contract.json (standalone .NET 8 semantic assertion results)."""
+    if not hr.is_file(): return None
+    try:
+        d = json.loads(hr.read_text(encoding="utf-8"))
+        if not isinstance(d, dict): return None
+        return dict(contractPassed=d.get("contractPassed", 0),
+                    contractTotal=d.get("contractTotal", 0))
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description="Honest per-chunk snapshot")
     p.add_argument("--gate-ratio", type=float, default=None,
@@ -140,6 +152,10 @@ def main() -> int:
         f = _fact_stats(fr)
         if f:
             info["fact"] = f
+        # contract may live in the fact root (manual run) or bench root (pipeline)
+        c = _contract_stats(fr.parent / "contract.json")
+        if c:
+            info["contract"] = c
     # benchmark + hotupdate from artifacts build-output tree
     for base in [root_bench]:
         if not base.is_dir(): continue
@@ -156,25 +172,30 @@ def main() -> int:
                 if b: info["bench"] = b
                 h = _hu_stats(res / "hotupdate.json")
                 if h: info["hu"] = h
+                if "contract" not in info:
+                    c = _contract_stats(res / "contract.json")
+                    if c: info["contract"] = c
 
     # build table
     lines = []
     hdr = (f"{'CHUNK':56s}  {'F_tot':>5}  {'F_nom':>4}"
            f"  {'real':>4}  {'unassert':>7}  {'smoke?':>6}  {'fail':>4}"
-           f"  {'real%':>5}   {'B_ok':>4}{'B_stub':>5}   {'HU_sem':>6}{'HU_pch':>6}   {'GATE':>4}")
+           f"  {'real%':>5}   {'B_ok':>4}{'B_stub':>5}   {'HU_sem':>6}{'HU_pch':>6}"
+           f"   {'CT_ok':>5}{'CT_tot':>6}   {'GATE':>4}")
     sep = "-" * len(hdr)
     lines.append("")
     lines.append(hdr)
     lines.append(sep)
 
-    ft, fn, frl, fu, fs, ff, bo, bs, hs, hp, bg, hg = [0] * 12
+    ft, fn, frl, fu, fs, ff, bo, bs, hs, hp, bg, hg, cto, ctt = [0] * 14
     gk = []
     for key in sorted(seen, key=lambda k: k.lower()):
         info = seen[key]
         f = info.get("fact")
         b = info.get("bench")
         h = info.get("hu")
-        if not f and not b and not h:
+        c = info.get("contract")
+        if not f and not b and not h and not c:
             continue
 
         # compute gate
@@ -198,14 +219,21 @@ def main() -> int:
             frl += real_v; fu += unassert; fs += smoke_u; ff += fail_ct
         if b: bo += b["nonStub"]; bs += b["stub"]
         if h: hs += h["semantic"]; hp += h["patch"]
+        if c: cto += c["contractPassed"]; ctt += c["contractTotal"]
         if gt == "fail": bg += 1; gk.append(key); hg += 1
         gs = "PASS" if gt == "pass" else "FAIL" if gt == "fail" else "skip"
+        c_ok = c["contractPassed"] if c else 0
+        c_tot = c["contractTotal"] if c else 0
         lines.append(f"{key:56s}  {f['total'] if f else 0:5d}  {f['nominal'] if f else 0:4d}"
                      f"  {real_v:4d}  {unassert:7d}  {smoke_u:6d}  {fail_ct:4d}"
-                     f"  {pct:4.1f}%   {b_total:4d}{b_stub:5d}   {h_sem:6d}{h_pch:6d}   {gs:>4}")
+                     f"  {pct:4.1f}%   {b_total:4d}{b_stub:5d}   {h_sem:6d}{h_pch:6d}"
+                     f"   {c_ok:5d}{c_tot:6d}   {gs:>4}")
 
     lines.append(sep)
-    lines.append(f"{'TOTAL':56s}{ft:5d}{fn:6d}{frl:5d}{fu:8d}{fs:6d}{ff:<5}       {bo:5d}{bs:5d}  {hs:6d}{hp:6d}  gated_b={bg}  gated_hu={hg}")
+    lines.append(f"{'TOTAL':56s}  {ft:5d}  {fn:4d}"
+                 f"  {frl:4d}  {fu:7d}  {fs:6d}  {ff:4d}"
+                 f"           {bo:4d}{bs:5d}   {hs:6d}{hp:6d}"
+                 f"   {cto:5d}{ctt:6d}  gated_b={bg}  gated_hu={hg}")
     lines.append(f"\nGate ratio threshold: {gate_ratio}  |  Gated chunks: {bg}")
     if gk:
         lines.append(f"  gated list: {', '.join(gk)}")

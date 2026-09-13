@@ -346,6 +346,7 @@ def main():
     stage_functions = {
         "build": None,
         "fact": None,
+        "contract": None,
         "profile": None,
         "benchmark": None,
         "managed_benchmark": None,
@@ -381,6 +382,9 @@ def main():
     # ── Stage dependency DAG validation ──
     STAGE_DEPS: dict[str, list[str]] = {
         "fact":              ["build"],
+        # contract runs standalone .NET 8 semantic assertions — it needs neither
+        # build nor fact, so it can run on its own (cheap, no AOT build required).
+        "contract":          [],
         "benchmark":         ["build", "fact"],
         # P1-A: managed_benchmark appends net8/net10 to the SAME perf store that
         # benchmark_chunk writes with "w". Must run AFTER benchmark or its "w"
@@ -474,6 +478,7 @@ def main():
     # Import stage functions
     from verification.stages.build import run_build
     from verification.stages.fact_chunk import run_fact_chunk
+    from verification.stages.contract_chunk import run_contract_chunk
     from verification.stages.profile import run_profile
     from verification.stages.benchmark_chunk import run_benchmark_chunk
     from verification.stages.managed_benchmark import run_managed_benchmark
@@ -486,6 +491,7 @@ def main():
     runners = {
         "build": run_build,
         "fact": run_fact_chunk,
+        "contract": run_contract_chunk,
         "profile": run_profile,
         "benchmark": run_benchmark_chunk,
         "managed_benchmark": run_managed_benchmark,
