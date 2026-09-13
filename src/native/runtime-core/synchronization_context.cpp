@@ -5,18 +5,26 @@
 // THE REAL IMPLEMENTATION
 // -----------------------
 // A placeholder SynchronizationContext (the kind `new SynchronizationContext()`
-// creates) invokes Post and Send on the calling thread, inline.  This is
-// semantically correct because in a headless AOT runtime there is no UI pump
-// to marshal to.  A *real* UI-thread context installed by
-// `SetSynchronizationContext` would override Post to queue to its own pump;
-// that API surface works, the placeholder just has no pump to queue to.
+// creates) has no UI pump to marshal to, so it uses the ThreadPool as its
+// transport:
+//
+//   Post -> queue on the ThreadPool   (async, returns before the callback runs)
+//   Send -> invoke inline             (sync, no pump to marshal to)
+//
+// `Send` being inline is the honest choice: the alternative is blocking the
+// calling thread until a pump that does not exist drains the callback.  `Post`
+// is genuinely asynchronous — a real UI-thread context installed by
+// `SetSynchronizationContext` would override it to queue to its own pump; the
+// placeholder queues to the pool instead of silently running inline.
 //
 // The extern "C" bridge at the bottom is what generated C++ calls via the
 // ShapeRegistry; the namespace members above it are the runtime-internal API.
 
 #include "synchronization_context.h"
+#include "thread_pool.h"
 
 #include <cstdlib>
+#include <new>
 #include <thread>
 
 namespace chaos::il2cpp::runtime_core::threading {
@@ -25,6 +33,22 @@ namespace {
 
 // thread_local for the current thread's SynchronizationContext.
 thread_local SynchronizationContext* tls_current_ctx = nullptr;
+
+/// Trampoline payload for an asynchronous Post.  The ThreadPool work-item ABI is
+/// a bare `void(*)(void*)`, and Post needs both the callback and its state, so
+/// they travel together in one heap node that the worker frees after running.
+struct PostWork {
+    void (*callback)(void*);
+    void* state;
+
+    static void Run(void* self) noexcept {
+        auto* work = static_cast<PostWork*>(self);
+        void (*cb)(void*) = work->callback;
+        void* st = work->state;
+        delete work;
+        cb(st);
+    }
+};
 
 }  // anonymous namespace
 
@@ -57,10 +81,30 @@ SynchronizationContext* SynchronizationContextGetCurrent() noexcept
 bool SynchronizationContextPost(SynchronizationContext* ctx,
                                 void (*callback)(void*), void* state) noexcept
 {
-    // Placeholder context: invoke inline.  This is the honest choice — without
-    // a UI pump the only alternative is blocking the caller forever.
+    // Asynchronous by contract (see the header): queue the callback on the
+    // ThreadPool and return WITHOUT running it.  The caller must not be blocked
+    // and must not observe the callback run before Post returns.
+    //
+    // This used to invoke `callback(state)` inline, which made Post and Send
+    // behaviourally identical.  That is not a harmless simplification: managed
+    // code distinguishes the two — ConfigureAwait(true) continuation ordering,
+    // deadlock-avoidance patterns, and any "did this actually run later?" check
+    // all rely on Post returning first.  An inline Post also re-enters the
+    // caller's stack, so a callback that takes a lock already held by the
+    // caller self-deadlocks where real Post would not.
+    //
+    // The queue boundary needs to own the callback/state pair until a worker
+    // picks it up, so stash them together rather than passing `state` through
+    // as the context (which would lose the callback).
     if (ctx == nullptr || callback == nullptr) return false;
-    callback(state);
+
+    auto* work = new (std::nothrow) PostWork{callback, state};
+    if (work == nullptr) return false;
+
+    // ExecutionContext capture (the safe entry point): a posted callback that
+    // touches AsyncLocal/ExecutionContext must see the ambient state at Post
+    // time, not whatever the picking worker happens to have.
+    ThreadPoolQueueUserWorkItem(&PostWork::Run, work);
     return true;
 }
 

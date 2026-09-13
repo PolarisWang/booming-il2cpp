@@ -28,6 +28,13 @@ chaos_native_add_test(test_async_integration_smoke
     LABELS "unit;threading"
 )
 
+# synchronization_context_post_test — T1.5: Post must dispatch to the ThreadPool
+# rather than running inline (which would make Post==Send).
+chaos_native_add_test(test_synchronization_context_post
+    synchronization_context_post_test.cpp
+    LABELS "unit;threading"
+)
+
 # cancellation_token_test — T1.1/T1.2: ThrowIfCancellationRequested must actually
 # raise, get_token must not degrade to None, and linked sources must propagate.
 chaos_native_add_test(test_cancellation_token
