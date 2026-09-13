@@ -55,7 +55,7 @@ public sealed partial class NativeAotLoweringPlanner
             // lookup. (The Assembly overload above keeps its existing entry point.)
             registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
                 ["System.Reflection.MemberInfo", "System.Type"],
-                ShapeKind.SimpleForward, "ChaosReflectionMemberIsDefinedByToken",
+                ShapeKind.SimpleForward, "ChaosReflectionMemberIsDefinedForTarget",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Reflection.MemberInfo", AotCoreIrTypeShapeKind.ReferenceType),
@@ -65,7 +65,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
                 ["System.Reflection.Module", "System.Type"],
-                ShapeKind.SimpleForward, "ChaosReflectionMemberIsDefinedByToken",
+                ShapeKind.SimpleForward, "ChaosReflectionMemberIsDefinedForTarget",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Reflection.Module", AotCoreIrTypeShapeKind.ReferenceType),
@@ -75,7 +75,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
                 ["System.Reflection.ParameterInfo", "System.Type"],
-                ShapeKind.SimpleForward, "ChaosReflectionMemberIsDefinedByToken",
+                ShapeKind.SimpleForward, "ChaosReflectionMemberIsDefinedForTarget",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot("System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType),

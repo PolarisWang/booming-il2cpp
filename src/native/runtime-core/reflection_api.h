@@ -49,8 +49,10 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(CHAOS_IL2CPP_INTPTR member
  * Returns a shared empty list (count=0) when the member has no attributes.
  */
 CHAOS_IL2CPP_INTPTR ChaosReflectionCollectCustomAttributes(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttributesForMember(CHAOS_IL2CPP_INTPTR member_handle) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionMemberHasAnyAttribute(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionMemberIsDefinedByToken(CHAOS_IL2CPP_INTPTR member_kind, CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attribute_type_token) noexcept;
+CHAOS_IL2CPP_INT32  ChaosReflectionMemberIsDefinedForTarget(CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attribute_type_handle) noexcept;
 
 /* ── PropertyInfo / EventInfo descriptor accessors ───────────────────
  * Backed by the Tier-2 property/event descriptors. The accessor-method

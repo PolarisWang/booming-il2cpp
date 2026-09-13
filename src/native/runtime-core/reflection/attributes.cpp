@@ -152,6 +152,23 @@ const uint32_t* SelectAttributeOffsetArray(const ModuleDescriptor* mod,
 
 }  // namespace
 
+// One-argument entry point matching the codegen registration contract.
+//
+// The SimpleForward registrations for CustomAttributeExtensions.GetCustomAttributes
+// forward only the attribute target (Assembly / MemberInfo / Module / ParameterInfo):
+// there is no second slot for a member-kind discriminant, so the generated call takes
+// one argument. This overload derives the kind so those calls link and behave.
+//
+// The descriptor blob is keyed by (module_id, token) and TokenToIndex() resolves the
+// entity index from the token alone; the kind only selects which per-kind offset array
+// is consulted. Attribute targets reaching here are types, so kind 1 (Type) is the
+// correct selection rather than a guess.
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttributesForMember(
+    CHAOS_IL2CPP_INTPTR member_handle) noexcept {
+    return ChaosReflectionCollectCustomAttributes(
+        static_cast<CHAOS_IL2CPP_INTPTR>(1), member_handle);
+}
+
 CHAOS_IL2CPP_INTPTR ChaosReflectionCollectCustomAttributes(
     CHAOS_IL2CPP_INTPTR member_kind,
     CHAOS_IL2CPP_INTPTR member_handle) noexcept
@@ -217,6 +234,22 @@ CHAOS_IL2CPP_INT32 ChaosReflectionMemberHasAnyAttribute(
 }
 
 // Whether a specific attribute type is present — `IsDefined(type)`.
+// Two-argument entry point matching the codegen registration contract.
+//
+// The IsDefined(MemberInfo|Module|ParameterInfo, Type) registrations forward two ABI
+// slots — the attribute target and the attribute type — while the token-matching entry
+// point above additionally takes a member-kind discriminant. This overload supplies the
+// default kind (1 = Type, matching how targets are encoded) and resolves the attribute
+// type handle to the token the blob lookup compares against.
+CHAOS_IL2CPP_INT32 ChaosReflectionMemberIsDefinedForTarget(
+    CHAOS_IL2CPP_INTPTR member_handle,
+    CHAOS_IL2CPP_INTPTR attribute_type_handle) noexcept {
+    if (attribute_type_handle == 0) return 0;
+    return ChaosReflectionMemberIsDefinedByToken(
+        static_cast<CHAOS_IL2CPP_INTPTR>(1), member_handle,
+        static_cast<CHAOS_IL2CPP_INTPTR>(GetTypeToken(attribute_type_handle)));
+}
+
 CHAOS_IL2CPP_INT32 ChaosReflectionMemberIsDefinedByToken(
     CHAOS_IL2CPP_INTPTR member_kind,
     CHAOS_IL2CPP_INTPTR member_handle,

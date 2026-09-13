@@ -839,6 +839,14 @@ public sealed class ValueGenerator
         // Value types (int, DateTime, Guid...) already handled by DefaultValue as default(T)
         // which is a VALID value — do not fabricate new instances; NULL-reference is the
         // only defect DefaultValue introduces, and only for reference types.
+// Reflection member types are views over metadata: a GetUninitializedObject
+// instance has null internals, so every accessor either throws or returns a
+// meaningless value. The factories supply a real, metadata-backed instance
+// (same expressions the subject path uses), which is what lets the callee
+// exercise its own logic instead of failing on a null guard.
+if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
+    return reflectionExpr;
+
         if (IsResolvableValueType(typeName))
             return null;
 
@@ -885,6 +893,33 @@ public sealed class ValueGenerator
     /// returns null for a zero-initialised string, so passing it as a reflection
     /// argument only ever exercises the callee's null guard.
     /// </summary>
+    /// <summary>
+    /// Real, metadata-backed instance expressions for reflection member types used as
+    /// ARGUMENTS. Mirrors CSharpExpressionBuilder.KnownTypeFactories (which serves the
+    /// subject path) because the two paths build expressions independently.
+    /// </summary>
+    private static readonly Dictionary<string, string> ReflectionInstanceFactories = new(StringComparer.Ordinal)
+    {
+        // Names are emitted verbatim into the probe project, which defines
+        // ReflectionSubjectSample alongside the generated tests.
+        ["System.Reflection.Assembly"] = "global::System.Reflection.Assembly.GetExecutingAssembly()",
+        ["System.Reflection.Module"] = "global::System.Reflection.Assembly.GetExecutingAssembly().ManifestModule",
+        ["System.Reflection.AssemblyName"] = "global::System.Reflection.Assembly.GetExecutingAssembly().GetName()",
+        ["System.Type"] = "typeof(ReflectionSubjectSample)",
+        ["System.Reflection.MemberInfo"] = "typeof(ReflectionSubjectSample)",
+        ["System.Reflection.MethodBase"] = "typeof(ReflectionSubjectSample).GetMethod(\"SampleMethod\")!",
+        ["System.Reflection.MethodInfo"] = "typeof(ReflectionSubjectSample).GetMethod(\"SampleMethod\")!",
+        ["System.Reflection.ConstructorInfo"] = "typeof(ReflectionSubjectSample).GetConstructor(global::System.Type.EmptyTypes)!",
+        ["System.Reflection.FieldInfo"] = "typeof(ReflectionSubjectSample).GetField(\"SampleField\")!",
+        ["System.Reflection.PropertyInfo"] = "typeof(ReflectionSubjectSample).GetProperty(\"SampleProperty\")!",
+        ["System.Reflection.EventInfo"] = "typeof(ReflectionSubjectSample).GetEvent(\"SampleEvent\")!",
+        ["System.Reflection.ParameterInfo"] = "typeof(ReflectionSubjectSample).GetMethod(\"SampleMethod\")!.GetParameters()[0]",
+        ["System.Reflection.CustomAttributeData"] = "global::System.Reflection.CustomAttributeData.GetCustomAttributes(typeof(ReflectionSubjectSample))[0]",
+        ["System.Reflection.TypeDelegator"] = "new global::System.Reflection.TypeDelegator(typeof(ReflectionSubjectSample))",
+        ["System.Reflection.TypeInfo"] = "typeof(ReflectionSubjectSample).GetTypeInfo()",
+        ["System.Globalization.CultureInfo"] = "global::System.Globalization.CultureInfo.InvariantCulture",
+    };
+
     private static readonly HashSet<string> NonNullStringDefaultTypes = new(StringComparer.Ordinal)
     {
         "System.String",

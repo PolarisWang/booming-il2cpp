@@ -46,7 +46,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes",
                 ["System.Reflection.Assembly"],
-                ShapeKind.SimpleForward, "ChaosReflectionCollectCustomAttributes",
+                ShapeKind.SimpleForward, "ChaosReflectionGetCustomAttributesForMember",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -54,7 +54,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes",
                 ["System.Reflection.MemberInfo"],
-                ShapeKind.SimpleForward, "ChaosReflectionCollectCustomAttributes",
+                ShapeKind.SimpleForward, "ChaosReflectionGetCustomAttributesForMember",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.MemberInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -62,7 +62,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes",
                 ["System.Reflection.Module"],
-                ShapeKind.SimpleForward, "ChaosReflectionCollectCustomAttributes",
+                ShapeKind.SimpleForward, "ChaosReflectionGetCustomAttributesForMember",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.Module", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -70,7 +70,7 @@ public sealed partial class NativeAotLoweringPlanner
 
             registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes",
                 ["System.Reflection.ParameterInfo"],
-                ShapeKind.SimpleForward, "ChaosReflectionCollectCustomAttributes",
+                ShapeKind.SimpleForward, "ChaosReflectionGetCustomAttributesForMember",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
