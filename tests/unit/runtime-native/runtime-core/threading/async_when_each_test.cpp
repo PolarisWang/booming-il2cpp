@@ -220,18 +220,38 @@ TEST(AsyncWhenEach, YieldsEveryChildExactlyOnce)
 // 4. Degenerate inputs must not hang or crash
 // ══════════════════════════════════════════════════════════════════════════════
 
-TEST(AsyncWhenEach, NullElementStillTerminatesTheStream)
+TEST(AsyncWhenEach, NullElementDoesNotProduceAPhantomElement)
 {
-    // A null slot occupies a position in the stream.  Accounting for it is what
-    // keeps `may_have_next` from reporting a phantom element forever.
+    // A null slot occupies a POSITION in the stream but must not become an
+    // element: the consumer drains exactly the real children and then the stream
+    // terminates.  A null that were counted as a pending completion, or that
+    // made `may_have_next` report an element forever, would hang every consumer
+    // waiting on the stream to end.
+    //
+    // The drain is load-bearing.  `may_have_next` is non-zero while an element is
+    // queued OR a child is still pending — that is the documented contract, and
+    // it is what lets a consumer distinguish "await now" from "stream ended".
+    // So terminating is only observable once the queued element is taken.
     CHAOS_IL2CPP_INTPTR a = Resolved(1);
     CHAOS_IL2CPP_INTPTR arr = MakeTaskArray({a, static_cast<CHAOS_IL2CPP_INTPTR>(0)});
     CHAOS_IL2CPP_INTPTR stream = chaos_task_when_each_array(arr);
     ASSERT_NE(stream, 0);
     FreeTaskArray(arr);
 
-    ASSERT_TRUE(WaitFor([&] { return chaos_task_when_each_may_have_next(stream) == 0; }))
-        << "a null element must still be accounted for so the stream terminates";
+    // Exactly one element is offered — the real child — and it is offered
+    // immediately, because it completed before the stream was constructed.
+    ASSERT_TRUE(WaitFor([&] { return chaos_task_when_each_may_have_next(stream) != 0; }))
+        << "the real child must be offered";
+    const CHAOS_IL2CPP_INTPTR first = chaos_task_when_each_try_dequeue(stream);
+    EXPECT_EQ(a, first);
+
+    // With the only real element drained, the null slot must not keep the stream
+    // alive: no phantom element, and no pending child.
+    EXPECT_EQ(chaos_task_when_each_try_dequeue(stream), 0)
+        << "the null slot must not be handed out as an element";
+    EXPECT_EQ(chaos_task_when_each_may_have_next(stream), 0)
+        << "a null element must not keep the stream from terminating";
+
     chaos_task_when_each_destroy(stream);
 }
 

@@ -8,6 +8,7 @@
 #include <chrono>
 #include <condition_variable>
 #include <cstdint>
+#include <cstdio>
 #include <mutex>
 #include <new>
 
@@ -55,7 +56,12 @@ struct RWLockEntryFixed {
     int32_t waiting_writers{0};
     std::atomic<int32_t> upgradeable_reader_tid{0};  // TID of upgradeable reader, 0 = none
     #ifndef NDEBUG
-    int32_t debug_writer_tid{0};  // TID of current writer (DEBUG only)
+    // Atomic: written by EnterWrite/UpgradeToWrite on the acquiring thread and
+    // read+cleared by ExitWrite on the releasing thread.  As a plain int32_t
+    // this was a data race, and the staleness was misleading — a hung lock
+    // dumped state=-1 with writer_tid=0 (see ExitRead, which can push state
+    // negative after a writer has already cleared this field).
+    std::atomic<int32_t> debug_writer_tid{0};  // TID of current writer (DEBUG only)
     #endif
 };
 
@@ -304,12 +310,44 @@ bool ReaderWriterLockSlimExitRead(uint32_t rw_handle) noexcept {
     auto* entry = FindRWLockFixed(rw_handle);
     if (entry == nullptr) return false;
 
-    int32_t prev = entry->state.fetch_sub(1, std::memory_order_release);
-    if (prev <= 0) return false;  // Not a reader.
+    // Claim the release with a CAS rather than an unconditional fetch_sub.
+    //
+    // fetch_sub mutates `state` BEFORE the "did I actually hold a read lock"
+    // check, so a mismatched exit (or a concurrent writer transition) drives
+    // the count past zero into negative territory — a state the lock cannot
+    // represent and cannot recover from.  CAS only decrements when the state
+    // genuinely looks like "readers hold it", so a bad exit is a no-op instead
+    // of permanent corruption.
+    int32_t prev = entry->state.load(std::memory_order_acquire);
+    while (prev > 0) {
+        if (entry->state.compare_exchange_weak(prev, prev - 1,
+                std::memory_order_release, std::memory_order_acquire)) {
+            break;
+        }
+    }
+    if (prev <= 0) return false;  // Not a reader — no writer downgrade from here.
 
-    // If there are waiting writers and this was the last reader, wake one.
-    if (prev == 1 && entry->waiting_writers > 0) {
-        entry->cv.notify_one();
+    // Announce the release under the mutex.
+    //
+    // The notification decision must be made while holding entry->mutex, and
+    // the waiters' counters are bumped under that same mutex in the slow paths.
+    // Reading `waiting_readers`/`waiting_writers` unlocked here loses wakeups:
+    // a waiter that has published its count but has not yet reached cv.wait()
+    // is invisible to a bare `notify_all`, and if no further release happens it
+    // parks forever.  That is exactly the observed hang — state pinned at 0
+    // with waiting_readers=7 and waiting_writers=1, every thread asleep and
+    // nobody left to notify.
+    bool was_last_reader = (prev == 1);
+    {
+        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
+        // Under the mutex the waiters are stable.  Wake everyone: the two
+        // populations have disjoint predicates (readers need
+        // `waiting_writers == 0`, writers need `state == 0`), so a single
+        // notify_one can hand the wake to a thread that must re-park and
+        // strand the other side.
+        if (entry->waiting_readers > 0 || entry->waiting_writers > 0 || was_last_reader) {
+            entry->cv.notify_all();
+        }
     }
     return true;
 }
@@ -326,7 +364,7 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) n
             std::memory_order_acquire, std::memory_order_relaxed)) {
         if (entry->upgradeable_reader_tid.load(std::memory_order_acquire) == 0) {
             #ifndef NDEBUG
-            entry->debug_writer_tid = threading::GetCurrentThreadId();
+            entry->debug_writer_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
             #endif
             return 1;  // Acquired without any syscall.
         }
@@ -345,7 +383,7 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) n
         if (entry->state.compare_exchange_strong(expected, -1,
                 std::memory_order_acquire, std::memory_order_relaxed)) {
             #ifndef NDEBUG
-            entry->debug_writer_tid = threading::GetCurrentThreadId();
+            entry->debug_writer_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
             #endif
             return 1;
         }
@@ -377,10 +415,33 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) n
         entry->waiting_writers--;
 
         if (result == 1) {
-            entry->state.store(-1, std::memory_order_release);
-            #ifndef NDEBUG
-            entry->debug_writer_tid = threading::GetCurrentThreadId();
-            #endif
+            // Re-check under the mutex before claiming the write lock.
+            //
+            // The wait predicate was evaluated at wake time, but the lock-free
+            // reader fast path in EnterRead only ever touches `state` — it does
+            // not take `entry->mutex`.  So between the predicate becoming true
+            // and this store, a reader can CAS state 0→1.  Storing -1 here
+            // unconditionally would then silently overwrite that reader's
+            // count, handing the lock to two holders at once.  The reader's
+            // later ExitRead would decrement the *writer's* -1 to -2, and the
+            // lock would never be recoverable.
+            //
+            // Claiming with a CAS closes that window: if a reader got in, the
+            // CAS fails and we go back to waiting rather than stealing.
+            int32_t zero = 0;
+            if (entry->state.compare_exchange_strong(zero, -1,
+                    std::memory_order_acquire, std::memory_order_relaxed)) {
+                #ifndef NDEBUG
+                entry->debug_writer_tid.store(threading::GetCurrentThreadId(),
+                                              std::memory_order_relaxed);
+                #endif
+                GC_TRANSITION_TO_COOPERATIVE();
+                return 1;
+            }
+            // A reader slipped in (or an upgradeable reader appeared).  Fall
+            // through to loop again; the blocking wait above is re-entered.
+            GC_TRANSITION_TO_COOPERATIVE();
+            return ReaderWriterLockSlimEnterWrite(rw_handle, timeout_ms);
         }
         GC_TRANSITION_TO_COOPERATIVE();
         return result;
@@ -393,19 +454,22 @@ bool ReaderWriterLockSlimExitWrite(uint32_t rw_handle) noexcept {
 
     #ifndef NDEBUG
     int32_t tid = threading::GetCurrentThreadId();
-    if (entry->debug_writer_tid != tid) {
+    int32_t owner = entry->debug_writer_tid.load(std::memory_order_relaxed);
+    if (owner != tid) {
         CHAOS_IL2CPP_LOG_ERROR_M("RWLock",
-            "ExitWrite by TID %d but writer is TID %d", tid, entry->debug_writer_tid);
+            "ExitWrite by TID %d but writer is TID %d", tid, owner);
         return false;
     }
-    entry->debug_writer_tid = 0;
+    entry->debug_writer_tid.store(0, std::memory_order_relaxed);
     #endif
 
     int32_t prev = entry->state.exchange(0, std::memory_order_release);
     if (prev != -1) return false;  // Not the writer.
 
-    // Wake waiters (both readers and writers).
-    if (entry->waiting_readers > 0 || entry->waiting_writers > 0) {
+    // Wake waiters under the mutex — see ExitRead for why the counter reads
+    // and the notify must happen with entry->mutex held.
+    {
+        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
         entry->cv.notify_all();
     }
     return true;
@@ -507,8 +571,9 @@ bool ReaderWriterLockSlimExitUpgradeableRead(uint32_t rw_handle) noexcept {
 
     entry->upgradeable_reader_tid.store(0, std::memory_order_release);
 
-    // Wake waiting writers (and other upgradeable readers).
-    if (entry->waiting_writers > 0) {
+    // Wake waiting writers (and other upgradeable readers) under the mutex.
+    {
+        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
         entry->cv.notify_all();
     }
     return true;
@@ -531,7 +596,7 @@ int32_t ReaderWriterLockSlimUpgradeToWrite(uint32_t rw_handle, int32_t timeout_m
             if (entry->state.compare_exchange_strong(s, -1,
                     std::memory_order_acquire, std::memory_order_relaxed)) {
                 #ifndef NDEBUG
-                entry->debug_writer_tid = tid;
+                entry->debug_writer_tid.store(tid, std::memory_order_relaxed);
                 #endif
                 return 1;  // Upgraded to write.
             }
@@ -562,9 +627,18 @@ int32_t ReaderWriterLockSlimUpgradeToWrite(uint32_t rw_handle, int32_t timeout_m
         entry->waiting_writers--;
 
         if (result == 1) {
-            entry->state.store(-1, std::memory_order_release);
+            // Same CAS-not-store discipline as EnterWrite's slow path: the
+            // wait predicate was evaluated when we were woken, but the reader
+            // fast path can still slip a reader in, and storing -1 over it
+            // would hand the lock to two holders.
+            int32_t zero = 0;
+            if (!entry->state.compare_exchange_strong(zero, -1,
+                    std::memory_order_acquire, std::memory_order_relaxed)) {
+                GC_TRANSITION_TO_COOPERATIVE();
+                return ReaderWriterLockSlimUpgradeToWrite(rw_handle, timeout_ms);
+            }
             #ifndef NDEBUG
-            entry->debug_writer_tid = tid;
+            entry->debug_writer_tid.store(tid, std::memory_order_relaxed);
             #endif
         }
         GC_TRANSITION_TO_COOPERATIVE();
@@ -773,3 +847,33 @@ bool CountdownEventReset(uint32_t ce_id, int32_t count) noexcept {
 }
 
 }  // namespace chaos::il2cpp::runtime_core::threading
+
+// ── Debug-only diagnostics ──────────────────────────────────────────────
+//
+// Not part of the ABI, and NDEBUG-gated so it never ships in a release build.
+// This exists so a hung process can be asked what its lock table actually
+// looks like, instead of the state being inferred from stack traces.  It is
+// worth its keep: it is what identified the RWLock stall as `state` pinned at
+// 0 with every waiter parked and nobody left to notify — a lost wakeup — where
+// the stack traces alone only showed "everything is asleep in cv.wait()".
+//
+// Usage: attach a debugger to the wedged process and call
+//   .call <module>+<ChaosDebugDumpRWLocks offset>()
+//   g
+// The rows go to the debuggee's stdout (one per live lock).
+#if !defined(NDEBUG)
+extern "C" __declspec(dllexport) void ChaosDebugDumpRWLocks(void) {
+    using namespace chaos::il2cpp::runtime_core::threading;
+    for (uint32_t i = 1; i < kMaxRWLockCount; ++i) {
+        auto& e = g_rwlocks[i];
+        if (!e.active) continue;
+        std::printf("[rwlock] handle=%u id=%u state=%d waiting_readers=%d "
+            "waiting_writers=%d upgradeable_tid=%d writer_tid=%d\n",
+            i, e.id, e.state.load(std::memory_order_acquire),
+            e.waiting_readers, e.waiting_writers,
+            e.upgradeable_reader_tid.load(std::memory_order_acquire),
+            e.debug_writer_tid.load(std::memory_order_relaxed));
+        std::fflush(stdout);
+    }
+}
+#endif

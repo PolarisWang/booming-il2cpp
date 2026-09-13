@@ -944,15 +944,26 @@ CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
     st->antecedent = antecedent;
     st->continuation = continuation;
     st->continuation_task = async_task_create();
+    const CHAOS_IL2CPP_INTPTR continuation_task = st->continuation_task;
 
     // async_task_on_completed fires inline when the antecedent already
     // completed, and stores + delivers via finish_async_task otherwise — so
     // both completion orders are covered without a branch here.
-    if (async_task_on_completed(antecedent, ContinueWithDelivery, st) == 0) {
+    //
+    // The inline path runs ContinueWithDelivery to completion BEFORE this call
+    // returns, and that function ends in `delete st`.  So `st` is dangling from
+    // the moment async_task_on_completed returns on that path, and its fields
+    // must be read out beforehand: `return st->continuation_task` here would be
+    // a use-after-free returning freed-fill garbage (0xdddddddddddddddd under
+    // the debug heap), which is what made every caller of this function observe
+    // a non-null but wild handle.
+    const CHAOS_IL2CPP_INTPTR on_completed =
+        async_task_on_completed(antecedent, ContinueWithDelivery, st);
+    if (on_completed == 0) {
         delete st;
         return 0;
     }
-    return st->continuation_task;
+    return continuation_task;
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
