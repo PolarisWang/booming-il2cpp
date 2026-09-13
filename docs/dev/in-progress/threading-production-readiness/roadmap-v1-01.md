@@ -136,13 +136,13 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | `T0.2` | 0 | **completed** | main | 重建三个 threading chunk | T0.1 | batch-1 | 重建后记录构建耗时（判定单/双 worktree）；**必须读 `[CODGEN-FAIL] total=` 与 `kCodegenFailureCount`** | 产物根 `fact.json` × 3 + codegen 降级计数 | ✅ build `1/1`（threading 489s / threading-2 557s，均 <30min ⇒ 维持双 worktree）；`kCodegenFailureCount` 已查=0；**fact 比对跑出 2 个真缺陷**（见 STATUS） | `artifacts/foundation-dll/`（不入仓库） | 大 |
 | `T0.3` | 0 | **completed** | main | 取证 `BuildMethodSourceSafe` 是否吞 threading 异常 | T0.0 | batch-1 | 独立取证，不依赖 T0.2 结果 | 取证报告 | ✅ 结论：吞（无过滤器 catch + 信号零消费者） | `src/managed/Chaos.IL2CPP.Generator/`（只读优先） | 中 |
 | `T0.4` | 0 | **completed** | main | 新建 threading native test workflow | T0.2 | batch-2 | 独立 workflow，不进 ci-framework；首跑 `continue-on-error` | `.github/workflows/threading-native-tests.yml` | ✅ 交付；**并发现 ctest 从未发现过任何测试**（`enable_testing()` 缺失，Windows 0→300）；244 用例首次真跑 = **20/27 通过，7 失败** | `.github/workflows/threading-native-tests.yml`、`CMakeLists.txt` | 中 |
-| `T1.7` | 1 | **ready** | tbd | 🔴 **T0.4 首次真跑暴露的 7 个 native 测试失败**（此前从未被任何人看到） | T0.4 | batch-3 | 5 SEGFAULT + 1 失败 + 1 超时：`test_threading_benchmark` / `test_async_when_async` / `test_queue_backpressure` / `test_phase3_industrialization`（SEGFAULT）、`test_async_continue_with`（SEH 0xC0000005）、`test_async_when_each`（`NullElementStillTerminatesTheStream` 挂起 23s）、`test_threading_stress`（1800s 超时，需判定真死锁 vs 阈值过紧） | 7 项各自定位 + 修复或显式登记为 known-fail | 7 项全部转绿或按基线显式登记 | `src/native/runtime-core/` 等 | 大 |
+| `T1.7` | 1 | done | tbd | 🔴 **T0.4 首次真跑暴露的 7 个 native 测试失败**（此前从未被任何人看到） | T0.4 | batch-3 | 5 SEGFAULT + 1 失败 + 1 超时：`test_threading_benchmark` / `test_async_when_async` / `test_queue_backpressure` / `test_phase3_industrialization`（SEGFAULT）、`test_async_continue_with`（SEH 0xC0000005）、`test_async_when_each`（`NullElementStillTerminatesTheStream` 挂起 23s）、`test_threading_stress`（1800s 超时，需判定真死锁 vs 阈值过紧） | 7 项各自定位 + 修复或显式登记为 known-fail | 7 项全部转绿或按基线显式登记 | `src/native/runtime-core/` 等 | 大 |
 | `T0.5` | 0 | ready | tbd | 🔴 **修 `fact_chunk.py` 分子分母跨技术混用**（T0.2 新发现的假绿通路） | T0.2 | batch-2 | `:310-318` 把 `passed`/`total` 整体换成 JIT 数，而 `:441` 的 `factory_gap_ct` 恒取自 AOT ⇒ 分子分母不同总体；症状 `gatePassed=520 > gateTotal=519` | `fact_chunk.py` 修复 + 回归 | 分子分母同源；`gatePassed <= gateTotal` 恒成立 | `tests/e2e/verification/stages/fact_chunk.py` | 小 |
-| `T1.1` | 1 | planned | tbd | `CancellationToken.throw_if_cancellation_requested` 真实抛出 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | revert 后测试失败 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
-| `T1.2` | 1 | planned | tbd | `source_get_token` 构造真实 token | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 小 |
-| `T1.3` | 1 | planned | tbd | `CreateLinkedTokenSource` 实现或显式拒绝 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
+| `T1.1` | 1 | done | tbd | `CancellationToken.throw_if_cancellation_requested` 真实抛出 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | revert 后测试失败 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
+| `T1.2` | 1 | done | tbd | `source_get_token` 构造真实 token | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 小 |
+| `T1.3` | 1 | done | tbd | `CreateLinkedTokenSource` 实现或显式拒绝 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
 | `T1.4` | 1 | planned | tbd | `Parallel` failed 接线 + 结果返回 + 异常传播 | T0.4 | batch-3 | 反例验证 | `parallel.cpp` + 测试 | 同上 | `src/native/runtime-core/parallel.cpp` | 大 |
-| `T1.5` | 1 | planned | tbd | `SynchronizationContext::Post` 真实入队 | T0.4 | batch-3 | 反例验证 | `synchronization_context.cpp` + 测试 | 同上 | `src/native/runtime-core/synchronization_context.cpp` | 中 |
+| `T1.5` | 1 | done | tbd | `SynchronizationContext::Post` 真实入队 | T0.4 | batch-3 | 反例验证 | `synchronization_context.cpp` + 测试 | 同上 | `src/native/runtime-core/synchronization_context.cpp` | 中 |
 | `T1.6` | 1 | **completed（假说证伪）** | main | 🔴 ~~`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆~~ **→ 真因：`SubjectInstanceFactory.Create<T>()` 降级为 fallback（恒返 null）** | T0.5 | batch-3 | 取证结论：原「指针混淆」**被自身取证证伪** —— 4 个 factoryGap 中 3 个 AOT=JIT 同为 factoryGap 且生成体不含 awaiter 调用；唯一真 diff `DisposeAsync_1__0` 的判别信号是 **null 是否被消费**（`chaos_locals` store→reload→null-guard），非 helper 内部。helper 本身无缺陷，**不改代码** | 取证报告（STATUS 已重写） + Phase 2 覆盖项登记 | ✅ AOT/JIT 全量对照完成；结论已写入 STATUS「缺陷 1」 | `docs/dev/in-progress/threading-production-readiness/STATUS.md` | 中 |
 | `T2.0` | 2 | planned | tbd | 新建 `extern "C"` ABI 出口层（**前置，不可跳过**） | T1.* | batch-4 | 参照 `interlocked_stubs.h` / `threading_stubs.h` 既有模式 | `runtime_stubs/` 下新增头/实现 | ABI 符号可被 codegen 生成的 C++ 调用 | `src/native/runtime-core/runtime_stubs/` | 大 |
 | `T2.1` | 2 | planned | tbd | 托管对象 ↔ native 句柄映射机制（**新机制，无先例**） | T2.0 | batch-4 | 需处理生命周期与 GC 交互 | 映射机制实现 | 托管 `SemaphoreSlim` 实例可绑定 native 槽位 | `src/native/runtime-core/` | 大 |
@@ -158,6 +158,37 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | `T4.1` | 4 | planned | tbd | threading chunk 门禁阈值 + 回归告警 | T3.* | batch-9 | **必须把 `kCodegenFailureCount` 纳入阈值**（当前零消费者，见 STATUS T0.3 结论） | 阈值配置 + 告警接入 | 阈值生效；告警可触发；`kCodegenFailureCount>0` 能阻断 | `.github/workflows/`、验证管线配置 | 中 |
 
 **status 说明**：`T0.0` = `ready`（无前置依赖，可立即启动）；其余 `planned`。
+
+### T1.7 完成记录（7 项全部转绿，commit `65508dbdb`）
+
+| 测试 | 原症状 | 真根因 |
+|------|--------|--------|
+| `test_threading_stress` | 1800s 超时 | **RWLock 丢唤醒**（见下） |
+| `test_async_continue_with` | SEH 0xC0000005 | `chaos_task_continue_with` 释放后使用：先行任务已完成时回调同步内联并 `delete st`，调用方随后读 `st->continuation_task` |
+| `test_queue_backpressure` | SEGV | `TryStealFromWorker` 无锁读 `s_worker_queues`（写入侧持 `s_mutex`）→ UAF。回退验证：回退后 20 次崩 7 次，保留 0 次 |
+| `test_async_when_each` | 23s 挂起 | **非缺陷**——`may_have_next` 在"有元素排队或子任务未完成"时返回 1 是文档化契约；原测试不排空就等终止，是断言错 |
+| `test_threading_benchmark` / `test_async_when_async` / `test_phase3_industrialization` / `test_rwlock_upgrade` | SEGFAULT / 失败 | **非独立缺陷**——均为上述 RWLock/偷取缺陷在竞争下的下游表现，修复后各自单独全绿 |
+
+**RWLock 死锁的真根因（本任务最重的一项）**：实测挂死现场为
+`state=0 waiting_readers=7 waiting_writers=1` —— `state==0` 说明锁是空闲的，
+但所有线程都在 `cv.wait` 里睡着，即**丢唤醒**。根因是 `waiting_readers` /
+`waiting_writers` 在慢路径里**持 `entry->mutex`** 自增，三个 Exit 路径却
+**不加锁**读这两个计数再决定要不要 `notify`：一个"已发布计数但还没走到
+`cv.wait()`"的等待者，对裸 `notify_all` 是不可见的，若此后没有新的释放
+就永久 park。修法是把 notify 决策统一移入 `entry->mutex` 临界区。
+
+配套的两个状态机缺陷：(a) `ExitRead` 无条件 `fetch_sub` 先把 `state` 改掉
+再判"是否真持有读锁"，错配 exit 会把计数推成负数且不可恢复——挂死现场曾
+观察到 `state=-1` 且 `writer_tid=0`，即锁被"无人持有的写者"永久占住；
+(b) `EnterWrite`/`UpgradeToWrite` 慢路径无条件 `state.store(-1)` 会覆盖
+读者快路径刚 CAS 上的 `0→1`，使锁同时交给两个持有者。两者分别改为 CAS。
+
+**方法论教训**：本项前两次修复尝试（`notify_one`→`notify_all`）均失败，因为
+那只是把"叫错人"换成"叫了但没人被叫到"，未触及可见性根因。真正解决问题的是
+**读活状态而非推断**——为此新增 NDEBUG 门控的 `ChaosDebugDumpRWLocks()`
+导出（附加到挂死进程后 `.call` + `g`，把锁表打到 stdout）；一行
+`state=0 waiting_readers=7 waiting_writers=1` 直接定性为丢唤醒，而栈回溯
+只能显示"全体在 cv.wait 里睡着"。该诊段保留在 `synchronization.cpp` 供后续复用。
 
 ---
 
