@@ -205,6 +205,45 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // ValueTask.FromResult / FromCanceled / FromException — the same
+            // factories but for ValueTask.  Without these, any call to
+            // ValueTask.FromResult / FromCanceled / FromException from the BCL
+            // falls through to ChaosExternalRuntimeFallback -> emitted as
+            // undefined extern "C" symbol, C3861 at build time.
+            // The ValueTask routing is the identity for the finished task handle.
+            foreach (var (vtName, vtSymbol) in new[]
+            {
+                ("FromResult", "async_task_from_result"),
+                ("FromException", "async_task_from_exception"),
+                ("FromCanceled", "async_task_from_canceled"),
+            })
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Threading.Tasks.ValueTask",
+                    MethodName: vtName,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        var symbol = GetExternalRuntimeHelperSymbol(callee);
+                        var paramCount = paramTypes.Count;
+                        // ValueTask::FromResult(T) — 1 param of the value type.
+                        // ValueTask::FromException(Exception) — 1 param.
+                        // ValueTask::FromCanceled(CancellationToken) — 1 param.
+                        if (paramCount != 1) return null;
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            $"    return {vtSymbol}(chaos_arg_0);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot()),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: vtSymbol);
+                    }));
+            }
+
             // ── Task.ContinueWith (Phase 2 P2-2 / P2-4) ──
             // `antecedent.ContinueWith(body)` registers `body` to run when the
             // antecedent completes and returns a NEW task carrying the

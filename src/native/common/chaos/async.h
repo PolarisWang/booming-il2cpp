@@ -377,7 +377,12 @@ inline CHAOS_IL2CPP_INTPTR async_task_from_exception(CHAOS_IL2CPP_INTPTR excepti
 /// state from a fault.  `canceled` is set and `faulted` is left false so the
 /// awaiter raises TaskCanceledException specifically, rather than conflating
 /// cancellation with a payload-less fault.
-inline CHAOS_IL2CPP_INTPTR async_task_from_canceled() noexcept
+///
+/// The token is accepted for signature symmetry with the managed overload but
+/// is not consumed: this runtime cancels a task by its own flag, and a
+/// never-cancelled token is the only input the factories are called with.
+inline CHAOS_IL2CPP_INTPTR async_task_from_canceled(
+    CHAOS_IL2CPP_INTPTR /*cancellation_token*/ = 0) noexcept
 {
     CHAOS_IL2CPP_INTPTR handle = async_task_create();
     auto* task = require_async_task(handle);

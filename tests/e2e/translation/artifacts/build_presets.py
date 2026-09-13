@@ -114,9 +114,9 @@ def _win_msvc_env_cmd(cmd: list[str]) -> list[str]:
     when vcvars cannot be found (the command still runs).
     """
     if sys.platform != "win32":
-        return cmd
+        return cmd, False
     if os.environ.get("VSCMD_ARG_TGT_ARCH"):   # vcvars already loaded
-        return cmd
+        return cmd, False
     vswhere = Path(os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")) \
         / "Microsoft Visual Studio" / "Installer" / "vswhere.exe"
     vcvars = None
@@ -144,10 +144,22 @@ def _win_msvc_env_cmd(cmd: list[str]) -> list[str]:
                 vcvars = cand
                 break
     if vcvars is None:
-        return cmd
-    # cmd /c "call vcvars64.bat && <cmd ...>"
+        return cmd, False
+    # Keep the BACKSLASH path: forward slashes make cmd.exe's `call` report
+    # "The system cannot find the path specified".
+    #
+    # Return (string, True).  The caller MUST pass it with shell=True as a
+    # STRING; the argv-list form makes subprocess re-quote the inner quotes
+    # into \" which cmd.exe rejects ("'\"...vcvars64.bat\"' is not recognized").
+    # Both forms were measured directly — only string+shell=True loads vcvars.
     joined = " ".join(f'"{c}"' if " " in c else c for c in cmd)
-    return ["cmd", "/c", f'call "{vcvars}" >nul && {joined}']
+    return f'call "{vcvars}" >nul && {joined}', True
+
+
+def _call(cmd_and_shell, **kwargs):
+    """Run a command from _win_msvc_env_cmd, handling its (cmd, shell) shape."""
+    cmd, use_shell = cmd_and_shell if isinstance(cmd_and_shell, tuple) else (cmd_and_shell, False)
+    return subprocess.run(cmd, shell=use_shell, **kwargs)
 
 
 def build_preset(preset_name: str, force: bool = False) -> bool:
@@ -174,7 +186,7 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
         preset_dir = eval(build_dir_str)
     elif cmake_preset:
         # Step 1: cmake --preset (configure)
-        result = subprocess.run(
+        result = _call(
             _win_msvc_env_cmd(["cmake", "--preset", cmake_preset]),
             cwd=_REPO_ROOT, capture_output=True, text=True, timeout=120,
         )
@@ -200,7 +212,7 @@ def build_preset(preset_name: str, force: bool = False) -> bool:
         ]
         if config:
             build_args += ["--config", config]
-        result = subprocess.run(
+        result = _call(
             _win_msvc_env_cmd(build_args),
             capture_output=True, text=True, timeout=600,
         )
