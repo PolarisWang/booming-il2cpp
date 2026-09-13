@@ -260,8 +260,7 @@ P2（架构完美）体现为阶段门禁不放松；P3（HotUpdate）无冲突�
 
 ## 已完成
 
-- ✅ 三路并行审计（native 实现面 / 验证覆盖度 / codegen 翻译缺口）
-- ✅ 证据链核验（partition 权威性、nightly 消费路径、chunk 缺席差集、crt_stubs 旧签名）
+- ✅ 三路并行审计（native 实现面 / 验证覆盖度 / codegen 翻译缺口）- ✅ 证据链核验（partition 权威性、nightly 消费路径、chunk 缺席差集、crt_stubs 旧签名）
 - ✅ 综合分析报告交付
 - ✅ `design-v1-01.md` 写入
 - ✅ `blocking_questions = []`，用户确认清零
@@ -281,3 +280,77 @@ P2（架构完美）体现为阶段门禁不放松；P3（HotUpdate）无冲突�
 - `chaos_continuation` 回归测试仍未落地（`bb9a02fd0` 无测试守护）
 - `pcdistpatch-cond-exit-target-dropped` 未修
 - 其余 32 个陈旧 chunk 重建（属 `chaos-continuation-scope` 任务）
+
+---
+
+## 并入：async/Task 会话的实测数据（2026-09-13）
+
+来源：`async-task-industrialization` 线（另一并发会话），评估报告见
+`docs/dev/in-progress/async-task-industrialization/production-readiness-assessment.md`。
+本节只登记**对本 roadmap 有直接输入价值**的实测结论与已落地改动，不重复其内容。
+
+### 对 Phase 0 / Phase 2 有直接价值的实测
+
+**1. `threading-tasks` chunk 的 fallback 调用点分布（实测，非推断）**
+
+chunk 的 19 个生成 TU 中，`chaos_external_runtime_*` 未定义符号：
+**427 个 distinct / 3015 个调用点**。分类：
+
+| 分类 | 调用点 | 占比 |
+|------|--------|------|
+| 测试夹具（`SubjectInstanceFactory::Create` 等，ATG 生成） | 968 | 32% |
+| **Task 家族（真实 lowering 缺口）** | **1965** | **65%** |
+| 其他 BCL | 82 | 3% |
+
+> 这组数字直接支撑 roadmap §12 的判断「Phase 2 成本大幅上调」：
+> 缺口不是零星几个 API，而是 Task 家族的系统性覆盖面。
+
+**2. 已落地的注册改动（本会话提交，可直接复用于 T2.x）**
+
+| commit | 内容 | 对本 roadmap 的意义 |
+|--------|------|-------------------|
+| `f1214b60c` | 泛型 awaiter 变体注册（`Task\`1::GetAwaiter`、`TaskAwaiter\`1::GetResult`、`ValueTaskAwaiter\`1::GetResult`、`ValueTask::ConfigureAwait`） | 这类「backtick 泛型拼写」的注册模式可直接套用 T2.2-T2.5 |
+| `c47f35b00` | `ValueTask.FromResult/FromException/FromCanceled` 注册 | — |
+| `7a89c72d7` | non-void `GetResult` wrapper（修 C2440：生成代码把 void 结果赋给 slot） | **T2.x 若遇同类 C2440，根因即此** |
+| `6afb108fe` | `chaos_parallel_for_range_int` 声明补入 `async_stubs.h` | **与 T0.0 的 C3861 根因同族**：「定义与注册都在，仅缺 header 声明」——本会话独立复现了该形态 |
+
+**3. 「声明缺口」的独立复现（佐证 T0.0 结论）**
+
+T0.0 判定 threading chunk 的 C3861 是「定义与注册都在，仅缺 header 声明」。
+本会话在 Parallel chunk 上**独立复现了同一形态**：`chaos_parallel_for_range_int`
+定义在 `parallel.cpp`、注册在 ShapeRegistry，但生成的 TU 无法见到声明 →
+12 处 C3861。补声明到 `async_stubs.h`（生成 TU 都 include 该头）后 1/1 passed。
+
+⇒ **T0.0b 的形状可以照此办理：把声明补到生成 TU 可见的头文件**。
+
+**4. 性能基线（Parallel chunk，可直接作为 Phase 3 benchmark 的对照）**
+
+107 个 benchmark 方法，`--benchmark-all 100`：
+
+| 指标 | 优化前 | 优化后 | 变化 |
+|------|--------|--------|------|
+| Hot 方法（>10μs） | 8 | 4 | −50% |
+| Hot 总耗时 | 1127μs | 215μs | **−81%** |
+| chunk 总耗时 | ~1175μs | 233μs | **−80%** |
+
+分项：`IDisposable::Dispose` 40μs→<1μs（no-op 注册）；
+委托 `.ctor` 31-62μs→<1μs（`ChaosDelegateInitialize`）；
+`Parallel.For` 585μs→不可测量（原生范围分区器 `e611138f3`）。
+
+> **对 T1.4 的直接影响**：`Parallel.For` 的原生分区器已落地
+> （`src/native/runtime-core/parallel.{h,cpp}`），T1.4 的「failed 接线 + 结果返回 +
+> 异常传播」是在其之上补语义，不是从零实现。
+
+**5. 未决/不适用（避免重复投入）**
+
+| 项 | 结论 |
+|----|------|
+| `TaskToAsyncResult` (12 调用点) | APM `Begin/End` 模式，AOT 无等价物 —— **显式拒绝，不实现** |
+| `ConcurrentExclusiveSchedulerPair` | 自定义 `TaskScheduler`，超出「仅默认 TaskScheduler」边界 |
+| `ValueTask` 家族剩余 C3861/C2660（5 处） | 本会话修到剩 5 个未收敛，**按三次规则停止**；留待 T2.x 统一处理 |
+
+### 与主会话的协调
+
+本会话曾短暂创建 `async-bcl-gaps` worktree，同步 main 后识别出本 roadmap
+已覆盖同一目标且诊断更准（「缺 ABI 出口层」而非「未注册」），
+**已删除该 worktree，未产生代码改动**。上述数据是唯一产出。
