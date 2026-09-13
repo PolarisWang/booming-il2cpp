@@ -430,8 +430,16 @@ internal sealed class SdkEmitter
         //
         // Written directly to the SDK runtime_stubs/ directory (not copied from source)
         // so the main runtime build is unaffected.
+        //
+        // ALWAYS overwrite — this content is fully determined by the generator source
+        // below.  A `if (!File.Exists(...))` guard here made a stale stub immortal: the
+        // chunk's hephaestus cache keeps runtime_stubs/ across builds, so once an old
+        // version was baked in, later fixes to this string never reached any chunk that
+        // had already been built.  That is exactly how the `_Thrd_sleep_for` ABI fix
+        // (2026-09-10) failed to reach the `text` chunk, leaving an entry.exe that
+        // SIGSEGV'd at startup on the first GateThreadLoop sleep.  See the same-shaped
+        // hazard in CopyNativeLibs (skip-if-exists never refreshes).
         var palTimeStubDst = Path.Combine(dstRuntimeStubs, "pal_time_stub.cpp");
-        if (!File.Exists(palTimeStubDst))
         {
             File.WriteAllText(palTimeStubDst,
                 "// pal_time_stub.cpp — SDK-emitted PAL time stub for test builds.\n"
@@ -464,8 +472,12 @@ internal sealed class SdkEmitter
         // IMPORTANT — MSVC 19.42+ signatures differ from C11 threads:
         //   _Thrd_sleep_for(unsigned long ms)        — takes ms directly, NOT a timespec ptr!
         //   _Cnd_timedwait_for_unchecked(void*, void*, unsigned int) — ms, NOT a struct ptr!
+        // ALWAYS overwrite — see the note on pal_time_stub.cpp above.  This stub in
+        // particular MUST track the MSVC signature change below: a chunk that cached the
+        // pre-fix `int __cdecl _Thrd_sleep_for(const void*, void*)` while the prebuilt
+        // chaos_runtime_core.lib called the post-fix `void __stdcall(unsigned long)` would
+        // link fine and then dereference the integer duration as a pointer at runtime.
         var crtStubsDst = Path.Combine(dstRuntimeStubs, "crt_stubs.cpp");
-        if (!File.Exists(crtStubsDst))
         {
             File.WriteAllText(crtStubsDst,
                 "// crt_stubs.cpp -- Stubs for MSVC 19.42+ CRT/STL symbols\n"
