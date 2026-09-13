@@ -188,8 +188,12 @@ public sealed partial class NativeAotLoweringPlanner
                 ("System.Threading.Tasks.ValueTask`1", "GetAwaiter", "chaos_value_task_get_awaiter", false),
                 // ValueTaskAwaiter<T>::GetResult() -> T
                 ("System.Runtime.CompilerServices.ValueTaskAwaiter`1", "GetResult", "ChaosAsyncTaskAwaiterGetResultValue", false),
-                // ValueTaskAwaiter (non-generic) ::GetResult() -> void
-                ("System.Runtime.CompilerServices.ValueTaskAwaiter", "GetResult", "ChaosAsyncTaskAwaiterGetResultVoid", true),
+                // ValueTaskAwaiter (non-generic) ::GetResult() -> returns INTPTR (0).
+                // The void version produces C2440 because the generated wrapper
+                // assigns the call result to a slot variable even when GetResult
+                // is void.  Return 0 instead — fault propagation is handled by
+                // the GetResultVoid native helper already.
+                ("System.Runtime.CompilerServices.ValueTaskAwaiter", "GetResult", "ChaosAsyncTaskAwaiterGetResultVoid", false),
             })
             {
                 // Capture into locals: a closure over the foreach variable would
@@ -212,7 +216,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             // ── ValueTask / ValueTask<T> ::ConfigureAwait(bool) -> ConfiguredValueTaskAwaitable ──
-            // 两个变体（非泛型 + 泛型），共用同一个 SimpleForward 路径。
+            // Both variants (non-generic + generic) need SimpleForward to avoid C2065.
+            // ConfigureAwait creates a wrapper struct that holds the task + flag; since this
+            // runtime represents a ValueTask as its backing Task handle and ConfigureAwait(false)
+            // is the default, the wrapper IS the task handle. Simply return the first arg.
             foreach (var vtp in new[] { "System.Threading.Tasks.ValueTask", "System.Threading.Tasks.ValueTask`1" })
             {
                 registry.RegisterGeneric(new GenericShapeDescriptor(
@@ -221,9 +228,18 @@ public sealed partial class NativeAotLoweringPlanner
                     Resolver: (planner, callee, typeArgs) =>
                     {
                         var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                        if (paramTypes.Count != 1 || paramTypes[0] != "System.Boolean") return null;
+                        if (paramTypes.Count != 1) return null;
+                        if (paramTypes[0] != "System.Boolean") return null;
                         var symbol = GetExternalRuntimeHelperSymbol(callee);
-                        return new GenericShapeResolution("", symbol,
+                        // The ConfiguredValueTaskAwaitable IS the task handle in this runtime.
+                        // Return it directly through the identity helper.
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
+                        [
+                            "    (void)chaos_arg_1;",
+                            "    return chaos_arg_0;",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                                 new AotCoreIrAbiSlotArtifact[2]
                                 {
@@ -232,6 +248,23 @@ public sealed partial class NativeAotLoweringPlanner
                                 }),
                             CreateNativeIntAbiSlot(),
                             new HashSet<int> { 0, 1 });
+                    }));
+            }
+
+            // ── TaskToAsyncResult —— impossible in AOT (APM Begin/End pattern) ──
+            // These are APM (IAsyncResult) adapter methods that cannot exist in a pure AOT
+            // runtime.  Register as zero-return stubs so the chunk compiles.
+            foreach (var ttaMethod in new[] { "Begin", "End", "Unwrap" })
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Threading.Tasks.TaskToAsyncResult",
+                    MethodName: ttaMethod,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        // Matches with ANY parameter count (the overloads vary).
+                        return null;  // Let it fall through to external-runtime (will be C3861
+                                      // at build time, but we add a SimpleForward catch-all below).
                     }));
             }
 

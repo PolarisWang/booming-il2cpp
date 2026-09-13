@@ -85,6 +85,20 @@ extern "C" void chaos_noop_void(CHAOS_IL2CPP_INTPTR) noexcept
     // No-op: the GC owns the lifetime, not managed Dispose.
 }
 
+// ── Phase 6 / A: non-void GetResult void helpers (C2440 fix) ──
+// These return 0 as INTPTR instead of void, because the generated wrapper
+// assigns the call result to a slot variable regardless of the return type.
+extern "C" CHAOS_IL2CPP_INTPTR chaos_task_awaiter_get_result_void(CHAOS_IL2CPP_INTPTR awaiter) noexcept
+{
+    (void)awaiter;
+    return 0;
+}
+extern "C" CHAOS_IL2CPP_INTPTR chaos_value_task_awaiter_get_result_void(CHAOS_IL2CPP_INTPTR awaiter) noexcept
+{
+    (void)awaiter;
+    return 0;
+}
+
 // ── TaskAwaiter.GetResult stub ─────────────────────────────────
 // Called from async state machine dispatch code.  The awaiter is a
 // managed TaskAwaiter object; this stub simply marks await as complete.
