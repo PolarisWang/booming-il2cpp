@@ -68,7 +68,13 @@ def classify_gate(fact: dict | None, *, min_ratio: float = GATE_REAL_RATIO) -> s
     real_v = fact.get("realVerified")
     if real_v is not None:
         unassertable = fact.get("unassertable") or 0
-        assertable = total - unassertable
+        # stubGap records (ATG emitted AOT-STUB-GAP: no AOT body at all) are an
+        # implementation backlog, not a verification gap in the method under
+        # test — same treatment as factoryGap in fact_chunk.py's own
+        # gate_denominator.  Leaving them in would make the json/xml chunks
+        # permanently un-passable for a reason the chunk cannot control.
+        stub_gap = fact.get("stubGap") or 0
+        assertable = total - unassertable - stub_gap
         # Nothing to assert anywhere -> the chunk is as verified as it can be.
         if assertable <= 0:
             return "pass"
@@ -108,14 +114,15 @@ def fact_real_ratio(fact: dict | None) -> float:
 def fact_gap_breakdown(fact: dict | None) -> dict:
     """Return the honest four-way split for reporting.
 
-    ``{realVerified, unassertable, smokeUnknown, failed, total}`` — zero-filled
-    when a legacy fact.json lacks the runtime fields.
+    ``{realVerified, unassertable, smokeUnknown, stubGap, failed, total}`` —
+    zero-filled when a legacy fact.json lacks the runtime fields.
     """
     fact = fact or {}
     return {
         "realVerified": fact.get("realVerified", 0),
         "unassertable": fact.get("unassertable", 0),
         "smokeUnknown": fact.get("smokeUnknown", 0),
+        "stubGap": fact.get("stubGap", 0),
         "failed": fact.get("failed", 0),
         "total": fact.get("total", 0),
     }

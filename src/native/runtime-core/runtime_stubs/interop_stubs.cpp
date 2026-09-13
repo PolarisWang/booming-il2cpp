@@ -792,7 +792,14 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     // If all of those failed to execute, the subject reaches this point genuinely
     // unresolved and flows to the documented sentinel catch-all below (not a
     // per-crypto-class lie).
-
+    // NOTE: unconditional return 0 here is a silent data-corruption risk for
+    // complex state-machine methods (XmlReader, JsonDocument, etc.). The LOG
+    // below makes this observable in diagnostics builds so developers can detect
+    // methods that need real native implementations. See P0-A of
+    // json-xml-production-readiness.
+    CHAOS_IL2CPP_LOG_WARN_M("ExternalRuntimeFallback",
+        "Phase 3 catch-all: {0} — unresolvable subject falls through to return 0",
+        (subject_id != nullptr ? subject_id : "(null)"));
    return 0;
 }
 

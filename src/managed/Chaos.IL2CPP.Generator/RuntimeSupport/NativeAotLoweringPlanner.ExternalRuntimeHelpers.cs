@@ -690,8 +690,26 @@ public sealed partial class NativeAotLoweringPlanner
 		string escapedCallee = callee.Replace("\\", "\\\\").Replace("\"", "\\\"");
 		// All catch-all fallback functions use () regardless of actual method params
 		// because call sites pass 0 args and the body uses hardcoded subject ID.
+		//
+		// P0-A (json-xml-production-readiness): the generated helper emits a
+		// one-time WARN before delegating.  ChaosExternalRuntimeFallback's Phase 3
+		// ultimately returns 0/null for subjects it cannot resolve — silent data
+		// corruption for state-machine methods (XmlReader, JsonDocument, ...).
+		// The warning makes the fall-through observable in diagnostics builds so
+		// the json/xml coverage work can see which subjects still lack a real
+		// native body instead of inferring it from a 42 sentinel.  The static
+		// guard keeps it to one line per distinct callee per process, so this
+		// does not become a hot-path cost.
 		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
-			["    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");"]);
+		[
+			"    static const bool chaos_warned_" + System.Math.Abs(failSymbol.GetHashCode()).ToString() + " = []() {",
+			"        CHAOS_IL2CPP_LOG_WARN(\"ExternalRuntimeFallback\",",
+			"            \"catch-all helper invoked: " + escapedCallee + " — no native body; delegates to Phase 1/2, else returns 0\");",
+			"        return true;",
+			"    }();",
+			"    (void)chaos_warned_" + System.Math.Abs(failSymbol.GetHashCode()).ToString() + ";",
+			"    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");",
+		]);
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 			Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
 		_externalRuntimeHelperCache[callee] = helperDefinition;

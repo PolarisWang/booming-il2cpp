@@ -370,6 +370,13 @@ public sealed class TestEmitter
             // path as unverifiable by design.
             if (isExternalAssembly)
             {
+                // P0-B (json-xml-production-readiness): emit an explicit machine-
+                // readable marker in addition to the human comment.  The fact layer
+                // (fact_chunk.py classify_fact_record) scans for "AOT-STUB-GAP" and
+                // buckets these as `stubGap` rather than `smoke`, so a method with no
+                // AOT body is no longer indistinguishable from a method that merely
+                // failed to assert.  See docs/dev/in-progress/json-xml-production-readiness.
+                sb.AppendLine("            // AOT-STUB-GAP");
                 sb.AppendLine($"            // [UNVERIFIED] AOT stub: {result.ExceptionType} thrown by {callExpr} (managed input->exception, AOT stub returns default — smoke test passes)");
                 return;
             }

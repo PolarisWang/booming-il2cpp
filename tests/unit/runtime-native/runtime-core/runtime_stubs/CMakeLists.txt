@@ -113,3 +113,16 @@ target_compile_definitions(convert_stubs_eh_test PRIVATE
     CHAOS_IL2CPP_EH_SETJMP
 )
 target_compile_options(convert_stubs_eh_test PRIVATE /utf-8)
+
+# P0-A (json-xml-production-readiness): XmlNameTable Add/Get interned-string
+# semantics.  Compiles xml_nametable_stubs.cpp + string_table.cpp directly
+# (same GNU ar / MSVC compat pattern as the sibling stub tests above).
+# The stub routes through string_table::Intern/Find, so string_table.cpp is
+# a hard dependency; exception_helpers is not linked because the
+# non-throwing contract is what is under test here.
+chaos_native_add_test(xml_nametable_test
+    xml_nametable_test.cpp
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/xml_nametable_stubs.cpp"
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/string_table.cpp"
+    LABELS "unit;core;xml"
+)

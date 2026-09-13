@@ -122,7 +122,8 @@ _UNASSERTABLE_RETURN_TYPES = frozenset({
 
 
 def classify_fact_record(rec: dict, return_type: str | None,
-                         is_factory_subject: bool = False) -> str:
+                         is_factory_subject: bool = False,
+                         stub_gap_ids: frozenset[str] | None = None) -> str:
     """Classify one runtime fact record into exactly one bucket.
 
     This is THE single source of truth for real-vs-smoke.  Both the chunk-level
@@ -136,6 +137,11 @@ def classify_fact_record(rec: dict, return_type: str | None,
       * ``smoke``       — value == 42 on a method that DOES return a value: it
                           should have produced a real assertion but did not.
                           This is the honest coverage gap.
+      * ``stubGap``     — ATG emitted ``AOT-STUB-GAP`` (no AOT body at all, so
+                          the call was never executed).  An implementation
+                          backlog item, not a verification gap in the method
+                          under test — excluded from the gate denominator the
+                          same way factoryGap is.
       * ``factoryGap``  — the dispatch threw before reaching the method: the
                           test's ``SubjectInstanceFactory.Create<T>()`` returned
                           null in AOT (its generic instantiation has no native
@@ -172,6 +178,15 @@ def classify_fact_record(rec: dict, return_type: str | None,
     # verification failure, not a smoke gap — report it as "failed".
     if rec.get("assertFailed"):
         return "failed"
+
+    # P0-B (json-xml-production-readiness): if this record's generatedMethodId
+    # carries an AOT-STUB-GAP marker from the ATG, it is a known stub gap
+    # rather than a smoke gap.  Bucket as stubGap so the gate does not penalise
+    # methods that the toolchain positively knows have no AOT body.
+    if stub_gap_ids is not None and not stub_gap_ids.isdisjoint(
+            _gen_method_ids(rec)):
+        return "stubGap"
+
     if return_type is None:
         # No metadata = supplemental-coverage method ATG never probed.
         # We have no way to decide void vs non-void — treat conservatively
@@ -203,6 +218,79 @@ def _count_unverified_markers(ctx: ChunkContext) -> int:
         return count
     except OSError:
         return 0
+
+
+def _gen_method_ids(rec: dict) -> list[str]:
+    """Extract the generatedMethodId(s) from a fact record.
+
+    The record key varies between run-epochs — prefer the runtime-stamped
+    ``generatedMethodId``, then fall back to ``methodSubjectId``.
+    """
+    raw = rec.get("generatedMethodId") or rec.get("methodSubjectId") or ""
+    return [raw] if raw else []
+
+
+def _stub_gap_method_ids(ctx: ChunkContext) -> frozenset[str]:
+    """Scan CombinedSubjects.cs for the machine-readable ``// AOT-STUB-GAP`` marker.
+
+    P0-B (json-xml-production-readiness): TestEmitter now emits ``// AOT-STUB-GAP``
+    immediately before every ``[UNVERIFIED]`` external-assembly stub comment.
+    That lets the fact layer distinguish:
+
+      * ``smoke``   — the method HAS an AOT body but produced no assertion value
+                      (a genuine coverage gap in the *test*).
+      * ``stubGap`` — ATG positively knows the method has no AOT body, so the
+                      call was never executed (a coverage gap in the
+                      *implementation*, and an infrastructure fact, not a defect
+                      in the method under test).
+
+    Without this distinction both collapse into ``smoke`` and the report cannot
+    tell "not implemented" apart from "not asserted" — the exact ambiguity that
+    made the JSON/XML real-verified numbers unreadable.
+
+    Markers are attributed to a method by proximity: the ``// AOT-STUB-GAP``
+    line appears in the same generated ``[Fact]`` body as the owning
+    generatedMethodId.  Because the marker is a whole-line comment emitted
+    directly above the ``[UNVERIFIED]`` line inside that body, we walk the file
+    tracking the most recent ``generatedMethodId`` assignment and bind it.
+
+    Returns a frozenset of generatedMethodId strings carrying the marker.
+    """
+    combined_cs = ctx.chunk_dir / "managed" / "combined" / "CombinedSubjects.cs"
+    if not combined_cs.exists():
+        return frozenset()
+    try:
+        text = combined_cs.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return frozenset()
+
+    if "AOT-STUB-GAP" not in text:
+        return frozenset()
+
+    # The generated file emits, per method, a body shaped roughly like:
+    #     public long <methodSuffix>()          // [Fact][HotUpdate]
+    #     {
+    #         ...
+    #         // AOT-STUB-GAP
+    #         // [UNVERIFIED] AOT stub: ...
+    #         return 42L;
+    #     }
+    # The method's generatedMethodId is recorded in the surrounding metadata
+    # block.  We bind a marker to the nearest *preceding* method identity token.
+    # Accept either an explicit `generatedMethodId` literal or the method-index
+    # local name, whichever the emitter produced in this file generation.
+    gap_ids: set[str] = set()
+    current_id: str | None = None
+    id_re = re.compile(r'generatedMethodId\s*=\s*"([^"]+)"')
+    for line in text.splitlines():
+        m = id_re.search(line)
+        if m:
+            current_id = m.group(1)
+            continue
+        if "AOT-STUB-GAP" in line and current_id is not None:
+            gap_ids.add(current_id)
+    return frozenset(gap_ids)
+
 
 
 def _get_factory_subject_ids(ctx: ChunkContext) -> frozenset[str]:
@@ -367,6 +455,12 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     # reported in their own bucket rather than hidden inside "failed".
     factory_subjects = _get_factory_subject_ids(ctx)
 
+    # Stub-gap detection (P0-B): pre-scan CombinedSubjects.cs for the
+    # `// AOT-STUB-GAP` marker TestEmitter writes above every [UNVERIFIED]
+    # external-assembly stub.  Those methods have no AOT body by construction,
+    # so they are bucketed separately from `smoke` — see classify_fact_record.
+    stub_gap_ids = _stub_gap_method_ids(ctx)
+
     def _annotate(records: list) -> list:
         if not records:
             return records
@@ -398,7 +492,8 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
                 rec["returnType"] = rt
                 rec["resultKind"] = classify_fact_record(
                     rec, rt,
-                    is_factory_subject=(gen_id in factory_subjects) if gen_id else False)
+                    is_factory_subject=(gen_id in factory_subjects) if gen_id else False,
+                    stub_gap_ids=stub_gap_ids)
                 continue
 
             # Fallback for records without methodSubjectId (pre-rebuild).
@@ -409,7 +504,8 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
                 sid = sid_by_index[int(idx)]
                 rt = _return_type_of(sid)
                 rec["returnType"] = rt
-                rec["resultKind"] = classify_fact_record(rec, rt)
+                rec["resultKind"] = classify_fact_record(
+                    rec, rt, stub_gap_ids=stub_gap_ids)
         return records
 
     per_method = {
@@ -429,16 +525,18 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     unassertable_ct = sum(1 for r in annotated if r.get("resultKind") == "unassertable")
     smoke_ct = sum(1 for r in annotated if r.get("resultKind") == "smoke")
     factory_gap_ct = sum(1 for r in annotated if r.get("resultKind") == "factoryGap")
+    stub_gap_ct = sum(1 for r in annotated if r.get("resultKind") == "stubGap")
     failed_ct = sum(1 for r in annotated if r.get("resultKind") == "failed")
 
     # Real-signal numerator: records that produced/or would produce a genuine
     # semantic check (a real value, or a genuine failure).  unassertable records
     # stay in the denominator so an all-void chunk cannot claim a free 100%.
-    # factoryGap records are infrastructure failures (factory returned null), not
-    # defects in the method under test — they are excluded from numerator AND
-    # denominator so they cannot block the gate while remaining fully visible.
+    # factoryGap and stubGap records are infrastructure gaps (factory returned
+    # null / method has no AOT body), not defects in the method under test —
+    # they are excluded from numerator AND denominator so they cannot block the
+    # gate while remaining fully visible.
     real_signal = real_ct + failed_ct
-    gate_denominator = total - factory_gap_ct
+    gate_denominator = total - factory_gap_ct - stub_gap_ct
 
     fact_data = {
         "passed": passed,
@@ -447,15 +545,16 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         "realVerified": real_ct,        # value != 42: genuine assertion value
         "unassertable": unassertable_ct,  # void/async-void: 42 is structural
         "smokeUnknown": smoke_ct,       # has a return type but returned 42 → GAP
+        "stubGap": stub_gap_ct,         # ATG marked AOT-STUB-GAP: no AOT body at all
         "factoryGap": factory_gap_ct,   # factory returned null → caught before method ran
         "failed": failed_ct,            # passed == False
-        # ── Gate numerator/denominator (factoryGap excluded from both sides) ──
+        # ── Gate numerator/denominator (factoryGap + stubGap excluded) ──
         "gateTotal": gate_denominator,
         "gatePassed": passed,
         # ── Legacy fields (backward compat; now runtime-based, not marker-based) ──
         "realTotal": real_signal,
         "realPassed": real_ct,
-        "unverifiedSmoke": unassertable_ct + smoke_ct,
+        "unverifiedSmoke": unassertable_ct + smoke_ct + stub_gap_ct,
         "unverifiedMarkers": unverified_smoke,  # diagnostic only (compile-time)
         "valueSuspicious": value_warnings > 0,
         "valueWarnings": value_warnings,
