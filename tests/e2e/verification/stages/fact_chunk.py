@@ -290,6 +290,33 @@ def _write_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         pass  # non-fatal
 
 
+def select_reference_counts(aot_result: dict,
+                            jit_result: dict | None) -> tuple[int, int, int, int]:
+    """Pick the (passed, total, jit_passed, jit_total) figure set for fact.json.
+
+    AOT is ALWAYS the reference population.  Every bucket in the aggregate
+    (real / unassertable / smoke / factoryGap / failed) is computed from the AOT
+    annotated records, so ``passed``/``total`` must come from the same run or the
+    numerator and denominator describe two different executions.
+
+    This deliberately does NOT swap in the JIT counts when the JIT pass-rate is
+    higher.  Doing so mixed a JIT numerator with an AOT-derived factory-gap
+    subtraction and produced the impossible ``gatePassed > gateTotal``
+    (observed 520 > 519 on the threading chunk).  It was also optimistic in
+    precisely the case that carries the most signal: AOT failing where JIT
+    passes, which is a real AOT lowering defect and the thing this stage exists
+    to surface.
+
+    JIT numbers are returned alongside rather than discarded, so callers can
+    report them separately (the cross-tech diff is the actionable form).
+    """
+    passed = aot_result.get("passed", 0) or 0
+    total = aot_result.get("total", 0) or 0
+    jit_passed = (jit_result.get("passed", 0) or 0) if jit_result else 0
+    jit_total = (jit_result.get("total", 0) or 0) if jit_result else 0
+    return passed, total, jit_passed, jit_total
+
+
 def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | None,
                         meta_total: int | None, fact_method_count: int | None,
                         value_warnings: int, unverified_smoke: int = 0) -> None:
@@ -305,16 +332,10 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     chunk_results_dir = ctx.chunk_dir / "results"
     chunk_results_dir.mkdir(parents=True, exist_ok=True)
     fact_path = chunk_results_dir / "fact.json"
-    passed = aot_result.get("passed", 0)
-    total = aot_result.get("total", 0)
-    if jit_result and jit_result.get("total", 0) > 0:
-        aot_rate = passed / total if total > 0 else 0.0
-        jit_passed = jit_result.get("passed", 0)
-        jit_total = jit_result.get("total", 0)
-        jit_rate = jit_passed / jit_total if jit_total > 0 else 0.0
-        if jit_rate > aot_rate:
-            passed = jit_passed
-            total = jit_total
+    # ── Reference population for every aggregate below is AOT ──────────────
+    # See select_reference_counts() for why the JIT counts are NOT substituted
+    # in.  They are carried through for separate reporting only.
+    passed, total, jit_passed, jit_total = select_reference_counts(aot_result, jit_result)
 
     # ── Build the per-method annotated records FIRST (source of truth) ──
     # Each record is stamped with bodyAvailability + returnType + resultKind by
@@ -452,6 +473,12 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         # ── Gate numerator/denominator (factoryGap excluded from both sides) ──
         "gateTotal": gate_denominator,
         "gatePassed": passed,
+        # ── JIT run (SEPARATE population — never mixed into the fields above) ──
+        # Reported so a JIT-better-than-AOT gap is visible instead of being
+        # silently folded into the AOT headline.  The cross-tech diff below is
+        # the actionable form of this signal.
+        "jitPassed": jit_passed,
+        "jitTotal": jit_total,
         # ── Legacy fields (backward compat; now runtime-based, not marker-based) ──
         "realTotal": real_signal,
         "realPassed": real_ct,
