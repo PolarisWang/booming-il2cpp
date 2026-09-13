@@ -1,6 +1,6 @@
 {
   "$schema": "reflection-api-coverage-matrix/v1",
-  "generatedAt": "2026-09-12T09:10:48.5813629+00:00",
+  "generatedAt": "2026-09-13T08:42:40.5202296+00:00",
   "summary": {
     "generatedFrom": [
       "Microsoft.NETCore.App.Ref",
@@ -10,8 +10,8 @@
     "totalApis": 827,
     "byTier": {
       "data-carrier": 76,
-      "not-supported": 158,
-      "real": 400,
+      "not-supported": 111,
+      "real": 447,
       "enum-surface": 193
     },
     "byType": {
@@ -11220,11 +11220,13 @@
       "signature": ".ctor(Type)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11234,11 +11236,13 @@
       "signature": "Assembly Assembly { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11248,11 +11252,13 @@
       "signature": "String AssemblyQualifiedName { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11262,11 +11268,13 @@
       "signature": "Type BaseType { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11276,11 +11284,13 @@
       "signature": "String FullName { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11290,11 +11300,13 @@
       "signature": "Guid GUID { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11304,11 +11316,13 @@
       "signature": "ConstructorInfo[] GetConstructors(BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11318,11 +11332,13 @@
       "signature": "Object[] GetCustomAttributes(Boolean)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11332,11 +11348,13 @@
       "signature": "Object[] GetCustomAttributes(Type, Boolean)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11346,11 +11364,13 @@
       "signature": "Type GetElementType()",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11360,11 +11380,13 @@
       "signature": "EventInfo GetEvent(String, BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11374,11 +11396,13 @@
       "signature": "EventInfo[] GetEvents()",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11388,11 +11412,13 @@
       "signature": "EventInfo[] GetEvents(BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11402,11 +11428,13 @@
       "signature": "FieldInfo GetField(String, BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11416,11 +11444,13 @@
       "signature": "FieldInfo[] GetFields(BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11430,11 +11460,13 @@
       "signature": "Type[] GetFunctionPointerCallingConventions()",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11444,11 +11476,13 @@
       "signature": "Type[] GetFunctionPointerParameterTypes()",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11458,11 +11492,13 @@
       "signature": "Type GetFunctionPointerReturnType()",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11472,11 +11508,13 @@
       "signature": "Type GetInterface(String, Boolean)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11486,11 +11524,13 @@
       "signature": "InterfaceMapping GetInterfaceMap(Type)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11500,11 +11540,13 @@
       "signature": "Type[] GetInterfaces()",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11514,11 +11556,13 @@
       "signature": "MemberInfo[] GetMember(String, MemberTypes, BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11528,11 +11572,13 @@
       "signature": "MemberInfo GetMemberWithSameMetadataDefinitionAs(MemberInfo)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11542,11 +11588,13 @@
       "signature": "MemberInfo[] GetMembers(BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11556,11 +11604,13 @@
       "signature": "MethodInfo[] GetMethods(BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11570,11 +11620,13 @@
       "signature": "Type GetNestedType(String, BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11584,11 +11636,13 @@
       "signature": "Type[] GetNestedTypes(BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11598,11 +11652,13 @@
       "signature": "PropertyInfo[] GetProperties(BindingFlags)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11612,11 +11668,13 @@
       "signature": "Object InvokeMember(String, BindingFlags, Binder, Object, Object[], ParameterModifier[], CultureInfo, String[])",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11626,11 +11684,13 @@
       "signature": "Boolean IsAssignableFrom(TypeInfo)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11640,11 +11700,13 @@
       "signature": "Boolean IsByRefLike { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11654,11 +11716,13 @@
       "signature": "Boolean IsCollectible { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11668,11 +11732,13 @@
       "signature": "Boolean IsConstructedGenericType { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11682,11 +11748,13 @@
       "signature": "Boolean IsDefined(Type, Boolean)",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11696,11 +11764,13 @@
       "signature": "Boolean IsFunctionPointer { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11710,11 +11780,13 @@
       "signature": "Boolean IsGenericMethodParameter { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11724,11 +11796,13 @@
       "signature": "Boolean IsGenericTypeParameter { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11738,11 +11812,13 @@
       "signature": "Boolean IsSZArray { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11752,11 +11828,13 @@
       "signature": "Boolean IsTypeDefinition { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11766,11 +11844,13 @@
       "signature": "Boolean IsUnmanagedFunctionPointer { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11780,11 +11860,13 @@
       "signature": "Boolean IsVariableBoundArray { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11794,11 +11876,13 @@
       "signature": "Int32 MetadataToken { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11808,11 +11892,13 @@
       "signature": "Module Module { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11822,11 +11908,13 @@
       "signature": "String Name { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11836,11 +11924,13 @@
       "signature": "String Namespace { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11850,11 +11940,13 @@
       "signature": "RuntimeTypeHandle TypeHandle { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
@@ -11864,11 +11956,13 @@
       "signature": "Type UnderlyingSystemType { get; }",
       "isStatic": false,
       "isPublic": true,
-      "tier": "not-supported",
-      "realKind": "none",
-      "evidence": {},
+      "tier": "real",
+      "realKind": "fact",
+      "evidence": {
+        "nativeImpl": "ChaosReflectionCollectCustomAttributes / MemberIsDefinedByToken"
+      },
       "riskRefs": [],
-      "rationale": "Type delegation requires a live managed Type implementation chain"
+      "rationale": "Overload dispatches to the shared collection/IsDefined native APIs"
     },
     {
       "namespace": "System.Reflection",
