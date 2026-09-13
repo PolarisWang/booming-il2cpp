@@ -600,9 +600,13 @@ public sealed partial class NativeAotEmitter
             // undeclared and producing a conflicting typedef (C2371).
             int end = headerContent.IndexOfAny(new[] { ' ', '{', ';', '\n', '\r', ':' }, nameStart);
             if (end < 0) continue;
-            // Store bare symbol name (strip "struct " prefix) for comparison
-            // with typedef names and references.
-            result.Add(headerContent.Substring(nameStart, end - nameStart));
+            // Store the FULL symbol ("chaos_valuetype_" + name), matching both the
+            // typedef scan above and the reference scan in
+            // AppendMissingVtTypedefsToHeaderPostScan. Storing the bare name here
+            // put two different key formats in the same set, so a struct-defined
+            // type could never match the referenced symbol and always got a
+            // conflicting typedef appended (C2371).
+            result.Add(valuetypePrefix + headerContent.Substring(nameStart, end - nameStart));
             pos = end + 1;
         }
     }
