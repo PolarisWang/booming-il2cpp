@@ -18,8 +18,8 @@ child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
 dispatch_model: sequential
-recommended_next_child: T0.0b
-latest_stop_point: T0.0 实测完成（根因非 crt_stubs），Phase 0 形状已修正，待切 worktree 后启动 T0.0b
+recommended_next_child: T0.2-run
+latest_stop_point: threading chunk build 转绿 1/1 passed（三层缺陷已修）；T0.2 尚差「运行 + fact 比对」
 ```
 
 ## 最近摘要
@@ -42,11 +42,71 @@ Phase 0 拆 4 个 T0.x + 检查点。
 
 ## 下一步
 
-**🔴 阻塞中**：worktree 无法构建。见下节「worktree 构建隔离缺失」。
+**✅ 阻塞已解除**：threading chunk **`1/1 passed`**（724 subjects → entry.exe，509s）。
+三层缺陷全部定位并修复，详见下节。
 
 ---
 
-## 🔴 worktree 构建隔离缺失（2026-09-13 实测，阻断级）
+## ✅ T0.0b/T0.0c/T0.2 闭环（2026-09-13 实测）
+
+**起点**：`0/1 passed`（550s），9× C3861 + 2× C3313/C3536。
+**终局**：`1/1 passed`（534s），零 error。中间经历了**三个独立缺陷**，
+且前两个被第三个掩盖 —— 每修好一层才暴露出下一层。
+
+### 缺陷 1 — C3861：缺 codegen 可见声明（T0.0b）
+
+`chaos_cancellation_token_*` 定义与 ShapeRegistry 注册都在，唯独缺 header 声明。
+修：新建 `runtime_stubs/cancellation_token_stubs.h`（8 个 `extern "C"` 声明）+
+在 `stubs.h` 中引入。**注意**该头拉入 `<chaos/native_types.h>` → `<chaos/config.h>`
+→ 全部 C++ std 头，**必须放在 `extern "C"` 块之外**（同 `threading_stubs.h` 的
+MSVC C2039 `::terminate` 约束）。
+
+### 缺陷 2 — C3313/C3536：void helper 破坏 INTPTR 分派（T0.0c）
+
+真因**不是** ABI slot，而是 **C++ 声明**。生成的 shape 分派
+（`runtime_helper_shapes.h`）对**每个** helper 都包一层
+`reinterpret_cast<CHAOS_IL2CPP_INTPTR>(sym(args...))`，调用点再加
+`const auto chaos_result = ...`。两步都要求 helper 是**值**，void 都不行。
+改 slot 只能修正 wrapper 的**类型**，改不了 callee 的**声明** —— 这正是
+`7f17415cd` 只改 slot 却无效的原因。
+
+修（`a2b06d690`）：三个 void helper 全部改为返回 `CHAOS_IL2CPP_INTPTR`(0)：
+`ChaosAsyncTaskAwaiterGetResultVoid`、`chaos_async_yield_get_result`
+（含 TPG fallback `CppProjectEmitter.cs:308`）、
+`ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject`。
+**取证手段**：把分派头里 290 个被 `reinterpret_cast<INTPTR>` 包裹的符号
+与 `src/native/**` 的声明逐一交叉比对 ⇒ 恰好 3 个 void，全修。
+
+### 缺陷 3 — LNK2019：header 的 `extern "C"` 块提前收口（b96856e01）
+
+编译全绿后进入链接，只剩 2 个未解析：
+`chaos_thread_yield`（Thread.Yield）/ `chaos_thread_sleep`（Thread.Sleep）。
+
+**真因**：`threading_stubs.cpp` 用**文件级** `extern "C" {` ⇒ 全部定义 C linkage
+（lib 里导出**未修饰名**，dumpbin 实证）；而 `threading_stubs.h` 的块**只包了
+`chaos_monitor_enter`/`chaos_monitor_exit` 两个函数**就收口，后面的声明落到
+**C++ linkage** ⇒ 声明与定义命名成两个不同符号（`?chaos_thread_yield@@YAHXZ`
+vs `chaos_thread_yield`）。
+
+**判别信号**：同一 obj 里的 `chaos_monitor_enter` 链接正常、`chaos_thread_yield`
+却报未解析 —— 这个**不对称**直接指向「块的覆盖范围」。
+修：延展 header 的块覆盖全部导出声明，文件尾收口；
+`chaos_thread_get_current` 保留在块外（故意的 inline C++）。
+
+### T0.3 假绿门禁：**通过**（独立取证）
+
+- `CODGEN-FAIL` 行：**0 次**
+- `kCodegenFailureCount` 符号：chunk 产物中**不存在**（设计上仅 `>0` 时 emit）
+⇒ **零 codegen 降级**，本次 `1/1` 是真实翻译成功，非 `BuildMethodSourceSafe` 兜底。
+
+### 仍未做（诚实标注）
+
+`--stages build` 只验证「编译+链接通过」。**entry.exe 的实际运行结果未验证** ——
+T0.2 的验收还差**运行 + fact 比对**一步。
+
+---
+
+## 🔴 worktree 构建隔离缺失（2026-09-13 实测，阻断级）—— **已修（a8e807696）**
 
 **T0.0b + T0.0c 的修复已提交（`7f17415cd`），但重跑 `--stages build` 仍 `0/1`，
 错误逐条未变。根因不是修复无效，而是 worktree 的改动对构建完全不可见。**
@@ -79,15 +139,25 @@ _pipeline package is relocated」——它锚定的是**代码所在的那棵树
 且**不会报错**——只会继续用主树的旧代码，症状与「修复无效」完全一致。
 这是一个**新的假绿/假红向量**：改动看似落地、构建照常输出、结果与改动无关。
 
-### 处置（待用户拍板）
+### 处置（✅ 已采纳方案 A，`a8e807696`）
 
-| 方案 | 内容 | 代价 |
+| 方案 | 内容 | 结论 |
 |---|---|---|
-| **A. 修复 worktree 的根解析**（推荐） | 改 `_repo_root()` / include 路径生成，使其锚定**当前工作区**而非主检出 | 动验证管线 + CMake 生成；影响面超出 threading |
-| **B. 放弃 worktree，回主工作区开发** | 承认隔离不可用，Phase 0 全部在主树做，靠 `git diff --cached` + 频繁提交防并发覆盖 | 回到 `parallel-agent-clean-checkout-clobber` 的暴露面 |
-| **C. worktree 只写代码，构建在主树跑** | worktree 出 patch → 主树 apply → 主树构建 | 手工同步，易漂移；等于没有隔离 |
+| **A. 修复 worktree 的根解析**（✅ 已实施） | `tool_helpers._worktree_root()` + TPG `TryDetectWorktreeRoot()`，以「`.git` 是文件且首行 `gitdir:`」识别 linked worktree | 已修；**code 根锚 worktree，data 根锚主树** |
+| B. 放弃 worktree，回主工作区开发 | — | 未采纳 |
+| C. worktree 只写代码，构建在主树跑 | — | 未采纳 |
 
-**在处置拍板前，T0.2（重建三 chunk）无法推进。**
+**⚠️ 实施中发现的约束（务必遵守）**：修根解析后必须**区分 code 根与 data 根**：
+
+| 根 | 应锚 | 理由 |
+|---|---|---|
+| `_repo_root()` / `_tool_dir()` | **worktree** | 代码：Generator / TPG / native 头 |
+| `build_root()`（`_path.py`） | **worktree** | 产物，天然隔离 |
+| `foundation_root()` | **主检出** | 数据：`tests/e2e/translation/` 是 gitignored 输入树，只在主检出被填充 |
+
+把 `CHAOS_FOUNDATION_DLL` 指向 worktree 的同名路径会立刻
+`namespace-partition.json not found` —— 那是**数据根指错**，不是修复失败。
+**正确调用**：`CHAOS_FOUNDATION_DLL=<主检出>/tests/e2e/translation`，其余自动锚 worktree。
 
 ---
 
