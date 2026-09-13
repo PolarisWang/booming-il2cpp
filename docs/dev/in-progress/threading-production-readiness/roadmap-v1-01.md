@@ -137,7 +137,7 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | `T0.3` | 0 | **completed** | main | 取证 `BuildMethodSourceSafe` 是否吞 threading 异常 | T0.0 | batch-1 | 独立取证，不依赖 T0.2 结果 | 取证报告 | ✅ 结论：吞（无过滤器 catch + 信号零消费者） | `src/managed/Chaos.IL2CPP.Generator/`（只读优先） | 中 |
 | `T0.4` | 0 | **completed** | main | 新建 threading native test workflow | T0.2 | batch-2 | 独立 workflow，不进 ci-framework；首跑 `continue-on-error` | `.github/workflows/threading-native-tests.yml` | ✅ 交付；**并发现 ctest 从未发现过任何测试**（`enable_testing()` 缺失，Windows 0→300）；244 用例首次真跑 = **20/27 通过，7 失败** | `.github/workflows/threading-native-tests.yml`、`CMakeLists.txt` | 中 |
 | `T1.7` | 1 | done | tbd | 🔴 **T0.4 首次真跑暴露的 7 个 native 测试失败**（此前从未被任何人看到） | T0.4 | batch-3 | 5 SEGFAULT + 1 失败 + 1 超时：`test_threading_benchmark` / `test_async_when_async` / `test_queue_backpressure` / `test_phase3_industrialization`（SEGFAULT）、`test_async_continue_with`（SEH 0xC0000005）、`test_async_when_each`（`NullElementStillTerminatesTheStream` 挂起 23s）、`test_threading_stress`（1800s 超时，需判定真死锁 vs 阈值过紧） | 7 项各自定位 + 修复或显式登记为 known-fail | 7 项全部转绿或按基线显式登记 | `src/native/runtime-core/` 等 | 大 |
-| `T0.5` | 0 | ready | tbd | 🔴 **修 `fact_chunk.py` 分子分母跨技术混用**（T0.2 新发现的假绿通路） | T0.2 | batch-2 | `:310-318` 把 `passed`/`total` 整体换成 JIT 数，而 `:441` 的 `factory_gap_ct` 恒取自 AOT ⇒ 分子分母不同总体；症状 `gatePassed=520 > gateTotal=519` | `fact_chunk.py` 修复 + 回归 | 分子分母同源；`gatePassed <= gateTotal` 恒成立 | `tests/e2e/verification/stages/fact_chunk.py` | 小 |
+| `T0.5` | 0 | **completed（先前已落盘）** | main | 🔴 **修 `fact_chunk.py` 分子分母跨技术混用**（T0.2 新发现的假绿通路） | T0.2 | batch-2 | `:310-318` 把 `passed`/`total` 整体换成 JIT 数，而 `:441` 的 `factory_gap_ct` 恒取自 AOT ⇒ 分子分母不同总体；症状 `gatePassed=520 > gateTotal=519` | `fact_chunk.py` 修复 + 回归 | ✅ 已由 `e0be16790` 修复并附回归测试 | `tests/e2e/verification/stages/fact_chunk.py` | 小 |
 | `T1.1` | 1 | done | tbd | `CancellationToken.throw_if_cancellation_requested` 真实抛出 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | revert 后测试失败 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
 | `T1.2` | 1 | done | tbd | `source_get_token` 构造真实 token | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 小 |
 | `T1.3` | 1 | done | tbd | `CreateLinkedTokenSource` 实现或显式拒绝 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
@@ -224,6 +224,30 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 **顺序反了**：应当先取实测（插桩计数/worker 退出数），再据此写反例；
 "看起来必然"的并发缺陷必须先用测量确认它真的发生，否则写出来的是**假承重**测试——
 它与假绿同族：都让人以为有覆盖而实际没有。
+
+---
+
+### T0.5 复核记录（已完成，先前 roadmap 状态列滞后，commit `e0be16790`）
+
+`e0be16790` 已修复并附回归测试 `tests/e2e/verification/tests/test_fact_chunk_reference_population.py`
+（7 passed）。本轮复核确认**修复成立且不为假绿**，依据两条：
+
+1. **同一总体，代码可读**：`select_reference_counts()` 只取 `aot_result`，并显式拒绝在
+   JIT 通过率更高时换用 JIT 计数（函数注释即记录了 520>519 这一原始症状）。
+2. **不变式由构造保证**，而非侥幸：`factoryGap` 记录的定义是"分派阶段就抛出、
+   从未进到方法体"（`fact_chunk.py:164`），因此**必然是 non-passing**，天然不计入 `passed`；
+   `gateTotal = total - factory_gap_ct` 又从分母剔掉同一批记录。两侧剔的是同一批，
+   故 `gatePassed <= gateTotal` 恒成立。
+
+**实测佐证**（threading chunk）：`passed=519 total=523 factoryGap=4 failed=0`，
+五个桶 `real+unassertable+smoke+factoryGap+failed = 523 = total` 恰好闭合。
+
+> **复核时踩到的坑（记录以免重蹈）**：我一度从 `passed == total - failed` 反推出
+> "`failed < factoryGap` 时仍会违例"，并据此判定 T0.5 **未修好**。该推断是**错的**——
+> 它漏掉了 `passed` 本身也已排除 factoryGap 记录这一事实。
+> **教训：断言"修复不成立"之前，先把分母/分子的定义从代码里读出来，而不是套一个看似显然的公式。**
+> 这与本 roadmap 反复出现的假绿主题同源：假绿是"以为绿了其实没绿"，
+> 而这是它的镜像——"以为红了其实没红"，同样源于用推断代替读数。
 
 ---
 
