@@ -41,11 +41,14 @@ public static class Program
         Check("Assembly.GetExecutingAssembly == this assembly",
             () => Assembly.GetExecutingAssembly().GetName().Name == typeof(Program).Assembly.GetName().Name);
 
-        // REF-RISK-7: a non-null check alone cannot tell the executing-image tracker
-        // from the old hard-coded CoreLib fallback (both are non-null). These assertions
-        // pin the identity: the assembly reported must be the one whose code is running,
-        // and it must not be CoreLib masquerading as the caller.
-        Check("REF-RISK-7: GetExecutingAssembly is this assembly, not the CoreLib fallback",
+        // These pin the *contract's* semantics: a caller running inside this assembly
+        // must see this assembly reported back.
+        //
+        // Scope note: this project is a standalone .NET 8 console app, so it does not
+        // exercise the AOT executing-image tracker — it runs against the reference
+        // runtime, where GetExecutingAssembly is trivially correct. REF-RISK-7's AOT
+        // behaviour is therefore NOT verified here; only the generated-code contract is.
+        Check("GetExecutingAssembly is this assembly (reference-runtime contract)",
             () =>
             {
                 var reported = Assembly.GetExecutingAssembly().GetName().Name;
@@ -54,7 +57,7 @@ public static class Program
                 return reported == actual && reported != coreLib;
             });
 
-        Check("REF-RISK-7: GetCallingAssembly reports a real assembly from inside a helper",
+        Check("GetCallingAssembly reports a real assembly from inside a helper",
             () => CallerProbe.AssemblyOfCaller() == typeof(Program).Assembly.GetName().Name);
 
         Check("Assembly.GetTypes returns non-empty and contains SampleSubject",
