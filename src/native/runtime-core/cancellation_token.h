@@ -68,6 +68,21 @@ uint32_t CancellationTokenRegister(uint32_t source_id, void (*callback)(void*), 
 /// @return true if found and unregistered.
 bool CancellationTokenUnregister(uint32_t registration_id) noexcept;
 
+/// Create a CancellationTokenSource that is cancelled as soon as ANY of the
+/// given sources is cancelled (managed: CreateLinkedTokenSource).
+///
+/// The new source's token is returned; cancellation propagates one way, from
+/// each input source to the linked source, by registering a callback on every
+/// input.  A source that is ALREADY cancelled propagates immediately, so the
+/// linked token is born cancelled — CancellationTokenRegister fires the
+/// callback inline in that case, which is exactly the semantics needed.
+///
+/// @param source_ids  Input source IDs (0 entries are skipped: None never cancels).
+/// @param count       Number of entries in source_ids.
+/// @return New source ID (0 on failure).
+uint32_t CancellationTokenSourceCreateLinked(const uint32_t* source_ids,
+                                             uint32_t count) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core::threading
 
 #endif  // CHAOS_IL2CPP_CANCELLATION_TOKEN_H_

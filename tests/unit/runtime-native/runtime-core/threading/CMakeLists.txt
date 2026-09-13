@@ -28,6 +28,13 @@ chaos_native_add_test(test_async_integration_smoke
     LABELS "unit;threading"
 )
 
+# cancellation_token_test — T1.1/T1.2: ThrowIfCancellationRequested must actually
+# raise, get_token must not degrade to None, and linked sources must propagate.
+chaos_native_add_test(test_cancellation_token
+    cancellation_token_test.cpp
+    LABELS "unit;threading"
+)
+
 # execution_context_smoke_test — ExecutionContext SuppressFlow/RestoreFlow
 # Compiles execution_context.cpp directly to avoid stale prebuilt lib issues.
 chaos_native_add_test(test_execution_context_smoke
