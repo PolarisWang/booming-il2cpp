@@ -32,6 +32,7 @@
 
 #include "runtime_stubs/stub_common.h"
 #include "runtime_stubs/xml_nametable_stubs.h"
+#include "codegen_bridge.h"
 
 namespace {
 
