@@ -119,10 +119,17 @@ vs `chaos_thread_yield`）。
 | `unverifiedMarkers` | 321 | 编译期 `[UNVERIFIED]` 标记 |
 | `factoryGap` | 4 | factory 返 null，方法**根本没跑** |
 
-#### 🔴 缺陷 1（真缺陷）：`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆
+#### 🔴 缺陷 1（真缺陷）：`SubjectInstanceFactory.Create<T>()` 降级 → 主体未被构造
 
-**症状**：cross-tech diff 1 条 ——
-`CancellationTokenRegistrationTests::DisposeAsync_1__0` `AOT=FAIL / JIT=PASS`。
+> **⚠️ 本节结论已于 2026-09-13 被自身取证推翻并重写。**
+> 曾一度记为「`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆」，**该结论是错的**：
+> 4 个 `factoryGap` 中有 3 个（`Cancel_0__0` / `CancelAsync_2__0` / `Dispose_6__0`）
+> 在 **AOT 与 JIT 下同为 `factoryGap`**，语义上根本不是 AOT 缺陷，且它们的生成体
+> **不含任何 awaiter helper 调用** —— helper 不可能是其原因。
+> 只有 `DisposeAsync_1__0` 是真 cross-tech diff。**推翻过程**见下方「取证更正」。
+
+**症状**：cross-tech diff 恰 1 条 ——
+`CancellationTokenRegistrationTests::DisposeAsync_1__0` `AOT=factoryGap / JIT=real+PASS`。
 
 **取证链（逐层，全部实测）**：
 
@@ -131,22 +138,29 @@ vs `chaos_thread_yield`）。
 | 1 | fact 记录 | AOT 侧 `resultKind: factoryGap`、`assertFailed: false` —— **不是断言失败** |
 | 2 | 插桩 `runtime-entry.cpp` 的 `__except` 过滤器 | `code=0xE0000001`（`kChaosManagedExceptionCode`）、**`exobj=nullptr`** |
 | 3 | 反查 raise 源 | `exception_helpers.cpp:163` — `ResolveTypeByName` 返 0 ⇒ `chaos_raise_exception(0)`（**null payload**） |
-| 4 | 看生成体 `native-aot.generated.page2.cpp:7120` | 调用点传的是 **`&chaos_locals[2]`**（ValueTask 槽位地址），非 task 句柄 |
-| 5 | 插桩 `ChaosAsyncTaskAwaiterGetResultVoid` | `awaiter=2A046FF5A0 completed=0 faulted=0 **canceled=107** exc=0` ← **`canceled=107` 不是 bool，是栈地址的第三个字节** |
+| 4 | 看生成体 `native-aot.generated.page2.cpp:3517` | `Create<CancellationTokenRegistration>()` 走 `chaos_external_runtime_..._Create_...` |
+| 5 | 看该符号定义 `native-aot.generated.cpp:8283` | 体是 `ChaosExternalRuntimeFallback(...)` ⇒ **恒返 0（null）** |
+| 6 | 看 null 的消费方式 | 返回值 store 进 `chaos_locals[0]`，**重新加载后带 null-guard** ⇒ guard 抛 NRE ⇒ 主体从未构造、方法从未运行 |
 
-**根因**：该 helper 无条件 `reinterpret_cast<AsyncTask*>(awaiter)` 并读
-`task->canceled`。`ValueTaskAwaiter.GetResult` 的调用点传进来的是
-**栈上结构体槽位地址**，于是读到栈垃圾（实测 107，非零）⇒ 误判「已取消」⇒
-`RaiseManagedException("System.Threading.Tasks.TaskCanceledException")` ⇒
-该类型在 chunk 内未注册 ⇒ 以 null payload 抛出 ⇒ fact 记为 `factoryGap`。
+**根因**：`Chaos.TestFramework.SubjectInstanceFactory.Create<T>()` 的泛型实例化在
+chunk 内**没有 native 实现**，被降级为 `ChaosExternalRuntimeFallback`（返 0）。
+`Create<CancellationTokenRegistration>()` 因而恒返 null。
 
-**旁证**：`CancellationTokenRegistration.DisposeAsync` 在
-`src/managed/**/RuntimeSupport/*.cs` 中**零注册** ⇒ 生成为
-`ChaosExternalRuntimeFallback(...)`（返 0）。这正是 roadmap Phase 2 预判的
-「缺 ABI 出口层」，**不是**未注册那么简单。
+**关键对照（为何只有它是 diff）**：同样走 fallback 的 `Cancel_0__0`，
+其 `Create<CancellationTokenSource>()` **也**返 null，但生成体把它**直接**传给
+`chaos_cancellation_token_source_cancel(_s2)` —— **没有 null-guard**，null 从未被
+消费，故 AOT 照样 `passed:true`。`DisposeAsync_1__0` 的差别**不在 awaiter helper**，
+而在返回值经过「store → reload → null-guard」这条路径。**判别信号是 null 是否被消费。**
+⇒ 这是 **roadmap Phase 2 预判的「缺 ABI 出口层」**的一个实例，**不是** Phase 1 语义缺陷。
 
-**处置**：登记为独立任务，**不阻塞 Phase 0 收口**（Phase 0 目标是止血+清假绿+CI，
-语义修复属 Phase 1/2）。见「任务登记」节。
+**处置**：归入 Phase 2（T2.x 句柄映射 + ABI 出口层）覆盖，**不在 Phase 1 修**。
+`ChaosAsyncTaskAwaiterGetResultVoid` 本身**无缺陷**，不改。
+
+**取证更正（复盘）**：初版把「插桩看到 `canceled=107`」当作根因证据，
+但那**只证明读到了栈垃圾，不证明读到垃圾就是失败原因** —— 缺陷 1 的真正判别是
+「被测方法是否运行过」，而非「某个 helper 里读到了什么」。教训：
+**插桩观测到异常值 ≠ 该值是因果链上的原因**；先做分母审计（4 个 factoryGap
+对照 AOT/JIT），再谈单点根因。
 
 #### 🔴 缺陷 2（假绿向量）：`fact_chunk.py` 分子分母跨技术混用
 

@@ -142,7 +142,7 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | `T1.3` | 1 | planned | tbd | `CreateLinkedTokenSource` 实现或显式拒绝 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
 | `T1.4` | 1 | planned | tbd | `Parallel` failed 接线 + 结果返回 + 异常传播 | T0.4 | batch-3 | 反例验证 | `parallel.cpp` + 测试 | 同上 | `src/native/runtime-core/parallel.cpp` | 大 |
 | `T1.5` | 1 | planned | tbd | `SynchronizationContext::Post` 真实入队 | T0.4 | batch-3 | 反例验证 | `synchronization_context.cpp` + 测试 | 同上 | `src/native/runtime-core/synchronization_context.cpp` | 中 |
-| `T1.6` | 1 | ready | tbd | 🔴 **`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆**（T0.2 实战发现） | T0.5 | batch-3 | `ValueTaskAwaiter.GetResult` 调用点传 `&chaos_locals[N]`（结构体槽位），helper 当 `AsyncTask*` 解引用 ⇒ 读栈垃圾 `canceled=107` ⇒ 误报 TaskCanceledException ⇒ 类型未注册 ⇒ null payload | `async_stubs.cpp` 修复 + 反例测试 | `DisposeAsync_1__0` AOT=JIT=PASS，cross-tech diff 归零 | `src/native/runtime-core/runtime_stubs/async_stubs.cpp` | 中 |
+| `T1.6` | 1 | **completed（假说证伪）** | main | 🔴 ~~`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆~~ **→ 真因：`SubjectInstanceFactory.Create<T>()` 降级为 fallback（恒返 null）** | T0.5 | batch-3 | 取证结论：原「指针混淆」**被自身取证证伪** —— 4 个 factoryGap 中 3 个 AOT=JIT 同为 factoryGap 且生成体不含 awaiter 调用；唯一真 diff `DisposeAsync_1__0` 的判别信号是 **null 是否被消费**（`chaos_locals` store→reload→null-guard），非 helper 内部。helper 本身无缺陷，**不改代码** | 取证报告（STATUS 已重写） + Phase 2 覆盖项登记 | ✅ AOT/JIT 全量对照完成；结论已写入 STATUS「缺陷 1」 | `docs/dev/in-progress/threading-production-readiness/STATUS.md` | 中 |
 | `T2.0` | 2 | planned | tbd | 新建 `extern "C"` ABI 出口层（**前置，不可跳过**） | T1.* | batch-4 | 参照 `interlocked_stubs.h` / `threading_stubs.h` 既有模式 | `runtime_stubs/` 下新增头/实现 | ABI 符号可被 codegen 生成的 C++ 调用 | `src/native/runtime-core/runtime_stubs/` | 大 |
 | `T2.1` | 2 | planned | tbd | 托管对象 ↔ native 句柄映射机制（**新机制，无先例**） | T2.0 | batch-4 | 需处理生命周期与 GC 交互 | 映射机制实现 | 托管 `SemaphoreSlim` 实例可绑定 native 槽位 | `src/native/runtime-core/` | 大 |
 | `T2.2` | 2 | planned | tbd | 注册 SemaphoreSlim + ReaderWriterLockSlim（含 upgradeable） | T2.1 | batch-5 | 最难；含 upgradeable 语义 | ShapeRegistry 注册 + 测试 | real% 提升；测试通过 | `.../RuntimeHelperShapeRegistry.CoreStubs.Part1.S16.cs` | 大 |
@@ -184,6 +184,14 @@ T0.0 ──┬─→ T0.1 ─→ T0.2 ─→ T0.4 ─→ T1.1..T1.5 ─→ T2.0 
 > 「`build.status=passed` 且 `kCodegenFailureCount` 已查」——那只覆盖了**编译+降级**，
 > 漏掉了「跑起来对不对」。补上这一步后立刻暴露 2 个缺陷，**证实该验收条件不充分**。
 > 教训：`build passed` ≠ 语义正确，两者之间必须插入「运行 + 跨技术比对」。
+>
+> **T1.6 假说证伪的溯源说明**：T1.6 原本被写成「`ChaosAsyncTaskAwaiterGetResultVoid`
+> 指针类型混淆」，依据是插桩观测到 `canceled=107`（栈垃圾）。**该结论是错的**，
+> 后续全量对照推翻了它：4 个 `factoryGap` 中 3 个在 AOT/JIT 下**同为** `factoryGap`，
+> 且其生成体**不含任何 awaiter helper 调用**。真判别是「`Create<T>()` 返回的 null
+> 是否被消费」。**教训：插桩观测到异常值 ≠ 该值是因果链上的原因；先做分母审计
+> （全量对照 AOT/JIT），再谈单点根因。** 这正是 T0.5 修好计数后可做的事 ——
+> **修假绿通路本身放大了后续取证的分辨率**。
 
 ---
 
