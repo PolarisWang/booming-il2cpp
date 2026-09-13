@@ -305,7 +305,7 @@ public sealed class CppProjectEmitter
                 + "CHAOS_IL2CPP_INTPTR chaos_async_yield_create(void) noexcept { return 0; }\n"
                 + "CHAOS_IL2CPP_INTPTR chaos_async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR) noexcept { return 0; }\n"
                 + "CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR) noexcept { return 1; }\n"
-                + "void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR) noexcept {}\n"
+                + "CHAOS_IL2CPP_INTPTR chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR) noexcept { return 0; }\n"
                 + "}\n");
         }
 

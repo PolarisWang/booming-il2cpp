@@ -16,7 +16,11 @@ extern "C" {
 CHAOS_IL2CPP_INTPTR chaos_async_yield_create(void) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
 CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
-void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
+// INTPTR, not void: the managed YieldAwaiter.GetResult() is void, but the
+// generated shape dispatch forwards every helper through
+// reinterpret_cast<CHAOS_IL2CPP_INTPTR>(...), which is ill-formed over a void
+// expression.  Same ABI constraint as ChaosAsyncTaskAwaiterGetResultVoid below.
+CHAOS_IL2CPP_INTPTR chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
 
 // ── Hot BCL no-ops ──
 // IDisposable::Dispose() lowered to a native no-op (the GC owns the lifetime,
@@ -29,8 +33,20 @@ extern "C" void chaos_noop_void(CHAOS_IL2CPP_INTPTR dispose_target) noexcept;
 
 // TaskAwaiter stubs (DirectNativeSymbol for async state machine dispatch).
 // Generated code calls these when lowering async Task.GetResult() patterns.
-void ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
-void ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+//
+// ABI note: both RETURN CHAOS_IL2CPP_INTPTR even though the managed members are
+// `void TaskAwaiter.GetResult()`.  The generated shape dispatch in
+// runtime_helper_shapes.h wraps every helper call as
+//     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(<symbol>(args...));
+// so a `void`-returning symbol is ill-formed there (reinterpret_cast from void)
+// — and the caller site further wraps that in `const auto chaos_result = ...`,
+// which would deduce `const void` (C3313/C3536).  The slot type recorded in
+// ShapeRegistry cannot help: it types the *wrapper*, not this declaration.
+// Every other helper in this header already returns INTPTR for this reason.
+// The implementation returns 0; nothing consumes it (fault/cancel propagation
+// happens via RaiseManagedException inside).
+CHAOS_IL2CPP_INTPTR ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
 
 // ── Task.Delay / TaskAwaiter await path (non-generic Task) ──
 // Without these, Task.Delay / Task.GetAwaiter / TaskAwaiter.get_IsCompleted

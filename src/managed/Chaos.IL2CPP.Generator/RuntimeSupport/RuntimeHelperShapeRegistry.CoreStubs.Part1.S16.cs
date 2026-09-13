@@ -168,29 +168,26 @@ public sealed partial class NativeAotLoweringPlanner
                         DirectNativeSymbol: "ChaosAsyncTaskAwaiterGetResultValue");
                 }));
 
-            // ── Non-generic TaskAwaiter.GetResult (void) ──
+            // ── Non-generic TaskAwaiter.GetResult (void in managed) ──
             // `await someTask` (no result) lowers against the non-generic
             // TaskAwaiter, whose GetResult returns void.  It must still
-            // propagate a fault, so it routes to the void-returning helper
-            // rather than sharing the value-returning one above.
-            // ── Non-generic TaskAwaiter.GetResult (void) ──
-            // `await someTask` (no result) lowers against the non-generic
-            // TaskAwaiter, whose GetResult returns void.  It must still
-            // propagate a fault, so it routes to the void-returning helper
-            // rather than sharing the value-returning one above.
+            // propagate a fault, so it routes to its own helper rather than
+            // sharing the value-returning one above.
             //
-            // The return slot is CreateNativeIntAbiSlot() and NOT
-            // CreateVoidAbiSlot(): the lowering always emits
-            //   const auto chaos_result = <call>(...);
-            //   _sN = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-            // for every call, even when the managed method is void.  With a
-            // void slot the generated C++ declares `const auto chaos_result`
-            // over a void expression → C3313 ("variable cannot have the type
-            // 'const void'") + C3536.  The native helper genuinely returns
-            // void and the generated TU sees only an injected declaration, so
-            // the expression type is void regardless; the three-state
-            // fault/cancel propagation still happens inside the helper, and
-            // GetResult is only reached after the awaiter reports completion.
+            // Two independent requirements, both satisfied here:
+            //   1. The slot must be INTPTR, not void — the lowering emits
+            //      `const auto chaos_result = <call>(...);` unconditionally,
+            //      so a void slot yields C3313 ("variable cannot have the type
+            //      'const void'") + C3536.
+            //   2. The native symbol itself must be declared as RETURNING
+            //      INTPTR.  The shape dispatch in runtime_helper_shapes.h
+            //      forwards through `reinterpret_cast<CHAOS_IL2CPP_INTPTR>(...)`,
+            //      which is ill-formed over a void expression.  Fixing only the
+            //      slot is not enough: the declaration comes from async_stubs.h,
+            //      so `ChaosAsyncTaskAwaiterGetResultVoid` returns INTPTR (0)
+            //      there and in its definition.  The managed member is void, so
+            //      the value is unobservable; fault/cancel propagation happens
+            //      via RaiseManagedException inside the helper.
             // This mirrors the ValueTaskAwaiter registration below, which hit
             // the same wall in commit 7a89c72d7.
             registry.Register("System.Runtime.CompilerServices.TaskAwaiter", "GetResult", [],
