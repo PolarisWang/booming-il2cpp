@@ -99,10 +99,67 @@ vs `chaos_thread_yield`）。
 - `kCodegenFailureCount` 符号：chunk 产物中**不存在**（设计上仅 `>0` 时 emit）
 ⇒ **零 codegen 降级**，本次 `1/1` 是真实翻译成功，非 `BuildMethodSourceSafe` 兜底。
 
-### 仍未做（诚实标注）
+### T0.2 运行 + fact 比对（2026-09-13 完成）—— **跑出真缺陷，结论不是「绿」**
 
-`--stages build` 只验证「编译+链接通过」。**entry.exe 的实际运行结果未验证** ——
-T0.2 的验收还差**运行 + fact 比对**一步。
+补上了此前欠的「运行 entry.exe + fact 比对」一步。两个 chunk 均 `--stages build,fact`：
+
+| chunk | build | fact 判定 | realVerified |
+|---|---|---|---|
+| `threading` | `1/1 passed`（489s） | `1/2 passed`（**failed**） | 136/136 |
+| `threading-2` | `1/1 passed`（557s） | 未跑（时间预算内先定位缺陷 1） | — |
+
+**`519/523 passed` 不是真实通过率**，必须按 `fact.json` 分字段读：
+
+| 字段 | 值 | 含义 |
+|---|---|---|
+| `total`/`passed` | 523 / 520 | 原始记录（口径混用，见缺陷 2） |
+| `gateTotal`/`gatePassed` | 519 / 520 | 门禁分子分母 —— **`gatePassed > gateTotal` 是计数 bug** |
+| `realTotal`/`realPassed` | 136 / 136 | **真实语义断言，全通过** |
+| `unverifiedSmoke` | 383 | 仅 42 哨兵、无真断言 |
+| `unverifiedMarkers` | 321 | 编译期 `[UNVERIFIED]` 标记 |
+| `factoryGap` | 4 | factory 返 null，方法**根本没跑** |
+
+#### 🔴 缺陷 1（真缺陷）：`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆
+
+**症状**：cross-tech diff 1 条 ——
+`CancellationTokenRegistrationTests::DisposeAsync_1__0` `AOT=FAIL / JIT=PASS`。
+
+**取证链（逐层，全部实测）**：
+
+| 步 | 手段 | 事实 |
+|---|---|---|
+| 1 | fact 记录 | AOT 侧 `resultKind: factoryGap`、`assertFailed: false` —— **不是断言失败** |
+| 2 | 插桩 `runtime-entry.cpp` 的 `__except` 过滤器 | `code=0xE0000001`（`kChaosManagedExceptionCode`）、**`exobj=nullptr`** |
+| 3 | 反查 raise 源 | `exception_helpers.cpp:163` — `ResolveTypeByName` 返 0 ⇒ `chaos_raise_exception(0)`（**null payload**） |
+| 4 | 看生成体 `native-aot.generated.page2.cpp:7120` | 调用点传的是 **`&chaos_locals[2]`**（ValueTask 槽位地址），非 task 句柄 |
+| 5 | 插桩 `ChaosAsyncTaskAwaiterGetResultVoid` | `awaiter=2A046FF5A0 completed=0 faulted=0 **canceled=107** exc=0` ← **`canceled=107` 不是 bool，是栈地址的第三个字节** |
+
+**根因**：该 helper 无条件 `reinterpret_cast<AsyncTask*>(awaiter)` 并读
+`task->canceled`。`ValueTaskAwaiter.GetResult` 的调用点传进来的是
+**栈上结构体槽位地址**，于是读到栈垃圾（实测 107，非零）⇒ 误判「已取消」⇒
+`RaiseManagedException("System.Threading.Tasks.TaskCanceledException")` ⇒
+该类型在 chunk 内未注册 ⇒ 以 null payload 抛出 ⇒ fact 记为 `factoryGap`。
+
+**旁证**：`CancellationTokenRegistration.DisposeAsync` 在
+`src/managed/**/RuntimeSupport/*.cs` 中**零注册** ⇒ 生成为
+`ChaosExternalRuntimeFallback(...)`（返 0）。这正是 roadmap Phase 2 预判的
+「缺 ABI 出口层」，**不是**未注册那么简单。
+
+**处置**：登记为独立任务，**不阻塞 Phase 0 收口**（Phase 0 目标是止血+清假绿+CI，
+语义修复属 Phase 1/2）。见「任务登记」节。
+
+#### 🔴 缺陷 2（假绿向量）：`fact_chunk.py` 分子分母跨技术混用
+
+`fact_chunk.py:310-318` 在 JIT 通过率 > AOT 时把 **`passed`/`total` 整体替换为 JIT 的数**；
+而 `:441` 的 `gate_denominator = total - factory_gap_ct` 里，
+`factory_gap_ct` **永远来自 AOT 记录**（`:431` 遍历 `per_method["aot"]`）。
+
+⇒ **分子可能取自 JIT、分母取自 AOT**，两个不同总体相减。
+现场症状：`gatePassed=520 > gateTotal=519`。
+
+**影响**：门禁在「AOT 差、JIT 好」时**系统性偏乐观** —— 恰好掩盖了缺陷 1 那类
+「AOT 独有失败」。这条与 T0.1（源树残留）、T0.3（codegen 降级）构成**第三条独立假绿通路**。
+**处置**：Phase 0 内修（属「堵假绿向量」），见 T0.5。
 
 ---
 

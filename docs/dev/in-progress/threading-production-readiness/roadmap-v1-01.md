@@ -130,17 +130,19 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | task_id | phase | status | owner | purpose | depends_on | batch_id | requirements | deliverables | exit_criteria | conflict_scope | estimated_effort |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | `T0.0` | 0 | **completed** | main | 实测 build 错误（**完整重建**，非读日志） | — | — | 主工作区跑，不切 worktree | 实测错误文本 + 错误类型判定 | ✅ 已完成：**非 crt_stubs**；C3861 声明缺口 + C3313/C3536 | 只读，无写出 | 中 |
-| `T0.0b` | 0 | ready | tbd | 🔴 **补 `chaos_cancellation_token_*` 的 codegen 可见声明** | T0.0 | batch-0 | 定义/注册都在（`cancellation_token.cpp:255,289,297` / `S16.cs:1697,1731,1739`），**仅缺 header 声明**；参照 `runtime_stubs/threading_stubs.h` 既有模式 | `runtime_stubs/` 下新增声明头 | C3861 三个符号消失 | `src/native/runtime-core/runtime_stubs/` | 中 |
-| `T0.0c` | 0 | ready | tbd | 🔴 定位 `chaos_result` 为 `const void`（C3313/C3536） | T0.0 | batch-0 | 与 cancellation **无关的第二缺陷**；疑似返回 void 的 SimpleForward 被赋给变量 | 根因定位 + 修复 | C3313/C3536 消失 | `src/managed/Chaos.IL2CPP.Generator/` | 中 |
-| `T0.1` | 0 | planned | tbd | 清除源树陈旧假绿产物 | T0.0b | batch-1 | `rm -f` 显式列举，禁用 `git clean` | 三个 chunk 源树 `results/fact.json` 已删 | 源树下三路径均不存在 | `tests/e2e/translation/System.Private.CoreLib/chunks/threading*/results/` | 小 |
-| `T0.2` | 0 | planned | tbd | 重建三个 threading chunk | T0.1 | batch-1 | 重建后记录构建耗时（判定单/双 worktree）；**必须读 `[CODGEN-FAIL] total=` 与 `kCodegenFailureCount`** | 产物根 `fact.json` × 3 + codegen 降级计数 | `build.status=passed` **且** `kCodegenFailureCount` 已查（>0 则未完成）；fact.json mtime > provenance.json | `artifacts/foundation-dll/`（不入仓库） | 大 |
-| `T0.3` | 0 | planned | tbd | 取证 `BuildMethodSourceSafe` 是否吞 threading 异常 | T0.0 | batch-1 | 独立取证，不依赖 T0.2 结果 | 取证报告 | 明确结论：吞 / 不吞 | `src/managed/Chaos.IL2CPP.Generator/`（只读优先） | 中 |
-| `T0.4` | 0 | planned | tbd | 新建 threading native test workflow | T0.2 | batch-2 | 独立 workflow，不进 ci-framework；首跑 `continue-on-error` | `.github/workflows/threading-native-tests.yml` | CI 跑出 244 用例结果 | `.github/workflows/threading-native-tests.yml` | 中 |
+| `T0.0b` | 0 | **completed** | main | 🔴 **补 `chaos_cancellation_token_*` 的 codegen 可见声明** | T0.0 | batch-0 | 定义/注册都在（`cancellation_token.cpp:255,289,297` / `S16.cs:1697,1731,1739`），**仅缺 header 声明**；参照 `runtime_stubs/threading_stubs.h` 既有模式 | `runtime_stubs/` 下新增声明头 | C3861 三个符号消失 | `src/native/runtime-core/runtime_stubs/` | 中 |
+| `T0.0c` | 0 | **completed** | main | 🔴 定位 `chaos_result` 为 `const void`（C3313/C3536） | T0.0 | batch-0 | 与 cancellation **无关的第二缺陷**；疑似返回 void 的 SimpleForward 被赋给变量 | 根因定位 + 修复 | C3313/C3536 消失 | `src/managed/Chaos.IL2CPP.Generator/` | 中 |
+| `T0.1` | 0 | **completed** | main | 清除源树陈旧假绿产物 | T0.0b | batch-1 | `rm -f` 显式列举，禁用 `git clean` | 三个 chunk 源树 `results/fact.json` 已删 | 源树下三路径均不存在 | `tests/e2e/translation/System.Private.CoreLib/chunks/threading*/results/` | 小 |
+| `T0.2` | 0 | **completed** | main | 重建三个 threading chunk | T0.1 | batch-1 | 重建后记录构建耗时（判定单/双 worktree）；**必须读 `[CODGEN-FAIL] total=` 与 `kCodegenFailureCount`** | 产物根 `fact.json` × 3 + codegen 降级计数 | ✅ build `1/1`（threading 489s / threading-2 557s，均 <30min ⇒ 维持双 worktree）；`kCodegenFailureCount` 已查=0；**fact 比对跑出 2 个真缺陷**（见 STATUS） | `artifacts/foundation-dll/`（不入仓库） | 大 |
+| `T0.3` | 0 | **completed** | main | 取证 `BuildMethodSourceSafe` 是否吞 threading 异常 | T0.0 | batch-1 | 独立取证，不依赖 T0.2 结果 | 取证报告 | ✅ 结论：吞（无过滤器 catch + 信号零消费者） | `src/managed/Chaos.IL2CPP.Generator/`（只读优先） | 中 |
+| `T0.4` | 0 | ready | tbd | 新建 threading native test workflow | T0.2 | batch-2 | 独立 workflow，不进 ci-framework；首跑 `continue-on-error` | `.github/workflows/threading-native-tests.yml` | CI 跑出 244 用例结果 | `.github/workflows/threading-native-tests.yml` | 中 |
+| `T0.5` | 0 | ready | tbd | 🔴 **修 `fact_chunk.py` 分子分母跨技术混用**（T0.2 新发现的假绿通路） | T0.2 | batch-2 | `:310-318` 把 `passed`/`total` 整体换成 JIT 数，而 `:441` 的 `factory_gap_ct` 恒取自 AOT ⇒ 分子分母不同总体；症状 `gatePassed=520 > gateTotal=519` | `fact_chunk.py` 修复 + 回归 | 分子分母同源；`gatePassed <= gateTotal` 恒成立 | `tests/e2e/verification/stages/fact_chunk.py` | 小 |
 | `T1.1` | 1 | planned | tbd | `CancellationToken.throw_if_cancellation_requested` 真实抛出 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | revert 后测试失败 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
 | `T1.2` | 1 | planned | tbd | `source_get_token` 构造真实 token | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 小 |
 | `T1.3` | 1 | planned | tbd | `CreateLinkedTokenSource` 实现或显式拒绝 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
 | `T1.4` | 1 | planned | tbd | `Parallel` failed 接线 + 结果返回 + 异常传播 | T0.4 | batch-3 | 反例验证 | `parallel.cpp` + 测试 | 同上 | `src/native/runtime-core/parallel.cpp` | 大 |
 | `T1.5` | 1 | planned | tbd | `SynchronizationContext::Post` 真实入队 | T0.4 | batch-3 | 反例验证 | `synchronization_context.cpp` + 测试 | 同上 | `src/native/runtime-core/synchronization_context.cpp` | 中 |
+| `T1.6` | 1 | ready | tbd | 🔴 **`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆**（T0.2 实战发现） | T0.5 | batch-3 | `ValueTaskAwaiter.GetResult` 调用点传 `&chaos_locals[N]`（结构体槽位），helper 当 `AsyncTask*` 解引用 ⇒ 读栈垃圾 `canceled=107` ⇒ 误报 TaskCanceledException ⇒ 类型未注册 ⇒ null payload | `async_stubs.cpp` 修复 + 反例测试 | `DisposeAsync_1__0` AOT=JIT=PASS，cross-tech diff 归零 | `src/native/runtime-core/runtime_stubs/async_stubs.cpp` | 中 |
 | `T2.0` | 2 | planned | tbd | 新建 `extern "C"` ABI 出口层（**前置，不可跳过**） | T1.* | batch-4 | 参照 `interlocked_stubs.h` / `threading_stubs.h` 既有模式 | `runtime_stubs/` 下新增头/实现 | ABI 符号可被 codegen 生成的 C++ 调用 | `src/native/runtime-core/runtime_stubs/` | 大 |
 | `T2.1` | 2 | planned | tbd | 托管对象 ↔ native 句柄映射机制（**新机制，无先例**） | T2.0 | batch-4 | 需处理生命周期与 GC 交互 | 映射机制实现 | 托管 `SemaphoreSlim` 实例可绑定 native 槽位 | `src/native/runtime-core/` | 大 |
 | `T2.2` | 2 | planned | tbd | 注册 SemaphoreSlim + ReaderWriterLockSlim（含 upgradeable） | T2.1 | batch-5 | 最难；含 upgradeable 语义 | ShapeRegistry 注册 + 测试 | real% 提升；测试通过 | `.../RuntimeHelperShapeRegistry.CoreStubs.Part1.S16.cs` | 大 |
@@ -162,18 +164,26 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 
 ```
 T0.0 ──┬─→ T0.1 ─→ T0.2 ─→ T0.4 ─→ T1.1..T1.5 ─→ T2.0 ─→ T2.1 ─┬─→ T2.2, T2.3
-       │                          （Phase 1）                  ├─→ T2.4, T2.5
-       └─→ T0.3（独立取证）                                     │
-                                                                └─→ T3.1..T3.5 ─→ T4.1
+       │                   └─→ T0.5 ─┘  （Phase 1）              ├─→ T2.4, T2.5
+       └─→ T0.3（独立取证）  └────→ T1.6                     │
+                                                              └─→ T3.1..T3.5 ─→ T4.1
 ```
 
 **关键串行点**：
 - `T0.0 → T0.1`：T0.0 的结果决定 Phase 0 形状（若错误类型非 crt_stubs，T0.1 需重评）
 - `T0.2 → T0.4`：CI workflow 需要知道实际的测试规模与失败基线
+- `T0.2 → T0.5`：**T0.2 的 fact 比对新发现**，先堵计数假绿再谈基线
+- `T0.5 → T1.6`：T1.6 的验收依赖 T0.5 修好的 cross-tech diff 计数可信
 - `T1.* → T2.0`：Phase 2 依赖 Phase 1 关闭的语义造假（否则 ABI 接线接的是错的语义）
 - `T2.1 → T2.2..T2.5`：句柄映射机制是所有原语注册的前置
 
 **独立点**：`T0.3` 与 T0.1/T0.2 无依赖（只依赖 T0.0 的实测结果）
+
+> **T0.2 追加发现的溯源说明**：`T0.5` 与 `T1.6` 均**不是**原计划的子任务，
+> 而是 T0.2「运行 + fact 比对」这一步的实测产出。原 roadmap 把 T0.2 的验收写成
+> 「`build.status=passed` 且 `kCodegenFailureCount` 已查」——那只覆盖了**编译+降级**，
+> 漏掉了「跑起来对不对」。补上这一步后立刻暴露 2 个缺陷，**证实该验收条件不充分**。
+> 教训：`build passed` ≠ 语义正确，两者之间必须插入「运行 + 跨技术比对」。
 
 ---
 
