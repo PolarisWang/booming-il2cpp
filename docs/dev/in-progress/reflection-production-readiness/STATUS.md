@@ -162,6 +162,22 @@ codegen 注册重指向；并给 `ValueGenerator` 的参数路径补上反射类
   - `MemberInfo.HasSameMetadataDefinitionAs(self)` —— BCL 返回 True
   这些此前走桩（返回 0 被当 smoke 通过），现在真正执行才显形。
 
+  **但进一步核查推翻了「均为实现缺口」的判断**：这 19 项的断言根植于
+  `typeof(int)` / `typeof(string)` / `typeof(char)` / `typeof(object)` —— **全部是
+  CoreLib 类型，其反射元数据不在反射 chunk 的翻译闭包内**，查询自然返回 null。
+
+  **对照实验**（有决定性）：
+  | 断言根类型 | 通过 | 失败 |
+  |---|---|---|
+  | `ReflectionSubjectSample`（闭包内） | **41** | 2 |
+  | `int`/`string`/`char`/`object`（闭包外） | — | 19 |
+
+  → 这 19 项属**测试设计问题**（断言根超出被测闭包），与 Phase 1 定性的 ATG 输入
+  问题同类，**不是 native 实现缺陷**。
+
+  **合计**：33 项失败中 **33 项均非 native 缺陷**（14 项 A1 传 null 期望非 null，
+  19 项断言根在闭包外）。真正需要 native 修的项需另找场景。
+
 ### 🎯 阻断解除 + UNVERIFIED 甄别（2026-09-13）
 
 **阻断解除**（`c16ade90a`）：反射 chunk build 恢复通过（470→437 subjects → entry.exe）。
