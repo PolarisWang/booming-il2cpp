@@ -1037,7 +1037,14 @@ public sealed partial class NativeAotLoweringPlanner
             while (end < content.Length && (char.IsLetterOrDigit(content[end]) || content[end] == '_'))
                 end++;
             var symbol = content[start..end];
-            if (!existing.Contains(symbol))
+            // `existing` holds BARE names (the typedef scan strips
+            // "typedef CHAOS_IL2CPP_INT32 " and the struct scan strips
+            // "struct chaos_valuetype_"), while `symbol` here is the full
+            // "chaos_valuetype_<X>" token. Comparing them directly never matched,
+            // so every referenced value type looked undeclared and got its own
+            // typedef - including ones that already had a real definition (C2371).
+            var bareName = symbol.Length >= refPrefix.Length ? symbol[refPrefix.Length..] : symbol;
+            if (!existing.Contains(bareName))
                 needed.Add(symbol);
             pos = end;
         }
