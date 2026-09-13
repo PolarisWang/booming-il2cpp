@@ -106,3 +106,55 @@ static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_..._MulticastDelegate[] = {
 
 - 属性 setter 语义修正（`PropertyInfo.GetSetMethod` 对只读属性应返 null）——独立小改
 - 值类型字段的装箱语义——超出本次范围
+
+---
+
+## 7. 实施结论（2026-09-13）：方案 A 已试并**回退**，需求被重新定性
+
+按方案 A 实现（descriptor 加 `field_offset` + Scriban 发射 `offsetof` + 运行时改用偏移）
+后构建**失败**，两个错误暴露了方案的前提错误：
+
+```
+error C2039: 'field_..._ReflectionSubjectSample__SampleField': is not a member of
+             'chaos_type_..._ReflectionSubjectSample'
+error C2737: 'kReflFields_...': constexpr object must be initialized
+```
+
+### 前提错误的根源
+
+codegen **只为 GC 引用字段物化 C++ 成员**（该 struct 只含 `_BackingField` 与
+`SampleEvent`），值类型字段（如 `int SampleField`）**没有对应的 C++ 成员**。
+
+→ 「所有字段都有 C++ 成员可供 `offsetof`」这一假设不成立。
+
+### 需求被重新定性
+
+检查该 chunk 里**唯一**的 GetValue 断言：
+
+```csharp
+typeof(int).GetFields(BindingFlags.Public | BindingFlags.Static)[0].GetValue(null!)
+// 期望 2147483647，即 int.MaxValue
+```
+
+它读的是 **const 字段**，且**根本不需要 offset**——`constant_value` 已在 descriptor 中。
+
+但进一步核查发现：**`System.Int32` 不在该 chunk 的类型闭包内**，其 field descriptor
+**根本没有被发射**（grep `kReflFields_..._Int32` 无结果）。
+
+→ 因此该断言失败的真正原因是**输入无法解析**（字段句柄指不到任何 descriptor），
+而非 `FieldGetValue` 的取值逻辑。
+
+### 结论
+
+- 方案 A **不解决**该用例，且引入 ABI 变更与构建风险 → **已回退**
+- `FieldGetValue` 忽略字段偏移**确实是真实缺陷**（会在"多字段类型的实例字段读取"
+  场景下给错值），但当前 chunk **没有能暴露它的用例**
+- 该 GetValue 断言属于「测试期望超出被测类型闭包」一类，应归入
+  ATG 的输入/期望生成问题（与 Phase 1 定性的同类），**不是 native 缺陷**
+
+### 后续建议
+
+`FieldGetValue` 的偏移修复应**延后到有真实用例时**再做（且需先解决"值类型字段
+无 C++ 成员"的前置问题）。当前优先级应让位于：
+1. 366 项 UNVERIFIED 中真正属于 native 缺陷的部分
+2. A2（55 项 not-supported 的显式抛异常实施）
