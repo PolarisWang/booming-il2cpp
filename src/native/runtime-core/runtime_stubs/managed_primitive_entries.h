@@ -131,4 +131,43 @@ CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockTimeSpan(
 CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimDisposeManaged(
     CHAOS_IL2CPP_INTPTR rw) noexcept;
 
+// ══════════════════════════════════════════════════════════════════════
+// ManualResetEventSlim — T2.4
+// ══════════════════════════════════════════════════════════════════════
+//
+// Backed by the T2.0 WaitHandle family with type discriminant 0 (manual), so
+// there is no new native object here — only the instance→handle recovery.
+//
+// `Set` / `Dispose` are straightforward.  `Wait` has FIVE managed overloads
+// ((), (CancellationToken), (int), (TimeSpan), (int, CancellationToken),
+// (TimeSpan, CancellationToken)) and the chunk contains all of them; they
+// differ only in how the timeout is encoded and whether a cancellation token is
+// attached.  The token-bearing overloads are handled by their own entries below
+// — a token that is already cancelled must NOT be ignored, or a caller's
+// cancellation would silently become an infinite wait.
+//
+// Returns follow MANAGED semantics: Set/Dispose are INT32 (nonzero = did work),
+// Wait returns 1 = signalled, 0 = not signalled (timeout or cancelled).
+
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimSetManaged(
+    CHAOS_IL2CPP_INTPTR mres) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimResetManaged(
+    CHAOS_IL2CPP_INTPTR mres) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimDisposeManaged(
+    CHAOS_IL2CPP_INTPTR mres) noexcept;
+
+/// Wait() — infinite.
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitManaged(
+    CHAOS_IL2CPP_INTPTR mres) noexcept;
+
+/// Wait(int timeout_ms) — -1 = infinite, 0 = poll.
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitInt32(
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
+
+/// Wait(TimeSpan timeout) — tick carrier pointer.
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
+
 }  // extern "C"

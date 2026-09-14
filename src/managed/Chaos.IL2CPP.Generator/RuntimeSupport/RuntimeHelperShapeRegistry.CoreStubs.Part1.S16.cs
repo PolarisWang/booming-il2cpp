@@ -2430,5 +2430,124 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0 });
         }
 
+        /// <summary>
+        /// T2.4: System.Threading.ManualResetEventSlim — instance→handle recovery.
+        /// Same receiver-not-passed constraint as
+        /// <see cref="RegisterReaderWriterLockSlimAndSemaphoreSlim"/>; see that
+        /// method's doc block for why the receiver is recovered from the instance
+        /// field rather than declared as an ABI slot.
+        /// </summary>
+        private static void RegisterManualResetEventSlim(RuntimeHelperShapeRegistry registry)
+        {
+            // ══════════════════════════════════════════════════════════════
+            // T2.4: ManualResetEventSlim
+            // ══════════════════════════════════════════════════════════════
+            //
+            // Same receiver-not-passed situation as the RWLock family above, and
+            // the same recovery (instance field -> native handle).  Backed by the
+            // T2.0 WaitHandle family with type discriminant 0 (manual), so no new
+            // native object kind is introduced.
+            //
+            // NINE subject ids here, and the counting matters: `Wait` appears with
+            // five distinct signatures because the chunk contains every overload.
+            // Each needs its own canonical key — a single "Wait" registration would
+            // silently leave four of them on the fallback path.
+            //
+            // The CancellationToken-bearing overloads are registered to the SAME
+            // native entry as their token-less siblings.  That is a deliberate
+            // simplification with a REAL limitation, recorded here so it is not
+            // mistaken for full support:
+            //
+            //   The native entry ignores the token.  A token that is ALREADY
+            //   cancelled therefore does not produce the immediate
+            //   OperationCanceledException that managed code expects; the wait
+            //   proceeds on its timeout instead.  Wiring cancellation properly
+            //   requires the entry to consult the token and raise, which needs the
+            //   token's handle ABI (cancellation_token_stubs.h) plus a managed
+            //   exception from this call site — neither exists yet.
+            //
+            // So: the wait semantics are real, the cancellation semantics are not.
+            // Marked TODO rather than left as an unstated gap.
+            //
+            // TODO(t2.4): honour the CancellationToken (is_cancellation_requested
+            // -> raise OperationCanceledException) once the token ABI reaches
+            // these call sites.
+            const string Mres = "ManualResetEventSlim";
+
+            registry.Register(Mres, "Set", [],
+                ShapeKind.SimpleForward, "ChaosManualResetEventSlimSetManaged",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Mres, "Reset", [],
+                ShapeKind.SimpleForward, "ChaosManualResetEventSlimResetManaged",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Mres, "Dispose", [],
+                ShapeKind.SimpleForward, "ChaosManualResetEventSlimDisposeManaged",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // Wait() — no managed argument.
+            registry.Register(Mres, "Wait", [],
+                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitManaged",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // Wait(int) and Wait(TimeSpan) are DIFFERENT canonical keys.
+            registry.Register(Mres, "Wait", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitInt32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Mres, "Wait", ["System.TimeSpan"],
+                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitTimeSpan",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // The token-bearing overloads — see the TODO above.  The token slot is
+            // declared (the subject id lists it, so the lowering will pop it) but
+            // the native entry does not read it.
+            registry.Register(Mres, "Wait", ["System.Threading.CancellationToken"],
+                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitManaged",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Mres, "Wait", ["System.Int32", "System.Threading.CancellationToken"],
+                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitInt32",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register(Mres, "Wait", ["System.TimeSpan", "System.Threading.CancellationToken"],
+                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitTimeSpan",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+        }
+
     }
 }

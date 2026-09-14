@@ -191,4 +191,64 @@ CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimDisposeManaged(
         rw, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&ChaosReaderWriterLockSlimDestroy));
 }
 
+// ══════════════════════════════════════════════════════════════════════
+// ManualResetEventSlim — T2.4
+// ══════════════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimSetManaged(
+    CHAOS_IL2CPP_INTPTR mres) noexcept
+{
+    const CHAOS_IL2CPP_INTPTR handle = BoundHandle(mres);
+    if (handle == 0) return 0;
+    return ChaosWaitHandleSet(handle) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimResetManaged(
+    CHAOS_IL2CPP_INTPTR mres) noexcept
+{
+    const CHAOS_IL2CPP_INTPTR handle = BoundHandle(mres);
+    if (handle == 0) return 0;
+    return ChaosWaitHandleReset(handle) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimDisposeManaged(
+    CHAOS_IL2CPP_INTPTR mres) noexcept
+{
+    // Same clear-before-destroy protocol as the RWLock Dispose, and the same
+    // idempotence: managed Dispose() plus a finalizer both run.
+    //
+    // ChaosWaitHandleClose returns INT32; Release discards it via the
+    // void(INTPTR) cast, matching how the managed Dispose() ignores it.
+    return ChaosManagedHandleRelease(
+        mres, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&ChaosWaitHandleClose));
+}
+
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitManaged(
+    CHAOS_IL2CPP_INTPTR mres) noexcept
+{
+    const CHAOS_IL2CPP_INTPTR handle = BoundHandle(mres);
+    if (handle == 0) return 0;
+    // 1 = signalled, 0 = timeout, -1 = error.  Anything that is not a
+    // definite "signalled" must not be reported as true.
+    return (ChaosWaitHandleWaitOne(handle, kInfinite) == 1) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitInt32(
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+{
+    const CHAOS_IL2CPP_INTPTR handle = BoundHandle(mres);
+    if (handle == 0) return 0;
+    return (ChaosWaitHandleWaitOne(handle, timeout_ms) == 1) ? 1 : 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept
+{
+    const CHAOS_IL2CPP_INTPTR handle = BoundHandle(mres);
+    if (handle == 0) return 0;
+    return (ChaosWaitHandleWaitOne(handle, TimeSpanTicksToMillis(timespan_ticks)) == 1)
+               ? 1
+               : 0;
+}
+
 }  // extern "C"

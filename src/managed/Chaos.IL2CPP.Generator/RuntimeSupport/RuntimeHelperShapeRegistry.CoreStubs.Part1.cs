@@ -109,6 +109,7 @@ public sealed partial class NativeAotLoweringPlanner
             // T2.2: instance methods whose receiver is not carried in the ABI —
             // see the doc block on the registration for why no receiver slot exists.
             RegisterReaderWriterLockSlimAndSemaphoreSlim(registry);
+            RegisterManualResetEventSlim(registry);
             RegisterValueTask(registry);
             RegisterHotBclNoOps(registry);
             RegisterParallelLoops(registry);
