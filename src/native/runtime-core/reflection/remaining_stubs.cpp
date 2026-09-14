@@ -1551,6 +1551,16 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetObjectData(CHAOS_IL2CPP_INTPTR ass
 // the same lookup GetVersion below already performs.
 namespace {
 
+// Decodes an AssemblyName handle (managed object; runtime_name_value at offset 16)
+// into its name characters. Every AssemblyName accessor previously reinterpret-cast
+// the handle to char* — valid only while GetAssemblyName returned a bare
+// image_name_utf8 pointer, and garbage now that it returns a managed-shaped object.
+const char* DecodeAssemblyNameHandle(CHAOS_IL2CPP_INTPTR name) noexcept {
+    if (name == 0) return nullptr;
+    return DecodeAndNullTerminateString(
+        ChaosReflectionGetAssemblyNameValue(name));
+}
+
 const ReflectionQueryImageDescriptor* FindImageByName(const char* image_name) noexcept {
     if (image_name == nullptr) return nullptr;
     const uint32_t mod_count = GetModuleCount();
@@ -1570,7 +1580,7 @@ const ReflectionQueryImageDescriptor* FindImageByName(const char* image_name) no
 // AssemblyName.Name — the simple name (assembly short name without the
 // ", Version=..., Culture=..." qualification).
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetName(CHAOS_IL2CPP_INTPTR name) noexcept {
-    const char* image_name = reinterpret_cast<const char*>(name);
+    const char* image_name = DecodeAssemblyNameHandle(name);
     if (image_name == nullptr) return 0;
     // AOT image names are plain assembly simple names, so the value interns
     // directly.
@@ -1583,7 +1593,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetName(CHAOS_IL2CPP_INTPTR name)
 // Culture=neutral, PublicKeyToken=null". Built from the image descriptor's
 // version fields, mirroring how the BCL composes it.
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetFullName(CHAOS_IL2CPP_INTPTR name) noexcept {
-    const char* image_name = reinterpret_cast<const char*>(name);
+    const char* image_name = DecodeAssemblyNameHandle(name);
     const auto* image = FindImageByName(image_name);
     if (image == nullptr) return ChaosReflectionAssemblyNameGetName(name);
 
@@ -1619,8 +1629,13 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameToString(CHAOS_IL2CPP_INTPTR name
 // equality is the strongest correct answer.
 CHAOS_IL2CPP_INT32 ChaosReflectionAssemblyNameReferenceMatchesDefinition(
     CHAOS_IL2CPP_INTPTR reference, CHAOS_IL2CPP_INTPTR definition) noexcept {
-    const char* a = reinterpret_cast<const char*>(reference);
-    const char* b = reinterpret_cast<const char*>(definition);
+    // Both handles are managed AssemblyName objects; compare their runtime_name_value
+    // strings (offset 16), not the object pointers as char data.
+    if (reference == 0 || definition == 0) return 0;
+    const char* a = DecodeAndNullTerminateString(
+        ChaosReflectionGetAssemblyNameValue(reference));
+    const char* b = DecodeAndNullTerminateString(
+        ChaosReflectionGetAssemblyNameValue(definition));
     if (a == nullptr || b == nullptr) return 0;
     return std::strcmp(a, b) == 0 ? 1 : 0;
 }
@@ -1631,12 +1646,16 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureInfo(CHAOS_IL2CPP_INTPT
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetVersion(CHAOS_IL2CPP_INTPTR name) noexcept {
-    // name is the image_name_utf8 pointer returned by ChaosReflectionGetAssemblyName.
-    // Scan all registered modules for a matching image descriptor, read the version
-    // fields from the descriptor, format as "X.Y.Z.W", and return an intern'd string id.
+    // `name` is a managed AssemblyName object; its display name is read from
+    // runtime_name_value (offset 16) — NOT reinterpret-cast as char data. This
+    // previously treated the handle as the raw image_name_utf8 pointer, which only
+    // worked while GetAssemblyName returned a bare char*; once it started returning
+    // a managed-shaped object this decode became mandatory.
     if (name == 0) return 0;
 
-    const char* image_name = reinterpret_cast<const char*>(name);
+    const char* image_name = DecodeAndNullTerminateString(
+        ChaosReflectionGetAssemblyNameValue(name));
+    if (image_name == nullptr) return 0;
     const uint32_t mod_count = GetModuleCount();
     for (uint32_t mid = 0; mid < mod_count; mid++) {
         const auto* mod = GetModuleByIndex(mid);
