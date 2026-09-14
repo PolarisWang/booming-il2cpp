@@ -614,8 +614,7 @@ P2（架构完美）体现为阶段门禁不放松；P3（HotUpdate）无冲突�
 
 ### 仍未解决
 
-`test_parallel_for` 失败（`mutex destroyed while busy`）：已用「从链接输入移除该 TU
-后失败依旧复现」证明**非本次引入**。按 `preexisting-failure-not-same-as-unrelated`
-的纪律，这只排除「本次引入」，**不**主张「与 threading 域无关」——它很可能与
-T3.x 同类（线程池启动后未收尾），**留待后续取证**，不标为无关丢弃。
+### 已关闭
+
+`test_parallel_for` 失败（`mutex destroyed while busy`）：**已于 2026-09-14 取证并修复**（commit `c0670a6c1`）。根因是测试中 `std::lock_guard<std::mutex>` 的作用域覆盖了整个剩余函数体，`delete mu` 时该 mutex 仍被本线程持有且曾被 worker 线程通过 `static` 指针访问过，MSVC STL Debug 断言检测到 owner thread id 仍被设置。修复后将断言放入独立作用域，使 `lock_guard` 在 `ThreadPoolShutdown` 前释放。**推翻此前「预存在失败、可能与线程池收尾同族」的推测**——真因是纯测试缺陷，与实现无关。
 
