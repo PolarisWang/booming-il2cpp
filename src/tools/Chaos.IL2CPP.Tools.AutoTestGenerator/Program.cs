@@ -383,6 +383,16 @@ if (allTypes)
 
                 string kind;
                 bool isBenchmark;
+                // E (json-xml-production-readiness, deferred): record the exception
+                // the MANAGED body raises for this subject, so that a future
+                // codegen path (true lowering, not catch-all) can emit matching
+                // RaiseManagedException calls.  JsonMetadataServices.Create*Info
+                // are NativeGenerated (not catch-all), so the catch-all-only fix
+                // attempted here was insufficient — the exception type must flow
+                // through the real lowering path, which is a cross-layer task
+                // (ATG metadata → codegen reader → planning→emission).
+                // See docs/dev/in-progress/json-xml-production-readiness/roadmap.
+                string? expectedExceptionType = null;
 
                 if (probeLookup.TryGetValue(subjectId, out var pr))
                 {
@@ -391,6 +401,7 @@ if (allTypes)
                         // Exception-throwing: hotupdate only, no [Benchmark]
                         kind = "hotupdate";
                         isBenchmark = false;
+                        expectedExceptionType = pr.ExceptionType;
                     }
                     else if (pr.IsDeterministic && !pr.IsVoid)
                     {
@@ -435,7 +446,7 @@ if (allTypes)
                 {
                     var generatedMethodId = $"{SanitizePath(method.Name)}_{mi}_{paramSuffix}_{si}";
 
-                    methodEntries.Add(new SubjectMethodEntry(globalIdx, kind, subjectId, generatedMethodId));
+                    methodEntries.Add(new SubjectMethodEntry(globalIdx, kind, subjectId, generatedMethodId, expectedExceptionType));
                     if (isBenchmark)
                         benchmarkMethodIndices.Add(globalIdx);
                     else
@@ -1023,4 +1034,5 @@ internal sealed record SubjectMethodEntry(
     int Index,
     string Kind,
     string MethodSubjectId,
-    string? GeneratedMethodId = null);
+    string? GeneratedMethodId = null,
+    string? ExpectedExceptionType = null);

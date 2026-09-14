@@ -98,6 +98,12 @@ Phase 0 ──► Phase 1 ──► Phase 2 ──► Phase 3 ──► Phase 4
 | B3 | Phase 3 | 核心 API M1–M8 |
 | B4 | Phase 4 | 收口 |
 
+### 已登记但未执行的发现
+
+| issue | 发现时间 | 描述 | 影响 |
+|---|---|---|---|
+| AOT/managed 异常行为对齐 | 2026-09-14 | JsonMetadataServices.Create*Info 是 NativeGenerated 路径，不走 catch-all。要让 AOT 抛与 managed 相同的异常类型，需要 ATG metadata → codegen reader → planning → emission 完整跨层链路。当前 catch-all 分支改动已清理。 | global-ns 55 个 stubGap 中 10 个 Set 0 方法已暴露为 realDefect（AOT 不抛异常），剩余 45 个仍为 stubGap。修复需独立立项。 |
+
 ### 子任务表
 
 | task_id | phase | status | owner | purpose | depends_on | batch_id | requirements | deliverables | exit_criteria | conflict_scope | estimated_effort |
