@@ -197,3 +197,46 @@ catch (const chaos_managed_exception&) {
 但**都不是当前的主因**。主因是这一条：**方法体吞掉了断言异常**。
 
 修那三层都不会让断言失败变成红灯；修这一条才会。
+
+---
+
+## 修复方案（待决策）
+
+### 该 catch 的既有意图（源码注释，MethodEmission.cs:450-455）
+
+> Wrap subject methods w/o EH regions in try/catch to **prevent C++ exceptions from
+> propagating to the fact-json `__except` handler**.
+
+即：防止 `chaos_external_runtime_*` 未注册符号抛出的异常穿透到 runner 的 SEH 处理器。
+**这个目标是合理的** —— 但它顺带把**断言异常**也吞了，二者未加区分。
+
+### 方案对比
+
+| | 做法 | 优点 | 缺点 |
+|---|---|---|---|
+| **A** | catch 内区分异常类型：断言异常**重新抛出**，其余照旧 return {} | 保留原意图；断言失败可传播 | 需 C++ 侧能识别"这是断言异常" |
+| **B** | catch 内先调 `Assert_Complete()` 检查失败标记，若为 1 则不 return 而是继续传播 | 复用既有退出码机制，无需类型识别 | 依赖 `Assert_Complete` 的 TLS 正确性（层 1 问题） |
+| **C** | 断言路径不依赖异常：`Fail` 只置退出码不抛，方法继续执行到 return | 最简单，绕开异常传播问题 | 改变 `Fail` 语义（不再抛出，调用方代码不再中断） |
+
+### 建议
+
+**方案 C 最干净**，理由：
+1. **绕开整个问题** —— 不依赖异常能否传播，只看退出码
+2. runner **已经**在读 `Assert_Complete()`（`RuntimeEntry.cpp.scriban:427`），
+   只是当前被 `!caught` 耦合
+3. 断言失败后测试方法**继续执行到 return** 是可接受的（断言已记录失败）
+4. 不需要 C++ 侧识别异常类型（方案 A 需要跨语言约定）
+
+配套必须同时修：
+- **层 2**：`assertFailed = !caught && Complete()!=0` → 去掉 `!caught` 耦合
+  （`assertFailed = Complete()!=0`），否则异常路径还是会掩盖
+- **层 3**：JIT 分支的 `assertFailed = false` 需同样接上 `Complete()`
+
+### 影响面与风险
+
+**打开后可能大面积变红** —— 这正是目的（暴露真实失败），但必须：
+1. **先在单 chunk（反射）量化**：跑一次，统计新增红灯数
+2. 评估这些红灯是"真实缺陷"还是"断言本身写错"
+3. 再决定是否全量推广
+
+**未合入 main**：该改动影响**所有** subject 的通过判定，需先量化再决策。
