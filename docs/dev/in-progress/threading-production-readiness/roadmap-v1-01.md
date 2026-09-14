@@ -141,7 +141,7 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | `T1.1` | 1 | done | tbd | `CancellationToken.throw_if_cancellation_requested` 真实抛出 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | revert 后测试失败 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
 | `T1.2` | 1 | done | tbd | `source_get_token` 构造真实 token | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 小 |
 | `T1.3` | 1 | done | tbd | `CreateLinkedTokenSource` 实现或显式拒绝 | T0.4 | batch-3 | 反例验证 | `cancellation_token.cpp` + 测试 | 同上 | `src/native/runtime-core/cancellation_token.cpp` | 中 |
-| `T1.4` | 1 | done | tbd | `Parallel` failed 接线 + 结果返回 + 异常传播 | T0.4 | batch-3 | 反例验证 | `parallel.cpp` + 测试 | 5 项测试全绿 | `src/native/runtime-core/parallel.cpp` | 大 |
+| `T1.4` | 1 | done | tbd | `Parallel` failed 接线 + 结果返回 + 异常传播 | T0.4 | batch-3 | 反例验证 | `parallel.cpp` + 测试 | 6 项测试全绿；**另有 cap 截断缺陷（本轮追补修复，见 T1.4 追补记录）** | `src/native/runtime-core/parallel.cpp` | 大 |
 | `T1.5` | 1 | done | tbd | `SynchronizationContext::Post` 真实入队 | T0.4 | batch-3 | 反例验证 | `synchronization_context.cpp` + 测试 | 同上 | `src/native/runtime-core/synchronization_context.cpp` | 中 |
 | `T1.6` | 1 | **completed（假说证伪）** | main | 🔴 ~~`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆~~ **→ 真因：`SubjectInstanceFactory.Create<T>()` 降级为 fallback（恒返 null）** | T0.5 | batch-3 | 取证结论：原「指针混淆」**被自身取证证伪** —— 4 个 factoryGap 中 3 个 AOT=JIT 同为 factoryGap 且生成体不含 awaiter 调用；唯一真 diff `DisposeAsync_1__0` 的判别信号是 **null 是否被消费**（`chaos_locals` store→reload→null-guard），非 helper 内部。helper 本身无缺陷，**不改代码** | 取证报告（STATUS 已重写） + Phase 2 覆盖项登记 | ✅ AOT/JIT 全量对照完成；结论已写入 STATUS「缺陷 1」 | `docs/dev/in-progress/threading-production-readiness/STATUS.md` | 中 |
 | `T2.0` | 2 | planned | tbd | 新建 `extern "C"` ABI 出口层（**前置，不可跳过**） | T1.* | batch-4 | 参照 `interlocked_stubs.h` / `threading_stubs.h` 既有模式 | `runtime_stubs/` 下新增头/实现 | ABI 符号可被 codegen 生成的 C++ 调用 | `src/native/runtime-core/runtime_stubs/` | 大 |
@@ -224,6 +224,94 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 **顺序反了**：应当先取实测（插桩计数/worker 退出数），再据此写反例；
 "看起来必然"的并发缺陷必须先用测量确认它真的发生，否则写出来的是**假承重**测试——
 它与假绿同族：都让人以为有覆盖而实际没有。
+
+### T1.4 追补：cap 引入的**区间截断**（本项真正的缺陷，`chunks_for` 上限未同步缩放宽）
+
+上面「反例验证部分成立」的记录写成时，T1.4 **仍带着一个自己引入的真缺陷**，
+而当时全部测试都是绿的。该缺陷在本轮为「复核 60ms/14ms 性能数据」而重建 A/B 探针时才暴露。
+
+**症状**：`Parallel.For(0, 4096, body)` 只跑约 **2200~2450** 次 body 调用（每次运行不同），
+而不是 4096 次；调用方**照常返回**，不报任何错。加一句 `sleep` 在调用之后会 **SEGFAULT**。
+
+**根因**：T1.4 把 dispatch 数改成 `min(总chunk数, hw*4, 64)`，但 chunk 的**跨度**仍写死 `kChunkSize = 32`。
+两者相乘才是可达的索引空间，而 cap 只压了其中一个因子：
+
+```
+可达上界 = dispatch 数 × 每 worker 可领块数 × 跨度
+         = 64          × kMaxClaimAttempts(4)            × 32   = 8192
+```
+
+8192 > 4096，**看似够**——这正是缺陷能长期隐藏的原因：它不依赖常量关系，只依赖
+**claim 预算恰好被花在对的顺序上**。于是同一个调用在不同运行下覆盖不同数量的索引
+（实测 2197 / 2248 / 2299 / 2365 / 2397 / 2444 / 2454，**没有一次跑满**）。
+
+**为何五个测试全绿**：它们的最宽区间是 2000（63 块），**刚好卡在 64 块 cap 之下**。
+把旧跨度原位注入回去后，五个测试**仍然全绿**——它们对本缺陷完全不承重。
+
+**修法**：跨度由 dispatch 数反推，`span = ceil(count / chunks)`，下界 `kMinChunkSize`。
+不变量从「靠预算算术侥幸成立」变成「由构造成立」：`chunks × span >= count` 恒真。
+同时补一条真正承重的测试 `RangeWiderThanTheDispatchCapIsCoveredWhole`（区间 5000，
+刻意越过 cap 且留余数块）。
+
+**反例验证（本次成立）**：注入 `span = 固定 32` → 新测试 **FAIL**（`missing 791 of 5000,
+first missing index 3772`），其余 5 条 **仍全绿**；恢复后 6/6 全绿。
+
+**实测修复效果**：区间 0..96 / 256 / 512 / 1024 / 2048 / 4096 / 8192 **全部跑满且无 gap**，
+连跑 5 次稳定；修复前 A/B 探针在首次宽区间调用即 **SEGFAULT**，修复后完整跑完。
+
+**方法论教训（比上一条更重）**：T1.4 的完成记录写成时，我给出的证据是「5 项测试全绿」——
+而 5 项测试的**区间宽度全部在 cap 之下**，这个覆盖面是**结构性**不足，不是运气不好。
+**新引入的「上限」类参数必须同时验证它与其它常量乘积仍是全称量词**；
+只验证「有限几个区间仍绿」等于没验证。这也解释了为何当初的性能数据会引人误判：
+探针区间 0..10000 早已越过 cap，只是当时把截断误读成了"测不准"。
+
+---
+
+### T1.5 追补：**测试与实现反向**（`PostInvokesTheCallbackWithItsState` 钉的是被 T1.5 删掉的行为）
+
+T1.5 把 `Post` 从「内联执行」改成「入队 ThreadPool 后立即返回」——实现是对的，
+但 `synchronization_context_test.cpp` 里那条老测试，在 `Post` 返回的**下一行**就断言
+`g_post_count == 1`。这个断言**只有内联实现能满足**。于是：实现修对了，测试开始红。
+
+> **这类测试比没有测试更坏**：它把**正确的修复**显示成回归，会诱导人回滚修复。
+
+**取证（不是推断）**：在 HEAD 上另开干净 worktree 复现，**同样这一条失败**——排除「本次改动引入」。
+随后读实现确认契约确实是异步（`synchronization_context.cpp:81-109` 入队后 `return true`，
+不执行回调），而 `Send` 保持内联（`:111-117`），故 `Send` 那条一直绿。
+
+**第一次修法仍然是错的（记录下来）**：我把断言拆成「立即读计数器必须为 0」+「等待后必须为 1」。
+方向对，但**立即读计数器本身有竞态**——worker 可能在 `Post` 写完队列、调用方读计数器之间就把回调跑完了。
+这是个**瞬时**窗口，单跑碰不上，只在合适调度下才炸。
+而这正是同目录的姊妹测试 `test_synchronization_context_post` **早已明确否定**的做法，
+它的注释原文写着：*"A 'did it run before Post returned?' assertion cannot: a fast worker makes that
+observation inherently racy, so it would be flaky against a correct implementation."*
+我等于重新发现了一遍已被记录过的坑——**同目录已经写好的教训没有被读**。
+
+**正确的判别式是线程身份，不是时序**：
+
+| 实现 | 回调执行线程 |
+|---|---|
+| 内联（旧） | **调用方**线程 |
+| 入队（T1.5） | **其它**线程 |
+
+入队时调用方正阻塞在等待里，不可能同时在跑 pool work，所以「回调跑在别的线程」是**确定性**判据。
+计数器/state 的断言全部移到等待**之后**，不再与任何东西竞态。
+
+**另修一个真缺陷（我引入的）**：改完测试后 gtest 打印 `[ PASSED ] 7 tests.` 却**进程退出码 3**，
+ctest 因此判红。用 `--gtest_filter` 逐条二分，锁定到 `PostInvokesTheCallbackWithItsState`。
+根因：该测试从**不调用 `ThreadPoolInitialize()`**，而它现在真的会往池里投递工作项；
+入队到一个未初始化的池会留下退出阶段仍存活的线程，导致 teardown 异常退出。
+**修法**：补 `ThreadPoolInitialize()` / `ThreadPoolShutdown()` 配对（与姊妹测试一致）。
+> 教训：**gtest 打印 PASSED ≠ 进程退出码为 0**；ctest 看的是后者。校验测试是否真绿，
+> 必须同时看退出码，否则会得到「测试全绿但 CI 红」这种自相矛盾的信号。
+
+**反例验证（两次注入均按预期）**：
+- 注入内联 `Post` → 仅 `PostInvokesTheCallbackWithItsState` **FAIL**，落在线程身份断言上，其余 6 条绿；
+- 恢复 → **7/7 绿且退出码 0**。
+
+**实测**：`ctest -L threading` **30/30 全绿**（修前为 97%，1 项常红）。
+> 注：另有一次全量运行中 `test_async_integration_smoke` 单次失败，
+> 但单独连跑 6 次及随后全量运行均通过，**未能复现**，记为已知 flaky，未做处置。
 
 ---
 

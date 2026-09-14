@@ -290,3 +290,14 @@ chaos_native_add_test(test_monitor_pulseall_stress
 # elsewhere.  Reviving them is a separate task — they need to be rewritten
 # against the current API, not merely re-registered.  Tracked in STATUS.md.
 
+# ── NOT registered: parallel_probe/ (investigation instruments) ─────────────
+# parallel_probe/ holds standalone A/B + coverage probes used to verify the T1.4
+# dispatch-policy change and to reproduce the large-range truncation (see the
+# roadmap's T1.4 record).  They are NOT ctest cases and are deliberately not
+# added here: each has its own main(), links the chaos static libs directly, and
+# needs two different parallel.cpp revisions side by side — none of which the
+# chaos_native_add_test factory supports.
+#
+# They are also EXCLUDE_FROM_ALL in their own CMakeLists, so nothing builds them
+# unless asked.  See parallel_probe/CMakeLists.txt for the invocation.
+
