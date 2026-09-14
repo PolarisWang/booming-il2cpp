@@ -106,24 +106,39 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);
 extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll();
 extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations);
 
-// Assert lifecycle functions (from Chaos.TestFramework.Sdk via external runtime table)
+// Assert lifecycle functions. These are managed methods
+// (Chaos.TestFramework.Assert.Complete/Reset) that codegen emits as real AOT
+// function bodies into the generated pages.
+//
+// There used to be a `__declspec(selectany) ... { return 0; }` definition right
+// here, on the theory that the linker would let the codegen definition override
+// it.  That theory is wrong for functions:
+//
+//   * __declspec(selectany) is specified for DATA (globals), not functions.
+//     Applied to a function definition MSVC does not give it weak-override
+//     semantics, so this was an ordinary strong definition competing with the
+//     codegen one.
+//   * It sits in the same translation unit as RunFactJsonMode, the only caller.
+//     The compiler resolves the direct call within the TU and never emits a
+//     relocation the linker could redirect at.
+//
+// Net effect: the `return 0` body always won, so `Assert_Complete()` reported
+// "no assertion failure" for every subject ever run — the exit code set by
+// Assert.Fail (see Assert.cs) was written and never read.  assertFailed was
+// structurally incapable of being true.
+//
+// The weak fallback is NOT needed for chunks whose codegen closure has no
+// assertions: Assert_Complete is only called from RunFactJsonMode below, and
+// every chunk's generated pages define it (the SDK's assertion methods are part
+// of the codegen closure whenever the subjects can assert).  If a future chunk
+// genuinely lacks the symbol, the link will fail loudly here — which is the
+// correct outcome, not a silent return-0.
+//
+// entry_stubs.cpp still provides a plain (non-weak) definition for the SDK
+// runtime_stubs collection; that one is only compiled into the SDK lib, and
+// codegen's definition takes precedence when both are present.
 extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset();
 extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete();
-
-// Weak fallback definition for Assert_Complete. Provides a linkable symbol
-// when subjects code has no assertions (no definition from codegen).
-// __declspec(selectany) allows the subjects definition to override this at
-// link time, eliminating the Python LINK-HACK-3 (chaos_assert_stubs.cpp).
-// MSVC: selectany. GCC: __attribute__((weak)).
-#if defined(_MSC_VER)
-__declspec(selectany)
-#else
-__attribute__((weak))
-#endif
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete()
-{
-    return 0;
-}
 
 // Interop stub declarations (defined in interop_stubs.cpp from SDK runtime_stubs)
 extern "C" int ChaosMarshalGetLastPInvokeError() noexcept;

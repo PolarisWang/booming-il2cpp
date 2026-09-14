@@ -1513,7 +1513,14 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs" / s
         for s in ("interop_stubs.cpp", "math_stubs.cpp", "vector_stubs.cpp",
                   "misc_stubs.cpp", "array_stubs.cpp", "char_stubs.cpp",
-                  "async_stubs.cpp", "exception_stubs.cpp")
+                  "async_stubs.cpp", "exception_stubs.cpp",
+                  # entry_stubs.cpp defines Chaos_TestFramework_Sdk_..._Assert_Reset
+                  # and previously a `return 0` Assert_Complete that shadowed the
+                  # codegen definition (see that file's header).  It was missing
+                  # from this list, so editing it did NOT invalidate the build
+                  # cache and the stale entry.exe kept the old stub — the same
+                  # stale-artifact trap this list exists to prevent.
+                  "entry_stubs.cpp")
     ]
     # Include TPG/build dependencies so changes to templates, emitter, or
     # pipeline scripts invalidate the cache.  Without this, modifying
