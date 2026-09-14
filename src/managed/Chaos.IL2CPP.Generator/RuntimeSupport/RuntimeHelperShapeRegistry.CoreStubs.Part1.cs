@@ -895,8 +895,9 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0 });
 
             // XmlWriter.WriteStartDocument() -> void
+            // No IL parameters, but the instance receiver still occupies ABI slot 0.
             RegisterXmlWriterVoid(registry, "WriteStartDocument", "ChaosXmlWriterWriteStartDocument",
-                Array.Empty<AotCoreIrAbiSlotArtifact>(), new HashSet<int>());
+                new AotCoreIrAbiSlotArtifact[] { thisAbi }, new HashSet<int> { 0 });
 
             // XmlWriter.WriteStartElement(string) -> void
             RegisterXmlWriterVoid(registry, "WriteStartElement", "ChaosXmlWriterWriteStartElement",
