@@ -1388,119 +1388,46 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateNativeIntAbiSlot("System.Globalization.CompareInfo", AotCoreIrTypeShapeKind.ReferenceType),
                             new HashSet<int> { 0 });
 
-                        // ── Chaos.TestFramework.Assert inline shapes ──────────────────────
-                        // These inline expansions replace Assert.AreEqual/IsTrue/IsNull etc.
-                        // calls with C++ code that checks the condition and throws a managed
-                        // exception on failure.  The exception is caught by the dispatch
-                        // wrapper's catch(chaos_managed_exception&) block.
+                        // ── Chaos.TestFramework.Assert — inline shapes REMOVED ────────────
                         //
-                        // The C# codegen always emits these assertion bodies.  The calling
-                        // test code simply does not invoke Assert methods in non-verification
-                        // builds, so the assertion code is dead-stripped by the C++ linker.
-
-                        // Assert.AreEqual(expected, actual) — all overloads
-                        // For byte[] arrays, uses element-by-element memcmp instead of pointer
-                        // comparison, since different array allocations are never pointer-equal.
-                        registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                            MethodName: "AreEqual",
-                            Resolver: static (callee, paramTypes) =>
-                            {
-                                if (paramTypes.Count < 2) return null;
-
-                                // byte[]: structural comparison via __builtin_memcmp
-                                if (paramTypes[0] == "System.Byte[]" && paramTypes[1] == "System.Byte[]")
-                                {
-                                    return """
-            	                            [&]() -> void {
-            	                                bool _cae_eq;
-            	                                if (({0}) == ({1})) _cae_eq = true;
-            	                                else if (({0}) == 0 || ({1}) == 0) _cae_eq = false;
-            	                                else {
-            	                                    auto _cae_l0 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
-            	                                        reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({0}) + 24);
-            	                                    auto _cae_l1 = *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
-            	                                        reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({1}) + 24);
-            	                                    if (_cae_l0 != _cae_l1) _cae_eq = false;
-            	                                    else {
-            	                                        _cae_eq = __builtin_memcmp(
-            	                                            reinterpret_cast<const void*>(reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({0}) + 32),
-            	                                            reinterpret_cast<const void*>(reinterpret_cast<const CHAOS_IL2CPP_UINT8*>({1}) + 32),
-            	                                            static_cast<CHAOS_IL2CPP_SIZE>(_cae_l0)) == 0;
-            	                                    }
-            	                                }
-            	                                if (!_cae_eq) throw chaos_managed_exception{};
-            	                            }()
-            	                            """.Replace("\r\n", "\n").Trim();
-                                }
-
-                                return """
-            	                        [&]() -> void { if (({0}) != ({1})) { throw chaos_managed_exception{}; } }()
-            	                        """.Replace("\r\n", "\n").Trim();
-                            }));
-
-                        // Assert.IsTrue(condition)
-                        registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                            MethodName: "IsTrue",
-                            Resolver: static (callee, paramTypes) =>
-                            {
-                                if (paramTypes.Count < 1) return null;
-                                return """
-            	                        [&]() -> void { if (!({0})) { throw chaos_managed_exception{}; } }()
-            	                        """.Replace("\r\n", "\n").Trim();
-                            }));
-
-                        // Assert.IsFalse(condition)
-                        registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                            MethodName: "IsFalse",
-                            Resolver: static (callee, paramTypes) =>
-                            {
-                                if (paramTypes.Count < 1) return null;
-                                return """
-            	                        [&]() -> void { if ({0}) { throw chaos_managed_exception{}; } }()
-            	                        """.Replace("\r\n", "\n").Trim();
-                            }));
-
-                        // Assert.IsNull(value)
-                        registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                            MethodName: "IsNull",
-                            Resolver: static (callee, paramTypes) =>
-                            {
-                                if (paramTypes.Count < 1) return null;
-                                return """
-            	                        [&]() -> void { if (({0}) != 0) { throw chaos_managed_exception{}; } }()
-            	                        """.Replace("\r\n", "\n").Trim();
-                            }));
-
-                        // Assert.IsNotNull(value)
-                        registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                            MethodName: "IsNotNull",
-                            Resolver: static (callee, paramTypes) =>
-                            {
-                                if (paramTypes.Count < 1) return null;
-                                return """
-            	                        [&]() -> void { if (({0}) == 0) { throw chaos_managed_exception{}; } }()
-            	                        """.Replace("\r\n", "\n").Trim();
-                            }));
-
-                        // Assert.Fail(message) — always throws
-                        registry.RegisterInline(new InlineShapeDescriptor(
-                            TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
-                            MethodName: "Fail",
-                            Resolver: static (callee, paramTypes) =>
-                            {
-                                return """
-            	                        [&]() -> void { throw chaos_managed_exception{}; }()
-            	                        """.Replace("\r\n", "\n").Trim();
-                            }));
-
-                        // Assert.Throws<T>(Action) — deferred to follow-up implementation.
-                        // Requires recognizing the callvirt Invoke delegate pattern and
-                        // emitting a direct try/catch with type check.
+                        // These methods used to be replaced by inline C++ that checked the
+                        // condition and threw `chaos_managed_exception{}` directly:
+                        //
+                        //     [&]() -> void { if (!(cond)) { throw chaos_managed_exception{}; } }()
+                        //
+                        // That bypassed Assert.Fail, which is the ONLY place that sets
+                        // Assert.s_exitCode.  The consequence was that the runner's
+                        // `assertFailed = Complete() != 0` could never observe anything:
+                        // a failing assertion looked exactly like a crash that happened
+                        // before any assertion ran.  Subject-level attribution was blind.
+                        //
+                        // Worse, the inline hid a second defect for a long time: the SDK's
+                        // OWN compilation did not define VERIFY, so [Conditional("VERIFY")]
+                        // had already deleted every `Fail(...)` call *inside* the assertion
+                        // bodies.  Both are now fixed — see
+                        // Chaos.TestFramework.Sdk.csproj (DefineConstants VERIFY) and the
+                        // disassembly in the commit message.
+                        //
+                        // Deleting the inlines makes Assert.AreEqual/IsTrue/IsNull/... lower
+                        // as ordinary calls into their real AOT bodies, which set s_exitCode
+                        // and then throw.  The throw still propagates exactly as before
+                        // (`caught=true`), but now `assertFailed` is ALSO set, so a genuine
+                        // assertion failure is distinguishable from a pre-assertion crash.
+                        //
+                        // NOTE — the removed AreEqual(byte[], byte[]) inline did a structural
+                        // __builtin_memcmp rather than a pointer comparison, because two
+                        // distinct array allocations are never pointer-equal.  That
+                        // improvement is intentionally NOT carried over here: the managed
+                        // Assert.AreEqual(object,object) already routes through
+                        // EqualityComparer/structural comparison, and keeping a divergent
+                        // C++ special case would mean the AOT path and the managed path
+                        // assert different things.  If byte[] facts start failing after this
+                        // change, fix it in Assert.cs (managed), not by reintroducing an
+                        // inline — the whole point is that the two paths must agree.
+                        //
+                        // Assert.Throws<T>(Action) remains unimplemented (requires
+                        // recognizing the callvirt Invoke delegate pattern and emitting a
+                        // try/catch with a type check).
 
                         return;
         }

@@ -199,7 +199,6 @@ public sealed partial class NativeAotLoweringPlanner
         {
             return null;
         }
-
         // Priority 1: Inline shape — emit C++ expression directly at call site,
         // before external runtime helper check, because inline expansion gives
         // the best performance (no function call at all, matches JIT inlining).
@@ -285,11 +284,32 @@ public sealed partial class NativeAotLoweringPlanner
             if (TryGetLowerableMethod(callee) is { } lowerableAotMethod &&
                 helperDefinition!.DirectNativeSymbol == null)
             {
+                // ABI MUST come from the method we are actually calling.
+                //
+                // This branch redirects the call from the fallback helper (whose
+                // TargetSymbol is `chaos_external_runtime_<...>()` — a catch-all
+                // shim declared with zero parameters and an INTPTR return) to the
+                // callee's real AOT symbol, which has its own genuine arity and
+                // return type.  Reusing helperDefinition's ABI here describes the
+                // shim, not the target, so the emitted call talked to the real
+                // symbol with the shim's signature: zero arguments, and the result
+                // assigned to `const auto chaos_result` even when the target is
+                // void.  That produced, for every redirected call:
+                //
+                //   C2660: '...Assert_IsTrue...': function does not take 0 arguments
+                //   C3313: 'chaos_result': variable cannot have the type 'const void'
+                //
+                // The arguments were consumed from the eval stack by the shim's
+                // (empty) parameter list, so they were silently dropped on the
+                // floor even before the arity mismatch was reported.
+                //
+                // Taking the ABI from `lowerableAotMethod` — the same method whose
+                // symbol we pass as DirectNativeSymbol — keeps the two in agreement.
                 return new InvocationTarget(
-                    helperDefinition!.TargetSymbol,
-                    helperDefinition.ParameterAbis,
-                    helperDefinition.ReturnAbi,
-                    helperDefinition.RawArgumentIndices,
+                    ResolveCallTargetNativeSymbol(lowerableAotMethod),
+                    GetMethodAbiParameterSlots(lowerableAotMethod),
+                    lowerableAotMethod.ReturnAbi,
+                    EmptyRawArgumentIndices,
                     DirectNativeSymbol: ResolveCallTargetNativeSymbol(lowerableAotMethod));
             }
 

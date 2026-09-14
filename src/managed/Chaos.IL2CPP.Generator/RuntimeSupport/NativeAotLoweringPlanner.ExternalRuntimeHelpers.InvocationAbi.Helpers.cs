@@ -171,6 +171,17 @@ public sealed partial class NativeAotLoweringPlanner
     {
         switch (typeName)
         {
+            // A void-returning method has no carrier.  Without this case
+            // "System.Void" fell through to the `default` arm and became a
+            // NativeInt slot, so any consumer that derived a return type from
+            // the ABI saw "CHAOS_IL2CPP_INTPTR" instead of "void" — e.g. the
+            // catch-all external-runtime helper descriptor, whose ReturnAbi is
+            // built with this function, reported a value-returning signature
+            // for every void method it described.  Downstream that surfaced as
+            // `const auto chaos_result = <void fn>(...);` (C3313/C3536).
+            case "System.Void":
+            case "void":
+                return CreateVoidAbiSlot();
             case "System.Boolean":
                 return CreateNativeIntAbiSlot();
             case "System.Byte":

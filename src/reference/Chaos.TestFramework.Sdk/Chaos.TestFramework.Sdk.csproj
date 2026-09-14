@@ -15,6 +15,26 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/chaos-il2cpp</RepositoryUrl>
     <PackageOutputPath>$(MSBuildThisFileDirectory)..\..\..\testing\_packages\</PackageOutputPath>
+    <!--
+      VERIFY must be defined here, in the SDK's OWN compilation.
+
+      Every assertion in Assert.cs carries [Conditional("VERIFY")] — and so does
+      Assert.Fail itself.  [Conditional] is evaluated at the CALL SITE's compile
+      unit, so when this assembly was compiled without VERIFY, the compiler
+      deleted every `Fail(...)` call INSIDE the assertion bodies.  What shipped
+      was `if (expected != actual) { /* empty */ }` — the assertions could never
+      fail, never threw, and never set s_exitCode.
+
+      Verified by disassembling the built DLL: Assert.AreEqual(int,int) has
+      Code size 13, ending in `brfalse.s IL_000c` followed directly by `ret`,
+      with no `call Fail` anywhere.
+
+      Defining VERIFY here (not just in the generated subjects csproj, which
+      already does) is what makes the assertion bodies non-empty.  Without it,
+      no amount of downstream work — removing inline shapes, reading
+      Assert_Complete(), adding counters — can observe an assertion failure.
+    -->
+    <DefineConstants>$(DefineConstants);VERIFY</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

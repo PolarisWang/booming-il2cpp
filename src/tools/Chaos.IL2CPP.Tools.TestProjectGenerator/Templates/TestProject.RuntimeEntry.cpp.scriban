@@ -366,20 +366,29 @@ static int RunFactJsonMode() {
     const int kCount = kSubjectEntryCount;
 
     // Reset the managed assertion state before the fact loop so that
-    // s_exitCode from previous runs is cleared.  After dispatch, check
-    // Complete() as a backstop for assertion failures that may not have
-    // propagated as C++ exceptions (e.g. codegen-inlined assertion paths).
-#ifndef CHAOS_IL2CPP_JIT_MODE
+    // s_exitCode from previous runs is cleared.
+    //
+    // CHAOS_FACT_CHECK is a no-op guard, NOT a detector: the per-subject loop
+    // below reads-and-resets Complete() on every iteration, so by the time
+    // this runs the exit code is provably 0.  It cannot observe anything.
+    // The real attribution happens per-subject (see the assertionFailed /
+    // caught pair in the loop).  Kept only so the existing call site at the
+    // end of RunFactJsonMode stays valid.
+    //
+    // Note: Assert_Complete/Assert_Reset are the managed
+    // Chaos.TestFramework.Assert.Complete/Reset methods, emitted as real AOT
+    // bodies by codegen into the generated pages.  The `return 0` definition
+    // in entry_stubs.cpp / this file's weak fallback only applies to chunks
+    // whose codegen closure has no assertions — it is overridden by the strong
+    // definition at link time (MSVC __declspec(selectany) / GCC __attribute__((weak))).
+    // These are deliberately NOT gated on CHAOS_IL2CPP_JIT_MODE: the JIT build
+    // compiles the same generated pages, so the symbols resolve there too.
 #define CHAOS_FACT_RESET()   Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset()
 #define CHAOS_FACT_CHECK()   do { \
     if (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0) { \
         std::fprintf(stderr, "[ASSERT] s_exitCode was non-zero after fact loop\n"); \
     } \
 } while(0)
-#else
-#define CHAOS_FACT_RESET()   ((void)0)
-#define CHAOS_FACT_CHECK()   ((void)0)
-#endif
 
 #if defined(_WIN32)
     CHAOS_FACT_RESET();
@@ -414,29 +423,43 @@ static int RunFactJsonMode() {
             caught = true;
         }
 
-        // Distinguish "the subject's assertion executed and failed" from
-        // "the subject never ran".  An escaped exception (caught) is already a
-        // failure; a *clean* dispatch that nevertheless left the managed
-        // assertion exit code set is ALSO a failure — e.g. the AOT body
-        // returned default while the managed probe expected a real value, so
-        // Assert.AreEqual threw and was swallowed by the dispatcher's EH.
-        // Reporting that as passed would hide a genuine verification failure.
-#ifndef CHAOS_IL2CPP_JIT_MODE
-        bool assertFailed = !caught &&
+        // Attribute the outcome by EVIDENCE SOURCE, not by "did it throw".
+        //
+        // Two independent facts are observable here and they must not be
+        // conflated:
+        //   assertionFailed — the managed assertion ran and recorded a failure
+        //                     (the exit code was set before Complete() zeroed it)
+        //   caught          — the dispatch raised, for ANY reason
+        //
+        // `assertFailed` used to be `!caught && (Complete() != 0)`.  That
+        // coupling is wrong now that the method body rethrows managed
+        // exceptions (EmitManagedMethod `catch(...) { throw; }`): a failed
+        // assertion throws AssertionException, which now propagates and sets
+        // caught=true — so the `!caught` guard suppressed the very signal it
+        // was meant to capture, and every assertion failure was reported as a
+        // plain non-assertion failure.
+        //
+        // Reading Complete() unconditionally is safe and side-effect-free: it
+        // is the managed `Assert.Complete()`, which returns the thread-static
+        // exit code and resets it.
+        //
+        // A subject is a failure if EITHER signal fires.  `assertionFailed`
+        // with caught=true is the expected shape for a genuine assertion
+        // failure; the two counters let the pipeline tell that apart from a
+        // crash that happened before any assertion ran.
+        bool assertionFailed =
             (Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Complete() != 0);
         Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Reset();
-#else
-        bool assertFailed = false;
-#endif
-        bool passed = !caught && !assertFailed;
+        bool passed = !caught && !assertionFailed;
 
         if (!first) printf(",");
-        printf("{\"si\":%d,\"methodIndex\":%d,\"methodSubjectId\":\"%s\",\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 ",\"assertFailed\":%s}",
+        printf("{\"si\":%d,\"methodIndex\":%d,\"methodSubjectId\":\"%s\",\"contractIndex\":-1,\"passed\":%s,\"value\":%" PRId64 ",\"assertFailed\":%s,\"caught\":%s}",
                si, i,
                (si < kSubjectEntryCount && si < kCount && kSubjectSubjectIds != nullptr && kSubjectSubjectIds[si] != nullptr)
                    ? kSubjectSubjectIds[si] : "",
                passed ? "true" : "false", result,
-               assertFailed ? "true" : "false");
+               assertionFailed ? "true" : "false",
+               caught ? "true" : "false");
         first = false;
     }
     printf("]}

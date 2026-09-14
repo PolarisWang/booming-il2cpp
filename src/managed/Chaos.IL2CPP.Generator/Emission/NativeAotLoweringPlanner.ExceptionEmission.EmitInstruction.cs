@@ -1797,6 +1797,25 @@ public sealed partial class NativeAotLoweringPlanner
         if (_state.Value!.CurrentMethodArtifact == null) return false;
         if (_state.Value!.CurrentMethodNativeSymbol == null) return false;
         if (depth > InliningPlanner.kMaxInlineDepth) return false;
+
+        // Parameter count MUST come from the callee, not the call site.
+        //
+        // The argument-hoisting loop below pops `paramCount` values off the eval
+        // stack into `chaos_inline_arg_{i}` locals, and the body's `ldarg i` reads
+        // those locals.  When this was driven by the CALL SITE's arity, a callee
+        // with more parameters than the site reported (e.g. Assert.AreEqual's
+        // `Fail(message)` callee is 1-arg while the outer call was 3-arg, or the
+        // reverse) produced a body referencing `chaos_inline_arg_0` that was never
+        // declared -> C2065 'chaos_inline_arg_0': undeclared identifier.
+        //
+        // The callee's own parameter list is the only correct source; the call-site
+        // value is retained only as a fallback for artifacts that predate
+        // parameterCount being populated.
+        int calleeParamCount = calleeMethod.ParameterCount > 0
+            ? calleeMethod.ParameterCount
+            : paramCount;
+        paramCount = calleeParamCount;
+
         int inlineId = _state.Value!.NextInlineId++;
 
         // Budget check via InliningPlanner

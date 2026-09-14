@@ -333,7 +333,14 @@ public sealed class TestEmitter
                         // Discriminating APIs get a real assertion instead of the "is not null"
                         // sentinel: the probe cannot supply an expected value for them, but their
                         // post-condition is knowable outright.
-                        if (TryEmitDiscriminatingAssertion(sb, method, resultVar, assemblyName))
+                        //
+                        // The lookup key must be the CALLEE (typeFullName + method.Name), not
+                        // `method` — `method` is the synthesized SUBJECT method, whose name is
+                        // something like "GetExecutingAssembly_3__0".  Keying on it never matched
+                        // the table, so no discriminating assertion was ever emitted and every
+                        // such subject silently fell back to the `!= null` sentinel (which is
+                        // true in both the wired and unwired states — a guaranteed-green test).
+                        if (TryEmitDiscriminatingAssertion(sb, typeFullName, method.Name, resultVar))
                         {
                             sb.AppendLine("            return 1L;");
                         }
@@ -700,13 +707,18 @@ public sealed class TestEmitter
     /// Emit a discriminating assertion for an API whose post-condition is knowable
     /// without the probe, and report whether one was emitted.
     ///
+    /// <paramref name="calleeTypeFullName"/> / <paramref name="calleeName"/> identify
+    /// the API BEING TESTED — not the synthesized subject method that calls it.  The
+    /// table is keyed on the API, so passing the subject's own name would never match.
+    ///
     /// The expected value is expressed as a self-contained C# block over the result
     /// variable, so it can reference the running assembly and the CoreLib name
     /// without the generator needing to know this chunk's assembly identity.
     /// </summary>
-    private static bool TryEmitDiscriminatingAssertion(StringBuilder sb, MethodSignature method, string resultVar, string assemblyName)
+    private static bool TryEmitDiscriminatingAssertion(
+        StringBuilder sb, string calleeTypeFullName, string calleeName, string resultVar)
     {
-        var key = method.DeclaringTypeFullName + "." + method.Name;
+        var key = calleeTypeFullName + "." + calleeName;
         if (!DiscriminatingExpectations.TryGetValue(key, out var predicate)) return false;
 
         // The CoreLib name is read at run time rather than baked in, so the assertion
