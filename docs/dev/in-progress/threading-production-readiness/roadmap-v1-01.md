@@ -441,6 +441,51 @@ SemaphoreSlim 没有 real 用例可涨，RWLock 的 real 用例不是承重断�
 
 ---
 
+### 🔴 比上面更深一层：**已有的 `real` 用例本身不可信**（`real` 不检测异常被吞）
+
+上面那节说「real% 不升是因为没有 real 用例」。做 T2.2 时进一步取证发现：
+**有 real 用例的那些类型，real 用例也是假的。**
+
+**证据链**（全部可复跑，2026-09-14）：
+
+1. `managed/combined/CombinedSubjects.cs` 共 **721** 个 `[Fact]`，其中 **321 个**是
+   `// [UNVERIFIED] AOT stub: ... (managed input->exception, AOT stub returns default
+   — smoke test passes)` 形态，函数体被替换成 hardcode `return 42L;`。
+
+2. 例：`ReaderWriterLockSlimTests::ExitReadLock_9__0` 的**真实语义是抛
+   `SynchronizationLockException`**（在未持锁的锁上调用 `ExitReadLock`）。生成体里
+   这个语义**完全消失**，只剩 `return 42L;`。
+
+3. `results/fact-results.json`：1046 条记录中 `real` **656** 条，其中
+   **645 条 `value == 0`**；`contractIndex` 全为 -1，`bodyAvailability` 全为
+   `NativeGenerated`。
+
+4. **判别证据**：真正执行到的 subject 返回的是**非 0 的托管指针**，例如同一次运行里
+   `ManualResetEventSlimTests::Wait_*` → `value=156082109464`。而
+   `value==0` 与「抛异常后被 `catch (const chaos_managed_exception&) { return {}; }`
+   吞掉」在 fact 记录里**不可区分**。
+
+**为什么这比"没有 real 用例"严重**：断言期望 `default(...)`（0），实际 stub 返回
+42 → `42 != 0` 本应 FAIL，harness 却报 `passed: true, value: 0` —— 说明
+**harness 在异常路径上把"没拿到返回值"当成了"返回了默认值"**。也就是说
+`passed` / `value` 这两个字段在异常路径上**系统性失真**。
+
+**对 T2.2-T2.5 的影响（本条是强制约束）**：
+
+- ❌ 不得用 `real%` 作为注册是否生效的证据（上面已述）；
+- ❌ **也不得用 `passed: true` 作为"该 subject 行为正确"的证据**——345 条 real
+  里绝大多数并未真正执行到断言；
+- ✅ 唯一可信的证据是：(i) 本仓 native 层的**可证伪行为测试**（T2.0 已建立该模式），
+  (ii) 生成产物里 fallback 体 → `Chaos*` 直调的**文本对比**，
+  (iii) 真实对象返回值的**形状**（非 0 托管指针）。
+
+**独立于本 roadmap 的待办**：harness 应在 `catch (const chaos_managed_exception&)`
+路径上把该 subject 标为 `assertFailed`/新 `resultKind`（如 `threw`），而不是静默
+`return {}`。这是**跨域指标缺陷**，不属于 threading 域，已记入 memory
+`fact-real-kind-does-not-detect-thrown-exception`，建议单开 issue 跟踪。
+
+---
+
 ### T2.1 完成记录：句柄存在托管对象**自身的字段**里（`runtime_stubs/managed_handle_stubs.{h,cpp}`）
 
 **设计决定：不做"映射表"，做"字段"。**

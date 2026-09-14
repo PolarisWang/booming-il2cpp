@@ -2265,5 +2265,170 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
         }
 
+        /// <summary>
+        /// T2.2: System.Threading.ReaderWriterLockSlim + SemaphoreSlim.
+        ///
+        /// WHY THE RECEIVER IS NOT AN ABI SLOT
+        /// -----------------------------------
+        /// These are all INSTANCE methods, and the lowering for them passes NO
+        /// receiver: the generated body for
+        /// <c>ReaderWriterLockSlimTests::EnterReadLock_0__0</c> in the threading
+        /// chunk emits
+        /// <code>
+        ///   chaos_external_runtime_..._Create_ReaderWriterLockSlim__()   // -> _s2
+        ///   chaos_external_runtime_..._ReaderWriterLockSlim__EnterReadLock_System_Void__()  // no args
+        /// </code>
+        /// — <c>_s2</c> holds the instance and is then never read again.  Declaring
+        /// a receiver ABI slot here would therefore make the lowering pop a value
+        /// off an eval stack that has nothing left on it.
+        ///
+        /// So the receiver reaches the helper the other way: the native entry reads
+        /// it OUT OF THE INSTANCE.  That is exactly what T2.1's
+        /// <c>ChaosManagedHandleGetOrCreate</c> / <c>Load</c> / <c>Release</c> are
+        /// for, and it is what makes the two tasks a matched pair rather than two
+        /// independent registrations.
+        ///
+        /// CONSEQUENCE THAT MUST NOT BE FORGOTTEN
+        /// --------------------------------------
+        /// <c>SubjectInstanceFactory.Create&lt;ReaderWriterLockSlim&gt;()</c> is
+        /// <c>RuntimeHelpers.GetUninitializedObject</c> — it allocates a
+        /// zero-initialised object and runs NO constructor.  So the handle field is
+        /// 0 ("never bound"), NOT some stale value it can act on.  The native entry
+        /// must treat an unbound/absent handle as an error and say so, rather than
+        /// silently succeeding: "the constructor never ran" must not be
+        /// indistinguishable from "the lock is held".
+        ///
+        /// The managed ctors themselves (<c>.ctor(int)</c>) are a SEPARATE piece of
+        /// work — a parameterless/arity-1 ctor has to reach
+        /// <c>ChaosManagedHandleGetOrCreate</c> with a create hook.  Registering
+        /// these method entries does not do that, and this comment exists so the
+        /// distinction is not lost.
+        /// </summary>
+        private static void RegisterReaderWriterLockSlimAndSemaphoreSlim(RuntimeHelperShapeRegistry registry)
+        {
+            const string Rwls = "ReaderWriterLockSlim";
+
+            // ── Zero-argument entries: timeout is not a managed argument ──
+            //
+            // EnterReadLock() / EnterWriteLock() / EnterUpgradeableReadLock() /
+            // Dispose() take no managed argument.  Their native counterparts DO
+            // take a timeout, so the entry supplies the infinite sentinel itself
+            // rather than pretending the managed signature has a parameter the
+            // subject id does not list.
+            //
+            // Return slot is Void *in the managed sense* but NativeInt in the ABI:
+            // the lowering emits `const auto chaos_result = <call>(...);`
+            // unconditionally, so a Void return slot yields C3313.  This is the
+            // same wall the TaskAwaiter.GetResult registration hit (7a89c72d7).
+            registry.Register(Rwls, "EnterReadLock", [],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimEnterReadLockInfinite",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "EnterWriteLock", [],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimEnterWriteLockInfinite",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "EnterUpgradeableReadLock", [],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimEnterUpgradeableReadLockInfinite",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "Dispose", [],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimDisposeManaged",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── Exit* : the family the chunk currently fakes most visibly ──
+            //
+            // ExitReadLock on an unheld lock throws SynchronizationLockException
+            // in real .NET.  The chunk's generated body replaces that semantics
+            // with `return 42L;` (see the [UNVERIFIED] marker), so wiring these to
+            // a real helper is what gives the behavior back.
+            registry.Register(Rwls, "ExitReadLock", [],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimExitReadLock",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "ExitWriteLock", [],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimExitWriteLock",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "ExitUpgradeableReadLock", [],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimExitUpgradeableReadLock",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── TryEnter*Lock(int) and TryEnter*Lock(TimeSpan) ──
+            //
+            // TWO DIFFERENT SUBJECT IDS for the same two native parameters.  The
+            // managed overloads differ in how the timeout is ENCODED, not in
+            // whether there is one, so they must NOT share a canonical key.
+            // `registry.Register` throws on a duplicate key, which is the
+            // guardrail that makes this safe to state explicitly rather than
+            // discover at runtime.
+            //
+            // (TimeSpan, System.Int32) -> the TimeSpan arrives as an INTPTR to the
+            // 8-byte tick carrier, which the native entry converts to ms.  `int` is
+            // already ms.
+            registry.Register(Rwls, "TryEnterReadLock", ["System.TimeSpan"],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterReadLockTimeSpan",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "TryEnterReadLock", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterReadLockInt32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "TryEnterWriteLock", ["System.TimeSpan"],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterWriteLockTimeSpan",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "TryEnterWriteLock", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterWriteLockInt32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "TryEnterUpgradeableReadLock", ["System.TimeSpan"],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockTimeSpan",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(Rwls, "TryEnterUpgradeableReadLock", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockInt32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+        }
+
     }
 }
