@@ -90,10 +90,35 @@ RWLockEntryFixed        g_rwlocks[kMaxRWLockCount];
 BarrierEntryFixed       g_barriers[kMaxBarrierCount];
 CountdownEventEntryFixed g_countdown_events[kMaxCountdownEventCount];
 
-uint32_t s_next_sem_id = 1;
-uint32_t s_next_rw_id  = 1;
-uint32_t s_next_barrier_id = 1;
-uint32_t s_next_ce_id  = 1;
+// ── Per-type monotonic id allocators (T3.1) ──────────────────────────
+//
+// These serve the entries' `id` field.  Every path that bumps a counter (the
+// create functions) runs with NO external lock held, so concurrent creates did
+// a plain non-atomic `s_next_X_id++`.  Two threads could interleave the
+// load/add/store and hand out the SAME id to two live entries — and since the
+// id is the generation tag that `FindX` validates a slot against, duplicate ids
+// make a slot's identity ambiguous.
+//
+// The counter is therefore a std::atomic<uint32_t> bumped with fetch_add.  0 is
+// the slot-unused sentinel, so a wrapped-to-0 value is skipped rather than
+// handed out; in a 32-bit space that is a ~4-billion-create window, so the loop
+// exists for correctness rather than because practice will reach it.
+//
+// These are NOT merged into one global allocator: each type has its own slot
+// array with its own capacity, and a shared sequence would couple them for no
+// benefit.
+uint32_t AllocId(std::atomic<uint32_t>& next) noexcept {
+    uint32_t v = next.fetch_add(1, std::memory_order_relaxed);
+    while (v == 0) {   // 0 is the sentinel; skip it
+        v = next.fetch_add(1, std::memory_order_relaxed);
+    }
+    return v;
+}
+
+std::atomic<uint32_t> g_next_sem_id{1};
+std::atomic<uint32_t> g_next_rw_id{1};
+std::atomic<uint32_t> g_next_barrier_id{1};
+std::atomic<uint32_t> g_next_ce_id{1};
 
 SemaphoreEntryFixed* FindSemaphore(uint32_t handle) noexcept {
     if (handle == 0 || handle >= kMaxSemaphoreCount) return nullptr;
@@ -128,8 +153,7 @@ uint32_t SemaphoreSlimCreate(int32_t initial_count, int32_t max_count) noexcept 
     for (uint32_t i = 1; i < kMaxSemaphoreCount; i++) {
         auto& entry = g_semaphores[i];
         if (entry.id == 0) {
-            entry.id = s_next_sem_id++;
-            if (entry.id == 0) entry.id = s_next_sem_id++;
+            entry.id = AllocId(g_next_sem_id);
             entry.count.store(initial_count, std::memory_order_relaxed);
             entry.max_count = max_count;
             entry.active = true;
@@ -224,8 +248,7 @@ uint32_t ReaderWriterLockSlimCreate() noexcept {
         uint32_t expected_id = 0;
         if (entry.id == 0) {
             // Unused slot — claim it.
-            entry.id = s_next_rw_id++;
-            if (entry.id == 0) entry.id = s_next_rw_id++;
+            entry.id = AllocId(g_next_rw_id);
             entry.active = true;
             entry.state.store(0, std::memory_order_relaxed);
             entry.waiting_readers = 0;
@@ -679,8 +702,7 @@ uint32_t BarrierCreate(int32_t participant_count) noexcept {
     for (uint32_t i = 1; i < kMaxBarrierCount; i++) {
         auto& entry = g_barriers[i];
         if (entry.id == 0) {
-            entry.id = s_next_barrier_id++;
-            if (entry.id == 0) entry.id = s_next_barrier_id++;
+            entry.id = AllocId(g_next_barrier_id);
             entry.active = true;
             entry.participant_count = participant_count;
             entry.remaining = participant_count;
@@ -758,8 +780,7 @@ uint32_t CountdownEventCreate(int32_t initial_count) noexcept {
     for (uint32_t i = 1; i < kMaxCountdownEventCount; i++) {
         auto& entry = g_countdown_events[i];
         if (entry.id == 0) {
-            entry.id = s_next_ce_id++;
-            if (entry.id == 0) entry.id = s_next_ce_id++;
+            entry.id = AllocId(g_next_ce_id);
             entry.active = true;
             entry.count = initial_count;
             return i;

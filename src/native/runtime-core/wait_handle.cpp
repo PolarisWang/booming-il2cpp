@@ -37,7 +37,7 @@ namespace {
 
 std::shared_mutex s_handle_table_mutex;
 std::unordered_map<uint32_t, std::unique_ptr<WaitHandleEntry>> s_handles;
-uint32_t s_next_handle_id = 1;
+std::atomic<uint32_t> g_next_handle_id{1};
 
 WaitHandleEntry* FindHandle(uint32_t id) noexcept {
     auto it = s_handles.find(id);
@@ -72,8 +72,8 @@ uint32_t WaitHandleCreate(bool initial_state, WaitHandleType type) noexcept {
         return kInvalidWaitHandle;
     }
 
-    uint32_t id = s_next_handle_id++;
-    if (id == kInvalidWaitHandle) id = s_next_handle_id++;
+    uint32_t id = g_next_handle_id.fetch_add(1, std::memory_order_relaxed);
+    while (id == kInvalidWaitHandle) id = g_next_handle_id.fetch_add(1, std::memory_order_relaxed);
 
     auto entry = std::make_unique<WaitHandleEntry>();
     entry->id = id;
