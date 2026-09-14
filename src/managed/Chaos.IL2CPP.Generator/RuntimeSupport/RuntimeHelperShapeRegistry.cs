@@ -180,6 +180,83 @@ public sealed partial class NativeAotLoweringPlanner
             _inlineDescriptors.Add(descriptor);
         }
 
+        /// <summary>
+        /// Export the shape registry as a JSON capability manifest.
+        ///
+        /// Records which managed methods the codegen dispatches natively
+        /// (SimpleForward / InlineBody) versus those that have no shape at all.
+        /// Downstream consumers (the ATG value injector and the fact
+        /// classification layer) use it to tell a *wrong answer from a method
+        /// that has an implementation* apart from *a method with no
+        /// implementation at all* — the distinction the verification pipeline
+        /// previously could not make, because the external-runtime catch-all
+        /// returned 0 for both.
+        ///
+        /// Generic and Inline descriptors are pattern-matched (TypeDisplayName
+        /// Prefix + MethodName), not exact subjectIds, so they are exported as
+        /// patterns rather than resolved callee entries.
+        /// </summary>
+        public string ExportManifest()
+        {
+            var entries = new List<object>();
+
+            // Exact SimpleForward registrations — the authoritative "we have this".
+            foreach (var entry in _entriesByCanonicalKey.Values)
+            {
+                entries.Add(new
+                {
+                    kind = "exact",
+                    typeDisplayName = entry.TypeDisplayName,
+                    methodName = entry.MethodName,
+                    paramTypes = entry.ParamTypeDisplayNames,
+                    nativeSymbol = string.IsNullOrEmpty(entry.NativeFnSymbol)
+                        ? null : entry.NativeFnSymbol,
+                    shapeKind = entry.Kind.ToString(),
+                });
+            }
+
+            // Generic shape descriptors (pattern-based: type prefix + method name).
+            foreach (var desc in _genericDescriptors)
+            {
+                entries.Add(new
+                {
+                    kind = "generic-pattern",
+                    typeDisplayNamePrefix = desc.TypeDisplayNamePrefix,
+                    methodName = desc.MethodName,
+                });
+            }
+
+            // Inline shape descriptors (pattern-based).
+            foreach (var desc in _inlineDescriptors)
+            {
+                entries.Add(new
+                {
+                    kind = "inline-pattern",
+                    typeDisplayNamePrefix = desc.TypeDisplayNamePrefix,
+                    methodName = desc.MethodName,
+                    isInstanceMethod = desc.IsInstanceMethod,
+                });
+            }
+
+            var manifest = new
+            {
+                schemaVersion = 1,
+                generatedAt = DateTime.UtcNow.ToString("O"),
+                totalExactShapes = _entriesByCanonicalKey.Count,
+                totalGenericPatterns = _genericDescriptors.Count,
+                totalInlinePatterns = _inlineDescriptors.Count,
+                entries,
+            };
+
+            return System.Text.Json.JsonSerializer.Serialize(manifest,
+                new System.Text.Json.JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    DefaultIgnoreCondition =
+                        System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+                });
+        }
+
         /// <summary>Try to match a callee SubjectId to an inline shape descriptor.</summary>
         public bool TryMatchInlineShape(
             string callee,
