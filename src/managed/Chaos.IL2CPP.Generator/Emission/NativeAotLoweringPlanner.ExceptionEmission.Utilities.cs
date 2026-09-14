@@ -236,7 +236,26 @@ public sealed partial class NativeAotLoweringPlanner
             // carrier pointer, copy the real 32 bytes in.
             bool isVectorReducer = nativeSymbol.StartsWith("chaos_vector_", StringComparison.Ordinal)
                                    && invocationTarget.ParameterAbis.Count == 2;
-            for (int i = invocationTarget.ParameterAbis.Count - 1; i >= 0; i--)
+
+            // ── ABI slot list under-reports the argument count ──────────────
+            // The generic external-runtime path cannot always infer ABI slots for a
+            // signature (e.g. Assert.AreEqual(bool, bool, string) — the BOOL operands
+            // have no carrier mapping on this route), leaving ParameterAbis empty
+            // while the callee genuinely takes arguments.  Emitting the call from an
+            // empty slot list produces `Symbol()` — a C2660 arity error that fails the
+            // whole page TU, and silently drops the operands that were already pushed.
+            //
+            // The IR instruction still records the true arity (TargetParameterCount),
+            // and the operands are still on the eval stack.  Consume them and forward
+            // each as its raw pointer-sized value, which is what the external-runtime
+            // ABI expects for a value it cannot type precisely.
+            int abiCount = invocationTarget.ParameterAbis.Count;
+            int actualArgCount = (instruction?.TargetParameterCount is > 0)
+                ? instruction.TargetParameterCount.Value
+                : abiCount;
+            bool abiUnderreports = actualArgCount > abiCount;
+
+            for (int i = abiCount - 1; i >= 0; i--)
             {
                 string rawExpr = ConsumeEvalStackValueExpression();
                 if (!invocationTarget.RawArgumentIndices.Contains(i))
@@ -275,6 +294,24 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             }
             string directNativeArgs = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
+
+            // When ABI under-reports the true arg count, FormatAbiInvocationArgumentList
+            // only sees the (empty) ABI list and produces "".  The actual operands are
+            // still on the eval stack — consume them so the call site has the arity the
+            // callee declares.
+            //
+            // Eval-stack pops are LIFO: the enclosing loop pops index Count-1 first, so
+            // the HIGHEST argument index is consumed first.  Mirror that here — pop from
+            // the top down, then re-reverse into signature order.
+            if (abiUnderreports)
+            {
+                var extraArgs = new List<string>();
+                for (int i = actualArgCount - 1; i >= abiCount; i--)
+                    extraArgs.Add(ConsumeEvalStackValueExpression());
+                extraArgs.Reverse();  // back into (argN, ..., arg0) signature order
+                if (extraArgs.Count > 0)
+                    directNativeArgs = string.Join(", ", extraArgs);
+            }
             string nativeCtxArg = "";
             if (_sharedContextSymbols.Contains(nativeSymbol))
             {
