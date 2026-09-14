@@ -554,3 +554,68 @@ P2（架构完美）体现为阶段门禁不放松；P3（HotUpdate）无冲突�
 - `chaos_continuation` 回归测试仍未落地（`bb9a02fd0` 无测试守护）
 - `pcdistpatch-cond-exit-target-dropped` 未修
 - 其余 32 个陈旧 chunk 重建（属 `chaos-continuation-scope` 任务）
+
+---
+
+## Phase 2 / Phase 3 执行记录（2026-09-14 增补）
+
+### Phase 2 — codegen ABI 接线（T2.0-T2.5）
+
+| task | 结果 | commit | 说明 |
+|---|---|---|---|
+| T2.0 | ✅ | `f55fddfa1` | 39 个 `extern "C"` ABI 出口 + 链接期验证 |
+| T2.1 | ✅ | `a0b46d5d3` | 句柄存托管对象**字段**（非映射表）；GC 压缩式回收下唯一正确解 |
+| T2.2 | ✅ | `aabcf8887` | ReaderWriterLockSlim 托管面（15 入口 / 8 测试 / mutation 验证） |
+| T2.3 | ⛔ **blocked** | — | Barrier + CountdownEvent 在该 chunk **零 subject**，无对象可接线 |
+| T2.4 | ✅ | `b922c97e5` | ManualResetEventSlim（8 注册 / 8 测试） |
+| T2.5 | ✅ | `33c355ef0` | SpinLock（byref 写回）+ SpinWait + ThreadPool 可调用面 |
+
+**T2.3 的处置不是失败而是范围修正**：`grep -c` 证实 chunk 的
+`CombinedSubjects.cs` / `native-aot.generated.cpp` 中 Barrier 与 CountdownEvent
+均无 subject，连 fallback 符号都不存在。注册代码写了也不会有 subject 匹配它。
+**待 ATG 侧产出这些 subject 后再补**，当前不占用 Phase 2 工时，也不记为已完成。
+
+**T2.2/T2.4/T2.5 的验收口径已修正**（详见 roadmap 的
+`### ⚠️ T2.2/T2.3 的验收口径需修正` 与 `### 🔴 比上面更深一层` 两节）：
+
+- ❌ 不用 `real%` 判注册是否生效 —— 该 chunk `SemaphoreSlim` 的 real 用例数为 **0**；
+- ❌ 更不用 `passed: true` —— 实测 656 条 `real` 中 **645 条 `value == 0`**，
+  与「抛异常被 `catch (const chaos_managed_exception&) { return {}; }` 吞掉」
+  在 fact 记录里**不可区分**；
+- ✅ 唯一可信证据是 native 层**可证伪的行为测试** + 生成产物里 fallback 体 → `Chaos*` 直调。
+
+**独立于本 roadmap 的缺陷**：harness 应在异常路径上把 subject 标为
+`assertFailed` 而非静默 `return {}`。这是跨域指标缺陷，已记入 memory
+`fact-real-kind-does-not-detect-thrown-exception`，**建议单开 issue**。
+
+### Phase 3 — 加固（T3.1-T3.3）
+
+| task | 结果 | commit | 说明 |
+|---|---|---|---|
+| T3.1 | ✅ | `cec2e0973` | 非原子 static 桥变量 → `std::atomic` + `AllocId` |
+| T3.2 | ✅ | `dfc380d5f` | 句柄表槽位回收 + 并发 claim（**修出第二个缺陷**） |
+| T3.3 | ✅ | `cec2e0973` | 热路径 `fprintf` → 分级 log 宏（`delegate_helpers.cpp` 7 处） |
+| T3.4 | 本文档 | — | 文档与实现对齐 |
+| T3.5 | ⏳ | — | benchmark 填充（未验证是否仍为空模板） |
+
+**T3.1 范围修正**：design 称「8 处」。实测受影响的只有
+`synchronization.cpp` 的 4 个 id 计数器加 `wait_handle.cpp` 的 1 个；
+`cancellation_token.cpp`(×2) 与 `timer_queue.cpp`(×1) 的同名计数器**已有锁保护**，
+不是缺陷。原「8 处」把受保护与不受保护的混为一谈。
+
+**T3.2 在修 (a) 时暴露出 (b)**，两者独立：
+
+- (a) `Destroy` 只设 `active=false` 不清 `id` ⇒ 槽位对分配器永久不可见，
+  1023 次**生命周期内**创建即表满（即使从不重叠存活）；
+- (b) 修完 (a) 后并发测试立刻报 **90 次**失败：多个线程同时看到 `id == 0`，
+  都 claim 同一槽位 ⇒ 两个对象共用一槽。改用 `compare_exchange_strong` 原子 claim。
+
+隔离验证：并发用例修前**每次**失败、修后**连跑 5 次**全绿。
+
+### 仍未解决
+
+`test_parallel_for` 失败（`mutex destroyed while busy`）：已用「从链接输入移除该 TU
+后失败依旧复现」证明**非本次引入**。按 `preexisting-failure-not-same-as-unrelated`
+的纪律，这只排除「本次引入」，**不**主张「与 threading 域无关」——它很可能与
+T3.x 同类（线程池启动后未收尾），**留待后续取证**，不标为无关丢弃。
+
