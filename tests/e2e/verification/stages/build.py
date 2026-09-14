@@ -141,6 +141,40 @@ def _chaos_sdk_csproj() -> Path:
             / "Chaos.TestFramework.Sdk.csproj")
 
 
+def _wire_capability_table(ctx: ChunkContext, cmd: list[str]) -> None:
+    """Append --capability-table when the codegen capability manifest exists.
+
+    The manifest is produced by the *previous* codegen pass, so on a cold chunk
+    (no prior output) it is simply absent and the ATG runs un-guarded — that is
+    the documented degradation, not an error.  The manifest changes only when
+    the shape registry changes, so a one-pass lag is immaterial.
+
+    Folding the manifest into the compact Type::Method lookup is done here
+    rather than requiring the operator to run the exporter by hand, so the
+    table can never go stale relative to the manifest it came from.
+    """
+    manifest = (ctx.chunk_dir / "native" / "codegen" / "generated"
+                / "aot-capability-manifest.json")
+    if not manifest.exists():
+        print("  [build] Capability manifest: (none — value injection un-guarded)")
+        return
+
+    table_path = ctx.chunk_dir / "native" / "codegen" / "generated" / "capability-table.json"
+    exporter = _REPO_ROOT / "tests" / "e2e" / "verification" / "tools" / "export_capability_table.py"
+    try:
+        subprocess.run(
+            [sys.executable, str(exporter),
+             "--manifest", str(manifest), "--out", str(table_path)],
+            check=True, capture_output=True, text=True, timeout=120,
+        )
+        cmd.extend(["--capability-table", str(table_path)])
+        print(f"  [build] Capability table: {table_path.name}")
+    except (subprocess.CalledProcessError, subprocess.TimeoutExpired, OSError) as exc:
+        detail = getattr(exc, "stderr", "") or str(exc)
+        print(f"  [build] WARNING: capability table export failed ({detail.strip()[:200]})")
+        print("  [build] Value injection runs un-guarded for this chunk.")
+
+
 def _load_chunk_config(chunk_dir: Path) -> dict[str, Any]:
     """Load chunk.json config, returning {} if missing or corrupt."""
     config_path = chunk_dir / "chunk.json"
@@ -1193,6 +1227,13 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     if caps_path.exists():
         cmd.extend(["--capabilities", str(caps_path)])
         print(f"  [build] Capabilities: {caps_path.name}")
+    # Pass the AOT capability table (manifest folded into Type::Method lookup).
+    # The codegen emits aot-capability-manifest.json alongside the generated C++;
+    # export_capability_table.py folds it into a compact form the ATG can query.
+    # Without it the ATG value injector runs un-guarded and may feed a valid
+    # input to an API that has no implementation — turning a smoke gap into an
+    # unfixable failure.
+    _wire_capability_table(ctx, cmd)
     # ATG runs per-type over the whole chunk partition and always restarts from
     # scratch (see the rmtree above), so the wall time scales with chunk size.
     # CoreLib's `system` chunk (~500 methods across hundreds of types) exceeds

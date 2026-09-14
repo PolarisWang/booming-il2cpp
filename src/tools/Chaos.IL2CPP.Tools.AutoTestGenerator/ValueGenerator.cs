@@ -8,6 +8,17 @@ public sealed class ValueGenerator
     private readonly CSharpSerializer _serializer;
     private readonly AutoFixtureAllower? _autoFixture;
 
+    /// <summary>
+    /// Codegen capability table: <c>Type::Method</c> → status for every managed
+    /// method the AOT codegen can dispatch natively.  Semantic value injection
+    /// is gated on this so a valid input is only fed to an API that actually has
+    /// an implementation — injecting a valid input for an unimplemented API
+    /// merely trades a null-input smoke failure for an unfixable real failure.
+    /// Null when no table was supplied (older runs): injection then proceeds
+    /// unguarded, preserving the previous behaviour.
+    /// </summary>
+    private readonly IReadOnlyDictionary<string, string>? _capabilityTable;
+
     // Cache for enum type detection (Type.GetType is slow)
     private static readonly ConcurrentDictionary<string, bool> EnumTypeCache = new(StringComparer.Ordinal);
 
@@ -172,10 +183,26 @@ public sealed class ValueGenerator
             : "new System.Collections.ArrayList()",
     };
 
-    public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
+    public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null,
+                          IReadOnlyDictionary<string, string>? capabilityTable = null)
     {
         _serializer = serializer;
         _autoFixture = autoFixture;
+        _capabilityTable = capabilityTable;
+    }
+
+    /// <summary>
+    /// True when semantic value injection is allowed for this method.
+    ///
+    /// Returns true when no capability table was supplied (un-guarded legacy
+    /// behaviour).  With a table, only methods the codegen marks <c>real</c> are
+    /// eligible — the others would turn a null-input smoke gap into an
+    /// unfixable failure against a method that has no implementation at all.
+    /// </summary>
+    private static bool IsInjectable(IReadOnlyDictionary<string, string>? table, string typeFullName, string methodName)
+    {
+        if (table is null) return true;
+        return table.ContainsKey($"{typeFullName}::{methodName}");
     }
 
     /// <summary>
@@ -286,7 +313,7 @@ public sealed class ValueGenerator
         // the generic boundary probe, so the AOT runtime's un-implemented behavior
         // (returning null/false) goes undetected.  Inject explicit non-default argument
         // combinations so the generated test actually verifies real semantics.
-        AddSemanticMethodValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+        AddSemanticMethodValueSets(method, paramTypes, sets, usedSignatures, methodIndex, _capabilityTable);
 
         // 防线 4: 警告 — 如果该方法的全部值集都只包含 default 输入（所有参数都是
         // default/null），则说明该方法的 AOT 行为可能被蒙过。这个警告被 pipeline 的
@@ -1043,7 +1070,8 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
         string[] paramTypes,
         List<ValueSet> sets,
         HashSet<string> usedSignatures,
-        int methodIndex)
+        int methodIndex,
+        IReadOnlyDictionary<string, string>? capabilityTable)
     {
         // ── Convert.ChangeType(object, TypeCode[, IFormatProvider]) — 多值探针 ──
         // The default probe only sends default(object)+default(TypeCode), so a stub
@@ -1143,18 +1171,23 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
         // ArgumentNullException in managed AND AOT, then the generated test asserts
         // the result is non-null — a test that can never pass.  Supplying the real
         // seed-member name exercises the actual lookup path.
-        AddReflectionMemberValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+        // Gated on the codegen capability table: feeding a valid name to an API the
+        // codegen cannot dispatch would replace a smoke gap with a permanent failure.
+        if (IsInjectable(capabilityTable, method.DeclaringTypeFullName, method.Name))
+            AddReflectionMemberValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
 
         // ── Array static searches: a real array instead of default(Array) ──
         // Array.BinarySearch(default(Array)!, ...) throws ArgumentNullException in
         // both runtimes; the probe must feed a populated array to mean anything.
-        AddArraySearchValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+        if (IsInjectable(capabilityTable, method.DeclaringTypeFullName, method.Name))
+            AddArraySearchValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
 
         // ── Activator.CreateInstance: typeof(int) instead of default(Type) ──
         // Activator.CreateInstance(default(Type)!) returns null in both runtimes,
         // but the generated test asserts non-null result — a test that can never pass.
-        // Feeding typeof(string) makes the invocation succeed and produce a real object.
-        if (method.DeclaringTypeFullName == "System.Activator" &&
+        // Feeding typeof(int) makes the invocation succeed and produce a real object.
+        if (IsInjectable(capabilityTable, method.DeclaringTypeFullName, method.Name) &&
+            method.DeclaringTypeFullName == "System.Activator" &&
             method.Name is "CreateInstance" or "CreateInstanceFrom")
         {
             if (paramTypes.Length >= 1 && paramTypes[0] == "System.Type" &&
