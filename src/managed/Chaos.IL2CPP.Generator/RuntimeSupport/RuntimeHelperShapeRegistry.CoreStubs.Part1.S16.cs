@@ -2376,59 +2376,23 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
-            // ── TryEnter*Lock(int) and TryEnter*Lock(TimeSpan) ──
+            // ── TryEnter*Lock are DELIBERATELY NOT REGISTERED ──
             //
-            // TWO DIFFERENT SUBJECT IDS for the same two native parameters.  The
-            // managed overloads differ in how the timeout is ENCODED, not in
-            // whether there is one, so they must NOT share a canonical key.
-            // `registry.Register` throws on a duplicate key, which is the
-            // guardrail that makes this safe to state explicitly rather than
-            // discover at runtime.
+            // They take a managed parameter, and for instance methods with
+            // parameters the lowering does NOT forward the receiver — the shim
+            // declares only the timeout slot:
             //
-            // (TimeSpan, System.Int32) -> the TimeSpan arrives as an INTPTR to the
-            // 8-byte tick carrier, which the native entry converts to ms.  `int` is
-            // already ms.
-            registry.Register(Rwls, "TryEnterReadLock", ["System.TimeSpan"],
-                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterReadLockTimeSpan",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot()),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0 });
-
-            registry.Register(Rwls, "TryEnterReadLock", ["System.Int32"],
-                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterReadLockInt32",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateInt32AbiSlot()),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0 });
-
-            registry.Register(Rwls, "TryEnterWriteLock", ["System.TimeSpan"],
-                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterWriteLockTimeSpan",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot()),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0 });
-
-            registry.Register(Rwls, "TryEnterWriteLock", ["System.Int32"],
-                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterWriteLockInt32",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateInt32AbiSlot()),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0 });
-
-            registry.Register(Rwls, "TryEnterUpgradeableReadLock", ["System.TimeSpan"],
-                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockTimeSpan",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot()),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0 });
-
-            registry.Register(Rwls, "TryEnterUpgradeableReadLock", ["System.Int32"],
-                ShapeKind.SimpleForward, "ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockInt32",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateInt32AbiSlot()),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0 });
+            //   ..._TryEnterWriteLock_System_Boolean_System_Int32_(
+            //       CHAOS_IL2CPP_INT32 chaos_fn_arg_0)          // timeout only
+            //
+            // With no instance there is no way to recover the native lock, so a
+            // SimpleForward entry here cannot be made correct: it would either
+            // target the wrong lock or fabricate a result.  Leaving them
+            // unregistered keeps them on the fallback path, where the gap stays
+            // visible instead of being papered over.
+            //
+            // CONTRAST with the zero-argument entries above (EnterReadLock etc.):
+            // for those the shim's single slot IS the receiver, so they work.
         }
 
         /// <summary>
@@ -2504,50 +2468,22 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
-            // Wait(int) and Wait(TimeSpan) are DIFFERENT canonical keys.
-            registry.Register(Mres, "Wait", ["System.Int32"],
-                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitInt32",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateInt32AbiSlot()),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0 });
-
-            registry.Register(Mres, "Wait", ["System.TimeSpan"],
-                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitTimeSpan",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot()),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0 });
-
-            // The token-bearing overloads — see the TODO above.  The token slot is
-            // declared (the subject id lists it, so the lowering will pop it) but
-            // the native entry does not read it.
-            registry.Register(Mres, "Wait", ["System.Threading.CancellationToken"],
-                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitManaged",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot()),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0 });
-
-            registry.Register(Mres, "Wait", ["System.Int32", "System.Threading.CancellationToken"],
-                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitInt32",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                {
-                    CreateInt32AbiSlot(),
-                    CreateNativeIntAbiSlot(),
-                }),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0, 1 });
-
-            registry.Register(Mres, "Wait", ["System.TimeSpan", "System.Threading.CancellationToken"],
-                ShapeKind.SimpleForward, "ChaosManualResetEventSlimWaitTimeSpan",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                {
-                    CreateNativeIntAbiSlot(),
-                    CreateNativeIntAbiSlot(),
-                }),
-                CreateNativeIntAbiSlot(),
-                new HashSet<int> { 0, 1 });
+            // Wait(int) / Wait(TimeSpan) / Wait(int, token) / Wait(TimeSpan, token)
+            // are DELIBERATELY NOT REGISTERED — same reason as the RWLock
+            // TryEnter*Lock family above.  Their shims pass only the managed
+            // argument(s), so the receiver never arrives and the native entry
+            // cannot find the event:
+            //
+            //   ..._ManualResetEventSlim__Wait_System_Boolean_System_Int32_(
+            //       CHAOS_IL2CPP_INT32 chaos_fn_arg_0)          // timeout only
+            //
+            // The rule that falls out of all of the above: for an INSTANCE method
+            // the shim gets one slot per MANAGED PARAMETER, plus one for the
+            // receiver ONLY when there are no parameters at all.  So in this
+            // family only the zero-argument entries (Set / Reset / Dispose /
+            // Wait()) can recover the instance — every parameterised overload,
+            // CancellationToken included, receives its argument instead of
+            // `this` and is left unregistered.
         }
 
         /// <summary>

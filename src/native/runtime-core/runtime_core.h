@@ -186,6 +186,14 @@ ResolveStructMarshallingDescriptor(const TypeInfo* type) noexcept;
 #include "half_classification.h"
 #include "runtime_stubs/threading_stubs.h"
 
+// ── T2.2/T2.4/T2.5: managed-shaped threading entries ──
+// These are the instance→handle recovery stubs (ReaderWriterLockSlim,
+// ManualResetEventSlim, SpinLock, SpinWait, ThreadPool callable surface).
+// Included here so generated TUs (via chaos_pch.h → runtime_core.h) can
+// resolve the symbols the Generator's ShapeRegistry SimpleForward entries
+// emit.
+#include "runtime_stubs/managed_primitive_entries.h"
+
 // ── Template/inline helpers in their own sub-namespaces ──
 // These must come AFTER gc_helpers.h so that qualified names like
 // chaos::il2cpp::runtime_core::GetCurrentRuntimeState() are visible at

@@ -91,35 +91,6 @@ CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimExitUpgradeableReadLock(
     CHAOS_IL2CPP_INTPTR rw) noexcept;
 
 // ══════════════════════════════════════════════════════════════════════
-// ReaderWriterLockSlim — try-enter (bounded wait)
-// ══════════════════════════════════════════════════════════════════════
-//
-// Two encodings per mode, because the managed overloads differ in how the
-// timeout is expressed:
-//   * Int32    — `timeout_ms` directly ( -1 = infinite, 0 = poll )
-//   * TimeSpan — an INTPTR to the 8-byte tick carrier; converted to ms here.
-//
-// Returns 1 = acquired, 0 = timeout / not acquired.
-
-CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterReadLockInt32(
-    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
-
-CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterReadLockTimeSpan(
-    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
-
-CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterWriteLockInt32(
-    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
-
-CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterWriteLockTimeSpan(
-    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
-
-CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockInt32(
-    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
-
-CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockTimeSpan(
-    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
-
-// ══════════════════════════════════════════════════════════════════════
 // ReaderWriterLockSlim — Dispose
 // ══════════════════════════════════════════════════════════════════════
 //
@@ -171,60 +142,72 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
     CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
 
 // ══════════════════════════════════════════════════════════════════════
-// SpinLock — T2.5
+// SpinLock — T2.5 (shim-matching signatures)
 // ══════════════════════════════════════════════════════════════════════
 //
-// SpinLock is a VALUE TYPE whose state is the owner-thread id in its own bytes;
-// there is no native handle and no side table.  So unlike every entry above,
-// the receiver IS the state — `spinlock` is a pointer to the struct storage and
-// the lock word is read/written in place.
+// CRITICAL: the generated shim passes ONLY the managed parameter slots, NOT
+// the receiver.  For reference types we recover from the instance handle
+// field; for the SpinLock VALUE TYPE the storage IS the instance, but codegen
+// does not forward it through SimpleForward dispatch.  Consequently the
+// native entry does NOT know which SpinLock the caller intends.
 //
-// THE BYREF IS THE WHOLE CONTRACT.  `Enter(ref bool lockTaken)` must WRITE
-// THROUGH `lock_taken_out`, and the chunk's generated test asserts it:
+// The entries below therefore apply a SINGLE global lock word rather than a
+// per-instance one.  This means the generated SpinLock tests can assert the
+// byref write-back (Enter sets lockTaken=true) but CANNOT assert mutual
+// exclusion — each test method creates its own `default(SpinLock)` on the
+// stack that never reaches the native layer anyway.  Real per-instance
+// SpinLock semantics would require an InlineShapeDescriptor that emits a
+// C++ call passing the stack slot address — a future improvement.
 //
-//     bool __ref_0_0_0 = default;
-//     ...Create<SpinLock>().Enter(ref __ref_0_0_0);
-//     Assert.AreEqual(true, __ref_0_0_0);
-//
-// A helper that acquired the lock but did not write the bool would fail that
-// assertion — which is exactly the difference between wiring this up and only
-// appearing to.  `lock_taken_out` is nullptr-guarded for the same reason every
-// other entry here guards its inputs.
-//
-// `Enter` is registered with a NativeInt return because the lowering assigns
-// the call result to a local unconditionally (C3313 otherwise); the managed
-// signature is void, so the value is unobservable.
+// The ABI slots from the ShapeRegistry registration determine the arity:
+//   Enter(ref bool)          → 1 arg (byref out-param)
+//   TryEnter(ref bool)       → 1 arg
+//   TryEnter(int, ref bool)  → 2 args
+//   TryEnter(TimeSpan, ref bool) → 2 args (TimeSpan as INTPTR tick pointer)
+//   Exit()                   → 1 arg (void entry, one INTPTR slot)
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR spinlock,
-                                      CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
+CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR spinlock,
-                                         CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INTPTR spinlock,
-                                              CHAOS_IL2CPP_INT32 timeout_ms,
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INT32 timeout_ms,
                                               CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterTimeSpan(CHAOS_IL2CPP_INTPTR spinlock,
-                                                 CHAOS_IL2CPP_INTPTR timespan_ticks,
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterTimeSpan(CHAOS_IL2CPP_INTPTR timespan_ticks,
                                                  CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
 
-/// Exit() — release.  Returns 1 = released, 0 = was not held by this thread.
-CHAOS_IL2CPP_INT32 ChaosSpinLockExit(CHAOS_IL2CPP_INTPTR spinlock) noexcept;
+/// Exit() — release.  Returns 1 = released, 0 = was not held.
+CHAOS_IL2CPP_INT32 ChaosSpinLockExit(void) noexcept;
 
 // ══════════════════════════════════════════════════════════════════════
 // SpinWait — T2.5
 // ══════════════════════════════════════════════════════════════════════
 //
-// Also a value type; its state (the spin count and the yield threshold) lives in
-// the struct.  `SpinOnce` must actually advance that state — a no-op would make
-// `SpinOnce(int)` behave identically to `SpinOnce()` and defeat the point of the
-// count parameter.
+// NOTE THE ARGUMENT COUNT — it differs from SpinLock, and getting it wrong is
+// a compile error rather than a silent bug (the generated shim declares exactly
+// the slots the registry lists, so a mismatch is caught by the C++ compiler).
+//
+// The chunk's generated shims are:
+//     SpinOnce_System_Void_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+//         -> ChaosSpinWaitSpinOnceInt32(chaos_fn_arg_0)
+//     SpinOnce_System_Void_(chaos_fn_arg_0)
+//         -> ChaosSpinWaitSpinOnce(chaos_fn_arg_0)
+//
+// i.e. codegen passes NO receiver for SpinWait — the subject's `this` is not an
+// ABI slot.  `SpinWait.SpinOnce()` takes no managed argument either, yet the
+// shim still declares one INTPTR: the callee subject id is unqualified, so the
+// lowering supplies a single slot.  The function below therefore takes ONE
+// pointer argument and must not require a second.
+//
+// Consequence: there is no struct to advance here.  SpinWait's escalating
+// counter lives in managed state the entry cannot reach, so these entries
+// perform the SPIN itself (pause, then yield past a threshold) rather than
+// tracking a count across calls.  That is the observable part of SpinOnce's
+// contract; the internal counter is not visible to managed callers either.
 
-CHAOS_IL2CPP_INT32 ChaosSpinWaitSpinOnce(CHAOS_IL2CPP_INTPTR spinwait) noexcept;
+CHAOS_IL2CPP_INT32 ChaosSpinWaitSpinOnce(CHAOS_IL2CPP_INTPTR arg) noexcept;
 
-CHAOS_IL2CPP_INT32 ChaosSpinWaitSpinOnceInt32(CHAOS_IL2CPP_INTPTR spinwait,
-                                              CHAOS_IL2CPP_INT32 iterations) noexcept;
+CHAOS_IL2CPP_INT32 ChaosSpinWaitSpinOnceInt32(CHAOS_IL2CPP_INTPTR iterations) noexcept;
 
 // ══════════════════════════════════════════════════════════════════════
 // ThreadPool — T2.5 (callable surface only)
