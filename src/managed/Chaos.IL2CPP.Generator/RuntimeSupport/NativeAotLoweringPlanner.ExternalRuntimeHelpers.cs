@@ -700,16 +700,42 @@ public sealed partial class NativeAotLoweringPlanner
 		// native body instead of inferring it from a 42 sentinel.  The static
 		// guard keeps it to one line per distinct callee per process, so this
 		// does not become a hot-path cost.
-		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
-		[
-			"    static const bool chaos_warned_" + System.Math.Abs(failSymbol.GetHashCode()).ToString() + " = []() {",
+		//
+		// D (json-xml-production-readiness): JsonMetadataServices.Create*Info<T>
+		// are source-generator hooks whose MANAGED body deliberately throws
+		// NotSupportedException for every input.  The AOT stub returning 0 made
+		// the two disagree, forcing ATG to bucket the subject as an [UNVERIFIED]
+		// stub gap it cannot assert.  Emitting the same exception natively makes
+		// AOT and managed agree, which lets the fact layer treat the subject as a
+		// real (consistent) result instead of an unknown gap.
+		bool throwsNotSupported = callee.Contains(
+			"Serialization.Metadata.JsonMetadataServices::Create", StringComparison.Ordinal);
+		var warnGuard = "chaos_warned_" + System.Math.Abs(failSymbol.GetHashCode()).ToString();
+		var bodyLines = new List<string>
+		{
+			"    static const bool " + warnGuard + " = []() {",
 			"        CHAOS_IL2CPP_LOG_WARN(\"ExternalRuntimeFallback\",",
 			"            \"catch-all helper invoked: " + escapedCallee + " — no native body; delegates to Phase 1/2, else returns 0\");",
 			"        return true;",
 			"    }();",
-			"    (void)chaos_warned_" + System.Math.Abs(failSymbol.GetHashCode()).ToString() + ";",
-			"    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");",
-		]);
+			"    (void)" + warnGuard + ";",
+		};
+		if (throwsNotSupported)
+		{
+			// JsonMetadataServices.Create*Info<T> managed body throws
+			// NotSupportedException for ALL inputs.  The AOT stub returning 0
+			// makes the two disagree, forcing ATG to mark the subject [UNVERIFIED]
+			// and bucket it as stubGap.  Throwing chaos_managed_exception makes
+			// AOT and managed agree so the fact layer sees a consistent result.
+			bodyLines.Add("    // Managed body throws NotSupportedException for all inputs.");
+			bodyLines.Add("    throw chaos_managed_exception{};");
+		}
+		else
+		{
+			bodyLines.Add("    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");");
+		}
+		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
+			bodyLines.ToArray());
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
 			Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
 		_externalRuntimeHelperCache[callee] = helperDefinition;

@@ -477,6 +477,10 @@ public sealed class ValueGenerator
         ["JsonElement"] = "System.Text.Json.JsonDocument.Parse(\"{}\").RootElement",
         // Raw UTF-8 bytes for the reader-based overloads.  "{}" == 0x7B 0x7D.
         ["Utf8JsonReader"] = "new System.Text.Json.Utf8JsonReader(new byte[] { 0x7B, 0x7D })",
+        // JsonSerializerOptions.  JsonMetadataServices.Create*Info<T> requires a
+        // non-null options argument; default(JsonSerializerOptions)! throws ANE
+        // before the factory can run, making the whole subject an [UNVERIFIED] stub.
+        ["JsonSerializerOptions"] = "new System.Text.Json.JsonSerializerOptions()",
         // ── System.Xml ──
         // A minimal well-formed XML document for the XPath/XSLT navigators.
         ["XPathDocument"] = "new System.Xml.XPath.XPathDocument(new System.IO.StringReader(\"<root/>\"))",
