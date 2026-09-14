@@ -620,6 +620,32 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     stub_gap_ct = sum(1 for r in annotated if r.get("resultKind") == "stubGap")
     failed_ct = sum(1 for r in annotated if r.get("resultKind") == "failed")
 
+    # ── Failure attribution (needs the runner's assertFailed/caught stamps) ──
+    #
+    # Before the runner started stamping these, `caught=true` was a mixed
+    # signal: it meant "assertion failed", "an unregistered external symbol
+    # raised via the catch-all fallback", or "a genuine runtime bug",
+    # indistinguishably.  Triaging a chunk then required reading generated C++
+    # by hand.  These two counts separate the buckets so the split is visible
+    # in fact.json without any manual work:
+    #
+    #   assertFailed=true               → the subject's own Assert.* ran and
+    #                                     recorded a failure (a real signal; the
+    #                                     assertion executed and disagreed)
+    #   caught=true, assertFailed=false → it raised BEFORE any assertion ran
+    #                                     (pre-assertion crash: bad inputs,
+    #                                     unregistered API, or a runtime defect)
+    #
+    # Both are subsets of `failed` / shaped failures, not a new denominator —
+    # they exist for attribution, not for gating.  Older records (from runs
+    # before the runner stamped these fields) simply contribute 0 here; that is
+    # why these are reported alongside `attributionAvailable` rather than being
+    # trusted blindly.
+    attr_records = [r for r in annotated if "assertFailed" in r or "caught" in r]
+    assertion_failed_ct = sum(1 for r in annotated if r.get("assertFailed"))
+    pre_assertion_raise_ct = sum(
+        1 for r in annotated if r.get("caught") and not r.get("assertFailed"))
+
     # Real-signal numerator: records that produced/or would produce a genuine
     # semantic check (a real value, or a genuine failure).  unassertable records
     # stay in the denominator so an all-void chunk cannot claim a free 100%.
@@ -640,6 +666,26 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         "stubGap": stub_gap_ct,         # ATG marked AOT-STUB-GAP: no AOT body at all
         "factoryGap": factory_gap_ct,   # factory returned null → caught before method ran
         "failed": failed_ct,            # passed == False
+        # ── Failure attribution (runner stamps; attribution-only, no gating) ──
+        #
+        # NOTE: these do NOT partition `failed`.  They count by RUNTIME STAMP
+        # across all records, while `failed` counts a resultKind bucket — the
+        # same subject can be assertFailed AND classified realDefect/failed,
+        # and a stubGap subject can be caught without being a "failure".  Use
+        # these to attribute, not to reconcile against `failed`.
+        #
+        # assertionFailed: the subject's Assert.* executed and disagreed — a
+        #   real signal, and the only bucket that justifies "the implementation
+        #   is wrong" for a subject whose assertions are themselves sound.
+        # preAssertionRaise: raised before any assertion ran — bad inputs,
+        #   an unregistered API hitting the catch-all fallback, or a genuine
+        #   runtime defect.  Must be triaged, not assumed to be a defect.
+        "assertionFailed": assertion_failed_ct,
+        "preAssertionRaise": pre_assertion_raise_ct,
+        # Records that actually carry the attribution stamps.  Zero means the
+        # chunk's records predate the runner change, so the two counts above
+        # are 0-by-absence rather than 0-by-measurement.
+        "attributionAvailable": len(attr_records),
         # ── Gate numerator/denominator (factoryGap + stubGap excluded) ──
         "gateTotal": gate_denominator,
         "gatePassed": passed,
