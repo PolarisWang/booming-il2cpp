@@ -473,7 +473,7 @@ SemaphoreSlim 没有 real 用例可涨，RWLock 的 real 用例不是承重断�
 **对 T2.2-T2.5 的影响（本条是强制约束）**：
 
 - ❌ 不得用 `real%` 作为注册是否生效的证据（上面已述）；
-- ❌ **也不得用 `passed: true` 作为"该 subject 行为正确"的证据**——345 条 real
+- ❌ **也不得用 `passed: true` 作为"该 subject 行为正确"的证据**——**656** 条 real
   里绝大多数并未真正执行到断言；
 - ✅ 唯一可信的证据是：(i) 本仓 native 层的**可证伪行为测试**（T2.0 已建立该模式），
   (ii) 生成产物里 fallback 体 → `Chaos*` 直调的**文本对比**，
@@ -485,6 +485,54 @@ SemaphoreSlim 没有 real 用例可涨，RWLock 的 real 用例不是承重断�
 `fact-real-kind-does-not-detect-thrown-exception`，建议单开 issue 跟踪。
 
 ---
+
+### T2.2 完成记录 + T2.3 告警：chunk 覆盖缺口
+
+**T2.2（ReaderWriterLockSlim）已交付**（commit `aabcf8887`）：
+
+- 15 个 `extern "C"` 托管面入口在 `runtime_stubs/managed_primitive_entries.{h,cpp}`：
+  它们接收 managed 实例，经 T2.1 的 `ChaosManagedHandleLoad` 从实例自身字段取
+  native 句柄，再转发 T2.0 的 handle ABI。补上了 T2.0 没有的 `Exit*Lock` 与
+  `*TimeSpan` 重载（ticks→ms，负值→无限，Int64 中间量防溢出）。
+- 注册在 `Part1.S16.cs::RegisterReaderWriterLockSlimAndSemaphoreSlim`。
+  **一个坑**：必须用**非限定名** `"ReaderWriterLockSlim"`。subject id 形如
+  `System.Private.CoreLib/ReaderWriterLockSlim::...`，经
+  `ManagedNaming.GetTypeDisplayNameFromSubjectId` 会剥掉装配前缀，用全名
+  `System.Threading.ReaderWriterLockSlim` 匹配不上（静默不注册）。
+  `TryEnter*Lock` 的 `int` 与 `TimeSpan` 是**两个不同的 canonical key**，不可合并。
+- 8 个 native 行为测试（`test_managed_primitive_entries`），**含 mutation 验证**：
+  把 `BoundHandle` 换成"读一个全局锁"，第一个争用测试立刻 FAIL ⇒ 测试确实承重。
+  未构造实例（`SubjectInstanceFactory.Create<T>` = `GetUninitializedObject`，不跑
+  ctor，句柄字段为 0）必须报**失败**而非成功。
+
+**T2.3（Barrier + CountdownEvent）→ ⛔ [blocked]，非本 phase 的突破点**：
+
+取证（2026-09-14）：threading chunk 的 `CombinedSubjects.cs` 与
+`native-aot.generated.cpp` 中**没有任何 `Barrier` 或 `CountdownEvent` 的 subject**
+（`grep -c` 均为 0；后者连符号都不存在）。因此：
+
+- 注册 ShapeRegistry 条目不会有任何可观测效果——没有 subject 会匹配到它；
+- 无可用作承载体（写 native 测试只是"提前注册"，与上面的验收约束不符）。
+
+⇒ 这是**测试生成侧的覆盖缺口**，不是 ABI 断点。**待 ATG 侧产出这些 subject 后再补**。
+当前标记 `blocked`，不占用 Phase 2 的工作时间，也**不得**被记为已完成。
+
+### T2.4/T2.5 范围修正（同样受 chunk 覆盖约束）
+
+| 原语 | chunk 内 fallback 条目 | 处置 |
+|---|---|---|
+| `ManualResetEventSlim` | Set / Wait×5 / Dispose（8 subject） | **可做**（T2.4） |
+| `AutoResetEvent` | **无** | 同 T2.3，`blocked` |
+| `Timer` | **无** | 同 T2.3，`blocked` |
+| `SpinLock` | Enter / TryEnter×3（都带 `Boolean&`） | 见下 |
+| `SpinWait` | SpinOnce×2 / SpinUntil×3 | 见下 |
+| `ThreadPool` | QueueUserWorkItem / Get*Threads / Set*Threads 等 | T2.5 主体 |
+| `ThreadPoolBoundHandle` / `Overlapped` | 7 条 | **out_of_scope**（IO 完成端口，当前 ThreadPool 不覆盖） |
+| `Parallel.Invoke` | **无** | 同 T2.3，`blocked` |
+
+**SpinLock 的额外门槛**：3 个 `TryEnter` 的签名含 `System.Boolean&`（byref），
+SimpleForward 的 ABI 槽位要能表达 byref 并在返回时写回——这需要先确认 lowering
+对 byref 槽位的支持，否则是"注册了但写不回"的假接线。**开工前先验证**。
 
 ### T2.1 完成记录：句柄存在托管对象**自身的字段**里（`runtime_stubs/managed_handle_stubs.{h,cpp}`）
 
