@@ -52,7 +52,7 @@ def _fact_stats(fr: Path):
     smokeUnknown, failed}`` so consumers never see missing keys.
     """
     result = dict(total=0, nominal=0, realVerified=0, unassertable=0,
-                  smokeUnknown=0, failed=0)
+                  smokeUnknown=0, stubGap=0, failed=0)
     if not fr.is_file():
         return None
     d = json.loads(fr.read_text(encoding="utf-8"))
@@ -67,6 +67,7 @@ def _fact_stats(fr: Path):
         result["realVerified"] = sum(1 for k in kinds if k == "real")
         result["unassertable"] = sum(1 for k in kinds if k == "unassertable")
         result["smokeUnknown"] = sum(1 for k in kinds if k == "smoke")
+        result["stubGap"] = sum(1 for k in kinds if k == "stubGap")
         result["failed"] = sum(1 for k in kinds if k == "failed")
         return result
 
@@ -179,7 +180,7 @@ def main() -> int:
     # build table
     lines = []
     hdr = (f"{'CHUNK':56s}  {'F_tot':>5}  {'F_nom':>4}"
-           f"  {'real':>4}  {'unassert':>7}  {'smoke?':>6}  {'fail':>4}"
+           f"  {'real':>4}  {'unassert':>7}  {'smoke?':>6}  {'stubGap':>7}  {'fail':>4}"
            f"  {'real%':>5}   {'B_ok':>4}{'B_stub':>5}   {'HU_sem':>6}{'HU_pch':>6}"
            f"   {'CT_ok':>5}{'CT_tot':>6}   {'GATE':>4}")
     sep = "-" * len(hdr)
@@ -187,7 +188,7 @@ def main() -> int:
     lines.append(hdr)
     lines.append(sep)
 
-    ft, fn, frl, fu, fs, ff, bo, bs, hs, hp, bg, hg, cto, ctt = [0] * 14
+    ft, fn, frl, fu, fs, fsg, ff, bo, bs, hs, hp, bg, hg, cto, ctt = [0] * 15
     gk = []
     for key in sorted(seen, key=lambda k: k.lower()):
         info = seen[key]
@@ -203,6 +204,7 @@ def main() -> int:
         real_v = f["realVerified"] if f else 0
         unassert = f["unassertable"] if f else 0
         smoke_u = f["smokeUnknown"] if f else 0
+        stub_g = f.get("stubGap", 0)
         fail_ct = f["failed"] if f else 0
         pct = real_v / f["total"] * 100 if f and f["total"] > 0 else 0.0
         # Use *assertable* total (total - unassertable) for the percentage so
@@ -216,7 +218,7 @@ def main() -> int:
         h_pch = h["patch"] if h else 0
         if f:
             ft += f["total"]; fn += f["nominal"]
-            frl += real_v; fu += unassert; fs += smoke_u; ff += fail_ct
+            frl += real_v; fu += unassert; fs += smoke_u; fsg += stub_g; ff += fail_ct
         if b: bo += b["nonStub"]; bs += b["stub"]
         if h: hs += h["semantic"]; hp += h["patch"]
         if c: cto += c["contractPassed"]; ctt += c["contractTotal"]
@@ -225,13 +227,13 @@ def main() -> int:
         c_ok = c["contractPassed"] if c else 0
         c_tot = c["contractTotal"] if c else 0
         lines.append(f"{key:56s}  {f['total'] if f else 0:5d}  {f['nominal'] if f else 0:4d}"
-                     f"  {real_v:4d}  {unassert:7d}  {smoke_u:6d}  {fail_ct:4d}"
+                     f"  {real_v:4d}  {unassert:7d}  {smoke_u:6d}  {stub_g:7d}  {fail_ct:4d}"
                      f"  {pct:4.1f}%   {b_total:4d}{b_stub:5d}   {h_sem:6d}{h_pch:6d}"
                      f"   {c_ok:5d}{c_tot:6d}   {gs:>4}")
 
     lines.append(sep)
     lines.append(f"{'TOTAL':56s}  {ft:5d}  {fn:4d}"
-                 f"  {frl:4d}  {fu:7d}  {fs:6d}  {ff:4d}"
+                 f"  {frl:4d}  {fu:7d}  {fs:6d}  {fsg:7d}  {ff:4d}"
                  f"           {bo:4d}{bs:5d}   {hs:6d}{hp:6d}"
                  f"   {cto:5d}{ctt:6d}  gated_b={bg}  gated_hu={hg}")
     lines.append(f"\nGate ratio threshold: {gate_ratio}  |  Gated chunks: {bg}")

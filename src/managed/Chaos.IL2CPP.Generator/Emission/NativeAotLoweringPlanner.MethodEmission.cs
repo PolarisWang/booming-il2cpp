@@ -295,6 +295,27 @@ public sealed partial class NativeAotLoweringPlanner
         // Strip trailing semicolon from FormatMethodDeclaration for function definition header.
         builder.AppendLine(fnDecl.Length > 0 && fnDecl[^1] == ";"[0] ? fnDecl[..^1] : fnDecl);
         builder.AppendLine("{");
+
+        // ── REF-RISK-7: publish this method's image while it runs ────────
+        // Assembly.GetCallingAssembly()/GetExecutingAssembly() cannot unwind an AOT
+        // stack, so they read a thread-local slot that generated code maintains.
+        // Emitting the bracket for EVERY method would put a TLS write pair on the
+        // hottest path (P1) for a value only those two accessors ever read, so it is
+        // emitted only when the body actually calls one of them.
+        //
+        // The insertion point is here — immediately after the function-body brace.
+        // Post-processing the finished body was tried first and proved unreliable: the
+        // emitted text also contains a preceding extern-declaration list, and the body
+        // itself begins with nested lambdas, so a text search could not identify the
+        // definition brace. At this point in emission there is no ambiguity.
+        //
+        // The scope is RAII, so the thread-local is restored on every exit path
+        // (early return and exception unwind included).
+        if (MethodCallsAssemblyAccessor(instructions))
+        {
+            builder.AppendLine("    ChaosExecutingImageScope chaos_executing_image_scope(");
+            builder.AppendLine("        chaos_executing_image_handle());");
+        }
         StringBuilder stringBuilder = builder;
         StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(45, 1, stringBuilder);
         handler.AppendLiteral("    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
@@ -464,8 +485,18 @@ public sealed partial class NativeAotLoweringPlanner
         if (_wrapInTryCatch)
         {
             builder.AppendLine("} catch (const chaos_managed_exception&) {");
-            if (method.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
-                builder.AppendLine("    return {};");
+            // C# semantics: an uncaught managed exception propagates out of the method.
+            // This catch previously swallowed it and returned a default value, which
+            // made every assertion failure invisible to the runner (converted into
+            // "returned 0" -> passed=true). Managed exceptions must keep propagating;
+            // the runner's __except handler turns them into caught=true ->
+            // passed=false, which is what a failed assertion should look like.
+            // The wrapper still serves its Phase-4 purpose for NON-managed C++
+            // exceptions (unregistered external-runtime symbols): those are of a
+            // different type and keep hitting the __except handler too, marking the
+            // subject failed — also correct, since a call into a missing implementation
+            // is not a passing subject.
+            builder.AppendLine("    throw;  // RethrowManagedExceptions: C# semantics — propagate");
             builder.AppendLine("}");
         }
         builder.AppendLine("}");
@@ -620,6 +651,46 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// True when the method calls Assembly.GetCallingAssembly()/GetExecutingAssembly().
+    ///
+    /// Those two are registered as SimpleForward helpers, so a call site carries the
+    /// native symbol in its callee. Matching on that keeps the REF-RISK-7 bracket off
+    /// the hot path for every other method.
+    /// </summary>
+    /// <summary>True when the text names one of the executing-image accessors.</summary>
+    ///
+    /// The call site records a SUBJECT ID
+    /// ("System.Private.CoreLib/System.Reflection.Assembly::GetExecutingAssembly:...")
+    /// rather than the emitted native symbol — verified against the lowered IR, where
+    /// no targetSymbol field is present. Matching is therefore on the method name that
+    /// appears in both spellings, so either form would still be recognised.
+    private static bool MatchesAssemblyAccessor(string? text)
+    {
+        if (string.IsNullOrEmpty(text)) return false;
+        return text.Contains("GetCallingAssembly", StringComparison.Ordinal)
+            || text.Contains("GetExecutingAssembly", StringComparison.Ordinal)
+            || text.Contains("ChaosReflectionGetCallingAssembly", StringComparison.Ordinal)
+            || text.Contains("ChaosReflectionGetExecutingAssembly", StringComparison.Ordinal);
+    }
+
+    private static bool MethodCallsAssemblyAccessor(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+    {
+        foreach (var instruction in instructions)
+        {
+            // TargetSymbol holds the resolved native symbol for a direct call; Callee
+            // holds the subject id. Both are checked because which one carries the
+            // accessor name depends on how the call site was lowered.
+            if (MatchesAssemblyAccessor(instruction.TargetSymbol)
+                || MatchesAssemblyAccessor(instruction.Callee))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

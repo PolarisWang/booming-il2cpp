@@ -8,6 +8,17 @@ public sealed class ValueGenerator
     private readonly CSharpSerializer _serializer;
     private readonly AutoFixtureAllower? _autoFixture;
 
+    /// <summary>
+    /// Codegen capability table: <c>Type::Method</c> → status for every managed
+    /// method the AOT codegen can dispatch natively.  Semantic value injection
+    /// is gated on this so a valid input is only fed to an API that actually has
+    /// an implementation — injecting a valid input for an unimplemented API
+    /// merely trades a null-input smoke failure for an unfixable real failure.
+    /// Null when no table was supplied (older runs): injection then proceeds
+    /// unguarded, preserving the previous behaviour.
+    /// </summary>
+    private readonly IReadOnlyDictionary<string, string>? _capabilityTable;
+
     // Cache for enum type detection (Type.GetType is slow)
     private static readonly ConcurrentDictionary<string, bool> EnumTypeCache = new(StringComparer.Ordinal);
 
@@ -172,10 +183,26 @@ public sealed class ValueGenerator
             : "new System.Collections.ArrayList()",
     };
 
-    public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
+    public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null,
+                          IReadOnlyDictionary<string, string>? capabilityTable = null)
     {
         _serializer = serializer;
         _autoFixture = autoFixture;
+        _capabilityTable = capabilityTable;
+    }
+
+    /// <summary>
+    /// True when semantic value injection is allowed for this method.
+    ///
+    /// Returns true when no capability table was supplied (un-guarded legacy
+    /// behaviour).  With a table, only methods the codegen marks <c>real</c> are
+    /// eligible — the others would turn a null-input smoke gap into an
+    /// unfixable failure against a method that has no implementation at all.
+    /// </summary>
+    private static bool IsInjectable(IReadOnlyDictionary<string, string>? table, string typeFullName, string methodName)
+    {
+        if (table is null) return true;
+        return table.ContainsKey($"{typeFullName}::{methodName}");
     }
 
     /// <summary>
@@ -286,7 +313,7 @@ public sealed class ValueGenerator
         // the generic boundary probe, so the AOT runtime's un-implemented behavior
         // (returning null/false) goes undetected.  Inject explicit non-default argument
         // combinations so the generated test actually verifies real semantics.
-        AddSemanticMethodValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+        AddSemanticMethodValueSets(method, paramTypes, sets, usedSignatures, methodIndex, _capabilityTable);
 
         // 防线 4: 警告 — 如果该方法的全部值集都只包含 default 输入（所有参数都是
         // default/null），则说明该方法的 AOT 行为可能被蒙过。这个警告被 pipeline 的
@@ -477,6 +504,10 @@ public sealed class ValueGenerator
         ["JsonElement"] = "System.Text.Json.JsonDocument.Parse(\"{}\").RootElement",
         // Raw UTF-8 bytes for the reader-based overloads.  "{}" == 0x7B 0x7D.
         ["Utf8JsonReader"] = "new System.Text.Json.Utf8JsonReader(new byte[] { 0x7B, 0x7D })",
+        // JsonSerializerOptions.  JsonMetadataServices.Create*Info<T> requires a
+        // non-null options argument; default(JsonSerializerOptions)! throws ANE
+        // before the factory can run, making the whole subject an [UNVERIFIED] stub.
+        ["JsonSerializerOptions"] = "new System.Text.Json.JsonSerializerOptions()",
         // ── System.Xml ──
         // A minimal well-formed XML document for the XPath/XSLT navigators.
         ["XPathDocument"] = "new System.Xml.XPath.XPathDocument(new System.IO.StringReader(\"<root/>\"))",
@@ -1039,7 +1070,8 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
         string[] paramTypes,
         List<ValueSet> sets,
         HashSet<string> usedSignatures,
-        int methodIndex)
+        int methodIndex,
+        IReadOnlyDictionary<string, string>? capabilityTable)
     {
         // ── Convert.ChangeType(object, TypeCode[, IFormatProvider]) — 多值探针 ──
         // The default probe only sends default(object)+default(TypeCode), so a stub
@@ -1133,6 +1165,136 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
         // generic overload is left on the default single-value probe.
         // ── Delegate to the Parse-family injector ──
         AddParseFamilyValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+
+        // ── Reflection member lookups: real member name instead of default(string) ──
+        // typeof(ReflectionSubjectSample).GetProperty(default(string)!) throws
+        // ArgumentNullException in managed AND AOT, then the generated test asserts
+        // the result is non-null — a test that can never pass.  Supplying the real
+        // seed-member name exercises the actual lookup path.
+        // Gated on the codegen capability table: feeding a valid name to an API the
+        // codegen cannot dispatch would replace a smoke gap with a permanent failure.
+        if (IsInjectable(capabilityTable, method.DeclaringTypeFullName, method.Name))
+            AddReflectionMemberValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+
+        // ── Array static searches: a real array instead of default(Array) ──
+        // Array.BinarySearch(default(Array)!, ...) throws ArgumentNullException in
+        // both runtimes; the probe must feed a populated array to mean anything.
+        if (IsInjectable(capabilityTable, method.DeclaringTypeFullName, method.Name))
+            AddArraySearchValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+
+        // ── Activator.CreateInstance: typeof(int) instead of default(Type) ──
+        // Activator.CreateInstance(default(Type)!) returns null in both runtimes,
+        // but the generated test asserts non-null result — a test that can never pass.
+        // Feeding typeof(int) makes the invocation succeed and produce a real object.
+        if (IsInjectable(capabilityTable, method.DeclaringTypeFullName, method.Name) &&
+            method.DeclaringTypeFullName == "System.Activator" &&
+            method.Name is "CreateInstance" or "CreateInstanceFrom")
+        {
+            if (paramTypes.Length >= 1 && paramTypes[0] == "System.Type" &&
+                !method.Name.Contains("From"))  // only Type-first overloads
+            {
+                var args = paramTypes
+                    .Select((t, i) => i switch
+                    {
+                        0 => "typeof(int)",
+                        1 when t == "System.Object[]" => "new object[0]",
+                        _ => $"default({CSharpSerializer.ToCSharpTypeName(t)})",
+                    })
+                    .ToArray();
+                AddUnique(sets, usedSignatures, methodIndex, args);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Member names on the ATG seed type <c>ReflectionSubjectSample</c> that the
+    /// reflection probes can look up.  Keep in sync with the sample type emitted by
+    /// ProbeEmitter (see CSharpExpressionBuilder.ReflectionSeedExpressions).
+    /// </summary>
+    private static readonly Dictionary<string, string> ReflectionMemberNames = new(StringComparer.Ordinal)
+    {
+        ["GetProperty"] = "\"SampleProperty\"",
+        ["GetEvent"] = "\"SampleEvent\"",
+        ["GetField"] = "\"SampleField\"",
+        ["GetMethod"] = "\"SampleMethod\"",
+    };
+
+    /// <summary>
+    /// Replace a leading <c>default(string)</c> with a real member name for the
+    /// reflection lookup methods named in <see cref="ReflectionMemberNames"/>.
+    ///
+    /// Only fires when the first parameter is <c>System.String</c> — the
+    /// BindingFlags / Type / Binder trailing parameters keep their defaults, which
+    /// are valid for these overloads (BindingFlags.Public|Instance is the lookup
+    /// default; a null Type[] means "any signature").
+    /// </summary>
+    private static void AddReflectionMemberValueSets(
+        MethodSignature method,
+        string[] paramTypes,
+        List<ValueSet> sets,
+        HashSet<string> usedSignatures,
+        int methodIndex)
+    {
+        if (paramTypes.Length == 0 || paramTypes[0] != "System.String") return;
+        if (!ReflectionMemberNames.TryGetValue(method.Name, out var memberName)) return;
+
+        // Arity must match exactly — ProbeEmitter indexes every parameter position.
+        var args = paramTypes
+            .Select((t, i) => i == 0 ? memberName : $"default({CSharpSerializer.ToCSharpTypeName(t)})")
+            .ToArray();
+        AddUnique(sets, usedSignatures, methodIndex, args);
+    }
+
+    /// <summary>
+    /// Array.BinarySearch / IndexOf / LastIndexOf / Find-family: give the probe a
+    /// populated array rather than <c>default(Array)!</c>, which throws
+    /// ArgumentNullException in both the managed probe and AOT.
+    /// </summary>
+    private static void AddArraySearchValueSets(
+        MethodSignature method,
+        string[] paramTypes,
+        List<ValueSet> sets,
+        HashSet<string> usedSignatures,
+        int methodIndex)
+    {
+        if (method.DeclaringTypeFullName != "System.Array") return;
+        const string searchPrefix = "BinarySearch";
+        if (!method.Name.StartsWith(searchPrefix, StringComparison.Ordinal) &&
+            method.Name is not ("IndexOf" or "LastIndexOf"))
+            return;
+        if (paramTypes.Length == 0) return;
+
+        // int[] overloads: the first parameter is the array, the rest are indices /
+        // the value.  A 3-element array with a value that exists makes the search
+        // meaningful (index 1) rather than -1-by-accident.
+        if (paramTypes[0] == "System.Int32[]")
+        {
+            var args = paramTypes
+                .Select((t, i) => i switch
+                {
+                    0 => "new int[3] { 10, 20, 30 }",
+                    1 when t == "System.Int32" => "20",
+                    _ => $"default({CSharpSerializer.ToCSharpTypeName(t)})",
+                })
+                .ToArray();
+            AddUnique(sets, usedSignatures, methodIndex, args);
+        }
+        // object[] / Array overloads.
+        else if (paramTypes[0] is "System.Array" or "System.Object[]")
+        {
+            var arrayExpr = paramTypes[0] == "System.Array"
+                ? "new object[3] { 10, 20, 30 }"
+                : "new object[3] { 10, 20, 30 }";
+            var args = paramTypes
+                .Select((t, i) => i switch
+                {
+                    0 => arrayExpr,
+                    1 when t == "System.Object" => "20",
+                    _ => $"default({CSharpSerializer.ToCSharpTypeName(t)})",
+                })
+                .ToArray();
+            AddUnique(sets, usedSignatures, methodIndex, args);
+        }
     }
 
     /// <summary>
@@ -1156,7 +1318,10 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
         ["System.Int32"] = "\"1234567\"",
         ["System.UInt32"] = "\"3456789012\"",
         ["System.Int64"] = "\"1234567890123\"",
-        ["System.UInt64"] = "\"12345678901234567890\"",
+        // UInt64: the literal MUST fit in System.UInt64 (max 18446744073709551615).
+        // A longer value makes UInt64.Parse throw OverflowException in BOTH the managed
+        // probe and AOT, producing a test that can never pass.
+        ["System.UInt64"] = "\"1234567890123456789\"",
         // Int128/UInt128: the literal must stay within C#'s integer-literal range,
         // otherwise the generated Assert.AreEqual emits a constant the compiler
         // rejects with CS1021 (Integral constant is too large).

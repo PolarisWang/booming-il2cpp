@@ -455,6 +455,24 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetCallingAssembly(void) noexcept;
  */
 CHAOS_IL2CPP_INTPTR ChaosReflectionPushExecutingImage(CHAOS_IL2CPP_INTPTR image_handle) noexcept;
 void ChaosReflectionPopExecutingImage(CHAOS_IL2CPP_INTPTR previous) noexcept;
+
+// RAII form of the push/pop pair, for generated code.
+//
+// Generated method bodies may return early or unwind through exceptions, so a
+// hand-written pop would be skipped on those paths and leave the thread-local
+// executing image pointing at a method that has already returned. Destructor-based
+// restoration makes the bracket correct on every exit path, at the cost of one
+// TLS write that a correctly-emitted pop would perform anyway.
+struct ChaosExecutingImageScope {
+    CHAOS_IL2CPP_INTPTR previous;
+    explicit ChaosExecutingImageScope(CHAOS_IL2CPP_INTPTR image_handle) noexcept
+        : previous(ChaosReflectionPushExecutingImage(image_handle)) {}
+    ~ChaosExecutingImageScope() noexcept {
+        ChaosReflectionPopExecutingImage(previous);
+    }
+    ChaosExecutingImageScope(const ChaosExecutingImageScope&) = delete;
+    ChaosExecutingImageScope& operator=(const ChaosExecutingImageScope&) = delete;
+};
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetEntryAssembly(void) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetExecutingAssembly(void) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetImageRuntimeVersion(CHAOS_IL2CPP_INTPTR assembly) noexcept;

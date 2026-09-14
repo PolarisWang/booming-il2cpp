@@ -25,7 +25,33 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyName(CHAOS_IL2CPP_INTPTR assembly_
         decoded = &aot_metadata::kImageCoreLib;
     }
 
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<char*>(decoded->image_name_utf8));
+    // Return a managed AssemblyName-shaped object. Its only field the consumers read
+    // is runtime_name_value at offset 16 (ChaosReflectionGetAssemblyNameValue), holding
+    // the interned assembly name as a tagged string handle.
+    //
+    // This previously returned the raw image_name_utf8 char pointer, but get_Name
+    // treats the handle as a managed object and reads offset 16 of it — i.e. bytes of
+    // the string literal — producing garbage or 0 and breaking every
+    // Assembly.GetName().Name chain in AOT.
+    struct AssemblyNameBuf {
+        ThinLockableHeader header;               // [0..7]   TypeInfo*
+        CHAOS_IL2CPP_INTPTR header_pad;          // [8..15]  second header word — the
+                                                 // shadow-object model prefixes 16 bytes
+                                                 // ("after object header", cf. the Type
+                                                 // layout comment in invoke.cpp), so
+                                                 // runtime_name_value must land at [16].
+        CHAOS_IL2CPP_INTPTR runtime_name_value;  // [16..23] read by GetAssemblyNameValue
+    };
+    thread_local AssemblyNameBuf s_buf{};
+    s_buf = AssemblyNameBuf{};
+
+    const char* name = decoded->image_name_utf8;
+    auto id = string_table::Intern(name,
+        static_cast<CHAOS_IL2CPP_UINT32>(std::strlen(name)));
+    s_buf.runtime_name_value = static_cast<CHAOS_IL2CPP_INTPTR>(id | CHAOS_STRING_ID_TAG);
+
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetDeclaringType(CHAOS_IL2CPP_INTPTR type_handle) {

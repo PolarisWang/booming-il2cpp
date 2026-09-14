@@ -4,6 +4,9 @@
 // These stubs are compiled from source (not part of prebuilt lib)
 // to avoid stale-symbol issues with the SDK runtime library.
 #include <cstdlib>
+#include <cstring>
+#include <cstdio>
+#include <cfloat>
 #include <atomic>
 
 #include "generated_code_compat.h"
@@ -140,13 +143,101 @@ CHAOS_IL2CPP_INTPTR ChaosJsonSerializeBool(CHAOS_IL2CPP_INT32 value) noexcept
     return ChaosStringCreateFromUtf8(str, value ? 4 : 5);
 }
 
+/// Double / Single must use "R"-style shortest round-trippable formatting so
+/// that Deserialize(Serialize(x)) == x holds.  %g truncates to 6 significant
+/// digits, which silently loses precision (e.g. 0.1 → "0.1" is fine, but
+/// 1.0/3.0 → "0.333333" does not round-trip).  Use "%.17g" for double and
+/// "%.9g" for float, the standard .NET Core 3.0+ round-trip widths.
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeDouble(double value) noexcept
+{
+    char buffer[40];
+    // Non-finite values are not representable in JSON; .NET throws
+    // ArgumentException for these by default.  Emitting `null` here keeps the
+    // output well-formed rather than producing "nan"/"inf" which are not JSON.
+    if (value != value || value > DBL_MAX || value < -DBL_MAX)
+    {
+        return ChaosStringCreateFromUtf8("null", 4);
+    }
+    int len = snprintf(buffer, sizeof(buffer), "%.17g", value);
+    if (len <= 0) return ChaosStringCreateFromUtf8("null", 4);
+    return ChaosStringCreateFromUtf8(buffer, len);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosJsonSerializeSingle(float value) noexcept
+{
+    char buffer[24];
+    if (value != value || value > FLT_MAX || value < -FLT_MAX)
+    {
+        return ChaosStringCreateFromUtf8("null", 4);
+    }
+    int len = snprintf(buffer, sizeof(buffer), "%.9g", static_cast<double>(value));
+    if (len <= 0) return ChaosStringCreateFromUtf8("null", 4);
+    return ChaosStringCreateFromUtf8(buffer, len);
+}
+
 CHAOS_IL2CPP_INTPTR ChaosJsonSerializeString(CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    // For string values, JsonSerializer wraps them in quotes and escapes.
-    // Return the string as-is wrapped in quotes — simple JSON string value.
-    // The managed String content needs to be extracted from the String object.
-    // For now, return the input unchanged (caller handles JSON formatting).
-    return value;
+    // JsonSerializer.Serialize(string) must wrap the string in double quotes
+    // and escape special characters: " → \", \ → \\, \n → \n, \r → \r, \t → \t.
+    // The managed String may be a tagged StringId or a real StubStringHeader*.
+    if (value == 0) return ChaosStringCreateFromUtf8("null", 4);
+
+    const char* data = nullptr;
+    CHAOS_IL2CPP_UINT32 byte_count = 0;
+
+    if (chaos_is_string_id(value))
+    {
+        auto view = string_table::Resolve(chaos_extract_string_id(value));
+        if (view.utf8_data == nullptr) return ChaosStringCreateFromUtf8("null", 4);
+        data = view.utf8_data;
+        byte_count = view.byte_count;
+    }
+    else
+    {
+        const auto* header = reinterpret_cast<const StubStringHeader*>(value);
+        data = stub_string_data(reinterpret_cast<const void*>(value));
+        byte_count = header->byte_count;
+    }
+
+    // Compute escaped length.
+    // Minimum: two quotes ("") → 2 bytes.
+    // Upper bound: every byte could need escaping (" → \"  is 2 bytes).
+    constexpr CHAOS_IL2CPP_UINT32 kMinLen = 2;
+    CHAOS_IL2CPP_UINT32 escaped_len = kMinLen;
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < byte_count; ++i)
+    {
+        switch (data[i])
+        {
+            case '"':  case '\\': escaped_len += 2; break;
+            case '\n': case '\r': case '\t': escaped_len += 2; break;
+            default:   escaped_len += 1; break;
+        }
+    }
+
+    auto* buf = static_cast<char*>(CHAOS_IL2CPP_MALLOC(escaped_len + 1));
+    if (buf == nullptr) return ChaosStringCreateFromUtf8("null", 4);
+
+    buf[0] = '"';
+    CHAOS_IL2CPP_UINT32 wi = 1;
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < byte_count; ++i)
+    {
+        char c = data[i];
+        switch (c)
+        {
+            case '"':  buf[wi++] = '\\'; buf[wi++] = '"';  break;
+            case '\\': buf[wi++] = '\\'; buf[wi++] = '\\'; break;
+            case '\n': buf[wi++] = '\\'; buf[wi++] = 'n';  break;
+            case '\r': buf[wi++] = '\\'; buf[wi++] = 'r';  break;
+            case '\t': buf[wi++] = '\\'; buf[wi++] = 't';  break;
+            default:   buf[wi++] = c; break;
+        }
+    }
+    buf[wi++] = '"';
+    buf[wi] = '\0';
+
+    auto result = ChaosStringCreateFromUtf8(buf, static_cast<CHAOS_IL2CPP_INT32>(wi));
+    CHAOS_IL2CPP_FREE(buf);
+    return result;
 }
 
 // ── Precompiled JSON deserialization stubs ──────────────────
@@ -174,6 +265,74 @@ CHAOS_IL2CPP_INT32 ChaosJsonDeserializeBool(CHAOS_IL2CPP_INTPTR jsonStr) noexcep
     const char* data = stub_string_data(reinterpret_cast<void*>(jsonStr));
     if (data == nullptr) return 0;
     return (data[0] == 't' || data[0] == '1') ? 1 : 0;
+}
+
+/// Deserialize a JSON string literal back to a managed String.
+/// Accepts either a quoted JSON string ("abc") or a bare token (abc).
+/// Escape sequences are decoded back to their raw bytes.
+CHAOS_IL2CPP_INTPTR ChaosJsonDeserializeString(CHAOS_IL2CPP_INTPTR jsonStr) noexcept
+{
+    if (jsonStr == 0) return 0;
+    const char* data = stub_string_data(reinterpret_cast<void*>(jsonStr));
+    if (data == nullptr) return 0;
+
+    // "null" (unquoted) deserializes to a null managed string.
+    if (std::strcmp(data, "null") == 0) return 0;
+
+    const bool quoted = (data[0] == '"');
+    const char* start = quoted ? data + 1 : data;
+    const size_t raw_len = std::strlen(start);
+    const size_t end = quoted && raw_len > 0 && start[raw_len - 1] == '"'
+        ? raw_len - 1
+        : raw_len;
+
+    // Worst case the decoded form is no longer than the encoded form.
+    auto* buf = static_cast<char*>(CHAOS_IL2CPP_MALLOC(end + 1));
+    if (buf == nullptr) return 0;
+
+    size_t wi = 0;
+    for (size_t i = 0; i < end; ++i)
+    {
+        if (start[i] == '\\' && i + 1 < end)
+        {
+            ++i;
+            switch (start[i])
+            {
+                case 'n': buf[wi++] = '\n'; break;
+                case 'r': buf[wi++] = '\r'; break;
+                case 't': buf[wi++] = '\t'; break;
+                case '"': buf[wi++] = '"';  break;
+                case '\\': buf[wi++] = '\\'; break;
+                case '/': buf[wi++] = '/';  break;
+                default:  buf[wi++] = start[i]; break;
+            }
+        }
+        else
+        {
+            buf[wi++] = start[i];
+        }
+    }
+    buf[wi] = '\0';
+
+    auto result = ChaosStringCreateFromUtf8(buf, static_cast<CHAOS_IL2CPP_INT32>(wi));
+    CHAOS_IL2CPP_FREE(buf);
+    return result;
+}
+
+double ChaosJsonDeserializeDouble(CHAOS_IL2CPP_INTPTR jsonStr) noexcept
+{
+    if (jsonStr == 0) return 0.0;
+    const char* data = stub_string_data(reinterpret_cast<void*>(jsonStr));
+    if (data == nullptr) return 0.0;
+    return std::strtod(data, nullptr);
+}
+
+float ChaosJsonDeserializeSingle(CHAOS_IL2CPP_INTPTR jsonStr) noexcept
+{
+    if (jsonStr == 0) return 0.0f;
+    const char* data = stub_string_data(reinterpret_cast<void*>(jsonStr));
+    if (data == nullptr) return 0.0f;
+    return static_cast<float>(std::strtod(data, nullptr));
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -790,10 +949,24 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     // executes AOT Core IR JSON) and Phase 2 (dispatch table).  BCrypt/CNG stubs
     // are handled by codegen ShapeRegistry direct wrappers (not the fallback).
     // If all of those failed to execute, the subject reaches this point genuinely
-    // unresolved and flows to the documented sentinel catch-all below (not a
-    // per-crypto-class lie).
-
-   return 0;
+    // unresolved.
+    //
+    // This used to `return 0`.  That is a silent lie: the caller cannot tell
+    // "this method computed 0" from "this method has no implementation at all".
+    // Every assertion like `Assert.AreEqual(0, result)` then passes against a
+    // method that never ran, and the verification pipeline reports a
+    // confident-but-wrong green.  Raising a managed NotImplementedException
+    // instead makes the missing implementation observable: the runner records
+    // it as a genuine failure, and the fact classifier reports it as
+    // `notSupported` rather than a fabricated pass.
+    CHAOS_IL2CPP_LOG_WARN_M("ExternalRuntimeFallback",
+        "Phase 3 catch-all: {0} — unresolvable subject raises NotImplementedException",
+        (subject_id != nullptr ? subject_id : "(null)"));
+    chaos::il2cpp::runtime_core::RaiseManagedException(
+        "System.NotImplementedException",
+        subject_id != nullptr
+            ? subject_id
+            : "AOT runtime has no implementation for this subject.");
 }
 
 

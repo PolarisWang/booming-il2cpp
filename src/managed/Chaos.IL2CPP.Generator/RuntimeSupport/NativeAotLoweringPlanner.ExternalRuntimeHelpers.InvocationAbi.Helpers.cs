@@ -276,6 +276,30 @@ public sealed partial class NativeAotLoweringPlanner
 
 
 
+    private static AotCoreIrAbiSlotArtifact CreateFloat32AbiSlot(string? typeSubjectId = null, AotCoreIrTypeShapeKind typeShape = AotCoreIrTypeShapeKind.ValueType)
+    {
+        return new AotCoreIrAbiSlotArtifact
+        {
+            CarrierKindCode = AotCoreIrAbiCarrierKind.Float32,
+            TypeSubjectId = typeSubjectId,
+            TypeShape = typeShape
+        };
+    }
+
+
+
+    private static AotCoreIrAbiSlotArtifact CreateFloat64AbiSlot(string? typeSubjectId = null, AotCoreIrTypeShapeKind typeShape = AotCoreIrTypeShapeKind.ValueType)
+    {
+        return new AotCoreIrAbiSlotArtifact
+        {
+            CarrierKindCode = AotCoreIrAbiCarrierKind.Float64,
+            TypeSubjectId = typeSubjectId,
+            TypeShape = typeShape
+        };
+    }
+
+
+
     private static string MapAbiSlotReturnType(AotCoreIrAbiSlotArtifact abiSlot)
     {
         return abiSlot.CarrierKindCode switch

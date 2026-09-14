@@ -350,6 +350,14 @@ public static class NativeAotArtifactNames
     public const string LoweringPlan = "native-aot.plan.json";
     public const string Manifest = "native-aot.manifest.json";
     public const string MethodsManifest = "native-aot.methods.json";
+    /// <summary>
+    /// Shape-registry capability manifest.  Records which managed methods the
+    /// codegen dispatches natively (SimpleForward / InlineBody shape) versus
+    /// those with no shape at all, so downstream consumers (ATG value injector,
+    /// fact classification) can separate a wrong answer from a missing
+    /// implementation.
+    /// </summary>
+    public const string CapabilityManifest = "aot-capability-manifest.json";
 }
 
 public sealed record NativeCodegenMetricsArtifact

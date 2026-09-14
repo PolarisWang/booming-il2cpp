@@ -180,6 +180,92 @@ public sealed partial class NativeAotLoweringPlanner
             _inlineDescriptors.Add(descriptor);
         }
 
+        /// <summary>
+        /// Export the shape registry as a JSON capability manifest.
+        ///
+        /// Records which managed methods the codegen dispatches natively
+        /// (SimpleForward / InlineBody) versus those that have no shape at all.
+        /// Downstream consumers (the ATG value injector and the fact
+        /// classification layer) use it to tell a *wrong answer from a method
+        /// that has an implementation* apart from *a method with no
+        /// implementation at all* — the distinction the verification pipeline
+        /// previously could not make, because the external-runtime catch-all
+        /// returned 0 for both.
+        ///
+        /// Generic and Inline descriptors are pattern-matched (TypeDisplayName
+        /// Prefix + MethodName), not exact subjectIds, so they are exported as
+        /// patterns rather than resolved callee entries.
+        /// </summary>
+        public string ExportManifest()
+        {
+            var entries = new List<object>();
+
+            // Exact SimpleForward registrations — the authoritative "we have this".
+            foreach (var entry in _entriesByCanonicalKey.Values)
+            {
+                // Subject-id prefix in the same shape the metadata uses
+                // ("Assembly/Namespace.Type::Method:Signature"), so a consumer can
+                // match a metadata row with a plain StartsWith.  The registry only
+                // knows the managed type display name, so the prefix ends at the
+                // method name and the signature tail is matched by the consumer.
+                var subjectIdPrefix =
+                    $"System.Private.CoreLib/{entry.TypeDisplayName}::{entry.MethodName}:";
+
+                entries.Add(new
+                {
+                    kind = "exact",
+                    typeDisplayName = entry.TypeDisplayName,
+                    methodName = entry.MethodName,
+                    subjectIdPrefix,
+                    paramTypes = entry.ParamTypeDisplayNames,
+                    nativeSymbol = string.IsNullOrEmpty(entry.NativeFnSymbol)
+                        ? null : entry.NativeFnSymbol,
+                    shapeKind = entry.Kind.ToString(),
+                });
+            }
+
+            // Generic shape descriptors (pattern-based: type prefix + method name).
+            foreach (var desc in _genericDescriptors)
+            {
+                entries.Add(new
+                {
+                    kind = "generic-pattern",
+                    typeDisplayNamePrefix = desc.TypeDisplayNamePrefix,
+                    methodName = desc.MethodName,
+                });
+            }
+
+            // Inline shape descriptors (pattern-based).
+            foreach (var desc in _inlineDescriptors)
+            {
+                entries.Add(new
+                {
+                    kind = "inline-pattern",
+                    typeDisplayNamePrefix = desc.TypeDisplayNamePrefix,
+                    methodName = desc.MethodName,
+                    isInstanceMethod = desc.IsInstanceMethod,
+                });
+            }
+
+            var manifest = new
+            {
+                schemaVersion = 1,
+                generatedAt = DateTime.UtcNow.ToString("O"),
+                totalExactShapes = _entriesByCanonicalKey.Count,
+                totalGenericPatterns = _genericDescriptors.Count,
+                totalInlinePatterns = _inlineDescriptors.Count,
+                entries,
+            };
+
+            return System.Text.Json.JsonSerializer.Serialize(manifest,
+                new System.Text.Json.JsonSerializerOptions
+                {
+                    WriteIndented = true,
+                    DefaultIgnoreCondition =
+                        System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull,
+                });
+        }
+
         /// <summary>Try to match a callee SubjectId to an inline shape descriptor.</summary>
         public bool TryMatchInlineShape(
             string callee,
@@ -596,6 +682,19 @@ public sealed partial class NativeAotLoweringPlanner
 
 
             // Helper: register a precompiled JsonSerializer::Serialize<T> stub.
+            //
+            // Parameter count matters: JsonSerializer exposes several overloads
+            // that share the generic type argument but differ in arity —
+            //   Serialize<T>(T value)
+            //   Serialize<T>(T value, JsonSerializerOptions? options)
+            //   Serialize<T>(T value, JsonTypeInfo<T> jsonTypeInfo)
+            // The native stub only consumes the VALUE (chaos_arg_0); the trailing
+            // options/typeInfo argument is irrelevant to snprintf-based formatting.
+            // Declaring a fixed 1-param ABI made codegen pop only one value off the
+            // eval stack for the 2-param overloads, leaving the options argument
+            // unconsumed and corrupting the surrounding stack discipline.
+            // We therefore size ParameterAbis from the callee's real arity and pass
+            // the extra args through (the wrapper ignores everything past arg 0).
             void RegisterJsonSerialize(string typeArg, string nativeFn)
             {
                 var fn = nativeFn;
@@ -606,19 +705,42 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var t = typeArgs != null && typeArgs.Count > 0 ? typeArgs[0] : null;
                         if (!string.Equals(t, typeArg, StringComparison.Ordinal)) return null;
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        var argCount = Math.Max(1, paramTypes.Count);
+                        var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
+                        var paramSigParts = new List<string>();
+                        for (int i = 0; i < argCount; i++)
+                        {
+                            abiSlots.Add(CreateNativeIntAbiSlot());
+                            paramSigParts.Add($"CHAOS_IL2CPP_INTPTR chaos_arg_{i}");
+                        }
                         var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                        // Only arg 0 (the value) reaches the native formatter; the
+                        // trailing options/typeInfo args are consumed off the eval
+                        // stack but deliberately unused by the stub body.
+                        var bodyLines = new List<string>();
+                        for (int i = 1; i < argCount; i++)
+                            bodyLines.Add($"    (void)chaos_arg_{i};");
+                        bodyLines.Add($"    return {fn}(chaos_arg_0);");
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                            new[] { $"    return {fn}(chaos_arg_0);" });
+                            string.Join(", ", paramSigParts),
+                            bodyLines.ToArray());
+                        // NOTE: no DirectNativeSymbol here.  When the callee has more
+                        // than one parameter, codegen's DirectNativeSymbol path emits
+                        // a BARE call to the native symbol passing every ABI arg —
+                        // which would call `fn(arg0, arg1, ...)` on a 1-arg native
+                        // function (C2660).  Routing through the generated wrapper
+                        // instead keeps the extra args consumed-but-ignored.
                         return new GenericShapeResolution(src, symbol,
-                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                             CreateNativeIntAbiSlot(),
-                            new HashSet<int> { 0 },
-                            DirectNativeSymbol: fn);
+                            new HashSet<int>(Enumerable.Range(0, argCount)),
+                            DirectNativeSymbol: argCount == 1 ? fn : null);
                     }));
             }
 
             // Helper: register a precompiled JsonSerializer::Deserialize<T> stub.
+            // Arity-aware for the same reason as RegisterJsonSerialize above.
             void RegisterJsonDeserialize(string typeArg, string nativeFn)
             {
                 var fn = nativeFn;
@@ -629,13 +751,56 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         var t = typeArgs != null && typeArgs.Count > 0 ? typeArgs[0] : null;
                         if (!string.Equals(t, typeArg, StringComparison.Ordinal)) return null;
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        var argCount = Math.Max(1, paramTypes.Count);
+                        var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
+                        var paramSigParts = new List<string>();
+                        for (int i = 0; i < argCount; i++)
+                        {
+                            abiSlots.Add(CreateNativeIntAbiSlot());
+                            paramSigParts.Add($"CHAOS_IL2CPP_INTPTR chaos_arg_{i}");
+                        }
                         var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                            string.Join(", ", paramSigParts),
                             new[] { $"    return static_cast<CHAOS_IL2CPP_INTPTR>({fn}(chaos_arg_0));" });
+                        // NOTE: no DirectNativeSymbol when argCount > 1 — same
+                        // C2660 risk as RegisterJsonSerialize (see that comment).
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int>(Enumerable.Range(0, argCount)),
+                            DirectNativeSymbol: argCount == 1 ? fn : null);
+                    }));
+            }
+
+            // Helper: register a precompiled JsonSerializer::Deserialize<T> stub whose
+            // return carrier is a floating-point type (System.Double / System.Single).
+            //
+            // RegisterJsonDeserialize cannot be used for these: it declares the C++
+            // wrapper as CHAOS_IL2CPP_INTPTR and static_casts the native result, which
+            // bitcasts the floating-point return (in an XMM register) through the
+            // integer return slot and silently corrupts the value.  Here the wrapper
+            // returns the native float type directly and the ABI slot declares the
+            // matching Float64/Float32 carrier, so the call-site lowering loads it via
+            // ChaosLoadFloat64/ChaosLoadFloat32 (see FormatAbiArgumentExpression).
+            void RegisterJsonDeserializeFloating(string typeArg, string nativeFn, string cppReturnType, AotCoreIrAbiSlotArtifact returnAbi)
+            {
+                var fn = nativeFn;
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "JsonSerializer",
+                    MethodName: "Deserialize",
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var t = typeArgs != null && typeArgs.Count > 0 ? typeArgs[0] : null;
+                        if (!string.Equals(t, typeArg, StringComparison.Ordinal)) return null;
+                        var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                        var src = RenderSimpleExternalRuntimeHelper(cppReturnType, symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                            new[] { $"    return {fn}(chaos_arg_0);" });
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),
-                            CreateNativeIntAbiSlot(),
+                            returnAbi,
                             new HashSet<int> { 0 },
                             DirectNativeSymbol: fn);
                     }));
@@ -657,11 +822,19 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterJsonSerialize("System.UInt64", "ChaosJsonSerializeInt64");
             RegisterJsonSerialize("System.Boolean", "ChaosJsonSerializeBool");
             RegisterJsonSerialize("System.String", "ChaosJsonSerializeString");
+            RegisterJsonSerialize("System.Double", "ChaosJsonSerializeDouble");
+            RegisterJsonSerialize("System.Single", "ChaosJsonSerializeSingle");
 
             // ── Deserialize<T> stubs ──
             RegisterJsonDeserialize("System.Int32", "ChaosJsonDeserializeInt32");
             RegisterJsonDeserialize("System.Int64", "ChaosJsonDeserializeInt64");
             RegisterJsonDeserialize("System.Boolean", "ChaosJsonDeserializeBool");
+            RegisterJsonDeserialize("System.String", "ChaosJsonDeserializeString");
+            // Double/Single use the floating-point-return variant: the native stubs
+            // (ChaosJsonDeserializeDouble/Single in interop_stubs.cpp) return
+            // double/float, so the wrapper must not funnel them through INTPTR.
+            RegisterJsonDeserializeFloating("System.Double", "ChaosJsonDeserializeDouble", "double", CreateFloat64AbiSlot());
+            RegisterJsonDeserializeFloating("System.Single", "ChaosJsonDeserializeSingle", "float", CreateFloat32AbiSlot());
 
             // ── Dictionary<K,V>::TryAdd (smoke-test stub) ──
             registry.RegisterGeneric(new GenericShapeDescriptor(

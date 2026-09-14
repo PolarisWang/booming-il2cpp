@@ -41,6 +41,10 @@ string? wrapperSlug = null;
 string? sdkCsproj = null;
 string? tfm = null;
 string? capabilitiesPath = null;
+// Codegen capability table: Type::Method -> "real".  Gates semantic value
+// injection so a valid input is only fed to an API the AOT codegen can
+// actually dispatch.  See ValueGenerator.IsInjectable.
+string? capabilityTablePath = null;
 
 for (int i = 0; i < args.Length; i++)
 {
@@ -94,6 +98,9 @@ for (int i = 0; i < args.Length; i++)
             break;
         case "--capabilities-path" when i + 1 < args.Length:
             capabilitiesPath = args[++i];
+            break;
+        case "--capability-table" when i + 1 < args.Length:
+            capabilityTablePath = args[++i];
             break;
     }
 }
@@ -174,7 +181,7 @@ if (patchMode)
         Console.Error.WriteLine("ERROR: --patch-mode requires --all-types");
         return 1;
     }
-    return RunPatchMode(dllPath, namespaceFilter, outputDir, capabilitiesPath);
+    return RunPatchMode(dllPath, namespaceFilter, outputDir, capabilitiesPath, capabilityTablePath);
 }
 
 // ── Known type-to-DLL mapping for types not in System.Runtime.dll ──
@@ -255,7 +262,8 @@ if (allTypes)
     var allSerializer = new CSharpSerializer();
     var allExpressionBuilder = new CSharpExpressionBuilder(allSerializer);
     var allAutoFixture = new AutoFixtureAllower(allSerializer);
-    var allValueGenerator = new ValueGenerator(allSerializer, allAutoFixture);
+    var allValueGenerator = new ValueGenerator(allSerializer, allAutoFixture,
+        capabilityTable: CapabilityTable.Load(capabilityTablePath));
     var allProbeEmitter = new ProbeEmitter(allSerializer, allExpressionBuilder);
     var allEmitter = new TestEmitter(allSerializer, allExpressionBuilder);
     var allWriter = new ProjectWriter();
@@ -383,6 +391,16 @@ if (allTypes)
 
                 string kind;
                 bool isBenchmark;
+                // E (json-xml-production-readiness, deferred): record the exception
+                // the MANAGED body raises for this subject, so that a future
+                // codegen path (true lowering, not catch-all) can emit matching
+                // RaiseManagedException calls.  JsonMetadataServices.Create*Info
+                // are NativeGenerated (not catch-all), so the catch-all-only fix
+                // attempted here was insufficient — the exception type must flow
+                // through the real lowering path, which is a cross-layer task
+                // (ATG metadata → codegen reader → planning→emission).
+                // See docs/dev/in-progress/json-xml-production-readiness/roadmap.
+                string? expectedExceptionType = null;
 
                 if (probeLookup.TryGetValue(subjectId, out var pr))
                 {
@@ -391,6 +409,7 @@ if (allTypes)
                         // Exception-throwing: hotupdate only, no [Benchmark]
                         kind = "hotupdate";
                         isBenchmark = false;
+                        expectedExceptionType = pr.ExceptionType;
                     }
                     else if (pr.IsDeterministic && !pr.IsVoid)
                     {
@@ -435,7 +454,7 @@ if (allTypes)
                 {
                     var generatedMethodId = $"{SanitizePath(method.Name)}_{mi}_{paramSuffix}_{si}";
 
-                    methodEntries.Add(new SubjectMethodEntry(globalIdx, kind, subjectId, generatedMethodId));
+                    methodEntries.Add(new SubjectMethodEntry(globalIdx, kind, subjectId, generatedMethodId, expectedExceptionType));
                     if (isBenchmark)
                         benchmarkMethodIndices.Add(globalIdx);
                     else
@@ -545,7 +564,8 @@ Console.WriteLine("[Phase 2/5] Generating parameter values (AutoFixture + bounda
 var serializer = new CSharpSerializer();
 var expressionBuilder = new CSharpExpressionBuilder(serializer);
 var autoFixture = new AutoFixtureAllower(serializer);
-var valueGenerator = new ValueGenerator(serializer, autoFixture);
+var valueGenerator = new ValueGenerator(serializer, autoFixture,
+    capabilityTable: CapabilityTable.Load(capabilityTablePath));
 
 var allValueSets = new List<IReadOnlyList<ValueSet>>();
 int totalSets = 0;
@@ -688,7 +708,7 @@ static string EscapeCSharpKeyword(string name)
 // Scans DLL, generates values, and emits a single .cs file with [HotUpdate] subject
 // methods using GetPatchReturnExpression for return values.
 // The pipeline compiles this into PatchSubjects.dll for PatchDataExtractor.
-static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputDir, string? capabilitiesPath)
+static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputDir, string? capabilitiesPath, string? capabilityTablePath)
 {
     var assemblyName = Path.GetFileNameWithoutExtension(dllPath);
     var baseOutput = outputDir ?? Path.GetFullPath(Path.Combine("output", assemblyName));
@@ -722,7 +742,8 @@ static int RunPatchMode(string dllPath, string? namespaceFilter, string? outputD
     var serializer = new CSharpSerializer();
     var expressionBuilder = new CSharpExpressionBuilder(serializer);
     var autoFixture = new AutoFixtureAllower(serializer);
-    var valueGenerator = new ValueGenerator(serializer, autoFixture);
+    var valueGenerator = new ValueGenerator(serializer, autoFixture,
+        capabilityTable: CapabilityTable.Load(capabilitiesPath));
 
     Console.WriteLine("[Phase 2/3] Generating values and emitting patch source...");
     var sb = new StringBuilder();
@@ -1023,4 +1044,5 @@ internal sealed record SubjectMethodEntry(
     int Index,
     string Kind,
     string MethodSubjectId,
-    string? GeneratedMethodId = null);
+    string? GeneratedMethodId = null,
+    string? ExpectedExceptionType = null);

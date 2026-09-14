@@ -212,14 +212,15 @@ public sealed partial class NativeAotLoweringPlanner
                 ("System.Threading.Tasks.ValueTask`1", "GetAwaiter", "chaos_value_task_get_awaiter", false),
                 // ValueTaskAwaiter<T>::GetResult() -> T
                 ("System.Runtime.CompilerServices.ValueTaskAwaiter`1", "GetResult", "ChaosAsyncTaskAwaiterGetResultValue", false),
-                // ValueTaskAwaiter (non-generic) ::GetResult().  Returns
-                // CHAOS_IL2CPP_INTPTR, not void: the lowering wraps every call
-                // as `const auto chaos_result = ...` + a cast to INTPTR, so a
-                // void-typed call cannot compile (C2440, and C3313/C3536 in the
-                // `const auto` form).  Fault propagation lives entirely inside
-                // the native helper, so discarding its (void) return here loses
-                // nothing.
-                ("System.Runtime.CompilerServices.ValueTaskAwaiter", "GetResult", "ChaosAsyncTaskAwaiterGetResultVoid", false),
+                // ValueTaskAwaiter (non-generic) ::GetResult() -> returns void.
+                // The void version produced C3313 (const void chaos_result = ...)
+                // because returnsVoid=false made the codegen path assign the
+                // call result to an eval-stack slot via `const auto chaos_result =`,
+                // but ChaosAsyncTaskAwaiterGetResultVoid returns void.
+                // Fix: mark returnsVoid=true so the void-aware emission path
+                // emits a bare call without result assignment. Fault propagation
+                // is handled by the GetResultVoid native helper already.
+                ("System.Runtime.CompilerServices.ValueTaskAwaiter", "GetResult", "ChaosAsyncTaskAwaiterGetResultVoid", true),
             })
             {
                 // Capture into locals: a closure over the foreach variable would

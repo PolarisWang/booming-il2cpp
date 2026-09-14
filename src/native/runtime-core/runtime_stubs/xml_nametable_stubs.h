@@ -27,4 +27,20 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddString(
 CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetString(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
 
+/// NameTable.Add(char[] key, int start, int len) → string (interned).
+/// Same reference-equality contract as the string overload; the char[] window
+/// is decoded UTF-16 → UTF-8 before interning.  `key` is a managed char[]
+/// (StubArrayHeader with 2-byte elements); the window is [start, start+len).
+/// Throws NullReferenceException when `this` is null and
+/// ArgumentNullException when `key` is null — matching .NET.
+CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddChars(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR key,
+    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) noexcept;
+
+/// NameTable.Get(char[] key, int start, int len) → string? (query-only).
+/// Mirror of AddChars; never inserts.  Returns 0 (null) when absent.
+CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetChars(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR key,
+    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) noexcept;
+
 }  // extern "C"

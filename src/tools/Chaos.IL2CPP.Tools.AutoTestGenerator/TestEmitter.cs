@@ -1,9 +1,40 @@
-using System.Text;
+using System.Text;
 
 namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 
 public sealed class TestEmitter
 {
+    /// <summary>
+    /// Methods whose assertion must not rely on the probe's captured return value.
+    ///
+    /// Assertion strength is normally bounded by what the probe recorded: when the probe
+    /// captures nothing (empty result), <see cref="AppendAssert"/> returns early and the
+    /// fact body degrades to a "result is not null" sentinel. That sentinel cannot tell a
+    /// correct implementation from a fallback, because both are non-null — so a fix like
+    /// REF-RISK-7 (Assembly.GetCallingAssembly/GetExecutingAssembly reporting the real
+    /// caller instead of a hard-coded CoreLib) changes behaviour with no observable test
+    /// signal.
+    ///
+    /// This table names the small set of APIs whose post-condition is knowable WITHOUT
+    /// the probe, and supplies the assertion to emit for them. Entries are per API
+    /// (declaring type + method), so an empty table reproduces the previous behaviour
+    /// exactly.
+    /// </summary>
+    private static readonly Dictionary<string, string> DiscriminatingExpectations = new(StringComparer.Ordinal)
+    {
+        // Assembly.GetCallingAssembly()/GetExecutingAssembly() must report the assembly
+        // whose code is running. A non-null check cannot distinguish that from the
+        // CoreLib fallback the runtime returns when no executing image is published, so
+        // the assertion pins both halves: it must match the running assembly AND must not
+        // be CoreLib. Either half failing turns the fact red.
+        ["System.Reflection.Assembly.GetCallingAssembly"] =
+            "__RESULT.GetName().Name == \"CombinedSubjects\"",
+        ["System.Reflection.Assembly.GetExecutingAssembly"] =
+            "__RESULT.GetName().Name == \"CombinedSubjects\"",
+    };
+
+
+
     private readonly CSharpSerializer _serializer;
     private readonly CSharpExpressionBuilder _expressionBuilder;
 
@@ -299,8 +330,18 @@ public sealed class TestEmitter
                     else
                     {
                         var resultVar = $"result_{mi}_{set.SetIndex}";
-                        var returnExpr = ValueGenerator.GetResultToLongExpression(method.ReturnTypeName, resultVar);
-                        sb.AppendLine($"            return {returnExpr};");
+                        // Discriminating APIs get a real assertion instead of the "is not null"
+                        // sentinel: the probe cannot supply an expected value for them, but their
+                        // post-condition is knowable outright.
+                        if (TryEmitDiscriminatingAssertion(sb, method, resultVar, assemblyName))
+                        {
+                            sb.AppendLine("            return 1L;");
+                        }
+                        else
+                        {
+                            var returnExpr = ValueGenerator.GetResultToLongExpression(method.ReturnTypeName, resultVar);
+                            sb.AppendLine($"            return {returnExpr};");
+                        }
                     }
                     sb.AppendLine("        }");
                 }
@@ -370,6 +411,13 @@ public sealed class TestEmitter
             // path as unverifiable by design.
             if (isExternalAssembly)
             {
+                // P0-B (json-xml-production-readiness): emit an explicit machine-
+                // readable marker in addition to the human comment.  The fact layer
+                // (fact_chunk.py classify_fact_record) scans for "AOT-STUB-GAP" and
+                // buckets these as `stubGap` rather than `smoke`, so a method with no
+                // AOT body is no longer indistinguishable from a method that merely
+                // failed to assert.  See docs/dev/in-progress/json-xml-production-readiness.
+                sb.AppendLine("            // AOT-STUB-GAP");
                 sb.AppendLine($"            // [UNVERIFIED] AOT stub: {result.ExceptionType} thrown by {callExpr} (managed input->exception, AOT stub returns default — smoke test passes)");
                 return;
             }
@@ -647,4 +695,35 @@ public sealed class TestEmitter
             sb.Insert(0, '_');
         return sb.ToString();
     }
+
+    /// <summary>
+    /// Emit a discriminating assertion for an API whose post-condition is knowable
+    /// without the probe, and report whether one was emitted.
+    ///
+    /// The expected value is expressed as a self-contained C# block over the result
+    /// variable, so it can reference the running assembly and the CoreLib name
+    /// without the generator needing to know this chunk's assembly identity.
+    /// </summary>
+    private static bool TryEmitDiscriminatingAssertion(StringBuilder sb, MethodSignature method, string resultVar, string assemblyName)
+    {
+        var key = method.DeclaringTypeFullName + "." + method.Name;
+        if (!DiscriminatingExpectations.TryGetValue(key, out var predicate)) return false;
+
+        // The CoreLib name is read at run time rather than baked in, so the assertion
+        // does not depend on how the assembly was built.
+        // The expected name is baked as a literal and compared with String.op_Equality,
+        // which has a native body. Reference-type != / == on Assembly, Type.GetType, and
+        // typeof(...).Assembly chains all route through catch-all external helpers that
+        // return 0 in this chunk — each of those silently killed earlier versions of
+        // this predicate. Literal + op_Equality are the only reliably-supported primitives.
+        //
+        // A null RESULT is intentionally not pre-checked: GetName() on null raises an NRE,
+        // the P-1 rethrow propagates it, and the runner marks the subject failed — the same
+        // red light, with C#-consistent semantics.
+        var body = predicate.Replace("__RESULT", resultVar);
+        sb.AppendLine("            var __assemblies_match = " + body + ";");
+        sb.AppendLine("            Assert.IsTrue(__assemblies_match, \"reported assembly is not the running assembly, or is the CoreLib fallback\");");
+        return true;
+    }
+
 }

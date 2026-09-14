@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-13T08:23:53Z",
+  "targetFramework": "net8.0",
+  "source": "tests/e2e/translation/*/_dll/dll-method-manifest.json",
+  "assemblies": [
+    {
+      "assemblyName": "System.Text.Json",
+      "publicMethodTotal": 486,
+      "manifestMethodCount": 486,
+      "verdict": {
+        "real": null,
+        "notSupported": null,
+        "notApplicable": null,
+        "unclassified": 486
+      },
+      "namespaces": {
+        "System.Text.Json": 300,
+        "System.Text.Json.Serialization.Converters": 89,
+        "System.Text.Json.Nodes": 34,
+        "System.Text.Json.Serialization": 23,
+        "System.Text.Json.Serialization.Metadata": 21,
+        "System.Text.Json.Schema": 10,
+        "System.Net": 5,
+        "System.Text": 4
+      },
+      "topDeclaringTypes": {
+        "System.Text.Json.Utf8JsonWriter": 118,
+        "System.Text.Json.JsonElement": 54,
+        "System.Text.Json.Utf8JsonReader": 41,
+        "System.Text.Json.Nodes.JsonObject": 18,
+        "System.Text.Json.Nodes.JsonArray": 12,
+        "System.Text.Json.PooledByteBufferWriter": 11,
+        "System.Text.Json.JsonDocument": 10,
+        "System.Text.Json.WriteStack": 8,
+        "System.Text.Json.WriteStackFrame": 8,
+        "System.Text.Json.ReadStack": 7,
+        "System.Text.Json.BitStack": 6,
+        "System.Text.Json.ReadStackFrame": 6,
+        "System.Text.Json.Schema.JsonSchema": 6,
+        "System.Net.ArrayBuffer": 5,
+        "System.Text.Json.JsonSerializerOptions": 5,
+        "System.Text.Json.Serialization.PipeReadBufferState": 5,
+        "System.Text.Json.Serialization.StreamReadBufferState": 5,
+        "System.Text.Json.JsonElement+ArrayEnumerator": 4,
+        "System.Text.Json.JsonElement+ObjectEnumerator": 4,
+        "System.Text.Json.JsonProperty": 4,
+        "System.Text.Json.Schema.JsonSchemaExporter+GenerationState": 4,
+        "System.Text.Json.Serialization.Metadata.PolymorphicTypeResolver": 4,
+        "System.Text.ValueStringBuilder": 4,
+        "System.Text.Json.JsonEncodedText": 3,
+        "System.Text.Json.JsonSerializerOptions+CachingContext": 3,
+        "System.Text.Json.Serialization.Converters.EnumConverterFactory": 3,
+        "System.Text.Json.Serialization.Converters.JsonNodeConverter": 3,
+        "System.Text.Json.Serialization.Converters.NullableConverterFactory": 3,
+        "System.Text.Json.Serialization.IgnoreReferenceResolver": 3,
+        "System.Text.Json.Serialization.PreserveReferenceResolver": 3
+      },
+      "chunks": [
+        {
+          "slug": "global-ns",
+          "totalMethods": 57,
+          "factMethodCount": 29
+        },
+        {
+          "slug": "system-text-json-serialization-converters",
+          "totalMethods": 219,
+          "factMethodCount": 59
+        },
+        {
+          "slug": "text-json",
+          "totalMethods": 522,
+          "factMethodCount": 203
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Private.Xml",
+      "publicMethodTotal": 849,
+      "manifestMethodCount": 849,
+      "verdict": {
+        "real": null,
+        "notSupported": null,
+        "notApplicable": null,
+        "unclassified": 849
+      },
+      "namespaces": {
+        "System.Xml": 287,
+        "System.Xml.Xsl.Runtime": 267,
+        "System.Xml.Serialization": 140,
+        "System.Xml.Schema": 83,
+        "System.Xml.Xsl": 61,
+        "System.Xml.Resolvers": 9,
+        "System.Xml.XPath": 2
+      },
+      "topDeclaringTypes": {
+        "System.Xml.Xsl.Runtime.XmlQueryOutput": 63,
+        "System.Xml.XmlConvert": 39,
+        "System.Xml.XmlDocument": 39,
+        "System.Xml.Xsl.Runtime.XmlQueryRuntime": 37,
+        "System.Xml.XmlTextWriter": 28,
+        "System.Xml.XmlTextReader": 27,
+        "System.Xml.Xsl.XslTransform": 26,
+        "System.Xml.Xsl.XslCompiledTransform": 23,
+        "System.Xml.XmlElement": 22,
+        "System.Xml.XmlValidatingReader": 21,
+        "System.Xml.Serialization.XmlSerializer": 20,
+        "System.Xml.XmlNodeReader": 20,
+        "System.Xml.Xsl.Runtime.XsltFunctions": 20,
+        "System.Xml.Schema.XmlSchemaValidator": 19,
+        "System.Xml.Xsl.Runtime.XsltConvert": 17,
+        "System.Xml.Serialization.XmlSchemas": 14,
+        "System.Xml.Schema.XmlSchemaSet": 13,
+        "System.Xml.Xsl.Runtime.XmlILStorageConverter": 13,
+        "System.Xml.Xsl.Runtime.XsltLibrary": 13,
+        "System.Xml.Schema.XmlSchema": 11,
+        "System.Xml.Serialization.XmlSchemaImporter": 11,
+        "System.Xml.Schema.XmlSchemaCollection": 10,
+        "System.Xml.Serialization.CodeIdentifiers": 10,
+        "System.Xml.Serialization.XmlReflectionImporter": 10,
+        "System.Xml.Resolvers.XmlPreloadedResolver": 9,
+        "System.Xml.XmlAttribute": 9,
+        "System.Xml.XmlAttributeCollection": 9,
+        "System.Xml.XmlNamespaceManager": 9,
+        "System.Xml.Xsl.Runtime.XmlSortKeyAccumulator": 9,
+        "System.Xml.Serialization.SoapReflectionImporter": 8
+      },
+      "chunks": [
+        {
+          "slug": "system-xml-schema",
+          "totalMethods": 135,
+          "factMethodCount": 81
+        },
+        {
+          "slug": "system-xml-serialization",
+          "totalMethods": 237,
+          "factMethodCount": 113
+        },
+        {
+          "slug": "system-xml-xsl",
+          "totalMethods": 247,
+          "factMethodCount": 126
+        },
+        {
+          "slug": "xml",
+          "totalMethods": 1032,
+          "factMethodCount": 489
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Xml.ReaderWriter",
+      "publicMethodTotal": 442,
+      "manifestMethodCount": 442,
+      "verdict": {
+        "real": null,
+        "notSupported": null,
+        "notApplicable": null,
+        "unclassified": 442
+      },
+      "namespaces": {
+        "System.Xml": 287,
+        "System.Xml.Schema": 83,
+        "System.Xml.Xsl": 61,
+        "System.Xml.Resolvers": 9,
+        "System.Xml.Serialization": 2
+      },
+      "topDeclaringTypes": {
+        "System.Xml.XmlConvert": 39,
+        "System.Xml.XmlDocument": 39,
+        "System.Xml.XmlTextWriter": 28,
+        "System.Xml.XmlTextReader": 27,
+        "System.Xml.Xsl.XslTransform": 26,
+        "System.Xml.Xsl.XslCompiledTransform": 23,
+        "System.Xml.XmlElement": 22,
+        "System.Xml.XmlValidatingReader": 21,
+        "System.Xml.XmlNodeReader": 20,
+        "System.Xml.Schema.XmlSchemaValidator": 19,
+        "System.Xml.Schema.XmlSchemaSet": 13,
+        "System.Xml.Schema.XmlSchema": 11,
+        "System.Xml.Schema.XmlSchemaCollection": 10,
+        "System.Xml.Resolvers.XmlPreloadedResolver": 9,
+        "System.Xml.XmlAttribute": 9,
+        "System.Xml.XmlAttributeCollection": 9,
+        "System.Xml.XmlNamespaceManager": 9,
+        "System.Xml.Schema.XmlSchemaObjectCollection": 7,
+        "System.Xml.XmlNamedNodeMap": 7,
+        "System.Xml.Xsl.XsltArgumentList": 7,
+        "System.Xml.Schema.XmlSchemaType": 5,
+        "System.Xml.NameTable": 4,
+        "System.Xml.XmlText": 4,
+        "System.Xml.Schema.ValidationEventHandler": 3,
+        "System.Xml.Schema.XmlValueGetter": 3,
+        "System.Xml.XmlCDataSection": 3,
+        "System.Xml.XmlComment": 3,
+        "System.Xml.XmlDeclaration": 3,
+        "System.Xml.XmlDocumentFragment": 3,
+        "System.Xml.XmlDocumentType": 3
+      },
+      "chunks": [
+        {
+          "slug": "system-xml-schema"
+        },
+        {
+          "slug": "system-xml-xsl"
+        }
+      ]
+    }
+  ],
+  "grandTotal": {
+    "total": 1777,
+    "real": 0,
+    "notSupported": 0,
+    "notApplicable": 0,
+    "fakeGreen": 0,
+    "unclassified": 1777
+  }
+}

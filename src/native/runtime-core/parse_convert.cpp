@@ -567,6 +567,23 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt32(CHAOS_IL2CPP_INT32 value) n
     return DecimalFromDoubleResult(static_cast<double>(value));
 }
 
+// Convert.ToDecimal(long/ulong) — build a DecimalCarrier* from a 64-bit integer.
+// Kept separate from ChaosDecimalFromInt32 so the full 64-bit range reaches the
+// carrier instead of being truncated to 32 bits.  The simplified Decimal model
+// stores the mantissa as lo64/hi32, so a value beyond the int64-magnitude range
+// still round-trips through the double approximation used by the rest of this file.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt64(CHAOS_IL2CPP_INT64 value) noexcept
+{
+    return DecimalFromDoubleResult(static_cast<double>(value));
+}
+
+// Convert.ToDecimal(bool) — 0m / 1m.  Must NOT be a static_cast of the carrier to
+// a DecimalCarrier* (that would reinterpret the raw 0/1 carrier as a pointer).
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromBool(CHAOS_IL2CPP_INT32 value) noexcept
+{
+    return DecimalFromDoubleResult(value != 0 ? 1.0 : 0.0);
+}
+
 // ── Math::Ceiling/Floor/Round/Truncate(System.Decimal) ─────────────
 // The simplified Decimal model carries a signed integer magnitude, so these
 // integer-rounding ops are value-preserving. Return the input carrier pointer
