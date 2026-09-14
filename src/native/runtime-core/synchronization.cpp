@@ -27,7 +27,10 @@ constexpr uint32_t kMaxBarrierCount    = 1024;
 constexpr uint32_t kMaxCountdownEventCount = 1024;
 
 struct SemaphoreEntryFixed {
-    uint32_t id{0};
+    // Atomic: the create path claims a free slot by CAS-ing this from 0 to a
+    // freshly allocated id (see SemaphoreSlimCreate).  As a plain uint32_t two
+    // concurrent creates could both observe 0 and both claim the slot.
+    std::atomic<uint32_t> id{0};
     std::atomic<int32_t> count{0};
     int32_t max_count{0};
     bool active{false};
@@ -48,7 +51,7 @@ constexpr uint32_t kMaxRWLockCount = 1024;
 
 struct RWLockEntryFixed {
     std::atomic<int32_t> state{0};  // >=0: readers, -1: writer
-    uint32_t id{0};
+    std::atomic<uint32_t> id{0};    // slot claim marker; see SemaphoreEntryFixed
     bool active{false};
     CHAOS_IL2CPP_MUTEX mutex;
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
@@ -66,7 +69,7 @@ struct RWLockEntryFixed {
 };
 
 struct BarrierEntryFixed {
-    uint32_t id{0};
+    std::atomic<uint32_t> id{0};    // slot claim marker; see SemaphoreEntryFixed
     bool active{false};
     CHAOS_IL2CPP_MUTEX mutex;
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
@@ -76,7 +79,7 @@ struct BarrierEntryFixed {
 };
 
 struct CountdownEventEntryFixed {
-    uint32_t id{0};
+    std::atomic<uint32_t> id{0};    // slot claim marker; see SemaphoreEntryFixed
     bool active{false};
     CHAOS_IL2CPP_MUTEX mutex;
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
@@ -152,8 +155,9 @@ uint32_t SemaphoreSlimCreate(int32_t initial_count, int32_t max_count) noexcept 
 
     for (uint32_t i = 1; i < kMaxSemaphoreCount; i++) {
         auto& entry = g_semaphores[i];
-        if (entry.id == 0) {
-            entry.id = AllocId(g_next_sem_id);
+        uint32_t zero = 0;
+        if (entry.id.compare_exchange_strong(zero, AllocId(g_next_sem_id),
+                std::memory_order_acq_rel, std::memory_order_relaxed)) {
             entry.count.store(initial_count, std::memory_order_relaxed);
             entry.max_count = max_count;
             entry.active = true;
@@ -166,8 +170,23 @@ uint32_t SemaphoreSlimCreate(int32_t initial_count, int32_t max_count) noexcept 
 bool SemaphoreSlimDestroy(uint32_t sem_id) noexcept {
     auto* entry = FindSemaphore(sem_id);
     if (entry == nullptr) return false;
-    entry->active = false;
     entry->cv.notify_all();
+    // ── Slot recycling (T3.2) ────────────────────────────────────────
+    //
+    // `active = false` alone does NOT free the slot: SemaphoreSlimCreate looks
+    // for `entry.id == 0`, so a destroyed entry whose id is still nonzero is
+    // invisible to the allocator forever.  Every create/destroy cycle burned one
+    // of the 1023 slots permanently, and the table filled up after 1023 lifetime
+    // allocations even if they never overlapped in time.
+    //
+    // Clearing `id` is what makes the slot findable again.  The ORDER matters:
+    // clear id LAST, after `active` is false.  A concurrent FindSemaphore
+    // matching on `id` reads `active` second, so an entry that is mid-teardown
+    // either still has active=false (rejected) or is fully recycled and owned by
+    // the new creator.  Clearing `id` first would let a lookup by the OLD id
+    // match while `active` was still true for the old object.
+    entry->active = false;
+    entry->id = 0;
     return true;
 }
 
@@ -245,14 +264,15 @@ uint32_t ReaderWriterLockSlimCreate() noexcept {
     // Find a free slot in the fixed array.
     for (uint32_t i = 1; i < kMaxRWLockCount; i++) {
         auto& entry = g_rwlocks[i];
-        uint32_t expected_id = 0;
-        if (entry.id == 0) {
-            // Unused slot — claim it.
-            entry.id = AllocId(g_next_rw_id);
-            entry.active = true;
+        uint32_t zero = 0;
+        // CAS-claim the slot: two concurrent creates must not both observe a
+        // free slot and both initialise (and return) the same index.
+        if (entry.id.compare_exchange_strong(zero, AllocId(g_next_rw_id),
+                std::memory_order_acq_rel, std::memory_order_relaxed)) {
             entry.state.store(0, std::memory_order_relaxed);
             entry.waiting_readers = 0;
             entry.waiting_writers = 0;
+            entry.active = true;
             return i;  // handle = index
         }
     }
@@ -262,8 +282,9 @@ uint32_t ReaderWriterLockSlimCreate() noexcept {
 bool ReaderWriterLockSlimDestroy(uint32_t rw_handle) noexcept {
     auto* entry = FindRWLockFixed(rw_handle);
     if (entry == nullptr) return false;
-    entry->active = false;
     entry->cv.notify_all();
+    entry->active = false;
+    entry->id = 0;
     return true;
 }
 
@@ -701,12 +722,13 @@ uint32_t BarrierCreate(int32_t participant_count) noexcept {
 
     for (uint32_t i = 1; i < kMaxBarrierCount; i++) {
         auto& entry = g_barriers[i];
-        if (entry.id == 0) {
-            entry.id = AllocId(g_next_barrier_id);
-            entry.active = true;
+        uint32_t zero = 0;
+        if (entry.id.compare_exchange_strong(zero, AllocId(g_next_barrier_id),
+                std::memory_order_acq_rel, std::memory_order_relaxed)) {
             entry.participant_count = participant_count;
             entry.remaining = participant_count;
             entry.phase_number = 0;
+            entry.active = true;
             return i;
         }
     }
@@ -716,8 +738,9 @@ uint32_t BarrierCreate(int32_t participant_count) noexcept {
 bool BarrierDestroy(uint32_t barrier_id) noexcept {
     auto* entry = FindBarrier(barrier_id);
     if (entry == nullptr) return false;
-    entry->active = false;
     entry->cv.notify_all();
+    entry->active = false;
+    entry->id = 0;
     return true;
 }
 
@@ -779,10 +802,11 @@ uint32_t CountdownEventCreate(int32_t initial_count) noexcept {
 
     for (uint32_t i = 1; i < kMaxCountdownEventCount; i++) {
         auto& entry = g_countdown_events[i];
-        if (entry.id == 0) {
-            entry.id = AllocId(g_next_ce_id);
-            entry.active = true;
+        uint32_t zero = 0;
+        if (entry.id.compare_exchange_strong(zero, AllocId(g_next_ce_id),
+                std::memory_order_acq_rel, std::memory_order_relaxed)) {
             entry.count = initial_count;
+            entry.active = true;
             return i;
         }
     }
@@ -792,8 +816,9 @@ uint32_t CountdownEventCreate(int32_t initial_count) noexcept {
 bool CountdownEventDestroy(uint32_t ce_id) noexcept {
     auto* entry = FindCountdownEvent(ce_id);
     if (entry == nullptr) return false;
-    entry->active = false;
     entry->cv.notify_all();
+    entry->active = false;
+    entry->id = 0;
     return true;
 }
 
@@ -890,7 +915,7 @@ extern "C" __declspec(dllexport) void ChaosDebugDumpRWLocks(void) {
         if (!e.active) continue;
         std::printf("[rwlock] handle=%u id=%u state=%d waiting_readers=%d "
             "waiting_writers=%d upgradeable_tid=%d writer_tid=%d\n",
-            i, e.id, e.state.load(std::memory_order_acquire),
+            i, e.id.load(std::memory_order_relaxed), e.state.load(std::memory_order_acquire),
             e.waiting_readers, e.waiting_writers,
             e.upgradeable_reader_tid.load(std::memory_order_acquire),
             e.debug_writer_tid.load(std::memory_order_relaxed));

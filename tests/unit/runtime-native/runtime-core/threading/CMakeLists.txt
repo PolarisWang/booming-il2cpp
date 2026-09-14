@@ -289,6 +289,17 @@ chaos_native_add_test(test_rwlock_upgrade
     LABELS "unit;threading"
 )
 
+# handle_slot_recycling_test — T3.2: destroyed handle slots must return to the
+# free pool.  The fixed tables allocate by scanning for `id == 0`, but Destroy
+# used to set only `active = false`, so every create/destroy cycle burned a slot
+# permanently and the 1023-slot table exhausted after 1023 LIFETIME allocations.
+# Asserts reuse, freshness of a recycled slot, and the concurrent case.
+chaos_native_add_test(test_handle_slot_recycling
+    handle_slot_recycling_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/synchronization.cpp
+    LABELS "unit;threading"
+)
+
 # phase3_industrialization_test — Phase 3 TDD: timer precision, shutdown race, injection rate
 chaos_native_add_test(test_phase3_industrialization
     phase3_industrialization_test.cpp
