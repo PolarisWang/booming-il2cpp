@@ -56,5 +56,6 @@ extern "C" {
 #include "interop_stubs.h"
 #include "simd_stubs.h"
 #include "xml_nametable_stubs.h"
+#include "xml_writer_stubs.h"
 
 }  // extern "C"

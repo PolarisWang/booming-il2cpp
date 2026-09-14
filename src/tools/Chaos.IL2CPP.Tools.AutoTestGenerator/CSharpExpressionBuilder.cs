@@ -41,7 +41,7 @@ public sealed class CSharpExpressionBuilder
         ["System.Security.Cryptography.SHA256"] = "System.Security.Cryptography.SHA256.Create()",
         // XML abstract type factories
         ["System.Xml.XmlReader"] = "System.Xml.XmlReader.Create(new System.IO.StringReader(\"<root/>\"))",
-        ["System.Xml.XmlWriter"] = "System.Xml.XmlWriter.Create(System.IO.Stream.Null)",
+        ["System.Xml.XmlWriter"] = "System.Xml.XmlWriter.Create(new System.Text.StringBuilder())",
         // IO stream/text factories
         ["System.IO.Stream"] = "System.IO.Stream.Null",
         ["System.IO.TextReader"] = "new System.IO.StringReader(\"\")",
