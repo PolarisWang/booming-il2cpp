@@ -719,7 +719,24 @@ public sealed partial class NativeAotLoweringPlanner
     /// Maximum recursion depth for RecoverStructure. Prevents stack overflow
     /// from extremely nested CFGs during structure recovery.
     /// </summary>
-    private const int MaxRecoverStructureDepth = 6;
+        // Coarse nesting co-limit for structured recovery.
+        //
+        // This is NOT the stack-overflow guard — that is the runtime-measured
+        // TryEnsureSufficientExecutionStack() check in RecoverStructure, which is
+        // what actually protects the 1 MB ThreadPool stack.  This constant is a
+        // secondary bound so pathological CFGs cannot spin forever.
+        //
+        // It was 6, which turned out to be low enough to truncate LEGITIMATE
+        // nesting: a C# `for` loop inside an `if` inside a few sequential regions
+        // reached depth 8 during recovery, the loop-body range came back empty,
+        // and the emitted code was `while (cond) { }` with the body spilled as
+        // straight-line code before the loop — i.e. a `for` whose body ran
+        // unconditionally (hit as a __fastfail on an empty array).
+        //
+        // 32 keeps the secondary bound while leaving ample headroom for real
+        // method structure; the stack guard still fires first on genuinely deep
+        // or adversarial input.
+        private const int MaxRecoverStructureDepth = 32;
 
     /// <summary>
     /// Recover structured control flow from the CFG as a pure StructuredIR tree.

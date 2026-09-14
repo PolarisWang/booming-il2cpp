@@ -151,6 +151,24 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlySet<int>? loopExitOffsets = null,
         int depth = 0)
     {
+        // Loop-header check MUST precede the depth / singleton early returns below.
+        //
+        // A `for` loop is reached as [header..header] once its pre-header and body
+        // have been consumed — a loop with a single-block body reduces to exactly
+        // that range.  With this check placed after the `startIndex == endIndex`
+        // return, the header was emitted as a bare IRBlock and the loop vanished
+        // entirely (its condition dropped, its body emitted unconditionally).
+        if (cfg.LoopHeaders.TryGetValue(startIndex, out var headerLoopInfo))
+        {
+            // Depth-neutral: BuildLoop consumes the entire loop (header + body +
+            // latch) and returns one node, so entering it does not chain nesting
+            // the way if/else recovery does.  Charging a depth unit here pushed the
+            // loop BODY recovery past MaxRecoverStructureDepth, which returned an
+            // empty body and emitted `while (cond) { }` with the body spilled
+            // outside — the `for`-runs-unconditionally bug.
+            return BuildLoop(cfg, startIndex, endIndex, headerLoopInfo, loopHeaderOffset, loopExitOffsets, depth);
+        }
+
         // Note: RuntimeHelpers.TryEnsureSufficientExecutionStack is intentionally
         // NOT used here. .NET's runtime stack guard is based on a fixed per-thread
         // limit (~4 MB from dotnet.exe/AppHost), not the actual OS stack size.
@@ -210,10 +228,41 @@ public sealed partial class NativeAotLoweringPlanner
             return new IRBlock(block.BodyInstructions, block.Terminator);
         }
 
-        // Check if startIndex is a loop header
-        if (cfg.LoopHeaders.TryGetValue(startIndex, out var loopInfo))
+        // A loop header may lie LATER in this range without being at startIndex.
+        //
+        // This is how a `for` loop nested in an `if` arm arrives: the recursion
+        // covers [pre-header .. condition] (e.g. blocks 150..281) while the header
+        // is the condition block (281) and startIndex is the pre-header (150).
+        // Without this, the range is walked as flat sequential blocks, the
+        // pre-header's `br` to the condition is stripped as a forward fallthrough,
+        // and the loop body runs unconditionally.
+        //
+        // Emit the blocks before the header as a plain sequence, then recurse at
+        // the header so the loop-header check above and BuildLoop take over.
+        //
+        // Skipped when startIndex is itself a conditional dispatch: the if/else
+        // structure owns that layout, and its arms are recovered recursively —
+        // each re-entering here, where this branch fires if a header sits inside
+        // an arm.  (Doing it here unconditionally would fight BuildIfThenElse for
+        // the same blocks.)
+        if (!cfg.LoopHeaders.ContainsKey(startIndex)
+            && !(cfg.Blocks[startIndex].ConditionalTarget.HasValue
+                 && IsConditionalBranchOpcode(cfg.Blocks[startIndex].Terminator?.Op ?? "")))
         {
-            return BuildLoop(cfg, startIndex, endIndex, loopInfo, loopHeaderOffset, loopExitOffsets, depth + 1);
+            int firstHeaderIdx = -1;
+            for (int i = startIndex; i <= endIndex; i++)
+            {
+                if (cfg.LoopHeaders.ContainsKey(i)) { firstHeaderIdx = i; break; }
+            }
+            if (firstHeaderIdx > startIndex)
+            {
+                var preLoopNodes = new List<StructuredIRNode>();
+                for (int i = startIndex; i < firstHeaderIdx; i++)
+                    preLoopNodes.Add(new IRBlock(cfg.Blocks[i].BodyInstructions, cfg.Blocks[i].Terminator));
+                preLoopNodes.Add(RecoverStructure(
+                    cfg, firstHeaderIdx, endIndex, loopHeaderOffset, loopExitOffsets, depth));
+                return new IRSequence(preLoopNodes);
+            }
         }
 
         // Try to find a conditional branch at the start of the interval
@@ -446,17 +495,38 @@ public sealed partial class NativeAotLoweringPlanner
         if (isReversed)
         {
             // Reversed loop: body blocks precede the header in layout.
-            // The header's condition block is the last thing in the loop body,
-            // and the backward edge from header→body is the "continue" edge.
-            // This is inherently a do-while pattern.
+            //
+            // This shape is produced by Roslyn for C# `for` loops: the condition
+            // block is emitted AFTER the body (body-first / condition-last), so
+            // the backward edge runs condition→body rather than body→condition.
+            //
+            // Whether that is a `while` or a `do-while` depends on the header's
+            // terminator, NOT on the layout:
+            //
+            //   header is a CONDITIONAL branch whose target is the body
+            //     → the condition is tested BEFORE the body runs  → IRWhileLoop
+            //       (this is the ordinary `for`/`while` case; a zero-iteration
+            //        loop must skip the body entirely)
+            //
+            //   header falls through into the body (unconditional)
+            //     → the body always runs at least once            → IRDoWhileLoop
+            //
+            // Treating every reversed loop as a do-while (the previous behaviour
+            // here) silently executed `for`-loop bodies one extra time.  On an
+            // empty array the body's bounds check fired
+            // CHAOS_IL2CPP_FAIL_FAST() = __fastfail(7) — a hard abort, not a
+            // managed exception — so the subject reported caught=true /
+            // assertFailed=false instead of either passing or failing its assert.
             int minBody = loopInfo.BodyIndices.Min();
-            int maxBody = loopInfo.BodyIndices.Max();
             bodyStart = minBody;
             bodyEnd = headerIndex - 1; // body up to (not including) the header
 
             exitIdx = headerIndex + 1;
-            isWhile = false;
-            latchBlock = header; // the header (condition block) serves as latch
+
+            bool headerIsConditional = header.ConditionalTarget.HasValue &&
+                                       IsConditionalBranchOpcode(header.Terminator?.Op ?? "");
+            isWhile = headerIsConditional;
+            latchBlock = header;
         }
         else
         {
@@ -506,9 +576,25 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         // Build body with the loop's own context for break/continue detection
+        //
+        // NOTE: the recursion is depth-NEUTRAL (passes `depth`, not `depth + 1`).
+        //
+        // A loop body is a structurally terminal nesting: BuildLoop consumes the
+        // whole [bodyStart..bodyEnd] range and hands back one node, so descending
+        // into it cannot chain the way if/else nesting can.  Charging a depth unit
+        // for it made deep-but-legal methods hit `MaxRecoverStructureDepth` and
+        // come back EMPTY — which then emitted `while (cond) { }` with the real
+        // body spilled as straight-line code before the loop, i.e. a `for` loop
+        // whose body ran unconditionally (the C# `for` in Assert.AreEqual(byte[])
+        // was recovered at depth 8 against a limit of 6).
+        //
+        // Stack-overflow safety is still enforced by the explicit
+        // TryEnsureSufficientExecutionStack() guard at the top of this method,
+        // which is the real (runtime-measured) limit; the static counter is only a
+        // coarse co-limit and is not what protects the 1 MB ThreadPool stack.
         StructuredIRNode body;
         if (bodyStart <= bodyEnd)
-            body = RecoverStructure(cfg, bodyStart, bodyEnd, outerLoopHeaderOffset, loopExitSet, depth + 1);
+            body = RecoverStructure(cfg, bodyStart, bodyEnd, headerIndex >= 0 ? cfg.Blocks[headerIndex].StartOffset : outerLoopHeaderOffset, loopExitSet, depth);
         else
             body = new IRSequence(Array.Empty<StructuredIRNode>());
 
