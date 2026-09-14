@@ -144,5 +144,37 @@ public sealed partial class NativeAotLoweringPlanner
 
         }
 
+        /// <summary>
+        /// System.Reflection.AssemblyName::GetPublicKey / GetPublicKeyToken
+        ///
+        /// These were unregistered, so both fell through to the catch-all fallback
+        /// (zero parameters, answers 0).  The subjects therefore saw null where the
+        /// BCL returns a zero-length array, and
+        /// `Assert.AreEqual(Array.Empty&lt;byte&gt;(), result)` failed — which is how
+        /// they became the only two genuine assertion failures in the reflection
+        /// chunk once the runner started stamping assertFailed.
+        ///
+        /// The native entries return ChaosArrayEmpty_Inline() for an unsigned
+        /// assembly, matching .NET (verified: both accessors report len=0, and
+        /// Array.Empty&lt;byte&gt;() is not null).
+        /// </summary>
+        private static void RegisterSystemReflectionAssemblyNamePublicKey(RuntimeHelperShapeRegistry registry)
+        {
+            registry.Register("System.Reflection.AssemblyName", "GetPublicKey", [],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyNameGetPublicKey",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.Reflection.AssemblyName", "GetPublicKeyToken", [],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyNameGetPublicKeyToken",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+        }
+
     }
 }

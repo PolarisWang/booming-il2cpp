@@ -402,6 +402,10 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetVersionObj(CHAOS_IL2CPP_INTPTR
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCodeBase(CHAOS_IL2CPP_INTPTR name) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetEscapedCodeBase(CHAOS_IL2CPP_INTPTR name) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetKeyPair(CHAOS_IL2CPP_INTPTR name) noexcept;
+// Public key of an unsigned assembly — the BCL contract is a ZERO-LENGTH ARRAY,
+// not null.  See the implementation comment in remaining_stubs.cpp.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetPublicKey(CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetPublicKeyToken(CHAOS_IL2CPP_INTPTR name) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionAssemblyNameGetVersionCompatibility(CHAOS_IL2CPP_INTPTR name) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetCultureInfoObj(CHAOS_IL2CPP_INTPTR name) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetAssemblyNameFile(CHAOS_IL2CPP_INTPTR path) noexcept;

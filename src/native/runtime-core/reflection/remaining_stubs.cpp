@@ -9,6 +9,12 @@
 // the same translation unit — internal helpers from internal_helpers.cpp
 // (GetTypeDescriptorFromHandle, GetTypeInfoFromHandle, etc.) are available.
 
+// ChaosArrayEmpty_Inline — used by the AssemblyName public-key accessors, which
+// must return the zero-length array that the BCL returns for an unsigned
+// assembly (returning null instead fails the caller's Assert.AreEqual).
+// Declared here rather than relying on the including TU's transitive includes.
+#include "../runtime_stubs/array_stubs.h"
+
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
 
@@ -1462,6 +1468,30 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetEscapedCodeBase(CHAOS_IL2CPP_I
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetKeyPair(CHAOS_IL2CPP_INTPTR name) noexcept {
     if (name == 0) return 0;
     return 0;
+}
+
+// AssemblyName.GetPublicKey / GetPublicKeyToken — the public key of an
+// assembly that is not strong-name signed.
+//
+// The BCL answer for an unsigned assembly is a ZERO-LENGTH ARRAY, not null:
+// AssemblyName.GetPublicKey() returns Array.Empty<byte>().  (Verified against
+// .NET 8: both accessors report len=0, and `Array.Empty<byte>() == null` is
+// false.)  An AOT image has no strong-name signature, so that is also the
+// correct answer here.
+//
+// Returning 0 instead made every caller's `Assert.AreEqual(Array.Empty<byte>(),
+// result)` fail — which is how these two surfaced as the only genuine
+// assertion failures in the reflection chunk once the runner began stamping
+// assertFailed.  The distinction matters: 0 means "no value", empty means
+// "signed with the empty key", and only the latter satisfies the contract.
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetPublicKey(CHAOS_IL2CPP_INTPTR name) noexcept {
+    if (name == 0) return 0;
+    return ChaosArrayEmpty_Inline();
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetPublicKeyToken(CHAOS_IL2CPP_INTPTR name) noexcept {
+    if (name == 0) return 0;
+    return ChaosArrayEmpty_Inline();
 }
 
 // AssemblyName.VersionCompatibility — AssemblyVersionCompatibility.SameMachine
