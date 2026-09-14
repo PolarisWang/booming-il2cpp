@@ -78,6 +78,23 @@ public sealed partial class NativeAotEmitter
             Path = NativeAotArtifactNames.EnumMetadataHeader,
         });
 
+        // Shape-registry capability manifest (JSON): which managed methods the
+        // codegen dispatches natively.  Lets downstream consumers separate a
+        // wrong answer from a missing implementation.
+        if (!string.IsNullOrEmpty(templateModel.CapabilityManifestJson))
+        {
+            sources.Add(new NativeAotGeneratedSource
+            {
+                RelativePath = NativeAotArtifactNames.CapabilityManifest,
+                Contents = templateModel.CapabilityManifestJson,
+            });
+            artifacts.Add(new NativeAotGeneratedArtifactRef
+            {
+                Kind = "capabilityManifest",
+                Path = NativeAotArtifactNames.CapabilityManifest,
+            });
+        }
+
         var pages = loweringPlan.TranslationUnitPages;
         int? pageSize = loweringPlan.TranslationUnitPageSize;
 

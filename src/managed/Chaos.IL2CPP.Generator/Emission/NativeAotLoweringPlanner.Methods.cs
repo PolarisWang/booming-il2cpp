@@ -1697,6 +1697,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             NativeEntryFunctionName = loweringPlan.NativeEntryFunctionName,
             EntryBridgeArguments = entryBridgeArguments,
             ShapeDispatchHeaderContent = _shapeRegistry.GenerateCppShapeHeader(),
+            CapabilityManifestJson = _shapeRegistry.ExportManifest(),
             EnumMetadataHeaderContent = enumMetaHeader,
             ModuleRegistrationCode = moduleRegistrationCode,
             WorkloadAbi = loweringPlan.WorkloadAbi,
