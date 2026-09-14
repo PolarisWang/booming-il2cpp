@@ -110,6 +110,25 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Assembly", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
+            // Type::get_Module — was NOT registered, so it fell through to the
+            // catch-all external-runtime fallback, which is declared with zero
+            // parameters and answers 0.  `typeof(X).Module` therefore returned
+            // 0, and every downstream subject (Module.GetTypes, Module.Name, …)
+            // died on its own null-guard before reaching any assertion.
+            //
+            // In this AOT model one image == one module, so the module handle IS
+            // the encoded image handle that get_Assembly already produces.
+            // ChaosReflectionModuleGetTypes and the other Module accessors all
+            // decode their argument with TryDecodeReflectionQueryImageHandle —
+            // i.e. they accept exactly what get_Assembly returns.  Reusing the
+            // same native entry is correct here, not a shortcut.
+            registry.Register("System.Type", "get_Module", [],
+                ShapeKind.SimpleForward, "ChaosReflectionGetAssembly",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.Module", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
             registry.Register("System.Type", "GetGenericTypeDefinition", [],
                 ShapeKind.SimpleForward, "ChaosReflectionGetGenericTypeDefinition",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
