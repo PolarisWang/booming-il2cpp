@@ -121,6 +121,13 @@ Phase 0 → 1 →（视结果）2。
 
 | task_id | phase | status | purpose | depends_on | deliverables | exit_criteria |
 |---|---|---|---|---|---|---|
-| S0-1 | 0 | planned | 建判别性期望表 + 覆盖 2 个访问器 | — | ATG 表 + 发射逻辑 | 生成物含强断言 |
-| S1-1 | 1 | planned | 反向验证（核心验收） | S0-1 | 验证记录 | 关接线→转红；开接线→转绿 |
+| S0-1 | 0 | **completed** | 建判别性期望表 + 覆盖 2 个访问器 | — | ATG 表 + 发射逻辑 | 生成物含强断言 ✅ |
+| S1-1 | 1 | **completed** | 反向验证（核心验收） | S0-1 | 验证记录 | ✅ 关接线→转红；开接线→转绿（双向闭环） |
 | S2-1 | 2 | planned | 泛化到其余 API | S1-1 | 扩展的表 | 按需，每项反向验证 |
+
+**Phase 0/1 完成记录（2026-09-14）**：判别式定稿为
+`Name == "CombinedSubjects"`（subjects 镜像固定名，仅依赖 String.op_Equality——
+有 native body 的唯一比较原语）。配套修复：GetAssemblyName 返回托管形状对象
+（16B 前缀 + runtime_name_value，修复 offset-16 读取错位）、
+ReferenceMatchesDefinition/GetVersion/GetName/GetFullName 从对象模型解码。
+双向验证：接线开→val=1 绿；关→红。详见 `PHASE0-RESULTS.md`。

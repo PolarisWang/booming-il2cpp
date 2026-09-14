@@ -1,4 +1,4 @@
-using System.Text;
+using System.Text;
 
 namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 
@@ -28,9 +28,9 @@ public sealed class TestEmitter
         // the assertion pins both halves: it must match the running assembly AND must not
         // be CoreLib. Either half failing turns the fact red.
         ["System.Reflection.Assembly.GetCallingAssembly"] =
-            "__RESULT != null && __RESULT.GetName().Name != null && __RESULT.GetName().Name!.Length > 0 && __RESULT.GetName().Name != __CORELIB_ASSEMBLY.GetName().Name",
+            "__RESULT.GetName().Name == \"CombinedSubjects\"",
         ["System.Reflection.Assembly.GetExecutingAssembly"] =
-            "__RESULT != null && __RESULT.GetName().Name != null && __RESULT.GetName().Name!.Length > 0 && __RESULT.GetName().Name != __CORELIB_ASSEMBLY.GetName().Name",
+            "__RESULT.GetName().Name == \"CombinedSubjects\"",
     };
 
 
@@ -333,7 +333,7 @@ public sealed class TestEmitter
                         // Discriminating APIs get a real assertion instead of the "is not null"
                         // sentinel: the probe cannot supply an expected value for them, but their
                         // post-condition is knowable outright.
-                        if (TryEmitDiscriminatingAssertion(sb, method, resultVar))
+                        if (TryEmitDiscriminatingAssertion(sb, method, resultVar, assemblyName))
                         {
                             sb.AppendLine("            return 1L;");
                         }
@@ -704,22 +704,23 @@ public sealed class TestEmitter
     /// variable, so it can reference the running assembly and the CoreLib name
     /// without the generator needing to know this chunk's assembly identity.
     /// </summary>
-    private static bool TryEmitDiscriminatingAssertion(StringBuilder sb, MethodSignature method, string resultVar)
+    private static bool TryEmitDiscriminatingAssertion(StringBuilder sb, MethodSignature method, string resultVar, string assemblyName)
     {
         var key = method.DeclaringTypeFullName + "." + method.Name;
         if (!DiscriminatingExpectations.TryGetValue(key, out var predicate)) return false;
 
         // The CoreLib name is read at run time rather than baked in, so the assertion
         // does not depend on how the assembly was built.
-        // The CoreLib assembly is obtained through typeof(...), not
-        // Type.GetType("System.Object"): the latter has no native body in these chunks
-        // and routes through ChaosExternalRuntimeFallback to return 0, so dereferencing
-        // it threw inside the test body and masked the real outcome. typeof(...) is
-        // lowered to a constant handle and is already used elsewhere in this chunk.
-        sb.AppendLine("            var __corelib_assembly = typeof(int).Assembly;");
-        var body = predicate.Replace("__RESULT", resultVar).Replace("__CORELIB_ASSEMBLY", "__corelib_assembly");
-        // The predicate is a pure expression over the result variable (a statement block
-        // would not be a valid initializer).
+        // The expected name is baked as a literal and compared with String.op_Equality,
+        // which has a native body. Reference-type != / == on Assembly, Type.GetType, and
+        // typeof(...).Assembly chains all route through catch-all external helpers that
+        // return 0 in this chunk — each of those silently killed earlier versions of
+        // this predicate. Literal + op_Equality are the only reliably-supported primitives.
+        //
+        // A null RESULT is intentionally not pre-checked: GetName() on null raises an NRE,
+        // the P-1 rethrow propagates it, and the runner marks the subject failed — the same
+        // red light, with C#-consistent semantics.
+        var body = predicate.Replace("__RESULT", resultVar);
         sb.AppendLine("            var __assemblies_match = " + body + ";");
         sb.AppendLine("            Assert.IsTrue(__assemblies_match, \"reported assembly is not the running assembly, or is the CoreLib fallback\");");
         return true;
