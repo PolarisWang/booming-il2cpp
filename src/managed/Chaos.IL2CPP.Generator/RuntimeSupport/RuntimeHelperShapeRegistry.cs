@@ -203,13 +203,21 @@ public sealed partial class NativeAotLoweringPlanner
             // Exact SimpleForward registrations — the authoritative "we have this".
             foreach (var entry in _entriesByCanonicalKey.Values)
             {
-                // Subject-id prefix in the same shape the metadata uses
+                // Subject-id in the same shape the metadata uses
                 // ("Assembly/Namespace.Type::Method:Signature"), so a consumer can
-                // match a metadata row with a plain StartsWith.  The registry only
-                // knows the managed type display name, so the prefix ends at the
-                // method name and the signature tail is matched by the consumer.
+                // match a metadata row with a plain StartsWith.
+                //
+                // The signature IS included, not just the method name.  A name-only
+                // prefix over-claims: registering System.Activator::CreateInstance
+                // for the 1-arg (Type) overload would also match the 5-arg
+                // (Type, BindingFlags, Binder, Object[], CultureInfo) overload,
+                // which has no shape at all — so its failures were reported as
+                // realDefect ("the implementation is wrong") when they are in fact
+                // "there is no implementation".  The parameter list pins the match
+                // to the exact overload the shape was registered for.
                 var subjectIdPrefix =
-                    $"System.Private.CoreLib/{entry.TypeDisplayName}::{entry.MethodName}:";
+                    $"System.Private.CoreLib/{entry.TypeDisplayName}::{entry.MethodName}:" +
+                    $"({string.Join(",", entry.ParamTypeDisplayNames)})";
 
                 entries.Add(new
                 {
