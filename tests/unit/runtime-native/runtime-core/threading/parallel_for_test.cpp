@@ -316,16 +316,22 @@ TEST(ParallelFor, RunsOnPoolWorkersNotTheCallingThread)
     });
     ASSERT_TRUE(returned) << "Parallel.For must return";
 
-    std::lock_guard<std::mutex> lock(*mu);
-    EXPECT_EQ(ids->count(caller), 0u)
-        << "the calling thread blocks until the range completes, so it must not "
-           "be one of the workers; running the body on the caller means this is "
-           "not parallel at all";
-
+    {
+        std::lock_guard<std::mutex> lock(*mu);
+        EXPECT_EQ(ids->count(caller), 0u)
+            << "the calling thread blocks until the range completes, so it must not "
+               "be one of the workers; running the body on the caller means this is "
+               "not parallel at all";
+    }
+    // Let the lock_guard release before Shutdown: the mutex was used by worker
+    // threads via the s_mu static, and destroying it while workers are still
+    // being joined fires MSVC STL's "mutex destroyed while busy" debug check
+    // (the internal owner-thread-id is still set), even when the mutex is not
+    // currently locked.  Releasing first lets the STL see a clean state.
     delete body;
+    ThreadPoolShutdown();
     delete ids;
     delete mu;
-    ThreadPoolShutdown();
 }
 
 // ── 4. Degenerate ranges ───────────────────────────────────────────────
