@@ -123,7 +123,8 @@ _UNASSERTABLE_RETURN_TYPES = frozenset({
 
 def classify_fact_record(rec: dict, return_type: str | None,
                          is_factory_subject: bool = False,
-                         stub_gap_ids: frozenset[str] | None = None) -> str:
+                         stub_gap_ids: frozenset[str] | None = None,
+                         capability_manifest: dict[str, str] | None = None) -> str:
     """Classify one runtime fact record into exactly one bucket.
 
     This is THE single source of truth for real-vs-smoke.  Both the chunk-level
@@ -150,7 +151,22 @@ def classify_fact_record(rec: dict, return_type: str | None,
                           infrastructure gap, reported separately so it is
                           neither hidden inside ``failed`` nor confused with a
                           genuine assertion failure.
-      * ``failed``      — passed == False: a genuine assertion failure.
+      * ``realDefect``  — passed == False on a method the *capability manifest*
+                          marks as ``real`` (the codegen has a native shape /
+                          inline body for it).  A genuine AOT implementation
+                          defect: the runtime produced a wrong result for a
+                          method it *should* handle.  This is the actionable
+                          bug backlog.
+      * ``notSupported``— passed == False on a method the *capability manifest*
+                          marks as ``not-supported`` (the method has no native
+                          shape and no interpreter fallback).  An expected
+                          boundary: the AOT runtime correctly cannot implement
+                          this API (e.g. Activator.CreateInstanceFrom needs
+                          assembly loading).  No action needed unless the
+                          status is later upgraded to ``real``.
+      * ``failed``      — passed == False with no capability manifest entry.
+                          Falls into the same bucket as today, reported as
+                          an unclassified failure.
 
     **Missing metadata**: some fact records come from supplemental-coverage
     methods whose ``si`` does NOT align with any metadata ``index``.  In that
@@ -169,6 +185,16 @@ def classify_fact_record(rec: dict, return_type: str | None,
         # method under test.
         if is_factory_subject and not rec.get("assertFailed"):
             return "factoryGap"
+
+        # Capability-manifest-aware classification: if we know this method's
+        # AOT status, report it precisely rather than the generic "failed".
+        if capability_manifest:
+            status = capability_manifest.get(rec.get("si"))
+            if status == "real":
+                return "realDefect"
+            if status == "not-supported":
+                return "notSupported"
+
         return "failed"
     if rec.get("value") != 42:
         return "real"
@@ -301,6 +327,39 @@ def _stub_gap_method_ids(ctx: ChunkContext) -> frozenset[str]:
 
     return frozenset(gap_ids)
 
+
+def _load_capability_manifest(ctx) -> dict[str, str] | None:
+    """Load the AOT capability manifest emitted by the codegen layer.
+
+    The manifest records which managed methods the codegen can dispatch
+    natively (SimpleForward / InlineBody shape) versus those that have no
+    shape at all.  It lets a failing fact record be reported as a genuine
+    implementation defect (``realDefect``) instead of a generic ``failed``.
+
+    Returns a dict keyed by ``TypeDisplayName::MethodName`` — the same
+    canonical form the shape registry uses — or None when no manifest exists
+    (older codegen runs, non-codegen chunks).
+    """
+    cap_path = (ctx.chunk_dir / "native" / "codegen" / "generated"
+                / "aot-capability-manifest.json")
+    if not cap_path.exists():
+        return None
+
+    try:
+        manifest = json.loads(cap_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+
+    index: dict[str, str] = {}
+    for entry in manifest.get("entries", []) or []:
+        if entry.get("kind") != "exact":
+            continue
+        type_name = entry.get("typeDisplayName")
+        method_name = entry.get("methodName")
+        if not type_name or not method_name:
+            continue
+        index[f"{type_name}::{method_name}"] = "real"
+    return index if index else None
 
 
 def _get_factory_subject_ids(ctx: ChunkContext) -> frozenset[str]:
@@ -471,6 +530,13 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     # so they are bucketed separately from `smoke` — see classify_fact_record.
     stub_gap_ids = _stub_gap_method_ids(ctx)
 
+    # Capability manifest (AOT shape registry) — maps a record's `si` to the
+    # codegen's knowledge of that method: "real" (a native shape / inline body
+    # exists) or "not-supported" (no shape, no IL fallback).  Lets a failure be
+    # reported as `realDefect` (actionable AOT bug) vs `notSupported` (expected
+    # architectural boundary) instead of a generic `failed`.
+    capability_manifest = _load_capability_manifest(ctx)
+
     def _annotate(records: list) -> list:
         if not records:
             return records
@@ -503,7 +569,8 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
                 rec["resultKind"] = classify_fact_record(
                     rec, rt,
                     is_factory_subject=(gen_id in factory_subjects) if gen_id else False,
-                    stub_gap_ids=stub_gap_ids)
+                    stub_gap_ids=stub_gap_ids,
+                    capability_manifest=capability_manifest)
                 continue
 
             # Fallback for records without methodSubjectId (pre-rebuild).
@@ -515,7 +582,8 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
                 rt = _return_type_of(sid)
                 rec["returnType"] = rt
                 rec["resultKind"] = classify_fact_record(
-                    rec, rt, stub_gap_ids=stub_gap_ids)
+                    rec, rt, stub_gap_ids=stub_gap_ids,
+                    capability_manifest=capability_manifest)
         return records
 
     per_method = {
