@@ -106,6 +106,11 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterCancellationTokenSource(registry);
             RegisterExecutionContext(registry);
             RegisterSynchronizationContext(registry);
+            // T2.2: instance methods whose receiver is not carried in the ABI —
+            // see the doc block on the registration for why no receiver slot exists.
+            RegisterReaderWriterLockSlimAndSemaphoreSlim(registry);
+            RegisterManualResetEventSlim(registry);
+            RegisterSpinPrimitivesAndThreadPool(registry);
             RegisterValueTask(registry);
             RegisterHotBclNoOps(registry);
             RegisterParallelLoops(registry);

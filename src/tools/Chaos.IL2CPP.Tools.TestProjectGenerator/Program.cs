@@ -729,8 +729,25 @@ public static class Program
     /// Walk up from a DLL path to find the repo root (looks for src/managed/ or src/native/ directory).
     /// Distinguishes the real repo root from a testing/src/ directory that may exist in the test tree.
     /// </summary>
+    /// <remarks>
+    /// The walk-up alone is not sufficient when the build runs from a git worktree.
+    /// Chunk inputs live under <c>artifacts/</c>, which is resolved against the
+    /// *main* checkout (see <c>_path.build_root()</c>), so walking up from
+    /// <c>&lt;main&gt;/artifacts/.../managed/CombinedSubjects.dll</c> always lands on
+    /// the main checkout — even when the caller is a worktree.  That bakes
+    /// <c>CHAOS_PROJECT_ROOT</c> to the main tree, so every <c>src/native/**</c>
+    /// include in the generated CMakeLists resolves to main and edits made in the
+    /// worktree are silently invisible to the native build (no error, just stale
+    /// code).  <see cref="TryDetectWorktreeRoot"/> therefore takes precedence.
+    /// </remarks>
     private static string? DetectProjectRoot(string assemblyPath)
     {
+        var worktree = TryDetectWorktreeRoot();
+        if (worktree is not null)
+        {
+            return worktree.Replace("\\", "/");
+        }
+
         var dir = new DirectoryInfo(Path.GetDirectoryName(Path.GetFullPath(assemblyPath))!);
         string? best = null;
         while (dir is not null)
@@ -745,6 +762,53 @@ public static class Program
             dir = dir.Parent;
         }
         return best?.Replace("\\", "/");
+    }
+
+    /// <summary>
+    /// Resolve the git worktree root that contains this tool, if any.  Returns
+    /// <c>null</c> for a normal (non-worktree) checkout so the historical
+    /// assemblyPath walk-up stays in charge there.
+    /// </summary>
+    /// <remarks>
+    /// A linked worktree's <c>.git</c> is a *file* (not a directory) containing
+    /// <c>gitdir: &lt;main&gt;/.git/worktrees/&lt;name&gt;</c>, so it is detected by
+    /// walking up for a <c>.git</c> entry that is a file rather than a directory.
+    /// Walking from <see cref="AppContext.BaseDirectory"/> targets the tree the
+    /// tool binaries themselves live in, which is the tree whose
+    /// <c>src/native/**</c> the caller expects to be compiled.
+    /// </remarks>
+    private static string? TryDetectWorktreeRoot()
+    {
+        var dir = new DirectoryInfo(AppContext.BaseDirectory);
+        while (dir is not null)
+        {
+            var gitPath = Path.Combine(dir.FullName, ".git");
+            if (File.Exists(gitPath))
+            {
+                // Linked worktree: .git is a file pointing at the main repo.
+                // Only count it when it actually looks like a worktree gitdir.
+                try
+                {
+                    var firstLine = File.ReadLines(gitPath).FirstOrDefault() ?? "";
+                    if (firstLine.StartsWith("gitdir:", StringComparison.OrdinalIgnoreCase))
+                    {
+                        return dir.FullName;
+                    }
+                }
+                catch (IOException)
+                {
+                    // Unreadable .git file — fall through to the normal walk-up.
+                }
+            }
+            else if (Directory.Exists(gitPath))
+            {
+                // Normal checkout: top-level .git directory. Stop here; the
+                // caller's assemblyPath walk-up handles it as before.
+                return null;
+            }
+            dir = dir.Parent;
+        }
+        return null;
     }
 
     /// <summary>

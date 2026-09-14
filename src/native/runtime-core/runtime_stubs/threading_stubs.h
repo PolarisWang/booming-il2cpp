@@ -19,10 +19,25 @@ inline CHAOS_IL2CPP_INTPTR chaos_thread_get_current(void) noexcept
     if (thread == nullptr) return 0;
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(thread->managed_object);
 }
+// ── Linkage: these MUST all be extern "C" ──────────────────────────────
+//
+// threading_stubs.cpp opens a single file-scope `extern "C" {` and defines
+// every one of these symbols with C linkage (they export undecorated from
+// chaos_runtime_core.lib: `chaos_thread_yield`, not `?chaos_thread_yield@@YAHXZ`).
+// This header must therefore declare ALL of them inside one extern "C" block.
+//
+// When only a subset was inside the block (historically just
+// chaos_monitor_enter/exit), the rest were declared with C++ linkage while
+// defined with C linkage.  The mismatch is invisible until link time, and it
+// only fires for symbols whose definitions the linker has to pull by name:
+// LNK2019 "unresolved external symbol ?chaos_thread_yield@@YAHXZ" for
+// Thread.Yield / Thread.Sleep, while chaos_monitor_enter linked fine from the
+// same object file.  Keep this block closed only at the end of the exported
+// declarations.
 extern "C" {
+
 void chaos_monitor_enter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR lockTaken) noexcept;
 void chaos_monitor_exit(CHAOS_IL2CPP_INTPTR obj) noexcept;
-}
 CHAOS_IL2CPP_INT32 ChaosMonitorTryEnter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 timeout) noexcept;
 
 // Thread lifecycle: .ctor stores the delegate, Start spawns a native thread,
@@ -68,3 +83,5 @@ void chaos_thread_set_priority(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT3
 
 // Thread.IsThreadPoolThread: query whether thread is a ThreadPool worker.
 CHAOS_IL2CPP_INT32 chaos_thread_is_threadpool(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
+
+}  // extern "C"

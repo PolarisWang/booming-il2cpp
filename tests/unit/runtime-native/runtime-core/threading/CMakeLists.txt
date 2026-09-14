@@ -28,6 +28,75 @@ chaos_native_add_test(test_async_integration_smoke
     LABELS "unit;threading"
 )
 
+# synchronization_context_post_test — T1.5: Post must dispatch to the ThreadPool
+# rather than running inline (which would make Post==Send).
+chaos_native_add_test(test_synchronization_context_post
+    synchronization_context_post_test.cpp
+    LABELS "unit;threading"
+)
+
+# synchronization_stubs_test — T2.0: the extern "C" ABI export layer is callable.
+# The property under test is LINKAGE (undecorated C symbols reachable by an
+# unqualified name from a TU that includes only the ABI header), not behaviour —
+# a declaration that drifts outside the extern "C" block compiles fine and fails
+# only at link time, so this has to be a link-level test to be worth anything.
+chaos_native_add_test(test_synchronization_stubs
+    synchronization_stubs_test.cpp
+    LABELS "unit;threading"
+)
+
+# managed_handle_stubs_test — T2.1: the managed-instance ↔ native-slot binding.
+# The handle is stored in a fixed-offset field ON the managed object (the same
+# technique the registry uses for Nullable<T>::get_HasValue and the inline
+# List<T> view), so the properties under test are the offset being where it is
+# claimed to be, per-instance isolation, create-once, and clear-before-destroy.
+# Drives real SemaphoreSlim handles through the binding so a "stored the wrong
+# thing" implementation cannot pass by round-tripping a value with itself.
+chaos_native_add_test(test_managed_handle_stubs
+    managed_handle_stubs_test.cpp
+    LABELS "unit;threading"
+)
+
+# managed_primitive_entries_test — T2.2: the managed-shaped entries for
+# ReaderWriterLockSlim.  Codegen passes NO receiver for these instance methods,
+# so each entry recovers the handle from the instance's own field (T2.1).  The
+# tests therefore bind REAL locks and contend on them — "did the call return 1"
+# would pass for an implementation that ignored the receiver entirely.
+chaos_native_add_test(test_managed_primitive_entries
+    managed_primitive_entries_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/managed_primitive_entries.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/managed_handle_stubs.cpp
+    LABELS "unit;threading"
+)
+
+# managed_primitive_entries_mres_test — T2.4: ManualResetEventSlim's managed
+# surface, backed by the T2.0 WaitHandle family (discriminant 0 = manual).
+# Asserts Set/Reset/Wait actually drive the native event (a "return 1 for
+# everything" helper fails), per-instance isolation, and unbound rejection.
+chaos_native_add_test(test_managed_primitive_entries_mres
+    managed_primitive_entries_mres_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/managed_primitive_entries.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/managed_handle_stubs.cpp
+    LABELS "unit;threading"
+)
+
+# managed_primitive_entries_spin_test — T2.5: SpinLock + SpinWait.
+# Value-type entries where the receiver IS the state, plus SpinLock's byref
+# write-back (the main assertion that distinguishes a real from a fake wiring).
+chaos_native_add_test(test_managed_primitive_entries_spin
+    managed_primitive_entries_spin_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/managed_primitive_entries.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/managed_handle_stubs.cpp
+    LABELS "unit;threading"
+)
+
+# cancellation_token_test — T1.1/T1.2: ThrowIfCancellationRequested must actually
+# raise, get_token must not degrade to None, and linked sources must propagate.
+chaos_native_add_test(test_cancellation_token
+    cancellation_token_test.cpp
+    LABELS "unit;threading"
+)
+
 # execution_context_smoke_test — ExecutionContext SuppressFlow/RestoreFlow
 # Compiles execution_context.cpp directly to avoid stale prebuilt lib issues.
 chaos_native_add_test(test_execution_context_smoke
@@ -182,6 +251,16 @@ chaos_native_add_test(test_async_iterator
     LABELS "unit;threading"
 )
 
+# parallel_for_test — T1.4: Parallel.For range partitioner semantics.
+# Compiles parallel.cpp directly so the test drives the real
+# chaos_parallel_for_range_int rather than a stale prebuilt copy (same reason as
+# the rwlock_upgrade / async_task_state registrations above).
+chaos_native_add_test(test_parallel_for
+    parallel_for_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/parallel.cpp
+    LABELS "unit;threading"
+)
+
 # queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
 chaos_native_add_test(test_queue_backpressure
     queue_backpressure_test.cpp
@@ -210,6 +289,17 @@ chaos_native_add_test(test_rwlock_upgrade
     LABELS "unit;threading"
 )
 
+# handle_slot_recycling_test — T3.2: destroyed handle slots must return to the
+# free pool.  The fixed tables allocate by scanning for `id == 0`, but Destroy
+# used to set only `active = false`, so every create/destroy cycle burned a slot
+# permanently and the 1023-slot table exhausted after 1023 LIFETIME allocations.
+# Asserts reuse, freshness of a recycled slot, and the concurrent case.
+chaos_native_add_test(test_handle_slot_recycling
+    handle_slot_recycling_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/synchronization.cpp
+    LABELS "unit;threading"
+)
+
 # phase3_industrialization_test — Phase 3 TDD: timer precision, shutdown race, injection rate
 chaos_native_add_test(test_phase3_industrialization
     phase3_industrialization_test.cpp
@@ -229,3 +319,51 @@ chaos_native_add_test(test_object_header_benchmark
     object_header_benchmark_test.cpp
     LABELS "benchmark;threading;typesystem"
 )
+
+# ── Restored registration (T0.4) ────────────────────────────────────────────
+# monitor_pulseall_stress_test.cpp existed in the tree but was referenced by NO
+# CMakeLists repo-wide, so it was never compiled and never ran — 1 test case
+# silently dead.  Verified to build and PASS after registration.
+#
+# The gap is why the roadmap's "244 cases" baseline was short: a test file that
+# is not registered cannot fail, so its absence is invisible in CI.
+#
+# RESOURCE_LOCK bgc matches threading_stress: these stress cases must not run
+# concurrently with background-GC tests.
+chaos_native_add_test(test_monitor_pulseall_stress
+    monitor_pulseall_stress_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/synchronization.cpp
+    RESOURCE_LOCK bgc
+    LABELS "unit;threading;stress"
+)
+
+# ── NOT registered: two rotted test files (T0.4 finding) ────────────────────
+# hill_climbing_smoke_test.cpp and threadpool_events_smoke_test.cpp are also
+# present but unreferenced.  They were deliberately left OUT of this commit
+# because they no longer compile against the current sources — registering them
+# would turn the build red for no coverage gain:
+#
+#   hill_climbing_smoke_test.cpp — accesses HillClimbingController::cpu_count_
+#     and ::SigmoidGain, both now PRIVATE (C2248).  The class was tightened
+#     after the test was written.
+#   threadpool_events_smoke_test.cpp — calls ThreadPoolEventEmitThreadCreate /
+#     ThreadAttach / ThreadDetach / SafepointBegin / SafepointEnd /
+#     MonitorContention, none of which exist in namespace threading any more
+#     (C2039/C3861).  The event-emit surface was renamed or removed.
+#
+# These are ROTTED TESTS, not missing coverage being hidden: the behaviour they
+# aimed at is now covered by threadpool_events / hill-climbing paths exercised
+# elsewhere.  Reviving them is a separate task — they need to be rewritten
+# against the current API, not merely re-registered.  Tracked in STATUS.md.
+
+# ── NOT registered: parallel_probe/ (investigation instruments) ─────────────
+# parallel_probe/ holds standalone A/B + coverage probes used to verify the T1.4
+# dispatch-policy change and to reproduce the large-range truncation (see the
+# roadmap's T1.4 record).  They are NOT ctest cases and are deliberately not
+# added here: each has its own main(), links the chaos static libs directly, and
+# needs two different parallel.cpp revisions side by side — none of which the
+# chaos_native_add_test factory supports.
+#
+# They are also EXCLUDE_FROM_ALL in their own CMakeLists, so nothing builds them
+# unless asked.  See parallel_probe/CMakeLists.txt for the invocation.
+

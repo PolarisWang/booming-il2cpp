@@ -9,10 +9,44 @@ import sys
 from pathlib import Path
 
 
+def _worktree_root() -> Path | None:
+    """The git worktree root that contains this module, or None for a normal
+    checkout.
+
+    A linked worktree's ``.git`` is a *file* (``gitdir: <main>/.git/worktrees/
+    <name>``) rather than a directory, which is how it is told apart from the
+    main checkout.  Without this, ``_repo_root()`` below anchors to whichever
+    tree the *file* lives in (always the main checkout, since a worktree's
+    ``tests/e2e/verification`` is that same file), so a worktree would build the
+    tool from main's sources and silently run stale codegen.
+    """
+    cur = Path(__file__).resolve().parent
+    while cur != cur.parent:
+        git_path = cur / ".git"
+        if git_path.is_file():
+            try:
+                first = git_path.read_text(encoding="utf-8", errors="replace").splitlines()[0]
+            except (OSError, IndexError):
+                return None
+            if first.lower().startswith("gitdir:"):
+                return cur
+            return None
+        if git_path.is_dir():
+            return None  # normal checkout — behave as before
+        cur = cur.parent
+    return None
+
+
 def _repo_root() -> Path:
     """Repository root (dir holding .git). Walks up so it is robust to where the
     _pipeline package is relocated (engine moved to tests/e2e/verification in L6;
-    root is 4 dirs up from _pipeline/)."""
+    root is 4 dirs up from _pipeline/).
+
+    A git worktree is honoured first so that a worktree builds the tool from its
+    *own* sources; see _worktree_root()."""
+    wt = _worktree_root()
+    if wt is not None:
+        return wt
     cur = Path(__file__).resolve().parent
     while cur != cur.parent:
         if (cur / ".git").exists() or (cur / "tests" / "runner").is_dir():

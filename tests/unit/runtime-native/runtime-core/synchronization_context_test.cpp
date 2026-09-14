@@ -21,6 +21,7 @@
 #include <gtest/gtest.h>
 
 #include "synchronization_context.h"
+#include "thread_pool.h"
 
 #include <atomic>
 #include <chrono>
@@ -118,40 +119,97 @@ TEST(SynchronizationContext, IsPerThreadNotGlobal)
 // ══════════════════════════════════════════════════════════════════════════════
 
 namespace {
-int g_post_count = 0;
-void* g_post_state = nullptr;
+std::atomic<int>  g_post_count{0};
+std::atomic<void*> g_post_state{nullptr};
+std::atomic<std::thread::id> g_post_thread{};
+
+/// Records the invocation and releases any waiter.  The release stores are what
+/// let the Post test rendezvous without assuming Post ran the callback inline.
 void CountingCallback(void* state) {
-    ++g_post_count;
-    g_post_state = state;
+    g_post_thread.store(std::this_thread::get_id(), std::memory_order_release);
+    g_post_state.store(state, std::memory_order_release);
+    g_post_count.fetch_add(1, std::memory_order_release);
+}
+
+/// Blocks until the callback has been observed, or the deadline expires.
+bool WaitForPost(std::chrono::milliseconds budget = std::chrono::seconds(10)) {
+    const auto deadline = std::chrono::steady_clock::now() + budget;
+    while (std::chrono::steady_clock::now() < deadline) {
+        if (g_post_count.load(std::memory_order_acquire) == 1) return true;
+        std::this_thread::sleep_for(std::chrono::milliseconds(2));
+    }
+    return false;
 }
 }  // namespace
 
+// Post is ASYNCHRONOUS by contract: it queues the callback and returns without
+// running it.  This test used to assert `g_post_count == 1` on the line right
+// after Post returned, which only a Post that invoked the callback INLINE could
+// satisfy — so when Post was corrected to actually queue, the test failed while
+// the implementation was right.  A test that pins the opposite of the contract
+// it is meant to protect is worse than no test: it makes a correct fix look
+// like a regression.
+//
+// The first attempt at fixing this asserted "the callback did not run before
+// Post returned" by reading the counter IMMEDIATELY.  That is still wrong, in a
+// subtler way: the worker can land the callback between Post's queue-write and
+// the caller's read, so a CORRECT implementation fails intermittently.  The
+// sibling test (test_synchronization_context_post) had already rejected that
+// approach for exactly this reason.  Timing cannot separate inline from queued.
+//
+// Thread id can, and does so deterministically: an inline Post runs the
+// callback on the CALLER by definition, while a queued Post cannot — the caller
+// is parked in the wait below, not running pool work.  So the discriminator is
+//
+//   inline  => callback ran on the calling thread
+//   queued  => callback ran on some other thread
+//
+// with the counter/state assertions made AFTER the wait, where nothing races.
 TEST(SynchronizationContext, PostInvokesTheCallbackWithItsState)
 {
-    g_post_count = 0;
-    g_post_state = nullptr;
+    ThreadPoolInitialize();
+    g_post_count.store(0);
+    g_post_state.store(nullptr);
     SynchronizationContext* ctx = SynchronizationContextCreate();
     ASSERT_NE(ctx, nullptr);
 
+    const auto caller = std::this_thread::get_id();
     int marker = 0;
     EXPECT_TRUE(SynchronizationContextPost(ctx, CountingCallback, &marker));
-    EXPECT_EQ(g_post_count, 1) << "Post must actually invoke the callback";
-    EXPECT_EQ(g_post_state, &marker) << "and pass the caller's state through";
+
+    ASSERT_TRUE(WaitForPost())
+        << "a queued Post callback must still run — asynchrony means 'later', "
+           "not 'never'";
+    EXPECT_EQ(g_post_count.load(std::memory_order_acquire), 1)
+        << "and it must run exactly once";
+    EXPECT_EQ(g_post_state.load(std::memory_order_acquire),
+              static_cast<void*>(&marker))
+        << "and pass the caller's state through";
+    EXPECT_NE(g_post_thread.load(std::memory_order_acquire), caller)
+        << "Post must dispatch to a ThreadPool worker rather than run inline on "
+           "the calling thread; running on the caller makes Post and Send the "
+           "same operation, which is the defect T1.5 exists to close";
 
     SynchronizationContextDestroy(ctx);
+    ThreadPoolShutdown();
 }
 
 TEST(SynchronizationContext, SendInvokesTheCallbackWithItsState)
 {
     g_post_count = 0;
-    g_post_state = nullptr;
+    g_post_state.store(nullptr);
     SynchronizationContext* ctx = SynchronizationContextCreate();
     ASSERT_NE(ctx, nullptr);
 
     int marker = 0;
     EXPECT_TRUE(SynchronizationContextSend(ctx, CountingCallback, &marker));
-    EXPECT_EQ(g_post_count, 1) << "Send must actually invoke the callback";
-    EXPECT_EQ(g_post_state, &marker);
+    // Send IS synchronous by contract, so here the immediate check is the right
+    // one — and it is what distinguishes Send from Post.  If Send ever starts
+    // deferring, this fails while the Post test above still passes.
+    EXPECT_EQ(g_post_count.load(std::memory_order_acquire), 1)
+        << "Send must invoke the callback before returning";
+    EXPECT_EQ(g_post_state.load(std::memory_order_acquire),
+              static_cast<void*>(&marker));
 
     SynchronizationContextDestroy(ctx);
 }

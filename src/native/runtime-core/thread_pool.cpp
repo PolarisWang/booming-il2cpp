@@ -96,7 +96,16 @@ void DestroyWorkerQueue(WorkerLocalQueue* q) noexcept {
 }
 
 /// Try to steal a work item from a random victim worker.
-bool TryStealFromWorker(WorkItem& out, int32_t victim_count) noexcept {
+///
+/// `victim` is picked by the caller from a snapshot of s_worker_queues taken
+/// under s_mutex.  The vector itself is never indexed here: workers erase
+/// themselves from it on exit and shutdown clears it, so any unlocked walk
+/// could dereference a freed queue.  A victim may still have exited between the
+/// snapshot and this call — that is benign, because a worker only erases itself
+/// after it has stopped publishing work, and StealFromBack simply finds an empty
+/// deque.  The queue object stays alive until StealFromBack returns; see the
+/// ownership note at the worker-exit path.
+bool TryStealFromWorker(WorkItem& out, WorkerLocalQueue** victims, int32_t victim_count) noexcept {
     if (victim_count <= 1) return false;
 
     // Pick a random starting victim (thread-local random state avoids lock).
@@ -107,7 +116,8 @@ bool TryStealFromWorker(WorkItem& out, int32_t victim_count) noexcept {
     int32_t start = static_cast<int32_t>(tls_rng_state % static_cast<uint32_t>(victim_count));
     for (int32_t i = 0; i < victim_count; i++) {
         int32_t idx = (start + i) % victim_count;
-        auto* vq = s_worker_queues[idx];
+        auto* vq = victims[idx];
+        if (vq == nullptr) continue;
         // Don't steal from ourselves.
         if (vq == tls_worker_queue) continue;
         if (vq->StealFromBack(out)) return true;
@@ -162,12 +172,22 @@ void WorkerLoop() noexcept {
 
         // 2) Try stealing from random victim (work-stealing).
         {
-            int32_t victim_count;
+            // Snapshot the victim list under s_mutex, then steal outside the
+            // lock.  Holding the lock across the steal would serialise every
+            // worker's steal attempt; not taking a snapshot at all is what let
+            // this index a vector that workers concurrently erase from.
+            WorkerLocalQueue* victims[kThreadPoolMaxStealVictims];
+            int32_t victim_count = 0;
             {
                 std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
-                victim_count = static_cast<int32_t>(s_worker_queues.size());
+                const int32_t have = static_cast<int32_t>(s_worker_queues.size());
+                victim_count = have < kThreadPoolMaxStealVictims
+                    ? have : kThreadPoolMaxStealVictims;
+                for (int32_t i = 0; i < victim_count; ++i) {
+                    victims[i] = s_worker_queues[static_cast<size_t>(i)];
+                }
             }
-            if (TryStealFromWorker(item, victim_count)) {
+            if (TryStealFromWorker(item, victims, victim_count)) {
                 last_work_time = std::chrono::steady_clock::now();
                 has_ever_done_work = true;
                 goto execute;
@@ -686,8 +706,17 @@ void ThreadPoolShutdown() noexcept {
         s_workers.clear();
         s_worker_count.store(0, std::memory_order_release);
 
-        // Clean up worker queues.
-        for (auto* q : s_worker_queues) DestroyWorkerQueue(q);
+        // Worker queues are owned by the workers themselves: each WorkerLoop
+        // destroys its own local_q on exit (the DestroyWorkerQueue call at the
+        // bottom of the loop).  Freeing them here as well is a double free for
+        // every worker that already exited.
+        //
+        // Isolation note: reverting THIS block alone does not reproduce the
+        // StealFromBack crash — the load-bearing defect was the unlocked
+        // s_worker_queues[] read in TryStealFromWorker (reverting that gives 7
+        // crashes in 20 runs; keeping it gives 0).  The double free is a latent
+        // second defect kept closed on its own merits, not the observed trigger.
+        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
         s_worker_queues.clear();
     }
 

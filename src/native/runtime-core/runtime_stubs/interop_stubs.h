@@ -109,7 +109,7 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetRuntimeDirectory(void) noexcept;
 CHAOS_IL2CPP_INT32   ChaosRuntimeEnvironmentFromGlobalAccessCache(CHAOS_IL2CPP_INTPTR assemblyObj) noexcept;
 CHAOS_IL2CPP_INTPTR  ChaosRuntimeEnvironmentGetRuntimeInterfaceAsIntPtr(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2) noexcept;
 CHAOS_IL2CPP_INTPTR  ChaosRuntimeEnvironmentGetSystemVersion(void) noexcept;
-void                 ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2, CHAOS_IL2CPP_INTPTR retSlot) noexcept;
+CHAOS_IL2CPP_INTPTR  ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2, CHAOS_IL2CPP_INTPTR retSlot) noexcept;
 
 // ── AsnWriter.Scope stubs ────────────────────────────────────
 // DirectNativeSymbol stubs for System.Formats.Asn1.AsnWriter+Scope.

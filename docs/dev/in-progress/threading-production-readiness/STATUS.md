@@ -18,8 +18,8 @@ child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
 dispatch_model: sequential
-recommended_next_child: T0.0b
-latest_stop_point: T0.0 实测完成（根因非 crt_stubs），Phase 0 形状已修正，待切 worktree 后启动 T0.0b
+recommended_next_child: T0.2-run
+latest_stop_point: threading chunk build 转绿 1/1 passed（三层缺陷已修）；T0.2 尚差「运行 + fact 比对」
 ```
 
 ## 最近摘要
@@ -42,7 +42,280 @@ Phase 0 拆 4 个 T0.x + 检查点。
 
 ## 下一步
 
-**立即切 worktree**（`EnterWorktree(name=threading-phase0)`），随后启动 **T0.0b**。
+**✅ 阻塞已解除**：threading chunk **`1/1 passed`**（724 subjects → entry.exe，509s）。
+三层缺陷全部定位并修复，详见下节。
+
+---
+
+## ✅ T0.0b/T0.0c/T0.2 闭环（2026-09-13 实测）
+
+**起点**：`0/1 passed`（550s），9× C3861 + 2× C3313/C3536。
+**终局**：`1/1 passed`（534s），零 error。中间经历了**三个独立缺陷**，
+且前两个被第三个掩盖 —— 每修好一层才暴露出下一层。
+
+### 缺陷 1 — C3861：缺 codegen 可见声明（T0.0b）
+
+`chaos_cancellation_token_*` 定义与 ShapeRegistry 注册都在，唯独缺 header 声明。
+修：新建 `runtime_stubs/cancellation_token_stubs.h`（8 个 `extern "C"` 声明）+
+在 `stubs.h` 中引入。**注意**该头拉入 `<chaos/native_types.h>` → `<chaos/config.h>`
+→ 全部 C++ std 头，**必须放在 `extern "C"` 块之外**（同 `threading_stubs.h` 的
+MSVC C2039 `::terminate` 约束）。
+
+### 缺陷 2 — C3313/C3536：void helper 破坏 INTPTR 分派（T0.0c）
+
+真因**不是** ABI slot，而是 **C++ 声明**。生成的 shape 分派
+（`runtime_helper_shapes.h`）对**每个** helper 都包一层
+`reinterpret_cast<CHAOS_IL2CPP_INTPTR>(sym(args...))`，调用点再加
+`const auto chaos_result = ...`。两步都要求 helper 是**值**，void 都不行。
+改 slot 只能修正 wrapper 的**类型**，改不了 callee 的**声明** —— 这正是
+`7f17415cd` 只改 slot 却无效的原因。
+
+修（`a2b06d690`）：三个 void helper 全部改为返回 `CHAOS_IL2CPP_INTPTR`(0)：
+`ChaosAsyncTaskAwaiterGetResultVoid`、`chaos_async_yield_get_result`
+（含 TPG fallback `CppProjectEmitter.cs:308`）、
+`ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject`。
+**取证手段**：把分派头里 290 个被 `reinterpret_cast<INTPTR>` 包裹的符号
+与 `src/native/**` 的声明逐一交叉比对 ⇒ 恰好 3 个 void，全修。
+
+### 缺陷 3 — LNK2019：header 的 `extern "C"` 块提前收口（b96856e01）
+
+编译全绿后进入链接，只剩 2 个未解析：
+`chaos_thread_yield`（Thread.Yield）/ `chaos_thread_sleep`（Thread.Sleep）。
+
+**真因**：`threading_stubs.cpp` 用**文件级** `extern "C" {` ⇒ 全部定义 C linkage
+（lib 里导出**未修饰名**，dumpbin 实证）；而 `threading_stubs.h` 的块**只包了
+`chaos_monitor_enter`/`chaos_monitor_exit` 两个函数**就收口，后面的声明落到
+**C++ linkage** ⇒ 声明与定义命名成两个不同符号（`?chaos_thread_yield@@YAHXZ`
+vs `chaos_thread_yield`）。
+
+**判别信号**：同一 obj 里的 `chaos_monitor_enter` 链接正常、`chaos_thread_yield`
+却报未解析 —— 这个**不对称**直接指向「块的覆盖范围」。
+修：延展 header 的块覆盖全部导出声明，文件尾收口；
+`chaos_thread_get_current` 保留在块外（故意的 inline C++）。
+
+### T0.3 假绿门禁：**通过**（独立取证）
+
+- `CODGEN-FAIL` 行：**0 次**
+- `kCodegenFailureCount` 符号：chunk 产物中**不存在**（设计上仅 `>0` 时 emit）
+⇒ **零 codegen 降级**，本次 `1/1` 是真实翻译成功，非 `BuildMethodSourceSafe` 兜底。
+
+### T0.2 运行 + fact 比对（2026-09-13 完成）—— **跑出真缺陷，结论不是「绿」**
+
+补上了此前欠的「运行 entry.exe + fact 比对」一步。两个 chunk 均 `--stages build,fact`：
+
+| chunk | build | fact 判定 | realVerified |
+|---|---|---|---|
+| `threading` | `1/1 passed`（489s） | `1/2 passed`（**failed**） | 136/136 |
+| `threading-2` | `1/1 passed`（557s） | 未跑（时间预算内先定位缺陷 1） | — |
+
+**`519/523 passed` 不是真实通过率**，必须按 `fact.json` 分字段读：
+
+| 字段 | 值 | 含义 |
+|---|---|---|
+| `total`/`passed` | 523 / 520 | 原始记录（口径混用，见缺陷 2） |
+| `gateTotal`/`gatePassed` | 519 / 520 | 门禁分子分母 —— **`gatePassed > gateTotal` 是计数 bug** |
+| `realTotal`/`realPassed` | 136 / 136 | **真实语义断言，全通过** |
+| `unverifiedSmoke` | 383 | 仅 42 哨兵、无真断言 |
+| `unverifiedMarkers` | 321 | 编译期 `[UNVERIFIED]` 标记 |
+| `factoryGap` | 4 | factory 返 null，方法**根本没跑** |
+
+#### 🔴 缺陷 1（真缺陷）：`SubjectInstanceFactory.Create<T>()` 降级 → 主体未被构造
+
+> **⚠️ 本节结论已于 2026-09-13 被自身取证推翻并重写。**
+> 曾一度记为「`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆」，**该结论是错的**：
+> 4 个 `factoryGap` 中有 3 个（`Cancel_0__0` / `CancelAsync_2__0` / `Dispose_6__0`）
+> 在 **AOT 与 JIT 下同为 `factoryGap`**，语义上根本不是 AOT 缺陷，且它们的生成体
+> **不含任何 awaiter helper 调用** —— helper 不可能是其原因。
+> 只有 `DisposeAsync_1__0` 是真 cross-tech diff。**推翻过程**见下方「取证更正」。
+
+**症状**：cross-tech diff 恰 1 条 ——
+`CancellationTokenRegistrationTests::DisposeAsync_1__0` `AOT=factoryGap / JIT=real+PASS`。
+
+**取证链（逐层，全部实测）**：
+
+| 步 | 手段 | 事实 |
+|---|---|---|
+| 1 | fact 记录 | AOT 侧 `resultKind: factoryGap`、`assertFailed: false` —— **不是断言失败** |
+| 2 | 插桩 `runtime-entry.cpp` 的 `__except` 过滤器 | `code=0xE0000001`（`kChaosManagedExceptionCode`）、**`exobj=nullptr`** |
+| 3 | 反查 raise 源 | `exception_helpers.cpp:163` — `ResolveTypeByName` 返 0 ⇒ `chaos_raise_exception(0)`（**null payload**） |
+| 4 | 看生成体 `native-aot.generated.page2.cpp:3517` | `Create<CancellationTokenRegistration>()` 走 `chaos_external_runtime_..._Create_...` |
+| 5 | 看该符号定义 `native-aot.generated.cpp:8283` | 体是 `ChaosExternalRuntimeFallback(...)` ⇒ **恒返 0（null）** |
+| 6 | 看 null 的消费方式 | 返回值 store 进 `chaos_locals[0]`，**重新加载后带 null-guard** ⇒ guard 抛 NRE ⇒ 主体从未构造、方法从未运行 |
+
+**根因**：`Chaos.TestFramework.SubjectInstanceFactory.Create<T>()` 的泛型实例化在
+chunk 内**没有 native 实现**，被降级为 `ChaosExternalRuntimeFallback`（返 0）。
+`Create<CancellationTokenRegistration>()` 因而恒返 null。
+
+**关键对照（为何只有它是 diff）**：同样走 fallback 的 `Cancel_0__0`，
+其 `Create<CancellationTokenSource>()` **也**返 null，但生成体把它**直接**传给
+`chaos_cancellation_token_source_cancel(_s2)` —— **没有 null-guard**，null 从未被
+消费，故 AOT 照样 `passed:true`。`DisposeAsync_1__0` 的差别**不在 awaiter helper**，
+而在返回值经过「store → reload → null-guard」这条路径。**判别信号是 null 是否被消费。**
+⇒ 这是 **roadmap Phase 2 预判的「缺 ABI 出口层」**的一个实例，**不是** Phase 1 语义缺陷。
+
+**处置**：归入 Phase 2（T2.x 句柄映射 + ABI 出口层）覆盖，**不在 Phase 1 修**。
+`ChaosAsyncTaskAwaiterGetResultVoid` 本身**无缺陷**，不改。
+
+**取证更正（复盘）**：初版把「插桩看到 `canceled=107`」当作根因证据，
+但那**只证明读到了栈垃圾，不证明读到垃圾就是失败原因** —— 缺陷 1 的真正判别是
+「被测方法是否运行过」，而非「某个 helper 里读到了什么」。教训：
+**插桩观测到异常值 ≠ 该值是因果链上的原因**；先做分母审计（4 个 factoryGap
+对照 AOT/JIT），再谈单点根因。
+
+#### 🔴 缺陷 2（假绿向量）：`fact_chunk.py` 分子分母跨技术混用
+
+`fact_chunk.py:310-318` 在 JIT 通过率 > AOT 时把 **`passed`/`total` 整体替换为 JIT 的数**；
+而 `:441` 的 `gate_denominator = total - factory_gap_ct` 里，
+`factory_gap_ct` **永远来自 AOT 记录**（`:431` 遍历 `per_method["aot"]`）。
+
+⇒ **分子可能取自 JIT、分母取自 AOT**，两个不同总体相减。
+现场症状：`gatePassed=520 > gateTotal=519`。
+
+**影响**：门禁在「AOT 差、JIT 好」时**系统性偏乐观** —— 恰好掩盖了缺陷 1 那类
+「AOT 独有失败」。这条与 T0.1（源树残留）、T0.3（codegen 降级）构成**第三条独立假绿通路**。
+**处置**：Phase 0 内修（属「堵假绿向量」），见 T0.5。
+
+---
+
+## ✅ T0.4 完成（2026-09-13）—— 244 用例首次真正跑起来，并跑出 7 个失败
+
+### 决定性发现：**Windows 下 ctest 一个测试都没跑过**
+
+`chaos_native_add_test()`（`cmake/chaos_native_test.cmake:172`）每个测试都以
+`add_test(NAME ...)` 收尾。**`add_test()` 在未调用 `enable_testing()` 时是空操作** ——
+而全仓 `enable_testing()` **只出现在 `cmake/arm64-jit-test.cmake` 的 `if(QEMU_AARCH64)` 内**
+（`CMakeLists.txt` 仅在 ARM64 分支 578/799 行调用）。
+
+⇒ **x64 路径下所有 native 测试的 `add_test` 全部落入虚空**：
+
+```
+$ ctest --test-dir artifacts/presets/windows-x64-reference -C Debug -N
+Total Tests: 0
+$ ctest ... -LE "benchmark|stress|soak" --output-on-failure
+No tests were found!!!
+EXIT CODE: 0        ← 零测试却退出码 0
+```
+
+**影响面远超 threading**：`tests/suite_contract.yaml` 的 `contracts-native` 组
+（注释自称「runs the CTest targets under contracts/native + tests/unit/runtime-native
+（unit/deterministic only … ~200 deterministic native tests）」）**从未真正执行过任何用例**。
+这是与 T0.1（源树残留）、T0.3（codegen 降级信号零消费者）、T0.5（分子分母跨技术混用）
+**同族的第四条假绿通路** —— 且是最大的一条：不是「读错了源」，而是**根本没读**。
+
+**诚实标注**：`test_driver.py` 的 `ran_ok = res.error is None and res.total > 0`
+配合 `native.py:116` 的 `if res.total == 0: res.error = ...` **确实会**把零测试判为
+失败并让 driver 退出 1。所以**不是**「CI 一直绿着骗人」；准确的说法是：
+**该用例集从未被这个门禁执行过**（gate 在"发现 0 个测试"这一态上是诚实的），
+而 `contracts-native` 组所声明的覆盖范围与实际执行范围存在**巨大缺口**。
+
+**修复**：`CMakeLists.txt` 的 `windows-x64-reference` 分支中、
+`include(cmake/chaos_native_test.cmake)` 之后加 `enable_testing()`。
+修复后 `ctest -N` 由 **0 → 300**。
+
+### 顺带修复：三个「僵尸测试文件」
+
+28 个 threading test 文件中，**3 个从未被任何 CMakeLists 引用**（全仓 grep 零命中），
+即从未编译、从未运行：
+
+| 文件 | 用例 | 处置 |
+|---|---|---|
+| `monitor_pulseall_stress_test.cpp` | 1 | ✅ **已注册并验证通过**（0.81s PASS） |
+| `hill_climbing_smoke_test.cpp` | 15 | ❌ **未注册**：访问 `HillClimbingController::cpu_count_` / `::SigmoidGain`，二者现已 **private**（C2248） |
+| `threadpool_events_smoke_test.cpp` | 10 | ❌ **未注册**：调用 `ThreadPoolEventEmitThreadCreate/Attach/Detach/SafepointBegin/SafepointEnd/MonitorContention`，**全部已不存在**（C2039/C3861） |
+
+后两个是**腐烂测试**（rotted），不是被隐藏的覆盖 —— 它们针对的 API 已经改名或移除。
+**注册只会让构建变红而不增加任何覆盖**，故显式排除并在 CMakeLists 内注明原因。
+复活它们需**按现行 API 重写**，属独立任务。
+
+另外 `async_when_each_test.cpp` 有一个可推导类型 bug（`auto* t` 遍历
+`std::vector<CHAOS_IL2CPP_INTPTR>`，`__int64` 无法推导为指针，C3535/C2440）——
+一并修复。
+
+### 首次真实基线：**20/27 通过，7 失败**
+
+| 用例 | 结果 | 耗时 | 判定 |
+|---|---|---|---|
+| `test_threading_benchmark` | **SEGFAULT** | — | 真缺陷 |
+| `test_async_when_async` | **SEGFAULT** | — | 真缺陷 |
+| `test_async_continue_with` | Failed | — | 真缺陷（`ContinuationTaskCarriesTheContinuationsReturnValue`，SEH 0xC0000005） |
+| `test_async_when_each` | Failed | 26s | 真缺陷（`NullElementStillTerminatesTheStream` 挂起 23s） |
+| `test_queue_backpressure` | **SEGFAULT** | — | 真缺陷 |
+| `test_threading_stress` | **Timeout** | 1800s | 需判定：真死锁 or 超时阈值过紧 |
+| `test_phase3_industrialization` | **SEGFAULT** | — | 真缺陷 |
+
+**关键结论**：这 7 个失败**此前从未被任何人看到过** —— 因为这套用例从未运行。
+threading 的「生产级就绪」比 roadmap 撰写时的估计**更差**：
+不只是「无 CI 门禁」，而是**有 5 个真实的崩溃/挂起缺陷一直躺在树里**。
+
+**处置**：T0.4 交付 workflow 并按 roadmap 原定 `continue-on-error` 收基线
+（`enforce_gate` 默认 false）。这 7 个失败登记为 **T1.7**，在 Phase 1 处理 ——
+它们正是 Phase 1「关闭语义造假」要面对的东西，且**优先级高于**原 T1.1-T1.5
+（崩溃 > 静默错误结果 > 语义缺失）。
+
+### 交付物
+
+- `.github/workflows/threading-native-tests.yml`（独立 workflow，不进 ci-framework）
+  - 含**显式的发现数断言**：ctest 发现 0 个 threading 测试即 `exit 1`
+    —— 直接堵住本节发现的那条假绿通路
+  - `-LE "benchmark|soak"` 排除长跑测量层，**保留 `stress`**（并发缺陷就在那里）
+  - `enforce_gate` 默认 `false` 收集基线，可切换为阻断
+
+---
+
+## 🔴 worktree 构建隔离缺失（2026-09-13 实测，阻断级）—— **已修（a8e807696）**
+
+**T0.0b + T0.0c 的修复已提交（`7f17415cd`），但重跑 `--stages build` 仍 `0/1`，
+错误逐条未变。根因不是修复无效，而是 worktree 的改动对构建完全不可见。**
+
+### 证据链（逐层实测）
+
+| 环节 | 事实 | 证据 |
+|---|---|---|
+| native include 路径 | 指向 **主检出**，非 worktree | `chaos_entry.vcxproj:89` 的 `AdditionalIncludeDirectories` 首项 = `D:\agent\chaos-il2cpp\src\native\runtime-core` |
+| 主检出有无我的头 | **无** | `ls /d/agent/chaos-il2cpp/src/native/runtime-core/runtime_stubs/cancellation_token_stubs.h` → 不存在 |
+| 全仓声明位置 | 只在 `.cpp` 里 | `grep -rln chaos_cancellation_token_source_cancel src/native/` → 仅 `cancellation_token.cpp` |
+| codegen 工具根 | 解析到**主检出** | `tool_helpers._repo_root()` 从 `tool_helpers.py` 自身位置上溯；该文件在 `tests/e2e/verification/_pipeline/`，即主树 ⇒ 返回 `D:\agent\chaos-il2cpp` |
+| 工具新鲜度判定 | 比的是**主树的 Generator 源码**，故判「已是最新」而跳过重建 | `ensure_tool_built` → `_referenced_projects` → `_project_sources` 全部经 `_tool_dir()`（主树）解析 |
+| 后果 | TPG 跑的是 **15:26 的旧 Generator.dll**，不含 14:59 的 C# 修复 | TPG bin 内 DLL mtime `15:26:57` vs 我的 .cs mtime `14:59:53` |
+
+**关键句**：`_repo_root()` 的注释写着「Walks up so it is robust to where the
+_pipeline package is relocated」——它锚定的是**代码所在的那棵树**，而 worktree 里的
+`tests/e2e/verification/` 是主树的一份副本，但**工具本体、include 路径、构建产物全在主树**。
+
+### 结论
+
+**worktree 隔离在此仓库对「验证管线驱动的构建」不成立。**
+`EnterWorktree` 隔离了 git 工作区，但**没有隔离**：
+
+1. native 编译期 include 路径（硬编码主检出绝对路径）
+2. codegen 工具链（TPG/Generator DLL 及其新鲜度判定）
+3. `artifacts/` 产物根（本来就按主树解析）
+
+⇒ 在 worktree 里改 native 头/Generator 源码，**构建不会看到**，
+且**不会报错**——只会继续用主树的旧代码，症状与「修复无效」完全一致。
+这是一个**新的假绿/假红向量**：改动看似落地、构建照常输出、结果与改动无关。
+
+### 处置（✅ 已采纳方案 A，`a8e807696`）
+
+| 方案 | 内容 | 结论 |
+|---|---|---|
+| **A. 修复 worktree 的根解析**（✅ 已实施） | `tool_helpers._worktree_root()` + TPG `TryDetectWorktreeRoot()`，以「`.git` 是文件且首行 `gitdir:`」识别 linked worktree | 已修；**code 根锚 worktree，data 根锚主树** |
+| B. 放弃 worktree，回主工作区开发 | — | 未采纳 |
+| C. worktree 只写代码，构建在主树跑 | — | 未采纳 |
+
+**⚠️ 实施中发现的约束（务必遵守）**：修根解析后必须**区分 code 根与 data 根**：
+
+| 根 | 应锚 | 理由 |
+|---|---|---|
+| `_repo_root()` / `_tool_dir()` | **worktree** | 代码：Generator / TPG / native 头 |
+| `build_root()`（`_path.py`） | **worktree** | 产物，天然隔离 |
+| `foundation_root()` | **主检出** | 数据：`tests/e2e/translation/` 是 gitignored 输入树，只在主检出被填充 |
+
+把 `CHAOS_FOUNDATION_DLL` 指向 worktree 的同名路径会立刻
+`namespace-partition.json not found` —— 那是**数据根指错**，不是修复失败。
+**正确调用**：`CHAOS_FOUNDATION_DLL=<主检出>/tests/e2e/translation`，其余自动锚 worktree。
+
+---
 
 ## 问题来源
 
@@ -280,6 +553,67 @@ P2（架构完美）体现为阶段门禁不放松；P3（HotUpdate）无冲突�
 - `chaos_continuation` 回归测试仍未落地（`bb9a02fd0` 无测试守护）
 - `pcdistpatch-cond-exit-target-dropped` 未修
 - 其余 32 个陈旧 chunk 重建（属 `chaos-continuation-scope` 任务）
+
+---
+
+## Phase 2 / Phase 3 执行记录（2026-09-14 增补）
+
+### Phase 2 — codegen ABI 接线（T2.0-T2.5）
+
+| task | 结果 | commit | 说明 |
+|---|---|---|---|
+| T2.0 | ✅ | `f55fddfa1` | 39 个 `extern "C"` ABI 出口 + 链接期验证 |
+| T2.1 | ✅ | `a0b46d5d3` | 句柄存托管对象**字段**（非映射表）；GC 压缩式回收下唯一正确解 |
+| T2.2 | ✅ | `aabcf8887` | ReaderWriterLockSlim 托管面（15 入口 / 8 测试 / mutation 验证） |
+| T2.3 | ⛔ **blocked** | — | Barrier + CountdownEvent 在该 chunk **零 subject**，无对象可接线 |
+| T2.4 | ✅ | `b922c97e5` | ManualResetEventSlim（8 注册 / 8 测试） |
+| T2.5 | ✅ | `33c355ef0` | SpinLock（byref 写回）+ SpinWait + ThreadPool 可调用面 |
+
+**T2.3 的处置不是失败而是范围修正**：`grep -c` 证实 chunk 的
+`CombinedSubjects.cs` / `native-aot.generated.cpp` 中 Barrier 与 CountdownEvent
+均无 subject，连 fallback 符号都不存在。注册代码写了也不会有 subject 匹配它。
+**待 ATG 侧产出这些 subject 后再补**，当前不占用 Phase 2 工时，也不记为已完成。
+
+**T2.2/T2.4/T2.5 的验收口径已修正**（详见 roadmap 的
+`### ⚠️ T2.2/T2.3 的验收口径需修正` 与 `### 🔴 比上面更深一层` 两节）：
+
+- ❌ 不用 `real%` 判注册是否生效 —— 该 chunk `SemaphoreSlim` 的 real 用例数为 **0**；
+- ❌ 更不用 `passed: true` —— 实测 656 条 `real` 中 **645 条 `value == 0`**，
+  与「抛异常被 `catch (const chaos_managed_exception&) { return {}; }` 吞掉」
+  在 fact 记录里**不可区分**；
+- ✅ 唯一可信证据是 native 层**可证伪的行为测试** + 生成产物里 fallback 体 → `Chaos*` 直调。
+
+**独立于本 roadmap 的缺陷**：harness 应在异常路径上把 subject 标为
+`assertFailed` 而非静默 `return {}`。这是跨域指标缺陷，已记入 memory
+`fact-real-kind-does-not-detect-thrown-exception`，**建议单开 issue**。
+
+### Phase 3 — 加固（T3.1-T3.3）
+
+| task | 结果 | commit | 说明 |
+|---|---|---|---|
+| T3.1 | ✅ | `cec2e0973` | 非原子 static 桥变量 → `std::atomic` + `AllocId` |
+| T3.2 | ✅ | `dfc380d5f` | 句柄表槽位回收 + 并发 claim（**修出第二个缺陷**） |
+| T3.3 | ✅ | `cec2e0973` | 热路径 `fprintf` → 分级 log 宏（`delegate_helpers.cpp` 7 处） |
+| T3.4 | 本文档 | — | 文档与实现对齐 |
+| T3.5 | ⏳ | — | benchmark 填充（未验证是否仍为空模板） |
+
+**T3.1 范围修正**：design 称「8 处」。实测受影响的只有
+`synchronization.cpp` 的 4 个 id 计数器加 `wait_handle.cpp` 的 1 个；
+`cancellation_token.cpp`(×2) 与 `timer_queue.cpp`(×1) 的同名计数器**已有锁保护**，
+不是缺陷。原「8 处」把受保护与不受保护的混为一谈。
+
+**T3.2 在修 (a) 时暴露出 (b)**，两者独立：
+
+- (a) `Destroy` 只设 `active=false` 不清 `id` ⇒ 槽位对分配器永久不可见，
+  1023 次**生命周期内**创建即表满（即使从不重叠存活）；
+- (b) 修完 (a) 后并发测试立刻报 **90 次**失败：多个线程同时看到 `id == 0`，
+  都 claim 同一槽位 ⇒ 两个对象共用一槽。改用 `compare_exchange_strong` 原子 claim。
+
+隔离验证：并发用例修前**每次**失败、修后**连跑 5 次**全绿。
+
+### 已关闭
+
+`test_parallel_for` 失败（`mutex destroyed while busy`）：**已于 2026-09-14 取证并修复**（commit `c0670a6c1`）。根因是测试中 `std::lock_guard<std::mutex>` 的作用域覆盖了整个剩余函数体，`delete mu` 时该 mutex 仍被本线程持有且曾被 worker 线程通过 `static` 指针访问过，MSVC STL Debug 断言检测到 owner thread id 仍被设置。修复后将断言放入独立作用域，使 `lock_guard` 在 `ThreadPoolShutdown` 前释放。**推翻此前「预存在失败、可能与线程池收尾同族」的推测**——真因是纯测试缺陷，与实现无关。
 
 ---
 

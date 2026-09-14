@@ -244,6 +244,61 @@ def _count_unverified_markers(ctx: ChunkContext) -> int:
         return 0
 
 
+_CODEGEN_FAILURE_RE = re.compile(
+    r'extern\s+"C"\s+const\s+int\s+kCodegenFailureCount\s*=\s*(\d+)\s*;')
+
+
+def _read_codegen_failure_count(ctx: ChunkContext) -> int:
+    """Read `kCodegenFailureCount` from the chunk's generated AOT source.
+
+    The generator emits ``extern "C" const int kCodegenFailureCount = N;``
+    (NativeAotLoweringPlanner.Methods.cs:1326) whenever it had to replace a
+    method body with a stub.  The symbol is a compile-time constant in the
+    generated TU, so the value is readable from source without building — and
+    reading source avoids racing a binary built from a different revision.
+
+    The declaration is emitted ONLY when the count is > 0, so an absent symbol
+    means zero failures (not "unknown").  We still return 0 rather than None in
+    that case so the caller's comparison is a plain int compare.
+
+    Returns the count, or 0 if the symbol/file is absent.
+    """
+    subjects_dir = ctx.chunk_dir / "native" / "subjects"
+    if not subjects_dir.is_dir():
+        return 0
+    total = 0
+    try:
+        # Match both native-aot.generated.cpp and generated.page2/3/...cpp
+        files = sorted(subjects_dir.glob("native-aot.generated*.cpp"))
+    except OSError:
+        return 0
+    for path in files:
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        match = _CODEGEN_FAILURE_RE.search(text)
+        if match:
+            total += int(match.group(1))
+    return total
+
+
+def _codegen_failure_tolerance(ctx: ChunkContext) -> int:
+    """Per-chunk tolerance for kCodegenFailureCount; default 0 (block on any).
+
+    Default 0 is deliberate: a silently stubbed method is a correctness hazard
+    (it returns a default where real behavior was expected), so the safe default
+    is to block.  A family that legitimately has unsupported methods raises this
+    in its chunk config explicitly — making the allowance a visible decision
+    rather than a weakened global threshold.
+    """
+    config = _load_chunk_config(ctx.chunk_dir)
+    value = config.get("codegenFailureTolerance")
+    if isinstance(value, bool):   # bool is an int subclass; reject explicitly
+        return 0
+    if isinstance(value, int) and value >= 0:
+        return value
+    return 0
 def _gen_method_ids(rec: dict) -> list[str]:
     """Extract the generatedMethodId(s) from a fact record.
 
@@ -460,6 +515,33 @@ def _write_fact_history(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         pass  # non-fatal
 
 
+def select_reference_counts(aot_result: dict,
+                            jit_result: dict | None) -> tuple[int, int, int, int]:
+    """Pick the (passed, total, jit_passed, jit_total) figure set for fact.json.
+
+    AOT is ALWAYS the reference population.  Every bucket in the aggregate
+    (real / unassertable / smoke / factoryGap / failed) is computed from the AOT
+    annotated records, so ``passed``/``total`` must come from the same run or the
+    numerator and denominator describe two different executions.
+
+    This deliberately does NOT swap in the JIT counts when the JIT pass-rate is
+    higher.  Doing so mixed a JIT numerator with an AOT-derived factory-gap
+    subtraction and produced the impossible ``gatePassed > gateTotal``
+    (observed 520 > 519 on the threading chunk).  It was also optimistic in
+    precisely the case that carries the most signal: AOT failing where JIT
+    passes, which is a real AOT lowering defect and the thing this stage exists
+    to surface.
+
+    JIT numbers are returned alongside rather than discarded, so callers can
+    report them separately (the cross-tech diff is the actionable form).
+    """
+    passed = aot_result.get("passed", 0) or 0
+    total = aot_result.get("total", 0) or 0
+    jit_passed = (jit_result.get("passed", 0) or 0) if jit_result else 0
+    jit_total = (jit_result.get("total", 0) or 0) if jit_result else 0
+    return passed, total, jit_passed, jit_total
+
+
 def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | None,
                         meta_total: int | None, fact_method_count: int | None,
                         value_warnings: int, unverified_smoke: int = 0) -> None:
@@ -475,16 +557,10 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     chunk_results_dir = ctx.chunk_dir / "results"
     chunk_results_dir.mkdir(parents=True, exist_ok=True)
     fact_path = chunk_results_dir / "fact.json"
-    passed = aot_result.get("passed", 0)
-    total = aot_result.get("total", 0)
-    if jit_result and jit_result.get("total", 0) > 0:
-        aot_rate = passed / total if total > 0 else 0.0
-        jit_passed = jit_result.get("passed", 0)
-        jit_total = jit_result.get("total", 0)
-        jit_rate = jit_passed / jit_total if jit_total > 0 else 0.0
-        if jit_rate > aot_rate:
-            passed = jit_passed
-            total = jit_total
+    # ── Reference population for every aggregate below is AOT ──────────────
+    # See select_reference_counts() for why the JIT counts are NOT substituted
+    # in.  They are carried through for separate reporting only.
+    passed, total, jit_passed, jit_total = select_reference_counts(aot_result, jit_result)
 
     # ── Build the per-method annotated records FIRST (source of truth) ──
     # Each record is stamped with bodyAvailability + returnType + resultKind by
@@ -689,6 +765,12 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         # ── Gate numerator/denominator (factoryGap + stubGap excluded) ──
         "gateTotal": gate_denominator,
         "gatePassed": passed,
+        # ── JIT run (SEPARATE population — never mixed into the fields above) ──
+        # Reported so a JIT-better-than-AOT gap is visible instead of being
+        # silently folded into the AOT headline.  The cross-tech diff below is
+        # the actionable form of this signal.
+        "jitPassed": jit_passed,
+        "jitTotal": jit_total,
         # ── Legacy fields (backward compat; now runtime-based, not marker-based) ──
         "realTotal": real_signal,
         "realPassed": real_ct,
@@ -869,6 +951,38 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     if unverified_smoke > 0:
         print(f"  [fact] {unverified_smoke} subject(s) marked [UNVERIFIED] "
               f"(smoke-only — AOT stub cannot replicate managed exception)")
+
+    # ── T4.1: kCodegenFailureCount gate ──────────────────────────────────
+    #
+    # The generator emits `extern "C" const int kCodegenFailureCount = N;` into
+    # the chunk's generated TU whenever it silently replaced a method body with a
+    # stub (NativeAotLoweringPlanner.Methods.cs:1322-1327).  Until now NOTHING
+    # read it: a chunk could degrade N methods to stubs and still report a clean
+    # build+fact.  That is a silent-correctness通路 — the stub returns a default
+    # and the surrounding test may still "pass".
+    #
+    # Read it from the GENERATED SOURCE (not from the binary): the symbol is a
+    # compile-time constant in the emitted C++, so its value is available before
+    # the build succeeds, and reading the source avoids depending on a binary
+    # that may have been built from a different revision.
+    #
+    # Threshold semantics: a nonzero count is REPORTED always; it BLOCKS only
+    # above a configured tolerance, because some families legitimately have a
+    # small number of unsupported methods.  The tolerance is per-chunk so a
+    # family can raise it deliberately rather than by weakening the check
+    # globally.
+    codegen_failures = _read_codegen_failure_count(ctx)
+    codegen_tolerance = _codegen_failure_tolerance(ctx)
+    if codegen_failures > 0:
+        msg = (f"codegen: kCodegenFailureCount={codegen_failures} "
+               f"(tolerance {codegen_tolerance}) — {codegen_failures} method(s) "
+               f"silently replaced with stubs")
+        print(f"  [fact] WARNING: {msg}")
+        if codegen_failures > codegen_tolerance:
+            errors.append(msg)
+            print(f"  [fact] ERROR: codegen failure count exceeds tolerance — blocking")
+            if status == "passed":
+                status = "failed"
 
     # Summary. The `X/Y passed` headline must not be taken as "X/Y semantic
     # verifications" when part of the tail is smoke-only: an [UNVERIFIED] stub

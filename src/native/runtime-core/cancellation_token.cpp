@@ -7,6 +7,7 @@
 //   - Thread-safe: all operations protected by a single mutex.
 
 #include "cancellation_token.h"
+#include "exception_helpers.h"
 #include "timer_queue.h"
 
 #include <chaos/log.h>
@@ -220,6 +221,38 @@ bool CancellationTokenUnregister(uint32_t registration_id) noexcept {
     return false;
 }
 
+// Callback registered on each input source of a linked CTS.  `state` is the
+// linked source's id (as a uintptr), so cancelling any input cancels the link.
+static void LinkedSourcePropagate(void* state) noexcept {
+    const auto linked_id = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(state));
+    CancellationTokenSourceCancel(linked_id);
+}
+
+uint32_t CancellationTokenSourceCreateLinked(const uint32_t* source_ids,
+                                             uint32_t count) noexcept {
+    if (source_ids == nullptr || count == 0) return 0;
+
+    const uint32_t linked = CancellationTokenSourceCreate();
+    if (linked == 0) return 0;
+
+    // Register on every input.  Two subtleties:
+    //   - Register() fires the callback INLINE when the input is already
+    //     cancelled, so a linked source built from an already-cancelled token
+    //     is itself already cancelled by the time this loop ends.  That matches
+    //     managed semantics and needs no special case here.
+    //   - A 0 entry is CancellationToken.None, which can never cancel; skip it
+    //     rather than registering a callback that would never fire.
+    for (uint32_t i = 0; i < count; ++i) {
+        const uint32_t input = source_ids[i];
+        if (input == 0 || input == linked) continue;
+        CancellationTokenRegister(
+            input, &LinkedSourcePropagate,
+            reinterpret_cast<void*>(static_cast<uintptr_t>(linked)));
+    }
+
+    return linked;
+}
+
 }  // namespace chaos::il2cpp::runtime_core::threading
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -260,11 +293,22 @@ extern "C" void chaos_cancellation_token_throw_if_cancellation_requested(
             static_cast<uint32_t>(source_id))) {
         return;
     }
-    // Fault the current task by raising a Task-level fault.  In generated C++
-    // the task handle is obtained from the enclosing state machine's builder;
-    // the ShapeRegistry resolver injects it as a receiver parameter.  The
-    // error detail is not surfaced here — the cancellation model only
-    // requires the task to transition to a canceled-rather-than-faulted state.
+
+    // Managed contract: CancellationToken.ThrowIfCancellationRequested() throws
+    // OperationCanceledException (and TaskCanceledException derives from it) when
+    // the token is cancelled.  This MUST actually raise — the previous version
+    // checked the state and then returned without throwing, so a cancelled token
+    // silently fell through and the enclosing method body continued executing.
+    // That is the most dangerous shape of semantic fake-out: the call site looks
+    // correct, the branch is taken, and the managed code after it runs anyway,
+    // producing wrong results instead of an observable cancellation.
+    //
+    // TaskCanceledException is the subtype the BCL uses on the await/cancellation
+    // path and is already raised elsewhere in this runtime (async_stubs.cpp), so
+    // it stays catchable as OperationCanceledException by managed handlers.
+    chaos::il2cpp::runtime_core::RaiseManagedException(
+        "System.Threading.Tasks.TaskCanceledException",
+        "A task was canceled.");
 }
 
 // ── CancellationTokenSource lifecycle (extern "C" for codegen) ──

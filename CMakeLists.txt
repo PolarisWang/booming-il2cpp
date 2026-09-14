@@ -69,6 +69,23 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     include(cmake/chaos_native_test.cmake)
     find_package(Python3 QUIET)
 
+    # ── CTest registration (REQUIRED) ────────────────────────────────────
+    # chaos_native_add_test() below ends in add_test(NAME ...).  add_test() is a
+    # NO-OP unless enable_testing() has been called in this directory or an
+    # ancestor, so without this call every Windows native test is registered
+    # into nothing: the targets still BUILD, but `ctest` reports
+    #   Total Tests: 0  /  "No tests were found!!!"
+    # and exits 0.  The build stays green and not a single assertion runs.
+    #
+    # This is the same false-green class as the reporting.py source-tree read
+    # (T0.1) and the unconsumed kCodegenFailureCount signal (T0.3): the artifact
+    # that should carry the signal exists, but nothing downstream receives it.
+    # The only other enable_testing() in the tree is under if(QEMU_AARCH64) in
+    # cmake/arm64-jit-test.cmake, so ARM64 ran its tests while x64 ran none.
+    #
+    # Must precede the add_subdirectory() test blocks below.
+    enable_testing()
+
     # ── GoogleTest ────────────────────────────────────────────────────────
     # Every chaos_native_add_test() target links gtest_main/gtest, so googletest
     # must be provisioned here (before the native contracts / runtime-native

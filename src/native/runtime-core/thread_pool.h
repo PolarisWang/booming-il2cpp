@@ -188,6 +188,13 @@ int32_t ThreadPoolWorkerCount() noexcept;
 constexpr int32_t kThreadPoolMinWorkerCount = 1;
 constexpr int32_t kThreadPoolMaxWorkerCount = 32767;
 
+/// Upper bound on the number of victim queues a worker snapshots when
+/// attempting a steal.  The snapshot is a fixed-size stack array taken under
+/// s_mutex, so it must be bounded independently of the live worker count; a
+/// steal attempt is a heuristic, and sampling this many candidates is
+/// statistically indistinguishable from scanning all of them.
+constexpr int32_t kThreadPoolMaxStealVictims = 64;
+
 /// Maximum depth of the global work-item queue before backpressure kicks in.
 /// Prevents unbounded growth from producer threads outpacing workers.
 constexpr int32_t kThreadPoolMaxQueueDepth = 8192;

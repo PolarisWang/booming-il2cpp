@@ -70,10 +70,14 @@ CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR yield_
     return 1;  // Always complete — YieldAwaitable.IsCompleted returns true in tests.
 }
 
-void chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept
+CHAOS_IL2CPP_INTPTR chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept
 {
     (void)yield_awaiter;
-    // No-op: YieldAwaitable.GetResult() returns void.
+    // No-op: YieldAwaitable.GetResult() returns void in managed code.
+    // Returns 0 to satisfy the ABI — the shape dispatch wraps every helper in
+    // reinterpret_cast<CHAOS_IL2CPP_INTPTR>(...), which is ill-formed over a
+    // void expression (see the INTPTR note in async_stubs.h).
+    return 0;
 }
 
 // ── Phase 6 / E3: hot BCL no-ops ──
@@ -102,11 +106,14 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_value_task_awaiter_get_result_void(CHAOS_IL
 // ── TaskAwaiter.GetResult stub ─────────────────────────────────
 // Called from async state machine dispatch code.  The awaiter is a
 // managed TaskAwaiter object; this stub simply marks await as complete.
-void ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept
+CHAOS_IL2CPP_INTPTR ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept
 {
     (void)awaiter;
     // No-op: TaskAwaiter.GetResult() propagates exceptions for failed tasks.
     // For test pipeline, assume the task completed successfully.
+    // Returns 0 to satisfy the ABI (see the INTPTR note in async_stubs.h) —
+    // the managed member is void, so no caller can observe this value.
+    return 0;
 }
 
 // ── Task.Delay / Task.GetAwaiter / TaskAwaiter.get_IsCompleted (non-generic) ──
@@ -204,14 +211,21 @@ CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awai
     return task->result;
 }
 
-/// TaskAwaiter non-generic GetResult — void-returning, same fault propagation.
-/// TaskAwaiter non-generic GetResult — void-returning, same three-state
-/// fault/cancel propagation as the value-returning form.
-void ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept
+/// TaskAwaiter non-generic GetResult — same three-state fault/cancel
+/// propagation as the value-returning form.
+///
+/// Returns CHAOS_IL2CPP_INTPTR (always 0) rather than void purely to satisfy
+/// the generated code's ABI contract: runtime_helper_shapes.h forwards every
+/// helper through `reinterpret_cast<CHAOS_IL2CPP_INTPTR>(...)`, which is
+/// ill-formed for a void expression, and the call site adds a `const auto`
+/// binding that would deduce `const void`.  The managed member is void, so the
+/// value is unobservable; fault and cancellation are signalled by the
+/// RaiseManagedException calls below, not by the return value.
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept
 {
     using namespace chaos::il2cpp::common;
     using namespace chaos::il2cpp::runtime_core;
-    if (awaiter == 0) return;
+    if (awaiter == 0) return 0;
     auto* task = reinterpret_cast<AsyncTask*>(awaiter);
 
     if (task->canceled.load(std::memory_order_acquire))
@@ -229,6 +243,8 @@ void ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept
             "System.Exception",
             "A task faulted without an exception payload.");
     }
+
+    return 0;
 }
 
 /// True when the task is complete (success or fault) — the synchronous
@@ -928,15 +944,26 @@ CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
     st->antecedent = antecedent;
     st->continuation = continuation;
     st->continuation_task = async_task_create();
+    const CHAOS_IL2CPP_INTPTR continuation_task = st->continuation_task;
 
     // async_task_on_completed fires inline when the antecedent already
     // completed, and stores + delivers via finish_async_task otherwise — so
     // both completion orders are covered without a branch here.
-    if (async_task_on_completed(antecedent, ContinueWithDelivery, st) == 0) {
+    //
+    // The inline path runs ContinueWithDelivery to completion BEFORE this call
+    // returns, and that function ends in `delete st`.  So `st` is dangling from
+    // the moment async_task_on_completed returns on that path, and its fields
+    // must be read out beforehand: `return st->continuation_task` here would be
+    // a use-after-free returning freed-fill garbage (0xdddddddddddddddd under
+    // the debug heap), which is what made every caller of this function observe
+    // a non-null but wild handle.
+    const CHAOS_IL2CPP_INTPTR on_completed =
+        async_task_on_completed(antecedent, ContinueWithDelivery, st);
+    if (on_completed == 0) {
         delete st;
         return 0;
     }
-    return st->continuation_task;
+    return continuation_task;
 }
 
 // ══════════════════════════════════════════════════════════════════════════════

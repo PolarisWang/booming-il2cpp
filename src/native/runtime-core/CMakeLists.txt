@@ -70,6 +70,9 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/monitor_stubs.cpp
     runtime_stubs/mutex_stubs.cpp
     runtime_stubs/threadpool_events.cpp
+    runtime_stubs/synchronization_stubs.cpp
+    runtime_stubs/managed_handle_stubs.cpp
+    runtime_stubs/managed_primitive_entries.cpp
     runtime_stubs/convert_stubs.cpp
     runtime_stubs/interop_stubs.cpp
     runtime_stubs/unsafe_stubs.cpp
