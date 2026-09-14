@@ -31,6 +31,9 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterParameterInfogetParameterType(registry);
             RegisterFieldInfogetFieldType(registry);
             RegisterPropertyInfogetPropertyType(registry);
+            // Accessors with native implementations that were never registered —
+            // they were falling through to the catch-all fallback and returning 0.
+            RegisterUnregisteredReflectionAccessors(registry);
             RegisterTypegetFullName(registry);
             RegisterTypegetIsValueType(registry);
             RegisterRuntimeHelpersGetHashCode(registry);
