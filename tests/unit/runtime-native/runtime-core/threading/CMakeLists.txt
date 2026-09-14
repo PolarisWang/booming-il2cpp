@@ -45,6 +45,18 @@ chaos_native_add_test(test_synchronization_stubs
     LABELS "unit;threading"
 )
 
+# managed_handle_stubs_test — T2.1: the managed-instance ↔ native-slot binding.
+# The handle is stored in a fixed-offset field ON the managed object (the same
+# technique the registry uses for Nullable<T>::get_HasValue and the inline
+# List<T> view), so the properties under test are the offset being where it is
+# claimed to be, per-instance isolation, create-once, and clear-before-destroy.
+# Drives real SemaphoreSlim handles through the binding so a "stored the wrong
+# thing" implementation cannot pass by round-tripping a value with itself.
+chaos_native_add_test(test_managed_handle_stubs
+    managed_handle_stubs_test.cpp
+    LABELS "unit;threading"
+)
+
 # cancellation_token_test — T1.1/T1.2: ThrowIfCancellationRequested must actually
 # raise, get_token must not degrade to None, and linked sources must propagate.
 chaos_native_add_test(test_cancellation_token

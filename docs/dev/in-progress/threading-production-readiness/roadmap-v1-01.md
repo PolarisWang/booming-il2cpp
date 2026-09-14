@@ -144,8 +144,8 @@ P3（HotUpdate）无冲突：本路线图不触碰 hotupdate 路径。
 | `T1.4` | 1 | done | tbd | `Parallel` failed 接线 + 结果返回 + 异常传播 | T0.4 | batch-3 | 反例验证 | `parallel.cpp` + 测试 | 6 项测试全绿；**另有 cap 截断缺陷（本轮追补修复，见 T1.4 追补记录）** | `src/native/runtime-core/parallel.cpp` | 大 |
 | `T1.5` | 1 | done | tbd | `SynchronizationContext::Post` 真实入队 | T0.4 | batch-3 | 反例验证 | `synchronization_context.cpp` + 测试 | 同上 | `src/native/runtime-core/synchronization_context.cpp` | 中 |
 | `T1.6` | 1 | **completed（假说证伪）** | main | 🔴 ~~`ChaosAsyncTaskAwaiterGetResultVoid` 指针类型混淆~~ **→ 真因：`SubjectInstanceFactory.Create<T>()` 降级为 fallback（恒返 null）** | T0.5 | batch-3 | 取证结论：原「指针混淆」**被自身取证证伪** —— 4 个 factoryGap 中 3 个 AOT=JIT 同为 factoryGap 且生成体不含 awaiter 调用；唯一真 diff `DisposeAsync_1__0` 的判别信号是 **null 是否被消费**（`chaos_locals` store→reload→null-guard），非 helper 内部。helper 本身无缺陷，**不改代码** | 取证报告（STATUS 已重写） + Phase 2 覆盖项登记 | ✅ AOT/JIT 全量对照完成；结论已写入 STATUS「缺陷 1」 | `docs/dev/in-progress/threading-production-readiness/STATUS.md` | 中 |
-| `T2.0` | 2 | planned | tbd | 新建 `extern "C"` ABI 出口层（**前置，不可跳过**） | T1.* | batch-4 | 参照 `interlocked_stubs.h` / `threading_stubs.h` 既有模式 | `runtime_stubs/` 下新增头/实现 | ABI 符号可被 codegen 生成的 C++ 调用 | `src/native/runtime-core/runtime_stubs/` | 大 |
-| `T2.1` | 2 | planned | tbd | 托管对象 ↔ native 句柄映射机制（**新机制，无先例**） | T2.0 | batch-4 | 需处理生命周期与 GC 交互 | 映射机制实现 | 托管 `SemaphoreSlim` 实例可绑定 native 槽位 | `src/native/runtime-core/` | 大 |
+| `T2.0` | 2 | **done** | `f55fddfa1` | 新建 `extern "C"` ABI 出口层（**前置，不可跳过**） | T1.* | batch-4 | 参照 `interlocked_stubs.h` / `threading_stubs.h` 既有模式 | `runtime_stubs/synchronization_stubs.{h,cpp}`，39 导出 | ABI 符号可被 codegen 生成的 C++ 调用 ✅ 链接期验证 | `src/native/runtime-core/runtime_stubs/` | 中（低于预估） |
+| `T2.1` | 2 | **done** | （本 commit） | 托管对象 ↔ native 句柄映射机制（**不是新机制**：句柄存对象自身字段，见前提修正） | T2.0 | batch-4 | 需处理生命周期与 GC 交互 ✅ 已答（字段随对象 teardown） | `runtime_stubs/managed_handle_stubs.{h,cpp}`，4 导出 | 托管实例可绑定 native 槽位 ✅ 8/8 绿 + 反例 | `src/native/runtime-core/` | 中（低于预估） |
 | `T2.2` | 2 | planned | tbd | 注册 SemaphoreSlim + ReaderWriterLockSlim（含 upgradeable） | T2.1 | batch-5 | 最难；含 upgradeable 语义 | ShapeRegistry 注册 + 测试 | real% 提升；测试通过 | `.../RuntimeHelperShapeRegistry.CoreStubs.Part1.S16.cs` | 大 |
 | `T2.3` | 2 | planned | tbd | 注册 Barrier + CountdownEvent | T2.1 | batch-5 | — | 同上 | 同上 | 同上 | 中 |
 | `T2.4` | 2 | planned | tbd | 注册 ManualResetEvent(Slim) + AutoResetEvent + Timer | T2.1 | batch-6 | — | 同上 | 同上 | 同上 | 中 |
@@ -384,6 +384,153 @@ Roadmap 当初把 T2.2/T2.3/T2.4 标为「大/中」，但它们的 native 部�
 而 T2.1 要绑定的是**托管对象**——必须回答"托管对象被 GC 回收后，native 槽位由谁释放"。
 建议 T2.1 实现时以 `wait_handle.cpp` 的表为模板（它已处理 `active` 标志与并发查找），
 并把 GC 侧的生命周期问题**单独**作为设计点，而不是把"没有先例"当成整项的风险来源。
+
+---
+
+### ⚠️ T2.2/T2.3 的**验收口径**需修正：real% 不会因注册而提升（实测）
+
+**这一条也是实测推翻 roadmap 前提的**，且直接影响 Phase 2 的 exit_criteria
+（原文：「各原语注册后 **real% 显著提升**」）。
+
+**实测数据**（`artifacts/foundation-dll/System.Private.CoreLib/chunks/threading/results/fact-results.json`，
+`--stages build,fact` 产物，2026-09-13 跑出）：
+
+| 原语 | chunk 内 subject 数 | 按 `resultKind` 分布 |
+|------|------|------|
+| `SemaphoreSlim` | 24 | `smoke` 19 + `unassertable` 5 —— **`real` = 0** |
+| `ReaderWriterLockSlim` | 13 | `unassertable` 7 + `real` 6 |
+| `ManualResetEventSlim` | 8 | `unassertable` 4 + `real` 4 |
+| `ThreadPool` | 46 | `smoke` 34 + `real` 12 |
+| `Lock` | 25 | `real` 13 + `unassertable` 12 |
+
+**关键事实：`SemaphoreSlim` 根本没有 `real` (contract) 用例。** 那 6 个
+`ReaderWriterLockSlim` 的 `real`，`contractIndex` 全为 **-1**，方法名全是
+`TryEnter*Lock` —— 而 `TryEnter` 在**未争用**的锁上恒返 true，不触及任何 native 出口：
+
+```
+TryEnterReadLock_1_System_TimeSpan_0        contractIndex=-1  return=System.Boolean
+TryEnterReadLock_2_int_0                    contractIndex=-1  return=System.Boolean
+TryEnterWriteLock_4_System_TimeSpan_0       contractIndex=-1  return=System.Boolean
+TryEnterWriteLock_5_int_0                   contractIndex=-1  return=System.Boolean
+TryEnterUpgradeableReadLock_7_System_TimeSpan_0  contractIndex=-1  return=System.Boolean
+TryEnterUpgradeableReadLock_8_int_0         contractIndex=-1  return=System.Boolean
+```
+
+⇒ **即使把 SemaphoreSlim/RWLock 的 ABI 全部接上，`real%` 也不会动**：
+SemaphoreSlim 没有 real 用例可涨，RWLock 的 real 用例不是承重断言。
+
+**这与 Phase 2 的 `watch_items` 直接冲突**——原文写「注册后 real% 不升 → 存在第二道
+断点，**不得**直接加大注册量」。按实测，real% 不升的**已知原因**是
+**chunk 的 subject/contract 生成侧决定了有多少 real 用例**，而不是 ABI 断点。
+
+**修正后的验收口径**（T2.2-T2.5 用）：
+1. **主判据改为可证伪的行为测试**：新 ABI 符号经 native 测试覆盖（T2.0 已建立该模式），
+   断言的是**语义正确性**（如 `SemaphoreSlim.Wait` 真的阻塞、`Release` 真的唤醒），
+   而不是「注册条目数」或「real% 涨了多少」。
+2. **real% 仍观察，但降级为信号**：不升**不构成**「第二道断点」的证据，不得据此加大注册量，
+   也不得据此判 T2.2 失败。要判定 real% 该不该涨，先查该原语在 chunk 里有没有
+   `resultKind == "real"` 的 subject——**没有就别指望**。
+3. **注册条目的价值用别的证据承载**：注册后该原语的调用从
+   `ChaosExternalRuntimeFallback` 变成**真实 native 调用**，这可在生成产物里直接取证
+   （对比注册前后 `native-aot.generated.cpp` 中该 `System_Threading_*::` 符号是否从
+   fallback 体变为 `Chaos*` 直调）。
+
+> **沉淀**：`real%` 是**跨层**指标——它同时取决于 (a) 有没有 ABI 出口、(b) codegen 发不发
+> 真实调用、(c) **测试生成侧有没有为该类型产出承重断言**。Phase 2 只动前两项。
+> 把三者混在一个指标里判成败，会把「测试生成侧没覆盖」误判成「ABI 没接对」。
+
+---
+
+### T2.1 完成记录：句柄存在托管对象**自身的字段**里（`runtime_stubs/managed_handle_stubs.{h,cpp}`）
+
+**设计决定：不做"映射表"，做"字段"。**
+
+Roadmap 把它描述成「托管对象 ↔ native 句柄映射机制」，措辞暗示需要一张表。**不需要。**
+实测发现仓库里已有**四个**先例，其中 `synchronization_context.cpp` 是唯一针对
+"托管对象身份由 native 持有"的先例，而它根本不用表：
+
+```cpp
+// synchronization_context.cpp:125-146
+extern "C" CHAOS_IL2CPP_INTPTR chaos_synchronization_context_create() noexcept
+{ return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(SynchronizationContextCreate()); }
+extern "C" CHAOS_IL2CPP_INTPTR chaos_synchronization_context_get_current() noexcept
+{ return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(SynchronizationContextGetCurrent()); }
+```
+
+native `create` 交出一个不透明 INTPTR，托管实例带着它，每个实例方法再传回来。
+**T2.1 沿用这个形态**：句柄作为字段存在**托管对象自己身上**，native 侧按
+**固定偏移**读写。
+
+**偏移量 = `sizeof(ThinLockableHeader)` = 8**。这同样是既有技术，不是新发明：
+registry 对 `Nullable<T>::get_HasValue` 用的就是
+`*reinterpret_cast<CHAOS_IL2CPP_INT32*>(chaos_arg_0)`
+（`RuntimeHelperShapeRegistry.CoreStubs.Part1.S17.cs`），
+`generated_code_compat.h` 的 `chaos_list_fields` 也写明字段
+"embedded in the GC object right after ThinLockableHeader (offset 8)"。
+
+#### 为什么"字段"优于"表"——这是 GC 问题的答案，不是风格偏好
+
+Roadmap 给 T2.1 标的风险是「托管对象被 GC 回收后，native 槽位由谁释放」。
+
+- **字段**：对象像拥有任何其它字段一样拥有自己的句柄 ⇒ 释放点就是对象自己的
+  teardown（`Dispose()` / 终结器），不需要额外机制去得知"某个对象死了"。
+- **按对象地址为键的表**：在**移动式/压缩式 GC 下根本不成立**——键会在脚下改变。
+  而且它需要一套独立的存活推理，等于把一个问题变成两个。
+
+⇒ 选字段不是省事，是**唯一在压缩式 GC 下正确的**选择。
+
+#### 两个 0 不是同一个状态
+
+句柄字段为 0 有两种成因：**从未初始化**（字段没被写过）与**已释放**。
+`ChaosManagedHandleGetOrCreate` 是这两者的区分点：未绑定 ⇒ 按需创建；
+已释放 ⇒ 返回 0 失败，**不得**静默复活。
+
+**为什么必须"按需创建"而不是在 `.ctor()` 里创建**：托管 `SemaphoreSlim` 有两个构造
+——无参构造与 `(int initialCount, int maxCount)`。只有后者知道计数。若在 `.ctor()`
+里急切创建，无参构造**没有参数可传**，只能创建一个**错的**。改成首次使用时创建，
+参数就取第一个真实操作所提供的。
+
+#### 一个并发窗口，一处显式顺序
+
+`ChaosManagedHandleRelease` **先清零字段，再调 destroy**。反过来的话，两步之间
+的并发调用会观察到一个**即将失效的 id**——这正是 `wait_handle.cpp` 的 `active`
+标志要关的那个 use-after-release 窗口。
+
+#### 验证
+
+新增 `tests/unit/runtime-native/runtime-core/threading/managed_handle_stubs_test.cpp`
+（8 用例，`ManagedHandleBinding.*`）。**只 include ABI 头**，与生成 TU 所见一致。
+
+承重的那条是 `GetOrCreateCreatesExactlyOnce`：它用 `SemaphoreSlimCreate/Wait` 造**真实**
+信号量并穿过绑定，故"存了个别的东西"的实现无法靠自洽往返蒙混。
+**反例验证**：把 `if (*slot != 0) return *slot;` 这行注释掉（即每次调用都重建），
+该用例失败：
+
+```
+managed_handle_stubs_test.cpp(127): error: Expected equality of these values:
+  second   Which is: 2
+  first    Which is: 1
+GetOrCreate must be idempotent per instance
+```
+
+恢复后 **8/8 绿、退出码 0**。
+
+实测：`ctest -C Debug -L threading` → **31/32**，唯一失败 `test_parallel_for`
+**经实测确认为预存在**（见下）。
+
+#### ⚠️ `test_parallel_for` 预存在失败（已取证，非本次引入）
+
+症状：`mutex destroyed while busy`（MSVC STL），退出非 0。
+
+**为何判定预存在**：把 `managed_handle_stubs.cpp` 从
+`chaos_runtime_core` 的源列表**移除后重新构建**该测试，失败**依旧复现**。
+即把本次新增的 TU 从链接输入里彻底拿掉，失败不变 ⇒ 与本项改动无关。
+
+> **纪律提醒**（`preexisting-failure-not-same-as-unrelated`）：干净树复现只排除
+> "本次引入"，**不**等于"与本域无关"。这里只主张前者——**不主张**它与 threading
+> 域无关。该失败牵涉 `parallel.cpp` + ThreadPool 生命周期，**很可能**正是
+> T3.x 要处理的那类"线程池启动后未收尾"缺陷的同族，故记在此处待 Phase 3 取证，
+> 而不是标为"无关"丢弃。
 
 ---
 
