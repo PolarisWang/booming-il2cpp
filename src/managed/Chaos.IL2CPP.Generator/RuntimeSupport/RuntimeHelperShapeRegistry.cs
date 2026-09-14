@@ -203,11 +203,20 @@ public sealed partial class NativeAotLoweringPlanner
             // Exact SimpleForward registrations — the authoritative "we have this".
             foreach (var entry in _entriesByCanonicalKey.Values)
             {
+                // Subject-id prefix in the same shape the metadata uses
+                // ("Assembly/Namespace.Type::Method:Signature"), so a consumer can
+                // match a metadata row with a plain StartsWith.  The registry only
+                // knows the managed type display name, so the prefix ends at the
+                // method name and the signature tail is matched by the consumer.
+                var subjectIdPrefix =
+                    $"System.Private.CoreLib/{entry.TypeDisplayName}::{entry.MethodName}:";
+
                 entries.Add(new
                 {
                     kind = "exact",
                     typeDisplayName = entry.TypeDisplayName,
                     methodName = entry.MethodName,
+                    subjectIdPrefix,
                     paramTypes = entry.ParamTypeDisplayNames,
                     nativeSymbol = string.IsNullOrEmpty(entry.NativeFnSymbol)
                         ? null : entry.NativeFnSymbol,
