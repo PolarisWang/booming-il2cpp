@@ -1133,6 +1133,131 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
         // generic overload is left on the default single-value probe.
         // ── Delegate to the Parse-family injector ──
         AddParseFamilyValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+
+        // ── Reflection member lookups: real member name instead of default(string) ──
+        // typeof(ReflectionSubjectSample).GetProperty(default(string)!) throws
+        // ArgumentNullException in managed AND AOT, then the generated test asserts
+        // the result is non-null — a test that can never pass.  Supplying the real
+        // seed-member name exercises the actual lookup path.
+        AddReflectionMemberValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+
+        // ── Array static searches: a real array instead of default(Array) ──
+        // Array.BinarySearch(default(Array)!, ...) throws ArgumentNullException in
+        // both runtimes; the probe must feed a populated array to mean anything.
+        AddArraySearchValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+
+        // ── Activator.CreateInstance: typeof(int) instead of default(Type) ──
+        // Activator.CreateInstance(default(Type)!) returns null in both runtimes,
+        // but the generated test asserts non-null result — a test that can never pass.
+        // Feeding typeof(string) makes the invocation succeed and produce a real object.
+        if (method.DeclaringTypeFullName == "System.Activator" &&
+            method.Name is "CreateInstance" or "CreateInstanceFrom")
+        {
+            if (paramTypes.Length >= 1 && paramTypes[0] == "System.Type" &&
+                !method.Name.Contains("From"))  // only Type-first overloads
+            {
+                var args = paramTypes
+                    .Select((t, i) => i switch
+                    {
+                        0 => "typeof(int)",
+                        1 when t == "System.Object[]" => "new object[0]",
+                        _ => $"default({CSharpSerializer.ToCSharpTypeName(t)})",
+                    })
+                    .ToArray();
+                AddUnique(sets, usedSignatures, methodIndex, args);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Member names on the ATG seed type <c>ReflectionSubjectSample</c> that the
+    /// reflection probes can look up.  Keep in sync with the sample type emitted by
+    /// ProbeEmitter (see CSharpExpressionBuilder.ReflectionSeedExpressions).
+    /// </summary>
+    private static readonly Dictionary<string, string> ReflectionMemberNames = new(StringComparer.Ordinal)
+    {
+        ["GetProperty"] = "\"SampleProperty\"",
+        ["GetEvent"] = "\"SampleEvent\"",
+        ["GetField"] = "\"SampleField\"",
+        ["GetMethod"] = "\"SampleMethod\"",
+    };
+
+    /// <summary>
+    /// Replace a leading <c>default(string)</c> with a real member name for the
+    /// reflection lookup methods named in <see cref="ReflectionMemberNames"/>.
+    ///
+    /// Only fires when the first parameter is <c>System.String</c> — the
+    /// BindingFlags / Type / Binder trailing parameters keep their defaults, which
+    /// are valid for these overloads (BindingFlags.Public|Instance is the lookup
+    /// default; a null Type[] means "any signature").
+    /// </summary>
+    private static void AddReflectionMemberValueSets(
+        MethodSignature method,
+        string[] paramTypes,
+        List<ValueSet> sets,
+        HashSet<string> usedSignatures,
+        int methodIndex)
+    {
+        if (paramTypes.Length == 0 || paramTypes[0] != "System.String") return;
+        if (!ReflectionMemberNames.TryGetValue(method.Name, out var memberName)) return;
+
+        // Arity must match exactly — ProbeEmitter indexes every parameter position.
+        var args = paramTypes
+            .Select((t, i) => i == 0 ? memberName : $"default({CSharpSerializer.ToCSharpTypeName(t)})")
+            .ToArray();
+        AddUnique(sets, usedSignatures, methodIndex, args);
+    }
+
+    /// <summary>
+    /// Array.BinarySearch / IndexOf / LastIndexOf / Find-family: give the probe a
+    /// populated array rather than <c>default(Array)!</c>, which throws
+    /// ArgumentNullException in both the managed probe and AOT.
+    /// </summary>
+    private static void AddArraySearchValueSets(
+        MethodSignature method,
+        string[] paramTypes,
+        List<ValueSet> sets,
+        HashSet<string> usedSignatures,
+        int methodIndex)
+    {
+        if (method.DeclaringTypeFullName != "System.Array") return;
+        const string searchPrefix = "BinarySearch";
+        if (!method.Name.StartsWith(searchPrefix, StringComparison.Ordinal) &&
+            method.Name is not ("IndexOf" or "LastIndexOf"))
+            return;
+        if (paramTypes.Length == 0) return;
+
+        // int[] overloads: the first parameter is the array, the rest are indices /
+        // the value.  A 3-element array with a value that exists makes the search
+        // meaningful (index 1) rather than -1-by-accident.
+        if (paramTypes[0] == "System.Int32[]")
+        {
+            var args = paramTypes
+                .Select((t, i) => i switch
+                {
+                    0 => "new int[3] { 10, 20, 30 }",
+                    1 when t == "System.Int32" => "20",
+                    _ => $"default({CSharpSerializer.ToCSharpTypeName(t)})",
+                })
+                .ToArray();
+            AddUnique(sets, usedSignatures, methodIndex, args);
+        }
+        // object[] / Array overloads.
+        else if (paramTypes[0] is "System.Array" or "System.Object[]")
+        {
+            var arrayExpr = paramTypes[0] == "System.Array"
+                ? "new object[3] { 10, 20, 30 }"
+                : "new object[3] { 10, 20, 30 }";
+            var args = paramTypes
+                .Select((t, i) => i switch
+                {
+                    0 => arrayExpr,
+                    1 when t == "System.Object" => "20",
+                    _ => $"default({CSharpSerializer.ToCSharpTypeName(t)})",
+                })
+                .ToArray();
+            AddUnique(sets, usedSignatures, methodIndex, args);
+        }
     }
 
     /// <summary>
