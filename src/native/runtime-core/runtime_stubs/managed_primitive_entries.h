@@ -170,4 +170,82 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitInt32(
 CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
     CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
 
+// ══════════════════════════════════════════════════════════════════════
+// SpinLock — T2.5
+// ══════════════════════════════════════════════════════════════════════
+//
+// SpinLock is a VALUE TYPE whose state is the owner-thread id in its own bytes;
+// there is no native handle and no side table.  So unlike every entry above,
+// the receiver IS the state — `spinlock` is a pointer to the struct storage and
+// the lock word is read/written in place.
+//
+// THE BYREF IS THE WHOLE CONTRACT.  `Enter(ref bool lockTaken)` must WRITE
+// THROUGH `lock_taken_out`, and the chunk's generated test asserts it:
+//
+//     bool __ref_0_0_0 = default;
+//     ...Create<SpinLock>().Enter(ref __ref_0_0_0);
+//     Assert.AreEqual(true, __ref_0_0_0);
+//
+// A helper that acquired the lock but did not write the bool would fail that
+// assertion — which is exactly the difference between wiring this up and only
+// appearing to.  `lock_taken_out` is nullptr-guarded for the same reason every
+// other entry here guards its inputs.
+//
+// `Enter` is registered with a NativeInt return because the lowering assigns
+// the call result to a local unconditionally (C3313 otherwise); the managed
+// signature is void, so the value is unobservable.
+
+CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR spinlock,
+                                      CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR spinlock,
+                                         CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INTPTR spinlock,
+                                              CHAOS_IL2CPP_INT32 timeout_ms,
+                                              CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterTimeSpan(CHAOS_IL2CPP_INTPTR spinlock,
+                                                 CHAOS_IL2CPP_INTPTR timespan_ticks,
+                                                 CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
+
+/// Exit() — release.  Returns 1 = released, 0 = was not held by this thread.
+CHAOS_IL2CPP_INT32 ChaosSpinLockExit(CHAOS_IL2CPP_INTPTR spinlock) noexcept;
+
+// ══════════════════════════════════════════════════════════════════════
+// SpinWait — T2.5
+// ══════════════════════════════════════════════════════════════════════
+//
+// Also a value type; its state (the spin count and the yield threshold) lives in
+// the struct.  `SpinOnce` must actually advance that state — a no-op would make
+// `SpinOnce(int)` behave identically to `SpinOnce()` and defeat the point of the
+// count parameter.
+
+CHAOS_IL2CPP_INT32 ChaosSpinWaitSpinOnce(CHAOS_IL2CPP_INTPTR spinwait) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosSpinWaitSpinOnceInt32(CHAOS_IL2CPP_INTPTR spinwait,
+                                              CHAOS_IL2CPP_INT32 iterations) noexcept;
+
+// ══════════════════════════════════════════════════════════════════════
+// ThreadPool — T2.5 (callable surface only)
+// ══════════════════════════════════════════════════════════════════════
+//
+// Only the four operations the current native pool actually implements are
+// exported.  `GetAvailableThreads`/`GetMaxThreads`/`GetMinThreads` have NO
+// native counterpart today (the pool has no max/min configuration surface), so
+// they are deliberately NOT claimed here — registering them against a
+// placeholder would reproduce exactly the fake-pass this phase removes.
+//
+// `QueueUserWorkItem` takes (callback, state) — the same pair the T2.0 ABI and
+// the queue itself use.
+
+CHAOS_IL2CPP_INT32 ChaosThreadPoolQueueUserWorkItemManaged(
+    CHAOS_IL2CPP_INTPTR callback, CHAOS_IL2CPP_INTPTR state) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosThreadPoolQueueUserWorkItemUnsafeManaged(
+    CHAOS_IL2CPP_INTPTR callback, CHAOS_IL2CPP_INTPTR state) noexcept;
+
+/// Current worker count (>= 0).
+CHAOS_IL2CPP_INT32 ChaosThreadPoolGetWorkerCountManaged() noexcept;
+
 }  // extern "C"

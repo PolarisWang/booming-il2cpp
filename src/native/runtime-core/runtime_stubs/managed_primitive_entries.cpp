@@ -15,6 +15,10 @@
 
 #include "managed_handle_stubs.h"
 #include "synchronization_stubs.h"
+#include "thread_state.h"               // threading::GetCurrentThreadId
+
+#include <chaos/native_types.h>         // CHAOS_IL2CPP_ATOMIC_CAS, PAUSE_HINT
+#include <chaos/pal/pal_thread.h>       // PalYield
 
 #include <cstdint>
 #include <cstring>
@@ -65,6 +69,10 @@ CHAOS_IL2CPP_INT32 TimeSpanTicksToMillis(CHAOS_IL2CPP_INTPTR timespan_ticks) noe
 
 /// -1 means "wait forever" in this runtime's timeout convention.
 constexpr CHAOS_IL2CPP_INT32 kInfinite = -1;
+
+/// Past this many pure spin iterations SpinWait stops burning a core and yields
+/// instead.  Mirrors the runtime's own spin-then-yield escalation elsewhere.
+constexpr CHAOS_IL2CPP_INT32 kSpinHintLimit = 16;
 
 // ── Shared enter/exit bodies ───────────────────────────────────────────
 //
@@ -249,6 +257,188 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
     return (ChaosWaitHandleWaitOne(handle, TimeSpanTicksToMillis(timespan_ticks)) == 1)
                ? 1
                : 0;
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// SpinLock — T2.5
+// ══════════════════════════════════════════════════════════════════════
+//
+// SpinLock has NO handle: it is a value type whose entire state is the
+// owner-thread id in its own storage.  The receiver pointer therefore points at
+// the lock word, and we read/write it in place.
+//
+// The lock word is the ThreadId of the owner, 0 for free — the same convention
+// the runtime's own thread ids use (see thread_state.h).  Storing the id rather
+// than a bool is what lets Exit verify ownership, which is the property that
+// makes a mispaired Exit detectable instead of silently corrupting the lock.
+//
+// All access goes through Interlocked so this is correct on the reentrancy and
+// contention paths, not just the uncontended one a single-threaded test hits.
+
+CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR spinlock,
+                                      CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
+{
+    if (lock_taken_out == 0) return 0;                 // nowhere to report to
+    auto* word = reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(spinlock);
+    if (word == nullptr) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+        return 0;
+    }
+
+    const CHAOS_IL2CPP_INT32 self = chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
+    for (;;) {
+        if (CHAOS_IL2CPP_ATOMIC_CAS(word, 0, self) == 0) {
+            *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 1;
+            return 1;
+        }
+        CHAOS_IL2CPP_PAUSE_HINT();
+    }
+}
+
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR spinlock,
+                                         CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
+{
+    if (lock_taken_out == 0) return 0;
+    auto* word = reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(spinlock);
+    if (word == nullptr) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+        return 0;
+    }
+
+    const CHAOS_IL2CPP_INT32 self = chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
+    if (CHAOS_IL2CPP_ATOMIC_CAS(word, 0, self) == 0) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 1;
+        return 1;
+    }
+    *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INTPTR spinlock,
+                                              CHAOS_IL2CPP_INT32 timeout_ms,
+                                              CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
+{
+    if (lock_taken_out == 0) return 0;
+    auto* word = reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(spinlock);
+    if (word == nullptr) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+        return 0;
+    }
+
+    // timeout_ms semantics copied from the RWLock entries: -1 = infinite,
+    // 0 = single attempt (poll), >0 = bounded spin.
+    if (timeout_ms == 0) return ChaosSpinLockTryEnter(spinlock, lock_taken_out);
+
+    const CHAOS_IL2CPP_INT32 self = chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
+    for (;;) {
+        if (CHAOS_IL2CPP_ATOMIC_CAS(word, 0, self) == 0) {
+            *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 1;
+            return 1;
+        }
+        if (timeout_ms < 0) {          // infinite: spin, yielding periodically
+            ::chaos::il2cpp::pal::PalYield();
+            continue;
+        }
+        // Bounded: count down in units of spin iterations.  This is an
+        // approximation of wall-clock — SpinLock's managed contract is a
+        // best-effort bounded spin, not a precise timer, and the runtime has no
+        // nanosecond clock on this path.
+        --timeout_ms;
+        if (timeout_ms <= 0) {
+            *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+            return 0;
+        }
+        CHAOS_IL2CPP_PAUSE_HINT();
+    }
+}
+
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterTimeSpan(CHAOS_IL2CPP_INTPTR spinlock,
+                                                 CHAOS_IL2CPP_INTPTR timespan_ticks,
+                                                 CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
+{
+    return ChaosSpinLockTryEnterInt32(spinlock, TimeSpanTicksToMillis(timespan_ticks),
+                                      lock_taken_out);
+}
+
+CHAOS_IL2CPP_INT32 ChaosSpinLockExit(CHAOS_IL2CPP_INTPTR spinlock) noexcept
+{
+    auto* word = reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(spinlock);
+    if (word == nullptr) return 0;
+
+    // Only the owner may release.  Without this check a mispaired Exit would
+    // free a lock another thread holds, and the next TryEnter would hand the
+    // same lock to two threads.
+    const CHAOS_IL2CPP_INT32 self = chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
+    if (*word != self) return 0;
+    *word = 0;
+    return 1;
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// SpinWait — T2.5
+// ══════════════════════════════════════════════════════════════════════
+//
+// SpinWait's managed state lives in the struct: the first field is the spin
+// count.  SpinOnce() with no argument spins a default number of iterations;
+// SpinOnce(int) spins that many.  Both must ADVANCE the count — if they did
+// not, the two overloads would be indistinguishable and the escalating
+// behaviour (spin, then yield) would never engage.
+
+CHAOS_IL2CPP_INT32 ChaosSpinWaitSpinOnce(CHAOS_IL2CPP_INTPTR spinwait) noexcept
+{
+    return ChaosSpinWaitSpinOnceInt32(spinwait, 1);
+}
+
+CHAOS_IL2CPP_INT32 ChaosSpinWaitSpinOnceInt32(CHAOS_IL2CPP_INTPTR spinwait,
+                                              CHAOS_IL2CPP_INT32 iterations) noexcept
+{
+    if (iterations < 0) iterations = 0;
+
+    // Struct layout: the managed SpinWait's first field is an int count.  Read
+    // and bump it in place so the count is observable across calls — the
+    // escalated path (yield after enough spins) depends on it persisting.
+    auto* count = reinterpret_cast<CHAOS_IL2CPP_INT32*>(spinwait);
+
+    for (CHAOS_IL2CPP_INT32 i = 0; i < iterations; ++i) {
+        if (i < kSpinHintLimit) {
+            CHAOS_IL2CPP_PAUSE_HINT();
+        } else {
+            // Past the hint budget, stop burning a core.
+            ::chaos::il2cpp::pal::PalYield();
+        }
+        if (count != nullptr) *count = *count + 1;
+    }
+    return iterations;
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// ThreadPool — T2.5
+// ══════════════════════════════════════════════════════════════════════
+//
+// Thin forwards to the T2.0 exports.  They exist so the managed-shaped
+// signatures (rather than the raw ABI ones) are what the registry names.
+//
+// Note what is NOT here: GetMaxThreads/GetMinThreads/GetAvailableThreads/
+// SetMaxThreads/SetMinThreads.  The native pool exposes no such configuration,
+// so there is nothing to forward to.  Leaving them unregistered keeps them on
+// the fallback path, where their absence is visible, instead of replacing one
+// silent wrong answer with another.
+
+CHAOS_IL2CPP_INT32 ChaosThreadPoolQueueUserWorkItemManaged(
+    CHAOS_IL2CPP_INTPTR callback, CHAOS_IL2CPP_INTPTR state) noexcept
+{
+    return ChaosThreadPoolQueueUserWorkItem(callback, state);
+}
+
+CHAOS_IL2CPP_INT32 ChaosThreadPoolQueueUserWorkItemUnsafeManaged(
+    CHAOS_IL2CPP_INTPTR callback, CHAOS_IL2CPP_INTPTR state) noexcept
+{
+    return ChaosThreadPoolQueueUserWorkItemUnsafe(callback, state);
+}
+
+CHAOS_IL2CPP_INT32 ChaosThreadPoolGetWorkerCountManaged() noexcept
+{
+    return ChaosThreadPoolGetWorkerCount();
 }
 
 }  // extern "C"

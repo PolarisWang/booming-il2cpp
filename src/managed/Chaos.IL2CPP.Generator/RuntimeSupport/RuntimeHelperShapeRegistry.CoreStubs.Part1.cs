@@ -110,6 +110,7 @@ public sealed partial class NativeAotLoweringPlanner
             // see the doc block on the registration for why no receiver slot exists.
             RegisterReaderWriterLockSlimAndSemaphoreSlim(registry);
             RegisterManualResetEventSlim(registry);
+            RegisterSpinPrimitivesAndThreadPool(registry);
             RegisterValueTask(registry);
             RegisterHotBclNoOps(registry);
             RegisterParallelLoops(registry);

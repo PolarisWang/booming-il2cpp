@@ -80,6 +80,16 @@ chaos_native_add_test(test_managed_primitive_entries_mres
     LABELS "unit;threading"
 )
 
+# managed_primitive_entries_spin_test — T2.5: SpinLock + SpinWait.
+# Value-type entries where the receiver IS the state, plus SpinLock's byref
+# write-back (the main assertion that distinguishes a real from a fake wiring).
+chaos_native_add_test(test_managed_primitive_entries_spin
+    managed_primitive_entries_spin_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/managed_primitive_entries.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/managed_handle_stubs.cpp
+    LABELS "unit;threading"
+)
+
 # cancellation_token_test — T1.1/T1.2: ThrowIfCancellationRequested must actually
 # raise, get_token must not degrade to None, and linked sources must propagate.
 chaos_native_add_test(test_cancellation_token

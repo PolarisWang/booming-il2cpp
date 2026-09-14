@@ -2549,5 +2549,143 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
         }
 
+        /// <summary>
+        /// T2.5: SpinLock + SpinWait + the ThreadPool callable surface.
+        ///
+        /// VALUE-TYPE RECEIVERS.  SpinLock and SpinWait are structs, so unlike the
+        /// classes above there is no handle to recover — the receiver pointer IS
+        /// the state, and the native entries read/write it in place.  That changes
+        /// the failure mode worth guarding: for the handle-based types the risk
+        /// was "operated on no object"; here it is "operated on a COPY and threw
+        /// the result away", which looks identical from the caller's side.  The
+        /// byref write-back below is the case where that would be caught.
+        ///
+        /// THE BYREF SLOT.  `Enter(ref bool lockTaken)` / `TryEnter(ref bool)` /
+        /// `TryEnter(int, ref bool)` / `TryEnter(TimeSpan, ref bool)` carry the
+        /// bool as `AotCoreIrAbiCarrierKind.ByRef` (= CHAOS_IL2CPP_INTPTR, a raw
+        /// pointer), the same encoding `System.Enum.TryParse(System.Object&)` uses
+        /// (Part3.S23.cs).  It must be listed in rawArgumentIndices so the
+        /// lowering passes the POINTER rather than dereferencing to a bool value.
+        ///
+        /// This is load-bearing, not decoration: the chunk's generated test is
+        ///     bool __ref_0_0_0 = default;
+        ///     ...Create&lt;SpinLock&gt;().Enter(ref __ref_0_0_0);
+        ///     Assert.AreEqual(true, __ref_0_0_0);
+        /// so a helper that acquired the lock but did not write the bool fails.
+        ///
+        /// SCOPE NOTE — what is deliberately NOT registered.  The chunk also
+        /// contains ThreadPool.GetMaxThreads/GetMinThreads/GetAvailableThreads/
+        /// SetMaxThreads/SetMinThreads.  The native pool has no min/max
+        /// configuration surface at all, so there is nothing to forward to.
+        /// Registering them against a placeholder would replace one silent wrong
+        /// answer (fallback 0) with another, which is exactly the defect class
+        /// this phase removes — so they are left on the fallback path where their
+        /// absence stays visible.
+        /// </summary>
+        private static void RegisterSpinPrimitivesAndThreadPool(RuntimeHelperShapeRegistry registry)
+        {
+            const string SpinLock = "SpinLock";
+            const string SpinWait = "SpinWait";
+            const string ThreadPool = "ThreadPool";
+
+            // ── SpinLock ──
+            //
+            // Enter() returns void in managed but the lowering assigns the result
+            // to a local unconditionally, so the return slot is NativeInt (the
+            // C3313 wall again — see the TaskAwaiter.GetResult note above).
+
+            // Enter(ref bool)
+            registry.Register(SpinLock, "Enter", ["System.Boolean&"],
+                ShapeKind.SimpleForward, "ChaosSpinLockEnter",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.ByRef }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // TryEnter(ref bool)
+            registry.Register(SpinLock, "TryEnter", ["System.Boolean&"],
+                ShapeKind.SimpleForward, "ChaosSpinLockTryEnter",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.ByRef }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // TryEnter(int, ref bool)
+            registry.Register(SpinLock, "TryEnter", ["System.Int32", "System.Boolean&"],
+                ShapeKind.SimpleForward, "ChaosSpinLockTryEnterInt32",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateInt32AbiSlot(),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.ByRef },
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // TryEnter(TimeSpan, ref bool) — different canonical key from both.
+            registry.Register(SpinLock, "TryEnter", ["System.TimeSpan", "System.Boolean&"],
+                ShapeKind.SimpleForward, "ChaosSpinLockTryEnterTimeSpan",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.ByRef },
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // Exit() — no argument.  Note: managed SpinLock.Exit() is void and
+            // returns nothing observable, so the return slot value is discarded.
+            registry.Register(SpinLock, "Exit", [],
+                ShapeKind.SimpleForward, "ChaosSpinLockExit",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── SpinWait ──
+
+            registry.Register(SpinWait, "SpinOnce", [],
+                ShapeKind.SimpleForward, "ChaosSpinWaitSpinOnce",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            registry.Register(SpinWait, "SpinOnce", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosSpinWaitSpinOnceInt32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── ThreadPool — callable surface only ──
+            //
+            // Two of the three are ASSEMBLY-QUALIFIED subject ids in the chunk:
+            //   System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem<...>
+            // so they are registered under the qualified type display name.  See
+            // the note above on why Get*/Set*Threads are absent.
+
+            registry.Register("System.Threading.ThreadPool", "QueueUserWorkItem",
+                ["System.Action`1", "System.Int32", "System.Boolean"],
+                ShapeKind.SimpleForward, "ChaosThreadPoolQueueUserWorkItemManaged",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Threading.ThreadPool", "UnsafeQueueUserWorkItem",
+                ["System.Action`1", "System.Int32", "System.Boolean"],
+                ShapeKind.SimpleForward, "ChaosThreadPoolQueueUserWorkItemUnsafeManaged",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0, 1 });
+        }
+
     }
 }
