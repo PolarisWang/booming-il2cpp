@@ -124,7 +124,7 @@ _UNASSERTABLE_RETURN_TYPES = frozenset({
 def classify_fact_record(rec: dict, return_type: str | None,
                          is_factory_subject: bool = False,
                          stub_gap_ids: frozenset[str] | None = None,
-                         manifest_prefixes: frozenset[str] | None = None,
+                         manifest_prefixes: frozenset[tuple[str, str]] | None = None,
                          subject_id: str | None = None) -> str:
     """Classify one runtime fact record into exactly one bucket.
 
@@ -381,7 +381,7 @@ def _stub_gap_method_ids(ctx: ChunkContext) -> frozenset[str]:
     return frozenset(gap_ids)
 
 
-def _load_capability_manifest(ctx) -> frozenset[str] | None:
+def _load_capability_manifest(ctx) -> frozenset[tuple[str, str]] | None:
     """Load the AOT capability manifest emitted by the codegen layer.
 
     The manifest records which managed methods the codegen can dispatch
@@ -389,12 +389,15 @@ def _load_capability_manifest(ctx) -> frozenset[str] | None:
     shape at all.  It lets a failing fact record be reported as a genuine
     implementation defect (``realDefect``) instead of a generic ``failed``.
 
-    Returns a set of **subject-id prefixes** in the same shape the metadata
-    uses (``Assembly/Namespace.Type::Method:``).  A metadata row belongs to
-    the codegen's capability set when it starts with any returned prefix.
-    Returns None when no manifest exists (older codegen runs, or a chunk
-    with no codegen output) — callers then fall back to the generic
-    ``failed`` bucket.
+    Returns a set of ``("Namespace.Type::Method", "(Param1,Param2)")``
+    tuples, or None when no manifest exists.
+
+    Why a tuple and not a string prefix: a prefix ending at the method name
+    over-claims (``Activator::CreateInstance`` would match its 5-arg
+    overload, which has no shape), while a prefix that also embeds the
+    signature does not line up with the metadata's
+    ``…::Method:ReturnType(Params)`` form.  Comparing the method's identity
+    and its parameter list as separate fields is exact for both.
     """
     cap_path = (ctx.chunk_dir / "native" / "codegen" / "generated"
                 / "aot-capability-manifest.json")
@@ -406,28 +409,44 @@ def _load_capability_manifest(ctx) -> frozenset[str] | None:
     except (json.JSONDecodeError, OSError):
         return None
 
-    prefixes: set[str] = set()
+    keys: set[tuple[str, str]] = set()
     for entry in manifest.get("entries", []) or []:
         if entry.get("kind") != "exact":
             continue
-        prefix = entry.get("subjectIdPrefix")
-        if not prefix:
-            # Older manifests predate subjectIdPrefix; synthesise the same shape
-            # so the loader keeps working against a stale codegen artifact.
-            type_name = entry.get("typeDisplayName")
-            method_name = entry.get("methodName")
-            if type_name and method_name:
-                prefix = f"System.Private.CoreLib/{type_name}::{method_name}:"
-        if prefix:
-            prefixes.add(prefix)
-    return frozenset(prefixes) if prefixes else None
+        type_name = entry.get("typeDisplayName")
+        method_name = entry.get("methodName")
+        params = entry.get("paramTypes")
+        if not type_name or not method_name or params is None:
+            continue
+        keys.add((f"{type_name}::{method_name}", ",".join(params)))
+    return frozenset(keys) if keys else None
 
 
-def _has_codegen_shape(manifest_prefixes: frozenset[str] | None, subject_id: str | None) -> bool:
-    """True when *subject_id* is covered by a codegen shape."""
-    if not manifest_prefixes or not subject_id:
+def _has_codegen_shape(manifest_keys: frozenset[tuple[str, str]] | None,
+                       subject_id: str | None) -> bool:
+    """True when *subject_id* names a method the codegen has a shape for.
+
+    ``subject_id`` has the metadata shape
+    ``Assembly/Namespace.Type::Method:ReturnType(Param1,Param2)``; the
+    manifest keys are ``("Namespace.Type::Method", "Param1,Param2")``.  Both
+    halves must match — the method identity *and* the exact overload.
+    """
+    if not manifest_keys or not subject_id:
         return False
-    return any(subject_id.startswith(p) for p in manifest_prefixes)
+
+    after_slash = subject_id.split("/", 1)[1] if "/" in subject_id else subject_id
+    if "::" not in after_slash:
+        return False
+    type_and_method, _, rest = after_slash.partition("::")
+    if ":" not in rest:
+        return False
+    method_name, _, signature = rest.partition(":")
+    # signature == "ReturnType(Param1,Param2)"
+    if "(" not in signature or not signature.endswith(")"):
+        return False
+    params = signature[signature.index("(") + 1:-1]
+
+    return (f"{type_and_method}::{method_name}", params) in manifest_keys
 
 
 def _get_factory_subject_ids(ctx: ChunkContext) -> frozenset[str]:
