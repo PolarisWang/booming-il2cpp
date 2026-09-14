@@ -35,6 +35,16 @@ chaos_native_add_test(test_synchronization_context_post
     LABELS "unit;threading"
 )
 
+# synchronization_stubs_test — T2.0: the extern "C" ABI export layer is callable.
+# The property under test is LINKAGE (undecorated C symbols reachable by an
+# unqualified name from a TU that includes only the ABI header), not behaviour —
+# a declaration that drifts outside the extern "C" block compiles fine and fails
+# only at link time, so this has to be a link-level test to be worth anything.
+chaos_native_add_test(test_synchronization_stubs
+    synchronization_stubs_test.cpp
+    LABELS "unit;threading"
+)
+
 # cancellation_token_test — T1.1/T1.2: ThrowIfCancellationRequested must actually
 # raise, get_token must not degrade to None, and linked sources must propagate.
 chaos_native_add_test(test_cancellation_token

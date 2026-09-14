@@ -315,6 +315,78 @@ ctest 因此判红。用 `--gtest_filter` 逐条二分，锁定到 `PostInvokesT
 
 ---
 
+### T2.0 完成记录：`extern "C"` ABI 出口层（`runtime_stubs/synchronization_stubs.{h,cpp}`）
+
+**这一项的工作量远小于 roadmap 预估，原因值得记录：native 实现早已存在。**
+
+`SemaphoreSlim` / `ReaderWriterLockSlim`（含 upgradeable）/ `Barrier` / `CountdownEvent`
+的完整实现已在 `synchronization.cpp`，`ManualResetEvent` / `AutoResetEvent` 已在
+`wait_handle.cpp`，`Timer` 已在 `timer_queue.cpp`，`ThreadPool` 已在 `thread_pool.cpp`。
+Roadmap 当初把 T2.2/T2.3/T2.4 标为「大/中」，但它们的 native 部分（也就是最难的部分）
+**已经写完并通过既有测试**。
+
+真正缺的只有两件事，且互为因果：
+
+1. 这些函数是 **C++ 命名空间函数**（`chaos::il2cpp::runtime_core::threading::Xxx`）；
+2. 因此 codegen 的 `SimpleForward` 发射**够不到它们**——它发射的是
+   `reinterpret_cast<CHAOS_IL2CPP_INTPTR>(<NativeFnSymbol>(args...))`，
+   一个**不带限定名**的直接调用，编译进独立的 TU。
+
+所以 T2.0 的产物是 **ABI 边界，不是重新实现**：39 个 `extern "C"` 转发 shim。
+
+**命名约定**：采用 `Chaos` + PascalCase，与 ShapeRegistry 已在引用的 Interlocked 先例一致
+（`ChaosInterlockedMemoryBarrier`，见 `RuntimeHelperShapeRegistry.CoreStubs.Part2.S22.cs:155`）。
+旧有的 `chaos_*` snake_case 一族（`chaos_monitor_enter`、`chaos_thread_*`）**保留不动**——
+两种大小写都是合法 C 符号，registry 条目名与实现名一致即可，为风格统一去改已工作的符号是净损失。
+**新增的线程导出统一用 `Chaos*`。**
+
+**exit 判据（"ABI 符号可被 codegen 生成的 C++ 调用"）是链接期性质，故用链接期测试验证**：
+`tests/unit/runtime-native/runtime-core/threading/synchronization_stubs_test.cpp`
+**只 include ABI 头**，不 include 任何 `synchronization.h` / `wait_handle.h` / …，
+调用全部走 header `extern "C"` 块内的非限定标识符——与生成 TU 所见完全一致。
+该 TU 甚至还**不能**写 `using namespace chaos::il2cpp::runtime_core::threading;`
+（实测报 `C3083`），因为 ABI 头根本不引入命名空间，这本身就是"它就是边界"的证据。
+
+**客观证据（非推断）**：`dumpbin /symbols synchronization_stubs.obj` 显示
+`External | ChaosSemaphoreSlimCreate` —— **未修饰**，且 `grep -c '\?Chaos[A-Za-z]*@@'` **为 0**，
+即无任何 C++ 修饰名。
+
+**反例验证**：把一个符号的声明挪到 `extern "C"` 块**之外**（正是 `threading_stubs.h`
+所记录的漂移缺陷），编译期**无诊断**，链接期报
+`LNK2019: unresolved external symbol "int __cdecl ChaosBarrierCreate_probe(void)"`——
+注意返回值类型与 `__cdecl` 都进了符号名，证明该声明拿到的是 C++ 链接性与调用约定；
+而对应定义是未修饰的 C 符号。恢复后 **9/9 绿、退出码 0**。
+
+**顺带修掉一个真缺陷（与 T1.5 同根）**：`ChaosThreadPoolEnsureInitialized` 启动线程池后
+若不关闭，进程在所有测试 PASSED 的情况下仍以**退出码 3** 结束，ctest 记红。
+故 ABI 必须导出 `ChaosThreadPoolShutdown`（不能假设调用方有别的关闭途径）。
+**这与 T1.5 的 `synchronization_context` 是同一个根因**：启动线程池/投递工作项却不收尾。
+> 沉淀：**"启动了持有活线程的子系统"必须配套显式关闭出口**，否则症状是
+> "gtest 全绿但 ctest 红"，且用 `--gtest_filter` 二分才能定位。
+
+**实测**：`ctest -L threading` **31/31 全绿**（含新增 1 项）。
+
+---
+
+### ⚠️ T2.1 前提修正：句柄映射**有先例**，不是"新机制"
+
+原 roadmap 把 T2.1 描述为「托管对象 ↔ native 句柄映射机制（**新机制，无先例**）」。
+本轮排查（含一次独立专项调查）确认**该描述不成立**，至少三处先例：
+
+| 先例 | 位置 | 形态 |
+|------|------|------|
+| **WaitHandle 表**（最接近） | `wait_handle.cpp:38-40` | `unordered_map<uint32_t, unique_ptr<WaitHandleEntry>>` + `shared_mutex`；`WaitHandleEntry{id, active, PalEvent*}`；单调递增 id |
+| **同步对象固定数组表** | `synchronization.cpp` | `g_semaphores[1024]` / `g_rwlocks[1024]` / `g_barriers[1024]` / `g_countdown_events[1024]`；句柄=数组下标 + `active` 标志 |
+| **通用对象句柄** | `engine_binding.cpp:19-34` | `CreateEngineObjectHandle(void*)` → `uint32_t`；`ResolveEngineObjectHandle(uint32_t)` → `void*` |
+
+**T2.1 应当沿用既有形态，而不是发明新基础设施。** 唯一真正的新问题是
+**生命周期与 GC 交互**（roadmap 原文这点是对的）：上述三者的句柄都是**原生侧自有**的，
+而 T2.1 要绑定的是**托管对象**——必须回答"托管对象被 GC 回收后，native 槽位由谁释放"。
+建议 T2.1 实现时以 `wait_handle.cpp` 的表为模板（它已处理 `active` 标志与并发查找），
+并把 GC 侧的生命周期问题**单独**作为设计点，而不是把"没有先例"当成整项的风险来源。
+
+---
+
 ### T0.5 复核记录（已完成，先前 roadmap 状态列滞后，commit `e0be16790`）
 
 `e0be16790` 已修复并附回归测试 `tests/e2e/verification/tests/test_fact_chunk_reference_population.py`
