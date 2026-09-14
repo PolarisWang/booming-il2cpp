@@ -949,17 +949,24 @@ CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcep
     // executes AOT Core IR JSON) and Phase 2 (dispatch table).  BCrypt/CNG stubs
     // are handled by codegen ShapeRegistry direct wrappers (not the fallback).
     // If all of those failed to execute, the subject reaches this point genuinely
-    // unresolved and flows to the documented sentinel catch-all below (not a
-    // per-crypto-class lie).
-    // NOTE: unconditional return 0 here is a silent data-corruption risk for
-    // complex state-machine methods (XmlReader, JsonDocument, etc.). The LOG
-    // below makes this observable in diagnostics builds so developers can detect
-    // methods that need real native implementations. See P0-A of
-    // json-xml-production-readiness.
+    // unresolved.
+    //
+    // This used to `return 0`.  That is a silent lie: the caller cannot tell
+    // "this method computed 0" from "this method has no implementation at all".
+    // Every assertion like `Assert.AreEqual(0, result)` then passes against a
+    // method that never ran, and the verification pipeline reports a
+    // confident-but-wrong green.  Raising a managed NotImplementedException
+    // instead makes the missing implementation observable: the runner records
+    // it as a genuine failure, and the fact classifier reports it as
+    // `notSupported` rather than a fabricated pass.
     CHAOS_IL2CPP_LOG_WARN_M("ExternalRuntimeFallback",
-        "Phase 3 catch-all: {0} — unresolvable subject falls through to return 0",
+        "Phase 3 catch-all: {0} — unresolvable subject raises NotImplementedException",
         (subject_id != nullptr ? subject_id : "(null)"));
-   return 0;
+    chaos::il2cpp::runtime_core::RaiseManagedException(
+        "System.NotImplementedException",
+        subject_id != nullptr
+            ? subject_id
+            : "AOT runtime has no implementation for this subject.");
 }
 
 
