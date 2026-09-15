@@ -162,6 +162,42 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
 - 建议：sentinel 兜底桩应改为显式 FAIL（诚实的响亮失败），在真实实现落地前
   至少可观测 —— 这是低成本的止血项
 
+---
+
+## ✅ 部分修复已落地（commit `1343fabe0`）
+
+| 修复 | 内容 |
+|---|---|
+| **Part1.S5 GetMethod 通配 shape 遮蔽** | GenericShape 先于 TryMatchShape 执行，S15 的精确 SimpleForward 注册（含指向真实实现的 1 参版）**永远被遮蔽**。现按 paramTypes 分流：1 参/2 参转发 `ChaosReflectionGetMethod` 真实实现，其余保持桩 |
+| **members.cpp 参数个数偏移错位** | `param_count` 读 offset 8（element_type_shape+padding）——两种数组布局的 length 都在 **offset 24**。注释声称 "16 bytes header" 与代码自相矛盾；该路径此前无真实调用者故未暴露 |
+| S15 补 GetMethod(String, Type[]) 精确注册 | 被通配遮蔽，保留作后备 |
+
+### 层叠图谱（C 组 si=192 的完整依赖链，逐层实测）
+
+```
+层1  new Type[]{typeof(char)} 的 newarr 分配未发射
+     （IR 有 newarr System.Type @il17，生成体只有 _s5 = 0 → null → FAIL_FAST）
+  ↓ 修好后
+层2  GetMethod 查 B3 类型描述符的 methods 表 —— 但 B3 收集器只收
+     properties/fields/events，methods = nullptr → GetMethod 返 0
+  ↓ 修好后
+层3  FindReflectionQueryMethod 按名字+参数个数匹配 —— IndexOf(char) 与
+     IndexOf(string) 个数相同会歧义；需 descriptor 携带参数类型
+  ↓（B 组同理需要 MemberInfo 托管模型）
+终局  6+6 项转绿
+```
+
+**每修一层就会暴露下一层** —— 这与 B5 修完后 preAssertionRaise 的下降一致
+（35→31→C 组待层1/层2）。
+
+### 移交状态
+
+| 组 | 依赖 | 建议去向 |
+|---|---|---|
+| C（6 项） | 层1 newarr lowering + 层2 methods 表 + 层3 参数类型 | 本 roadmap 延伸或新立 |
+| B（6 项） | MemberInfo 托管对象模型 | 新立（设计级） |
+| A（2 项） | cdb 定位精确 abort 点 | debug-20-real-defects |
+
 
 ## Terminal Notes
 
