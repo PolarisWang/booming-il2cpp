@@ -34,6 +34,12 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetInterfaces(CHAOS_IL2CPP_INTPTR type_handle
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetField(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id);
+// Type::GetProperty(string) / Type::GetEvent(string) — name-only member lookup
+// against the type's descriptor tables.  Declared here as the codegen-side
+// counterpart of ChaosReflectionGetField above; the codegen helpers for all
+// three previously CHAOS_IL2CPP_FAIL()ed because no descriptors were emitted.
+CHAOS_IL2CPP_INTPTR ChaosReflectionTypeGetProperty(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionTypeGetEvent(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id, CHAOS_IL2CPP_INTPTR param_types);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericArguments(CHAOS_IL2CPP_INTPTR type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericTypeDefinition(CHAOS_IL2CPP_INTPTR type_handle);

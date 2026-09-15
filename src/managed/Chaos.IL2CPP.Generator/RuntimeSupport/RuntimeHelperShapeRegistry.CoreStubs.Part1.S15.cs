@@ -48,11 +48,16 @@ public sealed partial class NativeAotLoweringPlanner
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
+                    // Resolve against the type's field descriptor table instead of
+                    // aborting.  The table is emitted per closure-reachable type and
+                    // registered via ChaosRegisterExternalType, whose dynamic table
+                    // the runtime's type lookup already consults.  Signature:
+                    // (Type, string name, BindingFlags) — the flags parameter is not
+                    // yet honoured (name-only match, same as Type::GetField(string)).
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    CHAOS_IL2CPP_FAIL();",
-                        "    return 0;",
+                        $"    return ChaosReflectionGetField(chaos_arg_0, chaos_arg_1);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -82,8 +87,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    CHAOS_IL2CPP_FAIL();",
-                        "    return 0;",
+                        $"    return ChaosReflectionTypeGetEvent(chaos_arg_0, chaos_arg_1);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
@@ -110,11 +114,14 @@ public sealed partial class NativeAotLoweringPlanner
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
+                    // Resolve against the type's property descriptor table instead of
+                    // aborting.  See the GetField note above for the table's origin.
+                    // Signature: (Type, string name, BindingFlags) — flags not yet
+                    // honoured (name-only match).
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    CHAOS_IL2CPP_FAIL();",
-                        "    return 0;",
+                        $"    return ChaosReflectionTypeGetProperty(chaos_arg_0, chaos_arg_1);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),

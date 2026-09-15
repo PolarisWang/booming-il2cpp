@@ -142,5 +142,78 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(
     return 0;
 }
 
+// ── Type::GetProperty / GetField / GetEvent ──────────────────────────
+//
+// These resolve a member by name against the type's descriptor tables.  They
+// exist because the members were previously unreachable: codegen emitted no
+// property/field/event descriptors at all, so the codegen-side helpers were
+// deliberate CHAOS_IL2CPP_FAIL() stubs and any member query aborted the
+// process.  The descriptor tables are now emitted per closure-reachable type
+// and registered through ChaosRegisterExternalType, whose dynamic table
+// GetTypeDescriptorFromHandle already consults — so a plain descriptor walk
+// is all that is needed here.
+//
+// Name-only matching (no signature): the callers are the 1-argument
+// GetProperty(string)/GetField(string)/GetEvent(string) overloads.  Overload
+// resolution among same-named members is not attempted — returning the first
+// match mirrors the existing method path's no-param_types branch.
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionTypeGetProperty(
+    CHAOS_IL2CPP_INTPTR type_handle,
+    CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    if (desc == nullptr || desc->properties == nullptr) return 0;
+
+    const char* name = DecodeAndNullTerminateString(name_string_id);
+    if (name == nullptr) return 0;
+
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < desc->property_count; i++) {
+        if (NamesMatch(desc->properties[i].name_utf8, name)) {
+            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryPropertyHandle(&desc->properties[i]));
+        }
+    }
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionTypeGetField(
+    CHAOS_IL2CPP_INTPTR type_handle,
+    CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    if (desc == nullptr || desc->fields == nullptr) return 0;
+
+    const char* name = DecodeAndNullTerminateString(name_string_id);
+    if (name == nullptr) return 0;
+
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < desc->field_count; i++) {
+        if (NamesMatch(desc->fields[i].name_utf8, name)) {
+            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryFieldHandle(&desc->fields[i]));
+        }
+    }
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionTypeGetEvent(
+    CHAOS_IL2CPP_INTPTR type_handle,
+    CHAOS_IL2CPP_INTPTR name_string_id) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+    auto* desc = GetTypeDescriptorFromHandle(type_handle);
+    if (desc == nullptr || desc->events == nullptr) return 0;
+
+    const char* name = DecodeAndNullTerminateString(name_string_id);
+    if (name == nullptr) return 0;
+
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < desc->event_count; i++) {
+        if (NamesMatch(desc->events[i].name_utf8, name)) {
+            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryEventHandle(&desc->events[i]));
+        }
+    }
+    return 0;
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"
