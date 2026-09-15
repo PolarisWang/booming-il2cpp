@@ -281,4 +281,64 @@ void chaos_async_iterator_builder_complete(CHAOS_IL2CPP_INTPTR builder_handle) n
 // single release point, called when the state machine's own lifetime ends.
 void chaos_async_iterator_builder_destroy(CHAOS_IL2CPP_INTPTR builder_handle) noexcept;
 
+// ══════════════════════════════════════════════════════════════════════
+// T1: Task.Wait(CancellationToken) / ConfigureAwait
+// ══════════════════════════════════════════════════════════════════════
+
+/// Task.Wait(CancellationToken) — infinite wait with token.
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitToken(CHAOS_IL2CPP_INTPTR task_handle,
+                                            CHAOS_IL2CPP_INTPTR token) noexcept;
+
+/// Task.Wait(TimeSpan) / Task.Wait(TimeSpan, CancellationToken) —
+/// blocking wait with TimeSpan timeout.
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitTimeSpan(CHAOS_IL2CPP_INTPTR task_handle,
+                                              CHAOS_IL2CPP_INTPTR timeout_span,
+                                              CHAOS_IL2CPP_INTPTR token) noexcept;
+
+/// Task.ConfigureAwait(bool) / Task<T>.ConfigureAwait(bool)
+/// Returns the ConfiguredTaskAwaitable as an INTPTR carrier pointer.
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskConfigureAwait(CHAOS_IL2CPP_INTPTR task_handle,
+                                                 CHAOS_IL2CPP_INT32 continue_on_captured_context) noexcept;
+
+/// Task.ConfigureAwait(ConfigureAwaitOptions) — flags-based overload.
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskConfigureAwaitOptions(
+    CHAOS_IL2CPP_INTPTR task_handle,
+    CHAOS_IL2CPP_INT32 options) noexcept;
+
+/// ConfiguredTaskAwaitable.GetAwaiter() / ConfiguredTaskAwaitable<T>.GetAwaiter()
+/// Reads the task handle and returns it as the awaiter reference.
+CHAOS_IL2CPP_INTPTR ChaosConfiguredTaskAwaitableGetAwaiter(
+    CHAOS_IL2CPP_INTPTR awaitable_carrier) noexcept;
+
+/// ConfiguredTaskAwaitable<T>.GetResult() — returns the result value.
+CHAOS_IL2CPP_INTPTR ChaosConfiguredTaskAwaitableGetResult(
+    CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+
+/// Task<T>.ConfigureAwait(bool) / ConfigureAwait(ConfigureAwaitOptions)
+/// Returns the ConfiguredTaskAwaitable<T> carrier pointer.
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskOfTConfigureAwait(
+    CHAOS_IL2CPP_INTPTR task_handle,
+    CHAOS_IL2CPP_INT32 continue_on_captured_context) noexcept;
+
+/// ValueTask.ConfigureAwait(bool) / ValueTask<T>.ConfigureAwait(bool)
+CHAOS_IL2CPP_INTPTR ChaosValueTaskConfigureAwait(
+    CHAOS_IL2CPP_INTPTR value_task_ptr,
+    CHAOS_IL2CPP_INT32 continue_on_captured_context) noexcept;
+
+/// ConfiguredValueTaskAwaitable.GetAwaiter()
+CHAOS_IL2CPP_INTPTR ChaosConfiguredValueTaskAwaitableGetAwaiter(
+    CHAOS_IL2CPP_INTPTR awaitable_carrier) noexcept;
+
+/// ConfiguredValueTaskAwaitable.get_IsCompleted()
+CHAOS_IL2CPP_INT32 ChaosConfiguredValueTaskAwaitableGetIsCompleted(
+    CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+
+/// ConfiguredValueTaskAwaitable.GetResult() (void)
+void ChaosConfiguredValueTaskAwaitableGetResultVoid(
+    CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+
+/// ConfiguredValueTaskAwaitable<T>.GetResult() -> T
+CHAOS_IL2CPP_INTPTR ChaosConfiguredValueTaskAwaitableGetResultValue(
+    CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+
 }  // extern "C"

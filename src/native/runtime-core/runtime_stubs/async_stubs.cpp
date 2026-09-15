@@ -47,6 +47,7 @@ CHAOS_IL2CPP_INTPTR async_task_create_gc() noexcept
 }
 
 #include <cstdint>
+#include <cstring>
 #include <new>
 #include <mutex>
 #include <vector>
@@ -1224,4 +1225,134 @@ CHAOS_IL2CPP_INTPTR chaos_value_task_get_awaiter(CHAOS_IL2CPP_INTPTR vt_handle) 
 CHAOS_IL2CPP_INTPTR chaos_task_unwrap(CHAOS_IL2CPP_INTPTR outer) noexcept
 {
     return outer;
+}
+
+// ══════════════════════════════════════════════════════════════════════
+// T1: Task.Wait(token / TimeSpan) + ConfigureAwait family
+// ══════════════════════════════════════════════════════════════════════
+
+namespace {
+/// The managed TimeSpan carrier is an INTPTR to 8 bytes of Int64 ticks
+/// (100 ns each).  Read via memcpy because the eval-stack slot is not
+/// guaranteed to be 8-byte aligned.
+CHAOS_IL2CPP_INT32 SpanTicksToMillis(CHAOS_IL2CPP_INTPTR span) noexcept
+{
+    if (span == 0) return 0;
+    CHAOS_IL2CPP_INT64 ticks = 0;
+    std::memcpy(&ticks, reinterpret_cast<const void*>(span), sizeof(ticks));
+    if (ticks < 0) return -1;              // negative span = infinite
+    if (ticks == 0) return 0;
+    const CHAOS_IL2CPP_INT64 ms = ticks / 10000;
+    if (ms > 0x7FFFFFFF) return 0x7FFFFFFF;
+    return static_cast<CHAOS_IL2CPP_INT32>(ms);
+}
+}  // anonymous namespace
+
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitToken(CHAOS_IL2CPP_INTPTR task_handle,
+                                            CHAOS_IL2CPP_INTPTR token) noexcept
+{
+    // The token is accepted but NOT honoured: this call site has no
+    // cancellation plumbing, the same boundary recorded for the
+    // ManualResetEventSlim token overloads in the threading roadmap.  Waiting
+    // indefinitely is what this call did through the fallback before, so this
+    // is not a regression — it is the honest limit of what can be wired today.
+    (void)token;
+    return ChaosAsyncTaskWait(task_handle, -1);
+}
+
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitTimeSpan(CHAOS_IL2CPP_INTPTR task_handle,
+                                              CHAOS_IL2CPP_INTPTR timeout_span,
+                                              CHAOS_IL2CPP_INTPTR token) noexcept
+{
+    (void)token;
+    return ChaosAsyncTaskWait(task_handle, SpanTicksToMillis(timeout_span));
+}
+
+// ── ConfigureAwait ─────────────────────────────────────────────────────
+//
+// `ConfiguredTaskAwaitable` is a struct the state machine carries; its first
+// field IS the task.  The second (the continuation action) is not needed here
+// because awaiter resumption goes through AwaitUnsafeOnCompleted, which
+// already has the task.
+//
+// So ConfigureAwait's whole job is to hand back something whose identity is
+// the task handle — and since the existing awaiter entries
+// (ChaosAsyncTaskAwaiterGetIsCompleted / GetResultValue) already take a task
+// handle in that role, the handle itself is the carrier.  No allocation is
+// needed, which is also why this cannot leak.
+
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskConfigureAwait(
+    CHAOS_IL2CPP_INTPTR task_handle,
+    CHAOS_IL2CPP_INT32 continue_on_captured_context) noexcept
+{
+    (void)continue_on_captured_context;   // no SynchronizationContext capture yet
+    return task_handle;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskConfigureAwaitOptions(
+    CHAOS_IL2CPP_INTPTR task_handle,
+    CHAOS_IL2CPP_INT32 options) noexcept
+{
+    (void)options;
+    return task_handle;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskOfTConfigureAwait(
+    CHAOS_IL2CPP_INTPTR task_handle,
+    CHAOS_IL2CPP_INT32 continue_on_captured_context) noexcept
+{
+    (void)continue_on_captured_context;
+    return task_handle;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosConfiguredTaskAwaitableGetAwaiter(
+    CHAOS_IL2CPP_INTPTR awaitable_carrier) noexcept
+{
+    return awaitable_carrier;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosConfiguredTaskAwaitableGetResult(
+    CHAOS_IL2CPP_INTPTR awaiter) noexcept
+{
+    return ChaosAsyncTaskGetResultBlocking(awaiter);
+}
+
+// ── ValueTask.ConfigureAwait ───────────────────────────────────────────
+//
+// ValueTask's carrier is already an opaque handle in this runtime
+// (chaos_value_task_get_awaiter returns it unchanged), so ConfigureAwait is
+// the same identity-shaped operation.
+
+CHAOS_IL2CPP_INTPTR ChaosValueTaskConfigureAwait(
+    CHAOS_IL2CPP_INTPTR value_task_ptr,
+    CHAOS_IL2CPP_INT32 continue_on_captured_context) noexcept
+{
+    (void)continue_on_captured_context;
+    return value_task_ptr;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosConfiguredValueTaskAwaitableGetAwaiter(
+    CHAOS_IL2CPP_INTPTR awaitable_carrier) noexcept
+{
+    return awaitable_carrier;
+}
+
+CHAOS_IL2CPP_INT32 ChaosConfiguredValueTaskAwaitableGetIsCompleted(
+    CHAOS_IL2CPP_INTPTR awaiter) noexcept
+{
+    return ChaosAsyncTaskGetIsCompleted(awaiter);
+}
+
+void ChaosConfiguredValueTaskAwaitableGetResultVoid(
+    CHAOS_IL2CPP_INTPTR awaiter) noexcept
+{
+    // Propagate fault/cancel the way the bare ValueTaskAwaiter.GetResult does;
+    // the value itself is unobservable in the void form.
+    (void)ChaosAsyncTaskGetResultBlocking(awaiter);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosConfiguredValueTaskAwaitableGetResultValue(
+    CHAOS_IL2CPP_INTPTR awaiter) noexcept
+{
+    return ChaosAsyncTaskGetResultBlocking(awaiter);
 }

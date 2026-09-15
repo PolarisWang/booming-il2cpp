@@ -113,6 +113,104 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // ── T1: Task.Wait(CancellationToken) ──
+            // Wait(CancellationToken) is an instance method with one parameter,
+            // so Phase A's receiver injection gives the shim 2 slots:
+            // (task_handle, token).  The native entry ignores the token
+            // (no cancellation wiring at this call site yet — same limitation
+            // as the MRES token overloads in the threading roadmap).
+            registry.Register("System.Threading.Tasks.Task", "Wait",
+                ["System.Threading.CancellationToken"],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskWaitToken",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── T1: Task.ConfigureAwait(bool) ──
+            registry.Register("System.Threading.Tasks.Task", "ConfigureAwait",
+                ["System.Boolean"],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskConfigureAwait",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── T1: Task.ConfigureAwait(ConfigureAwaitOptions) ──
+            registry.Register("System.Threading.Tasks.Task", "ConfigureAwait",
+                ["System.Threading.Tasks.ConfigureAwaitOptions"],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskConfigureAwaitOptions",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── T1: ConfiguredTaskAwaitable.GetAwaiter ──
+            registry.Register(
+                "System.Runtime.CompilerServices.ConfiguredTaskAwaitable", "GetAwaiter", [],
+                ShapeKind.SimpleForward, "ChaosConfiguredTaskAwaitableGetAwaiter",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── T1: ConfiguredTaskAwaitable<T>.GetAwaiter ──
+            registry.Register(
+                "System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1", "GetAwaiter", [],
+                ShapeKind.SimpleForward, "ChaosConfiguredTaskAwaitableGetAwaiter",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── T1: Task<T>.ConfigureAwait(bool) ──
+            registry.Register(
+                "System.Threading.Tasks.Task`1", "ConfigureAwait", ["System.Boolean"],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskOfTConfigureAwait",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── T1: Task<T>.ConfigureAwait(ConfigureAwaitOptions) ──
+            registry.Register(
+                "System.Threading.Tasks.Task`1", "ConfigureAwait",
+                ["System.Threading.Tasks.ConfigureAwaitOptions"],
+                ShapeKind.SimpleForward, "ChaosAsyncTaskOfTConfigureAwait",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── T1: ValueTask.ConfigureAwait(bool) ──
+            registry.Register(
+                "System.Threading.Tasks.ValueTask", "ConfigureAwait", ["System.Boolean"],
+                ShapeKind.SimpleForward, "ChaosValueTaskConfigureAwait",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateInt32AbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── T1: ConfiguredValueTaskAwaitable.GetAwaiter ──
+            registry.Register(
+                "System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable",
+                "GetAwaiter", [],
+                ShapeKind.SimpleForward, "ChaosConfiguredValueTaskAwaitableGetAwaiter",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
+            // ── T1: ConfiguredValueTaskAwaitable<T>.GetAwaiter ──
+            registry.Register(
+                "System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable`1",
+                "GetAwaiter", [],
+                ShapeKind.SimpleForward, "ChaosConfiguredValueTaskAwaitableGetAwaiter",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateNativeIntAbiSlot(),
+                new HashSet<int> { 0 });
+
             registry.Register("System.Runtime.CompilerServices.TaskAwaiter", "get_IsCompleted", [],
                 ShapeKind.SimpleForward, "ChaosAsyncTaskAwaiterGetIsCompleted",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(

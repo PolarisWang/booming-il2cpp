@@ -114,6 +114,16 @@ chaos_native_add_test(test_async_task_state
     LABELS "unit;threading"
 )
 
+# async_t1_test — T1: Task.ConfigureAwait / Wait(CancellationToken) /
+# ConfiguredTaskAwaitable chain.  Links async_stubs.cpp directly for the real
+# entry points, plus delegate_helpers.cpp for delegate invoke support.
+chaos_native_add_test(test_async_t1
+    async_t1_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/core/delegate_helpers.cpp
+    LABELS "unit;threading"
+)
+
 # async_task_exception_test — ASYNC-P1-3: exception propagation (Phase 1 exit
 # gate).  Links async_stubs.cpp directly so the real ChaosAsyncTask* entry
 # points are under test.
