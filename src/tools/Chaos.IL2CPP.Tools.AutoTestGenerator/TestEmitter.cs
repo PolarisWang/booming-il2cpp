@@ -859,6 +859,30 @@ public sealed class TestEmitter
                or "SetAttribute" or "SetAttributeNode")
             return true;
 
+        // XmlNameTable: native stubs raise ArgumentNullException for null input
+        // and return null for empty/non-existent lookups.  ATG subjects construct
+        // via KnownInstances → real NameTable instance, so methods execute.
+        if (declaringType is not null
+            && (declaringType.Contains("System.Xml.XmlNameTable", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.NameTable", StringComparison.Ordinal))
+            && method.Name is "Get" or "Add")
+            return true;
+
+        // XmlAttributeCollection / XmlNodeList / XmlNamedNodeMap /
+        // XmlNamespaceManager: native stubs replicate the managed validation
+        // (ArgumentException for a foreign node, InvalidOperationException for an
+        // uninitialized collection, ArgumentNullException for null args).
+        if (declaringType is not null
+            && (declaringType.Contains("System.Xml.XmlAttributeCollection", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlNodeList", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlNamedNodeMap", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlNamespaceManager", StringComparison.Ordinal))
+            && method.Name is "SetNamedItem" or "Append" or "Prepend" or "Item"
+               or "GetNamedItem" or "AddNamespace" or "RemoveNamespace"
+               or "LookupNamespace" or "LookupPrefix" or "HasNamespace"
+               or "PopScope" or "PushScope")
+            return true;
+
         return false;
     }
 

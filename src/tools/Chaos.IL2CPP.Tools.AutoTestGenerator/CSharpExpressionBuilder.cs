@@ -101,6 +101,13 @@ public sealed class CSharpExpressionBuilder
         ["System.Xml.XmlWriterSettings"] = "new System.Xml.XmlWriterSettings()",
         ["System.Xml.XmlImplementation"] = "new System.Xml.XmlImplementation()",
         ["System.Xml.XmlUrlResolver"] = "new System.Xml.XmlUrlResolver()",
+        // XmlNameTable (abstract) → concrete NameTable instance.
+        // Without this, ATG's GetInstanceExpression falls through to
+        // SubjectInstanceFactory.Create<XmlNameTable>() which returns a
+        // GetUninitializedObject bare object whose instance methods throw
+        // InvalidOperationException, triggering the AOT-STUB-GAP skip.
+        ["System.Xml.XmlNameTable"] = "new System.Xml.NameTable()",
+        ["System.Xml.NameTable"] = "new System.Xml.NameTable()",
         // IO stream/text factories
         ["System.IO.Stream"] = "System.IO.Stream.Null",
         ["System.IO.TextReader"] = "new System.IO.StringReader(\"\")",

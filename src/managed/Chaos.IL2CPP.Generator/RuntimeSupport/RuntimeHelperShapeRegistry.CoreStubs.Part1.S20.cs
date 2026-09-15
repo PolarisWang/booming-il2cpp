@@ -406,6 +406,75 @@ public sealed partial class NativeAotLoweringPlanner
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                     new[] { attrAbi, nodeAbi }),
                 new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlNode" });
+
+            // ── XmlAttributeCollection / XmlNodeList / XmlNamedNodeMap ──
+            var attrCollAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.XmlAttributeCollection",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var nodeListAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.XmlNodeList",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var namedMapAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.XmlNamedNodeMap",
+                AotCoreIrTypeShapeKind.ReferenceType);
+
+            registry.Register("System.Xml.XmlAttributeCollection", "SetNamedItem",
+                new[] { "System.Xml.XmlNode" }, ShapeKind.SimpleForward,
+                "ChaosXmlAttributeCollectionSetNamedItem",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { attrCollAbi, nodeAbi }),
+                objAbi, new HashSet<int> { 0, 1 });
+            RegisterXmlDomVoid(registry, "System.Xml.XmlAttributeCollection", "Append",
+                "ChaosXmlAttributeCollectionAppend",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { attrCollAbi, nodeAbi }),
+                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlNode" });
+            RegisterXmlDomVoid(registry, "System.Xml.XmlAttributeCollection", "Prepend",
+                "ChaosXmlAttributeCollectionPrepend",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { attrCollAbi, nodeAbi }),
+                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlNode" });
+
+            registry.Register("System.Xml.XmlNodeList", "Item",
+                new[] { "System.Int32" }, ShapeKind.SimpleForward,
+                "ChaosXmlNodeListItem",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { nodeListAbi, intRetAbi }),
+                objAbi, new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Xml.XmlNamedNodeMap", "GetNamedItem",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlNamedNodeMapGetNamedItem",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { namedMapAbi, strAbi }),
+                objAbi, new HashSet<int> { 0, 1 });
+            registry.Register("System.Xml.XmlNamedNodeMap", "SetNamedItem",
+                new[] { "System.Xml.XmlNode" }, ShapeKind.SimpleForward,
+                "ChaosXmlNamedNodeMapSetNamedItem",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { namedMapAbi, nodeAbi }),
+                objAbi, new HashSet<int> { 0, 1 });
+
+            // ── XmlNamespaceManager ──
+            var nsMgrAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.XmlNamespaceManager",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            RegisterXmlDomVoid(registry, "System.Xml.XmlNamespaceManager", "AddNamespace",
+                "ChaosXmlNamespaceManagerAddNamespace",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { nsMgrAbi, strAbi, strAbi }),
+                new HashSet<int> { 0, 1, 2 },
+                new[] { "System.String", "System.String" });
+            RegisterXmlDomVoid(registry, "System.Xml.XmlNamespaceManager", "RemoveNamespace",
+                "ChaosXmlNamespaceManagerRemoveNamespace",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { nsMgrAbi, strAbi }),
+                new HashSet<int> { 0, 1 }, new[] { "System.String" });
+            registry.Register("System.Xml.XmlNamespaceManager", "GetEnumerator",
+                Array.Empty<string>(), ShapeKind.SimpleForward,
+                "ChaosXmlNamespaceManagerGetEnumerator",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { nsMgrAbi }),
+                objAbi, rawThis);
         }
 
         private static void RegisterXmlDomVoid(

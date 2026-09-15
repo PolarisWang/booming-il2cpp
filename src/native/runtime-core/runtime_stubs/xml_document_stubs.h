@@ -70,4 +70,17 @@ void ChaosXmlElementWriteTo(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR wr
 void ChaosXmlAttributeAppendChild(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) noexcept;
 void ChaosXmlAttributePrependChild(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) noexcept;
 
+// ── XmlAttributeCollection / XmlNodeList / XmlNamedNodeMap ──
+CHAOS_IL2CPP_INTPTR ChaosXmlAttributeCollectionSetNamedItem(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept;
+void ChaosXmlAttributeCollectionAppend(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept;
+void ChaosXmlAttributeCollectionPrepend(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlNodeListItem(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 index) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlNamedNodeMapGetNamedItem(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlNamedNodeMapSetNamedItem(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept;
+
+// ── XmlNamespaceManager ──
+void ChaosXmlNamespaceManagerAddNamespace(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix, CHAOS_IL2CPP_INTPTR uri) noexcept;
+void ChaosXmlNamespaceManagerRemoveNamespace(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlNamespaceManagerGetEnumerator(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
+
 }  // extern "C"

@@ -498,5 +498,106 @@ void ChaosXmlAttributePrependChild(
     RaiseInvalidOp("An XmlAttribute cannot have children.");
 }
 
+// ══════════════════════════════════════════════════════════════════
+// XmlAttributeCollection / XmlNodeList / XmlNamedNodeMap
+// ══════════════════════════════════════════════════════════════════
+
+/// SetNamedItem(XmlNode) — an attribute collection built on a bare object has
+/// no owning element, so the managed code throws ArgumentException.
+CHAOS_IL2CPP_INTPTR ChaosXmlAttributeCollectionSetNamedItem(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept
+{
+    (void)this_ptr;
+    if (node == 0) RaiseArgumentNullException("node");
+    RaiseArgException("The node to be inserted is from a different document context.");
+}
+
+void ChaosXmlAttributeCollectionAppend(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept
+{
+    (void)this_ptr;
+    if (node == 0) RaiseArgumentNullException("node");
+    RaiseArgException("The node to be inserted is from a different document context.");
+}
+
+void ChaosXmlAttributeCollectionPrepend(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept
+{
+    (void)this_ptr;
+    if (node == 0) RaiseArgumentNullException("node");
+    RaiseArgException("The node to be inserted is from a different document context.");
+}
+
+/// XmlNodeList.Item(int) — a bare node list has no backing collection.
+CHAOS_IL2CPP_INTPTR ChaosXmlNodeListItem(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 index) noexcept
+{
+    (void)this_ptr; (void)index;
+    RaiseInvalidOp("The node list is not initialized.");
+}
+
+CHAOS_IL2CPP_INTPTR ChaosXmlNamedNodeMapGetNamedItem(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+{
+    (void)this_ptr;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len))
+        RaiseArgumentNullException("name");
+    RaiseInvalidOp("The named node map is not initialized.");
+}
+
+CHAOS_IL2CPP_INTPTR ChaosXmlNamedNodeMapSetNamedItem(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept
+{
+    (void)this_ptr;
+    if (node == 0) RaiseArgumentNullException("node");
+    RaiseArgException("The node to be inserted is from a different document context.");
+}
+
+// ══════════════════════════════════════════════════════════════════
+// XmlNamespaceManager
+// ══════════════════════════════════════════════════════════════════
+
+/// AddNamespace(prefix, uri) — argument validation matches the managed API.
+/// A real namespace scope is not modelled, so a valid pair is a no-op.
+void ChaosXmlNamespaceManagerAddNamespace(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR uri) noexcept
+{
+    (void)this_ptr;
+    const char* p = nullptr; size_t p_len = 0;
+    if (!ManagedStringView(prefix, p, p_len))
+        RaiseArgumentNullException("prefix");
+    const char* u = nullptr; size_t u_len = 0;
+    if (!ManagedStringView(uri, u, u_len))
+        RaiseArgumentNullException("uri");
+    // "xml" / "xmlns" are reserved and rejected by the managed implementation.
+    if ((p_len == 3 && std::strncmp(p, "xml", 3) == 0)
+        || (p_len == 5 && std::strncmp(p, "xmlns", 5) == 0)
+        || p_len == 0)
+        RaiseArgException("Prefix is reserved or invalid.");
+    // Valid prefix/uri pair: no-op (the AOT subset keeps no namespace scope).
+}
+
+void ChaosXmlNamespaceManagerRemoveNamespace(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix) noexcept
+{
+    (void)this_ptr;
+    const char* p = nullptr; size_t p_len = 0;
+    if (!ManagedStringView(prefix, p, p_len))
+        RaiseArgumentNullException("prefix");
+    // Removing a prefix that was never added is a silent no-op in the BCL.
+}
+
+CHAOS_IL2CPP_INTPTR ChaosXmlNamespaceManagerGetEnumerator(
+    CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+{
+    (void)this_ptr;
+    // No namespace scope is tracked, so there is nothing to enumerate.
+    RaiseInvalidOp("The namespace manager has no scope to enumerate.");
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
