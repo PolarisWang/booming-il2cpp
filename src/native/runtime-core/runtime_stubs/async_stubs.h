@@ -341,4 +341,32 @@ void ChaosConfiguredValueTaskAwaitableGetResultVoid(
 CHAOS_IL2CPP_INTPTR ChaosConfiguredValueTaskAwaitableGetResultValue(
     CHAOS_IL2CPP_INTPTR awaiter) noexcept;
 
+// ══════════════════════════════════════════════════════════════════════
+// Page-file symbol declarations (C3861 guard for multi-TU builds)
+// ══════════════════════════════════════════════════════════════════════
+
+/// The non-generic TaskAwaiter.GetResult(void) — the symbol page files
+/// call directly through the external-runtime dispatch table when the
+/// method is split into a separate translation unit.
+extern "C" CHAOS_IL2CPP_INTPTR
+    chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__() noexcept;
+
+/// Task.GetAwaiter() → TaskAwaiter — page files call this through the
+/// external-runtime symbol when the method is in a different TU.
+extern "C" CHAOS_IL2CPP_INTPTR
+    chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__() noexcept;
+
+/// Task<T>.GetAwaiter() → TaskAwaiter<T> — generic variant.
+extern "C" CHAOS_IL2CPP_INTPTR
+    chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___() noexcept;
+
+/// TaskAwaiter<T>.GetResult() -> T — generic awaiter result.
+extern "C" CHAOS_IL2CPP_INTPTR
+    chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__() noexcept;
+
+/// ValueTaskAwaiter.GetResult(void) — non-generic void overload called from
+/// page-file external-runtime dispatch.
+extern "C" CHAOS_IL2CPP_INTPTR
+    chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__() noexcept;
+
 }  // extern "C"

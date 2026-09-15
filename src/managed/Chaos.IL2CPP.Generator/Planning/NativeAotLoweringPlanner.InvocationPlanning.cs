@@ -5,6 +5,99 @@ namespace Chaos.IL2CPP.Generator;
 public sealed partial class NativeAotLoweringPlanner
 {
 
+    /// <summary>
+    /// True when <paramref name="callee"/> is an instance-method call whose
+    /// generated shim therefore carries an implicit receiver slot.
+    /// </summary>
+    /// <remarks>
+    /// Bridge-import thunks (built here, in InvocationPlanning) must agree with
+    /// the shim signature built by <c>CreateDefinitionFromShapeEntry</c> (in the
+    /// ExternalRuntimeHelpers phase).  That function applies Phase-A receiver
+    /// injection; this one historically did not, so instance methods with zero
+    /// managed parameters got a 0-arg call against a 1-arg definition (C2660).
+    ///
+    /// The callee's subject id carries no instance-vs-static marker, so this
+    /// checks the linked-world method model first and falls back to the same
+    /// cross-assembly allowlist the receiver injection uses (those BCL types are
+    /// not in the model).
+    /// </remarks>
+    private bool IsInstanceMethodCallee(string callee)
+    {
+        if (_allManagedMethods != null && _allManagedMethods.TryGetValue(callee, out var mm))
+            return !mm.IsStatic;
+
+        var typeName = ExtractDeclaringTypeNameFromSubjectId(callee);
+        if (typeName == null) return false;
+
+        // Static-only families that also appear with a zero-param managed
+        // signature and must NOT gain a receiver slot.
+        if (typeName == "ThreadPool" || typeName == "Thread" ||
+            typeName.Contains("Interlocked") || typeName.Contains("Volatile"))
+            return false;
+
+        // ── Static methods on otherwise-instance Task types ──
+        //
+        // Task carries BOTH instance methods (Wait, ConfigureAwait, GetAwaiter)
+        // and static factories (FromResult, FromException, FromCanceled, Run,
+        // WhenAll, WhenAny, Delay).  The allowlist below is type-based, so it
+        // would wrongly add a receiver to the static ones — which is what
+        // produced `async_task_from_exception(handle, exception)` against a
+        // 1-argument definition.
+        //
+        // The static names are enumerated rather than inferred because the
+        // subject id does not mark staticness and these types are not in the
+        // linked-world model.  Adding a static Task factory means adding it here.
+        var methodName = ExtractMethodNameFromSubjectId(callee);
+        if (methodName != null && _StaticTaskMethodNames.Contains(methodName))
+            return false;
+
+        foreach (var t in _ReceiverInjectedTypes)
+        {
+            if (string.Equals(typeName, t, StringComparison.Ordinal))
+                return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Method names on the Task/ValueTask family that are STATIC and therefore
+    /// take no receiver slot.  Enumerated, not inferred — see IsInstanceMethodCallee.
+    /// </summary>
+    private static readonly HashSet<string> _StaticTaskMethodNames = new(StringComparer.Ordinal)
+    {
+        "FromResult", "FromException", "FromCanceled", "FromCanceled",
+        "Run", "Delay", "WhenAll", "WhenAny", "WhenEach",
+        "Yield", "WaitAll", "WaitAny",
+        "ContinueWhenAll", "ContinueWhenAny",
+    };
+
+    /// <summary>Method name from a subject id, or null if malformed.</summary>
+    private static string? ExtractMethodNameFromSubjectId(string subjectId)
+    {
+        var sep = subjectId.IndexOf("::", StringComparison.Ordinal);
+        if (sep < 0) return null;
+        var after = subjectId[(sep + 2)..];
+        var colon = after.IndexOf(':');
+        var paren = after.IndexOf('(');
+        var end = colon >= 0 && paren >= 0 ? Math.Min(colon, paren)
+               : colon >= 0 ? colon
+               : paren >= 0 ? paren : -1;
+        return end < 0 ? after : after[..end];
+    }
+
+    /// <summary>
+    /// Declaring type display name from a subject id
+    /// (<c>Assembly/Namespace.Type::Method:Ret(Params)</c>), or null if malformed.
+    /// </summary>
+    private static string? ExtractDeclaringTypeNameFromSubjectId(string subjectId)
+    {
+        var slash = subjectId.IndexOf('/');
+        var afterAssembly = slash >= 0 ? subjectId[(slash + 1)..] : subjectId;
+        var sep = afterAssembly.IndexOf("::", StringComparison.Ordinal);
+        if (sep < 0) return null;
+        return afterAssembly[..sep];
+    }
+
     private IReadOnlyList<AotCoreIrMethodArtifact> CollectReachableMethods(
         AotCoreIrArtifact aotCoreIr,
         AotCoreIrMethodArtifact entryMethod)

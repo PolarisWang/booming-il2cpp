@@ -964,25 +964,48 @@ public sealed partial class NativeAotLoweringPlanner
 	/// </summary>
 	private static bool _injectReceiverForParameterisedMissingEntry(string callee)
 	{
-		// Only inject for known threading primitives whose instance methods
-		// were registered in Part1.S16.cs (T2.2/T2.4/T2.5).  These types'
-		// managed methods are NOT in the linked-world model (they are BCL
-		// cross-assembly), so we cannot rely on IsStatic lookup.
+		// Only inject for known instance-method types whose managed methods are
+		// NOT in the linked-world model (they are cross-assembly BCL callees).
 		//
-		// The types listed here are reference types that need per-instance
-		// receiver recovery.  Static-only types like ThreadPool are excluded.
+		// The declaring type in a subject id is the FULLY QUALIFIED name
+		// ("System.Threading.Tasks.Task"), not the bare type name — matching on
+		// the bare name silently fails and the receiver is not injected, which
+		// surfaces much later as C2660 in the generated C++.
+		//
+		// A denylist would be fragile here (any unknown type would silently get
+		// a receiver and break its shim), so this is an explicit allowlist:
+		// every entry has a ShapeRegistry registration that expects a receiver.
 		if (!HasMethodParameters(callee))
-			return false;   // zero-param already works
+			return false;   // zero-param already works — the sole slot IS the receiver
 
 		var typeName = ExtractDeclaringTypeName(callee);
-		return typeName switch
+		if (typeName == null) return false;
+
+		foreach (var t in _ReceiverInjectedTypes)
 		{
-			"ReaderWriterLockSlim" => true,
-			"ManualResetEventSlim" => true,
-			"SpinLock" => true,
-			_ => false,
-		};
+			if (string.Equals(typeName, t, StringComparison.Ordinal))
+				return true;
+		}
+		return false;
 	}
+
+	/// <summary>
+	/// Fully-qualified declaring-type names whose parameterised instance methods
+	/// take an injected receiver slot.  Kept as one list so adding a T2–T5 entry
+	/// is a one-line change with an obvious place to look.
+	/// </summary>
+	private static readonly string[] _ReceiverInjectedTypes =
+	{
+		// Phase A — threading sync primitives
+		"ReaderWriterLockSlim",
+		"ManualResetEventSlim",
+		"SpinLock",
+		// T1 — Task / ValueTask family
+		"System.Threading.Tasks.Task",
+		"System.Threading.Tasks.Task`1",
+		"System.Threading.Tasks.ValueTask",
+		"System.Threading.Tasks.ValueTask`1",
+	};
 
 	/// <summary>
 	/// Extract the declaring type display name from a subject id.
