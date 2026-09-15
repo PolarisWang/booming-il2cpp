@@ -452,7 +452,12 @@ static int RunFactJsonMode() {
             }
         } else {
             caught = true;
-            std::fprintf(stderr, "[ABORT-FAULT] si=%d\n", si);
+            // Subject id in the log (mirrors the SEH-FAULT line): SIGABRT triage
+            // otherwise requires manually mapping si → methodSubjectId.
+            const char* _abort_sid =
+                (si < kSubjectEntryCount && si < kCount && kSubjectSubjectIds != nullptr && kSubjectSubjectIds[si] != nullptr)
+                    ? kSubjectSubjectIds[si] : "";
+            std::fprintf(stderr, "[ABORT-FAULT] si=%d %s\n", si, _abort_sid);
         }
 
         // Attribute the outcome by EVIDENCE SOURCE, not by "did it throw".
