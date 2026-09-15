@@ -172,23 +172,31 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
 | **members.cpp 参数个数偏移错位** | `param_count` 读 offset 8（element_type_shape+padding）——两种数组布局的 length 都在 **offset 24**。注释声称 "16 bytes header" 与代码自相矛盾；该路径此前无真实调用者故未暴露 |
 | S15 补 GetMethod(String, Type[]) 精确注册 | 被通配遮蔽，保留作后备 |
 
-### 层叠图谱（C 组 si=192 的完整依赖链，逐层实测）
+### 层叠图谱（C 组 si=192 的完整依赖链，逐层实测 — 2026-09-15 更新）
 
 ```
-层1  new Type[]{typeof(char)} 的 newarr 分配未发射
-     （IR 有 newarr System.Type @il17，生成体只有 _s5 = 0 → null → FAIL_FAST）
-  ↓ 修好后
-层2  GetMethod 查 B3 类型描述符的 methods 表 —— 但 B3 收集器只收
-     properties/fields/events，methods = nullptr → GetMethod 返 0
+层1  ✅ 已修（1343fabe0 续）：newarr 分配实际已发射（ChaosArrayNew1D 在生成体中），
+     真 abort 源是 stelem.ref 的 chaos_is_array_store_compatible 对编码句柄读垃圾
+     header → FAIL_FAST。已对全部 stelem.ref 跳过该检查（null/bounds 检查保留）。
+     实测：C 组 8 项 ABORT → NRE（caught=true），全局 ABORT 14→6
+  ↓ 已暴露
+层2  ✅ 已修（8bd4c84f8）：methods 表已发射进描述符
+  ↓ 已暴露
+层1b 🔴 当前阻断：typeof(string) 折叠返回 TypeInfoHot*（裸类型句柄），
+     ChaosReflectionGetMethod 的 TryDecodeReflectionQueryHandle /
+     module registry / pseudo-metadata 三条解码路径都无法把 TypeInfoHot*
+     转成 ReflectionQueryTypeDescriptor → GetMethod 返 0 → NRE。
+     需架构决策：typeof 值模型与反射句柄体系打通（fold 改推编码句柄，
+     或 TypeInfoHot* → descriptor 反查）
   ↓ 修好后
 层3  FindReflectionQueryMethod 按名字+参数个数匹配 —— IndexOf(char) 与
      IndexOf(string) 个数相同会歧义；需 descriptor 携带参数类型
   ↓（B 组同理需要 MemberInfo 托管模型）
-终局  6+6 项转绿
+终局  C 组 8 项转绿
 ```
 
-**每修一层就会暴露下一层** —— 这与 B5 修完后 preAssertionRaise 的下降一致
-（35→31→C 组待层1/层2）。
+**每修一层就会暴露下一层** —— 与 B5 修完后 preAssertionRaise 的下降一致
+（35→31→33 中 C 组从 abort 转 NRE）。
 
 ### 移交状态
 

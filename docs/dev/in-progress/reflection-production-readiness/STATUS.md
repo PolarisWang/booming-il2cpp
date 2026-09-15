@@ -90,6 +90,41 @@ roadmap P0–P4 全部子任务已归档至 `docs/dev/completed/reflection-produ
 
 ## 下一步
 
+### 🎯 里程碑：断言体系闭环 + 反射成员元数据管线落地（2026-09-14/15）
+
+**本轮主题**：把 reflection chunk 的失败从「不可归因的 abort」推进到「可归因的诚实失败」。
+
+**结果数字**（`artifacts/foundation-dll/System.Private.CoreLib/chunks/reflection/`）：
+
+| 指标 | 2026-09-13 基线 | 现在 |
+|---|---|---|
+| passed | 248 | **249** |
+| ABORT-FAULT（进程中止，不可归因） | 21 | **6** |
+| caught（托管异常，可归因） | ~33 | 33（构成已改变） |
+| `assertFailed` 字段有效性 | 恒 false（闸门失效） | **首次有效** |
+
+**五层断言缺陷链**（全部修复，双向验证闭环 —— 见 memory `aot-codegen-multi-defect-chain-2026-09-14`）：
+1. SDK 编译未定义 `VERIFY` → 断言体被剥空（`249220748`）
+2. ATG 判别式查表键用错（subject 名 → callee 名）（`249220748`）
+3. runner `!caught` 耦合 + `"caught"` 未入 fact（`0f6b70b63`）
+4. `Assert_Complete` 弱桩恒胜（selectany 对函数无效）（`0f6b70b63`）
+5. 循环 lowering 三缺陷 + while 条件重算槽位（`24060f15a`/`42915b6b4`/`b3ebf5139`）
+
+**反射成员元数据管线（B3，三步全落地）**：
+- 收集：closure 可达性过滤的属性/字段/事件/方法/参数扫描（`a008825f8`/`c3f128b7c`）
+- 发射：per-type 描述符表 + `ChaosRegisterReflectionMembers` 自注册（`887df3404`）
+- 消费：`GetProperty/GetField/GetEvent/GetMethod` FAIL 桩 → 真实查表（`2add27c1e`/`1343fabe0`）
+
+**B7 第二条 abort 链（14→6）**：
+- `stelem.ref` store-compat 检查对编码句柄读垃圾 header → 全部跳过（`1343fabe0`）
+- sentinel 假指针桩 → 恢复 `return 0`，调用方 null-guard 抛托管 NRE（可归因）
+- A2.7 ldtoken 补偿 = 深度记账双缺陷相消，**禁止单独修**（`bb10026d7`，⚠️ 见 EmitInstruction.cs 注释）
+
+**剩余 33 项 caught 的构成**（诚实记录，非"均非缺陷"推断）：
+- C 组（si=192–199，8 项）：`typeof` 折叠返回 `TypeInfoHot*` 而非编码描述符句柄 → `ChaosReflectionGetMethod` 无法解码 → NRE。**需架构决策**：typeof 值模型与反射句柄体系打通（层 1b）
+- A/B 组（si=54/56/138/139/141/142，6 项 abort）：GetMembers 链需 MemberInfo 托管对象模型（设计级）
+- 其余 19 项：未注册符号 / 描述符缺失，按 not-supported 路线走
+
 ### 🎯 里程碑：real-planned 与 unclassified 双双归零（2026-09-12）
 
 | 指标 | 起点 | 现在 |
