@@ -196,6 +196,22 @@ public sealed partial class NativeAotLoweringPlanner
     internal readonly List<(string TypeSubjectId, string Name, string MemberType, uint Flags, long ConstantValue)> _reflectionEvents = new();
 
     /// <summary>
+    /// Methods of closure-reachable types, for the reflection method descriptor
+    /// tables.  Type::GetMethod resolves against these — without them, the
+    /// forwarded ChaosReflectionGetMethod call finds an empty methods table and
+    /// returns 0 (the C-group subjects' NRE).
+    /// </summary>
+    internal readonly List<(string TypeSubjectId, uint Token, string MethodSubjectId, string Name, string ReturnTypeName, int ParamCount, uint Flags)> _reflectionMethods = new();
+
+    /// <summary>
+    /// Parameter descriptors keyed by their owning method's subject id.  Emitted as
+    /// per-method arrays so ReflectionQueryMethodDescriptor.parameters can point at
+    /// real data — GetParameters()[i] on a method with nullptr parameters would
+    /// return an empty array and the [0] access would abort.
+    /// </summary>
+    internal readonly List<(string MethodSubjectId, string ParamSubjectId, string ParamName, int ParamIndex, string ParamTypeName)> _reflectionMethodParams = new();
+
+    /// <summary>
     /// When true, method emission runs sequentially (single-threaded).
     /// Set by --force-serial CLI flag.  Used as fallback if parallel
     /// emission causes heap corruption (0xC000037D).

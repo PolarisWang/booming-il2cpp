@@ -464,6 +464,45 @@ public sealed partial class NativeAotLoweringPlanner
             _reflectionEvents.Add((typeSubjectId, evtName,
                 DescribeMemberTypeFromAccessor(reader, evtAccessor), flags, 0L));
         }
+
+        // ── Methods ──
+        // Type::GetMethod(name, Type[]) resolves against the type's method
+        // descriptor table; the descriptor's `parameters` array feeds
+        // GetParameters()[i].  Both were absent before (methods = nullptr / 0).
+        foreach (var methodHandle in typeDef.GetMethods())
+        {
+            var md = reader.GetMethodDefinition(methodHandle);
+            var methodName = reader.GetString(md.Name);
+
+            System.Reflection.Metadata.MethodSignature<string> sig;
+            try
+            {
+                sig = md.DecodeSignature(
+                    new MetadataMethodSignatureTypeNameProvider(reader, _assemblyName), null);
+            }
+            catch (BadImageFormatException) { continue; }
+
+            var returnTypeName = sig.ReturnType ?? "System.Void";
+            var paramTypes = sig.ParameterTypes.ToArray();
+
+            string methodSubjectId = ManagedNaming.CreateMethodSubjectId(
+                typeSubjectId, methodName, returnTypeName, paramTypes);
+
+            uint mFlags = 0;
+            if ((md.Attributes & MethodAttributes.Public) != 0) mFlags |= 1u << 0;
+            if ((md.Attributes & MethodAttributes.Static) != 0) mFlags |= 1u << 1;
+            if ((md.Attributes & MethodAttributes.Virtual) != 0) mFlags |= 1u << 2;
+
+            uint token = (uint)MetadataTokens.GetToken(methodHandle);
+            _reflectionMethods.Add((typeSubjectId, token, methodSubjectId,
+                methodName, returnTypeName, paramTypes.Length, mFlags));
+
+            for (int pi = 0; pi < paramTypes.Length; pi++)
+            {
+                var paramSubjectId = ManagedNaming.CreateParameterSubjectId(methodSubjectId, pi, $"p{pi}");
+                _reflectionMethodParams.Add((methodSubjectId, paramSubjectId, $"p{pi}", pi, paramTypes[pi]));
+            }
+        }
     }
 
     /// <summary>Whether a property/event accessor method is static.</summary>

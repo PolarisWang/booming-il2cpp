@@ -533,6 +533,16 @@ public sealed class TestEmitter
             {
                 var csType = CSharpSerializer.MapToCSharpType(method.ReturnTypeName);
 
+                // Internal runtime types (e.g. XmlElementList, which is not a public
+                // type) cannot be referenced by name in generated C#.  When the return
+                // type captured by the probe is internal, skip the assertion rather than
+                // emitting `default(XmlElementList)!` which fails CS0246.
+                if (IsInternalRuntimeType(method.ReturnTypeName))
+                {
+                    sb.AppendLine($"            // [UNVERIFIED] null return via internal type {method.ReturnTypeName} — skipping assertion");
+                    return;
+                }
+
                 // Array-typed returns that the probe captured as null are ambiguous:
                 // the BCL convention for "no items" is an EMPTY ARRAY, not null (e.g.
                 // ParameterInfo.GetOptionalCustomModifiers() on an unmodified parameter
@@ -709,7 +719,9 @@ public sealed class TestEmitter
             // System.Linq.EmptyLookup<TKey,TElement> is internal
             || typeName.Contains("EmptyLookup", StringComparison.Ordinal)
             // System.Collections.Frozen.EmptyFrozenSet is internal
-            || typeName.Contains("EmptyFrozenSet", StringComparison.Ordinal);
+            || typeName.Contains("EmptyFrozenSet", StringComparison.Ordinal)
+            // System.Xml.XmlElementList is internal (System.Private.Xml)
+            || typeName.Contains("XmlElementList", StringComparison.Ordinal);
     }
 
     /// <summary>

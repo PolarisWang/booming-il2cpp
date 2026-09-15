@@ -255,22 +255,25 @@ public sealed partial class NativeAotLoweringPlanner
         }
         // A2.7 DCE: Skip dead ltoken when typeof(T) compile-time fold fires.
         //
-        // ⚠️ KNOWN DEPTH-ACCOUNTING ENTANGLEMENT (2026-09-15, do not "fix" in
-        // isolation): the ldtoken here IS compensated +1, and the fold's own push
-        // at the GetTypeFromHandle call site allocates another slot — a net +2 for
-        // the pair's real IL net of +1.  That inflation is WRONG in isolation, but
-        // removing the compensation (net +1) regressed 10+ subjects elsewhere
-        // (verified: passed 252 → 249) — some other slot-consumption pattern is
-        // implicitly relying on the inflated depth.  The two defects cancel.
-        // Untangling requires a dedicated audit of the whole structured-slot
-        // depth accounting (see B7/STATUS.md 层叠图谱).
+        // NO slot compensation: the ldtoken in _typeOfSkipIlOffsets is atomically
+        // paired with a _typeOfFoldMap entry at the following GetTypeFromHandle
+        // call, and that fold's emission pushes the folded TypeInfo* — providing
+        // the pair's real IL net of exactly +1.  Compensating the ldtoken with an
+        // extra slot ran the depth one ahead of the real stack, so multi-operand
+        // consumers (stelem.ref: value/index/array) read the array base from the
+        // INDEX slot — `new Type[]{typeof(char)}` left a null array and aborted
+        // (ABORT-FAULT) in the reflection chunk.
+        //
+        // (2026-09-15 second measurement, S5 forwarding isolated: removing the
+        // compensation with the S5 GetMethod fix held at passed=249 — identical
+        // to the compensated build.  The earlier "regression" reading was
+        // confounded by the S5 fake-green removal landing in the same build.)
         if (_typeOfSkipIlOffsets.Count > 0 &&
             _state.Value!.CurrentMethodNativeSymbol != null &&
             instruction.Op == "ldtoken" &&
             _typeOfSkipIlOffsets.TryGetValue(_state.Value!.CurrentMethodNativeSymbol, out var typeOfSkipSet) &&
             typeOfSkipSet.Contains(instruction.IlOffset))
         {
-            CompensateDceSkipForStructuredSlots(instruction);
             return;
         }
 

@@ -52,6 +52,55 @@ public sealed class CSharpExpressionBuilder
             "new System.Xml.XmlTextWriter(new System.IO.StringWriter())",
         ["System.Xml.XmlTextReader"] =
             "new System.Xml.XmlTextReader(new System.IO.StringReader(\"<root/>\"))",
+        // Xml DOM types: these DO have parameterless ctors, but ATG's
+        // Type.GetType() lookup returns null for them (they live in
+        // System.Private.Xml, not the ATG host's loaded assemblies), so the
+        // parameterless-ctor probe at the bottom of GetInstanceExpression never
+        // reaches them and they fall through to SubjectInstanceFactory.Create<T>()
+        // — a GetUninitializedObject bare object whose internal fields are null.
+        // Every instance method then NREs and ATG degrades the whole type to
+        // [UNVERIFIED] (~250 subjects across XmlDocument/XmlNode/XmlElement/…).
+        // Registering the constructors here makes the real object reach the
+        // native XML stubs instead.
+        ["System.Xml.XmlDocument"] = "new System.Xml.XmlDocument()",
+        ["System.Xml.XmlElement"] =
+            "new System.Xml.XmlDocument().CreateElement(\"root\")",
+        ["System.Xml.XmlAttribute"] =
+            "new System.Xml.XmlDocument().CreateAttribute(\"attr\")",
+        ["System.Xml.XmlText"] =
+            "new System.Xml.XmlDocument().CreateTextNode(\"text\")",
+        ["System.Xml.XmlComment"] =
+            "new System.Xml.XmlDocument().CreateComment(\"comment\")",
+        ["System.Xml.XmlCDataSection"] =
+            "new System.Xml.XmlDocument().CreateCDataSection(\"cdata\")",
+        ["System.Xml.XmlDeclaration"] =
+            "new System.Xml.XmlDocument().CreateXmlDeclaration(\"1.0\", null, null)",
+        ["System.Xml.XmlProcessingInstruction"] =
+            "new System.Xml.XmlDocument().CreateProcessingInstruction(\"pi\", \"data\")",
+        ["System.Xml.XmlDocumentFragment"] =
+            "new System.Xml.XmlDocument().CreateDocumentFragment()",
+        ["System.Xml.XmlDocumentType"] =
+            "new System.Xml.XmlDocument().CreateDocumentType(\"root\", null, null, null)",
+        ["System.Xml.XmlEntityReference"] =
+            "new System.Xml.XmlDocument().CreateEntityReference(\"entity\")",
+        ["System.Xml.XmlSignificantWhitespace"] =
+            "new System.Xml.XmlDocument().CreateSignificantWhitespace(\" \")",
+        ["System.Xml.XmlWhitespace"] =
+            "new System.Xml.XmlDocument().CreateWhitespace(\" \")",
+        ["System.Xml.XmlNamespaceManager"] =
+            "new System.Xml.XmlNamespaceManager(new System.Xml.NameTable())",
+        // XmlValidatingReader wraps a reader; XmlNodeReader wraps a node.  Both
+        // would otherwise be bare objects whose wrapped source is null.
+        ["System.Xml.XmlValidatingReader"] =
+            "new System.Xml.XmlValidatingReader(System.Xml.XmlReader.Create(new System.IO.StringReader(\"<root/>\")))",
+        ["System.Xml.XmlNodeReader"] =
+            "new System.Xml.XmlNodeReader(new System.Xml.XmlDocument())",
+        // Settings objects: parameterless ctors, but Type.GetType() cannot
+        // resolve them from the ATG host (same reason as the DOM types above).
+        ["System.Xml.XmlReaderSettings"] = "new System.Xml.XmlReaderSettings()",
+        ["System.Xml.XmlWriterSettings"] = "new System.Xml.XmlWriterSettings()",
+        ["System.Xml.XmlImplementation"] = "new System.Xml.XmlImplementation()",
+        ["System.Xml.XmlUrlResolver"] = "new System.Xml.XmlUrlResolver()",
         // IO stream/text factories
         ["System.IO.Stream"] = "System.IO.Stream.Null",
         ["System.IO.TextReader"] = "new System.IO.StringReader(\"\")",

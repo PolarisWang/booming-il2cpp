@@ -207,6 +207,17 @@ public sealed partial class NativeAotLoweringPlanner
         bool skipChecks = (_state.Value!.LoopArrayAccessSkipOffsets?.Contains(instruction.IlOffset) == true)
             || TrySkipArrayChecks(rawArrayExpr, rawIndexExpr);
 
+        // System.Type[] element stores skip the runtime store-compatibility check.
+        //
+        // typeof(T) in this runtime yields a raw TypeInfoHot* — the type handle IS
+        // the Type instance; there is no managed Type wrapper object.  The
+        // compatibility check reads the value's "header" to determine its runtime
+        // type, but stelem.ref values include encoded reflection handles
+        // (TypeInfoHot*, descriptor pointers with tag bits) that have NO managed
+        // header — the check reads garbage and the store aborts (FAIL_FAST).
+        // Skip the check for ALL stelem.ref: null/bounds checks are still emitted.
+        bool skipStoreCompat = true;
+
         builder.AppendLine($"{indentation}{{");
         builder.AppendLine($"{indentation}    auto chaos_value_raw = {rawValueExpr};");
         if (isReferenceElement && _stringIdMapping is { Count: > 0 })
@@ -236,7 +247,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine($"{indentation}    {{");
             builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL_FAST();");
             builder.AppendLine($"{indentation}    }}");
-            if (isReferenceElement)
+            if (isReferenceElement && !skipStoreCompat)
             {
                 builder.AppendLine($"{indentation}    if (!chaos_is_array_store_compatible(chaos_array, chaos_value))");
                 builder.AppendLine($"{indentation}    {{");

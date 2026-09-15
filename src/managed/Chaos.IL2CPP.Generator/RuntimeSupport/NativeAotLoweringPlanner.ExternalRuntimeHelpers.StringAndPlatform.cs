@@ -34,8 +34,18 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (isStub)
             {
-                lines.Insert(lines.Count - 1, "    static CHAOS_IL2CPP_UINT8 s_sentinel = 0;");
-                lines[^1] = "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);";
+                // Keep the stub as `return 0` (null).  The previous behaviour
+                // returned &s_sentinel — a non-null but meaningless address —
+                // specifically so callers' null-checks would "pass" during fact
+                // verification.  That was counterproductive: the null-check passing
+                // let the caller proceed to dereference the sentinel as a real
+                // object, causing garbage reads → FAIL_FAST → SIGABRT (reported as
+                // ABORT-FAULT with no diagnostic).  Returning 0 makes the caller's
+                // null-guard raise a managed NRE instead — a clean, attributable
+                // failure that the fact runner reports as caught=true.
+                //
+                // The bodyLines here have exactly one line: "    return 0;"
+                // (the isStub check guarantees no other "return" lines).
                 bodyLines = lines;
             }
         }

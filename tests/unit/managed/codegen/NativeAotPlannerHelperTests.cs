@@ -647,9 +647,10 @@ public sealed class NativeAotPlannerHelperTests
             new[] { typeof(string), typeof(string), typeof(string), s_stringListType })!;
         var bodyLines = new List<string> { "    return 0;" };
         var result = (string)method.Invoke(null, new object[] { "CHAOS_IL2CPP_INTPTR", "sentinel_helper", "CHAOS_IL2CPP_INTPTR chaos_arg_0", bodyLines })!;
-        // Sentinel fix should add s_sentinel and replace return 0 with return &s_sentinel
-        Assert.Contains("s_sentinel", result);
-        Assert.Contains("reinterpret_cast", result);
+        // Sentinel fix was REMOVED: stubs now return 0 (null) so callers' null-guards
+        // raise managed NRE instead of dereferencing a fake non-null pointer.
+        Assert.DoesNotContain("s_sentinel", result);
+        Assert.Contains("return 0;", result);
     }
 
     [Fact]
