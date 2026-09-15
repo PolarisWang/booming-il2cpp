@@ -9,6 +9,139 @@ public sealed partial class NativeAotLoweringPlanner
     partial class RuntimeHelperShapeRegistry
     {
         /// <summary>
+        /// M5 (json-xml-production-readiness): native shapes for
+        /// System.Xml.XmlTextReader's read surface.
+        ///
+        /// Target is the CONCRETE XmlTextReader present in the XML chunk's
+        /// namespace partition.  The native side runs a minimal pull-tokenizer
+        /// (xml_reader_stubs.cpp) over an input buffer; a managed TextReader
+        /// argument is accepted for identity but the buffer is currently sourced
+        /// from a default document — see the TODO in ChaosXmlTextReaderCreate.
+        ///
+        /// Covered: Read / NodeType / Name / LocalName / NamespaceURI / Prefix /
+        ///   Value / Depth / IsEmptyElement / HasAttributes / AttributeCount /
+        ///   MoveToFirst|NextAttribute / MoveToElement / GetAttribute(string) /
+        ///   ReadString / HasLineInfo / LookupNamespace / ResolveEntity / Skip /
+        ///   ResetState / Close.
+        ///
+        /// Not covered: base64/binhex, ReadChars, ReadContentAs*,
+        ///   ReadElementContentAs*, GetNamespacesInScope, GetRemainder.
+        /// </summary>
+        private static void RegisterXmlTextReaderStubs(RuntimeHelperShapeRegistry registry)
+        {
+            var ttAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.XmlTextReader",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var trAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.IO.TextReader",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var strAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var intRetAbi = CreateInt32AbiSlot();
+            var strRetAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var rawThis = new HashSet<int> { 0 };
+            var thisOnly = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { ttAbi });
+
+            // ── ctor(TextReader) ──
+            registry.Register("System.Xml.XmlTextReader", ".ctor",
+                new[] { "System.IO.TextReader" },
+                ShapeKind.SimpleForward, "ChaosXmlTextReaderCreate",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { trAbi }),
+                CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
+
+            // ── Read() -> bool ──
+            registry.Register("System.Xml.XmlTextReader", "Read",
+                Array.Empty<string>(), ShapeKind.SimpleForward, "ChaosXmlTextReaderRead",
+                thisOnly, intRetAbi, rawThis);
+
+            // ── bool-returning no-arg query methods ──
+            RegisterXmlTextReaderBool(registry, "get_NodeType", "ChaosXmlTextReaderNodeType");
+            RegisterXmlTextReaderBool(registry, "IsEmptyElement", "ChaosXmlTextReaderIsEmptyElement");
+            RegisterXmlTextReaderBool(registry, "HasAttributes", "ChaosXmlTextReaderHasAttributes");
+            RegisterXmlTextReaderBool(registry, "MoveToFirstAttribute", "ChaosXmlTextReaderMoveToFirstAttribute");
+            RegisterXmlTextReaderBool(registry, "MoveToNextAttribute", "ChaosXmlTextReaderMoveToNextAttribute");
+            RegisterXmlTextReaderBool(registry, "MoveToElement", "ChaosXmlTextReaderMoveToElement");
+            RegisterXmlTextReaderBool(registry, "HasLineInfo", "ChaosXmlTextReaderHasLineInfo");
+            RegisterXmlTextReaderBool(registry, "get_AttributeCount", "ChaosXmlTextReaderAttributeCount");
+            RegisterXmlTextReaderBool(registry, "get_Depth", "ChaosXmlTextReaderDepth");
+
+            // ── string-returning no-arg query methods ──
+            RegisterXmlTextReaderStr(registry, "get_Name", "ChaosXmlTextReaderName");
+            RegisterXmlTextReaderStr(registry, "get_LocalName", "ChaosXmlTextReaderLocalName");
+            RegisterXmlTextReaderStr(registry, "get_NamespaceURI", "ChaosXmlTextReaderNamespaceURI");
+            RegisterXmlTextReaderStr(registry, "get_Prefix", "ChaosXmlTextReaderPrefix");
+            RegisterXmlTextReaderStr(registry, "get_Value", "ChaosXmlTextReaderValue");
+            RegisterXmlTextReaderStr(registry, "ReadString", "ChaosXmlTextReaderReadString");
+
+            // ── void no-arg methods ──
+            RegisterXmlTextReaderVoid(registry, "Close", "ChaosXmlTextReaderClose");
+            RegisterXmlTextReaderVoid(registry, "ResolveEntity", "ChaosXmlTextReaderResolveEntity");
+            RegisterXmlTextReaderVoid(registry, "Skip", "ChaosXmlTextReaderSkip");
+            RegisterXmlTextReaderVoid(registry, "ResetState", "ChaosXmlTextReaderResetState");
+
+            // ── GetAttribute(string) -> string ──
+            var ga1 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { ttAbi, strAbi });
+            registry.Register("System.Xml.XmlTextReader", "GetAttribute",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderGetAttributeStr", ga1, strRetAbi,
+                new HashSet<int> { 0, 1 });
+
+            // ── LookupNamespace(string) -> string ──
+            registry.Register("System.Xml.XmlTextReader", "LookupNamespace",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderLookupNamespace", ga1, strRetAbi,
+                new HashSet<int> { 0, 1 });
+        }
+
+        // NOTE: all XmlTextReader methods use a 32-bit return ABI regardless of
+        // declared type. In 64-bit C++ the return register is shared, so an int
+        // method returns via RAX/eax and a bool via AL; both are carried through
+        // the same CreateInt32AbiSlot. This keeps the registry compact and is
+        // exact for every non-pointer return in this family.
+
+        private static void RegisterXmlTextReaderBool(
+            RuntimeHelperShapeRegistry registry, string methodName, string symbol)
+        {
+            registry.Register("System.Xml.XmlTextReader", methodName,
+                Array.Empty<string>(), ShapeKind.SimpleForward, symbol,
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { CreateNativeIntAbiSlot(
+                        "System.Private.Xml/System.Xml.XmlTextReader",
+                        AotCoreIrTypeShapeKind.ReferenceType) }),
+                CreateInt32AbiSlot(), new HashSet<int> { 0 });
+        }
+
+        private static void RegisterXmlTextReaderStr(
+            RuntimeHelperShapeRegistry registry, string methodName, string symbol)
+        {
+            registry.Register("System.Xml.XmlTextReader", methodName,
+                Array.Empty<string>(), ShapeKind.SimpleForward, symbol,
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { CreateNativeIntAbiSlot(
+                        "System.Private.Xml/System.Xml.XmlTextReader",
+                        AotCoreIrTypeShapeKind.ReferenceType) }),
+                CreateNativeIntAbiSlot(
+                    "System.Private.CoreLib/System.String",
+                    AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+        }
+
+        private static void RegisterXmlTextReaderVoid(
+            RuntimeHelperShapeRegistry registry, string methodName, string symbol)
+        {
+            registry.Register("System.Xml.XmlTextReader", methodName,
+                Array.Empty<string>(), ShapeKind.SimpleForward, symbol,
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { CreateNativeIntAbiSlot(
+                        "System.Private.Xml/System.Xml.XmlTextReader",
+                        AotCoreIrTypeShapeKind.ReferenceType) }),
+                CreateVoidAbiSlot(), new HashSet<int> { 0 });
+        }
+
+        /// <summary>
         /// M6 (json-xml-production-readiness): native shapes for
         /// System.Xml.XmlTextWriter (CONCRETE type present in the XML chunk).
         ///
