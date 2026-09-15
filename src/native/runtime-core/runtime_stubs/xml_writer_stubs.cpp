@@ -62,6 +62,7 @@ struct WriterState {
 
     bool    start_doc_written;
     bool    in_start_tag;  // between WriteStartElement and its `>`
+    bool    in_attribute;  // between WriteStartAttribute and WriteEndAttribute
 };
 
 constexpr size_t kInitialCap = 256;
@@ -252,6 +253,26 @@ void ChaosXmlWriterWriteString(
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
 
+    // Inside an open attribute the text is the attribute VALUE: the opening
+    // quote was emitted by WriteStartAttribute, so escape for an attribute
+    // context (quote-aware) and let WriteEndAttribute close it.
+    if (st->in_attribute) {
+        const char* adata = nullptr;
+        size_t alen = 0;
+        if (!ManagedStringView(text, adata, alen)) return;
+        for (size_t i = 0; i < alen; ++i) {
+            switch (adata[i]) {
+                case '&':  AppendStr(st, "&amp;");  break;
+                case '<':  AppendStr(st, "&lt;");   break;
+                case '"':  AppendStr(st, "&quot;"); break;
+                case '\n': AppendStr(st, "&#xA;");  break;
+                case '\t': AppendStr(st, "&#x9;");  break;
+                default:   AppendRaw(st, adata + i, 1); break;
+            }
+        }
+        return;
+    }
+
     if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
     CloseStartTag(st);
 
@@ -357,6 +378,243 @@ void ChaosXmlWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     // buffered to release.  Kept as an explicit entry point because callers
     // legitimately invoke it and it must not be a no-op at the ABI level.
     (void)this_ptr;
+}
+
+// ════════════════════════════════════════════════════════════════════
+// XmlTextWriter entry points (M6 target type)
+//
+// XmlTextWriter is the CONCRETE type present in the XML chunk's namespace
+// partition; XmlWriter (abstract) is not, so nothing could reach the shapes
+// registered against it.  These entry points reuse the same WriterState.
+// ════════════════════════════════════════════════════════════════════
+
+/// Factory for `new XmlTextWriter(TextWriter)`.  The managed TextWriter
+/// argument supplies identity only — output accumulates in the native buffer.
+CHAOS_IL2CPP_INTPTR ChaosXmlTextWriterCreate(CHAOS_IL2CPP_INTPTR text_writer) noexcept
+{
+    if (text_writer == 0) return 0;
+
+    auto* st = static_cast<WriterState*>(CHAOS_IL2CPP_MALLOC(sizeof(WriterState)));
+    if (st == nullptr) return 0;
+    std::memset(st, 0, sizeof(WriterState));
+
+    st->buf = static_cast<char*>(CHAOS_IL2CPP_MALLOC(kInitialCap));
+    if (st->buf == nullptr) { CHAOS_IL2CPP_FREE(st); return 0; }
+    st->buf[0] = '\0';
+    st->cap = kInitialCap;
+
+    st->frames = static_cast<ElementFrame*>(
+        CHAOS_IL2CPP_MALLOC(sizeof(ElementFrame) * kMaxDepth));
+    if (st->frames == nullptr) {
+        CHAOS_IL2CPP_FREE(st->buf);
+        CHAOS_IL2CPP_FREE(st);
+        return 0;
+    }
+    st->frame_cap = kMaxDepth;
+
+    const size_t slot = AllocSlot(st);
+    if (slot == 0) {
+        CHAOS_IL2CPP_FREE(st->frames);
+        CHAOS_IL2CPP_FREE(st->buf);
+        CHAOS_IL2CPP_FREE(st);
+        return 0;
+    }
+    return static_cast<CHAOS_IL2CPP_INTPTR>(slot);
+}
+
+/// WriteStartDocument(bool standalone)
+void ChaosXmlWriterWriteStartDocumentBool(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR standalone) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (st->start_doc_written) return;
+    AppendStr(st, standalone ? "<?xml version=\"1.0\" standalone=\"yes\"?>"
+                             : "<?xml version=\"1.0\"?>");
+    st->start_doc_written = true;
+}
+
+/// WriteWhitespace(string) — emitted verbatim (caller controls formatting).
+void ChaosXmlWriterWriteWhitespace(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ws) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    CloseStartTag(st);
+    const char* data = nullptr;
+    size_t len = 0;
+    if (ManagedStringView(ws, data, len)) AppendRaw(st, data, len);
+}
+
+/// WriteRaw(string) — verbatim, no entity escaping.
+void ChaosXmlWriterWriteRaw(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
+    CloseStartTag(st);
+    const char* data = nullptr;
+    size_t len = 0;
+    if (ManagedStringView(text, data, len)) AppendRaw(st, data, len);
+}
+
+/// WriteComment(string)
+void ChaosXmlWriterWriteComment(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
+    CloseStartTag(st);
+    AppendStr(st, "<!--");
+    const char* data = nullptr;
+    size_t len = 0;
+    if (ManagedStringView(text, data, len)) AppendRaw(st, data, len);
+    AppendStr(st, "-->");
+}
+
+/// WriteCData(string)
+void ChaosXmlWriterWriteCData(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
+    CloseStartTag(st);
+    AppendStr(st, "<![CDATA[");
+    const char* data = nullptr;
+    size_t len = 0;
+    if (ManagedStringView(text, data, len)) AppendRaw(st, data, len);
+    AppendStr(st, "]]>");
+}
+
+/// WriteFullEndElement() — always emits `</name>` (never self-closing).
+void ChaosXmlWriterWriteFullEndElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr || st->depth == 0) return;
+    const size_t idx = st->depth - 1;
+    CloseStartTag(st);
+    AppendStr(st, "</");
+    if (st->frames[idx].name) AppendStr(st, st->frames[idx].name);
+    AppendRaw(st, ">", 1);
+    CHAOS_IL2CPP_FREE(st->frames[idx].name);
+    st->depth = idx;
+}
+
+/// WriteEndDocument() — closes every open element.
+void ChaosXmlWriterWriteEndDocument(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    while (st->depth > 0) ChaosXmlWriterWriteEndElement(this_ptr);
+}
+
+/// WriteStartElement(string prefix, string localName, string ns)
+void ChaosXmlWriterWriteStartElement3(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+
+    const char* name = nullptr;
+    size_t name_len = 0;
+    if (!ManagedStringView(local_name, name, name_len)) {
+        RaiseManagedException("System.ArgumentException",
+                              "The local name cannot be null.");
+        return;
+    }
+
+    const char* pfx = nullptr;
+    size_t pfx_len = 0;
+    ManagedStringView(prefix, pfx, pfx_len);
+
+    if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
+    CloseStartTag(st);
+
+    if (st->depth >= st->frame_cap) {
+        RaiseManagedException("System.InvalidOperationException",
+                              "XML writer element nesting limit exceeded.");
+        return;
+    }
+
+    AppendRaw(st, "<", 1);
+
+    // Qualified name: prefix:localName, or localName when no prefix.
+    char* stored = nullptr;
+    if (pfx_len > 0) {
+        const size_t cap = pfx_len + 1 + name_len + 1;
+        stored = static_cast<char*>(CHAOS_IL2CPP_MALLOC(cap));
+        if (stored != nullptr) {
+            std::memcpy(stored, pfx, pfx_len);
+            stored[pfx_len] = ':';
+            std::memcpy(stored + pfx_len + 1, name, name_len);
+            stored[pfx_len + 1 + name_len] = '\0';
+            AppendStr(st, stored);
+        } else {
+            AppendRaw(st, name, name_len);
+        }
+    } else {
+        AppendRaw(st, name, name_len);
+        stored = static_cast<char*>(CHAOS_IL2CPP_MALLOC(name_len + 1));
+        if (stored != nullptr) {
+            std::memcpy(stored, name, name_len);
+            stored[name_len] = '\0';
+        }
+    }
+
+    st->frames[st->depth].name = stored;
+    st->frames[st->depth].has_children = false;
+    st->depth += 1;
+    st->in_start_tag = true;
+}
+
+/// WriteStartAttribute(string prefix, string localName, string ns)
+/// Opens an attribute; the value follows via WriteString/WriteRaw.
+void ChaosXmlWriterWriteStartAttribute(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (st->depth == 0 || !st->in_start_tag) {
+        RaiseManagedException("System.InvalidOperationException",
+                              "Cannot start an attribute outside a start tag.");
+        return;
+    }
+    (void)ns;
+
+    const char* name = nullptr;
+    size_t name_len = 0;
+    if (!ManagedStringView(local_name, name, name_len)) {
+        RaiseManagedException("System.ArgumentException",
+                              "The local name cannot be null.");
+        return;
+    }
+    const char* pfx = nullptr;
+    size_t pfx_len = 0;
+    ManagedStringView(prefix, pfx, pfx_len);
+
+    AppendRaw(st, " ", 1);
+    if (pfx_len > 0) { AppendRaw(st, pfx, pfx_len); AppendRaw(st, ":", 1); }
+    AppendRaw(st, name, name_len);
+    AppendRaw(st, "=\"", 2);
+    st->in_attribute = true;
+}
+
+/// WriteEndAttribute() — closes the pending attribute quote.
+void ChaosXmlWriterWriteEndAttribute(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr || !st->in_attribute) return;
+    AppendRaw(st, "\"", 1);
+    st->in_attribute = false;
 }
 
 void ChaosXmlWriterClose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept

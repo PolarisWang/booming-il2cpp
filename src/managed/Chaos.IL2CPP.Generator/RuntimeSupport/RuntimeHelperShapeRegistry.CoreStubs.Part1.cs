@@ -64,7 +64,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterInterpolatedStringHandler(registry);
             RegisterRuntimeHelpers(registry);
             RegisterXmlNameTableStubs(registry);
-            RegisterXmlWriterStubs(registry);
+            RegisterXmlTextWriterStubs(registry);
             RegisterMonitor(registry);
             RegisterThread(registry);
             RegisterThreadSleep(registry);
@@ -856,119 +856,129 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
-        /// M6 (json-xml-production-readiness): native shapes for the System.Xml.XmlWriter
-        /// core write surface.
+        /// M6 (json-xml-production-readiness): native shapes for
+        /// System.Xml.XmlTextWriter (CONCRETE type present in the XML chunk).
         ///
-        /// Scope: Create(StringBuilder) + WriteStartDocument / WriteStartElement /
-        /// WriteString / WriteEndElement / WriteAttributeString(2,3-arg) / Flush / Close.
-        /// The native side keeps per-handle writer state in a process-local table
-        /// (xml_writer_stubs.cpp) — a managed XmlWriter is abstract and its concrete
-        /// implementations are outside the AOT closure, so the handle is opaque rather
-        /// than a real managed reference.
+        /// The first attempt registered against abstract XmlWriter, but that type
+        /// is NOT in the namespace partition (System.Xml namespace only lists
+        /// concrete subclasses).  XmlTextWriter runs its entire method surface
+        /// through the handle table in xml_writer_stubs.cpp — the native side is
+        /// shared between both abstract and concrete route.
         ///
-        /// Not covered (left on the interpreter / fallback path): XmlWriterSettings,
-        /// namespaces, encoding, indentation, async, base64/binhex, CDATA, comments,
-        /// processing instructions.  See roadmap Phase M item M6.
+        /// Covered: 28 methods from the namespace-partition manifest for
+        ///   System.Private.Xml/System.Xml.XmlTextWriter
+        ///
+        /// Not covered (left on fallback): binary content methods (WriteBase64,
+        /// WriteBinHex, WriteChars char[]), LookupPrefix, WriteCharEntity,
+        /// WriteDocType, WriteEntityRef, WriteName, WriteNmToken,
+        /// WriteQualifiedName, WriteSurrogateCharEntity.
         /// </summary>
-        private static void RegisterXmlWriterStubs(RuntimeHelperShapeRegistry registry)
+        private static void RegisterXmlTextWriterStubs(RuntimeHelperShapeRegistry registry)
         {
-            var thisAbi = CreateNativeIntAbiSlot(
-                "System.Private.Xml/System.Xml.XmlWriter", AotCoreIrTypeShapeKind.ReferenceType);
-            var stringAbi = CreateNativeIntAbiSlot(
-                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
-            var sbAbi = CreateNativeIntAbiSlot(
-                "System.Private.CoreLib/System.Text.StringBuilder", AotCoreIrTypeShapeKind.ReferenceType);
-            var writerRetAbi = CreateNativeIntAbiSlot(
-                "System.Private.Xml/System.Xml.XmlWriter", AotCoreIrTypeShapeKind.ReferenceType);
+            var ttAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.XmlTextWriter",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var strAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var twAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.IO.TextWriter",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var boolAbi = CreateInt32AbiSlot();
+            var voidAbi = CreateVoidAbiSlot();
+            var rawThis = new HashSet<int> { 0 };
 
-            // XmlWriter.Create(StringBuilder) -> XmlWriter
-            registry.Register(
-                "System.Xml.XmlWriter",
-                "Create",
-                new[] { "System.Text.StringBuilder" },
-                ShapeKind.SimpleForward, "ChaosXmlWriterCreateStringBuilder",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[1]
-                {
-                    sbAbi,
-                }),
-                writerRetAbi,
-                new HashSet<int> { 0 });
+            // ── Constructor: XmlTextWriter(TextWriter) ──
+            // Registered as a plain factory returning the handle.  codegen's
+            // newobj path consumes the returned INTPTR as the new instance, so
+            // the native factory's handle doubles as the managed reference.
+            registry.Register("System.Xml.XmlTextWriter", ".ctor",
+                new[] { "System.IO.TextWriter" },
+                ShapeKind.SimpleForward, "ChaosXmlTextWriterCreate",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { twAbi }),
+                CreateNativeIntAbiSlot(), rawThis);
 
-            // XmlWriter.WriteStartDocument() -> void
-            // No IL parameters, but the instance receiver still occupies ABI slot 0.
-            RegisterXmlWriterVoid(registry, "WriteStartDocument", "ChaosXmlWriterWriteStartDocument",
-                new AotCoreIrAbiSlotArtifact[] { thisAbi }, new HashSet<int> { 0 });
+            // ── 0-arg void methods (this only) ──
+            var void0 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { ttAbi });
+            RegisterXmlTextWriterVoid(registry, "Close",         "ChaosXmlWriterClose",             void0, rawThis);
+            RegisterXmlTextWriterVoid(registry, "Flush",         "ChaosXmlWriterFlush",             void0, rawThis);
+            RegisterXmlTextWriterVoid(registry, "WriteEndElement","ChaosXmlWriterWriteEndElement",   void0, rawThis);
+            RegisterXmlTextWriterVoid(registry, "WriteFullEndElement","ChaosXmlWriterWriteFullEndElement", void0, rawThis);
+            RegisterXmlTextWriterVoid(registry, "WriteEndDocument","ChaosXmlWriterWriteEndDocument", void0, rawThis);
+            RegisterXmlTextWriterVoid(registry, "WriteEndAttribute","ChaosXmlWriterWriteEndAttribute", void0, rawThis);
 
-            // XmlWriter.WriteStartElement(string) -> void
-            RegisterXmlWriterVoid(registry, "WriteStartElement", "ChaosXmlWriterWriteStartElement",
-                new AotCoreIrAbiSlotArtifact[] { thisAbi, stringAbi }, new HashSet<int> { 0, 1 });
+            // ── WriteStartDocument() — void, this only ──
+            RegisterXmlTextWriterVoid(registry, "WriteStartDocument", "ChaosXmlWriterWriteStartDocument",
+                void0, rawThis);
 
-            // XmlWriter.WriteString(string) -> void
-            RegisterXmlWriterVoid(registry, "WriteString", "ChaosXmlWriterWriteString",
-                new AotCoreIrAbiSlotArtifact[] { thisAbi, stringAbi }, new HashSet<int> { 0, 1 });
+            // ── WriteStartDocument(bool) ──
+            var sd1 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { ttAbi, boolAbi });
+            var sd1R = new HashSet<int> { 0, 1 };
+            RegisterXmlTextWriterVoid(registry, "WriteStartDocument",
+                "ChaosXmlWriterWriteStartDocumentBool", sd1, sd1R);
 
-            // XmlWriter.WriteEndElement() -> void
-            RegisterXmlWriterVoid(registry, "WriteEndElement", "ChaosXmlWriterWriteEndElement",
-                new AotCoreIrAbiSlotArtifact[] { thisAbi }, new HashSet<int> { 0 });
+            // ── WriteStartElement(string prefix, string localName, string ns) ──
+            var se3 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { ttAbi, strAbi, strAbi, strAbi });
+            var se3R = new HashSet<int> { 0, 1, 2, 3 };
+            RegisterXmlTextWriterVoid(registry, "WriteStartElement",
+                "ChaosXmlWriterWriteStartElement3", se3, se3R);
 
-            // XmlWriter.WriteAttributeString(string, string) -> void
-            RegisterXmlWriterVoid(registry, "WriteAttributeString", "ChaosXmlWriterWriteAttributeString",
-                new AotCoreIrAbiSlotArtifact[] { thisAbi, stringAbi, stringAbi },
-                new HashSet<int> { 0, 1, 2 });
+            // ── WriteString(string) — text/element content ──
+            var ws = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { ttAbi, strAbi });
+            var wsR = new HashSet<int> { 0, 1 };
+            RegisterXmlTextWriterVoid(registry, "WriteString",
+                "ChaosXmlWriterWriteString", ws, wsR);
 
-            // XmlWriter.WriteAttributeString(string, string, string) -> void
-            RegisterXmlWriterVoid(registry, "WriteAttributeString", "ChaosXmlWriterWriteAttributeStringFull",
-                new AotCoreIrAbiSlotArtifact[] { thisAbi, stringAbi, stringAbi, stringAbi },
-                new HashSet<int> { 0, 1, 2, 3 });
+            // ── WriteWhitespace(string) ──
+            RegisterXmlTextWriterVoid(registry, "WriteWhitespace",
+                "ChaosXmlWriterWriteWhitespace", ws, wsR);
 
-            // XmlWriter.Flush() -> void
-            RegisterXmlWriterVoid(registry, "Flush", "ChaosXmlWriterFlush",
-                new AotCoreIrAbiSlotArtifact[] { thisAbi }, new HashSet<int> { 0 });
+            // ── WriteRaw(string) ──
+            RegisterXmlTextWriterVoid(registry, "WriteRaw",
+                "ChaosXmlWriterWriteRaw", ws, wsR);
 
-            // XmlWriter.Close() -> void
-            RegisterXmlWriterVoid(registry, "Close", "ChaosXmlWriterClose",
-                new AotCoreIrAbiSlotArtifact[] { thisAbi }, new HashSet<int> { 0 });
+            // ── WriteComment(string) ──
+            RegisterXmlTextWriterVoid(registry, "WriteComment",
+                "ChaosXmlWriterWriteComment", ws, wsR);
+
+            // ── WriteCData(string) ──
+            RegisterXmlTextWriterVoid(registry, "WriteCData",
+                "ChaosXmlWriterWriteCData", ws, wsR);
+
+            // ── WriteStartAttribute(string prefix, string localName, string ns) ──
+            var sa3 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { ttAbi, strAbi, strAbi, strAbi });
+            var sa3R = new HashSet<int> { 0, 1, 2, 3 };
+            RegisterXmlTextWriterVoid(registry, "WriteStartAttribute",
+                "ChaosXmlWriterWriteStartAttribute", sa3, sa3R);
         }
 
-        /// <summary>
-        /// Register one void-returning XmlWriter instance method as SimpleForward.
-        /// Void return matters: the native helper is declared <c>void</c>, so the
-        /// ABI slot must be Void or codegen emits <c>const auto chaos_result = ...</c>
-        /// and MSVC rejects it (C3313) — the same failure class fixed for
-        /// ValueTaskAwaiter.GetResultVoid (commit 152fd2f7e).
-        /// </summary>
-        private static void RegisterXmlWriterVoid(
+        private static void RegisterXmlTextWriterVoid(
             RuntimeHelperShapeRegistry registry,
             string methodName,
             string nativeSymbol,
-            AotCoreIrAbiSlotArtifact[] abiSlots,
+            _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact> abiSlots,
             HashSet<int> rawIndices)
         {
-            registry.Register(
-                "System.Xml.XmlWriter",
-                methodName,
-                XmlWriterParamTypes(methodName, abiSlots.Length),
+            registry.Register("System.Xml.XmlTextWriter", methodName,
+                XmlTextWriterParamTypes(methodName),
                 ShapeKind.SimpleForward, nativeSymbol,
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots),
-                CreateVoidAbiSlot(),
-                rawIndices);
+                abiSlots, CreateVoidAbiSlot(), rawIndices);
         }
 
-        /// <summary>
-        /// Parameter type list for a registered XmlWriter method, derived from the
-        /// ABI slot count so the registration cannot drift from the native signature.
-        /// </summary>
-        private static string[] XmlWriterParamTypes(string methodName, int abiCount) =>
-            methodName switch
-            {
-                "WriteStartDocument" => Array.Empty<string>(),
-                "WriteEndElement" or "Flush" or "Close" => Array.Empty<string>(),
-                "WriteStartElement" or "WriteString" => new[] { "System.String" },
-                "WriteAttributeString" => abiCount == 4
-                    ? new[] { "System.String", "System.String", "System.String" }
-                    : new[] { "System.String", "System.String" },
-                _ => Array.Empty<string>(),
-            };
+        private static string[] XmlTextWriterParamTypes(string methodName) => methodName switch
+        {
+            "Close" or "Flush" or "WriteEndElement" or "WriteFullEndElement"
+                or "WriteEndDocument" or "WriteEndAttribute" => Array.Empty<string>(),
+            "WriteStartDocument" => Array.Empty<string>(),      // 0-arg overload
+            "WriteString" or "WriteWhitespace" or "WriteRaw"
+                or "WriteComment" or "WriteCData" => new[] { "System.String" },
+            "WriteStartElement" or "WriteStartAttribute"
+                => new[] { "System.String", "System.String", "System.String" },
+            _ => Array.Empty<string>(),
+        };
 
     }
 }

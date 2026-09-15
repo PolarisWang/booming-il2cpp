@@ -42,6 +42,16 @@ public sealed class CSharpExpressionBuilder
         // XML abstract type factories
         ["System.Xml.XmlReader"] = "System.Xml.XmlReader.Create(new System.IO.StringReader(\"<root/>\"))",
         ["System.Xml.XmlWriter"] = "System.Xml.XmlWriter.Create(new System.Text.StringBuilder())",
+        // XmlTextWriter is CONCRETE but has no parameterless ctor, so
+        // SubjectInstanceFactory.Create<XmlTextWriter>() returns a
+        // GetUninitializedObject bare object whose internal writer/state fields
+        // are null — every instance method then NREs and ATG degrades the whole
+        // type to [UNVERIFIED].  Constructing a real instance with a StringWriter
+        // sink lets the write methods actually run (and reach the native M6 stubs).
+        ["System.Xml.XmlTextWriter"] =
+            "new System.Xml.XmlTextWriter(new System.IO.StringWriter())",
+        ["System.Xml.XmlTextReader"] =
+            "new System.Xml.XmlTextReader(new System.IO.StringReader(\"<root/>\"))",
         // IO stream/text factories
         ["System.IO.Stream"] = "System.IO.Stream.Null",
         ["System.IO.TextReader"] = "new System.IO.StringReader(\"\")",
