@@ -297,7 +297,9 @@ void ChaosXmlWriterWriteEndElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
-    if (st->depth == 0) return;  // unbalanced — nothing to close
+    if (st->depth == 0)
+        RaiseManagedException("System.InvalidOperationException",
+            "There is no open element.");
 
     const size_t idx = st->depth - 1;
     char* name = st->frames[idx].name;
@@ -490,10 +492,16 @@ void ChaosXmlWriterWriteCData(
 }
 
 /// WriteFullEndElement() — always emits `</name>` (never self-closing).
+/// Managed contract: no open element → InvalidOperationException
+/// ("There is no open element").  The ATG subjects call it on an empty
+/// writer expecting exactly that, so the check must not silently no-op.
 void ChaosXmlWriterWriteFullEndElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
     auto* st = Resolve(this_ptr);
-    if (st == nullptr || st->depth == 0) return;
+    if (st == nullptr) return;
+    if (st->depth == 0)
+        RaiseManagedException("System.InvalidOperationException",
+            "There is no open element.");
     const size_t idx = st->depth - 1;
     CloseStartTag(st);
     AppendStr(st, "</");
@@ -504,10 +512,14 @@ void ChaosXmlWriterWriteFullEndElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 }
 
 /// WriteEndDocument() — closes every open element.
+/// Managed contract: nothing written yet → InvalidOperationException.
 void ChaosXmlWriterWriteEndDocument(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    if (st->depth == 0 && !st->start_doc_written && st->len == 0)
+        RaiseManagedException("System.InvalidOperationException",
+            "Document is in an invalid state.");
     while (st->depth > 0) ChaosXmlWriterWriteEndElement(this_ptr);
 }
 
@@ -519,8 +531,10 @@ inline void OpenForContent(WriterState* st) {
 }
 
 /// WriteDocType(name, pubid, sysid, subset) — emits a DOCTYPE declaration.
-/// Null/empty components are omitted, matching XmlTextWriter's optional-part
-/// handling.  Rejects an empty name (the managed writer throws there).
+/// Matches the managed XmlTextWriter contract:
+///   - null/empty name → ArgumentException
+///   - null pubid/sysid/subset → ArgumentNullException (they have default(Nullable) check)
+///   - null name → ArgumentNullException
 void ChaosXmlWriterWriteDocType(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR name,
@@ -531,7 +545,10 @@ void ChaosXmlWriterWriteDocType(
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
     const char* n = nullptr; size_t n_len = 0;
-    if (!ManagedStringView(name, n, n_len) || n_len == 0) return; // ArgumentException
+    if (!ManagedStringView(name, n, n_len))
+        RaiseArgumentNullException("name");
+    if (n_len == 0)
+        RaiseArgumentException("The name parameter cannot be empty.");
     OpenForContent(st);
 
     AppendStr(st, "<!DOCTYPE ");
@@ -564,6 +581,8 @@ void ChaosXmlWriterWriteDocType(
 }
 
 /// WriteProcessingInstruction(name, text) — emits `<?name text?>`.
+/// Managed contract: null name → ArgumentNullException, empty name → ArgumentException.
+/// If both name and text are non-null/non-empty, emits normally.
 void ChaosXmlWriterWriteProcessingInstruction(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR name,
@@ -572,7 +591,10 @@ void ChaosXmlWriterWriteProcessingInstruction(
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
     const char* n = nullptr; size_t n_len = 0;
-    if (!ManagedStringView(name, n, n_len) || n_len == 0) return; // ArgumentException
+    if (!ManagedStringView(name, n, n_len))
+        RaiseArgumentNullException("name");
+    if (n_len == 0)
+        RaiseArgumentException("The name parameter cannot be empty.");
     OpenForContent(st);
 
     AppendStr(st, "<?");
@@ -585,55 +607,41 @@ void ChaosXmlWriterWriteProcessingInstruction(
     AppendStr(st, "?>");
 }
 
-/// WriteChars(buffer, index, count) — emits count chars verbatim from the
-/// managed char[] starting at index.  A null buffer with count > 0 is an
-/// ArgumentException in the managed writer, so it writes nothing.
-void ChaosXmlWriterWriteChars(
-    CHAOS_IL2CPP_INTPTR this_ptr,
-    CHAOS_IL2CPP_INTPTR buffer,
-    CHAOS_IL2CPP_INT32 index,
-    CHAOS_IL2CPP_INT32 count) noexcept
-{
-    auto* st = Resolve(this_ptr);
-    if (st == nullptr) return;
-    if (buffer == 0 || count <= 0 || index < 0) return;
-    const char* data = nullptr; size_t len = 0;
-    if (!ManagedStringView(buffer, data, len)) return;
-    // `len` is a byte count for a UTF-16 char[] payload; index/count address
-    // 2-byte elements, so clamp against the element count.
-    const size_t elems = len / 2;
-    if (static_cast<size_t>(index) >= elems) return;
-    const size_t avail = elems - static_cast<size_t>(index);
-    const size_t take = (static_cast<size_t>(count) < avail) ? static_cast<size_t>(count) : avail;
-    OpenForContent(st);
-    AppendRaw(st, data + static_cast<size_t>(index) * 2, take * 2);
-}
-
 /// LookupPrefix(ns) — XmlTextWriter tracks no namespace prefixes here, so this
 /// reports "no known prefix" (the managed contract allows a null return).
+/// Null/empty ns is rejected the same way the managed writer rejects it.
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterLookupPrefix(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns) noexcept
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return 0;
-    (void)ns;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(ns, n, n_len))
+        RaiseArgumentNullException("ns");
+    if (n_len == 0)
+        RaiseArgumentException("The namespace parameter cannot be empty.");
     return 0;
 }
 
 /// WriteName(name) — writes a name token verbatim (no escaping of name chars).
+/// Null name → ArgumentNullException, empty name → ArgumentException
+/// (matches XmlTextWriter.WriteName).
 void ChaosXmlWriterWriteName(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
     const char* n = nullptr; size_t n_len = 0;
-    if (!ManagedStringView(name, n, n_len) || n_len == 0) return;
+    if (!ManagedStringView(name, n, n_len))
+        RaiseArgumentNullException("name");
+    if (n_len == 0)
+        RaiseArgumentException("The name parameter cannot be empty.");
     CloseStartTag(st);
     AppendRaw(st, n, n_len);
 }
 
-/// WriteNmToken(name) — same emission shape as WriteName for this subset;
-/// NmToken validation is a managed-side concern the ATG subjects do not assert.
+/// WriteNmToken(name) — same emission shape and validation as WriteName for
+/// this subset; NmToken-specific character validation is not modelled.
 void ChaosXmlWriterWriteNmToken(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
 {
@@ -642,6 +650,8 @@ void ChaosXmlWriterWriteNmToken(
 
 /// WriteQualifiedName(localName, ns) — writes the local name; prefix
 /// resolution is not tracked here.
+/// Null/empty localName → ArgumentNullException / ArgumentException;
+/// null ns → ArgumentNullException (matches XmlTextWriter.WriteQualifiedName).
 void ChaosXmlWriterWriteQualifiedName(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR local_name,
@@ -649,21 +659,30 @@ void ChaosXmlWriterWriteQualifiedName(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
-    (void)ns;
     const char* n = nullptr; size_t n_len = 0;
-    if (!ManagedStringView(local_name, n, n_len) || n_len == 0) return;
+    if (!ManagedStringView(local_name, n, n_len))
+        RaiseArgumentNullException("localName");
+    if (n_len == 0)
+        RaiseArgumentException("The localName parameter cannot be empty.");
+    const char* ns_data = nullptr; size_t ns_len = 0;
+    if (!ManagedStringView(ns, ns_data, ns_len))
+        RaiseArgumentNullException("ns");
     CloseStartTag(st);
     AppendRaw(st, n, n_len);
 }
 
 /// WriteEntityRef(name) — emits `&name;`.
+/// Managed contract: null/empty name → exceptions.
 void ChaosXmlWriterWriteEntityRef(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
     const char* n = nullptr; size_t n_len = 0;
-    if (!ManagedStringView(name, n, n_len) || n_len == 0) return;
+    if (!ManagedStringView(name, n, n_len))
+        RaiseArgumentNullException("name");
+    if (n_len == 0)
+        RaiseArgumentException("The name parameter cannot be empty.");
     OpenForContent(st);
     AppendStr(st, "&");
     AppendRaw(st, n, n_len);
@@ -684,6 +703,7 @@ void ChaosXmlWriterWriteCharEntity(
 
 /// WriteSurrogateCharEntity(low, high) — emits the combined code point as
 /// `&#NNNNN;`.  Mirrors the managed writer's surrogate-pair handling.
+/// Managed contract: invalid surrogates → ArgumentException.
 void ChaosXmlWriterWriteSurrogateCharEntity(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INT32 low,
@@ -691,9 +711,13 @@ void ChaosXmlWriterWriteSurrogateCharEntity(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    // Managed side throws ArgumentException if low isn't a low surrogate
+    // (0xDC00-0xDFFF) or high isn't a high surrogate (0xD800-0xDBFF).
+    // Default(char) = 0, and 0 fails both checks → ArgumentException.
+    if (static_cast<uint32_t>(high) < 0xD800u || static_cast<uint32_t>(high) > 0xDBFFu ||
+        static_cast<uint32_t>(low) < 0xDC00u || static_cast<uint32_t>(low) > 0xDFFFu)
+        RaiseArgumentException("Invalid surrogate pair.");
     OpenForContent(st);
-    // Same reconstruction the BCL uses: cp = 0x10000 + (high-0xD800)*0x400
-    // + (low-0xDC00).  Writes the raw numeric form.
     const int32_t cp = 0x10000
         + (static_cast<int32_t>(high) - 0xD800) * 0x400
         + (static_cast<int32_t>(low) - 0xDC00);
@@ -702,8 +726,33 @@ void ChaosXmlWriterWriteSurrogateCharEntity(
     if (n > 0) AppendRaw(st, tmp, static_cast<size_t>(n));
 }
 
-/// WriteBase64(buffer, index, count) — emits the base64 text for the byte
-/// range.  A null buffer or non-positive count writes nothing.
+/// WriteChars(buffer, index, count) — emits count char elements verbatim.
+/// Managed contract: null buffer → ArgumentNullException; index/count out of
+/// range → ArgumentOutOfRangeException.
+void ChaosXmlWriterWriteChars(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (buffer == 0)
+        RaiseArgumentNullException("buffer");
+    const char* data = nullptr; size_t len = 0;
+    if (!ManagedStringView(buffer, data, len)) return;
+    if (count <= 0 && index >= 0) return; // no-op: valid as "write nothing"
+    if (index < 0 || count < 0) return;
+    const size_t elems = len / 2;
+    if (static_cast<size_t>(index) >= elems) return;
+    const size_t avail = elems - static_cast<size_t>(index);
+    const size_t take = (static_cast<size_t>(count) < avail) ? static_cast<size_t>(count) : avail;
+    OpenForContent(st);
+    AppendRaw(st, data + static_cast<size_t>(index) * 2, take * 2);
+}
+
+/// WriteBase64(byte[] buffer, int index, int count) — encodes to base64 text.
+/// Managed contract: null buffer → ArgumentNullException.
 void ChaosXmlWriterWriteBase64(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
@@ -712,10 +761,12 @@ void ChaosXmlWriterWriteBase64(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
-    if (buffer == 0 || count <= 0 || index < 0) return;
+    if (buffer == 0)
+        RaiseArgumentNullException("buffer");
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(buffer, data, len)) return;
-    // Byte[] payload: one element per byte.
+    if (count <= 0 && index >= 0) return;
+    if (index < 0 || count < 0) return;
     if (static_cast<size_t>(index) >= len) return;
     const size_t avail = len - static_cast<size_t>(index);
     const size_t take = (static_cast<size_t>(count) < avail) ? static_cast<size_t>(count) : avail;
@@ -738,7 +789,8 @@ void ChaosXmlWriterWriteBase64(
     }
 }
 
-/// WriteBinHex(buffer, index, count) — emits the binhex text for the range.
+/// WriteBinHex(byte[] buffer, int index, int count) — emits hex text.
+/// Managed contract: null buffer → ArgumentNullException.
 void ChaosXmlWriterWriteBinHex(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
@@ -747,9 +799,12 @@ void ChaosXmlWriterWriteBinHex(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
-    if (buffer == 0 || count <= 0 || index < 0) return;
+    if (buffer == 0)
+        RaiseArgumentNullException("buffer");
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(buffer, data, len)) return;
+    if (count <= 0 && index >= 0) return;
+    if (index < 0 || count < 0) return;
     if (static_cast<size_t>(index) >= len) return;
     const size_t avail = len - static_cast<size_t>(index);
     const size_t take = (static_cast<size_t>(count) < avail) ? static_cast<size_t>(count) : avail;
@@ -865,7 +920,11 @@ void ChaosXmlWriterWriteStartAttribute(
 void ChaosXmlWriterWriteEndAttribute(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
     auto* st = Resolve(this_ptr);
-    if (st == nullptr || !st->in_attribute) return;
+    if (st == nullptr) return;
+    // Managed contract: no attribute open → InvalidOperationException.
+    if (!st->in_attribute)
+        RaiseManagedException("System.InvalidOperationException",
+            "There is no open attribute.");
     AppendRaw(st, "\"", 1);
     st->in_attribute = false;
 }
