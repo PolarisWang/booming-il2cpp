@@ -39,6 +39,10 @@ static inline uint32_t DecodeMetadataToken(CHAOS_IL2CPP_INTPTR handle) {
 //   1. ReflectionQuery encoded handle → direct pointer decode
 //   2. Module Registry handle → extract module_id → LookupModule → image → FindReflectionQueryTypeByToken
 //   3. Raw metadata token → aot_metadata shared tables
+//   4. TypeInfoHot* (typeof-fold receiver) → ChaosRegisterExternalType owner map
+// Defined in type_resolve.cpp.
+extern "C" const ReflectionQueryTypeDescriptor* ChaosFindReflectionTypeByTypeInfo(CHAOS_IL2CPP_INTPTR type_info) noexcept;
+
 static inline const ReflectionQueryTypeDescriptor* GetTypeDescriptorFromHandle(CHAOS_IL2CPP_INTPTR handle) {
     if (handle == 0) return nullptr;
 
@@ -90,6 +94,19 @@ static inline const ReflectionQueryTypeDescriptor* GetTypeDescriptorFromHandle(C
                 }
             }
         }
+    }
+
+    // Try TypeInfoHot* owner map.  The A2.7 typeof fold pushes the raw
+    // TypeInfoHot* (chaos_mt_X.AsTypeInfoHot()) — a plain pointer that matches
+    // none of the encodings above.  Casting it to TypeInfoHandle would read the
+    // pointer's high bits as a module id, so module-registry lookup fails
+    // harmlessly.  Descriptors emitted by the codegen carry type_info_ptr with
+    // the exact expression the fold pushes; the reverse map resolves them.
+    // Must run BEFORE the raw-token fallback below: the pointer's low 32 bits
+    // could accidentally equal a real metadata token and return a wrong type.
+    {
+        auto* owned = ChaosFindReflectionTypeByTypeInfo(handle);
+        if (owned != nullptr) return owned;
     }
 
     // Fall back to raw metadata token lookup

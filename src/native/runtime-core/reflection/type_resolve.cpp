@@ -16,14 +16,51 @@ struct DynamicTypeEntry {
 static DynamicTypeEntry s_dynamicTypes[kMaxDynamicTypes];
 static CHAOS_IL2CPP_UINT32 s_dynamicTypeCount = 0u;
 
+// ── TypeInfoHot* → descriptor owner map ───────────────────────────────────
+// Populated by ChaosRegisterExternalType when the descriptor carries a
+// type_info_ptr.  Consulted by GetTypeDescriptorFromHandle (internal_helpers)
+// for typeof-fold receivers that match no other handle encoding.
+static constexpr CHAOS_IL2CPP_UINT32 kMaxTypeInfoOwners = 512u;
+struct TypeInfoOwnerEntry {
+    CHAOS_IL2CPP_INTPTR type_info;
+    const ReflectionQueryTypeDescriptor* type_desc;
+};
+static TypeInfoOwnerEntry s_typeInfoOwners[kMaxTypeInfoOwners];
+static CHAOS_IL2CPP_UINT32 s_typeInfoOwnerCount = 0u;
+
+extern "C" const ReflectionQueryTypeDescriptor* ChaosFindReflectionTypeByTypeInfo(
+    CHAOS_IL2CPP_INTPTR type_info) noexcept
+{
+    for (CHAOS_IL2CPP_UINT32 i = 0u; i < s_typeInfoOwnerCount; i++) {
+        if (s_typeInfoOwners[i].type_info == type_info)
+            return s_typeInfoOwners[i].type_desc;
+    }
+    return nullptr;
+}
+
 extern "C" void ChaosRegisterExternalType(
     CHAOS_IL2CPP_UINT32 fnv24_hash,
     const ReflectionQueryTypeDescriptor* type_desc) noexcept
 {
-    if (s_dynamicTypeCount < kMaxDynamicTypes && type_desc != nullptr) {
+    if (type_desc == nullptr) return;
+    if (s_dynamicTypeCount < kMaxDynamicTypes) {
         s_dynamicTypes[s_dynamicTypeCount].fnv24_hash = fnv24_hash;
         s_dynamicTypes[s_dynamicTypeCount].type_desc = type_desc;
         s_dynamicTypeCount++;
+    }
+    // Secondary index: TypeInfoHot* → descriptor.  The A2.7 typeof fold pushes
+    // the raw TypeInfoHot* (chaos_mt_X.AsTypeInfoHot()), which encodes neither a
+    // ReflectionQuery handle (tag bit 63) nor a module-registry handle
+    // ([module_id:32][token:32]) — casting the pointer to TypeInfoHandle reads
+    // the pointer's high bits as a module id, so every decode path fails and
+    // GetMethod/GetProperty return 0.  The codegen fills each descriptor's
+    // type_info_ptr with the exact same expression the fold pushes, so this
+    // reverse map resolves typeof-fold receivers back to their descriptors.
+    if (type_desc->type_info_ptr != nullptr && s_typeInfoOwnerCount < kMaxTypeInfoOwners) {
+        s_typeInfoOwners[s_typeInfoOwnerCount].type_info =
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(type_desc->type_info_ptr);
+        s_typeInfoOwners[s_typeInfoOwnerCount].type_desc = type_desc;
+        s_typeInfoOwnerCount++;
     }
 }
 

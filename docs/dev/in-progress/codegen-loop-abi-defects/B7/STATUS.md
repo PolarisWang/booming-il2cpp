@@ -182,12 +182,32 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
   ↓ 已暴露
 层2  ✅ 已修（8bd4c84f8）：methods 表已发射进描述符
   ↓ 已暴露
-层1b 🔴 当前阻断：typeof(string) 折叠返回 TypeInfoHot*（裸类型句柄），
-     ChaosReflectionGetMethod 的 TryDecodeReflectionQueryHandle /
-     module registry / pseudo-metadata 三条解码路径都无法把 TypeInfoHot*
-     转成 ReflectionQueryTypeDescriptor → GetMethod 返 0 → NRE。
-     需架构决策：typeof 值模型与反射句柄体系打通（fold 改推编码句柄，
-     或 TypeInfoHot* → descriptor 反查）
+层1b 🔴→🟡 当前阻断（已精确定位，2026-09-15 cdb+stderr 探针闭环）：
+     双重值模型错配，两层叠加：
+     (a) typeof 折叠（A2.7）推裸 TypeInfoHot*，而【generated 对象模型】
+         （native-aot.generated.cpp:28207 ChaosReflectionGetMethod，自
+         ReflectionObjectEmission.cs 发射）把接收者强转为托管
+         chaos_type_System_Type* 并读 runtime_type_handle 字段
+         （= 0x02000000|FNV32(subjectId)，TLS 缓存的托管 Type 对象）。
+         裸指针读出垃圾 handle → resolve_method_handle 不命中 → 返 0 → NRE。
+     (b) runtime 侧 GetTypeDescriptorFromHandle 三条解码路径也解不了裸
+         TypeInfoHot* —— 已修：ChaosRegisterExternalType 现按描述符的
+         type_info_ptr 建【TypeInfoHot*→descriptor 反查表】
+         （ChaosFindReflectionTypeByTypeInfo），emitter 仅对
+         MethodTable 已定义的类型（_referenceTypeBaseSubjectIds ∪
+         _valueTypeStructSubjectIds）填 type_info_ptr。落地后
+         passed 249→253。
+  → 剩余修复方案（下一会话）：generated 对象模型入口加
+     chaos_reflection_coerce_type_value(v)：
+     * `*(void**)v != nullptr` → 已是托管对象，原样返回
+     * 否则裸 TypeInfoHot* → ChaosFindReflectionTypeByTypeInfo(v) →
+       desc → 用 desc->reserved_flags（emitter 填
+       0x02000000|FNV32(subjectId)，即 GetTypeHandleLiteral 常量）→
+       chaos_reflection_create_type_value(handle)（TLS 缓存，P1 可接受）
+     * 对象模型全部 reinterpret 接收者处先过 coerce
+     ⚠️ 改 fold 本身（直接推 create_type_value）会波及其他 chunk 的
+     enum helper 消费方（fold 注释声称服务 Enum.Format/Parse），风险大；
+     coerce 方案只动对象模型入口，fold 保持不变。
   ↓ 修好后
 层3  FindReflectionQueryMethod 按名字+参数个数匹配 —— IndexOf(char) 与
      IndexOf(string) 个数相同会歧义；需 descriptor 携带参数类型

@@ -915,6 +915,32 @@ public sealed partial class NativeAotLoweringPlanner
             var m = methodsByType.FirstOrDefault(g => g.Key == typeId);
 
             string descSym = ReflectionMemberSymbol("desc", typeId);
+            // Fill type_info_ptr with the same TypeInfoHot* expression the A2.7
+            // typeof fold pushes — GetNativeTypeInfoSymbol(typeId) yields
+            // chaos_mt_<Type>.AsTypeInfoHot(), byte-identical to the fold's
+            // operand.  The runtime's ChaosRegisterExternalType builds a
+            // TypeInfoHot* → descriptor reverse map from this field, so
+            // typeof-fold receivers resolve through GetMethod/GetProperty/etc.
+            // Without it, a folded typeof value matches no handle encoding and
+            // every member query returns 0.
+            //
+            // ONLY for types whose MethodTable symbol has a DEFINITION in the
+            // generated sources: reference types in
+            // _referenceTypeBaseSubjectIds plus emitted value-type structs.
+            // (_allEmittedTypeSubjectIds is broader — it also covers types that
+            // get only an extern chaos_mt_ DECLARATION, e.g. MemberInfo,
+            // TypeInfo, Decimal — and emitting AsTypeInfoHot() for those
+            // produces LNK2001 × N.  The failure is silent at pipeline level:
+            // the fact stage keeps running against a stale entry.exe.)
+            // The typeof fold can only produce TypeInfoHot* for
+            // MethodTable-defined types anyway, so this is exactly the fold's
+            // output domain.
+            bool hasMethodTable =
+                _referenceTypeBaseSubjectIds.ContainsKey(typeId)
+                || (_valueTypeStructSubjectIds?.Contains(typeId) == true);
+            string typeInfoExpr = hasMethodTable
+                ? GetNativeTypeInfoSymbol(typeId)
+                : "nullptr";
             sb.AppendLine($"{tab}static const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor {descSym} = {{");
             sb.AppendLine($"{tab}    0u, \"{EscapeCppStringLiteral(typeId)}\", \"{EscapeCppStringLiteral(typeId)}\", nullptr, nullptr, nullptr,");
             sb.AppendLine($"{tab}    nullptr,");
@@ -923,7 +949,7 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine($"{tab}    {(e is null ? "nullptr" : ReflectionMemberSymbol("events", typeId))}, {(e is null ? 0 : e.Count())}u,");
             sb.AppendLine($"{tab}    {(m is null ? "nullptr" : ReflectionMemberSymbol("methods", typeId))}, {(m is null ? 0 : m.Count())}u,");
             sb.AppendLine($"{tab}    nullptr, 0u,");                  // generic_parameters, generic_param_count
-            sb.AppendLine($"{tab}    0u, nullptr,");                  // reserved_flags, type_info_ptr
+            sb.AppendLine($"{tab}    0u, {typeInfoExpr},");           // reserved_flags, type_info_ptr
             sb.AppendLine($"{tab}}};");
             sb.AppendLine($"{tab}ChaosRegisterExternalType({ReflectionMemberFnv24(typeId)}u, &{descSym});");
         }
