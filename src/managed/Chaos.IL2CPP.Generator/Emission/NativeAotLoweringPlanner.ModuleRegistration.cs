@@ -818,7 +818,8 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private string BuildReflectionMemberDescriptorTables()
     {
-        int total = _reflectionProperties.Count + _reflectionFields.Count + _reflectionEvents.Count;
+        int total = _reflectionProperties.Count + _reflectionFields.Count
+            + _reflectionEvents.Count + _reflectionMethods.Count;
         if (total == 0) return string.Empty;
 
         var sb = new StringBuilder(4096);
@@ -834,6 +835,41 @@ public sealed partial class NativeAotLoweringPlanner
             .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
         var eventsByType = _reflectionEvents.GroupBy(e => e.TypeSubjectId)
             .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
+
+        // Methods + their parameter arrays: Type::GetMethod(name, Type[]) resolves
+        // against the type's method table, and GetParameters()[i] reads the method's
+        // parameter descriptors.  Both were absent (methods = nullptr / 0), so
+        // GetMethod found nothing and GetParameters returned empty.
+        var methodsByType = _reflectionMethods.GroupBy(m => m.TypeSubjectId)
+            .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
+        var paramsByMethod = _reflectionMethodParams.GroupBy(p => p.MethodSubjectId)
+            .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
+
+        // ── Per-method parameter arrays ──
+        foreach (var g in paramsByMethod)
+        {
+            string sym = ReflectionMemberSymbol("params", g.Key);
+            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor {sym}[] = {{");
+            foreach (var m in g.OrderBy(x => x.ParamIndex))
+                sb.AppendLine($"{tab}{{ \"{EscapeCppStringLiteral(m.ParamSubjectId)}\", \"{EscapeCppStringLiteral(m.ParamName)}\", {m.ParamIndex}u, \"{EscapeCppStringLiteral(m.ParamTypeName)}\", 0, 0u }},");
+            sb.AppendLine($"{ind}}};");
+        }
+
+        // ── Per-type method arrays ──
+        foreach (var g in methodsByType)
+        {
+            string sym = ReflectionMemberSymbol("methods", g.Key);
+            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor {sym}[] = {{");
+            foreach (var m in g.OrderBy(x => x.Token))
+            {
+                var paramSym = paramsByMethod.Any(pg => pg.Key == m.MethodSubjectId)
+                    ? ReflectionMemberSymbol("params", m.MethodSubjectId)
+                    : "nullptr";
+                var paramCount = paramsByMethod.FirstOrDefault(pg => pg.Key == m.MethodSubjectId)?.Count() ?? 0;
+                sb.AppendLine($"{tab}{{ {m.Token}u, \"{EscapeCppStringLiteral(m.MethodSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.ReturnTypeName)}\", {m.ParamCount}, {paramSym}, {paramCount}u, nullptr, {m.Flags}u }},");
+            }
+            sb.AppendLine($"{ind}}};");
+        }
 
         // ── Per-type member arrays ──
         foreach (var g in propsByType)
@@ -865,6 +901,7 @@ public sealed partial class NativeAotLoweringPlanner
         var allTypes = propsByType.Select(g => g.Key)
             .Concat(fieldsByType.Select(g => g.Key))
             .Concat(eventsByType.Select(g => g.Key))
+            .Concat(methodsByType.Select(g => g.Key))
             .Distinct(StringComparer.Ordinal)
             .OrderBy(t => t, StringComparer.Ordinal)
             .ToList();
@@ -875,6 +912,7 @@ public sealed partial class NativeAotLoweringPlanner
             var p = propsByType.FirstOrDefault(g => g.Key == typeId);
             var f = fieldsByType.FirstOrDefault(g => g.Key == typeId);
             var e = eventsByType.FirstOrDefault(g => g.Key == typeId);
+            var m = methodsByType.FirstOrDefault(g => g.Key == typeId);
 
             string descSym = ReflectionMemberSymbol("desc", typeId);
             sb.AppendLine($"{tab}static const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor {descSym} = {{");
@@ -883,9 +921,9 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine($"{tab}    {(f is null ? "nullptr" : ReflectionMemberSymbol("fields", typeId))}, {(f is null ? 0 : f.Count())}u,");
             sb.AppendLine($"{tab}    {(p is null ? "nullptr" : ReflectionMemberSymbol("props", typeId))}, {(p is null ? 0 : p.Count())}u,");
             sb.AppendLine($"{tab}    {(e is null ? "nullptr" : ReflectionMemberSymbol("events", typeId))}, {(e is null ? 0 : e.Count())}u,");
-            sb.AppendLine($"{tab}    nullptr, 0u,");
-            sb.AppendLine($"{tab}    nullptr, 0u, 0u,");
-            sb.AppendLine($"{tab}    nullptr,");
+            sb.AppendLine($"{tab}    {(m is null ? "nullptr" : ReflectionMemberSymbol("methods", typeId))}, {(m is null ? 0 : m.Count())}u,");
+            sb.AppendLine($"{tab}    nullptr, 0u,");                  // generic_parameters, generic_param_count
+            sb.AppendLine($"{tab}    0u, nullptr,");                  // reserved_flags, type_info_ptr
             sb.AppendLine($"{tab}}};");
             sb.AppendLine($"{tab}ChaosRegisterExternalType({ReflectionMemberFnv24(typeId)}u, &{descSym});");
         }
