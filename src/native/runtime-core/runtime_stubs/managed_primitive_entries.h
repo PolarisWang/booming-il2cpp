@@ -91,6 +91,32 @@ CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimExitUpgradeableReadLock(
     CHAOS_IL2CPP_INTPTR rw) noexcept;
 
 // ══════════════════════════════════════════════════════════════════════
+// ReaderWriterLockSlim — try-enter (NOW WIRED: receiver injected)
+// ══════════════════════════════════════════════════════════════════════
+//
+// The lowering-layer receiver injection (A.2) prepends the receiver slot,
+// so the shim signature is (rw_handle + timeout).  Each entry recovers the
+// native lock from the instance, then calls the T2.0 handle ABI.
+
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterReadLockInt32(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterReadLockTimeSpan(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterWriteLockInt32(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterWriteLockTimeSpan(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockInt32(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockTimeSpan(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
+
+// ══════════════════════════════════════════════════════════════════════
 // ReaderWriterLockSlim — Dispose
 // ══════════════════════════════════════════════════════════════════════
 //
@@ -145,39 +171,33 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
 // SpinLock — T2.5 (shim-matching signatures)
 // ══════════════════════════════════════════════════════════════════════
 //
-// CRITICAL: the generated shim passes ONLY the managed parameter slots, NOT
-// the receiver.  For reference types we recover from the instance handle
-// field; for the SpinLock VALUE TYPE the storage IS the instance, but codegen
-// does not forward it through SimpleForward dispatch.  Consequently the
-// native entry does NOT know which SpinLock the caller intends.
+// SpinLock is a VALUE TYPE, so the receiver is a pointer to the struct's own
+// storage.  A.2's receiver injection supplies it as chaos_fn_arg_0, so these
+// entries operate on the ACTUAL instance (real per-instance mutual exclusion).
 //
-// The entries below therefore apply a SINGLE global lock word rather than a
-// per-instance one.  This means the generated SpinLock tests can assert the
-// byref write-back (Enter sets lockTaken=true) but CANNOT assert mutual
-// exclusion — each test method creates its own `default(SpinLock)` on the
-// stack that never reaches the native layer anyway.  Real per-instance
-// SpinLock semantics would require an InlineShapeDescriptor that emits a
-// C++ call passing the stack slot address — a future improvement.
-//
-// The ABI slots from the ShapeRegistry registration determine the arity:
-//   Enter(ref bool)          → 1 arg (byref out-param)
-//   TryEnter(ref bool)       → 1 arg
-//   TryEnter(int, ref bool)  → 2 args
-//   TryEnter(TimeSpan, ref bool) → 2 args (TimeSpan as INTPTR tick pointer)
-//   Exit()                   → 1 arg (void entry, one INTPTR slot)
+// Shim signatures after injection:
+//   Enter(ref bool)              → (spinlock, &lockTaken)
+//   TryEnter(ref bool)           → (spinlock, &lockTaken)
+//   TryEnter(int, ref bool)      → (spinlock, timeout, &lockTaken)
+//   TryEnter(TimeSpan, ref bool) → (spinlock, ticks, &lockTaken)
+//   Exit()                       → (spinlock)
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
+CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR spinlock,
+                                      CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR spinlock,
+                                         CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INT32 timeout_ms,
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INTPTR spinlock,
+                                              CHAOS_IL2CPP_INT32 timeout_ms,
                                               CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterTimeSpan(CHAOS_IL2CPP_INTPTR timespan_ticks,
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterTimeSpan(CHAOS_IL2CPP_INTPTR spinlock,
+                                                 CHAOS_IL2CPP_INTPTR timespan_ticks,
                                                  CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept;
 
-/// Exit() — release.  Returns 1 = released, 0 = was not held.
-CHAOS_IL2CPP_INT32 ChaosSpinLockExit(void) noexcept;
+/// Exit() — release.  Returns 1 = released, 0 = was not held by this thread.
+CHAOS_IL2CPP_INT32 ChaosSpinLockExit(CHAOS_IL2CPP_INTPTR spinlock) noexcept;
 
 // ══════════════════════════════════════════════════════════════════════
 // SpinWait — T2.5

@@ -834,8 +834,47 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		var symbol = GetExternalRuntimeHelperSymbol(callee);
 		var returnType = MapAbiSlotReturnType(entry.ReturnAbi);
-		var parameterSignature = FormatAbiSlotParameterSignature(entry.ParameterAbis);
-		var argCount = entry.ParameterAbis.Count;
+
+		// ── Instance method receiver injection (Phase A) ────────────────
+		//
+		// SimpleForward shims for instance methods must include a receiver slot
+		// as the first ABI parameter, because the generated call site pops the
+		// managed arguments from the eval stack and the receiver is one of them
+		// (it is pushed by the IL `callvirt` / `call` just like any other arg).
+		// The ShapeRegistry entry's ParameterAbis lists ONLY the explicit managed
+		// parameters — the receiver must be prepended here.
+		//
+		// The receiver's type is the declaring type of the method, read from the
+		// managed method model.  We use the exact DeclaringTypeSubjectId so the
+		// lowering can produce a typed slot rather than an opaque INTPTR, which
+		// is necessary for value-type receivers (the slot encoding differs).
+		//
+		// Static methods are NOT modified — their shim has no receiver slot.
+		var receiverSlot = TryGetReceiverSlot(callee);
+		var abis = entry.ParameterAbis;
+		var rawArgs = entry.RawArgumentIndices ?? EmptyRawArgumentIndices;
+		IReadOnlyList<AotCoreIrAbiSlotArtifact> effectiveAbis;
+		IReadOnlySet<int> effectiveRawArgs;
+		if (receiverSlot != null)
+		{
+			// Prepend the receiver as slot 0, shift existing indices.
+			var newAbis = new List<AotCoreIrAbiSlotArtifact>(abis.Count + 1) { receiverSlot };
+			newAbis.AddRange(abis);
+			effectiveAbis = newAbis;
+
+			var shifted = new HashSet<int> { 0 };  // receiver is always a raw arg
+			foreach (var idx in rawArgs)
+				shifted.Add(idx + 1);
+			effectiveRawArgs = shifted;
+		}
+		else
+		{
+			effectiveAbis = abis;
+			effectiveRawArgs = rawArgs;
+		}
+
+		var parameterSignature = FormatAbiSlotParameterSignature(effectiveAbis);
+		var argCount = effectiveAbis.Count;
 		var args = argCount == 0 ? string.Empty :
 			string.Join(", ", Enumerable.Range(0, argCount).Select(i => $"chaos_fn_arg_{i}"));
 		var bodyLines = entry.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void
@@ -843,9 +882,34 @@ public sealed partial class NativeAotLoweringPlanner
 			: new[] { $"    return {entry.NativeFnSymbol}({args});" };
 		return new ExternalRuntimeHelperDefinition(callee, symbol,
 			RenderSimpleExternalRuntimeHelper(returnType, symbol, parameterSignature, bodyLines),
-			entry.ParameterAbis, entry.ReturnAbi, entry.RawArgumentIndices ?? EmptyRawArgumentIndices,
+			effectiveAbis, entry.ReturnAbi, effectiveRawArgs,
 			entry.ReferencedStaticFieldSubjectIds,
 			DirectNativeSymbol: entry.NativeFnSymbol);
+	}
+
+	/// <summary>
+	/// If <paramref name="callee"/> is an instance method, returns the ABI slot
+	/// for its receiver (the `this` pointer).  For static methods returns null.
+	/// </summary>
+	private AotCoreIrAbiSlotArtifact? TryGetReceiverSlot(string callee)
+	{
+		if (_allManagedMethods == null)
+			return null;
+
+		if (!_allManagedMethods.TryGetValue(callee, out var mm))
+			return null;
+
+		if (mm.IsStatic)
+			return null;
+
+		// Receiver slot: NativeInt carrying the declaring type.  The exact
+		// subject id matters for value-type receivers (the ABI carrier differs
+		// from a plain reference pass-through), so we do not pass null.
+		//
+		// DeclaringTypeShape is not on ManagedMethodModel — reference vs value
+		// type is resolved by the caller's slot formatting from the subject id.
+		return CreateNativeIntAbiSlot(mm.DeclaringTypeSubjectId,
+			AotCoreIrTypeShapeKind.ReferenceType);
 	}
 
 }

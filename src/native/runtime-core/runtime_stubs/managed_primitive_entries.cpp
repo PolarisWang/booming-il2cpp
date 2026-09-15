@@ -141,23 +141,52 @@ CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimExitUpgradeableReadLock(
     return ExitWithHandle(rw, &ChaosReaderWriterLockSlimExitUpgradeableRead);
 }
 
-// ── ReaderWriterLockSlim — try-enter (NOT WIRED) ───────────────────────
+// ── ReaderWriterLockSlim — try-enter (NOW WIRED: receiver injected by A.2) ──
 //
-// `TryEnter{Read,Write,UpgradeableRead}Lock(int|TimeSpan)` are deliberately
-// NOT implemented.  The generated shim passes ONLY the timeout argument —
-// the receiver is not forwarded for instance methods that take parameters
-// (see managed_primitive_entries.h).  Without the instance there is no way
-// to recover the native lock handle, so wiring these would mean either
-// operating on a wrong lock or silently succeeding.  They stay on the
-// fallback path, where their absence remains visible.
-//
-// The zero-argument entries above DO receive the instance (their shim's
-// single slot is the receiver), which is why Enter/Exit/Dispose are wired.
+// With the lowering-layer receiver injection, shims for these methods carry
+// the instance handle as chaos_fn_arg_0 and the managed parameter(s) after it.
+// Each entry recovers the native lock from the instance handle, then calls the
+// T2.0 handle ABI with the parameter.
 
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterReadLockInt32(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+{
+    return EnterWithHandle(rw, timeout_ms, &ChaosReaderWriterLockSlimEnterRead);
+}
 
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterReadLockTimeSpan(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept
+{
+    return EnterWithHandle(rw, TimeSpanTicksToMillis(timespan_ticks),
+                           &ChaosReaderWriterLockSlimEnterRead);
+}
 
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterWriteLockInt32(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+{
+    return EnterWithHandle(rw, timeout_ms, &ChaosReaderWriterLockSlimEnterWrite);
+}
 
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterWriteLockTimeSpan(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept
+{
+    return EnterWithHandle(rw, TimeSpanTicksToMillis(timespan_ticks),
+                           &ChaosReaderWriterLockSlimEnterWrite);
+}
 
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockInt32(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+{
+    return EnterWithHandle(rw, timeout_ms,
+                           &ChaosReaderWriterLockSlimEnterUpgradeableRead);
+}
+
+CHAOS_IL2CPP_INT32 ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockTimeSpan(
+    CHAOS_IL2CPP_INTPTR rw, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept
+{
+    return EnterWithHandle(rw, TimeSpanTicksToMillis(timespan_ticks),
+                           &ChaosReaderWriterLockSlimEnterUpgradeableRead);
+}
 
 // ── ReaderWriterLockSlim — Dispose ─────────────────────────────────────
 //
@@ -236,30 +265,35 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
 }
 
 // ══════════════════════════════════════════════════════════════════════
-// SpinLock — T2.5 (shim-matching signatures)
+// ══════════════════════════════════════════════════════════════════════
+// SpinLock — T2.5 (per-instance, receiver now injected by A.2)
 // ══════════════════════════════════════════════════════════════════════
 //
-// The generated shim passes ONLY the managed parameter slots, NOT the
-// receiver.  The entries therefore use a SINGLE GLOBAL lock word rather
-// than a per-instance one — every SpinLock.Enter* call from generated
-// code targets `g_spin_lock_word`.  This is fine for the generated test
-// pattern (each test creates its own `default(SpinLock)` on the stack
-// that nothing reaches) but NOT correct for real per-instance mutual
-// exclusion — a future InlineShapeDescriptor fix.
+// SpinLock is a VALUE TYPE, so the receiver is a pointer to the struct's own
+// storage — the lock word lives in the caller's stack slot.  A.2's receiver
+// injection now supplies it as chaos_fn_arg_0, so these entries operate on the
+// ACTUAL SpinLock instance instead of a process-global word.  That restores
+// real per-instance mutual exclusion.
 //
-// The byref write-back (Enter sets lockTaken=true) IS load-bearing.
+// The lock word is 0 (free) or the owning ThreadId.  Storing the id rather than
+// a bool is what lets Exit verify ownership — a mispaired Exit is detectable
+// instead of silently corrupting the lock.
 
-namespace {
-std::atomic<CHAOS_IL2CPP_INT32> g_spin_lock_word{0};
-constexpr CHAOS_IL2CPP_INT32 kLockHeld = 1;
-}  // anonymous namespace
-
-CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
+CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR spinlock,
+                                      CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
 {
     if (lock_taken_out == 0) return 0;
+    auto* word = reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(spinlock);
+    if (spinlock == 0) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+        return 0;
+    }
+
+    const CHAOS_IL2CPP_INT32 self =
+        chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
     for (;;) {
         CHAOS_IL2CPP_INT32 expected = 0;
-        if (g_spin_lock_word.compare_exchange_weak(expected, kLockHeld,
+        if (word->compare_exchange_weak(expected, self,
                 std::memory_order_acquire, std::memory_order_relaxed)) {
             *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 1;
             return 1;
@@ -268,11 +302,19 @@ CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR lock_taken_out) noexce
     }
 }
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR spinlock,
+                                         CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
 {
     if (lock_taken_out == 0) return 0;
+    if (spinlock == 0) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+        return 0;
+    }
+    auto* word = reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(spinlock);
+    const CHAOS_IL2CPP_INT32 self =
+        chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
     CHAOS_IL2CPP_INT32 expected = 0;
-    if (g_spin_lock_word.compare_exchange_weak(expected, kLockHeld,
+    if (word->compare_exchange_weak(expected, self,
             std::memory_order_acquire, std::memory_order_relaxed)) {
         *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 1;
         return 1;
@@ -281,14 +323,23 @@ CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR lock_taken_out) noe
     return 0;
 }
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INT32 timeout_ms,
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INTPTR spinlock,
+                                              CHAOS_IL2CPP_INT32 timeout_ms,
                                               CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
 {
     if (lock_taken_out == 0) return 0;
-    if (timeout_ms == 0) return ChaosSpinLockTryEnter(lock_taken_out);
+    if (spinlock == 0) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+        return 0;
+    }
+    if (timeout_ms == 0) return ChaosSpinLockTryEnter(spinlock, lock_taken_out);
+
+    auto* word = reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(spinlock);
+    const CHAOS_IL2CPP_INT32 self =
+        chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
     for (;;) {
         CHAOS_IL2CPP_INT32 expected = 0;
-        if (g_spin_lock_word.compare_exchange_weak(expected, kLockHeld,
+        if (word->compare_exchange_weak(expected, self,
                 std::memory_order_acquire, std::memory_order_relaxed)) {
             *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 1;
             return 1;
@@ -306,17 +357,22 @@ CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INT32 timeout_ms,
     }
 }
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterTimeSpan(CHAOS_IL2CPP_INTPTR timespan_ticks,
+CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterTimeSpan(CHAOS_IL2CPP_INTPTR spinlock,
+                                                 CHAOS_IL2CPP_INTPTR timespan_ticks,
                                                  CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
 {
-    return ChaosSpinLockTryEnterInt32(TimeSpanTicksToMillis(timespan_ticks),
+    return ChaosSpinLockTryEnterInt32(spinlock, TimeSpanTicksToMillis(timespan_ticks),
                                       lock_taken_out);
 }
 
-CHAOS_IL2CPP_INT32 ChaosSpinLockExit(void) noexcept
+CHAOS_IL2CPP_INT32 ChaosSpinLockExit(CHAOS_IL2CPP_INTPTR spinlock) noexcept
 {
-    CHAOS_IL2CPP_INT32 expected = kLockHeld;
-    if (g_spin_lock_word.compare_exchange_strong(expected, 0,
+    if (spinlock == 0) return 0;
+    auto* word = reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(spinlock);
+    const CHAOS_IL2CPP_INT32 self =
+        chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
+    CHAOS_IL2CPP_INT32 expected = self;
+    if (word->compare_exchange_strong(expected, 0,
             std::memory_order_release, std::memory_order_relaxed)) {
         return 1;
     }
