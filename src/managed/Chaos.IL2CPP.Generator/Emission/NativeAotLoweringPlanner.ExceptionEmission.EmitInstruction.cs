@@ -254,6 +254,16 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
         // A2.7 DCE: Skip dead ltoken when typeof(T) compile-time fold fires.
+        //
+        // ⚠️ KNOWN DEPTH-ACCOUNTING ENTANGLEMENT (2026-09-15, do not "fix" in
+        // isolation): the ldtoken here IS compensated +1, and the fold's own push
+        // at the GetTypeFromHandle call site allocates another slot — a net +2 for
+        // the pair's real IL net of +1.  That inflation is WRONG in isolation, but
+        // removing the compensation (net +1) regressed 10+ subjects elsewhere
+        // (verified: passed 252 → 249) — some other slot-consumption pattern is
+        // implicitly relying on the inflated depth.  The two defects cancel.
+        // Untangling requires a dedicated audit of the whole structured-slot
+        // depth accounting (see B7/STATUS.md 层叠图谱).
         if (_typeOfSkipIlOffsets.Count > 0 &&
             _state.Value!.CurrentMethodNativeSymbol != null &&
             instruction.Op == "ldtoken" &&
