@@ -47,25 +47,44 @@ __except(EXCEPTION_EXECUTE_HANDLER) {
 `generatedMethodId` → metadata 行 → `methodSubjectId` 的路径。已确认
 `fact_chunk.py::_annotate` 走的正是这条路径。
 
-## 最终清单：11 个 realDefect
+## 最终清单：9 个 realDefect
 
-| # | BCL 方法 | 已有 native 符号 |
-|---|---------|-----------------|
-| 1 | `Activator::CreateInstance(Type)` | `ChaosReflectionCreateInstance` |
-| 2 | `Array::CreateInstance(Type, Int32)` | `ChaosArrayCreateInstance` |
-| 3 | `Enum::Parse(Type, String, Boolean)` | enum stubs |
-| 4 | `Enum::Format(Type, Object, String)` | enum stubs |
-| 5 | `UInt64::Parse(String, NumberStyles)` ×3 | `ChaosParseUInt64Styles` |
-| 6 | `Math::Cos(Double)` | `ChaosMathCos` |
-| 7 | `Math::Pow(Double, Double)` | `ChaosMathPow` |
-| 8 | `Random::NextDouble()` | `ChaosRandomNextDouble` |
-| 9 | `Type::GetField(String)` | `ChaosTypeGetFieldBindingFlags` |
+| si | BCL 方法 | 故障码 | 状态 |
+|----|---------|--------|------|
+| 7 | `Activator::CreateInstance(Type)` | 待查 | 未修 |
+| 151 | `Array::CreateInstance(Type, Int32)` | `0xe0000001` | 未修 |
+| 1357 | `Enum::Parse(Type, String, Boolean)` | 待查 | 未修 |
+| 1371 | `Enum::Format(Type, Object, String)` | `0xe0000001` | 未修 |
+| 1720 | `UInt64::Parse(String, NumberStyles)` | 待查 | 未修 |
+| 1871 | `Math::Cos(Double)` | `0xc0000005` | 未修 |
+| 1877 | `Math::Pow(Double, Double)` | `0xc0000005` | 未修 |
+| 2899 | `Type::GetField(String)` | 待查 | 未修 |
+| — | `Random::NextDouble()` | `0xc0000005` | 未修 |
 
-## 下一步
+## 已修复（本轮）
 
-1. 逐个定位这 11 个的故障点（已有 `[SEH-FAULT]` 输出可用）
-2. 区分「native 实现缺陷」vs「参数 ABI 传递缺陷」
-3. 修复
+### Int32/Int64 Parse 多参重载（commit `697b8550b`）
+
+**症状**：`0xc0000005` 访问违规。
+
+**根因**：只有 1 参 `Parse(String)` 注册了 shape；ATG 注入有效字面量后调用
+`Parse("1234567", NumberStyles)`（2 参），而 SimpleForward 发射器转发**全部**
+参数 → `ChaosParseInt32(2参)` 打到 1 参 native → 栈上读到垃圾 → AV。
+
+**修复**：
+- native 侧加 `ChaosParseInt32Styles/Provider/StylesProvider` +
+  `ChaosParseInt64Styles/Provider/StylesProvider`
+- 注册侧补齐 6 个 shape，指向对应 arity 的符号
+
+**验证**：realDefect 从 20 降到 9（去重后独立方法）。
+
+## 两类剩余故障
+
+| 故障码 | 含义 | 数量 |
+|--------|------|------|
+| `0xe0000001` | C++ EH 异常（托管抛出） | 3 |
+| `0xc0000005` | STATUS_ACCESS_VIOLATION | 3 |
+| 待查 | — | 3 |
 
 ## 复现命令
 
