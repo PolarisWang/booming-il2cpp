@@ -736,6 +736,30 @@ public sealed class TestEmitter
                or "CreateIAsyncEnumerableInfo")
             return true;
 
+        // XmlTextWriter's argument-validation surface (W1,
+        // json-xml-production-readiness).  The native stubs in
+        // xml_writer_stubs.cpp raise the same managed exceptions the BCL does:
+        //   ArgumentNullException   — null name/buffer/ns
+        //   ArgumentException       — empty name, invalid surrogate pair
+        //   InvalidOperationException — no open element / attribute / document
+        // Emitting the try/throw-reprobe form (rather than the [UNVERIFIED] skip)
+        // turns these subjects into real results: the native call executes, the
+        // throw is observed by the subject's enclosing catch, and fact records a
+        // genuine value instead of the codegen-time `return 42L` smoke stub.
+        //
+        // Async variants are deliberately EXCLUDED — they need the async state
+        // machine (Phase M) and currently fail on the managed side too, so the
+        // conservative skip remains correct for them.
+        if (declaringType is not null
+            && declaringType.Contains("System.Xml.XmlTextWriter", StringComparison.Ordinal)
+            && method.Name is "WriteDocType" or "WriteProcessingInstruction"
+               or "WriteEntityRef" or "WriteEndElement" or "WriteFullEndElement"
+               or "WriteEndAttribute" or "WriteEndDocument" or "WriteName"
+               or "WriteQualifiedName" or "WriteNmToken"
+               or "WriteSurrogateCharEntity" or "WriteChars" or "WriteRaw"
+               or "WriteBase64" or "WriteBinHex" or "LookupPrefix")
+            return true;
+
         return false;
     }
 
