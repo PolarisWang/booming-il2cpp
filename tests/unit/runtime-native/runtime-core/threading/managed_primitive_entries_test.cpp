@@ -130,3 +130,52 @@ TEST(ManagedPrimitiveEntries, DisposeReleasesTheBindingAndIsIdempotent)
     EXPECT_EQ(ChaosReaderWriterLockSlimEnterRead(rw, 0), -1)
         << "the destroyed lock's id must no longer resolve";
 }
+
+// ── 4. TryEnter* — now wired via receiver injection (Phase A) ────────
+
+TEST(ManagedPrimitiveEntries, TryEnterReadLockReachesTheInstancesOwnLock)
+{
+    FakeRwls a;
+    const CHAOS_IL2CPP_INTPTR rw = Bind(a);
+
+    // Free lock: TryEnterReadLock(int) with timeout 0 must succeed.
+    EXPECT_EQ(ChaosReaderWriterLockSlimTryEnterReadLockInt32(AsIntPtr(&a), 0), 1);
+
+    // Now the lock is held in read mode: a non-blocking write acquire must fail.
+    EXPECT_EQ(ChaosReaderWriterLockSlimEnterWrite(rw, 0), 0)
+        << "TryEnterReadLock must actually enter the lock";
+
+    ChaosReaderWriterLockSlimExitRead(rw);
+    ChaosReaderWriterLockSlimDestroy(rw);
+}
+
+TEST(ManagedPrimitiveEntries, TryEnterUpgradeableReadLockReachesTheInstancesOwnLock)
+{
+    FakeRwls a;
+    const CHAOS_IL2CPP_INTPTR rw = Bind(a);
+
+    // Poll with 0 ticks.  The lock is free, so this must succeed.
+    CHAOS_IL2CPP_INT64 zeroTicks = 0;
+    EXPECT_EQ(ChaosReaderWriterLockSlimTryEnterUpgradeableReadLockTimeSpan(
+                  AsIntPtr(&a), reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&zeroTicks)), 1)
+        << "upgradeable read with 0-ticks must poll and succeed on a free lock";
+
+    // While upgradeable read is held, a regular write must fail.
+    EXPECT_EQ(ChaosReaderWriterLockSlimEnterWrite(rw, 0), 0);
+
+    ChaosReaderWriterLockSlimExitUpgradeableRead(rw);
+    ChaosReaderWriterLockSlimDestroy(rw);
+}
+
+TEST(ManagedPrimitiveEntries, TryEnterWriteLockFailsWhenWriteLockHeld)
+{
+    FakeRwls a;
+    const CHAOS_IL2CPP_INTPTR rw = Bind(a);
+
+    ASSERT_EQ(ChaosReaderWriterLockSlimEnterWriteLockInfinite(AsIntPtr(&a)), 1);
+    EXPECT_EQ(ChaosReaderWriterLockSlimTryEnterWriteLockInt32(AsIntPtr(&a), 0), 0)
+        << "TryEnterWriteLock must fail when write lock is already held";
+
+    ChaosReaderWriterLockSlimExitWrite(rw);
+    ChaosReaderWriterLockSlimDestroy(rw);
+}
