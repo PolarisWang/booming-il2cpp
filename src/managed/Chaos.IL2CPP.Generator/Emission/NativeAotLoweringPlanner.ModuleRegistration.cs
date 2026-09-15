@@ -33,6 +33,11 @@ public sealed partial class NativeAotLoweringPlanner
         EmitCustomAttributeModuleDescriptorFields(caFieldSb);
         string caFieldCode = caFieldSb.ToString();
 
+        // Pre-build the reflection member descriptor tables (properties / fields /
+        // events).  Built in C# rather than Scriban because the grouping into
+        // per-type arrays with prefix indices is easier to get right here.
+        string reflectionMemberCode = BuildReflectionMemberDescriptorTables();
+
         var model = new ScriptObject
         {
             ["indentation"] = ScribanTemplateRenderer.Indentation(1),
@@ -41,6 +46,8 @@ public sealed partial class NativeAotLoweringPlanner
             ["type_count"] = _moduleTypeCount,
             ["custom_attribute_blob_code"] = caCode,
             ["module_descriptor_custom_attr_fields"] = caFieldCode,
+            ["has_reflection_members"] = reflectionMemberCode.Length > 0,
+            ["reflection_member_tables_code"] = reflectionMemberCode,
         };
 
         if (hasTypeData)
@@ -789,5 +796,130 @@ public sealed partial class NativeAotLoweringPlanner
     /// this builds entries for JIT compilation — first call triggers JitStubDispatchImpl
     /// → Compile() → direct_ptr patched to compiled native code.
     /// </summary>
+
+    /// <summary>
+    /// Build the reflection member descriptor tables (properties / fields / events)
+    /// as a C++ block, plus the per-type <c>ReflectionQueryTypeDescriptor</c> array
+    /// and the registration call that hands them to the runtime.
+    ///
+    /// These tables are what <c>Type::GetProperty</c> / <c>GetField</c> / <c>GetEvent</c>
+    /// resolve against.  Without them those accessors are deliberate
+    /// <c>CHAOS_IL2CPP_FAIL()</c> stubs (<c>RuntimeHelperShapeRegistry.CoreStubs.Part1.S15.cs</c>)
+    /// and any member query aborts the process.
+    ///
+    /// Emitted per closure-reachable type (see
+    /// <c>CollectReflectionMemberMetadataFromClosure</c>) rather than for the whole
+    /// BCL — the library's full member set is props=5128 / fields=9011, while a
+    /// chunk observes a few dozen types.
+    ///
+    /// Registration goes through the existing <c>ChaosRegisterExternalType</c>, whose
+    /// hash-keyed dynamic table the type-resolution path already consults.  No ABI
+    /// structure is extended, so ModuleDescriptor layout is untouched.
+    /// </summary>
+    private string BuildReflectionMemberDescriptorTables()
+    {
+        int total = _reflectionProperties.Count + _reflectionFields.Count + _reflectionEvents.Count;
+        if (total == 0) return string.Empty;
+
+        var sb = new StringBuilder(4096);
+        string ind = ScribanTemplateRenderer.Indentation(1);
+        string tab = ind + "    ";
+
+        // Group members by declaring type so each type's descriptor can point at its
+        // own contiguous slice.  Types are emitted in a stable order for reproducible
+        // generated sources.
+        var propsByType = _reflectionProperties.GroupBy(p => p.TypeSubjectId)
+            .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
+        var fieldsByType = _reflectionFields.GroupBy(f => f.TypeSubjectId)
+            .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
+        var eventsByType = _reflectionEvents.GroupBy(e => e.TypeSubjectId)
+            .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
+
+        // ── Per-type member arrays ──
+        foreach (var g in propsByType)
+        {
+            string sym = ReflectionMemberSymbol("props", g.Key);
+            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryPropertyDescriptor {sym}[] = {{");
+            foreach (var m in g.OrderBy(x => x.Name, StringComparer.Ordinal))
+                sb.AppendLine($"{tab}{{ \"{EscapeCppStringLiteral(m.TypeSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.MemberType)}\", {m.Flags}u }},");
+            sb.AppendLine($"{ind}}};");
+        }
+        foreach (var g in fieldsByType)
+        {
+            string sym = ReflectionMemberSymbol("fields", g.Key);
+            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryFieldDescriptor {sym}[] = {{");
+            foreach (var m in g.OrderBy(x => x.Name, StringComparer.Ordinal))
+                sb.AppendLine($"{tab}{{ 0u, \"{EscapeCppStringLiteral(m.TypeSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.MemberType)}\", {m.ConstantValue}LL, {m.Flags}u }},");
+            sb.AppendLine($"{ind}}};");
+        }
+        foreach (var g in eventsByType)
+        {
+            string sym = ReflectionMemberSymbol("events", g.Key);
+            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryEventDescriptor {sym}[] = {{");
+            foreach (var m in g.OrderBy(x => x.Name, StringComparer.Ordinal))
+                sb.AppendLine($"{tab}{{ \"{EscapeCppStringLiteral(m.TypeSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.MemberType)}\", {m.Flags}u }},");
+            sb.AppendLine($"{ind}}};");
+        }
+
+        // ── Per-type descriptors + registration ──
+        var allTypes = propsByType.Select(g => g.Key)
+            .Concat(fieldsByType.Select(g => g.Key))
+            .Concat(eventsByType.Select(g => g.Key))
+            .Distinct(StringComparer.Ordinal)
+            .OrderBy(t => t, StringComparer.Ordinal)
+            .ToList();
+
+        sb.AppendLine($"{ind}static void ChaosRegisterReflectionMembers() {{");
+        foreach (var typeId in allTypes)
+        {
+            var p = propsByType.FirstOrDefault(g => g.Key == typeId);
+            var f = fieldsByType.FirstOrDefault(g => g.Key == typeId);
+            var e = eventsByType.FirstOrDefault(g => g.Key == typeId);
+
+            string descSym = ReflectionMemberSymbol("desc", typeId);
+            sb.AppendLine($"{tab}static const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor {descSym} = {{");
+            sb.AppendLine($"{tab}    0u, \"{EscapeCppStringLiteral(typeId)}\", \"{EscapeCppStringLiteral(typeId)}\", nullptr, nullptr, nullptr,");
+            sb.AppendLine($"{tab}    nullptr,");
+            sb.AppendLine($"{tab}    {(f is null ? "nullptr" : ReflectionMemberSymbol("fields", typeId))}, {(f is null ? 0 : f.Count())}u,");
+            sb.AppendLine($"{tab}    {(p is null ? "nullptr" : ReflectionMemberSymbol("props", typeId))}, {(p is null ? 0 : p.Count())}u,");
+            sb.AppendLine($"{tab}    {(e is null ? "nullptr" : ReflectionMemberSymbol("events", typeId))}, {(e is null ? 0 : e.Count())}u,");
+            sb.AppendLine($"{tab}    nullptr, 0u,");
+            sb.AppendLine($"{tab}    nullptr, 0u, 0u,");
+            sb.AppendLine($"{tab}    nullptr,");
+            sb.AppendLine($"{tab}}};");
+            sb.AppendLine($"{tab}ChaosRegisterExternalType({ReflectionMemberFnv24(typeId)}u, &{descSym});");
+        }
+        sb.AppendLine($"{ind}}}");
+        // Self-registering static initializer: the table must be live before any
+        // subject runs, and this TU is linked into every entry.exe.
+        sb.AppendLine($"{ind}namespace {{ const bool s_reflection_members_registered = (ChaosRegisterReflectionMembers(), true); }}");
+
+        return sb.ToString();
+    }
+
+    /// <summary>C++ identifier for a per-type member slice (subject id sanitised).</summary>
+    private static string ReflectionMemberSymbol(string kind, string typeSubjectId)
+    {
+        var sb = new StringBuilder("kRefl_");
+        sb.Append(kind).Append('_');
+        foreach (char c in typeSubjectId)
+            sb.Append(char.IsLetterOrDigit(c) ? c : '_');
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// FNV-1a 24-bit hash of a type subject id — must match the runtime's
+    /// <c>ChaosRegisterExternalType</c> key derivation in type_resolve.cpp.
+    /// </summary>
+    private static uint ReflectionMemberFnv24(string typeSubjectId)
+    {
+        uint h = 2166136261u;
+        foreach (char c in typeSubjectId)
+        {
+            h ^= (byte)c;
+            h *= 16777619u;
+        }
+        return h & 0xFFFFFFu;
+    }
 
 }

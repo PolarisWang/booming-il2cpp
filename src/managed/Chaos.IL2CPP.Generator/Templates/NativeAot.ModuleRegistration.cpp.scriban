@@ -62,6 +62,16 @@
 
 {{ custom_attribute_blob_code }}
 
+{{~ # ── Reflection member descriptors ──────────────────────────────────
+    # Type::GetProperty / GetField / GetEvent resolve against these tables.
+    # Without them those accessors have nothing to look up and are registered
+    # as deliberate CHAOS_IL2CPP_FAIL() stubs — any member query aborts the
+    # process.  Emitted per closure-reachable type, not for the whole BCL.
+~}}
+{{~ if has_reflection_members ~}}
+{{ reflection_member_tables_code }}
+{{~ end ~}}
+
 {{ indentation }}static const ModuleDescriptor s_native_aot_module = {
 {{ indentation }}{{ tab }}/* .name_utf8         = */ "{{ assembly_name }}",
 {{ indentation }}{{ tab }}/* .image             = */ &kReflImage,
