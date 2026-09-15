@@ -304,6 +304,143 @@ public sealed partial class NativeAotLoweringPlanner
                 new[] { "System.String" }, ShapeKind.SimpleForward,
                 "ChaosXmlWriterLookupPrefix", qn2, strAbi,
                 new HashSet<int> { 0, 1 });
+
+            // ── Abstract XmlWriter surface ──
+            //
+            // ATG subjects reach the writer two ways: `new XmlTextWriter(...)`
+            // (concrete, registered above) and `XmlWriter.Create(...)` — whose
+            // STATIC type is the abstract System.Xml.XmlWriter.  The latter is
+            // what System_Xml_XmlWriterTests exercises, and without these shapes
+            // every such call fell through to ChaosExternalRuntimeFallback and
+            // the subject degenerated into an ATG smoke stub.
+            //
+            // The same native symbols serve both: ChaosXmlWriterCreate hands out
+            // the opaque handle for either entry point, so an XmlWriter.Create
+            // result is indistinguishable from an XmlTextWriter at the ABI level.
+            // Method bodies are shared via RegisterXmlWriterVoid below, which
+            // differs from the XmlTextWriter helper only in the receiver type key.
+            RegisterXmlWriterStubs(registry);
+        }
+
+        /// <summary>
+        /// Register the abstract System.Xml.XmlWriter surface, mirrored onto the
+        /// same native symbols as XmlTextWriter.
+        ///
+        /// Why this is safe: the native side models the writer as an opaque
+        /// handle into a process-local table, with no reference to the managed
+        /// type hierarchy.  XmlTextWriter and XmlWriter.Create's returned
+        /// XmlWellFormedWriter therefore share one implementation; registering
+        /// both managed entry points against it only widens which subjects reach
+        /// the code, it does not change the write semantics.
+        /// </summary>
+        private static void RegisterXmlWriterStubs(RuntimeHelperShapeRegistry registry)
+        {
+            var wAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.XmlWriter",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var strAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var intRetAbi = CreateInt32AbiSlot();
+            var rawThis = new HashSet<int> { 0 };
+
+            var void0 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { wAbi });
+            var ws = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { wAbi, strAbi });
+            var wsR = new HashSet<int> { 0, 1 };
+            var ws2 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { wAbi, strAbi, strAbi });
+            var ws2R = new HashSet<int> { 0, 1, 2 };
+            var ws3 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { wAbi, strAbi, strAbi, strAbi });
+            var ws3R = new HashSet<int> { 0, 1, 2, 3 };
+            var arrAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.Array",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var wc3 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { wAbi, arrAbi, intRetAbi, intRetAbi });
+            var wc3R = new HashSet<int> { 0, 1, 2, 3 };
+            var ce1 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { wAbi, intRetAbi });
+            var ce1R = new HashSet<int> { 0, 1 };
+            var char2 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { wAbi, intRetAbi, intRetAbi });
+            var char2R = new HashSet<int> { 0, 1, 2 };
+            var dt4 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { wAbi, strAbi, strAbi, strAbi, strAbi });
+            var dt4R = new HashSet<int> { 0, 1, 2, 3, 4 };
+
+            // 0-arg void
+            RegisterXmlWriterVoid(registry, "Close",              "ChaosXmlWriterClose",              void0, rawThis, Array.Empty<string>());
+            RegisterXmlWriterVoid(registry, "Flush",              "ChaosXmlWriterFlush",              void0, rawThis, Array.Empty<string>());
+            RegisterXmlWriterVoid(registry, "WriteEndElement",    "ChaosXmlWriterWriteEndElement",    void0, rawThis, Array.Empty<string>());
+            RegisterXmlWriterVoid(registry, "WriteFullEndElement","ChaosXmlWriterWriteFullEndElement",void0, rawThis, Array.Empty<string>());
+            RegisterXmlWriterVoid(registry, "WriteEndDocument",   "ChaosXmlWriterWriteEndDocument",   void0, rawThis, Array.Empty<string>());
+            RegisterXmlWriterVoid(registry, "WriteEndAttribute",  "ChaosXmlWriterWriteEndAttribute",  void0, rawThis, Array.Empty<string>());
+            RegisterXmlWriterVoid(registry, "WriteStartDocument", "ChaosXmlWriterWriteStartDocument", void0, rawThis, Array.Empty<string>());
+
+            // 1-arg string
+            RegisterXmlWriterVoid(registry, "WriteString",     "ChaosXmlWriterWriteString",     ws, wsR, new[] { "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteWhitespace", "ChaosXmlWriterWriteWhitespace", ws, wsR, new[] { "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteRaw",        "ChaosXmlWriterWriteRaw",        ws, wsR, new[] { "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteComment",    "ChaosXmlWriterWriteComment",    ws, wsR, new[] { "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteCData",      "ChaosXmlWriterWriteCData",      ws, wsR, new[] { "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteName",       "ChaosXmlWriterWriteName",       ws, wsR, new[] { "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteNmToken",    "ChaosXmlWriterWriteNmToken",    ws, wsR, new[] { "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteEntityRef",  "ChaosXmlWriterWriteEntityRef",  ws, wsR, new[] { "System.String" });
+
+            // 2-arg string
+            RegisterXmlWriterVoid(registry, "WriteQualifiedName",        "ChaosXmlWriterWriteQualifiedName",        ws2, ws2R, new[] { "System.String", "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteProcessingInstruction","ChaosXmlWriterWriteProcessingInstruction",ws2, ws2R, new[] { "System.String", "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteAttributeString",      "ChaosXmlWriterWriteAttributeString",      ws2, ws2R, new[] { "System.String", "System.String" });
+
+            // 3-arg string
+            RegisterXmlWriterVoid(registry, "WriteStartElement",    "ChaosXmlWriterWriteStartElement3",    ws3, ws3R, new[] { "System.String", "System.String", "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteStartAttribute",  "ChaosXmlWriterWriteStartAttribute",   ws3, ws3R, new[] { "System.String", "System.String", "System.String" });
+            RegisterXmlWriterVoid(registry, "WriteElementString",   "ChaosXmlWriterWriteElementString",    ws3, ws3R, new[] { "System.String", "System.String", "System.String" });
+
+            // 4-arg string
+            RegisterXmlWriterVoid(registry, "WriteDocType", "ChaosXmlWriterWriteDocType", dt4, dt4R, new[] { "System.String", "System.String", "System.String", "System.String" });
+
+            // buffer/index/count
+            RegisterXmlWriterVoid(registry, "WriteChars",  "ChaosXmlWriterWriteChars",  wc3, wc3R, new[] { "System.Char[]", "System.Int32", "System.Int32" });
+            RegisterXmlWriterVoid(registry, "WriteBase64", "ChaosXmlWriterWriteBase64", wc3, wc3R, new[] { "System.Byte[]", "System.Int32", "System.Int32" });
+            RegisterXmlWriterVoid(registry, "WriteBinHex", "ChaosXmlWriterWriteBinHex", wc3, wc3R, new[] { "System.Byte[]", "System.Int32", "System.Int32" });
+
+            // char
+            RegisterXmlWriterVoid(registry, "WriteCharEntity",          "ChaosXmlWriterWriteCharEntity",          ce1,   ce1R,   new[] { "System.Char" });
+            RegisterXmlWriterVoid(registry, "WriteSurrogateCharEntity", "ChaosXmlWriterWriteSurrogateCharEntity", char2, char2R, new[] { "System.Char", "System.Char" });
+
+            // WriteValue(object) — reflected value, written with invariant ToString.
+            registry.Register("System.Xml.XmlWriter", "WriteValue",
+                new[] { "System.Object" }, ShapeKind.SimpleForward,
+                "ChaosXmlWriterWriteValue",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { wAbi, arrAbi }),
+                CreateVoidAbiSlot(), new HashSet<int> { 0, 1 });
+
+            // LookupPrefix(string) -> string
+            registry.Register("System.Xml.XmlWriter", "LookupPrefix",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlWriterLookupPrefix", ws, strAbi,
+                new HashSet<int> { 0, 1 });
+        }
+
+        /// <summary>
+        /// Register one void-returning abstract-XmlWriter instance method as
+        /// SimpleForward.  Mirrors <see cref="RegisterXmlTextWriterVoid"/> but
+        /// keys on the abstract receiver type.
+        /// </summary>
+        private static void RegisterXmlWriterVoid(
+            RuntimeHelperShapeRegistry registry,
+            string methodName,
+            string nativeSymbol,
+            _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact> abiSlots,
+            HashSet<int> rawIndices,
+            string[] paramTypes)
+        {
+            registry.Register("System.Xml.XmlWriter", methodName,
+                paramTypes,
+                ShapeKind.SimpleForward, nativeSymbol,
+                abiSlots, CreateVoidAbiSlot(), rawIndices);
         }
 
         /// <summary>

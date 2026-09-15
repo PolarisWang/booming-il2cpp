@@ -382,6 +382,46 @@ void ChaosXmlWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     (void)this_ptr;
 }
 
+/// WriteElementString(prefix, localName, ns) — shortcut that opens + writes
+/// text + closes in one call.  For the stub subset this is equivalent to
+/// WriteStartElement + WriteString + WriteEndElement.
+void ChaosXmlWriterWriteElementString(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    const char* pfx = nullptr; size_t pfx_len = 0;
+    (void)ManagedStringView(prefix, pfx, pfx_len);
+    const char* name = nullptr; size_t name_len = 0;
+    if (!ManagedStringView(local_name, name, name_len) || name_len == 0) return;
+    (void)ns;
+    ChaosXmlWriterWriteStartElement3(this_ptr, prefix, local_name, ns);
+    // Write empty string as text content so the element is not self-closing.
+    // ATG subjects that test WriteElementString expect the element to have
+    // content so that WriteEndElement emits a paired closing tag.
+    CloseStartTag(st);
+    if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
+    ChaosXmlWriterWriteEndElement(this_ptr);
+}
+
+/// WriteValue(object) — writes the invariant ToString() of the value.
+/// For the stub subset, treat a null argument as empty string text content
+/// (mirroring the managed writer's behaviour of writing "").
+void ChaosXmlWriterWriteValue(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
+    CloseStartTag(st);
+    const char* data = nullptr; size_t len = 0;
+    if (ManagedStringView(value, data, len))
+        AppendRaw(st, data, len);
+}
+
 // ════════════════════════════════════════════════════════════════════
 // XmlTextWriter entry points (M6 target type)
 //

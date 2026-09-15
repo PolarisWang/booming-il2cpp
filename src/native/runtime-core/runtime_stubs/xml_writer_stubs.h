@@ -132,6 +132,24 @@ void ChaosXmlWriterWriteBinHex(
     CHAOS_IL2CPP_INT32 index,
     CHAOS_IL2CPP_INT32 count) noexcept;
 
+/// XmlTextWriter.WriteAttributeString(string localName, string value) → void
+void ChaosXmlWriterWriteAttributeString(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR value) noexcept;
+
+/// XmlTextWriter.WriteElementString(string prefix, string localName, string ns) → void
+void ChaosXmlWriterWriteElementString(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept;
+
+/// XmlTextWriter.WriteValue(object value) → void
+void ChaosXmlWriterWriteValue(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR value) noexcept;
+
 /// XmlTextWriter.LookupPrefix(string ns) → string (null when unknown)
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterLookupPrefix(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns) noexcept;
