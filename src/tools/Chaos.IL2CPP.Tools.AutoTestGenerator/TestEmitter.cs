@@ -883,6 +883,23 @@ public sealed class TestEmitter
                or "PopScope" or "PushScope")
             return true;
 
+        // System.Text.Json.Utf8JsonWriter (M3): ATG subjects construct this type
+        // through SubjectInstanceFactory.Create<Utf8JsonWriter>() — a bare
+        // GetUninitializedObject instance whose instance methods throw
+        // ObjectDisposedException / InvalidOperationException / ArgumentNullException
+        // from the managed implementation.  The native stubs (json_writer_stubs.cpp)
+        // replicate those contracts.  Only methods with stubs are listed.
+        if (declaringType is not null
+            && declaringType.Contains("System.Text.Json.Utf8JsonWriter", StringComparison.Ordinal)
+            && method.Name is "Flush" or "Dispose" or "Reset"
+               or "WriteStartObject" or "WriteStartArray" or "WriteEndObject"
+               or "WriteEndArray"
+               or "WriteString" or "WriteNumber" or "WriteBoolean"
+               or "WriteNull" or "WriteNullValue" or "WriteBooleanValue"
+               or "WritePropertyName" or "WriteRawValue" or "WriteCommentValue"
+               or "WriteTo")
+            return true;
+
         return false;
     }
 
