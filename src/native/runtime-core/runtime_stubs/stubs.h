@@ -60,5 +60,6 @@ extern "C" {
 #include "xml_reader_stubs.h"
 #include "xml_convert_stubs.h"
 #include "xml_document_stubs.h"
+#include "json_writer_stubs.h"
 
 }  // extern "C"
