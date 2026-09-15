@@ -162,6 +162,12 @@ set(CHAOS_CRYPTO_STUBS
 set(CHAOS_OBJECT_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/object_stubs.cpp"
 )
+set(CHAOS_XML_READER_STUBS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/xml_reader_stubs.cpp"
+)
+set(CHAOS_XML_WRITER_STUBS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/xml_writer_stubs.cpp"
+)
 set(CHAOS_GC_ALLOC_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/core/gc_alloc_stubs.cpp"
 )
@@ -200,6 +206,8 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_OBJECT_STUBS}
     ${CHAOS_GC_ALLOC_STUBS}
+    ${CHAOS_XML_READER_STUBS}
+    ${CHAOS_XML_WRITER_STUBS}
     ${CHAOS_CRT_STUBS}
     ${CHAOS_AOT_GENERATED_CPP}
 )

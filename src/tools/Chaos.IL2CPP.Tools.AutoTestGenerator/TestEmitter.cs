@@ -723,6 +723,22 @@ public sealed class TestEmitter
     /// whose managed body throws for every input (source-generator hooks).  Extend
     /// this list as the catch-all gains other well-known throwing families.
     /// </remarks>
+    /// <summary>
+    /// Whether the AOT side reproduces the managed exception for this method,
+    /// meaning the subject can execute the real call instead of degenerating
+    /// into a codegen-time smoke stub.
+    ///
+    /// <para>
+    /// Accepts the concrete <c>XmlTextWriter</c> AND the abstract
+    /// <c>XmlWriter</c> declaring type.  The latter matters because ATG
+    /// synthesizes subjects from the API surface of the abstract class
+    /// (<c>System_Xml_XmlWriterTests</c> calls <c>XmlWriter.Create(...)</c>, whose
+    /// static type is the abstract base).  Both entry points land on the same
+    /// native symbols — the registry registers the abstract receiver type
+    /// against the same writer stubs — so the same argument-validation contract
+    /// holds for either one.
+    /// </para>
+    /// </summary>
     private static bool ExternalStubRaisesManagedException(MethodSignature method)
     {
         var declaringType = method.DeclaringTypeFullName;
@@ -736,7 +752,7 @@ public sealed class TestEmitter
                or "CreateIAsyncEnumerableInfo")
             return true;
 
-        // XmlTextWriter's argument-validation surface (W1,
+        // XmlTextWriter / XmlWriter argument-validation surface (W1+W2,
         // json-xml-production-readiness).  The native stubs in
         // xml_writer_stubs.cpp raise the same managed exceptions the BCL does:
         //   ArgumentNullException   — null name/buffer/ns
@@ -751,13 +767,15 @@ public sealed class TestEmitter
         // machine (Phase M) and currently fail on the managed side too, so the
         // conservative skip remains correct for them.
         if (declaringType is not null
-            && declaringType.Contains("System.Xml.XmlTextWriter", StringComparison.Ordinal)
+            && (declaringType.Contains("System.Xml.XmlTextWriter", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlWriter", StringComparison.Ordinal))
             && method.Name is "WriteDocType" or "WriteProcessingInstruction"
                or "WriteEntityRef" or "WriteEndElement" or "WriteFullEndElement"
                or "WriteEndAttribute" or "WriteEndDocument" or "WriteName"
                or "WriteQualifiedName" or "WriteNmToken"
                or "WriteSurrogateCharEntity" or "WriteChars" or "WriteRaw"
-               or "WriteBase64" or "WriteBinHex" or "LookupPrefix")
+               or "WriteBase64" or "WriteBinHex" or "LookupPrefix"
+               or "WriteValue" or "WriteAttributeString" or "WriteElementString")
             return true;
 
         return false;
