@@ -331,6 +331,21 @@ public sealed partial class NativeAotLoweringPlanner
 
         /// <summary>
         /// Type::GetMethod generic handler (GenericShapeDescriptor -- handles various overloads)
+        ///
+        /// NOTE: this generic shape SHADOWS the exact SimpleForward registrations for
+        /// GetMethod (S15) — TryMatchGenericShape runs before TryMatchShape, so this
+        /// resolver owns every GetMethod callee.  It must therefore discriminate by
+        /// parameter types:
+        ///
+        ///   (String)                → real lookup, no param filter
+        ///   (String, Type[])        → real lookup, name + parameter-count match
+        ///   anything else           → stub (BindingFlags/bool overloads filter by
+        ///                             more than count; forwarding would mis-bind)
+        ///
+        /// The resolver previously emitted `return 0` for every overload; the
+        /// stub-tail rewrite (StringAndPlatform) turned that into a sentinel return,
+        /// so callers' null-checks passed and downstream member access dereferenced
+        /// garbage (the second abort chain in the reflection chunk).
         /// </summary>
         private static void RegisterTypeGetMethodgeneric(RuntimeHelperShapeRegistry registry)
         {
@@ -347,7 +362,7 @@ public sealed partial class NativeAotLoweringPlanner
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                         [
                             "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                            "    return 0;",
+                            "    return ChaosReflectionGetMethod(chaos_arg_0, chaos_arg_1, 0);",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
@@ -358,13 +373,31 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
                             new HashSet<int> { 0, 1 });
                     }
-                    var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                    if (paramTypes.Count == 2 && paramTypes[1] == "System.Type[]")
+                    {
+                        var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+                        [
+                            "    (void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;",
+                            "    return ChaosReflectionGetMethod(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                        ]);
+                        return new GenericShapeResolution(src2, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                            {
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1, 2 });
+                    }
+                    var srcStub = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
                     [
                         "    (void)chaos_arg_0; (void)chaos_arg_1; (void)chaos_arg_2;",
                         "    return 0;",
                     ]);
-                    return new GenericShapeResolution(src2, symbol,
+                    return new GenericShapeResolution(srcStub, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                         {
                             CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),

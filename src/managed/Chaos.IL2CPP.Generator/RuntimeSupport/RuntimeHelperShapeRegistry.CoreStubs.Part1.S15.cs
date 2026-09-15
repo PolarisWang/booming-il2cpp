@@ -138,6 +138,22 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0, 1 });
 
+            // Type::GetMethod(string, Type[]) — was unregistered, so it fell through to
+            // the catch-all sentinel stub, which returns &s_sentinel: a NON-null but
+            // invalid pointer.  The callers' `!` (null-forgiving) cannot detect that,
+            // so `GetParameters()[0]` read garbage and aborted (ABORT-FAULT).
+            // ChaosReflectionGetMethod already decodes the managed Type[] argument
+            // (name + parameter-count match against the type's method descriptor table).
+            registry.Register("System.Type", "GetMethod", ["System.String", "System.Type[]"],
+                ShapeKind.SimpleForward, "ChaosReflectionGetMethod",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type[]", AotCoreIrTypeShapeKind.ReferenceType),
+                }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1, 2 });
+
             registry.Register("System.Type", "GetType", ["System.String"],
                 ShapeKind.SimpleForward, "ChaosReflectionGetTypeByName",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(

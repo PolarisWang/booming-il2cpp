@@ -118,11 +118,18 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(
     if (method_name == nullptr) return 0;
 
     if (param_types != 0) {
-        // Layout: object_header (16 bytes ThinLockableHeader) + length (4 bytes)
+        // Managed array layout (chaos_managed_array, mirrored by
+        // ManagedArrayAccessor in stub_common.h — both have length at offset 24):
+        //   header(8) | element_type_shape(1)+pad(7) | element_type_info(8) | length(8)
+        // The previous read used offset sizeof(ThinLockableHeader) == 8, which is
+        // element_type_shape + padding — never a valid count.  The path was dead
+        // until GetMethod(string, Type[]) was wired to it (no caller passed a real
+        // array before), which is why the wrong offset went unnoticed.
         const auto* arr_bytes = reinterpret_cast<const uint8_t*>(
             static_cast<CHAOS_IL2CPP_INTPTR>(param_types));
-        int32_t param_count = *reinterpret_cast<const CHAOS_IL2CPP_INT32*>(
-            arr_bytes + sizeof(ThinLockableHeader));
+        const auto managed_length =
+            *reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(arr_bytes + 24);
+        int32_t param_count = static_cast<int32_t>(managed_length);
         if (param_count < 0) param_count = 0;
 
         auto* method = FindReflectionQueryMethod(desc, method_name, param_count);
