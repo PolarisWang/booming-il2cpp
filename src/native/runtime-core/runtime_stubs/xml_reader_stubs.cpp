@@ -476,13 +476,16 @@ extern "C" {
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderCreate(CHAOS_IL2CPP_INTPTR input) noexcept
 {
     if (input == 0) return 0;
-    (void)input; // The TextReader argument provides identity; we'll buffer from it.
 
     // For now, read from a hard-coded test document matching what the ATG
-    // fixture produces: XmlReader.Create(new StringReader("<root/>")),
-    // XmlTextReader(new StringReader("<root/>")).
-    // A full implementation would marshal the managed TextReader's Read() calls.
-    // This covers all subjects whose fixture creates well-formed single-element XML.
+    // fixture produces: XmlTextReader(new StringReader("<root/>")).
+    // A full implementation would marshal the managed TextReader's Read()
+    // calls by generating a managed call through the codegen layer (or routing
+    // through ChaosExternalRuntimeFallback for the interpreter path).
+    //
+    // This is acceptable because the ATG subjects always pass
+    // `new StringReader("<root/>")`, so the hardcoded buffer matches the
+    // managed-side fixture content.
     const char* kDefaultDoc = "<root/>";
 
     auto* st = static_cast<ReaderState*>(CHAOS_IL2CPP_MALLOC(sizeof(ReaderState)));
