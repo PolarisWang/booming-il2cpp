@@ -237,7 +237,7 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimDisposeManaged(
 }
 
 CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitManaged(
-    CHAOS_IL2CPP_INTPTR mres) noexcept
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR /*token*/) noexcept
 {
     const CHAOS_IL2CPP_INTPTR handle = BoundHandle(mres);
     if (handle == 0) return 0;
@@ -247,7 +247,7 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitManaged(
 }
 
 CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitInt32(
-    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INT32 timeout_ms, CHAOS_IL2CPP_INTPTR /*token*/) noexcept
 {
     const CHAOS_IL2CPP_INTPTR handle = BoundHandle(mres);
     if (handle == 0) return 0;
@@ -255,7 +255,7 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitInt32(
 }
 
 CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
-    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR timespan_ticks, CHAOS_IL2CPP_INTPTR /*token*/) noexcept
 {
     const CHAOS_IL2CPP_INTPTR handle = BoundHandle(mres);
     if (handle == 0) return 0;

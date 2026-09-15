@@ -894,22 +894,125 @@ public sealed partial class NativeAotLoweringPlanner
 	private AotCoreIrAbiSlotArtifact? TryGetReceiverSlot(string callee)
 	{
 		if (_allManagedMethods == null)
-			return null;
+		{
+			// No managed-model available (e.g. cross-assembly BCL-only chunk).
+			// Fall through to subject-id inference below.
+		}
+		else
+		{
+			// Primary path: lookup in the linked-world managed method model.
+			// The callee's assembly prefix and the model's key prefix are NOT
+			// always the same string (a BCL type reached from the test assembly
+			// arrives as `System.Private.CoreLib/...` while the model may key it
+			// as `System.Threading/...`), so a direct lookup can miss.
+			if (!_allManagedMethods.TryGetValue(callee, out var mm))
+			{
+				var canonical = ManagedNaming.NormalizeSubjectIdAssembly(callee);
+				foreach (var kv in _allManagedMethods)
+				{
+					if (string.Equals(ManagedNaming.NormalizeSubjectIdAssembly(kv.Key),
+							canonical, StringComparison.Ordinal))
+					{
+						mm = kv.Value;
+						break;
+					}
+				}
+			}
 
-		if (!_allManagedMethods.TryGetValue(callee, out var mm))
-			return null;
+			if (mm != null)
+			{
+				if (mm.IsStatic)
+					return null;
+				return CreateNativeIntAbiSlot(mm.DeclaringTypeSubjectId,
+					AotCoreIrTypeShapeKind.ReferenceType);
+			}
+		}
 
-		if (mm.IsStatic)
-			return null;
-
-		// Receiver slot: NativeInt carrying the declaring type.  The exact
-		// subject id matters for value-type receivers (the ABI carrier differs
-		// from a plain reference pass-through), so we do not pass null.
+		// Fallback: cross-assembly BCL method not in the linked-world model.
+		// Infer from the subject-id whether this is an instance method.
 		//
-		// DeclaringTypeShape is not on ManagedMethodModel — reference vs value
-		// type is resolved by the caller's slot formatting from the subject id.
-		return CreateNativeIntAbiSlot(mm.DeclaringTypeSubjectId,
-			AotCoreIrTypeShapeKind.ReferenceType);
+		// Subject-id format:  <Assembly>/<Type>::<Method>:<ReturnType>(<Params>)
+		// The SimpleForward entries for threading primitives are ALL instance
+		// methods, but the BCL types (ReaderWriterLockSlim, ManualResetEventSlim,
+		// SpinLock, SpinWait) are NOT in the reachable-closure model — the
+		// aot-core-ir only holds CombinedSubjects + test-framework methods.
+		//
+		// We can tell instance from static by the method signature: a method
+		// with zero parameters that is NOT a static method (e.g. Dispose())
+		// has exactly the same shim shape as a static method.  The zero-param
+		// entries already work because their single ABI slot IS the receiver.
+		// For methods WITH parameters, we inject the receiver if the declaring
+		// type is a known class type (not a static helper class).
+		//
+		// Conservative: inject receiver for any parameterised instance method
+		// of a type whose name does NOT start with "ThreadPool" or contain
+		// "Interlocked" (which are static-only families).
+		if (_injectReceiverForParameterisedMissingEntry(callee))
+		{
+			var typeName = ExtractDeclaringTypeName(callee);
+			return CreateNativeIntAbiSlot(typeName,
+				AotCoreIrTypeShapeKind.ReferenceType);
+		}
+
+		return null;
+	}
+
+	/// <summary>
+	/// True when <paramref name="callee"/> is a parameterised instance method
+	/// of a type that does NOT have its managed model in the linked-world closure
+	/// (a cross-assembly BCL type), and for which we should inject a receiver slot.
+	/// </summary>
+	private static bool _injectReceiverForParameterisedMissingEntry(string callee)
+	{
+		// Only inject for known threading primitives whose instance methods
+		// were registered in Part1.S16.cs (T2.2/T2.4/T2.5).  These types'
+		// managed methods are NOT in the linked-world model (they are BCL
+		// cross-assembly), so we cannot rely on IsStatic lookup.
+		//
+		// The types listed here are reference types that need per-instance
+		// receiver recovery.  Static-only types like ThreadPool are excluded.
+		if (!HasMethodParameters(callee))
+			return false;   // zero-param already works
+
+		var typeName = ExtractDeclaringTypeName(callee);
+		return typeName switch
+		{
+			"ReaderWriterLockSlim" => true,
+			"ManualResetEventSlim" => true,
+			"SpinLock" => true,
+			_ => false,
+		};
+	}
+
+	/// <summary>
+	/// Extract the declaring type display name from a subject id.
+	/// Subject-id format:  <Assembly>/<Type>::<Method>:<ReturnType>(<Params>)
+	/// Returns null on malformed input.
+	/// </summary>
+	private static string? ExtractDeclaringTypeName(string subjectId)
+	{
+		// Strip assembly prefix: everything before the first '/'
+		var slash = subjectId.IndexOf('/');
+		var afterAssembly = slash >= 0 ? subjectId[(slash + 1)..] : subjectId;
+
+		// Strip method: everything after "::"
+		var sep = afterAssembly.IndexOf("::");
+		if (sep < 0) return null;
+
+		return afterAssembly[..sep];
+	}
+
+	/// <summary>
+	/// True when the subject-id carries method parameters (a non-empty parenthesised list).
+	/// </summary>
+	private static bool HasMethodParameters(string subjectId)
+	{
+		var paren = subjectId.LastIndexOf('(');
+		if (paren < 0) return false;
+		var close = subjectId.LastIndexOf(')');
+		if (close <= paren) return false;
+		var inner = subjectId[(paren + 1)..close];
+		return !string.IsNullOrEmpty(inner);
 	}
 
 }

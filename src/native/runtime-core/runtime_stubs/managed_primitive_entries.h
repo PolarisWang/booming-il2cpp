@@ -157,15 +157,15 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimDisposeManaged(
 
 /// Wait() — infinite.
 CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitManaged(
-    CHAOS_IL2CPP_INTPTR mres) noexcept;
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR = 0) noexcept;  // token ignored (T2.4 TODO)
 
 /// Wait(int timeout_ms) — -1 = infinite, 0 = poll.
 CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitInt32(
-    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INT32 timeout_ms, CHAOS_IL2CPP_INTPTR = 0) noexcept;  // token ignored
 
 /// Wait(TimeSpan timeout) — tick carrier pointer.
 CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
-    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR timespan_ticks) noexcept;
+    CHAOS_IL2CPP_INTPTR mres, CHAOS_IL2CPP_INTPTR timespan_ticks, CHAOS_IL2CPP_INTPTR = 0) noexcept;  // token ignored
 
 // ══════════════════════════════════════════════════════════════════════
 // SpinLock — T2.5 (shim-matching signatures)
