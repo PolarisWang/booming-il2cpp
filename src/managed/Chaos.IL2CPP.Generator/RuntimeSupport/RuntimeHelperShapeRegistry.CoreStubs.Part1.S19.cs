@@ -50,7 +50,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new[] { "System.IO.TextReader" },
                 ShapeKind.SimpleForward, "ChaosXmlTextReaderCreate",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { trAbi }),
-                CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
+                CreateVoidAbiSlot(), new HashSet<int> { 0 });
 
             // ── Read() -> bool ──
             registry.Register("System.Xml.XmlTextReader", "Read",
