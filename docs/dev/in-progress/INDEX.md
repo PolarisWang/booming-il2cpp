@@ -12,3 +12,5 @@
 | [foundation-dll-phase-1-corelib](foundation-dll-phase-1-corelib/STATUS.md) | plan | in-progress | 2026-05-05 | Phase 1 System.Private.CoreLib 全量 il2cpp 开发 | false |
 | [runtime-external-reflection-type](runtime-external-reflection-type/STATUS.md) | plan | completed | 2026-05-05 | Runtime External 依赖实现 — Reflection/Type + Exception | false |
 | [reflection-production-readiness](reflection-production-readiness/STATUS.md) | roadmap | roadmap | 2026-09-12 | 启动 P0-1 建 ApiSurfaceScanner，先出反射 API 总量数字以定 Phase 2–3 粒度 | true |
+
+| [debug-20-real-defects](debug-20-real-defects/STATUS.md) | plan | ready-to-start | 2026-09-15 | cdb 定位 20 个 realDefect 异常来源 | true |
