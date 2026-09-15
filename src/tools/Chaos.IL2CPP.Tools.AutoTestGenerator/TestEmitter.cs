@@ -793,6 +793,22 @@ public sealed class TestEmitter
                or "WriteNode" or "WriteAttributes")
             return true;
 
+        // XmlConvert static methods: pure string→value transforms whose native
+        // stubs (xml_convert_stubs.cpp) raise the same exceptions the BCL does
+        // (FormatException for malformed/empty input, ArgumentNullException for
+        // a null string, OverflowException for out-of-range values) and the same
+        // XmlException for the Verify* XSD-name predicates.
+        if (declaringType is not null
+            && declaringType.Contains("System.Xml.XmlConvert", StringComparison.Ordinal)
+            && method.Name is "ToBoolean" or "ToByte" or "ToSByte"
+               or "ToInt16" or "ToUInt16" or "ToInt32" or "ToUInt32"
+               or "ToInt64" or "ToUInt64" or "ToSingle" or "ToDouble"
+               or "ToDecimal" or "ToChar" or "ToGuid" or "ToTimeSpan"
+               or "ToDateTime" or "ToDateTimeOffset"
+               or "VerifyName" or "VerifyNCName" or "VerifyNMTOKEN"
+               or "VerifyPublicId" or "VerifyWhitespace" or "VerifyXmlChars")
+            return true;
+
         return false;
     }
 

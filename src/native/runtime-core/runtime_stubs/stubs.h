@@ -58,5 +58,6 @@ extern "C" {
 #include "xml_nametable_stubs.h"
 #include "xml_writer_stubs.h"
 #include "xml_reader_stubs.h"
+#include "xml_convert_stubs.h"
 
 }  // extern "C"
