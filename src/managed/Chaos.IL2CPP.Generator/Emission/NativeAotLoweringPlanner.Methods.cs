@@ -1017,6 +1017,21 @@ public sealed partial class NativeAotLoweringPlanner
         }
         // Phase 0: Collect ModuleRegistry Tier 0 type data from PE metadata
         CollectModuleTypeData(closureManifest.InputAssemblyPath);
+
+        // Reflection member metadata (properties/fields/events) must come from the
+        // assemblies that DEFINE the queried types, not from the subjects DLL.  The
+        // reflection subjects ask about BCL types — `typeof(string).GetProperty("Length")`
+        // — whose metadata lives in System.Private.CoreLib, i.e. one of the closure's
+        // RESOLVED assemblies.  Scanning only InputAssemblyPath collects the generated
+        // test classes' own members instead, which nothing queries.
+        //
+        // Scoped to the closure's queried types (not the whole of CoreLib): the full
+        // library is props=5128 / fields=9011, while this closure's reflection query
+        // surface is a few hundred call sites.  Emitting only what is reachable keeps
+        // the table 1-2 orders of magnitude smaller, matching the reachability-based
+        // emission the rest of codegen already follows.
+        CollectReflectionMemberMetadataFromClosure(closureManifest);
+
         // Phase 1 string-id table via Scriban
         var stringIdCode = BuildStringIdTable(stringLiterals);
         if (!string.IsNullOrEmpty(stringIdCode))

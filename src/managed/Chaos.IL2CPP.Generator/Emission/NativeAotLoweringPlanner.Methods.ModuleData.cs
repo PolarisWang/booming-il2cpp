@@ -117,16 +117,6 @@ public sealed partial class NativeAotLoweringPlanner
                 _moduleTypeParentTokens.Add(parentToken);
                 _moduleTypeInfoSymbols.Add(typeInfoSymbol);
                 _moduleTypeSubjectIds.Add(subjectId);
-
-                // ── Reflection member metadata (properties / fields / events) ──
-                // Collect the raw member info per type so the module registration
-                // template can emit ReflectionQuery*Descriptor tables.  Without these
-                // tables, the runtime's reflection accessors
-                // (Type::GetProperty / GetField / GetEvent) have nothing to resolve
-                // against and are registered as deliberate CHAOS_IL2CPP_FAIL() stubs —
-                // i.e. querying any member aborts the process.
-                CollectReflectionMemberMetadata(metadataReader, typeDef, subjectId, typeToken);
-
                 _moduleTypeCount++;
             }
 
@@ -305,6 +295,79 @@ public sealed partial class NativeAotLoweringPlanner
     /// Extracted as a separate method to give the JIT a clear stack-cleanup boundary
     /// (avoiding stack accumulation observed with Select().ToList() lambda closure).
     /// </summary>
+
+    /// <summary>
+    /// Collect reflection member metadata from every assembly the closure resolved,
+    /// scoped to the types the closure actually queries.
+    ///
+    /// Why the resolved set rather than the input assembly: the reflection subjects
+    /// ask about BCL types (`typeof(string).GetProperty("Length")`), whose metadata
+    /// lives in <c>System.Private.CoreLib</c> — a resolved assembly, not
+    /// <c>CombinedSubjects.dll</c>.  Scanning only the input collects the generated
+    /// test classes' own members, which nothing queries.
+    ///
+    /// Why scoped: the whole of CoreLib is props=5128 / fields=9011, while this
+    /// closure's reflection query surface is a few hundred call sites.  Only types
+    /// whose subject id appears in the closure's reachable-type set are scanned,
+    /// keeping the emitted tables 1-2 orders of magnitude smaller — the same
+    /// reachability-based discipline the rest of codegen follows.
+    /// </summary>
+    private void CollectReflectionMemberMetadataFromClosure(ManagedClosureManifestArtifact closureManifest)
+    {
+        var resolved = closureManifest.ResolvedAssemblies;
+        if (resolved is null || resolved.Count == 0)
+            return;
+
+        // Types the closure can observe: every type subject id that codegen has
+        // emitted a TypeInfo for.  Restricting to this set is what keeps the scan
+        // proportional to the closure rather than to the BCL.
+        var wanted = _allEmittedTypeSubjectIds;
+        if (wanted is null || wanted.Count == 0)
+            return;
+
+        foreach (var asm in resolved)
+        {
+            if (string.IsNullOrEmpty(asm.Path) || !File.Exists(asm.Path))
+                continue;
+
+            try
+            {
+                using var stream = File.OpenRead(asm.Path);
+                using var pe = new PEReader(stream);
+                if (!pe.HasMetadata) continue;
+                var reader = pe.GetMetadataReader();
+
+                foreach (var handle in reader.TypeDefinitions)
+                {
+                    var typeDef = reader.GetTypeDefinition(handle);
+                    var ns = reader.GetString(typeDef.Namespace);
+                    var name = reader.GetString(typeDef.Name);
+
+                    // Skip the same synthetic types CollectModuleTypeData skips.
+                    if (name == "<Module>") continue;
+
+                    // Compute the same subject id shape used elsewhere so the lookup
+                    // matches what codegen emitted TypeInfo for.
+                    string typeSubjectId = $"{asm.AssemblyName}/{SanitizeReflectionTypeName(ns, name)}";
+                    if (!wanted.Contains(typeSubjectId)) continue;
+
+                    CollectReflectionMemberMetadata(reader, typeDef, typeSubjectId, 0u);
+                }
+            }
+            catch (Exception ex) when (ex is IOException or BadImageFormatException or InvalidOperationException)
+            {
+                Console.Error.WriteLine(
+                    $"[warning] CollectReflectionMemberMetadata: skipping '{asm.AssemblyName}': {ex.GetType().Name}: {ex.Message}");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Render a TypeDef's namespace+name in the subject-id spelling used elsewhere
+    /// ("Namespace.Type" / "Type", nested types joined with '+').
+    /// </summary>
+    private string SanitizeReflectionTypeName(string ns, string name)
+        => string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
 
     /// <summary>
     /// Collect a type's properties, fields and events for the reflection member
