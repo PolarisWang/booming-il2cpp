@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -438,7 +438,14 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (ite.PostMergeBody != null)
             {
-                _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
+                // A conditional EXPRESSION (`b = c ? x : y;`) leaves one value on the
+                // stack for the merge to consume; a plain `if (c) {}` leaves none.
+                // Restoring to postCondDepth in both cases discarded the arms' value,
+                // so the merge's `stloc` popped a stale slot — observed as a managed
+                // handle being returned instead of the computed result.  See
+                // IRIfThenElse.MergeCarriesValue.
+                int mergeDepth = ite.MergeCarriesValue ? postCondDepth + 1 : postCondDepth;
+                _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(mergeDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
@@ -513,7 +520,14 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (ite.PostMergeBody != null)
             {
-                _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(postCondDepth);
+                // A conditional EXPRESSION (`b = c ? x : y;`) leaves one value on the
+                // stack for the merge to consume; a plain `if (c) {}` leaves none.
+                // Restoring to postCondDepth in both cases discarded the arms' value,
+                // so the merge's `stloc` popped a stale slot — observed as a managed
+                // handle being returned instead of the computed result.  See
+                // IRIfThenElse.MergeCarriesValue.
+                int mergeDepth = ite.MergeCarriesValue ? postCondDepth + 1 : postCondDepth;
+                _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(mergeDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
@@ -652,6 +666,65 @@ public sealed partial class NativeAotLoweringPlanner
 
 
 
+    /// <summary>
+    /// Whether re-evaluating these loop-condition instructions could change program
+    /// behaviour beyond the loop's own control flow.
+    ///
+    /// `EmitIRWhileLoop` (plan B) re-emits the condition at the END of every pass so
+    /// the `for`-loop test is recomputed.  That is sound only when the condition is
+    /// a pure expression over locals/args.  A call, a field store, or an array store
+    /// inside the condition would run an extra time — or one time too many — so such
+    /// loops must keep the single-evaluation form.
+    ///
+    /// Deliberately conservative: anything not provably pure returns true (i.e. it
+    /// is treated as side-effecting and gets no re-emission).  Loop conditions in
+    /// practice are `ldloc/ldarg/ldlen/conv/clt/...` plus a local store, which this
+    /// admits; a false positive only costs a stale-test loop, never wrong code.
+    /// </summary>
+    private static bool WhileConditionHasSideEffects(
+        IReadOnlyList<AotCoreIrInstructionArtifact> conditionInstructions)
+    {
+        foreach (var instr in conditionInstructions)
+        {
+            switch (instr.Op)
+            {
+                // Anything that can invoke managed code, allocate, or write memory
+                // observable outside this expression.
+                case "call":
+                case "callvirt":
+                case "calli":
+                case "newobj":
+                case "newarr":
+                case "stfld":
+                case "stsfld":
+                case "stelem":
+                case "stelem.i1":
+                case "stelem.i2":
+                case "stelem.i4":
+                case "stelem.i8":
+                case "stelem.r4":
+                case "stelem.r8":
+                case "stelem.ref":
+                case "stobj":
+                case "stind.i1":
+                case "stind.i2":
+                case "stind.i4":
+                case "stind.i8":
+                case "stind.r4":
+                case "stind.r8":
+                case "stind.ref":
+                case "throw":
+                case "rethrow":
+                    return true;
+                default:
+                    break;
+            }
+        }
+        return false;
+    }
+
+
+
     private void EmitIRWhileLoop(
         StringBuilder builder,
         IRWhileLoop w,
@@ -709,7 +782,32 @@ public sealed partial class NativeAotLoweringPlanner
 
         var terminator = w.ConditionTerminator;
 
+        // Plan B — re-evaluate the condition every iteration, keeping `while (cond)`.
+        //
+        // The condition instructions used to be emitted ONCE, before the `while`, with
+        // the test reading captured locals:
+        //
+        //     <condition instructions>          // evaluated once
+        //     while (chaos_left < chaos_right)  // stale snapshot, never updated
+        //     { ...body... }
+        //
+        // A `for` loop's condition must be recomputed each pass, so the body has to feed
+        // back into it.  Re-emitting the condition instructions at the END of the loop
+        // body achieves that while preserving `while (cond)` — chosen over
+        // `while(true){...if(!cond)break;}` on P1 grounds (no extra per-iteration branch).
+        //
+        // Purity precondition: the condition runs one extra time per iteration, so it must
+        // not carry side effects.  In IL, loop conditions are comparisons over
+        // locals/args; a condition containing a call would make this unsound and such a
+        // loop keeps the single-evaluation form.  `WhileConditionHasSideEffects` gates it.
         var filteredConditions = FilterRedundantStoreReloadPairs(w.ConditionInstructions);
+        var condBuf = new StringBuilder();
+        foreach (var instr in filteredConditions)
+            EmitInstruction(condBuf, instr, indentation);
+        string condBlock = WhileConditionHasSideEffects(w.ConditionInstructions)
+            ? string.Empty
+            : condBuf.ToString();
+
         foreach (var instr in filteredConditions)
             EmitInstruction(builder, instr, indentation);
 
@@ -738,6 +836,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (hoistedIVSlot.HasValue)
                 builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = static_cast<CHAOS_IL2CPP_INT32>(chaos_locals[{hoistedIVSlot.Value}]);");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
+            if (condBlock.Length > 0) builder.Append(condBlock);
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
         }
@@ -791,14 +890,24 @@ public sealed partial class NativeAotLoweringPlanner
                     ? $"static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>({_cmpLExpr}))"
                     : $"static_cast<{valueType}>({_cmpLExpr})",
             };
-            builder.AppendLine(inner + $"const auto chaos_right = {_cmpRight};");
-            builder.AppendLine(inner + $"const auto chaos_left = {_cmpLeft};");
+            // Non-const so the plan-B re-evaluation below can refresh them; `const auto`
+            // captured a single snapshot and the loop never re-tested.
+            builder.AppendLine(inner + $"auto chaos_right = {_cmpRight};");
+            builder.AppendLine(inner + $"auto chaos_left = {_cmpLeft};");
 
             builder.AppendLine(inner + "while (chaos_left " + cmpOp + " chaos_right)");
             builder.AppendLine(inner + "{");
             if (hoistedIVSlot.HasValue)
                 builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = static_cast<CHAOS_IL2CPP_INT32>(chaos_locals[{hoistedIVSlot.Value}]);");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
+            if (condBlock.Length > 0)
+            {
+                // Re-run the condition instructions, then refresh the two locals the
+                // test reads so the loop exits when the condition turns false.
+                builder.Append(condBlock);
+                builder.AppendLine(bodyIndent + $"chaos_right = {_cmpRight};");
+                builder.AppendLine(bodyIndent + $"chaos_left = {_cmpLeft};");
+            }
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
         }
@@ -2761,7 +2870,8 @@ public sealed partial class NativeAotLoweringPlanner
                     AppendSuspendReturnsRec(ite.ThenBody),
                     ite.ElseBody is null ? null : AppendSuspendReturnsRec(ite.ElseBody),
                     AppendSuspendReturnsRec(ite.PostMergeBody ?? new IRSequence(Array.Empty<StructuredIRNode>())),
-                    ite.PreConditionDepth);
+                    ite.PreConditionDepth,
+                    ite.MergeCarriesValue);
 
             case IRExceptionRegion er:
                 return new IRExceptionRegion(

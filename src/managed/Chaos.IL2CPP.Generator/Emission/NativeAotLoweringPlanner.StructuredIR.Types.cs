@@ -26,7 +26,19 @@ public sealed partial class NativeAotLoweringPlanner
         StructuredIRNode ThenBody,
         StructuredIRNode? ElseBody,
         StructuredIRNode? PostMergeBody = null,
-        int PreConditionDepth = 0
+        int PreConditionDepth = 0,
+        // Whether the arms LEAVE A VALUE on the eval stack for the merge point to
+        // consume (`b = c ? x : y;`), as opposed to a plain statement `if (c) {}`.
+        //
+        // This must not be inferred from PostMergeBody's shape: both forms produce an
+        // ordinary instruction sequence there.  It is a property of the IL — the arms'
+        // net stack effect — and is computed when the node is built.
+        //
+        // Without it the emitter restored the depth to PreConditionDepth at the merge,
+        // discarding the value the arms had pushed; the following `stloc` then popped a
+        // stale slot (observed as a managed handle being returned instead of the
+        // computed result).
+        bool MergeCarriesValue = false
     ) : StructuredIRNode;
 
     /// <summary>Header-controlled while loop.</summary>

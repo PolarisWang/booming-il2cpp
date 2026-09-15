@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -649,7 +649,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var elseBody = ite.ElseBody is null ? null : RemoveTrailingBranch(ite.ElseBody, targetOffset);
                     var postMergeBody = ite.PostMergeBody is null ? null : RemoveTrailingBranch(ite.PostMergeBody, targetOffset);
                     if (!ReferenceEquals(thenBody, ite.ThenBody) || !ReferenceEquals(elseBody, ite.ElseBody) || !ReferenceEquals(postMergeBody, ite.PostMergeBody))
-                        return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator, thenBody, elseBody, postMergeBody, ite.PreConditionDepth);
+                        return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator, thenBody, elseBody, postMergeBody, ite.PreConditionDepth, ite.MergeCarriesValue);
                     return ite;
                 }
 

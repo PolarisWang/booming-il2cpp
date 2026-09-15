@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -369,7 +369,8 @@ public sealed partial class NativeAotLoweringPlanner
                     StripExceptionPartitionExitTerminators(ite.ThenBody),
                     ite.ElseBody is null ? null : StripExceptionPartitionExitTerminators(ite.ElseBody),
                     ite.PostMergeBody is null ? null : StripExceptionPartitionExitTerminators(ite.PostMergeBody),
-                    ite.PreConditionDepth),
+                    ite.PreConditionDepth,
+                    ite.MergeCarriesValue),
             IRWhileLoop loop
                 => new IRWhileLoop(
                     loop.ConditionInstructions,

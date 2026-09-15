@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -76,7 +76,7 @@ public sealed partial class NativeAotLoweringPlanner
                         !ReferenceEquals(postMerge, ite.PostMergeBody))
                     {
                         return new IRIfThenElse(ite.ConditionInstructions, ite.BranchTerminator,
-                            thenBody, elseBody, postMerge, ite.PreConditionDepth);
+                            thenBody, elseBody, postMerge, ite.PreConditionDepth, ite.MergeCarriesValue);
                     }
                     return ite;
                 }

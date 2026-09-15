@@ -107,13 +107,45 @@ public sealed partial class NativeAotLoweringPlanner
         if (effectiveMerge.HasValue && mergeIdx <= endIdx)
             postMergeBody = RecoverStructure(cfg, mergeIdx, endIdx, loopHeaderOffset, loopExitOffsets, depth + 1);
 
+        // Whether the arms leave a value for the merge to consume (`b = c ? x : y;`)
+        // or not (plain `if (c) {}`).  Determined from the MERGE BLOCK's own stack
+        // effect: a merge that begins by consuming a value (stloc/pop, or any opcode
+        // whose IL pops outnumber pushes by one) expects the arms to have pushed one.
+        //
+        // Computed here from the IL, never inferred from PostMergeBody's shape — see
+        // the field's remarks on IRIfThenElse.
+        bool mergeCarriesValue = effectiveMerge.HasValue
+            && MergeBlockConsumesValue(cfg.Blocks[mergeIdx]);
+
         return new IRIfThenElse(
             condBlock.BodyInstructions,
             condBlock.Terminator ?? throw new InvalidOperationException("Condition block must have a terminator"),
             thenBranch,
             elseBranch,
             postMergeBody,
-            PreConditionDepth: preCondDepth);
+            PreConditionDepth: preCondDepth,
+            MergeCarriesValue: mergeCarriesValue);
+    }
+
+    /// <summary>
+    /// Whether an if-then-else merge block starts by consuming a value its arms
+    /// pushed — i.e. the source form was a conditional EXPRESSION rather than a
+    /// statement.
+    ///
+    /// Judged from the block's first instruction's IL stack effect: a 1-to-1 opcode
+    /// (`conv.*`, `neg`, …) consumes one and pushes one, so it does NOT indicate a
+    /// merge-carried value; `stloc`/`pop`/`starg`/`stfld`-style opcodes do.
+    /// </summary>
+    private static bool MergeBlockConsumesValue(BasicBlock mergeBlock)
+    {
+        if (mergeBlock.BodyInstructions.Count == 0) return false;
+        var first = mergeBlock.BodyInstructions[0];
+        return first.Op is "stloc" or "stloc.s" or "starg" or "pop" or "initobj"
+            or "stfld" or "stsfld" or "stobj"
+            or "stind.i1" or "stind.i2" or "stind.i4" or "stind.i8"
+            or "stind.r4" or "stind.r8" or "stind.ref" or "stind.i"
+            or "stelem" or "stelem.i" or "stelem.ref"
+            or "throw" or "ret" or "leave" or "br" or "brtrue" or "brfalse";
     }
 
 
