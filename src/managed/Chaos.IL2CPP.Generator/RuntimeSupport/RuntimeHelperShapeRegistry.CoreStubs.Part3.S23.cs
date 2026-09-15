@@ -589,6 +589,79 @@ public sealed partial class NativeAotLoweringPlanner
                             new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
                             new HashSet<int> { 0 });
 
+                        // ── System.Int32/Int64::Parse multi-arg overloads ─────────────────
+                        // Only the 1-arg (String) overload was registered above.  The
+                        // SimpleForward emitter forwards EVERY managed argument via
+                        // ChaosParseInt32(args...), so Parse(string, NumberStyles) — a
+                        // 2-arg call — reached a 1-arg native and faulted with
+                        // STATUS_ACCESS_VIOLATION (0xc0000005) instead of parsing.
+                        //
+                        // These overloads are only exercised once a semantic value set
+                        // feeds a real literal ("1234567"), which is why the defect was
+                        // invisible while the probe still used default(string)/"".
+                        // See docs/dev/in-progress/debug-20-real-defects.
+                        {
+                            var int32ReturnSlot = CreateInt32AbiSlot();
+                            var i32StringSlot = CreateNativeIntAbiSlot(
+                                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+                            var i32StylesSlot = CreateInt32AbiSlot();
+                            var i32ProviderSlot = CreateNativeIntAbiSlot(
+                                "System.Object", AotCoreIrTypeShapeKind.ReferenceType);
+
+                            registry.Register("System.Int32", "Parse",
+                                new string[] { "System.String", "System.Globalization.NumberStyles" },
+                                ShapeKind.SimpleForward, "ChaosParseInt32Styles",
+                                new List<AotCoreIrAbiSlotArtifact> { i32StringSlot, i32StylesSlot },
+                                int32ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.Int32", "Parse",
+                                new string[] { "System.String", "System.IFormatProvider" },
+                                ShapeKind.SimpleForward, "ChaosParseInt32Provider",
+                                new List<AotCoreIrAbiSlotArtifact> { i32StringSlot, i32ProviderSlot },
+                                int32ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.Int32", "Parse",
+                                new string[] { "System.String", "System.Globalization.NumberStyles", "System.IFormatProvider" },
+                                ShapeKind.SimpleForward, "ChaosParseInt32StylesProvider",
+                                new List<AotCoreIrAbiSlotArtifact> { i32StringSlot, i32StylesSlot, i32ProviderSlot },
+                                int32ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            var int64ReturnSlot = new AotCoreIrAbiSlotArtifact
+                            {
+                                CarrierKindCode = AotCoreIrAbiCarrierKind.Int64,
+                                TypeShape = AotCoreIrTypeShapeKind.ValueType,
+                            };
+                            var i64StringSlot = CreateNativeIntAbiSlot(
+                                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+                            var i64StylesSlot = CreateInt32AbiSlot();
+                            var i64ProviderSlot = CreateNativeIntAbiSlot(
+                                "System.Object", AotCoreIrTypeShapeKind.ReferenceType);
+
+                            registry.Register("System.Int64", "Parse",
+                                new string[] { "System.String", "System.Globalization.NumberStyles" },
+                                ShapeKind.SimpleForward, "ChaosParseInt64Styles",
+                                new List<AotCoreIrAbiSlotArtifact> { i64StringSlot, i64StylesSlot },
+                                int64ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.Int64", "Parse",
+                                new string[] { "System.String", "System.IFormatProvider" },
+                                ShapeKind.SimpleForward, "ChaosParseInt64Provider",
+                                new List<AotCoreIrAbiSlotArtifact> { i64StringSlot, i64ProviderSlot },
+                                int64ReturnSlot,
+                                new HashSet<int> { 0 });
+
+                            registry.Register("System.Int64", "Parse",
+                                new string[] { "System.String", "System.Globalization.NumberStyles", "System.IFormatProvider" },
+                                ShapeKind.SimpleForward, "ChaosParseInt64StylesProvider",
+                                new List<AotCoreIrAbiSlotArtifact> { i64StringSlot, i64StylesSlot, i64ProviderSlot },
+                                int64ReturnSlot,
+                                new HashSet<int> { 0 });
+                        }
+
                         // ── System.UInt32::Parse — all 4 documented overloads ─────────────
                         // UInt32.Parse was the missing sibling of the Int32/Int64/Double
                         // stubs above.  Its absence let codegen emit calls to

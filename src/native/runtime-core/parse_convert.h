@@ -28,7 +28,20 @@ CHAOS_IL2CPP_INTPTR ChaosFormatDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept;
 
 // ── Int32::Parse / Int64::Parse / Double::Parse ─────────────────────
 CHAOS_IL2CPP_INT32  ChaosParseInt32(CHAOS_IL2CPP_INTPTR value) noexcept;
+// Multi-arg Int32.Parse overloads — each gets its own symbol so the
+// SimpleForward shape emitter (which forwards every managed argument via
+// ChaosParseInt32X(args...)) compiles.  Extra params are discarded.
+CHAOS_IL2CPP_INT32  ChaosParseInt32Styles(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept;
+CHAOS_IL2CPP_INT32  ChaosParseInt32Provider(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_INT32  ChaosParseInt32StylesProvider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+
 CHAOS_IL2CPP_INT64  ChaosParseInt64(CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INT64  ChaosParseInt64Styles(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept;
+CHAOS_IL2CPP_INT64  ChaosParseInt64Provider(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_INT64  ChaosParseInt64StylesProvider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+
 CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) noexcept;
 
 // ── UInt32::Parse / UInt64::Parse ────────────────────────────────────

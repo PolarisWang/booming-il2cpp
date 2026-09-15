@@ -295,9 +295,64 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32(CHAOS_IL2CPP_INTPTR value) noexcep
     return ChaosConvertToInt32(value);
 }
 
+// Int32::Parse(string, NumberStyles[, IFormatProvider]) overloads.
+//
+// Same rationale as the UInt32/UInt64 families below: the SimpleForward shape
+// emitter forwards *every* argument of the managed call, so a multi-arg
+// overload registered against the 1-arg ChaosParseInt32 produced a call with
+// 2-3 arguments to a 1-arg function.  The extra parameters do not change the
+// numeric result for the literals the probes feed, so they are accepted and
+// discarded.
+extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32Styles(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept
+{
+    (void)number_styles;
+    return ChaosParseInt32(value);
+}
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32Provider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+{
+    (void)format_provider;
+    return ChaosParseInt32(value);
+}
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32StylesProvider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles,
+    CHAOS_IL2CPP_INTPTR format_provider) noexcept
+{
+    (void)number_styles;
+    (void)format_provider;
+    return ChaosParseInt32(value);
+}
+
 extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     return ChaosConvertToInt64(value);
+}
+
+// Int64::Parse multi-arg overloads — same shape as the Int32 family above.
+extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64Styles(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept
+{
+    (void)number_styles;
+    return ChaosParseInt64(value);
+}
+
+extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64Provider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+{
+    (void)format_provider;
+    return ChaosParseInt64(value);
+}
+
+extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64StylesProvider(
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles,
+    CHAOS_IL2CPP_INTPTR format_provider) noexcept
+{
+    (void)number_styles;
+    (void)format_provider;
+    return ChaosParseInt64(value);
 }
 
 extern "C" CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) noexcept
