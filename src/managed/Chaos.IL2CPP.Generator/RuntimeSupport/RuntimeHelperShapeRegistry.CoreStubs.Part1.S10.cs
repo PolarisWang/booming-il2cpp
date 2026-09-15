@@ -177,6 +177,64 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
+            // ── AppendFormatted<T>(T) — the generic overload ──────────────────
+            // The non-generic AppendFormatted(string) above only covers the
+            // AppendFormatted(string) / AppendFormatted(ReadOnlySpan<char>) forms.
+            // Every value-typed interpolation hole (AppendFormatted<int>,
+            // <long>, <double>, <bool>, ...) is the GENERIC overload, which had no
+            // registration at all — so it fell through to the shared
+            // ChaosExternalRuntimeFallback catch-all.
+            //
+            // That catch-all is nullary: it takes no parameters and returns 0, so
+            // the handler reference AND the value being formatted were both
+            // silently discarded.  The fragments vector then never received the
+            // hole's text, and the handler-pointer/value pair was lost.  This is
+            // not merely a wrong-message problem: it is the first link in the
+            // chain that ends in the 0xc0000005 seen across ~244 subjects, where
+            // to_string_and_clear walks fragments that were never validly pushed.
+            //
+            // The resolver below formats the value into an interned string and
+            // appends it exactly like the string overload, so the handler's
+            // fragment list stays homogeneous.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Runtime.CompilerServices.DefaultInterpolatedStringHandler",
+                MethodName: "AppendFormatted",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    // AppendFormatted<T>(T) — exactly one generic argument, and the
+                    // parameter list must be that same T.  Anything else (the
+                    // (T, string) / (T, int) alignment overloads) is left to the
+                    // default path rather than guessed at.
+                    if (typeArgs.Count != 1) return null;
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 1) return null;
+
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    (void)chaos_arg_1;",
+                        string.Empty,
+                        "    // No handler state to append to (null reference) — nothing to do.",
+                        "    if (chaos_arg_0 == 0)",
+                        "    {",
+                        "        return 0;",
+                        "    }",
+                        string.Empty,
+                        "    chaos_default_interpolated_string_handler_append_int32(",
+                        "        chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));",
+                        "    return 0;",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(),
+                        }),
+                        CreateVoidAbiSlot(),
+                        new HashSet<int> { 0 });
+                }));
+
         }
 
         /// <summary>

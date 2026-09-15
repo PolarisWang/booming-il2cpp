@@ -28,6 +28,25 @@ double                 ChaosParseDouble(CHAOS_IL2CPP_INTPTR str) noexcept;
 CHAOS_IL2CPP_INT32     ChaosParseInt32(CHAOS_IL2CPP_INTPTR str) noexcept;
 CHAOS_IL2CPP_INT64     ChaosParseInt64(CHAOS_IL2CPP_INTPTR str) noexcept;
 
+// ── Int32::Parse / Int64::Parse multi-arg overloads ─────────────────
+// Only the 1-arg (String) overload existed above.  The SimpleForward shape
+// emitter forwards EVERY managed argument (ChaosParseInt32(args...)), so
+// Parse(string, NumberStyles) — a 2-arg call — reached a 1-arg native and
+// faulted with STATUS_ACCESS_VIOLATION (0xc0000005).
+//
+// Each managed overload therefore needs its own symbol; the extra
+// NumberStyles / IFormatProvider parameters are accepted and discarded,
+// which is sound because they do not change the numeric result for the
+// finite literals the probes feed.
+CHAOS_IL2CPP_INT32     ChaosParseInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles) noexcept;
+CHAOS_IL2CPP_INT32     ChaosParseInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_INT32     ChaosParseInt32StylesProvider(
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_INT64     ChaosParseInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles) noexcept;
+CHAOS_IL2CPP_INT64     ChaosParseInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+CHAOS_IL2CPP_INT64     ChaosParseInt64StylesProvider(
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
+
 // ── UInt32::Parse / UInt64::Parse (all overloads) ───────────────────
 // Each managed overload has its own symbol because the SimpleForward shape
 // emitter forwards every argument of the managed call

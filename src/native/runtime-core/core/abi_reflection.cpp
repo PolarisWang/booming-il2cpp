@@ -452,7 +452,7 @@ static const void* CHAOS_RUNTIME_ABI_CALL _abi_object_get_type_info(const void* 
     // Dereference to return the TypeInfo pointer, matching chaos_object_get_type_info().
     return obj ? *static_cast<const void* const*>(obj) : nullptr;
 }
-static bool CHAOS_RUNTIME_ABI_CALL _abi_is_string_id(uintptr_t value) noexcept { return false; }
+static bool CHAOS_RUNTIME_ABI_CALL _abi_is_string_id(uintptr_t value) noexcept { return chaos_is_string_id(static_cast<CHAOS_IL2CPP_INTPTR>(value)); }
 static uintptr_t CHAOS_RUNTIME_ABI_CALL _abi_string_materialize(uintptr_t value) noexcept { return value; }
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
