@@ -208,6 +208,22 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
      ⚠️ 改 fold 本身（直接推 create_type_value）会波及其他 chunk 的
      enum helper 消费方（fold 注释声称服务 Enum.Format/Parse），风险大；
      coerce 方案只动对象模型入口，fold 保持不变。
+
+     ⛔ **2026-09-15 首次实施失败（已回退，253 恢复）**：
+     - 方案变形：reserved_flags 被 enum flag 位占用（enum_stubs.cpp:909
+       kFlagIsEnum），不能放 pseudo handle → 改为复用
+       get_object_type 的 stable_id→handle 映射表（generated 侧发射
+       chaos_reflection_type_handle_from_stable_id），判别器用
+       首字段非空 = 托管对象。
+     - 结果：passed 253→248，且 si=151–158（MethodInfoTests::
+       GetGenericArguments 链）从**干净失败退化为 AV 崩溃**
+       （0xc0000005）——coerce 在该路径产生了此前不存在的坏指针。
+     - 教训：**判别器/映射表覆盖不足**。Type[] 元素（raw TypeInfoHot*
+       经 stelem 存入）在 GetGenericArguments 中被 coerce 成新建托管
+       Type 后，后续 generic_argument_type_handle 语义与原先
+       "0 或 raw"的假设不符。重试前必须先 cdb 定位 si=151 的精确
+       AV 点，把 coerce 的适用面收窄到**显式列出的接收者函数**
+       （GetMethod/GetTypeHandle），不要全局替换 11 处 reinterpret。
   ↓ 修好后
 层3  FindReflectionQueryMethod 按名字+参数个数匹配 —— IndexOf(char) 与
      IndexOf(string) 个数相同会歧义；需 descriptor 携带参数类型
