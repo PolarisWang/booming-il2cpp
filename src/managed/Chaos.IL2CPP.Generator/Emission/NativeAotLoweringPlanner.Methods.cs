@@ -179,6 +179,23 @@ public sealed partial class NativeAotLoweringPlanner
     private bool _hasCustomAttributeBlob;
 
     /// <summary>
+    /// Reflection member metadata collected per type during module registration,
+    /// consumed by NativeAot.ModuleRegistration.cpp.scriban to emit
+    /// ReflectionQueryPropertyDescriptor / FieldDescriptor / EventDescriptor tables.
+    ///
+    /// Shape: (declaringTypeSubjectId, memberName, memberTypeSubjectId, flags,
+    ///         constantValue).  A flat list is enough because the emitted tables are
+    /// grouped into per-type arrays by a prefix index built at emit time.
+    ///
+    /// Rationale: the runtime resolves Type::GetProperty/GetField/GetEvent against
+    /// these descriptors.  With no descriptors emitted, those accessors are
+    /// deliberate CHAOS_IL2CPP_FAIL() stubs and any member query aborts.
+    /// </summary>
+    internal readonly List<(string TypeSubjectId, string Name, string MemberType, uint Flags, long ConstantValue)> _reflectionProperties = new();
+    internal readonly List<(string TypeSubjectId, string Name, string MemberType, uint Flags, long ConstantValue)> _reflectionFields = new();
+    internal readonly List<(string TypeSubjectId, string Name, string MemberType, uint Flags, long ConstantValue)> _reflectionEvents = new();
+
+    /// <summary>
     /// When true, method emission runs sequentially (single-threaded).
     /// Set by --force-serial CLI flag.  Used as fallback if parallel
     /// emission causes heap corruption (0xC000037D).

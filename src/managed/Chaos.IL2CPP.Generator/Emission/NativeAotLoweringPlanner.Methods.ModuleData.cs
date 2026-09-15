@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -117,6 +117,16 @@ public sealed partial class NativeAotLoweringPlanner
                 _moduleTypeParentTokens.Add(parentToken);
                 _moduleTypeInfoSymbols.Add(typeInfoSymbol);
                 _moduleTypeSubjectIds.Add(subjectId);
+
+                // ── Reflection member metadata (properties / fields / events) ──
+                // Collect the raw member info per type so the module registration
+                // template can emit ReflectionQuery*Descriptor tables.  Without these
+                // tables, the runtime's reflection accessors
+                // (Type::GetProperty / GetField / GetEvent) have nothing to resolve
+                // against and are registered as deliberate CHAOS_IL2CPP_FAIL() stubs —
+                // i.e. querying any member aborts the process.
+                CollectReflectionMemberMetadata(metadataReader, typeDef, subjectId, typeToken);
+
                 _moduleTypeCount++;
             }
 
@@ -295,5 +305,164 @@ public sealed partial class NativeAotLoweringPlanner
     /// Extracted as a separate method to give the JIT a clear stack-cleanup boundary
     /// (avoiding stack accumulation observed with Select().ToList() lambda closure).
     /// </summary>
+
+    /// <summary>
+    /// Collect a type's properties, fields and events for the reflection member
+    /// descriptor tables.
+    ///
+    /// These tables are what <c>Type::GetProperty</c> / <c>GetField</c> / <c>GetEvent</c>
+    /// resolve against at runtime.  They were never emitted, which is why those three
+    /// accessors are registered as deliberate <c>CHAOS_IL2CPP_FAIL()</c> stubs
+    /// (<c>RuntimeHelperShapeRegistry.CoreStubs.Part1.S15.cs</c>) — querying any member
+    /// aborted the process instead of returning a handle.
+    ///
+    /// The member's type is recorded as a subject id string (the same identity the
+    /// rest of reflection uses); flags mirror the ECMA-335 attribute bit patterns
+    /// already encoded in the runtime's <c>kPropertyFlag*</c> / <c>kFieldFlag*</c>
+    /// constants.
+    /// </summary>
+    private void CollectReflectionMemberMetadata(
+        MetadataReader reader, TypeDefinition typeDef, string typeSubjectId, uint typeToken)
+    {
+        // ── Properties ──
+        foreach (var propHandle in typeDef.GetProperties())
+        {
+            // Fully qualified: `reader.GetProperty` otherwise binds to the
+            // System.Reflection TypeExtensions.GetProperty(Type, string) extension
+            // (this file imports System.Reflection).
+            System.Reflection.Metadata.PropertyDefinition prop =
+                reader.GetPropertyDefinition(propHandle);
+            var propName = reader.GetString(prop.Name);
+
+            // The member type lives on the accessor's signature; prefer the getter,
+            // falling back to the setter for write-only properties.
+            var accessors = prop.GetAccessors();
+            var accessorHandle = !accessors.Getter.IsNil ? accessors.Getter : accessors.Setter;
+            string memberType = accessorHandle.IsNil
+                ? string.Empty
+                : DescribeMemberTypeFromAccessor(reader, accessorHandle);
+
+            uint flags = 0;
+            const PropertyAttributes SpecialName = (PropertyAttributes)0x0200;
+            if ((prop.Attributes & SpecialName) != 0) flags |= 1u << 3;   // kPropertyFlagIsSpecialName
+            if (!accessors.Getter.IsNil) flags |= 1u << 1;                // kPropertyFlagCanRead
+            if (!accessors.Setter.IsNil) flags |= 1u << 2;                // kPropertyFlagCanWrite
+            if (!accessorHandle.IsNil && IsAccessorStatic(reader, accessorHandle)) flags |= 1u << 0;
+
+            _reflectionProperties.Add((typeSubjectId, propName, memberType, flags, 0L));
+        }
+
+        // ── Fields ──
+        foreach (var fieldHandle in typeDef.GetFields())
+        {
+            System.Reflection.Metadata.FieldDefinition field = reader.GetFieldDefinition(fieldHandle);
+            var fieldName = reader.GetString(field.Name);
+
+            uint flags = 0;
+            if ((field.Attributes & FieldAttributes.Public) != 0)   flags |= 1u << 0;
+            if ((field.Attributes & FieldAttributes.Static) != 0)   flags |= 1u << 1;
+            if ((field.Attributes & FieldAttributes.InitOnly) != 0) flags |= 1u << 2;
+            if ((field.Attributes & FieldAttributes.Literal) != 0)  flags |= 1u << 3;
+
+            // Enum literals carry their value in the Constant table; other fields
+            // have none.  GetDefaultValue returns ConstantHandle.Nil when absent.
+            long constantValue = 0;
+            var constHandle = field.GetDefaultValue();
+            if (!constHandle.IsNil)
+            {
+                try
+                {
+                    var constant = reader.GetConstant(constHandle);
+                    var blob = reader.GetBlobReader(constant.Value);
+                    constantValue = ReadConstantBlob(
+                        field.DecodeSignature(
+                            new MetadataMethodSignatureTypeNameProvider(reader, _assemblyName), null),
+                        ref blob);
+                }
+                catch (BadImageFormatException) { constantValue = 0; }
+                catch (InvalidOperationException) { constantValue = 0; }
+            }
+
+            _reflectionFields.Add((typeSubjectId, fieldName,
+                DescribeFieldType(reader, field), flags, constantValue));
+        }
+
+        // ── Events ──
+        foreach (var eventHandle in typeDef.GetEvents())
+        {
+            System.Reflection.Metadata.EventDefinition evt = reader.GetEventDefinition(eventHandle);
+            var evtName = reader.GetString(evt.Name);
+
+            uint flags = 0;
+            var evtAccessors = evt.GetAccessors();
+            var evtAccessor = !evtAccessors.Adder.IsNil ? evtAccessors.Adder : evtAccessors.Remover;
+            if (!evtAccessor.IsNil && IsAccessorStatic(reader, evtAccessor)) flags |= 1u << 0;
+
+            _reflectionEvents.Add((typeSubjectId, evtName,
+                DescribeMemberTypeFromAccessor(reader, evtAccessor), flags, 0L));
+        }
+    }
+
+    /// <summary>Whether a property/event accessor method is static.</summary>
+    private static bool IsAccessorStatic(MetadataReader reader, MethodDefinitionHandle handle)
+    {
+        if (handle.IsNil) return false;
+        var md = reader.GetMethodDefinition(handle);
+        return (md.Attributes & MethodAttributes.Static) != 0;
+    }
+
+    /// <summary>
+    /// Describe a member's type from its accessor method signature (return type for
+    /// a getter, first parameter for a setter/adder/remover).
+    /// </summary>
+    private string DescribeMemberTypeFromAccessor(MetadataReader reader, MethodDefinitionHandle handle)
+    {
+        if (handle.IsNil) return string.Empty;
+        try
+        {
+            var md = reader.GetMethodDefinition(handle);
+            var sig = md.DecodeSignature(new MetadataMethodSignatureTypeNameProvider(reader, _assemblyName), null);
+            if (sig.ReturnType is { Length: > 0 } rt && rt != "System.Void") return rt;
+            if (sig.ParameterTypes is { Length: > 0 }) return sig.ParameterTypes[0];
+        }
+        catch (BadImageFormatException) { }
+        return string.Empty;
+    }
+
+    /// <summary>Describe a field's declared type from its signature.</summary>
+    private string DescribeFieldType(MetadataReader reader, FieldDefinition field)
+    {
+        try
+        {
+            return field.DecodeSignature(new MetadataMethodSignatureTypeNameProvider(reader, _assemblyName), null);
+        }
+        catch (BadImageFormatException)
+        {
+            return string.Empty;
+        }
+    }
+
+    /// <summary>
+    /// Read a field's constant-table blob into a long.  Handles the primitive
+    /// constant kinds ECMA-335 permits on fields (bool/char/integrals).
+    /// </summary>
+    private static long ReadConstantBlob(string typeName, ref BlobReader blob)
+    {
+        switch (typeName)
+        {
+            case "System.Boolean": return blob.ReadBoolean() ? 1L : 0L;
+            case "System.Char": return blob.ReadUInt16();
+            case "System.SByte": return blob.ReadSByte();
+            case "System.Byte": return blob.ReadByte();
+            case "System.Int16": return blob.ReadInt16();
+            case "System.UInt16": return blob.ReadUInt16();
+            case "System.Int32": return blob.ReadInt32();
+            case "System.UInt32": return blob.ReadUInt32();
+            case "System.Int64": return blob.ReadInt64();
+            case "System.UInt64": return unchecked((long)blob.ReadUInt64());
+            default: return 0L;
+        }
+    }
+
 
 }
