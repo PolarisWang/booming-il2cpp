@@ -815,8 +815,14 @@ public sealed class TestEmitter
         // (ArgumentOutOfRangeException for a null/empty name,
         // ArgumentNullException for a null buffer, InvalidOperationException for
         // ResolveEntity at an invalid position).
+        //
+        // XmlValidatingReader & XmlNodeReader share the same exception contracts
+        // for GetAttribute/MoveToAttribute/ResolveEntity on a bare object, so
+        // they are included here too.
         if (declaringType is not null
-            && declaringType.Contains("System.Xml.XmlTextReader", StringComparison.Ordinal)
+            && (declaringType.Contains("System.Xml.XmlTextReader", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlValidatingReader", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlNodeReader", StringComparison.Ordinal))
             && method.Name is "MoveToAttribute" or "GetAttribute"
                or "ReadContentAsBase64" or "ReadContentAsBinHex"
                or "ReadElementContentAsBase64" or "ReadElementContentAsBinHex"

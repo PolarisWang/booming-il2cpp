@@ -183,6 +183,17 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterXmlTextReaderInt(registry, "ReadElementContentAsBinHex",
                 "ChaosXmlTextReaderReadElementContentAsBinHex", thisBuf3, thisBuf3R);
 
+            // ── XmlValidatingReader / XmlNodeReader: same contracts as XmlTextReader ──
+            // Both are reader variants whose bare-object instance methods raise
+            // the same exception types (ArgumentOutOfRangeException for a
+            // null/empty attribute name, InvalidOperationException for
+            // ResolveEntity at an invalid position).  The native symbols are
+            // shared with XmlTextReader, so only the receiver type is new.
+            RegisterReaderVariant(registry, "System.Xml.XmlValidatingReader",
+                thisStr, thisStrR, thisStrStr, thisStrStrR, intRetAbi);
+            RegisterReaderVariant(registry, "System.Xml.XmlNodeReader",
+                thisStr, thisStrR, thisStrStr, thisStrStrR, intRetAbi);
+
             // NOTE: ResolveEntity() is already registered by M5 in S19 — its shape
             // key is unchanged, so re-registering here would raise
             // "Shape already registered" at planner construction (HANDOFF §4.2).
@@ -201,6 +212,45 @@ public sealed partial class NativeAotLoweringPlanner
                 new[] { "System.Byte[]", "System.Int32", "System.Int32" },
                 ShapeKind.SimpleForward, nativeSymbol,
                 abiSlots, CreateInt32AbiSlot(), rawIndices);
+        }
+
+        /// <summary>
+        /// Register the GetAttribute / MoveToAttribute / ResolveEntity surface for
+        /// a reader variant (XmlValidatingReader, XmlNodeReader).  The native
+        /// symbols are shared with XmlTextReader — the reader variants raise the
+        /// same argument-validation exceptions on a bare object.
+        /// </summary>
+        private static void RegisterReaderVariant(
+            RuntimeHelperShapeRegistry registry,
+            string typeName,
+            _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact> thisStr,
+            HashSet<int> thisStrR,
+            _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact> thisStrStr,
+            HashSet<int> thisStrStrR,
+            AotCoreIrAbiSlotArtifact intRetAbi)
+        {
+            var strAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var thisOnly = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { thisStr[0] });
+
+            registry.Register(typeName, "MoveToAttribute",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderMoveToAttributeStr", thisStr, intRetAbi, thisStrR);
+            registry.Register(typeName, "MoveToAttribute",
+                new[] { "System.String", "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderMoveToAttributeStrNs", thisStrStr, intRetAbi, thisStrStrR);
+            registry.Register(typeName, "GetAttribute",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderGetAttributeStr", thisStr, strAbi, thisStrR);
+            registry.Register(typeName, "GetAttribute",
+                new[] { "System.String", "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderGetAttributeStrNs", thisStrStr, strAbi, thisStrStrR);
+            registry.Register(typeName, "ResolveEntity",
+                Array.Empty<string>(), ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderResolveEntity", thisOnly,
+                CreateVoidAbiSlot(), new HashSet<int> { 0 });
         }
 
         /// <summary>
