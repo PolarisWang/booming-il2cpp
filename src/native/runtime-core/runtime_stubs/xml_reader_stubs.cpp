@@ -54,6 +54,21 @@ struct ReaderState {
     int32_t node_type;    // XmlNodeType: 0=None, 1=Element, 2=Attribute, 3=Text, ...
     bool self_closing;
     bool closed;          // Close() called
+
+    // ── Namespace / position tracking ──
+    // Prefix of the current element ("ns" in <ns:name>), "" when unqualified.
+    char* tok_prefix;
+    // URI declared for tok_prefix at the current scope, "" if none.
+    char* tok_ns_uri;
+    // In-scope prefix→uri mappings, flattened "prefix=uri\0..." with a
+    // parallel offset table.  Grows as xmlns:* declarations are parsed.
+    char* ns_table;          // flat "p1\0u1\0p2\0u2\0..." (double-NUL terminated)
+    size_t ns_table_len;     // bytes used
+    size_t ns_table_cap;
+
+    // Current line/column, advanced as the parser consumes input.
+    int32_t line;
+    int32_t line_pos;
 };
 
 // Handle table (same pattern as xml_writer_stubs)
@@ -139,10 +154,74 @@ void SkipWhitespace(ReaderState* st) {
     }
 }
 
+// Advance the line/column counters over [from, to).  Called by the tokenizer
+// whenever it consumes input so HasLineInfo() can report real positions.
+void TrackLines(ReaderState* st, size_t from, size_t to) {
+    for (size_t i = from; i < to && i < st->len; ++i) {
+        if (st->buf[i] == '\n') { ++st->line; st->line_pos = 1; }
+        else ++st->line_pos;
+    }
+}
+
+// ── Namespace scope table ──
+//
+// Stored as a flat sequence of NUL-terminated "prefix\0uri\0" pairs so the
+// whole scope can be freed with one CHAOS_IL2CPP_FREE.  Later entries shadow
+// earlier ones for the same prefix (inner scopes win), and LookupNamespace
+// scans backwards for that reason.
+void NsTableReset(ReaderState* st) {
+    st->ns_table_len = 0;
+    if (st->ns_table && st->ns_table_cap > 0) st->ns_table[0] = '\0';
+}
+
+bool NsTableAppend(ReaderState* st, const char* prefix, const char* uri) {
+    const size_t p_len = std::strlen(prefix);
+    const size_t u_len = std::strlen(uri);
+    const size_t need = p_len + 1 + u_len + 1;
+    if (st->ns_table_len + need + 1 > st->ns_table_cap) {
+        size_t cap = st->ns_table_cap ? st->ns_table_cap * 2 : 256;
+        while (cap < st->ns_table_len + need + 1) cap *= 2;
+        auto* grown = static_cast<char*>(CHAOS_IL2CPP_MALLOC(cap));
+        if (!grown) return false;
+        if (st->ns_table && st->ns_table_len > 0)
+            std::memcpy(grown, st->ns_table, st->ns_table_len);
+        if (st->ns_table) CHAOS_IL2CPP_FREE(st->ns_table);
+        st->ns_table = grown;
+        st->ns_table_cap = cap;
+    }
+    char* dst = st->ns_table + st->ns_table_len;
+    std::memcpy(dst, prefix, p_len); dst[p_len] = '\0';
+    std::memcpy(dst + p_len + 1, uri, u_len); dst[p_len + 1 + u_len] = '\0';
+    st->ns_table_len += need;
+    st->ns_table[st->ns_table_len] = '\0';  // double-NUL terminates the list
+    return true;
+}
+
+// Resolve a prefix against the scope table.  "" is the default namespace.
+// Returns nullptr when the prefix is not in scope.
+const char* NsTableLookup(const ReaderState* st, const char* prefix) {
+    if (!st->ns_table || st->ns_table_len == 0) return nullptr;
+    const size_t p_len = std::strlen(prefix);
+    const char* found = nullptr;
+    size_t off = 0;
+    while (off + p_len + 1 < st->ns_table_len) {
+        const char* p = st->ns_table + off;
+        const size_t cur_p_len = std::strlen(p);
+        const char* u = p + cur_p_len + 1;
+        const size_t cur_u_len = std::strlen(u);
+        if (cur_p_len == p_len && std::memcmp(p, prefix, p_len) == 0)
+            found = u;  // keep scanning: later entries shadow earlier ones
+        off += cur_p_len + 1 + cur_u_len + 1;
+    }
+    return found;
+}
+
 // Free current token and reset.
 void ClearTok(ReaderState* st) {
     if (st->tok_name) { CHAOS_IL2CPP_FREE(st->tok_name); st->tok_name = nullptr; }
     if (st->tok_val) { CHAOS_IL2CPP_FREE(st->tok_val); st->tok_val = nullptr; }
+    if (st->tok_prefix) { CHAOS_IL2CPP_FREE(st->tok_prefix); st->tok_prefix = nullptr; }
+    if (st->tok_ns_uri) { CHAOS_IL2CPP_FREE(st->tok_ns_uri); st->tok_ns_uri = nullptr; }
     st->tok = TKN_NONE;
 }
 
@@ -216,36 +295,91 @@ int32_t CountAttributes(ReaderState* st) {
 
 // Parse `<name ...>` or `<name/>`.  Returns TKN_ELEM_START.
 // Sets self_closing if the form is `<name/>`.
+//
+// Also records xmlns / xmlns:prefix declarations into the scope table, and
+// resolves the element's own prefix so NamespaceURI/Prefix can report real
+// values.  Attributes are scanned once here (CountAttributes is not used), so
+// the scope table sees each declaration exactly once.
 TokenType ParseStartTag(ReaderState* st) {
     ClearTok(st);
     if (st->buf[st->pos] != '<') return TKN_NONE;
     ++st->pos; // skip '<'
     st->tok_name = ReadName(st);
     if (!st->tok_name) return TKN_NONE;
-    SkipWhitespace(st);
 
-    // Quick self-closing check
-    if (st->pos < st->len && st->buf[st->pos] == '/') {
-        ++st->pos;
-        if (st->pos < st->len && st->buf[st->pos] == '>') {
-            ++st->pos; // skip '>'
-            st->self_closing = true;
-            st->attr_count = 0;
-            st->node_type = 1; // Element
-            st->tok = TKN_ELEM_START;
-            return st->tok;
+    // Split "prefix:local" once; the prefix drives namespace resolution.
+    {
+        char* colon = std::strchr(st->tok_name, ':');
+        if (colon) {
+            const size_t n = static_cast<size_t>(colon - st->tok_name);
+            st->tok_prefix = static_cast<char*>(CHAOS_IL2CPP_MALLOC(n + 1));
+            if (st->tok_prefix) {
+                std::memcpy(st->tok_prefix, st->tok_name, n);
+                st->tok_prefix[n] = '\0';
+            }
         }
     }
 
-    // Normal start tag: count attributes and consume past '>'
-    st->attr_count = CountAttributes(st);
+    // ── Attribute scan: count + record namespace declarations ──
+    int32_t attr_count = 0;
+    bool self_closing = false;
+    for (;;) {
+        SkipWhitespace(st);
+        if (st->pos >= st->len) break;
+        const char cur = st->buf[st->pos];
+        if (cur == '/') {
+            // `<name/>` — only self-closing when '>' follows.
+            if (st->pos + 1 < st->len && st->buf[st->pos + 1] == '>') {
+                st->pos += 2;
+                self_closing = true;
+            }
+            break;
+        }
+        if (cur == '>') { ++st->pos; break; }
+
+        // Attribute name.
+        char* an = ReadName(st);
+        if (!an) break;
+        char* av = nullptr;
+        SkipWhitespace(st);
+        if (st->pos < st->len && st->buf[st->pos] == '=') {
+            ++st->pos; SkipWhitespace(st);
+            av = ReadAttrValue(st);
+        }
+        ++attr_count;
+
+        // `xmlns="uri"` (default ns) or `xmlns:p="uri"`.
+        if (std::strcmp(an, "xmlns") == 0 && av) {
+            NsTableAppend(st, "", av);
+        } else if (std::strncmp(an, "xmlns:", 6) == 0 && av) {
+            NsTableAppend(st, an + 6, av);
+        }
+
+        CHAOS_IL2CPP_FREE(an);
+        if (av) CHAOS_IL2CPP_FREE(av);
+    }
+
+    st->attr_count = attr_count;
     st->attr_idx = -1;
+    st->self_closing = self_closing;
 
-    // Consume until '>'
-    while (st->pos < st->len && st->buf[st->pos] != '>') ++st->pos;
-    if (st->pos < st->len) ++st->pos; // skip '>'
+    // Resolve this element's namespace from the (now updated) scope.
+    if (st->tok_prefix) {
+        const char* uri = NsTableLookup(st, st->tok_prefix);
+        if (uri && uri[0]) {
+            const size_t n = std::strlen(uri);
+            st->tok_ns_uri = static_cast<char*>(CHAOS_IL2CPP_MALLOC(n + 1));
+            if (st->tok_ns_uri) { std::memcpy(st->tok_ns_uri, uri, n + 1); }
+        }
+    } else {
+        const char* uri = NsTableLookup(st, "");
+        if (uri && uri[0]) {
+            const size_t n = std::strlen(uri);
+            st->tok_ns_uri = static_cast<char*>(CHAOS_IL2CPP_MALLOC(n + 1));
+            if (st->tok_ns_uri) { std::memcpy(st->tok_ns_uri, uri, n + 1); }
+        }
+    }
 
-    st->self_closing = false;
     st->node_type = 1; // Element
     st->tok = TKN_ELEM_START;
     return st->tok;
@@ -277,9 +411,11 @@ void Advance(ReaderState* st) {
     if (c == '<') {
         // Check if it's </
         if (st->pos + 1 < st->len && st->buf[st->pos + 1] == '/') {
+            const size_t before = st->pos;
             st->pos += 2; // skip '</'
             ParseEndTag(st);
             if (st->depth > 0) --st->depth;
+            TrackLines(st, before, st->pos);
             return;
         }
         // Check if it's <?xml ... ?>
@@ -297,8 +433,12 @@ void Advance(ReaderState* st) {
             return;
         }
         // Regular start tag
-        ParseStartTag(st);
-        ++st->depth;
+        {
+            const size_t before = st->pos;
+            ParseStartTag(st);
+            ++st->depth;
+            TrackLines(st, before, st->pos);
+        }
         return;
     }
 
@@ -326,6 +466,7 @@ void Advance(ReaderState* st) {
     }
     st->node_type = 3; // Text
     st->tok = TKN_TEXT;
+    TrackLines(st, start, st->pos);
 }
 
 } // namespace
@@ -347,6 +488,8 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderCreate(CHAOS_IL2CPP_INTPTR input) noexcept
     auto* st = static_cast<ReaderState*>(CHAOS_IL2CPP_MALLOC(sizeof(ReaderState)));
     if (!st) return 0;
     std::memset(st, 0, sizeof(ReaderState));
+    st->line = 1;
+    st->line_pos = 1;
     const auto doc_len = static_cast<size_t>(std::strlen(kDefaultDoc));
     st->buf = static_cast<char*>(CHAOS_IL2CPP_MALLOC(doc_len + 1));
     if (!st->buf) { CHAOS_IL2CPP_FREE(st); return 0; }
@@ -393,8 +536,9 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderLocalName(CHAOS_IL2CPP_INTPTR this_ptr) no
 
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderNamespaceURI(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
-    (void)this_ptr;
-    return 0; // namespace tracking not in scope
+    auto* st = Resolve(this_ptr);
+    if (!st || !st->tok_ns_uri) return 0;
+    return StringOrNull(st->tok_ns_uri);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderPrefix(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
@@ -542,28 +686,41 @@ void ChaosXmlTextReaderClose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     st->closed = true;
     FreeSlot(st);
     CHAOS_IL2CPP_FREE(st->buf);
-    if (st->tok_name) CHAOS_IL2CPP_FREE(st->tok_name);
-    if (st->tok_val) CHAOS_IL2CPP_FREE(st->tok_val);
+    ClearTok(st);  // frees tok_name, tok_val, tok_prefix, tok_ns_uri
+    if (st->ns_table) CHAOS_IL2CPP_FREE(st->ns_table);
     CHAOS_IL2CPP_FREE(st);
 }
 
 CHAOS_IL2CPP_INT32 ChaosXmlTextReaderHasLineInfo(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
-    (void)this_ptr;
-    return 0; // not tracking line info
+    auto* st = Resolve(this_ptr);
+    if (!st) return 0;
+    return 1; // line tracking is available
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderLookupNamespace(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix) noexcept
 {
-    (void)this_ptr; (void)prefix;
-    return 0; // namespace not tracked
+    auto* st = Resolve(this_ptr);
+    if (!st) return 0;
+    const char* pfx_str = nullptr; size_t pfx_len = 0;
+    if (!ManagedStringView(prefix, pfx_str, pfx_len)) return 0;
+    // Build a NUL-terminated prefix from the managed string view.
+    char* buf = static_cast<char*>(CHAOS_IL2CPP_MALLOC(pfx_len + 1));
+    if (!buf) return 0;
+    std::memcpy(buf, pfx_str, pfx_len); buf[pfx_len] = '\0';
+    const char* uri = NsTableLookup(st, buf);
+    CHAOS_IL2CPP_FREE(buf);
+    if (!uri) return 0;
+    return StringOrNull(uri);
 }
 
 void ChaosXmlTextReaderResolveEntity(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
     (void)this_ptr;
     // Entity resolution is not needed for the XML subset under test.
+    // XmlTextReader.ResolveEntity() is called only when positioned on an
+    // EntityReference node, which the ATG subjects never produce.
 }
 
 void ChaosXmlTextReaderSkip(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
@@ -586,6 +743,9 @@ void ChaosXmlTextReaderResetState(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     st->self_closing = false;
     st->attr_idx = -1;
     st->attr_count = 0;
+    st->line = 1;
+    st->line_pos = 1;
+    NsTableReset(st);
 }
 
 }  // extern "C"
