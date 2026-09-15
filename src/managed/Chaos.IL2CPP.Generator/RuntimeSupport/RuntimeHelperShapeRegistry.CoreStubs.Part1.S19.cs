@@ -171,6 +171,7 @@ public sealed partial class NativeAotLoweringPlanner
                 "System.Private.CoreLib/System.IO.TextWriter",
                 AotCoreIrTypeShapeKind.ReferenceType);
             var boolAbi = CreateInt32AbiSlot();
+            var intRetAbi = CreateInt32AbiSlot();
             var voidAbi = CreateVoidAbiSlot();
             var rawThis = new HashSet<int> { 0 };
 
@@ -239,6 +240,70 @@ public sealed partial class NativeAotLoweringPlanner
             var sa3R = new HashSet<int> { 0, 1, 2, 3 };
             RegisterXmlTextWriterVoid(registry, "WriteStartAttribute",
                 "ChaosXmlWriterWriteStartAttribute", sa3, sa3R, XmlTextWriterParamTypes("WriteStartAttribute", 3));
+
+            // ── Remaining string-only writers ──
+            RegisterXmlTextWriterVoid(registry, "WriteName",
+                "ChaosXmlWriterWriteName", ws, wsR, XmlTextWriterParamTypes("WriteName", 1));
+            RegisterXmlTextWriterVoid(registry, "WriteNmToken",
+                "ChaosXmlWriterWriteNmToken", ws, wsR, XmlTextWriterParamTypes("WriteNmToken", 1));
+            RegisterXmlTextWriterVoid(registry, "WriteEntityRef",
+                "ChaosXmlWriterWriteEntityRef", ws, wsR, XmlTextWriterParamTypes("WriteEntityRef", 1));
+
+            // ── WriteQualifiedName(string localName, string ns) ──
+            var qn2 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { ttAbi, strAbi, strAbi });
+            var qn2R = new HashSet<int> { 0, 1, 2 };
+            RegisterXmlTextWriterVoid(registry, "WriteQualifiedName",
+                "ChaosXmlWriterWriteQualifiedName", qn2, qn2R, XmlTextWriterParamTypes("WriteQualifiedName", 2));
+
+            // ── WriteProcessingInstruction(string name, string text) ──
+            RegisterXmlTextWriterVoid(registry, "WriteProcessingInstruction",
+                "ChaosXmlWriterWriteProcessingInstruction", qn2, qn2R,
+                XmlTextWriterParamTypes("WriteProcessingInstruction", 2));
+
+            // ── WriteDocType(string name, string pubid, string sysid, string subset) ──
+            var dt4 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { ttAbi, strAbi, strAbi, strAbi, strAbi });
+            var dt4R = new HashSet<int> { 0, 1, 2, 3, 4 };
+            RegisterXmlTextWriterVoid(registry, "WriteDocType",
+                "ChaosXmlWriterWriteDocType", dt4, dt4R, XmlTextWriterParamTypes("WriteDocType", 4));
+
+            // ── WriteChars(char[] buffer, int index, int count) ──
+            var arrAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.Array",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var wc3 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { ttAbi, arrAbi, intRetAbi, intRetAbi });
+            var wc3R = new HashSet<int> { 0, 1, 2, 3 };
+            RegisterXmlTextWriterVoid(registry, "WriteChars",
+                "ChaosXmlWriterWriteChars", wc3, wc3R, XmlTextWriterParamTypes("WriteChars", 3));
+
+            // ── WriteBase64 / WriteBinHex(byte[] buffer, int index, int count) ──
+            RegisterXmlTextWriterVoid(registry, "WriteBase64",
+                "ChaosXmlWriterWriteBase64", wc3, wc3R, XmlTextWriterParamTypes("WriteChars", 3));
+            RegisterXmlTextWriterVoid(registry, "WriteBinHex",
+                "ChaosXmlWriterWriteBinHex", wc3, wc3R, XmlTextWriterParamTypes("WriteChars", 3));
+
+            // ── WriteCharEntity(char ch) ──
+            var ce1 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { ttAbi, intRetAbi });
+            var ce1R = new HashSet<int> { 0, 1 };
+            RegisterXmlTextWriterVoid(registry, "WriteCharEntity",
+                "ChaosXmlWriterWriteCharEntity", ce1, ce1R, XmlTextWriterParamTypes("WriteCharEntity", 1));
+
+            // ── WriteSurrogateCharEntity(char low, char high) ──
+            var sce2 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { ttAbi, intRetAbi, intRetAbi });
+            var sce2R = new HashSet<int> { 0, 1, 2 };
+            RegisterXmlTextWriterVoid(registry, "WriteSurrogateCharEntity",
+                "ChaosXmlWriterWriteSurrogateCharEntity", sce2, sce2R,
+                XmlTextWriterParamTypes("WriteSurrogateCharEntity", 2));
+
+            // ── LookupPrefix(string ns) -> string ──
+            registry.Register("System.Xml.XmlTextWriter", "LookupPrefix",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlWriterLookupPrefix", qn2, strAbi,
+                new HashSet<int> { 0, 1 });
         }
 
         /// <summary>
@@ -275,8 +340,20 @@ public sealed partial class NativeAotLoweringPlanner
             if (methodName == "WriteStartElement" || methodName == "WriteStartAttribute")
                 return new[] { "System.String", "System.String", "System.String" };
             if (methodName is "WriteString" or "WriteWhitespace" or "WriteRaw"
-                or "WriteComment" or "WriteCData")
+                or "WriteComment" or "WriteCData" or "WriteQualifiedName"
+                or "WriteName" or "WriteNmToken" or "WriteEntityRef"
+                or "LookupPrefix")
                 return new[] { "System.String" };
+            if (methodName == "WriteProcessingInstruction")
+                return new[] { "System.String", "System.String" };
+            if (methodName == "WriteDocType")
+                return new[] { "System.String", "System.String", "System.String", "System.String" };
+            if (methodName == "WriteChars")
+                return new[] { "System.Char[]", "System.Int32", "System.Int32" };
+            if (methodName == "WriteCharEntity")
+                return new[] { "System.Char" };
+            if (methodName == "WriteSurrogateCharEntity")
+                return new[] { "System.Char", "System.Char" };
             return Array.Empty<string>();
         }
     }

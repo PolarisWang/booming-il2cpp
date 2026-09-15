@@ -69,6 +69,73 @@ void ChaosXmlWriterWriteComment(
 void ChaosXmlWriterWriteCData(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept;
 
+/// XmlTextWriter.WriteDocType(string name, string pubid, string sysid, string subset) → void
+void ChaosXmlWriterWriteDocType(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR name,
+    CHAOS_IL2CPP_INTPTR pubid,
+    CHAOS_IL2CPP_INTPTR sysid,
+    CHAOS_IL2CPP_INTPTR subset) noexcept;
+
+/// XmlTextWriter.WriteProcessingInstruction(string name, string text) → void
+void ChaosXmlWriterWriteProcessingInstruction(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR name,
+    CHAOS_IL2CPP_INTPTR text) noexcept;
+
+/// XmlTextWriter.WriteChars(char[] buffer, int index, int count) → void
+void ChaosXmlWriterWriteChars(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept;
+
+/// XmlTextWriter.WriteName(string) → void
+void ChaosXmlWriterWriteName(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
+
+/// XmlTextWriter.WriteNmToken(string) → void
+void ChaosXmlWriterWriteNmToken(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
+
+/// XmlTextWriter.WriteQualifiedName(string localName, string ns) → void
+void ChaosXmlWriterWriteQualifiedName(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept;
+
+/// XmlTextWriter.WriteEntityRef(string name) → void
+void ChaosXmlWriterWriteEntityRef(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
+
+/// XmlTextWriter.WriteCharEntity(char ch) → void
+void ChaosXmlWriterWriteCharEntity(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 ch) noexcept;
+
+/// XmlTextWriter.WriteSurrogateCharEntity(char low, char high) → void
+void ChaosXmlWriterWriteSurrogateCharEntity(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INT32 low,
+    CHAOS_IL2CPP_INT32 high) noexcept;
+
+/// XmlTextWriter.WriteBase64(byte[] buffer, int index, int count) → void
+void ChaosXmlWriterWriteBase64(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept;
+
+/// XmlTextWriter.WriteBinHex(byte[] buffer, int index, int count) → void
+void ChaosXmlWriterWriteBinHex(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept;
+
+/// XmlTextWriter.LookupPrefix(string ns) → string (null when unknown)
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterLookupPrefix(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns) noexcept;
+
 /// XmlTextWriter.Flush() → void
 void ChaosXmlWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
 

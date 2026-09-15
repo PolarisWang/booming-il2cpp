@@ -511,6 +511,259 @@ void ChaosXmlWriterWriteEndDocument(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     while (st->depth > 0) ChaosXmlWriterWriteEndElement(this_ptr);
 }
 
+/// Mark the current element as having children and close its start tag, so a
+/// following content write lands inside the element rather than in the tag.
+inline void OpenForContent(WriterState* st) {
+    if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
+    CloseStartTag(st);
+}
+
+/// WriteDocType(name, pubid, sysid, subset) — emits a DOCTYPE declaration.
+/// Null/empty components are omitted, matching XmlTextWriter's optional-part
+/// handling.  Rejects an empty name (the managed writer throws there).
+void ChaosXmlWriterWriteDocType(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR name,
+    CHAOS_IL2CPP_INTPTR pubid,
+    CHAOS_IL2CPP_INTPTR sysid,
+    CHAOS_IL2CPP_INTPTR subset) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len) || n_len == 0) return; // ArgumentException
+    OpenForContent(st);
+
+    AppendStr(st, "<!DOCTYPE ");
+    AppendRaw(st, n, n_len);
+
+    const char* p = nullptr; size_t p_len = 0;
+    const char* s = nullptr; size_t s_len = 0;
+    const bool has_pub = ManagedStringView(pubid, p, p_len) && p_len > 0;
+    const bool has_sys = ManagedStringView(sysid, s, s_len) && s_len > 0;
+    if (has_pub) {
+        AppendStr(st, " PUBLIC \"");
+        AppendRaw(st, p, p_len);
+        AppendStr(st, "\"");
+    } else if (has_sys) {
+        AppendStr(st, " SYSTEM");
+    }
+    if (has_sys) {
+        AppendStr(st, " \"");
+        AppendRaw(st, s, s_len);
+        AppendStr(st, "\"");
+    }
+
+    const char* sub = nullptr; size_t sub_len = 0;
+    if (ManagedStringView(subset, sub, sub_len) && sub_len > 0) {
+        AppendStr(st, " [");
+        AppendRaw(st, sub, sub_len);
+        AppendStr(st, "]");
+    }
+    AppendStr(st, ">");
+}
+
+/// WriteProcessingInstruction(name, text) — emits `<?name text?>`.
+void ChaosXmlWriterWriteProcessingInstruction(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR name,
+    CHAOS_IL2CPP_INTPTR text) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len) || n_len == 0) return; // ArgumentException
+    OpenForContent(st);
+
+    AppendStr(st, "<?");
+    AppendRaw(st, n, n_len);
+    const char* t = nullptr; size_t t_len = 0;
+    if (ManagedStringView(text, t, t_len) && t_len > 0) {
+        AppendStr(st, " ");
+        AppendRaw(st, t, t_len);
+    }
+    AppendStr(st, "?>");
+}
+
+/// WriteChars(buffer, index, count) — emits count chars verbatim from the
+/// managed char[] starting at index.  A null buffer with count > 0 is an
+/// ArgumentException in the managed writer, so it writes nothing.
+void ChaosXmlWriterWriteChars(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (buffer == 0 || count <= 0 || index < 0) return;
+    const char* data = nullptr; size_t len = 0;
+    if (!ManagedStringView(buffer, data, len)) return;
+    // `len` is a byte count for a UTF-16 char[] payload; index/count address
+    // 2-byte elements, so clamp against the element count.
+    const size_t elems = len / 2;
+    if (static_cast<size_t>(index) >= elems) return;
+    const size_t avail = elems - static_cast<size_t>(index);
+    const size_t take = (static_cast<size_t>(count) < avail) ? static_cast<size_t>(count) : avail;
+    OpenForContent(st);
+    AppendRaw(st, data + static_cast<size_t>(index) * 2, take * 2);
+}
+
+/// LookupPrefix(ns) — XmlTextWriter tracks no namespace prefixes here, so this
+/// reports "no known prefix" (the managed contract allows a null return).
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterLookupPrefix(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return 0;
+    (void)ns;
+    return 0;
+}
+
+/// WriteName(name) — writes a name token verbatim (no escaping of name chars).
+void ChaosXmlWriterWriteName(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len) || n_len == 0) return;
+    CloseStartTag(st);
+    AppendRaw(st, n, n_len);
+}
+
+/// WriteNmToken(name) — same emission shape as WriteName for this subset;
+/// NmToken validation is a managed-side concern the ATG subjects do not assert.
+void ChaosXmlWriterWriteNmToken(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+{
+    ChaosXmlWriterWriteName(this_ptr, name);
+}
+
+/// WriteQualifiedName(localName, ns) — writes the local name; prefix
+/// resolution is not tracked here.
+void ChaosXmlWriterWriteQualifiedName(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    (void)ns;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(local_name, n, n_len) || n_len == 0) return;
+    CloseStartTag(st);
+    AppendRaw(st, n, n_len);
+}
+
+/// WriteEntityRef(name) — emits `&name;`.
+void ChaosXmlWriterWriteEntityRef(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len) || n_len == 0) return;
+    OpenForContent(st);
+    AppendStr(st, "&");
+    AppendRaw(st, n, n_len);
+    AppendStr(st, ";");
+}
+
+/// WriteCharEntity(ch) — emits the numeric character reference `&#NN;`.
+void ChaosXmlWriterWriteCharEntity(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 ch) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    OpenForContent(st);
+    char tmp[16];
+    const int n = std::snprintf(tmp, sizeof(tmp), "&#%d;", static_cast<int>(ch));
+    if (n > 0) AppendRaw(st, tmp, static_cast<size_t>(n));
+}
+
+/// WriteSurrogateCharEntity(low, high) — emits the combined code point as
+/// `&#NNNNN;`.  Mirrors the managed writer's surrogate-pair handling.
+void ChaosXmlWriterWriteSurrogateCharEntity(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INT32 low,
+    CHAOS_IL2CPP_INT32 high) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    OpenForContent(st);
+    // Same reconstruction the BCL uses: cp = 0x10000 + (high-0xD800)*0x400
+    // + (low-0xDC00).  Writes the raw numeric form.
+    const int32_t cp = 0x10000
+        + (static_cast<int32_t>(high) - 0xD800) * 0x400
+        + (static_cast<int32_t>(low) - 0xDC00);
+    char tmp[24];
+    const int n = std::snprintf(tmp, sizeof(tmp), "&#%d;", cp);
+    if (n > 0) AppendRaw(st, tmp, static_cast<size_t>(n));
+}
+
+/// WriteBase64(buffer, index, count) — emits the base64 text for the byte
+/// range.  A null buffer or non-positive count writes nothing.
+void ChaosXmlWriterWriteBase64(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (buffer == 0 || count <= 0 || index < 0) return;
+    const char* data = nullptr; size_t len = 0;
+    if (!ManagedStringView(buffer, data, len)) return;
+    // Byte[] payload: one element per byte.
+    if (static_cast<size_t>(index) >= len) return;
+    const size_t avail = len - static_cast<size_t>(index);
+    const size_t take = (static_cast<size_t>(count) < avail) ? static_cast<size_t>(count) : avail;
+    OpenForContent(st);
+    static const char kAlphabet[] =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    const unsigned char* src = reinterpret_cast<const unsigned char*>(data) + index;
+    for (size_t i = 0; i < take; i += 3) {
+        const size_t rem = take - i;
+        const uint32_t b0 = src[i];
+        const uint32_t b1 = (rem > 1) ? src[i + 1] : 0;
+        const uint32_t b2 = (rem > 2) ? src[i + 2] : 0;
+        const uint32_t triple = (b0 << 16) | (b1 << 8) | b2;
+        char out[4];
+        out[0] = kAlphabet[(triple >> 18) & 0x3F];
+        out[1] = kAlphabet[(triple >> 12) & 0x3F];
+        out[2] = (rem > 1) ? kAlphabet[(triple >> 6) & 0x3F] : '=';
+        out[3] = (rem > 2) ? kAlphabet[triple & 0x3F] : '=';
+        AppendRaw(st, out, 4);
+    }
+}
+
+/// WriteBinHex(buffer, index, count) — emits the binhex text for the range.
+void ChaosXmlWriterWriteBinHex(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    if (buffer == 0 || count <= 0 || index < 0) return;
+    const char* data = nullptr; size_t len = 0;
+    if (!ManagedStringView(buffer, data, len)) return;
+    if (static_cast<size_t>(index) >= len) return;
+    const size_t avail = len - static_cast<size_t>(index);
+    const size_t take = (static_cast<size_t>(count) < avail) ? static_cast<size_t>(count) : avail;
+    OpenForContent(st);
+    static const char kHex[] = "0123456789ABCDEF";
+    const unsigned char* src = reinterpret_cast<const unsigned char*>(data) + index;
+    for (size_t i = 0; i < take; ++i) {
+        char pair[2];
+        pair[0] = kHex[(src[i] >> 4) & 0x0F];
+        pair[1] = kHex[src[i] & 0x0F];
+        AppendRaw(st, pair, 2);
+    }
+}
+
 /// WriteStartElement(string prefix, string localName, string ns)
 void ChaosXmlWriterWriteStartElement3(
     CHAOS_IL2CPP_INTPTR this_ptr,
