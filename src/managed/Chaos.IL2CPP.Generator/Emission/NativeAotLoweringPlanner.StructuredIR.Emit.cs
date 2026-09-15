@@ -800,16 +800,35 @@ public sealed partial class NativeAotLoweringPlanner
         // not carry side effects.  In IL, loop conditions are comparisons over
         // locals/args; a condition containing a call would make this unsound and such a
         // loop keeps the single-evaluation form.  `WhileConditionHasSideEffects` gates it.
+        //
+        // NOTE the re-emission must target the SAME slot the test reads.  Slot names are
+        // derived from the live depth counter, so a buffer built at a different depth
+        // writes `_s6` while the test reads `_s7` — the re-evaluation becomes dead code
+        // and the loop still spins on a stale value.  That is why the buffer is produced
+        // by replaying the instructions at the CURRENT depth right before emission of the
+        // loop body, and the resulting slot names are what the body's tail re-uses.
         var filteredConditions = FilterRedundantStoreReloadPairs(w.ConditionInstructions);
-        var condBuf = new StringBuilder();
-        foreach (var instr in filteredConditions)
-            EmitInstruction(condBuf, instr, indentation);
-        string condBlock = WhileConditionHasSideEffects(w.ConditionInstructions)
-            ? string.Empty
-            : condBuf.ToString();
+        bool reEvaluateCondition = !WhileConditionHasSideEffects(w.ConditionInstructions);
+        int preCondDepth = _state.Value!.ActiveStructuredSlotContext?.Depth ?? 0;
 
         foreach (var instr in filteredConditions)
             EmitInstruction(builder, instr, indentation);
+
+        // Condition evaluated; capture the slot the test will read so the per-iteration
+        // re-emission can write that SAME slot.  Slot names come from the depth counter,
+        // so replaying the condition at the pre-condition depth reproduces exactly the
+        // names the first evaluation used.
+        string reEvalBlock = string.Empty;
+        if (reEvaluateCondition && _state.Value!.ActiveStructuredSlotContext is { } _ctx)
+        {
+            var savedDepth = _ctx.Depth;
+            _ctx.RestoreDepth(preCondDepth);
+            var buf = new StringBuilder();
+            foreach (var instr in filteredConditions)
+                EmitInstruction(buf, instr, indentation);
+            _ctx.RestoreDepth(savedDepth);
+            reEvalBlock = buf.ToString();
+        }
 
         if (terminator.Op == "brtrue" || terminator.Op == "brfalse")
         {
@@ -836,7 +855,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (hoistedIVSlot.HasValue)
                 builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = static_cast<CHAOS_IL2CPP_INT32>(chaos_locals[{hoistedIVSlot.Value}]);");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
-            if (condBlock.Length > 0) builder.Append(condBlock);
+            if (reEvalBlock.Length > 0) builder.Append(reEvalBlock);
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
         }
@@ -900,11 +919,11 @@ public sealed partial class NativeAotLoweringPlanner
             if (hoistedIVSlot.HasValue)
                 builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = static_cast<CHAOS_IL2CPP_INT32>(chaos_locals[{hoistedIVSlot.Value}]);");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
-            if (condBlock.Length > 0)
+            if (reEvalBlock.Length > 0)
             {
                 // Re-run the condition instructions, then refresh the two locals the
                 // test reads so the loop exits when the condition turns false.
-                builder.Append(condBlock);
+                builder.Append(reEvalBlock);
                 builder.AppendLine(bodyIndent + $"chaos_right = {_cmpRight};");
                 builder.AppendLine(bodyIndent + $"chaos_left = {_cmpLeft};");
             }
