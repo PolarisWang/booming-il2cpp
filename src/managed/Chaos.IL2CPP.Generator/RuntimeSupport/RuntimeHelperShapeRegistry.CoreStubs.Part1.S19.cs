@@ -422,6 +422,19 @@ public sealed partial class NativeAotLoweringPlanner
                 new[] { "System.String" }, ShapeKind.SimpleForward,
                 "ChaosXmlWriterLookupPrefix", ws, strAbi,
                 new HashSet<int> { 0, 1 });
+
+            // ── WriteNode(XmlReader, bool) / WriteAttributes(XmlReader, bool) ──
+            // Second argument is a bool carried in the int32 slot, consistent
+            // with WriteStartDocument(bool) above.
+            var node2 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { wAbi, arrAbi, intRetAbi });
+            var node2R = new HashSet<int> { 0, 1, 2 };
+            RegisterXmlWriterVoid(registry, "WriteNode",
+                "ChaosXmlWriterWriteNode", node2, node2R,
+                new[] { "System.Xml.XmlReader", "System.Boolean" });
+            RegisterXmlWriterVoid(registry, "WriteAttributes",
+                "ChaosXmlWriterWriteAttributes", node2, node2R,
+                new[] { "System.Xml.XmlReader", "System.Boolean" });
         }
 
         /// <summary>

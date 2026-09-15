@@ -154,6 +154,18 @@ void ChaosXmlWriterWriteValue(
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterLookupPrefix(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns) noexcept;
 
+/// XmlTextWriter.WriteNode(XmlReader reader, bool defattr) → void
+void ChaosXmlWriterWriteNode(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR reader,
+    CHAOS_IL2CPP_INT32 defattr) noexcept;
+
+/// XmlTextWriter.WriteAttributes(XmlReader reader, bool defattr) → void
+void ChaosXmlWriterWriteAttributes(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR reader,
+    CHAOS_IL2CPP_INT32 defattr) noexcept;
+
 /// XmlTextWriter.Flush() → void
 void ChaosXmlWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
 

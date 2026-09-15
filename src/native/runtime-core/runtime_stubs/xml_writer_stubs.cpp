@@ -422,6 +422,38 @@ void ChaosXmlWriterWriteValue(
         AppendRaw(st, data, len);
 }
 
+/// WriteNode(XmlReader reader, bool defattr) — copies the reader's current node.
+/// Managed contract: null reader → ArgumentNullException.  The stub models no
+/// reader-to-writer copy, so a non-null reader is a no-op rather than an error.
+void ChaosXmlWriterWriteNode(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR reader,
+    CHAOS_IL2CPP_INT32 defattr) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    (void)defattr;
+    if (reader == 0)
+        RaiseArgumentNullException("reader");
+    // A real node copy needs the reader abstraction this stub does not model.
+    if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
+}
+
+/// WriteAttributes(XmlReader reader, bool defattr) — copies the reader's
+/// current element's attributes.  Null reader → ArgumentNullException.
+void ChaosXmlWriterWriteAttributes(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR reader,
+    CHAOS_IL2CPP_INT32 defattr) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (st == nullptr) return;
+    (void)defattr;
+    if (reader == 0)
+        RaiseArgumentNullException("reader");
+    if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
+}
+
 // ════════════════════════════════════════════════════════════════════
 // XmlTextWriter entry points (M6 target type)
 //

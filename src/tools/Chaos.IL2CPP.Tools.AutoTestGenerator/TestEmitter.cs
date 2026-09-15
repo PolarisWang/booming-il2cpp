@@ -775,7 +775,10 @@ public sealed class TestEmitter
                or "WriteQualifiedName" or "WriteNmToken"
                or "WriteSurrogateCharEntity" or "WriteChars" or "WriteRaw"
                or "WriteBase64" or "WriteBinHex" or "LookupPrefix"
-               or "WriteValue" or "WriteAttributeString" or "WriteElementString")
+               or "WriteValue" or "WriteAttributeString" or "WriteElementString"
+               or "WriteStartElement" or "WriteStartAttribute"
+               or "WriteCData" or "WriteCharEntity" or "WriteString"
+               or "WriteNode" or "WriteAttributes")
             return true;
 
         return false;
