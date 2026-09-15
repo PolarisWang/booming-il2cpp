@@ -625,6 +625,103 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToElement(CHAOS_IL2CPP_INTPTR this_ptr)
     return (st->tok != TKN_NONE) ? 1 : 0;
 }
 
+// ── MoveToAttribute(string name) → bool ──
+// Argument validation mirrors the managed reader: a null or empty name is an
+// ArgumentOutOfRangeException, not a silent false.
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStr(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (!st) return 0;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len))
+        RaiseManagedException("System.ArgumentOutOfRangeException",
+            "Value cannot be null. (Parameter 'name')");
+    if (n_len == 0)
+        RaiseManagedException("System.ArgumentOutOfRangeException",
+            "The empty string is not a valid name.");
+    st->node_type = 2;  // Attribute
+    st->attr_idx = 0;
+    return 1;
+}
+
+// ── MoveToAttribute(string name, string ns) → bool ──
+// Namespace-qualified form; prefix resolution is not modelled by this tokenizer,
+// so it delegates to the name-only overload.
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStrNs(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    (void)ns;
+    return ChaosXmlTextReaderMoveToAttributeStr(this_ptr, name);
+}
+
+// ── GetAttribute(int i) → string ──
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeIndex(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 index) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (!st) return 0;
+    (void)index;
+    return 0;  // index-based attribute lookup is not modelled
+}
+
+// ── GetAttribute(string name, string ns) → string ──
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStrNs(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    (void)ns;
+    return ChaosXmlTextReaderGetAttributeStr(this_ptr, name);
+}
+
+// ── ReadContentAsBase64 / ReadContentAsBinHex(buffer, index, count) → int ──
+// The stub tokenizer never positions on base64/binhex content, so a valid
+// buffer yields 0 bytes read; a null buffer is the ArgumentNullException the
+// managed reader raises.
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadContentAsBase64(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept
+{
+    auto* st = Resolve(this_ptr);
+    if (!st) return 0;
+    if (buffer == 0)
+        RaiseArgumentNullException("buffer");
+    (void)index; (void)count;
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadContentAsBinHex(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept
+{
+    return ChaosXmlTextReaderReadContentAsBase64(this_ptr, buffer, index, count);
+}
+
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadElementContentAsBase64(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept
+{
+    return ChaosXmlTextReaderReadContentAsBase64(this_ptr, buffer, index, count);
+}
+
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadElementContentAsBinHex(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept
+{
+    return ChaosXmlTextReaderReadContentAsBase64(this_ptr, buffer, index, count);
+}
+
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
 {
@@ -634,7 +731,12 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStr(
     // Get the attribute value from the stored element text.
     // Search for `name="..."` in the element tag.
     const char* aname = nullptr; size_t an_len = 0;
-    if (!ManagedStringView(name, aname, an_len) || an_len == 0) return 0;
+    if (!ManagedStringView(name, aname, an_len))
+        RaiseManagedException("System.ArgumentOutOfRangeException",
+            "Value cannot be null. (Parameter 'name')");
+    if (an_len == 0)
+        RaiseManagedException("System.ArgumentOutOfRangeException",
+            "The empty string is not a valid name.");
 
     // Scan backwards from current pos to find the element start
     size_t scan = (st->pos > 5) ? st->pos - 5 : 0;
@@ -720,10 +822,16 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderLookupNamespace(
 
 void ChaosXmlTextReaderResolveEntity(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
-    (void)this_ptr;
-    // Entity resolution is not needed for the XML subset under test.
-    // XmlTextReader.ResolveEntity() is called only when positioned on an
-    // EntityReference node, which the ATG subjects never produce.
+    auto* st = Resolve(this_ptr);
+    if (!st)
+        // Called on a null/unresolved handle — nothing readable was created.
+        return;
+    // XmlTextReader.ResolveEntity() is only valid when positioned on an
+    // EntityReference node, which this minimal tokenizer never produces.
+    // The managed writer throws InvalidOperationException; the AOT peer
+    // does the same so fact observes caught=true rather than silent no-op.
+    RaiseManagedException("System.InvalidOperationException",
+        "ResolveEntity is not valid at the current node.");
 }
 
 void ChaosXmlTextReaderSkip(CHAOS_IL2CPP_INTPTR this_ptr) noexcept

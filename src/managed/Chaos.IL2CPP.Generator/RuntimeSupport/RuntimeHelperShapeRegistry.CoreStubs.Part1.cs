@@ -67,6 +67,8 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterXmlTextWriterStubs(registry);
             RegisterXmlTextReaderStubs(registry);
             RegisterXmlConvertGroup(registry);
+            RegisterXmlTextReaderResidual(registry);
+            RegisterXmlDomGroup(registry);
             RegisterMonitor(registry);
             RegisterThread(registry);
             RegisterThreadSleep(registry);

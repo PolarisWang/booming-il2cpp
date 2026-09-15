@@ -90,6 +90,54 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderLookupNamespace(
 void ChaosXmlTextReaderResolveEntity(
     CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
 
+/// XmlTextReader.MoveToAttribute(string) → bool
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStr(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
+
+/// XmlTextReader.MoveToAttribute(string name, string ns) → bool
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStrNs(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept;
+
+/// XmlTextReader.GetAttribute(int) → string
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeIndex(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 index) noexcept;
+
+/// XmlTextReader.GetAttribute(string, string) → string
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStrNs(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept;
+
+/// XmlTextReader.ReadContentAsBase64(byte[], int, int) → int
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadContentAsBase64(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept;
+
+/// XmlTextReader.ReadContentAsBinHex(byte[], int, int) → int
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadContentAsBinHex(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept;
+
+/// XmlTextReader.ReadElementContentAsBase64(byte[], int, int) → int
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadElementContentAsBase64(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept;
+
+/// XmlTextReader.ReadElementContentAsBinHex(byte[], int, int) → int
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadElementContentAsBinHex(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR buffer,
+    CHAOS_IL2CPP_INT32 index,
+    CHAOS_IL2CPP_INT32 count) noexcept;
+
 /// XmlTextReader.Skip() → void
 void ChaosXmlTextReaderSkip(
     CHAOS_IL2CPP_INTPTR this_ptr) noexcept;

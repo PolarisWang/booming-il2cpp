@@ -809,6 +809,56 @@ public sealed class TestEmitter
                or "VerifyPublicId" or "VerifyWhitespace" or "VerifyXmlChars")
             return true;
 
+        // XmlTextReader residual surface (M5 follow-up): the qualified attribute
+        // lookups, the byte[]-buffer content readers and ResolveEntity.  The
+        // native stubs raise the same exceptions the managed reader does
+        // (ArgumentOutOfRangeException for a null/empty name,
+        // ArgumentNullException for a null buffer, InvalidOperationException for
+        // ResolveEntity at an invalid position).
+        if (declaringType is not null
+            && declaringType.Contains("System.Xml.XmlTextReader", StringComparison.Ordinal)
+            && method.Name is "MoveToAttribute" or "GetAttribute"
+               or "ReadContentAsBase64" or "ReadContentAsBinHex"
+               or "ReadElementContentAsBase64" or "ReadElementContentAsBinHex"
+               or "ResolveEntity")
+            return true;
+
+        // Xml DOM types: XmlNode / XmlDocument / XmlElement / XmlAttribute /
+        // XmlCharacterData.  ATG subjects use SubjectInstanceFactory.Create<T>()
+        // with bare objects (not real document trees), so every instance method
+        // throws NRE, InvalidOperationException or ArgumentException.
+        //
+        // Only the methods with native stubs (xml_document_stubs.cpp) are listed
+        // — an open "any method on these types" predicate would pull in
+        // object-returning members whose MethodTable symbols are not emitted,
+        // producing LNK2001 against chaos_mt_*.
+        if (declaringType is not null
+            && (declaringType.Contains("System.Xml.XmlNode", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlDocument", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlElement", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlAttribute", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlCharacterData", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlText", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlCDataSection", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlComment", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlWhitespace", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlSignificantWhitespace", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlDeclaration", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlDocumentType", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlEntityReference", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlProcessingInstruction", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlNotation", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlEntity", StringComparison.Ordinal))
+            && method.Name is "AppendChild" or "PrependChild" or "InsertBefore"
+               or "InsertAfter" or "ReplaceChild" or "RemoveChild" or "RemoveAll"
+               or "Supports" or "GetNamespaceOfPrefix" or "GetPrefixOfNamespace"
+               or "WriteTo" or "WriteContentTo"
+               or "LoadXml"
+               or "Substring" or "AppendData" or "InsertData" or "DeleteData"
+               or "ReplaceData"
+               or "SetAttribute" or "SetAttributeNode")
+            return true;
+
         return false;
     }
 
