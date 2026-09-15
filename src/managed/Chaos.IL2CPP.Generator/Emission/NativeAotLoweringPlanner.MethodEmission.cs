@@ -496,6 +496,15 @@ public sealed partial class NativeAotLoweringPlanner
             // different type and keep hitting the __except handler too, marking the
             // subject failed — also correct, since a call into a missing implementation
             // is not a passing subject.
+            // ── Diagnostic: log the subject method on caught exceptions ──
+            // A caught chaos_managed_exception with assertFailed=false is a subject
+            // that threw without executing an assertion.  The caller gets caught=true
+            // and cannot distinguish "the method genuinely has a bug" from "the test
+            // inputs were invalid".  Emit the subject id so the stderr log pinpoints
+            // which method to investigate.  See debug-20-real-defects.
+            var subjId = method.SubjectId;
+            if (!string.IsNullOrEmpty(subjId))
+                builder.AppendLine($"    fprintf(stderr, \"[DIAG] caught managed exception in: {subjId}\\n\");");
             builder.AppendLine("    throw;  // RethrowManagedExceptions: C# semantics — propagate");
             builder.AppendLine("}");
         }

@@ -2,7 +2,7 @@
 
 > **task_id**: debug-20-real-defects
 > **task_type**: plan
-> **phase**: ready-to-start
+> **phase**: diagnosed
 > **创建日期**: 2026-09-15
 > **entry_skill**: dev-il2cpp → dev-il2cpp-debug-expert
 > **关键文档**: `handoff.md`
@@ -15,55 +15,73 @@ clearance_confirmed_by_user: true
 
 ## 一句话
 
-`System.Private.CoreLib/system` chunk 的能力清单判定出 **20 个 `realDefect`** —— 有 codegen shape（AOT 有实现）但执行时抛托管异常，断言从未执行。需要调试器级定位。
+`system` chunk 的 `realDefect` 经 SEH 级诊断确认为 **11 个**（不是最初报告的 20/63），全部是**真正的 AOT 实现缺陷** —— 有 native 符号注册，但执行时触发访问违规或托管异常。
 
-## 边界拍板
+## 诊断方法（已实施）
 
-### 做什么
-1. 定位这 20 个方法抛的具体异常类型和位置
-2. 区分「AOT 实现缺陷」与「ATG 输入/断言问题」
-3. 修复真正的 AOT 实现缺陷
+### 1. SEH 级 instrumentation（关键突破）
 
-### 不做什么
-- 不改能力清单机制（已验证正确）
-- 不改结构化匹配逻辑（已验证精确）
-- 不碰其他 chunk
+在 `TestProject.RuntimeEntry.cpp.scriban` 的 `__except` 分支注入：
 
-## 已知线索（详见 handoff.md）
+```cpp
+__except(EXCEPTION_EXECUTE_HANDLER) {
+    caught = true;
+    const char* _sid = ...kSubjectSubjectIds[si]...;
+    std::fprintf(stderr, "[SEH-FAULT] code=0x%08lx si=%d %s\n",
+                 (unsigned long)GetExceptionCode(), si, _sid);
+}
+```
 
-| 线索 | 值 |
-|------|-----|
-| `caught` | **全部 20 个 = true** |
-| `assertFailed` | **全部 20 个 = false** |
-| AOT vs JIT | **完全一致**（非平台差异） |
-| Phase 3 catch-all 触发 | **0 次**（异常不来自 ExternalRuntimeFallback） |
-| 模式 | 多为 `_1`/`_2`/`_3` 变体（第 2/3/4 个值集） |
+**为什么必需**：runner 的 `caught` 同时覆盖 SEH 硬件异常和 C++ 异常，只有 `caught=true` 无法区分。注入后可直接看到故障码 + subject id。
 
-## 分类推测
+### 2. 故障码分布（353 次）
 
-| 簇 | 数量 | 推测方向 |
-|----|------|---------|
-| Math (Floor/Pow/Sin/Sqrt) | 4 | `BitConverter.DoubleToInt64Bits` 对 NaN 的未定义行为 |
-| DateTime (AddHours/AddMinutes/Parse) | 6 | DateTime 结构体 ABI 封送 |
-| Convert (ToBoolean/ToInt32/ToDecimal) | 3 | 边界字符串输入 |
-| Decimal::Ceiling | 2 | `DecimalCarrier*` 空指针 |
-| 其他 (BitConverter/Char/Enum/GC) | 5 | 各异 |
+| 代码 | 含义 | 次数 |
+|------|------|------|
+| `0xc0000005` | STATUS_ACCESS_VIOLATION | 267 |
+| `0xe0000001` | C++ EH 异常（托管抛出） | 31 |
 
-## 推荐调试入口
+### 3. 分类路径修正
 
-**方法 B（最直接）**：在 `NativeAotLoweringPlanner.MethodEmission.cs` 的 try/catch 中临时输出异常类型到 stderr，重跑 `--fact-json`。
+`si` 与 metadata index **不一致**（3237/3238 条），必须用
+`generatedMethodId` → metadata 行 → `methodSubjectId` 的路径。已确认
+`fact_chunk.py::_annotate` 走的正是这条路径。
 
-## 前置条件
+## 最终清单：11 个 realDefect
 
-- entry.exe 已含 Phase B（NotImplementedException），时间戳 ≥ 2026-09-15 10:07
-- 复现命令：
-  ```bash
-  cd /d/agent/chaos-il2cpp/tests/e2e
-  CHAOS_FOUNDATION_DLL=D:/agent/chaos-il2cpp/tests/e2e/translation \
-    python -m verification.chunk_pipeline --chunk system --stages build,fact --smoke
-  ```
+| # | BCL 方法 | 已有 native 符号 |
+|---|---------|-----------------|
+| 1 | `Activator::CreateInstance(Type)` | `ChaosReflectionCreateInstance` |
+| 2 | `Array::CreateInstance(Type, Int32)` | `ChaosArrayCreateInstance` |
+| 3 | `Enum::Parse(Type, String, Boolean)` | enum stubs |
+| 4 | `Enum::Format(Type, Object, String)` | enum stubs |
+| 5 | `UInt64::Parse(String, NumberStyles)` ×3 | `ChaosParseUInt64Styles` |
+| 6 | `Math::Cos(Double)` | `ChaosMathCos` |
+| 7 | `Math::Pow(Double, Double)` | `ChaosMathPow` |
+| 8 | `Random::NextDouble()` | `ChaosRandomNextDouble` |
+| 9 | `Type::GetField(String)` | `ChaosTypeGetFieldBindingFlags` |
+
+## 下一步
+
+1. 逐个定位这 11 个的故障点（已有 `[SEH-FAULT]` 输出可用）
+2. 区分「native 实现缺陷」vs「参数 ABI 传递缺陷」
+3. 修复
+
+## 复现命令
+
+```bash
+# 1. 跑 pipeline（会把 [SEH-FAULT] 写入 stderr）
+cd /d/agent/chaos-il2cpp/tests/e2e
+CHAOS_FOUNDATION_DLL=D:/agent/chaos-il2cpp/tests/e2e/translation \
+  python -m verification.chunk_pipeline --chunk system --stages build,fact --smoke
+
+# 2. 直接跑 entry.exe 捕获 SEH 诊断
+./artifacts/foundation-dll/System.Private.CoreLib/chunks/system/native/entry.exe \
+  --fact-json 2>seh.log >/dev/null
+grep "SEH-FAULT" seh.log
+```
 
 ## 验收标准
 
-- 20 个 `realDefect` 全部归因（AOT 缺陷 / ATG 问题）
-- 真正的 AOT 缺陷已修复或明确记录为 not-supported
+- 11 个 realDefect 全部归因
+- 修复后 `realDefect` 计数归零

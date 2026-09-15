@@ -433,9 +433,26 @@ static int RunFactJsonMode() {
                     GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             } __except(EXCEPTION_EXECUTE_HANDLER) {
                 caught = true;
+                // ── Diagnostic: identify the subject that faulted ──
+                // A caught SEH exception (STATUS_ACCESS_VIOLATION, etc.) means the
+                // generated AOT body dereferenced an invalid pointer BEFORE any
+                // assertion ran.  Without this line the only observable is
+                // caught=true, which is indistinguishable from a genuine assertion
+                // failure inside the same loop.  Emitting the subject id plus the
+                // SEH code turns an opaque failure into a locatable one.
+                // See docs/dev/in-progress/debug-20-real-defects.
+                {
+                    const char* _sid =
+                        (si < kSubjectEntryCount && kCount > 0 &&
+                         kSubjectSubjectIds != nullptr && kSubjectSubjectIds[si] != nullptr)
+                            ? kSubjectSubjectIds[si] : "";
+                    std::fprintf(stderr, "[SEH-FAULT] code=0x%08lx si=%d %s\n",
+                                 (unsigned long)GetExceptionCode(), si, _sid);
+                }
             }
         } else {
             caught = true;
+            std::fprintf(stderr, "[ABORT-FAULT] si=%d\n", si);
         }
 
         // Attribute the outcome by EVIDENCE SOURCE, not by "did it throw".
