@@ -981,12 +981,52 @@ public sealed partial class NativeAotLoweringPlanner
 		var typeName = ExtractDeclaringTypeName(callee);
 		if (typeName == null) return false;
 
+		// ── Static methods on otherwise-instance types ──
+		//
+		// Task carries instance methods (Wait, ConfigureAwait) AND static
+		// factories (FromResult, FromException, FromCanceled, Run, WhenAll, …).
+		// The allowlist is type-based, so without this check the static ones get
+		// a receiver slot too — e.g. `async_task_from_exception(handle, exc)`
+		// against a 1-argument definition (C2660).
+		var methodName = ExtractMethodNameFromSubjectId(callee);
+		if (methodName != null && _StaticTaskMethodNames.Contains(methodName))
+			return false;
+
 		foreach (var t in _ReceiverInjectedTypes)
 		{
 			if (string.Equals(typeName, t, StringComparison.Ordinal))
 				return true;
 		}
 		return false;
+	}
+
+	/// <summary>
+	/// Static Task/ValueTask factory names — the mirror of
+	/// <c>_StaticTaskMethodNames</c> in InvocationPlanning.cs.  The two MUST stay
+	/// in sync: they are consulted by the two independent receiver-injection
+	/// paths (SimpleForward vs bridge-import thunk) and any divergence makes the
+	/// generated calls disagree with the definitions.
+	/// </summary>
+	private static readonly HashSet<string> _StaticTaskMethodNames = new(StringComparer.Ordinal)
+	{
+		"FromResult", "FromException", "FromCanceled",
+		"Run", "Delay", "WhenAll", "WhenAny", "WhenEach",
+		"Yield", "WaitAll", "WaitAny",
+		"ContinueWhenAll", "ContinueWhenAny",
+	};
+
+	/// <summary>Method name from a subject id, or null if malformed.</summary>
+	private static string? ExtractMethodNameFromSubjectId(string subjectId)
+	{
+		var sep = subjectId.IndexOf("::", StringComparison.Ordinal);
+		if (sep < 0) return null;
+		var after = subjectId[(sep + 2)..];
+		var colon = after.IndexOf(':');
+		var paren = after.IndexOf('(');
+		var end = colon >= 0 && paren >= 0 ? Math.Min(colon, paren)
+		       : colon >= 0 ? colon
+		       : paren >= 0 ? paren : -1;
+		return end < 0 ? after : after[..end];
 	}
 
 	/// <summary>

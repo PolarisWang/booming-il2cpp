@@ -72,6 +72,19 @@ CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsCompleted(CHAOS_IL2CPP_INTPTR task_handle)
 CHAOS_IL2CPP_INT32 ChaosAsyncTaskWait(CHAOS_IL2CPP_INTPTR task_handle, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetResultBlocking(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
 
+/// `Task.Wait()` — the parameterless overload, i.e. an INFINITE wait.
+///
+/// This exists as its own symbol (rather than registering the 2-arg
+/// ChaosAsyncTaskWait with a -1 baked into an inline body) because a
+/// GenericShapeResolution carrying `DirectNativeSymbol` makes codegen emit a
+/// DIRECT call to that symbol with the call site's own arguments — the inline
+/// body's `-1` is discarded.  The result was `ChaosAsyncTaskWait(handle)`
+/// against a 2-parameter definition (C2660).
+///
+/// Registering the THUNK as the direct symbol keeps the ABI honest: one slot
+/// in, one slot out.
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitInfinite(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
+
 // ── Three-state query (resolved / faulted / cancelled) ──
 // These are mutually exclusive for a completed task: exactly one of
 // IsCanceled / IsFaulted is set when IsCompleted is true, and neither is set

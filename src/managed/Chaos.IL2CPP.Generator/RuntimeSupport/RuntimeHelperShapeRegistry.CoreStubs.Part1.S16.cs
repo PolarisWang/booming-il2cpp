@@ -553,14 +553,14 @@ public sealed partial class NativeAotLoweringPlanner
                         var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
-                            "    ChaosAsyncTaskWait(chaos_arg_0, -1);",
+                            "    ChaosAsyncTaskWaitInfinite(chaos_arg_0);",
                         ]);
                         return new GenericShapeResolution(src, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot()),
                             CreateVoidAbiSlot(),
                             new HashSet<int> { 0 },
-                            DirectNativeSymbol: "ChaosAsyncTaskWait");
+                            DirectNativeSymbol: "ChaosAsyncTaskWaitInfinite");
                     }
                     else if (paramTypes.Count == 1 && paramTypes[0] == "System.Int32")
                     {
