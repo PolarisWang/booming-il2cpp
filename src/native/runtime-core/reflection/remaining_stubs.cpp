@@ -735,7 +735,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetGetMethod(CHAOS_IL2CPP_INTPTR prop
     return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryMethodHandle(getter));
 }
 
-CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetSetMethod(CHAOS_IL2CPP_INTPTR prop) noexcept {
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetSetMethod(
+    CHAOS_IL2CPP_INTPTR prop, CHAOS_IL2CPP_INT32 non_public) noexcept {
     auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
         static_cast<PropertyInfoHandle>(prop));
     if (decoded == nullptr) return 0;
@@ -743,6 +744,12 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetSetMethod(CHAOS_IL2CPP_INTPTR prop
 
     const auto* setter = FindPropertyAccessor(decoded, "set_");
     if (setter == nullptr) return 0;
+    // BCL semantics: GetSetMethod(nonPublic: false) returns null when the setter
+    // is not public.  The 2-slot ABI (this + bool) exists because the original
+    // 1-slot registration made the eval-stack pop consume the BOOL as the
+    // `this` argument — GetSetMethod(false) null-checked the bool and raised NRE
+    // (B7 si=209).
+    if (non_public == 0 && (setter->flags & kMethodFlagIsPublic) == 0u) return 0;
     return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryMethodHandle(setter));
 }
 
@@ -1014,7 +1021,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetAccessors(CHAOS_IL2CPP_INTPTR prop
     if (ChaosReflectionPropertyGetGetMethod(prop) != 0) {
         return ChaosReflectionPropertyGetGetMethod(prop);
     }
-    return ChaosReflectionPropertyGetSetMethod(prop);
+    return ChaosReflectionPropertyGetSetMethod(prop, /*non_public*/ 1);
 }
 
 // PropertyInfo.GetConstantValue / GetRawConstantValue — the property's default
@@ -1397,7 +1404,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetValue(
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertySetValue(
     CHAOS_IL2CPP_INTPTR prop, CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR value) noexcept {
-    CHAOS_IL2CPP_INTPTR setter = ChaosReflectionPropertyGetSetMethod(prop);
+    CHAOS_IL2CPP_INTPTR setter = ChaosReflectionPropertyGetSetMethod(prop, /*non_public*/ 1);
     if (setter == 0) return 0;
     return ChaosReflectionInvokeMethod(setter, obj, value);
 }

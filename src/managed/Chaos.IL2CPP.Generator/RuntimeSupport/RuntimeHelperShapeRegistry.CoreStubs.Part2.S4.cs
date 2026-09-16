@@ -129,10 +129,13 @@ public sealed partial class NativeAotLoweringPlanner
 
             registry.Register("System.Reflection.PropertyInfo", "GetSetMethod", ["System.Boolean"],
                 ShapeKind.SimpleForward, "ChaosReflectionPropertyGetSetMethod",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot("System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[]
+                {
+                    CreateNativeIntAbiSlot("System.Reflection.PropertyInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateInt32AbiSlot()
+                }),
                 CreateNativeIntAbiSlot("System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
-                new HashSet<int> { 0 });
+                new HashSet<int> { 0, 1 });
 
             // PropertyInfo::GetIndexParameters → already registered in
             // RuntimeHelperShapeRegistry.CoreStubs.Part3.S16.cs (its native entry

@@ -73,7 +73,7 @@ CHAOS_IL2CPP_INT32  ChaosReflectionPropertyGetMemberType(CHAOS_IL2CPP_INTPTR pro
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetPropertyType(CHAOS_IL2CPP_INTPTR prop) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetName(CHAOS_IL2CPP_INTPTR prop) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetGetMethod(CHAOS_IL2CPP_INTPTR prop) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetSetMethod(CHAOS_IL2CPP_INTPTR prop) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetSetMethod(CHAOS_IL2CPP_INTPTR prop, CHAOS_IL2CPP_INT32 non_public) noexcept;
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetName(CHAOS_IL2CPP_INTPTR evt) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetEventHandlerType(CHAOS_IL2CPP_INTPTR evt) noexcept;
