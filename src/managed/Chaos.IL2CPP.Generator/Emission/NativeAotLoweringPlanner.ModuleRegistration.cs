@@ -1028,6 +1028,16 @@ public sealed partial class NativeAotLoweringPlanner
 
             // Parameter array builder: if-chain over per-method parameter names,
             // mirroring EmitMethodParameterNameCase in the object model TU.
+            //
+            // EmitMethodParameterNameCase constructs a ParameterInfo[] and sets each
+            // element's header.type_info, which references the ParameterInfo
+            // MethodTable symbol.  ParameterInfo is a BCL reflection type that is
+            // never a subject/closure type, so nothing else adds its MethodTable to
+            // the emission set — without the registration below every chunk whose
+            // B3 table contains a parameterised method fails to compile with
+            // C2065 'chaos_mt_..._ParameterInfo': undeclared identifier.
+            RegisterExtraMethodTableSymbol(ParameterInfoSubjectId);
+
             sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_b3(CHAOS_IL2CPP_INTPTR chaos_method_handle) noexcept");
             sb.AppendLine("{");
             var emittedParamHandles = new HashSet<string>(StringComparer.Ordinal);
@@ -1046,6 +1056,28 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// Subject id of the BCL reflection type whose MethodTable the object-model
+    /// parameter builders reference.
+    /// </summary>
+    private const string ParameterInfoSubjectId =
+        "System.Private.CoreLib/System.Reflection.ParameterInfo";
+
+    /// <summary>
+    /// Add a chaos_mt_* symbol to the extra-symbol set that the shared header
+    /// declares as an extern "C" MethodTable.
+    ///
+    /// Used by reflection-object emission paths that reference a BCL MethodTable
+    /// from generated code which is NOT a lowered method body — the normal
+    /// symbol scan in EmitMethodBodies only walks method bodies, so these
+    /// references would otherwise be declared nowhere (C2065).
+    /// </summary>
+    private void RegisterExtraMethodTableSymbol(string subjectId)
+    {
+        _extraMethodTableSymbols ??= new HashSet<string>(StringComparer.Ordinal);
+        _extraMethodTableSymbols.Add(GetNativeMethodTableSymbol(subjectId));
     }
 
     /// <summary>C++ identifier for a per-type member slice (subject id sanitised).</summary>
