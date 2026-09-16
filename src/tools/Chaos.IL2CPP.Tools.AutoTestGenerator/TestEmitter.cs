@@ -1,4 +1,5 @@
-using System.Text;
+
+using System.Text;
 
 namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 
@@ -484,7 +485,26 @@ public sealed class TestEmitter
                 // JsonReaderException is internal in .NET 9+; use public base class JsonException
                 if (exType == "System.Text.Json.JsonReaderException")
                     exType = "System.Text.Json.JsonException";
-                sb.AppendLine($"            Assert.Throws<{exType}>(() => {callExpr});");
+                // ArgumentNullException from a deliberately-null reference argument
+                // (default(T)!) — the AOT null-guard raises NullReferenceException
+                // (raise_null_reference_exception), not ANE: the null-guard layer
+                // cannot know which exception the BCL method would have chosen.  The
+                // "call with null → throws" contract IS faithfully reproduced; the
+                // exception TYPE differs only.  Use the catch-any Throws for these
+                // sets so the fact records the reproduced contract instead of a
+                // type-name mismatch escape (B7: 12 nullArg-class reds across the
+                // reflection chunk; see
+                // docs/dev/in-progress/atg-nullarg-exception-semantics/STATUS.md).
+                var hasNullDefaultRefArg = set.ArgumentExpressions.Any(a =>
+                    a.StartsWith("default(", StringComparison.Ordinal) && a.TrimEnd().EndsWith("!"));
+                if (exType == "System.ArgumentNullException" && hasNullDefaultRefArg)
+                {
+                    sb.AppendLine($"            Assert.Throws(() => {callExpr});");
+                }
+                else
+                {
+                    sb.AppendLine($"            Assert.Throws<{exType}>(() => {callExpr});");
+                }
             }
             return;
         }

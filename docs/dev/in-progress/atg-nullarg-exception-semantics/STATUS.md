@@ -21,7 +21,40 @@
    分类器（fact_chunk.py:217-233）正确识别为 `nullArg`（非缺陷），
    但 **passed=false 仍计入失败总数**。
 
-## 修复设计（已定，待实施）
+## ⚠️ 2026-09-16 实施修正：机制比预期深一层
+
+首试（TestEmitter 的 Throws 发射点改 ThrowsAny）**无效**——265 不变。
+实测生成体（CombinedSubjects.cs si=76）：
+
+```csharp
+var result_0_0 = CustomAttributeExtensions.GetCustomAttribute(default(Assembly)!, default(Type)!);
+return (object)(result_0_0) != null ? 1L : 0L;   // 非 null 哨兵，无 Throws 包裹
+```
+
+**这些 subject 的 probe 结果为空**（`result is null` → AppendAssert 早退），
+`hasException=false` → call 被直接内联执行 → NRE 逃逸。Throws 发射路径
+根本没走到。
+
+## 修正后的修复设计
+
+**位置**：TestEmitter 的 factCallStatement 决策处（~line 308）+
+AppendAssert 空结果早退（~line 414）。当 **probe 结果为空/无异常 且
+全部引用参数是 `default(T)!`** 时：
+
+```csharp
+try { var result_0_0 = <call>; return <sentinel(result)>; }
+catch (global::System.Exception) { return 1L; }
+// null-arg 契约：真实 .NET 抛 ANE；AOT 抛 NRE — 异常类型差异可接受
+```
+
+要点：
+- 判定条件与 fact_chunk.py 的 null_arg_ids 正则同源（`default(...)!`）
+- 哨兵 return 表达式在调用方（AppendAssert 之后）——需要把 try/catch
+  的 emit 线程化到 factCallStatement + 哨兵 return 两处
+- probe 空的原因（fixture 构造失败？probe 崩溃？）值得单独排查——
+  这些方法在真实 .NET 上应该抛 ANE 而非"无结果"
+
+## 原 ThrowsAny 修复（保留——对 probe 有结果的 subject 仍正确）
 
 **TestEmitter 单点改动**：`hasException==true` 且该 value set 含
 `default(<引用类型>)!` 参数 → 发 **`Assert.ThrowsAny`** 而非
