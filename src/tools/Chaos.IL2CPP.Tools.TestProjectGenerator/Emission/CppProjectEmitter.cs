@@ -818,8 +818,36 @@ public sealed class CppProjectEmitter
     private static void PrintLastLines(string output, int count)
     {
         var lines = output.Split(["\r\n", "\n"], StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines.TakeLast(count))
+
+        // Anchors that identify a genuine diagnostic rather than noise. Matched
+        // case-sensitively on the markers the toolchains actually emit:
+        //   gcc/clang  "error:", gmake  "错误 1"/"Error 1", cmake "Error:"/"CMake Error"
+        static bool IsDiagnostic(string line) =>
+            line.Contains("error:", StringComparison.Ordinal) ||
+            line.Contains("fatal error", StringComparison.OrdinalIgnoreCase) ||
+            line.Contains("CMake Error", StringComparison.Ordinal) ||
+            line.Contains("undefined reference", StringComparison.Ordinal) ||
+            line.Contains("错误 ", StringComparison.Ordinal) ||
+            line.Contains("Error 1", StringComparison.Ordinal) ||
+            line.Contains("Error 2", StringComparison.Ordinal);
+
+        var diagnostics = lines.Where(IsDiagnostic).ToList();
+        if (diagnostics.Count == 0)
+        {
+            // No recognisable diagnostic marker — fall back to the tail.  Still
+            // bounded, but this path is now the exception rather than the rule.
+            foreach (var line in lines.TakeLast(count))
+                Console.Error.WriteLine($"      {line}");
+            return;
+        }
+
+        // Cap the output so one pathological TU cannot flood the chunk log, and
+        // say so explicitly — a silently truncated list reads as "that was all".
+        const int MaxDiagnostics = 40;
+        foreach (var line in diagnostics.Take(MaxDiagnostics))
             Console.Error.WriteLine($"      {line}");
+        if (diagnostics.Count > MaxDiagnostics)
+            Console.Error.WriteLine($"      ... {diagnostics.Count - MaxDiagnostics} further diagnostic line(s) suppressed");
     }
 
     /// <summary>

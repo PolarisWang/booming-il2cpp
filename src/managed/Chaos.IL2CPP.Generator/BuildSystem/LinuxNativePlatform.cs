@@ -167,6 +167,24 @@ add_subdirectory("{bootstrapSrc}" "{outputDir}/bootstrap")
         }
     }
 
+    /// <summary>Cap on diagnostic lines printed per failed process.</summary>
+    private const int MaxDiagnosticLines = 40;
+
+    /// <summary>
+    /// True for lines that carry an actual build diagnosis rather than noise.
+    /// gcc/clang emit "error:", gmake emits "错误 N"/"Error N", CMake
+    /// emits "CMake Error".  Warnings are deliberately excluded — a failing
+    /// compile emits thousands of them and they are never the cause.
+    /// </summary>
+    private static bool IsDiagnosticLine(string line) =>
+        line.Contains("error:", StringComparison.Ordinal) ||
+        line.Contains("fatal error", StringComparison.OrdinalIgnoreCase) ||
+        line.Contains("CMake Error", StringComparison.Ordinal) ||
+        line.Contains("undefined reference", StringComparison.Ordinal) ||
+        line.Contains("错误 ", StringComparison.Ordinal) ||
+        line.Contains("Error 1", StringComparison.Ordinal) ||
+        line.Contains("Error 2", StringComparison.Ordinal);
+
     private static bool RunProcess(string executable, string arguments)
     {
         try
@@ -197,8 +215,24 @@ add_subdirectory("{bootstrapSrc}" "{outputDir}/bootstrap")
             if (proc.ExitCode != 0)
             {
                 Console.Error.WriteLine($"    [Linux] {executable} failed (exit={proc.ExitCode}):");
-                foreach (var line in error.Split('\n', StringSplitOptions.RemoveEmptyEntries))
-                    Console.Error.WriteLine($"      {line.Trim()}");
+                // Dumping every line flooded the log (39k+ lines on a failing
+                // compile) and the real `error:` sat thousands of lines before
+                // the tail, so callers saw only warnings. Surface the actual
+                // diagnostics first, then the tail for context.
+                var allLines = error.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+                var diagnostics = allLines.Where(IsDiagnosticLine).ToList();
+                if (diagnostics.Count > 0)
+                {
+                    foreach (var line in diagnostics.Take(MaxDiagnosticLines))
+                        Console.Error.WriteLine($"      {line.Trim()}");
+                    if (diagnostics.Count > MaxDiagnosticLines)
+                        Console.Error.WriteLine($"      ... {diagnostics.Count - MaxDiagnosticLines} further diagnostic line(s) suppressed");
+                }
+                else
+                {
+                    foreach (var line in allLines.TakeLast(20))
+                        Console.Error.WriteLine($"      {line.Trim()}");
+                }
                 return false;
             }
 
