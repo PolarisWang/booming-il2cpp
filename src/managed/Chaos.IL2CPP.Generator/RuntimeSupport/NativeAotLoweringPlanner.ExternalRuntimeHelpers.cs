@@ -1001,35 +1001,6 @@ public sealed partial class NativeAotLoweringPlanner
 	}
 
 	/// <summary>
-	/// Static Task/ValueTask factory names — the mirror of
-	/// <c>_StaticTaskMethodNames</c> in InvocationPlanning.cs.  The two MUST stay
-	/// in sync: they are consulted by the two independent receiver-injection
-	/// paths (SimpleForward vs bridge-import thunk) and any divergence makes the
-	/// generated calls disagree with the definitions.
-	/// </summary>
-	private static readonly HashSet<string> _StaticTaskMethodNames = new(StringComparer.Ordinal)
-	{
-		"FromResult", "FromException", "FromCanceled",
-		"Run", "Delay", "WhenAll", "WhenAny", "WhenEach",
-		"Yield", "WaitAll", "WaitAny",
-		"ContinueWhenAll", "ContinueWhenAny",
-	};
-
-	/// <summary>Method name from a subject id, or null if malformed.</summary>
-	private static string? ExtractMethodNameFromSubjectId(string subjectId)
-	{
-		var sep = subjectId.IndexOf("::", StringComparison.Ordinal);
-		if (sep < 0) return null;
-		var after = subjectId[(sep + 2)..];
-		var colon = after.IndexOf(':');
-		var paren = after.IndexOf('(');
-		var end = colon >= 0 && paren >= 0 ? Math.Min(colon, paren)
-		       : colon >= 0 ? colon
-		       : paren >= 0 ? paren : -1;
-		return end < 0 ? after : after[..end];
-	}
-
-	/// <summary>
 	/// Fully-qualified declaring-type names whose parameterised instance methods
 	/// take an injected receiver slot.  Kept as one list so adding a T2–T5 entry
 	/// is a one-line change with an obvious place to look.

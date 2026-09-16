@@ -1401,6 +1401,40 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+
+                    // ── T2: (delegate, CancellationToken) ──
+                    //
+                    // The second parameter is the token; the first varies by
+                    // overload (Action, Func<Task>, Func<int>, Func<Task<int>>,
+                    // ...) so the shape — exactly two params ending in a token —
+                    // is what identifies the family.
+                    //
+                    // The token is accepted but NOT honoured: there is no
+                    // cancellation plumbing at this call site.  Before this
+                    // registration the call returned 0 through the fallback (no
+                    // task at all), so queueing the delegate is strictly an
+                    // improvement; a cancelled token simply does not stop the
+                    // work, which is a documented limitation, not a regression.
+                    if (paramTypes.Count == 2 &&
+                        paramTypes[1] == "System.Threading.CancellationToken")
+                    {
+                        var sym2 = GetExternalRuntimeHelperSymbol(callee);
+                        var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", sym2,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    return chaos_task_run(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(src2, sym2,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(),
+                                CreateNativeIntAbiSlot(),
+                            }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: "chaos_task_run");
+                    }
+
                     // Delegate-only overloads: exactly one parameter, and it is the
                     // Action / Func<Task> delegate (passed as a native int handle).
                     if (paramTypes.Count != 1) return null;
@@ -1512,6 +1546,7 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int> { 0, 1 },
                         DirectNativeSymbol: "chaos_task_factory_start_new");
                 }));
+
         }
 
         /// <summary>

@@ -993,6 +993,19 @@ CHAOS_IL2CPP_INTPTR chaos_task_factory_start_new(
     return async_task_run(delegate_fn);
 }
 
+// ── T2: Task.Run ──────────────────────────────────────────────────────
+// Static entry; ABI is (delegate, token).  The token is accepted but not
+// honoured (see the header note).  Queues the delegate on the same runner as
+// TaskFactory::StartNew.
+CHAOS_IL2CPP_INTPTR chaos_task_run(
+    CHAOS_IL2CPP_INTPTR delegate_fn, CHAOS_IL2CPP_INTPTR token) noexcept
+{
+    using namespace chaos::il2cpp::common;
+    (void)token;
+    if (delegate_fn == 0) return 0;
+    return async_task_run(delegate_fn);
+}
+
 // ══════════════════════════════════════════════════════════════════════════════
 // AsyncIteratorMethodBuilder (ASYNC-P2-8 A2).
 //
@@ -1363,10 +1376,4 @@ CHAOS_IL2CPP_INTPTR ChaosConfiguredValueTaskAwaitableGetResultValue(
     CHAOS_IL2CPP_INTPTR awaiter) noexcept
 {
     return ChaosAsyncTaskGetResultBlocking(awaiter);
-}
-
-/// `Task.Wait()` — infinite wait, 1-arg shim-friendly entry.
-CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitInfinite(CHAOS_IL2CPP_INTPTR task_handle) noexcept
-{
-    return ChaosAsyncTaskWait(task_handle, -1);
 }

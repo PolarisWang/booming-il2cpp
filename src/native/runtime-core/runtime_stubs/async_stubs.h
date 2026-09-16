@@ -229,6 +229,20 @@ CHAOS_IL2CPP_INTPTR chaos_task_default_factory() noexcept;
 CHAOS_IL2CPP_INTPTR chaos_task_factory_start_new(
     CHAOS_IL2CPP_INTPTR factory, CHAOS_IL2CPP_INTPTR delegate_fn) noexcept;
 
+// ── T2: Task.Run / TaskFactory::StartNew(delegate, CancellationToken) ──
+//
+// Task.Run(Action, CancellationToken) and the generic Func overloads are
+// STATIC entry points (no receiver), so the ABI is (delegate, token).
+//
+// The token is accepted but NOT honoured: there is no cancellation plumbing at
+// these call sites, the same boundary recorded for Task.Wait(token) and the
+// MRES token overloads.  Queueing the delegate is the behaviour these calls had
+// before (through the fallback they returned 0, i.e. NO task at all), so wiring
+// them is strictly an improvement — a cancelled token simply does not stop the
+// work, which is a documented limitation rather than a silent regression.
+CHAOS_IL2CPP_INTPTR chaos_task_run(
+    CHAOS_IL2CPP_INTPTR delegate_fn, CHAOS_IL2CPP_INTPTR token) noexcept;
+
 // ── AsyncIteratorMethodBuilder native surface (ASYNC-P2-8 A2) ──
 // The 5 ops the `async IAsyncEnumerable<T>` / `async IAsyncEnumerator<T>` state
 // machine calls, plus the source-pool accessors codegen needs.  Implemented in
