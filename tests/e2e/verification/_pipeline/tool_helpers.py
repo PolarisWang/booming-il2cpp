@@ -132,7 +132,21 @@ def ensure_tool_built(tool_name: str) -> bool:
                         src_time = m
                 except OSError:
                     pass
-        if src_time <= dll.stat().st_mtime:
+        # The BUNDLED (copied upstream DLL inside the tool's bin) must also be
+        # newer than the upstream source.  `src_time` only compares sources to
+        # the tool's OWN dll — if a rebuild ran with the same code but an
+        # upstream project's DLL was copied in stale, dll.stat() is fresh while
+        # the bundled copy is old, and the check returns True incorrectly.
+        bundle_ok = True
+        for up in _referenced_projects(proj):
+            up_name = up.name.removesuffix(".csproj")
+            up_dll = up / "bin" / "Debug" / "net8.0" / f"{up_name}.dll"
+            bundled = proj.parent / "bin" / "Debug" / "net8.0" / f"{up_name}.dll"
+            if up_dll.exists() and bundled.exists() and bundled.stat().st_mtime < up_dll.stat().st_mtime:
+                bundle_ok = False
+                break
+
+        if src_time <= dll.stat().st_mtime and bundle_ok:
             return True
     # Release any lingering VBCSCompiler (Roslyn compiler server) handle on the
     # output DLL before rebuilding.  Without this, concurrent chunk pipelines on
