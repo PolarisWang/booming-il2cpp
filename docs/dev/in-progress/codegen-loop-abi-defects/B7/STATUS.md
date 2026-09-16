@@ -165,6 +165,19 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
 
 **结论**：剩余项分属 3 个域外任务（ATG fixture / ATG stubGap / MemberInfo 模型）+ 1 个 cdb 专项 + 3 个 runtime 语义专项。B7 的原生缺陷（sentinel/ABI/遮蔽/槽位）已全部闭环，**264/283 中所有仍失败项均不再属于 B7 的修复范围**。
 
+## ✅ A+B+C 三线收官诊断（2026-09-16，全 18 项根因收敛）
+
+| 组 | si | 真根因（逐项实测） | 归属 |
+|---|---|---|---|
+| nullArg | 76/88/90/92/94/106/107/108/109 | ATG 传 default(T)，BCL 正确抛 ArgumentNullException；ATG 期望值不可达 | ATG fixture |
+| MemberInfo 家族 | 138/139/141/142 | **接收者实为 runtime 句柄（GetMembers 走 runtime），解码正常**——失败全是 null 参数 + ATG 天真期望值。"MemberInfo 托管模型"前提被实测推翻 | ATG fixture |
+| ReferenceMatchesDefinition | 58 | 同上：null AssemblyName + 期望 true（BCL 抛 ArgumentNullException） | ATG fixture |
+| 泛型断言 | 128/133/209/54/56 | Assert.AreEqual<Object/MethodInfo/byte[]> 泛型实例化 catch-all（catch-all raise 在异常类型无法实例化时 std::abort）；runtime 侧已全部就绪（字段装箱/公钥侧表/Object.Equals 值比较，`984161690`+`c31368478`） | **ATG stubGap 降低决策** |
+
+**B7 域内可修项已全部修完（264→265 基线，5 个实体修复 commit）**。剩余
+18 项 = ATG 域两个任务：①fixture 真实参数生成（12 项）②泛型 AreEqual<T>
+AOT-lowering 决策（5 项）+ 1 项 58 归 ①。
+
 ## Terminal Notes
 
 - B7 调查完成：根因（sentinel 假指针）+ 完整桩清单 + 14 项量化分组 + 修法成本
