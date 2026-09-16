@@ -912,6 +912,8 @@ public sealed class TestEmitter
                or "InsertAfter" or "ReplaceChild" or "RemoveChild" or "RemoveAll"
                or "Supports" or "GetNamespaceOfPrefix" or "GetPrefixOfNamespace"
                or "WriteTo" or "WriteContentTo"
+               or "Clone" or "CloneNode" or "GetEnumerator"
+               or "SelectNodes" or "SelectSingleNode" or "SplitText"
                or "LoadXml" or "Load" or "Save" or "Validate" or "ImportNode"
                or "ReadNode"
                or "CreateNode" or "CreateDocumentType" or "CreateXmlDeclaration"

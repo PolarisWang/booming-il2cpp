@@ -150,6 +150,41 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNodeClone(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     RaiseInvalidOp("A bare XmlNode cannot be cloned.");
 }
 
+// ══════════════════════════════════════════════════════════════════
+// XPath selection + XmlText splitting
+// ══════════════════════════════════════════════════════════════════
+
+/// SelectNodes(xpath) / SelectSingleNode(xpath) — XPath evaluation needs a real
+/// document tree and a navigator, neither of which exists on a bare XmlNode.
+/// The managed implementation throws InvalidOperationException; a null xpath is
+/// rejected the same way (the bare-object check precedes argument validation in
+/// the reference implementation).
+CHAOS_IL2CPP_INTPTR ChaosXmlNodeSelectNodes(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xpath) noexcept
+{
+    (void)this_ptr;
+    const char* x = nullptr; size_t x_len = 0;
+    if (!ManagedStringView(xpath, x, x_len))
+        RaiseArgumentNullException("xpath");
+    RaiseInvalidOp("A bare XmlNode cannot evaluate an XPath expression.");
+}
+
+CHAOS_IL2CPP_INTPTR ChaosXmlNodeSelectSingleNode(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xpath) noexcept
+{
+    return ChaosXmlNodeSelectNodes(this_ptr, xpath);
+}
+
+/// XmlText.SplitText(offset) — splitting needs the node to be attached to a
+/// document; on a bare/attached-but-untracked node the managed code throws
+/// InvalidOperationException.
+CHAOS_IL2CPP_INTPTR ChaosXmlTextSplitText(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 offset) noexcept
+{
+    (void)this_ptr; (void)offset;
+    RaiseInvalidOp("A bare XmlText cannot be split.");
+}
+
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeCloneNode(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 deep) noexcept
 {

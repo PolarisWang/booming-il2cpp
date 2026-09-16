@@ -28,6 +28,8 @@ void ChaosXmlNodeRemoveAll(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeGetEnumerator(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeClone(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeCloneNode(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 deep) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlNodeSelectNodes(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xpath) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlNodeSelectSingleNode(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xpath) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeGetNamespaceOfPrefix(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeGetPrefixOfNamespace(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns_uri) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
@@ -70,6 +72,9 @@ void ChaosXmlElementSetAttributeNode(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_
 CHAOS_IL2CPP_INTPTR ChaosXmlElementGetElementsByTagName(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlElementCloneNode(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 deep) noexcept;
 void ChaosXmlElementWriteTo(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) noexcept;
+
+// ── XmlText ──
+CHAOS_IL2CPP_INTPTR ChaosXmlTextSplitText(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 offset) noexcept;
 
 // ── XmlAttribute ──
 void ChaosXmlAttributeAppendChild(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) noexcept;

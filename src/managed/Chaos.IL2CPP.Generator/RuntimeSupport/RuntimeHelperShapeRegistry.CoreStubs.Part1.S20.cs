@@ -340,8 +340,7 @@ public sealed partial class NativeAotLoweringPlanner
                 boolRetAbi, new HashSet<int> { 0, 1, 2 });
             registry.Register("System.Xml.XmlNode", "GetNamespaceOfPrefix",
                 new[] { "System.String" }, ShapeKind.SimpleForward,
-                "ChaosXmlNodeGetNamespaceOfPrefix", nodeStr2, strAbi, nodeStr2R);
-            registry.Register("System.Xml.XmlNode", "GetPrefixOfNamespace",
+                "ChaosXmlNodeGetNamespaceOfPrefix", nodeStr2, strAbi, nodeStr2R);            registry.Register("System.Xml.XmlNode", "GetPrefixOfNamespace",
                 new[] { "System.String" }, ShapeKind.SimpleForward,
                 "ChaosXmlNodeGetPrefixOfNamespace", nodeStr2, strAbi, nodeStr2R);
             registry.Register("System.Xml.XmlNode", "GetEnumerator",
@@ -350,9 +349,27 @@ public sealed partial class NativeAotLoweringPlanner
             registry.Register("System.Xml.XmlNode", "Clone",
                 Array.Empty<string>(), ShapeKind.SimpleForward,
                 "ChaosXmlNodeClone", thisOnly, objAbi, rawThis);
+            // CloneNode(bool deep) — the depth flag does not change the bare-object
+            // contract (InvalidOperationException either way); the slot is carried
+            // so the generated call matches the native signature.
+            registry.Register("System.Xml.XmlNode", "CloneNode",
+                new[] { "System.Boolean" }, ShapeKind.SimpleForward,
+                "ChaosXmlNodeCloneNode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { nodeAbi, intAbi }),
+                objAbi, new HashSet<int> { 0, 1 });
             registry.Register("System.Xml.XmlNode", "CreateNavigator",
                 Array.Empty<string>(), ShapeKind.SimpleForward,
                 "ChaosXmlNodeCreateNavigator", thisOnly, objAbi, rawThis);
+
+            // SelectNodes / SelectSingleNode(xpath) → node-list / node — on a bare
+            // XmlNode both throw InvalidOperationException (XPath needs the doc tree).
+            registry.Register("System.Xml.XmlNode", "SelectNodes",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlNodeSelectNodes", nodeStr2, objAbi, nodeStr2R);
+            registry.Register("System.Xml.XmlNode", "SelectSingleNode",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlNodeSelectSingleNode", nodeStr2, nodeAbi, nodeStr2R);
 
             // ── XmlDocument factories (return XmlNode-derived) ──
             registry.Register("System.Xml.XmlDocument", "CreateElement",
@@ -514,6 +531,16 @@ public sealed partial class NativeAotLoweringPlanner
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                     new[] { charDataAbi, intRetAbi, intRetAbi }),
                 strAbi, new HashSet<int> { 0, 1, 2 });
+
+            // ── XmlText.SplitText(offset) → XmlText ──
+            // The receiver is the concrete XmlText (a XmlCharacterData subclass);
+            // its shape key must be registered against XmlText, not XmlCharacterData.
+            registry.Register("System.Xml.XmlText", "SplitText",
+                new[] { "System.Int32" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextSplitText",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { charDataAbi, intRetAbi }),
+                charDataAbi, new HashSet<int> { 0, 1 });
             var cdStr = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                 new[] { charDataAbi, strAbi });
             var cdStrR = new HashSet<int> { 0, 1 };
