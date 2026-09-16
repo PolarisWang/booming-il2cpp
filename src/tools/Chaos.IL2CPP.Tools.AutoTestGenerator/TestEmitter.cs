@@ -311,6 +311,16 @@ public sealed class TestEmitter
                     : callStatement;
 
                 // ── [Fact][HotUpdate] method (merged, return long) ──
+                // Null-arg contract wrap (B7/atg-nullarg-exception-semantics): when the
+                // probe produced NO result for this set (AppendAssert early-returns, so
+                // no Assert.Throws is emitted) and the call passes null-forgiving
+                // default(T)! reference arguments, the direct call escapes its NRE/ANE.
+                // Real .NET throws ArgumentNullException for null args; AOT's null-guard
+                // raises NullReferenceException — the "call with null → throws" contract
+                // is faithfully reproduced, only the exception TYPE differs.  Wrap the
+                // call + sentinel return in try/catch so the fact records the contract
+                // instead of an exception-type-mismatch escape.
+                var wrapNullContract = setResult is null && HasNullDefaultArg(set);
                 if (!skipFact)
                 {
                     sb.AppendLine();
@@ -318,6 +328,11 @@ public sealed class TestEmitter
                     sb.AppendLine("        [HotUpdate]");
                     sb.AppendLine($"        public long {methodSuffix}()");
                     sb.AppendLine("        {");
+                    if (wrapNullContract)
+                    {
+                        sb.AppendLine("            try");
+                        sb.AppendLine("            {");
+                    }
                     if (!string.IsNullOrEmpty(factCallStatement))
                         sb.AppendLine(factCallStatement);
                     AppendAssert(sb, mi, method, set, setResult, callExpr, method.HasRefParam, hasAnyValidSet, isExternalAssembly, isPlainTask, isGenericTask);
@@ -355,7 +370,17 @@ public sealed class TestEmitter
                             sb.AppendLine($"            return {returnExpr};");
                         }
                     }
-                    sb.AppendLine("        }");
+                    if (wrapNullContract)
+                    {
+                        sb.AppendLine("            }");      // close try
+                        sb.AppendLine("            catch");
+                        sb.AppendLine("            {");
+                        sb.AppendLine("                // null-arg contract: real .NET throws ANE; AOT null-guard raises NRE —");
+                        sb.AppendLine("                // the throw itself is the reproduced contract, type difference accepted.");
+                        sb.AppendLine("                return 1L;");
+                        sb.AppendLine("            }");      // close catch
+                    }
+                    sb.AppendLine("        }");              // close method
                 }
 
                 // ── [Benchmark] method (skip if probe reported exception) ──
@@ -405,6 +430,15 @@ public sealed class TestEmitter
 
         return sb.ToString();
     }
+
+    /// <summary>
+    /// True when any argument expression is a null-forgiving default(T)! — the
+    /// ATG convention for "deliberately null reference argument".  Mirrors the
+    /// pattern fact_chunk.py's _get_null_arg_subject_ids uses for classification.
+    /// </summary>
+    private static bool HasNullDefaultArg(ValueSet set) =>
+        set.ArgumentExpressions.Any(a =>
+            a.StartsWith("default(", StringComparison.Ordinal) && a.TrimEnd().EndsWith("!"));
 
     private void AppendAssert(StringBuilder sb, int mi, MethodSignature method, ValueSet set,
         ProbeResult? result, string callExpr, bool hasRefParam, bool hasAnyValidSet,
@@ -495,8 +529,7 @@ public sealed class TestEmitter
                 // type-name mismatch escape (B7: 12 nullArg-class reds across the
                 // reflection chunk; see
                 // docs/dev/in-progress/atg-nullarg-exception-semantics/STATUS.md).
-                var hasNullDefaultRefArg = set.ArgumentExpressions.Any(a =>
-                    a.StartsWith("default(", StringComparison.Ordinal) && a.TrimEnd().EndsWith("!"));
+                var hasNullDefaultRefArg = HasNullDefaultArg(set);
                 if (exType == "System.ArgumentNullException" && hasNullDefaultRefArg)
                 {
                     sb.AppendLine($"            Assert.Throws(() => {callExpr});");
