@@ -254,11 +254,17 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
        发射 `chaos_reflection_resolve_method_handle_b3(type_handle, name)`
        定义；object-model 的 GetMethod 前向声明并在首查 miss 时回调；
        GetParameters 同样处理。全部 codegen 期常量，无 runtime 依赖。
-  ↓ 修好后
-层3  FindReflectionQueryMethod 按名字+参数个数匹配 —— IndexOf(char) 与
-     IndexOf(string) 个数相同会歧义；需 descriptor 携带参数类型
+  ↓ 已修（295aceaf6，2026-09-16）
+层3  ✅ B3 方法句柄回调落地：type_handle_from_stable_id 并入
+     reference/value 类型集（发射期可用，恰为 fold 输出域）；
+     ModuleRegistration（收集后）发射 resolve_method_handle_b3 +
+     get_parameters_b3，对象模型前向声明 + miss 回调。
+     效果：passed 254→256（146/153/154 转绿），C 组从 SEH-FAULT
+     推进到链尾 ABORT-FAULT（IsDefined raise 路径的具体 FAIL 点，
+     可 cdb 定位——下一层）
   ↓（B 组同理需要 MemberInfo 托管模型）
-终局  C 组 8 项转绿
+终局  C 组 8 项转绿（剩 IsDefined raise 路径 abort 的 cdb 定位 +
+     参数类型消歧）
 ```
 
 **每修一层就会暴露下一层** —— 与 B5 修完后 preAssertionRaise 的下降一致
