@@ -238,6 +238,22 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
        "0 或 raw"的假设不符。重试前必须先 cdb 定位 si=151 的精确
        AV 点，把 coerce 的适用面收窄到**显式列出的接收者函数**
        （GetMethod/GetTypeHandle），不要全局替换 11 处 reinterpret。
+     ⛔ **2026-09-16 层3 首试发现：级联缺口（未提交，已回退）**
+     - 直接改 resolve_method_handle 加 B3 case 无效：该 switch 在
+       EmitObjectModelDeclarations（Methods.cs:1008）内发射，而
+       _reflectionMethods 由 CollectReflectionMemberMetadataFromClosure
+       （:1049）填充——**发射先于收集，switch 拿到空表**。且
+       _allEmittedTypeSubjectIds 也是在 EmitObjectModelDeclarations
+       内部填充的，收集调用不能简单前移。
+     - 更深一层：GetParameters（ReflectionObjectEmission.cs:1215+）的
+       methodEntries switch 同样只覆盖 supplemental RegisteredMethods
+       （测试 subject），B3 伪方法句柄进去也会 miss。**层3 是级联**：
+       resolve_method_handle + GetParameters + 后续按方法句柄分派的
+       对象模型函数都需要 B3 覆盖。
+     - 正确方案（未实施）：在 BuildModuleRegistration（:1259，收集后）
+       发射 `chaos_reflection_resolve_method_handle_b3(type_handle, name)`
+       定义；object-model 的 GetMethod 前向声明并在首查 miss 时回调；
+       GetParameters 同样处理。全部 codegen 期常量，无 runtime 依赖。
   ↓ 修好后
 层3  FindReflectionQueryMethod 按名字+参数个数匹配 —— IndexOf(char) 与
      IndexOf(string) 个数相同会歧义；需 descriptor 携带参数类型
