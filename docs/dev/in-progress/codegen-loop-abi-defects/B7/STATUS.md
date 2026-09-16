@@ -262,9 +262,19 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
      效果：passed 254→256（146/153/154 转绿），C 组从 SEH-FAULT
      推进到链尾 ABORT-FAULT（IsDefined raise 路径的具体 FAIL 点，
      可 cdb 定位——下一层）
+  ↓ 已修（17ad452a8，2026-09-16）—— **C 组 8 项全部转绿**
+层4  🔴 真根因：extern "C" 同名遮蔽。subject 页对 GetParameters 的
+     调用绑定到 runtime 的 extern "C" ChaosReflectionGetParameters
+     （reflection_api.h 可见），对象模型 C++ 版本从未执行——runtime
+     版把 MethodInfo 对象指针当句柄解码 → 返 0 → [0] null → FAIL_FAST。
+     修法：对象模型版本改名 extern "C" chaos_reflection_get_parameters_managed，
+     生成头全局作用域加声明，S14 SimpleForward 改指新名。
+     ⚠️ 同名遮蔽与 [[discriminator-lookup-key-never-matched]] 同族。
+     效果：passed 256→264，总失败 27→19。
   ↓（B 组同理需要 MemberInfo 托管模型）
-终局  C 组 8 项转绿（剩 IsDefined raise 路径 abort 的 cdb 定位 +
-     参数类型消歧）
+终局  剩余 19 项：A 组 GetPublicKey 链 2 abort（debug-20-real-defects）、
+     GetMembers 链 6（MemberInfo 托管模型，设计级）、其余 11 为
+     未注册 catch-all 的诚实失败
 ```
 
 **每修一层就会暴露下一层** —— 与 B5 修完后 preAssertionRaise 的下降一致
