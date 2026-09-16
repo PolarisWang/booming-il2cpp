@@ -48,6 +48,14 @@ public sealed partial class NativeAotLoweringPlanner
 		// AV crashes in GetGenericArguments; see B7 STATUS 2026-09-16).
 		builder.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_type_value(CHAOS_IL2CPP_INTPTR chaos_type_handle);");
 		builder.AppendLine("extern \"C\" CHAOS_IL2CPP_UINT64 chaos_reflection_type_handle_from_stable_id(CHAOS_IL2CPP_UINT64 chaos_stable_id) noexcept;");
+		// B3 fallback resolvers — defined later in the module registration TU
+		// (after CollectReflectionMemberMetadataFromClosure has populated the
+		// reflection member tables; this TU emits before that point, so the
+		// definitions live in ModuleRegistration and only the declarations are
+		// visible here).  Consulted when the object-model switches above miss,
+		// which is the norm for BCL types (System.String::IndexOf, …).
+		builder.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle_b3(CHAOS_IL2CPP_INTPTR chaos_type_handle, const char* chaos_method_name) noexcept;");
+		builder.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_b3(CHAOS_IL2CPP_INTPTR chaos_method_handle) noexcept;");
 		builder.AppendLine("inline chaos_type_System_Private_CoreLib_System_Type* chaos_reflection_as_managed_type(CHAOS_IL2CPP_INTPTR chaos_value) noexcept");
 		builder.AppendLine("{");
 		builder.AppendLine("    if (chaos_value == 0)");
@@ -1220,6 +1228,13 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					EmitMethodParameterNameCase(builder, entry, "    if");
 				}
+				builder.AppendLine("    {");
+				builder.AppendLine("        const auto chaos_b3_params = chaos_reflection_get_parameters_b3(chaos_method_handle);");
+				builder.AppendLine("        if (chaos_b3_params != 0)");
+				builder.AppendLine("        {");
+				builder.AppendLine("            return chaos_b3_params;");
+				builder.AppendLine("        }");
+				builder.AppendLine("    }");
 				builder.AppendLine("    return chaos_reflection_create_reference_array(");
 				EmitParameterInfoTypeInfo(builder);
 				builder.AppendLine("        static_cast<CHAOS_IL2CPP_SIZE>(0));");
@@ -1481,11 +1496,45 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("{");
 			builder.AppendLine("    switch (chaos_stable_id)");
 			builder.AppendLine("    {");
+			// Source union: the supplemental RegisteredTypes (test subjects) PLUS the
+			// B3 closure-reachable types whose MethodTable is emitted — the typeof
+			// fold can only push TypeInfoHot* for MethodTable-defined types, so BCL
+			// types like System.String (absent from RegisteredTypes) must come from
+			// the B3 member tables or their stable_ids have no case here and
+			// as_managed_type falls back to the raw reinterpret (garbage handle →
+			// NRE).  chaos_type_id_* symbols only exist for MethodTable-defined
+			// types, so the same guard prevents unresolved externals.
+			var stableIdEntries = new List<(string Symbol, string Handle)>();
+			var seenStableIdSymbols = new HashSet<string>(StringComparer.Ordinal);
 			foreach (var typeEntry in _reflectionMemberSupport.TypeEntries
 				.OrderBy((ReflectionMemberTypeEntry entry) => entry.TypeSubjectId, StringComparer.Ordinal))
 			{
-				builder.AppendLine($"        case {GetNativeTypeIdSymbol(typeEntry.TypeSubjectId)}:");
-				builder.AppendLine($"            return static_cast<CHAOS_IL2CPP_UINT64>({GetTypeHandleLiteral(typeEntry.TypeSubjectId)});");
+				if (seenStableIdSymbols.Add(GetNativeTypeIdSymbol(typeEntry.TypeSubjectId)))
+				{
+					stableIdEntries.Add((GetNativeTypeIdSymbol(typeEntry.TypeSubjectId), GetTypeHandleLiteral(typeEntry.TypeSubjectId)));
+				}
+			}
+			// This TU is emitted inside EmitObjectModelDeclarations — BEFORE
+			// CollectReflectionMemberMetadataFromClosure populates the B3 tables —
+			// so the source must be the reference/value type sets, which ARE
+			// populated by this point.  Their union is exactly the set of types
+			// with an emitted MethodTable, i.e. exactly what the typeof fold can
+			// ever push, so coverage is complete without the B3 tables.
+			var emittedTypeIds = _referenceTypeBaseSubjectIds.Keys
+				.Concat(_valueTypeStructSubjectIds ?? (IEnumerable<string>)Array.Empty<string>())
+				.Distinct(StringComparer.Ordinal)
+				.OrderBy(id => id, StringComparer.Ordinal);
+			foreach (var emittedTypeId in emittedTypeIds)
+			{
+				if (seenStableIdSymbols.Add(GetNativeTypeIdSymbol(emittedTypeId)))
+				{
+					stableIdEntries.Add((GetNativeTypeIdSymbol(emittedTypeId), GetTypeHandleLiteral(emittedTypeId)));
+				}
+			}
+			foreach (var stableIdEntry in stableIdEntries)
+			{
+				builder.AppendLine($"        case {stableIdEntry.Symbol}:");
+				builder.AppendLine($"            return static_cast<CHAOS_IL2CPP_UINT64>({stableIdEntry.Handle});");
 			}
 			builder.AppendLine("        default:");
 			builder.AppendLine("            return 0;");
@@ -1597,7 +1646,11 @@ public sealed partial class NativeAotLoweringPlanner
 			handler.AppendLiteral("    auto* chaos_type = chaos_reflection_as_managed_type(chaos_type_value);");
 			stringBuilder104.AppendLine(ref handler);
 			builder.AppendLine("    const auto* chaos_method_name = chaos_reflection_get_string_utf8(chaos_name_value);");
-			builder.AppendLine("    const auto chaos_method_handle = chaos_reflection_resolve_method_handle(chaos_type->runtime_type_handle, chaos_method_name);");
+			builder.AppendLine("    auto chaos_method_handle = chaos_reflection_resolve_method_handle(chaos_type->runtime_type_handle, chaos_method_name);");
+			builder.AppendLine("    if (chaos_method_handle == 0)");
+			builder.AppendLine("    {");
+			builder.AppendLine("        chaos_method_handle = chaos_reflection_resolve_method_handle_b3(chaos_type->runtime_type_handle, chaos_method_name);");
+			builder.AppendLine("    }");
 			builder.AppendLine("    if (chaos_method_handle == 0)");
 			builder.AppendLine("    {");
 			builder.AppendLine("        return 0;");

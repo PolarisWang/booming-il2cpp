@@ -138,9 +138,10 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterUtf8WriterVoid(registry, "WriteNumber",
                 "ChaosUtf8JsonWriterWriteNumberUInt", wNumOnly, wNumOnlyR,
                 new[] { "System.UInt64" });
-            RegisterUtf8WriterVoid(registry, "WriteNumber",
-                "ChaosUtf8JsonWriterWriteNumberUInt64", wNumOnly, wNumOnlyR,
-                new[] { "System.UInt64" });
+            // NOTE: no second UInt64 registration here — WriteNumber(UInt64) is
+            // registered once above (ChaosUtf8JsonWriterWriteNumberUInt).  A
+            // duplicate shape key ("Shape already registered") throws in the
+            // registry constructor and blocks EVERY chunk's codegen.
 
             // ── WriteNumberValue (value-only overloads) → void ──
             // "Value" suffix methods have no property-name argument: valid only

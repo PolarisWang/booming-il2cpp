@@ -958,6 +958,93 @@ public sealed partial class NativeAotLoweringPlanner
         // subject runs, and this TU is linked into every entry.exe.
         sb.AppendLine($"{ind}namespace {{ const bool s_reflection_members_registered = (ChaosRegisterReflectionMembers(), true); }}");
 
+        // ── B3 fallback resolvers for the managed reflection object model ──
+        //
+        // The object-model switches (chaos_reflection_resolve_method_handle /
+        // ChaosReflectionGetParameters) are emitted inside
+        // EmitObjectModelDeclarations — BEFORE
+        // CollectReflectionMemberMetadataFromClosure populates
+        // _reflectionMethods/_reflectionMethodParams — and they only cover the
+        // supplemental RegisteredMethods (test-subject types).  BCL types
+        // reachable through the closure (System.String::IndexOf, …) therefore
+        // miss: GetMethod returned 0 → NRE (B7 layer 3).  The definitions below
+        // are emitted here, AFTER collection, and forward-declared in the object
+        // model TU; all handle literals are compile-time constants.
+        if (_reflectionMethods.Count > 0)
+        {
+            var b3ParamNames = _reflectionMethodParams
+                .GroupBy(p => p.MethodSubjectId, StringComparer.Ordinal)
+                .ToDictionary(
+                    g => g.Key,
+                    g => g.OrderBy(p => p.ParamIndex)
+                        .Select(p => p.ParamName)
+                        .ToArray(),
+                    StringComparer.Ordinal);
+
+            var b3Entries = _reflectionMethods
+                .Select(m => new ReflectionMemberMethodEntry(
+                    m.MethodSubjectId,
+                    m.TypeSubjectId,
+                    m.Name,
+                    b3ParamNames.TryGetValue(m.MethodSubjectId, out var names)
+                        ? names
+                        : Array.Empty<string>(),
+                    false,
+                    (int)m.Token))
+                .ToList();
+
+            // Method-handle resolver: one case per declaring type.
+            sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle_b3(CHAOS_IL2CPP_INTPTR chaos_type_handle, const char* chaos_method_name) noexcept");
+            sb.AppendLine("{");
+            sb.AppendLine("    if (chaos_method_name == nullptr) return 0;");
+            sb.AppendLine("    switch (chaos_type_handle)");
+            sb.AppendLine("    {");
+            foreach (var b3Group in b3Entries
+                .GroupBy(e => e.DeclaringTypeSubjectId, StringComparer.Ordinal)
+                .OrderBy(g => g.Key, (IComparer<string>)StringComparer.Ordinal))
+            {
+                if (string.Equals(b3Group.Key, "System.Private.CoreLib/System.Type", StringComparison.Ordinal) ||
+                    string.Equals(b3Group.Key, "System.Private.CoreLib/System.Reflection.MethodInfo", StringComparison.Ordinal))
+                {
+                    continue;
+                }
+                sb.AppendLine($"        case {GetTypeHandleLiteral(b3Group.Key)}:");
+                foreach (var b3Method in b3Group.OrderBy(e => e.MethodSubjectId, StringComparer.Ordinal))
+                {
+                    sb.AppendLine($"            if (CHAOS_IL2CPP_STRCMP(chaos_method_name, {ToCppStringLiteral(b3Method.MethodName)}) == 0)");
+                    sb.AppendLine("            {");
+                    sb.AppendLine($"                return {GetMethodHandleLiteral(b3Method.MethodSubjectId)};");
+                    sb.AppendLine("            }");
+                    sb.AppendLine();
+                }
+                sb.AppendLine("            break;");
+            }
+            sb.AppendLine("        default:");
+            sb.AppendLine("            break;");
+            sb.AppendLine("    }");
+            sb.AppendLine("    return 0;");
+            sb.AppendLine("}");
+            sb.AppendLine();
+
+            // Parameter array builder: if-chain over per-method parameter names,
+            // mirroring EmitMethodParameterNameCase in the object model TU.
+            sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_b3(CHAOS_IL2CPP_INTPTR chaos_method_handle) noexcept");
+            sb.AppendLine("{");
+            var emittedParamHandles = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var b3Method in b3Entries.OrderBy(e => e.MethodSubjectId, StringComparer.Ordinal))
+            {
+                var handleKey = GetMethodHandleLiteral(b3Method.MethodSubjectId);
+                if (!emittedParamHandles.Add(handleKey))
+                {
+                    continue;
+                }
+                EmitMethodParameterNameCase(sb, b3Method, "    if");
+            }
+            sb.AppendLine("    return 0;");
+            sb.AppendLine("}");
+            sb.AppendLine();
+        }
+
         return sb.ToString();
     }
 
