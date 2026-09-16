@@ -335,3 +335,24 @@ si=208/209 回红**。In-place revert，265 恢复。
 
 - 本项是**调查结论**，非实现
 - 关键判别：sentinel ≠ null —— 调用方的 `!` 挡不住，这是本链隐蔽的原因
+
+---
+
+## ✅ 收官更新（2026-09-16，280/283）
+
+sentinel 兜底桩已按本文件建议全部落地为真实实现，reflection chunk
+**265 → 280（+15）**，三个 commit：`b0b74f123`（ATG nullArg wrap）/
+`74e420474`（GetMembers 托管数组）/ `24de99eaa`（字段句柄数组 + 常量盒）。
+
+**剩余 3 项**：
+
+| si | 根因 | 去向 |
+|---|---|---|
+| 54/56 | Assert.AreEqual(byte[]) 的 for 循环被 lowering 成 do-while（体先无条件执行一次，i=0 读空数组 → FAIL_FAST）。`24060f15a` 的循环修复在单测过但管线生成物仍是 do-while——BuildLoop isReversed/isWhile 或 plan B emitter 未覆盖此 CFG 形态 | codegen 循环 lowering 专项（需 IR dump + 全量回归） |
+| 58 | ReferenceMatchesDefinition(null,null)：AOT 返 false，probe 期望 true（af=True，AOT/JIT 一致） | runtime 语义专项 |
+
+诊断过程中实测的关键机制：**ABORT-FAULT = FAIL → fail hook → longjmp**
+（绕过一切 C++ catch）；**运行时库改动必须重建 SDK**（build_presets.py），
+手动 cmake 只重链预编译 lib。详见 memory
+`b7-reflection-chunk-final-triage` 与
+`docs/dev/in-progress/atg-nullarg-exception-semantics/STATUS.md`。
