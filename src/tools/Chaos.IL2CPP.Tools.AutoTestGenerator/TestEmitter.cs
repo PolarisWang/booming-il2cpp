@@ -370,16 +370,17 @@ public sealed class TestEmitter
                             sb.AppendLine($"            return {returnExpr};");
                         }
                     }
-                    sb.AppendLine("        }");
                     if (wrapNullContract)
                     {
+                        sb.AppendLine("            }");      // close try
                         sb.AppendLine("            catch");
                         sb.AppendLine("            {");
                         sb.AppendLine("                // null-arg contract: real .NET throws ANE; AOT null-guard raises NRE —");
                         sb.AppendLine("                // the throw itself is the reproduced contract, type difference accepted.");
                         sb.AppendLine("                return 1L;");
-                        sb.AppendLine("            }");
+                        sb.AppendLine("            }");      // close catch
                     }
+                    sb.AppendLine("        }");              // close method
                 }
 
                 // ── [Benchmark] method (skip if probe reported exception) ──

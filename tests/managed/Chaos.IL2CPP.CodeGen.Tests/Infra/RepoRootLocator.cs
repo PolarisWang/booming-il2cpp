@@ -34,6 +34,8 @@ internal static class RepoRootLocator
     /// <summary>
     /// Walks up from <paramref name="startDirectory"/> until it finds the
     /// directory that contains a <c>.git</c> entry (file or directory).
+    /// A regular checkout has a <c>.git</c> directory; a worktree has a
+    /// <c>.git</c> file — both must resolve.
     /// </summary>
     /// <exception cref="DirectoryNotFoundException">
     /// No enclosing directory contains a <c>.git</c> entry.
@@ -41,7 +43,8 @@ internal static class RepoRootLocator
     public static string Find(string startDirectory)
     {
         var dir = new DirectoryInfo(startDirectory);
-        while (dir != null && !File.Exists(Path.Combine(dir.FullName, ".git")))
+        while (dir != null && !File.Exists(Path.Combine(dir.FullName, ".git")) &&
+               !Directory.Exists(Path.Combine(dir.FullName, ".git")))
         {
             dir = dir.Parent;
         }

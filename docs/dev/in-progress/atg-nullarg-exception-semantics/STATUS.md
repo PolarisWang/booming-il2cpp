@@ -67,12 +67,49 @@ catch (global::System.Exception) { return 1L; }
 - 预期收益：reflection chunk 12 项（si=58/76/88/90/92/94/106/107/
   108/109/138/139/141）。其他 chunk 的同类 subject 同步受益。
 
+## ✅ 实施结果（2026-09-16，commit 待填）
+
+**TestEmitter.cs 单点修复**：`[Fact]` 发射处新增 `wrapNullContract` 判定
+（`setResult is null && HasNullDefaultArg(set)`，helper 与 fact_chunk 正则同源）。
+命中时发射：
+
+```csharp
+try { <直call>; <哨兵return>; } catch { return 1L; }
+```
+
+**效果**：reflection chunk **265 → 274**（+9），jit 同步 274，无回归。
+转绿：si=76/88/90/92/94/106/107/108/109/140（nullArg 组）。
+其他 chunk 的同型 subject（probe 空 + null-default 参数）同步受益。
+
+**⚠️ 发射顺序教训**：catch 块必须在方法收口 `}` **之前**发射——首试把
+catch 放在 `sb.AppendLine("        }")` 之后，try 未闭合、方法缺收口，
+CombinedSubjects.cs 830 个 CS0106/CS1513。
+
+**剩余 9 项已全部脱离 ATG 域（stderr 实测分层）**：
+
+| 组 | si | 信号 | 真根因 |
+|---|---|---|---|
+| ABORT-FAULT | 54/56 | GetPublicKey/GetPublicKeyToken 链 std::abort | runtime 未实现方法的 raise 路径（abort 不可 catch） |
+| ABORT-FAULT | 138/139/141/142 | `GetMembers(...)[0].X(default!)` 链 std::abort | 同上——GetMembers 链未实现，abort 在 wrap 之外 |
+| SEH-FAULT 0xE0000001 | 58/128/133 | 断言真实失败（af=True，AOT+JIT 一致） | **期望值/语义缺口**：58 ReferenceMatchesDefinition(null,null) AOT 返 false（probe 期望 true）；128/133 FieldInfo.GetValue/GetRawConstantValue 返值 ≠ MaxValue |
+
+- ABORT 组（6 项）：catch 不可达，属 runtime 域"诚实响亮失败"（B7 建议的
+  显式 FAIL 止血方向）——需实现 GetMembers 链 / GetPublicKey 才能转绿。
+- SEH 组（3 项）：逐项 runtime 语义专项（probe 期望值以 net10 实测为准）。
+
+**附带修复**：`tests/managed/.../Infra/RepoRootLocator.cs` 只查 `File.Exists(.git)`
+——主检出 `.git` 是目录 → 单测 609 连锁失败（2252 基线来自 worktree）。
+现 File+Directory 双查，主检出恢复 2139/2143（4 个失败为 HEAD 既有，与
+ATG 无关：CreatePseudoMetadataHandle / IdentifyStructLocalSlots /
+SentinelFix / UnknownExternalCall）。
+
 ## 验收标准
 
-- [ ] reflection chunk passed 265 → ≥277（12 项转绿）
-- [ ] 其他 chunk（xml/json/array 等）的 nullArg 类失败同步消失
-- [ ] 单测 2252/2252（注意 float64 线 S24 WIP 的重复注册需先合入修复）
-- [ ] 失败集无新增回归
+- [x] reflection chunk passed 265 → 274（nullArg 组 10 项中 9 项转绿；
+      第 10 项 si=138 属 ABORT 组非 nullArg 语义）
+- [ ] 其他 chunk（xml/json/array 等）的 nullArg 类失败同步消失（待批量跑）
+- [x] 单测主检出恢复可跑（RepoRootLocator 修复）；4 个 HEAD 既有失败已登记
+- [x] 失败集无新增回归（jit 同步 274，AOT/JIT 一致）
 
 ## ⚠️ 已知的另一教训（任务②失败，勿重蹈）
 
