@@ -56,7 +56,13 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
-        /// System.Type::GetMembers (stub returning null)
+        /// System.Type::GetMembers — forwards to the runtime's managed-array
+        /// builder.  Subjects index the result as MemberInfo[] and invoke member
+        /// accessors on the elements, so a null/sentinel return trips the array
+        /// bounds check and FAIL_FASTs (uncatchable by managed try/catch — B7
+        /// si=138-142).  The runtime returns a real chaos_managed_array of encoded
+        /// member handles.  BindingFlags are accepted but not filtered (the
+        /// Tier-2 descriptor model has no accessibility data — honest superset).
         /// </summary>
         private static void RegisterSystemTypeGetMembers(RuntimeHelperShapeRegistry registry)
         {
@@ -75,11 +81,12 @@ public sealed partial class NativeAotLoweringPlanner
                         abiSlots.Add(CreateInt32AbiSlot());
                     if (abiSlots.Count == 1)
                     {
+                        // GetMembers() — no flags overload.
                         var src0 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
                             "    (void)chaos_arg_0;",
-                            "    return 0;",
+                            "    return ChaosReflectionGetMembersManagedArray(chaos_arg_0, 0);",
                         ]);
                         return new GenericShapeResolution(src0, symbol,
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
@@ -87,12 +94,13 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                             new HashSet<int> { 0 });
                     }
+                    // GetMembers(BindingFlags) and other flag-carrying overloads.
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol, paramSig,
                     [
                         $"    {voidExprs};",
-                        "    return 0;",
+                        "    return ChaosReflectionGetMembersManagedArray(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),

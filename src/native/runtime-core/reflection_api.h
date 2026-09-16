@@ -32,6 +32,11 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetProperties(CHAOS_IL2CPP_INTPTR type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetInterfaces(CHAOS_IL2CPP_INTPTR type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle);
+// Type::GetMembers result as a real managed MemberInfo[] (chaos_managed_array
+// of encoded member handles) — the flat ChaosReflectionGetMembers buffer is
+// not indexable by generated code (B7: bounds-check FAIL_FAST on [0]).
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembersManagedArray(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetField(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id);
 // Type::GetProperty(string) / Type::GetEvent(string) — name-only member lookup

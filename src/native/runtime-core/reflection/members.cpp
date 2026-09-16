@@ -4,6 +4,11 @@
 // (kind = 0 field, 1 method, 2 property, 3 nested type)
 // The managed wrapper iterates this buffer to construct MemberInfo[].
 
+// Managed-array access (chaos_managed_array / ChaosArrayNew1D) for the
+// Type::GetMembers managed-array wrapper below.
+#include "../runtime_stubs/array_stubs.h"
+#include "../ChaosGeneratedRuntimePrelude.h"
+
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
 
@@ -66,6 +71,48 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle) {
     }
 
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buffer);
+}
+
+// ── GetMembers as a managed MemberInfo[] ─────────────────────────
+// ATG subjects index the Type::GetMembers result as a managed array
+// (chaos_managed_array: length @24, inline elements) and then invoke member
+// accessors on the elements.  The flat [count, (kind, handle)...] buffer is
+// NOT bit-compatible with that layout — indexing it trips the bounds check
+// and FAIL_FASTs (uncatchable by any managed try/catch, B7 si=138-142).
+// This wrapper rebuilds the member handles as a real managed INTPTR[].
+//
+// BindingFlags are accepted but deliberately NOT filtered: the Tier-2
+// descriptor model carries no accessibility data, so the honest answer is
+// the unfiltered superset rather than a silently-wrong filtered subset.
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembersManagedArray(
+    CHAOS_IL2CPP_INTPTR type_handle,
+    CHAOS_IL2CPP_INT32 /*binding_flags*/) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+
+    CHAOS_IL2CPP_INTPTR flat = ChaosReflectionGetMembers(type_handle);
+    if (flat == 0) return 0;
+
+    const auto* buf = reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(flat);
+    const auto total = static_cast<CHAOS_IL2CPP_INT32>(buf[0]);
+    if (total <= 0 || total > 128) return 0;
+
+    // Elements are encoded reflection-query handles (tagged integers), NOT
+    // heap references — allocate with a non-reference element shape so the
+    // GC never scans them.
+    auto* arr = reinterpret_cast<chaos::il2cpp::jit::chaos_managed_array*>(
+        ChaosArrayNew1D(
+            &chaos::il2cpp::jit::chaos_type_info_managed_array.hot,
+            &chaos::il2cpp::jit::chaos_type_info_managed_array.hot,
+            chaos::il2cpp::jit::chaos_type_shape_value,
+            static_cast<CHAOS_IL2CPP_INTPTR>(total)));
+    if (arr == nullptr) return 0;
+
+    auto* elements = chaos::il2cpp::jit::chaos_array_get_elements(arr);
+    for (CHAOS_IL2CPP_INT32 i = 0; i < total; i++) {
+        // flat layout: [count, (kind, handle) x total] — keep the handle slot.
+        elements[i] = buf[2 + static_cast<CHAOS_IL2CPP_INTPTR>(2 * i)];
+    }
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handle) {
