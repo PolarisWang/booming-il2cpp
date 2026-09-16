@@ -65,6 +65,36 @@ PRESETS = {
 }
 
 
+def _file_fingerprint(path: Path) -> bytes:
+    """Content fingerprint for a source file, sized so late-file edits cannot hide.
+
+    The OLD implementation hashed only the first 4096 bytes of every source
+    file.  That is a real blind spot: any native change located deeper than
+    4KB (e.g. the ChaosParseUInt32 fix in parse_convert.cpp at offset ~5KB) did
+    not change the hash, so the SDK was declared up-to-date and the stale
+    prebuilt lib was linked into entry.exe while the pipeline silently ran the
+    old behavior.  We now hash the WHOLE file — the native tree is ~6.6MB in
+    645 files, so this costs ~0.1s, far cheaper than the 10+ minute rebuild it
+    would otherwise skip.
+
+    Reading is done in 64KB chunks rather than one big read_bytes(): a
+    generated .cpp can be hundreds of MB (native-aot.generated.cpp is ~55MB in
+    the system chunk), and materialising that into a single bytes object for a
+    discarded hash is wasteful.  Chunked streaming keeps memory bounded.
+    """
+    try:
+        h = hashlib.sha256()
+        with path.open("rb") as fh:
+            while True:
+                chunk = fh.read(65536)
+                if not chunk:
+                    break
+                h.update(chunk)
+        return h.digest()
+    except OSError:
+        return b""
+
+
 def _get_source_hash() -> str:
     """Compute a hash of all native source files to detect changes."""
     hasher = hashlib.sha256()
@@ -75,10 +105,7 @@ def _get_source_hash() -> str:
                 path = Path(root) / f
                 rel = path.relative_to(_REPO_ROOT)
                 hasher.update(str(rel).encode())
-                try:
-                    hasher.update(path.read_bytes()[:4096])
-                except OSError:
-                    pass
+                hasher.update(_file_fingerprint(path))
     return hasher.hexdigest()[:16]
 
 
