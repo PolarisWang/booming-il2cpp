@@ -73,7 +73,7 @@ CHAOS_IL2CPP_INT32  ChaosReflectionPropertyGetMemberType(CHAOS_IL2CPP_INTPTR pro
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetPropertyType(CHAOS_IL2CPP_INTPTR prop) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetName(CHAOS_IL2CPP_INTPTR prop) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetGetMethod(CHAOS_IL2CPP_INTPTR prop) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetSetMethod(CHAOS_IL2CPP_INTPTR prop, CHAOS_IL2CPP_INT32 non_public) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetSetMethod(CHAOS_IL2CPP_INTPTR prop, CHAOS_IL2CPP_INT32 non_public = 1) noexcept;
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetName(CHAOS_IL2CPP_INTPTR evt) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetEventHandlerType(CHAOS_IL2CPP_INTPTR evt) noexcept;
@@ -363,7 +363,8 @@ CHAOS_IL2CPP_INT32  ChaosReflectionFieldEqualsVersion(CHAOS_IL2CPP_INTPTR lhs, C
 CHAOS_IL2CPP_INT64  ChaosReflectionFieldGetFieldHandleVersion(CHAOS_IL2CPP_INTPTR field) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPTR field) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR field) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetValueDirect(CHAOS_IL2CPP_INTPTR field) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetValueDirect(CHAOS_IL2CPP_INTPTR field, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INT64 ChaosReflectionFieldGetRawConstantValue(CHAOS_IL2CPP_INTPTR field) noexcept;
 CHAOS_IL2CPP_INT32  ChaosReflectionFieldSetValueDirect(CHAOS_IL2CPP_INTPTR field) noexcept;
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetIndexParametersVersion(CHAOS_IL2CPP_INTPTR prop) noexcept;
@@ -601,5 +602,7 @@ using chaos::il2cpp::runtime_core::ChaosReflectionGetIsGenericTypeDef;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetIsPublic;
 using chaos::il2cpp::runtime_core::chaos_reflection_get_is_static;
 using chaos::il2cpp::runtime_core::ChaosReflectionFieldGetIsStatic;
+using chaos::il2cpp::runtime_core::ChaosReflectionFieldGetRawConstantValue;
+using chaos::il2cpp::runtime_core::ChaosReflectionFieldGetValueDirect;
 
 #endif  // CHAOS_IL2CPP_REFLECTION_API_H_

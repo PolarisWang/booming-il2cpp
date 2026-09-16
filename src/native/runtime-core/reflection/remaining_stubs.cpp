@@ -562,11 +562,81 @@ CHAOS_IL2CPP_INT32 ChaosReflectionFieldGetAttributes(CHAOS_IL2CPP_INTPTR field) 
 }
 
 // Raw constant value for literal fields (const / enum members).
+// ── Primitive boxing for FieldInfo.GetValue / GetRawConstantValue ──
+// Same 16-byte-header layout as parse_convert.cpp's box_int32 / enum_stubs.cpp's
+// enum_alloc_boxed_int32.  BCL returns BOXED objects from both APIs; the
+// previous raw-int64 returns were dereferenced as object pointers by callers
+// ("object_stubs called" → SEH, B7 si=128/133).
+// Canonical box layout = chaos_boxed_type_*: PureTypeHeader (8B, type_info at
+// offset 0) + CHAOS_IL2CPP_INTPTR payload at offset 8 (16B total).  parse_convert's
+// older 16-byte-header boxes are NOT bit-compatible with codegen boxes — the
+// assertion path cross-compares both.
+static CHAOS_IL2CPP_INTPTR reflection_alloc_boxed_int32(CHAOS_IL2CPP_INT32 value) noexcept {
+    auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(16));
+    if (storage == nullptr) return 0;
+    std::memset(storage, 0, 16);
+    const CHAOS_IL2CPP_INTPTR v = value;
+    std::memcpy(storage + 8, &v, sizeof(v));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+}
+static CHAOS_IL2CPP_INTPTR reflection_alloc_boxed_int64(CHAOS_IL2CPP_INT64 value) noexcept {
+    auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(16));
+    if (storage == nullptr) return 0;
+    std::memset(storage, 0, 16);
+    const CHAOS_IL2CPP_INTPTR v = static_cast<CHAOS_IL2CPP_INTPTR>(value);
+    std::memcpy(storage + 8, &v, sizeof(v));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+}
+static CHAOS_IL2CPP_INTPTR reflection_alloc_boxed_bool(CHAOS_IL2CPP_INT32 value) noexcept {
+    auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(16));
+    if (storage == nullptr) return 0;
+    std::memset(storage, 0, 16);
+    const CHAOS_IL2CPP_INTPTR v = value ? 1 : 0;
+    std::memcpy(storage + 8, &v, sizeof(v));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+}
+// Box through the runtime's own object model: object_new allocates with a
+// REAL type_info header (the MethodTable symbol is not visible in the runtime
+// TU, so a hand-built zeroed-header box breaks every downstream type_info
+// consumer — assertion Equals dereferenced it and faulted).  Payload is the
+// canonical CHAOS_IL2CPP_INTPTR slot at offset 8.
+static CHAOS_IL2CPP_INTPTR reflection_box_via_runtime(
+    const char* type_full_name, CHAOS_IL2CPP_INT64 value) noexcept {
+    auto* abi = GetRuntimeAbiV0();
+    auto* runtime = GetCurrentRuntimeState();
+    auto* thread = GetCurrentThreadState();
+    if (abi == nullptr || runtime == nullptr || thread == nullptr) return 0;
+    const auto type_handle = ResolveTypeByName(type_full_name);
+    if (type_handle == 0) return 0;
+    auto* obj = abi->object_new(runtime, thread, type_handle);
+    if (obj == nullptr) return 0;
+    *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<unsigned char*>(obj) + 8) =
+        static_cast<CHAOS_IL2CPP_INTPTR>(value);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(obj);
+}
+
+static CHAOS_IL2CPP_INTPTR reflection_box_constant(
+    const ReflectionQueryFieldDescriptor* field) noexcept {
+    if (field == nullptr) return 0;
+    const char* ft = field->member_type_utf8 != nullptr ? field->member_type_utf8 : "";
+    if (std::strcmp(ft, "System.Int32") == 0)
+        return reflection_box_via_runtime("System.Int32", field->constant_value);
+    if (std::strcmp(ft, "System.UInt32") == 0)
+        return reflection_box_via_runtime("System.UInt32", field->constant_value);
+    if (std::strcmp(ft, "System.Boolean") == 0)
+        return reflection_box_via_runtime("System.Boolean", field->constant_value != 0 ? 1 : 0);
+    return reflection_box_via_runtime("System.Int64", field->constant_value);
+}
+
 CHAOS_IL2CPP_INT64 ChaosReflectionFieldGetRawConstantValue(CHAOS_IL2CPP_INTPTR field) noexcept {
     auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
         static_cast<FieldInfoHandle>(field));
     if (decoded == nullptr) return 0;
-    return decoded->constant_value;
+    // BCL GetRawConstantValue() returns object (boxed).  The slot is INTPTR, so
+    // return the boxed object pointer — reinterpret_cast through the INT64 ABI
+    // (see reflection_box_constant for the flavor rationale).
+    return static_cast<CHAOS_IL2CPP_INT64>(reflection_box_constant(decoded));
 }
 
 // ── FieldInfo access-level modifiers (end) ──────────────────────────
@@ -1367,10 +1437,16 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetRequiredCustomModifiers(CHAOS_IL2CPP_
 // GetValueDirect/SetValueDirect operate on a TypedReference. AOT has no
 // TypedReference representation (it is a byref-plus-type runtime construct), so
 // these report unresolved rather than misinterpreting the argument.
-CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetValueDirect(CHAOS_IL2CPP_INTPTR field) noexcept {
+CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetValueDirect(
+    CHAOS_IL2CPP_INTPTR field, CHAOS_IL2CPP_INTPTR /*obj*/) noexcept {
     auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
         static_cast<FieldInfoHandle>(field));
     if (decoded == nullptr) return 0;
+    // Literal (const) fields: value comes from the metadata Constant table
+    // already stored in the descriptor — box per the field's type.  Instance
+    // field storage reads need EEClass offsets (Phase 3+) and return null.
+    if ((decoded->flags & kFieldFlagIsLiteral) != 0u)
+        return reflection_box_constant(decoded);
     return 0;
 }
 

@@ -95,15 +95,32 @@ public sealed partial class NativeAotLoweringPlanner
         /// </summary>
         private static void RegisterUnregisteredReflectionAccessors(RuntimeHelperShapeRegistry registry)
         {
-            // FieldInfo::GetRawConstantValue → ChaosReflectionPropertyGetRawConstantValue
-            // (the native entry is named ...Property... but is the shared constant-value
-            //  decoder; FieldInfo and PropertyInfo both expose the method).
+            // FieldInfo::GetRawConstantValue → ChaosReflectionFieldGetRawConstantValue.
+            // The previous target ...PropertyGetRawConstantValue decodes the argument
+            // as a PROPERTY descriptor — a FIELD handle never decodes there, so the
+            // call returned 0 for every field (B7 si=133).  The field entry also
+            // boxes the constant (BCL returns object, and a raw int64 was
+            // dereferenced as an object pointer by the assertion).
             registry.Register("System.Reflection.FieldInfo", "GetRawConstantValue", [],
-                ShapeKind.SimpleForward, "ChaosReflectionPropertyGetRawConstantValue",
+                ShapeKind.SimpleForward, "ChaosReflectionFieldGetRawConstantValue",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
+
+            // FieldInfo::GetValue(Object) → ChaosReflectionFieldGetValueDirect.
+            // Was a catch-all (no native body) — NotImplementedError on every call
+            // (B7 si=128).  Literal fields box the metadata constant; the obj arg
+            // is accepted for static fields (BCL ignores it there).
+            registry.Register("System.Reflection.FieldInfo", "GetValue", ["System.Object"],
+                ShapeKind.SimpleForward, "ChaosReflectionFieldGetValueDirect",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[]
+                {
+                    CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType)
+                }),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0, 1 });
 
             // PropertyInfo::GetRawConstantValue → ChaosReflectionPropertyGetRawConstantValue
             registry.Register("System.Reflection.PropertyInfo", "GetRawConstantValue", [],

@@ -803,26 +803,29 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value
 // Convert::ChangeType(object, TypeCode) — IConvertible dispatch
 // ═══════════════════════════════════════════════════════════════════
 
-// Allocate a boxed int32 object. Layout: ThinLockableHeader(16B) + int32 value(4B).
-// Pattern from enum_stubs.cpp enum_alloc_boxed_int32.
+// Allocate a boxed int32 object. Canonical layout (chaos_boxed_type_*):
+// PureTypeHeader 8B + CHAOS_IL2CPP_INTPTR payload at offset 8.  The previous
+// 16-byte-header layout was not bit-compatible with codegen boxes.
 static CHAOS_IL2CPP_INTPTR box_int32(CHAOS_IL2CPP_INT32 value) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
-    auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(20));
+    auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(16));
     if (storage == nullptr) return 0;
-    std::memset(storage, 0, 16); // header
-    std::memcpy(storage + 16, &value, sizeof(value));
+    std::memset(storage, 0, 16); // header + zero-extended payload
+    const CHAOS_IL2CPP_INTPTR v = value;
+    std::memcpy(storage + 8, &v, sizeof(v));
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
 }
 
-// Allocate a boxed boolean object. Layout: ThinLockableHeader(16B) + bool(1B).
+// Allocate a boxed boolean object. Canonical layout, payload at offset 8.
 static CHAOS_IL2CPP_INTPTR box_bool(CHAOS_IL2CPP_INT32 value) noexcept
 {
     using namespace chaos::il2cpp::runtime_core;
-    unsigned char* storage = static_cast<unsigned char*>(GcAllocateAtomic(17));
+    unsigned char* storage = static_cast<unsigned char*>(GcAllocateAtomic(16));
     if (storage == nullptr) return 0;
-    std::memset(storage, 0, 16); // header
-    storage[16] = value ? 1 : 0;
+    std::memset(storage, 0, 16); // header + zero-extended payload
+    const CHAOS_IL2CPP_INTPTR v = value ? 1 : 0;
+    std::memcpy(storage + 8, &v, sizeof(v));
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
 }
 

@@ -15,10 +15,25 @@
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
-CHAOS_IL2CPP_INTPTR ChaosObjectEqualsStatic(CHAOS_IL2CPP_INTPTR /*left*/, CHAOS_IL2CPP_INTPTR /*right*/) noexcept
+CHAOS_IL2CPP_INTPTR ChaosObjectEqualsStatic(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right) noexcept
 {
-    CHAOS_IL2CPP_LOG_WARN("Stub", "object_stubs called");
-    return 0;
+    // Was a constant-false stub — every object-typed Assert.AreEqual went
+    // through it and failed (B7 si=128/133).  Same-runtime-type objects compare
+    // their 8-byte payload at the canonical box offset (8).  This covers boxed
+    // primitives (Int32/Int64/Boolean/Char/Double) which is what the assertion
+    // path feeds here; reference types beyond identity still compare unequal
+    // unless pointer-identical.
+    if (left == right) return 1;
+    if (left == 0 || right == 0) return 0;
+    const void* const* l = reinterpret_cast<const void* const*>(left);
+    const void* const* r = reinterpret_cast<const void* const*>(right);
+    // Runtime-made boxes (reflection boxing) carry a zeroed header — the
+    // MethodTable symbol is not visible in the runtime TU.  A null type_info on
+    // either side degrades the check to payload equality; both non-null and
+    // different means different runtime types.
+    if (*l != *r && *l != nullptr && *r != nullptr) return 0;
+    return std::memcmp(reinterpret_cast<const unsigned char*>(left) + 8,
+                       reinterpret_cast<const unsigned char*>(right) + 8, 8) == 0 ? 1 : 0;
 }
 
 void ChaosObjectCtor(CHAOS_IL2CPP_INTPTR /*obj*/) noexcept
