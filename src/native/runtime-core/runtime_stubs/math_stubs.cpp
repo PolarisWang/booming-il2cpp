@@ -658,6 +658,147 @@ CHAOS_IL2CPP_FLOAT32 ChaosMathTanPiF(CHAOS_IL2CPP_FLOAT32 x) noexcept
     return std::tan(kChaosPiF * x);
 }
 
+// ── Classic Math/Double one-arg families — Single counterparts ────────
+// The double natives (ChaosMathExp, ChaosMathCosh, ChaosMathAcos, …) already
+// existed but carried no *shape registration*, so their subjects routed to the
+// operand-less catch-all; there were also no float-width entry points at all.
+// These complete both halves for System.Single::/System.MathF::.
+CHAOS_IL2CPP_FLOAT32 ChaosMathExpF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::exp(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathExp10F(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::pow(10.0f, x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathExp10M1F(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::pow(10.0f, x) - 1.0f;
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathLogF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::log(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathLog10F(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::log10(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathLog10P1F(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::log10(1.0f + x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathLog2M1F(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::log2(x) - 1.0f;
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathCoshF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::cosh(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathSinhF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::sinh(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathTanhF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::tanh(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAcosF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::acos(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAsinF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::asin(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAtanF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::atan(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAtan2F(CHAOS_IL2CPP_FLOAT32 y, CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::atan2(y, x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathTanF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::tan(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathSinF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::sin(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathCosF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::cos(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathPowF(CHAOS_IL2CPP_FLOAT32 x, CHAOS_IL2CPP_FLOAT32 y) noexcept
+{
+    return std::pow(x, y);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathSqrtF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return CHAOS_IL2CPP_SQRT(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathCeilingF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::ceil(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathFloorF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::floor(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathTruncateF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return CHAOS_IL2CPP_TRUNC(x);
+}
+
+// Double-width Exp10 family — same gap as the float ones above.
+CHAOS_IL2CPP_FLOAT64 ChaosMathExp10(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::pow(10.0, x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathExp10M1(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::pow(10.0, x) - 1.0;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathLog10P1(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::log10(1.0 + x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathLog2M1(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::log2(x) - 1.0;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathLogP1(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::log1p(x);
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
 

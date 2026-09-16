@@ -121,7 +121,6 @@ public sealed partial class NativeAotLoweringPlanner
                 RegisterUnaryF(type, "Exp2", "ChaosMathExp2F");
                 RegisterUnaryF(type, "ExpM1", "ChaosMathExpM1F");
                 RegisterUnaryF(type, "Log2", "ChaosMathLog2F");
-                RegisterUnaryF(type, "LogP1", "ChaosMathLog1pF");
                 RegisterUnaryF(type, "ReciprocalEstimate", "ChaosMathReciprocalEstimateF");
                 RegisterUnaryF(type, "ReciprocalSqrtEstimate", "ChaosMathReciprocalSqrtEstimateF");
 
@@ -161,6 +160,51 @@ public sealed partial class NativeAotLoweringPlanner
                 RegisterUnaryF(type, "SinPi", "ChaosMathSinPiF");
                 RegisterUnaryF(type, "TanPi", "ChaosMathTanPiF");
                 RegisterBinaryF(type, "Atan2Pi", "ChaosMathAtan2PiF");
+            }
+
+            // ── Classic Math/Double one-arg families ──────────────────────
+            // ChaosMathExp/Log/Log10/Cosh/Sinh/Tanh/Acos/Asin/Atan/Atan2/Tan
+            // already had native bodies in math_stubs.cpp but NO shape entry,
+            // so their subjects (MathTests::Exp_10, Cosh_9, Acos_0, …) routed
+            // to the operand-less catch-all.  Registering them here completes
+            // the same fix as the IEEE-754 block above.
+            foreach (var type in new[] { "System.Double", "System.Math" })
+            {
+                RegisterUnary(type, "Exp", "ChaosMathExp");
+                RegisterUnary(type, "Log", "ChaosMathLog");
+                RegisterUnary(type, "Log10", "ChaosMathLog10");
+                RegisterUnary(type, "Log10P1", "ChaosMathLog10P1");
+                RegisterUnary(type, "Log2M1", "ChaosMathLog2M1");
+                RegisterUnary(type, "Exp10", "ChaosMathExp10");
+                RegisterUnary(type, "Exp10M1", "ChaosMathExp10M1");
+                RegisterUnary(type, "Cosh", "ChaosMathCosh");
+                RegisterUnary(type, "Sinh", "ChaosMathSinh");
+                RegisterUnary(type, "Tanh", "ChaosMathTanh");
+                RegisterUnary(type, "Acos", "ChaosMathAcos");
+                RegisterUnary(type, "Asin", "ChaosMathAsin");
+                RegisterUnary(type, "Atan", "ChaosMathAtan");
+                RegisterUnary(type, "Tan", "ChaosMathTan");
+                RegisterBinary(type, "Atan2", "ChaosMathAtan2");
+            }
+
+            foreach (var type in new[] { "System.Single", "System.MathF" })
+            {
+                RegisterUnaryF(type, "Exp", "ChaosMathExpF");
+                RegisterUnaryF(type, "Log", "ChaosMathLogF");
+                RegisterUnaryF(type, "Log10", "ChaosMathLog10F");
+                RegisterUnaryF(type, "LogP1", "ChaosMathLog1pF");
+                RegisterUnaryF(type, "Log10P1", "ChaosMathLog10P1F");
+                RegisterUnaryF(type, "Log2M1", "ChaosMathLog2M1F");
+                RegisterUnaryF(type, "Exp10", "ChaosMathExp10F");
+                RegisterUnaryF(type, "Exp10M1", "ChaosMathExp10M1F");
+                RegisterUnaryF(type, "Cosh", "ChaosMathCoshF");
+                RegisterUnaryF(type, "Sinh", "ChaosMathSinhF");
+                RegisterUnaryF(type, "Tanh", "ChaosMathTanhF");
+                RegisterUnaryF(type, "Acos", "ChaosMathAcosF");
+                RegisterUnaryF(type, "Asin", "ChaosMathAsinF");
+                RegisterUnaryF(type, "Atan", "ChaosMathAtanF");
+                RegisterUnaryF(type, "Tan", "ChaosMathTanF");
+                RegisterBinaryF(type, "Atan2", "ChaosMathAtan2F");
             }
         }
     }
