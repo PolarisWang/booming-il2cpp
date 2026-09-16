@@ -1567,14 +1567,61 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetKeyPair(CHAOS_IL2CPP_INTPTR na
 // assertion failures in the reflection chunk once the runner began stamping
 // assertFailed.  The distinction matters: 0 means "no value", empty means
 // "signed with the empty key", and only the latter satisfies the contract.
+// ── AssemblyName public key side table ────────────────────────────
+// AssemblyName::SetPublicKey stores the byte[] on a side table keyed by the
+// managed AssemblyName object (same pattern as chaos_exception_metadata_entries:
+// object-pointer keyed, test-lifetime, GC-compaction caveat accepted).  The
+// previous SetPublicKey catch-all raised NotImplementedException through a path
+// that aborted when the exception type could not be instantiated (B7 si=54/56).
+struct AssemblyNameKeyEntry {
+    CHAOS_IL2CPP_INTPTR name_object;
+    CHAOS_IL2CPP_INTPTR key_array;   // byte[] handle, 0 = none
+};
+static constexpr CHAOS_IL2CPP_UINT32 kMaxAssemblyNameKeys = 64u;
+static AssemblyNameKeyEntry s_assembly_name_keys[kMaxAssemblyNameKeys]{};
+static CHAOS_IL2CPP_UINT32 s_assembly_name_key_count = 0u;
+
+static void AssemblyNameStoreKey(CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR key) noexcept {
+    if (name == 0) return;
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < s_assembly_name_key_count; i++) {
+        if (s_assembly_name_keys[i].name_object == name) {
+            s_assembly_name_keys[i].key_array = key;
+            return;
+        }
+    }
+    if (s_assembly_name_key_count < kMaxAssemblyNameKeys) {
+        s_assembly_name_keys[s_assembly_name_key_count++] = {name, key};
+    }
+}
+
+static CHAOS_IL2CPP_INTPTR AssemblyNameLoadKey(CHAOS_IL2CPP_INTPTR name) noexcept {
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < s_assembly_name_key_count; i++) {
+        if (s_assembly_name_keys[i].name_object == name)
+            return s_assembly_name_keys[i].key_array;
+    }
+    return 0;
+}
+
+extern "C" void ChaosReflectionAssemblyNameSetPublicKey(
+    CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR key) noexcept {
+    AssemblyNameStoreKey(name, key);
+}
+
+extern "C" void ChaosReflectionAssemblyNameSetPublicKeyToken(
+    CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR token) noexcept {
+    AssemblyNameStoreKey(name, token);
+}
+
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetPublicKey(CHAOS_IL2CPP_INTPTR name) noexcept {
     if (name == 0) return 0;
-    return ChaosArrayEmpty_Inline();
+    CHAOS_IL2CPP_INTPTR stored = AssemblyNameLoadKey(name);
+    return stored != 0 ? stored : ChaosArrayEmpty_Inline();
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameGetPublicKeyToken(CHAOS_IL2CPP_INTPTR name) noexcept {
     if (name == 0) return 0;
-    return ChaosArrayEmpty_Inline();
+    CHAOS_IL2CPP_INTPTR stored = AssemblyNameLoadKey(name);
+    return stored != 0 ? stored : ChaosArrayEmpty_Inline();
 }
 
 // AssemblyName.VersionCompatibility — AssemblyVersionCompatibility.SameMachine

@@ -154,6 +154,31 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Reflection.MethodInfo", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0, 1 });
 
+            // AssemblyName::SetPublicKey / SetPublicKeyToken(byte[]) → side-table
+            // store.  Were catch-alls whose NotImplementedException raise aborted
+            // the process when the exception type could not be instantiated
+            // (B7 si=54/56).  GetPublicKey/GetPublicKeyToken return the stored
+            // array, so Set→Get round-trips match the fixture byte-for-byte.
+            registry.Register("System.Reflection.AssemblyName", "SetPublicKey", ["System.Byte[]"],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyNameSetPublicKey",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[]
+                {
+                    CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.Reflection.AssemblyName", "SetPublicKeyToken", ["System.Byte[]"],
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyNameSetPublicKeyToken",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[]
+                {
+                    CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
             // PropertyInfo::GetIndexParameters → already registered in
             // RuntimeHelperShapeRegistry.CoreStubs.Part3.S16.cs (its native entry
             // ChaosReflectionPropertyGetIndexParameters returns an empty array —
