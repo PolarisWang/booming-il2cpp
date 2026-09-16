@@ -289,6 +289,17 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					TrackReferenceType("System.Private.CoreLib/System.String", null);
 				}
+				// ParameterInfo struct is referenced by the B3 parameter-array resolver
+				// (chaos_reflection_get_parameters_b3) emitted by
+				// BuildReflectionMemberDescriptorTables whenever the closure yields any
+				// reflection method metadata.  That resolver constructs a real
+				// ParameterInfo (CHAOS_IL2CPP_NEW_GC) whose struct must be complete.
+				// EmitObjectModelDeclarations runs BEFORE _reflectionMethods is
+				// populated, so whether the closure will emit the resolver cannot be
+				// known at this point — track the type unconditionally (a single struct
+				// with one runtime_name_value field; same pattern as System.Type /
+				// System.String below).
+				TrackReferenceType("System.Private.CoreLib/System.Reflection.ParameterInfo", "System.Private.CoreLib/System.Object");
 				if (IsTypeReflectionHelperSubjectId(instruction.Callee ?? string.Empty))
 				{
 					TrackReferenceType("System.Private.CoreLib/System.Type", "System.Private.CoreLib/System.Object");
