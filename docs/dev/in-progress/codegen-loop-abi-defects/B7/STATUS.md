@@ -178,6 +178,23 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
 18 项 = ATG 域两个任务：①fixture 真实参数生成（12 项）②泛型 AreEqual<T>
 AOT-lowering 决策（5 项）+ 1 项 58 归 ①。
 
+## ⛔ 泛型 AreEqual 重写尝试失败（2026-09-16，已回退）
+
+把泛型 AreEqual<T>/AreNotEqual<T> 的 EqualityComparer<T>.Default 替换为
+object.Equals + 删 typeof(T)（意图消除 lowering 阻断）→ **265→263，
+si=208/209 回红**。In-place revert，265 恢复。
+
+教训：208/209 在 catch-all 状态下是绿的——catch-all raise 后 fact 归类
+把它们计为可接受（异常语义匹配 ATG 期望），而非通过断言。让泛型体
+成功 lowering 反而改变了失败语义，暴露真正未实现的结构化比较路径。
+**"让方法跑起来"≠"让 subject 变绿"** —— 与
+[[fact-real-kind-does-not-detect-thrown-exception]] 同族：改判定前必须
+先理解当前绿是怎么来的。
+
+任务②的真正路径：不是让泛型体可降，而是逐个泛型实例化分析——
+(a) 断言语义能用现有 object overload 覆盖的 → ATG 侧重写调用点绑定；
+(b) 结构化比较（数组）需要真正的循环体实现 + 接口分派支持。
+
 ## Terminal Notes
 
 - B7 调查完成：根因（sentinel 假指针）+ 完整桩清单 + 14 项量化分组 + 修法成本
