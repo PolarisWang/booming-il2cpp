@@ -265,6 +265,85 @@ void ChaosUtf8JsonWriterWriteNumberUInt64(
 }
 
 // ══════════════════════════════════════════════════════════════════
+// WriteNumberValue / WriteStringValue — value-only overloads
+//
+// These are the "current position" variants (no property name): valid only
+// inside an array or at the root.  On a bare/disposed instance the managed
+// implementation throws ObjectDisposedException before any position check.
+// ══════════════════════════════════════════════════════════════════
+
+void ChaosUtf8JsonWriterWriteNumberValueInt(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
+{
+    CheckThis(this_ptr);
+    (void)value;
+    RaiseDisposedOrInvalid();
+}
+
+void ChaosUtf8JsonWriterWriteNumberValueDouble(
+    CHAOS_IL2CPP_INTPTR this_ptr, double value) noexcept
+{
+    CheckThis(this_ptr);
+    (void)value;
+    RaiseDisposedOrInvalid();
+}
+
+void ChaosUtf8JsonWriterWriteNumberValueFloat(
+    CHAOS_IL2CPP_INTPTR this_ptr, float value) noexcept
+{
+    CheckThis(this_ptr);
+    (void)value;
+    RaiseDisposedOrInvalid();
+}
+
+/// WriteNumberValue(decimal) — Decimal arrives as a 16-byte value that does not
+/// fit a scalar ABI slot; it is passed as a pointer to the boxed payload.
+void ChaosUtf8JsonWriterWriteNumberValueDecimal(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    CheckThis(this_ptr);
+    (void)value;
+    RaiseDisposedOrInvalid();
+}
+
+void ChaosUtf8JsonWriterWriteNumberValueUInt(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
+{
+    CheckThis(this_ptr);
+    (void)value;
+    RaiseDisposedOrInvalid();
+}
+
+void ChaosUtf8JsonWriterWriteStringValueStr(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    CheckThis(this_ptr);
+    if (value == 0) RaiseArgumentNullException("value");
+    RaiseDisposedOrInvalid();
+}
+
+/// WriteStringValue(DateTime / DateTimeOffset / Guid) — value types that do not
+/// fit a scalar slot (DateTime/DateTimeOffset are 8-byte structs passed by
+/// pointer; Guid is 16 bytes).  All arrive as an INTPTR to the value payload.
+void ChaosUtf8JsonWriterWriteStringValueStruct(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    CheckThis(this_ptr);
+    (void)value;
+    RaiseDisposedOrInvalid();
+}
+
+/// WriteStringValue(JsonEncodedText) — already-encoded text; the bare writer
+/// still fails the disposed check first.
+void ChaosUtf8JsonWriterWriteStringValueEncoded(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded) noexcept
+{
+    CheckThis(this_ptr);
+    (void)encoded;
+    RaiseDisposedOrInvalid();
+}
+
+// ══════════════════════════════════════════════════════════════════
 // WriteBoolean
 // ══════════════════════════════════════════════════════════════════
 
@@ -358,6 +437,18 @@ void ChaosUtf8JsonWriterWriteCommentValue(
 {
     CheckThis(this_ptr);
     if (comment == 0) RaiseArgumentNullException("comment");
+    RaiseDisposedOrInvalid();
+}
+
+/// WriteTo(Utf8JsonWriter) — JsonDocument/JsonElement/JsonProperty surface.
+/// ATG passes a bare target writer (default(Utf8JsonWriter)!), which the
+/// managed implementation rejects with ArgumentNullException.  Receiver
+/// validity is not checked (the source document is a bare object too).
+void ChaosUtf8JsonWriterWriteTo(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) noexcept
+{
+    (void)this_ptr;
+    if (writer == 0) RaiseArgumentNullException("writer");
     RaiseDisposedOrInvalid();
 }
 
