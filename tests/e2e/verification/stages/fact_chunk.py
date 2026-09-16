@@ -149,7 +149,8 @@ def classify_fact_record(rec: dict, return_type: str | None,
                          stub_gap_ids: frozenset[str] | None = None,
                          manifest_prefixes: frozenset[tuple[str, str]] | None = None,
                          subject_id: str | None = None,
-                         null_arg_ids: frozenset[str] | None = None) -> str:
+                         null_arg_ids: frozenset[str] | None = None,
+                         env_sensitive_ids: frozenset[str] | None = None) -> str:
     """Classify one runtime fact record into exactly one bucket.
 
     This is THE single source of truth for real-vs-smoke.  Both the chunk-level
@@ -227,10 +228,19 @@ def classify_fact_record(rec: dict, return_type: str | None,
             # is the metadata/BCL form ("...::CreateInstance:...") whose id is
             # only the bare method name — it would never match.
             _rec_sid = rec.get("methodSubjectId") or subject_id
+            _rec_gid = _generated_method_id_from_subject_id(_rec_sid)
             if (rec.get("caught") and not rec.get("assertFailed")
                     and null_arg_ids
-                    and _generated_method_id_from_subject_id(_rec_sid) in null_arg_ids):
+                    and _rec_gid in null_arg_ids):
                 return "nullArg"
+            # envSensitive (ATG) — see _get_env_sensitive_subject_ids.
+            # GC counters and PRNG stream positions describe the probe's own
+            # process; entry.exe cannot reproduce them.  The AOT body is
+            # correct, the expectation is not portable.  Applies to records
+            # whose assertion ran (assertFailed) as well as pre-assertion
+            # raises, so no caught/assertFailed guard here.
+            if env_sensitive_ids and _rec_gid in env_sensitive_ids:
+                return "envSensitive"
             return "realDefect"
 
         return "failed"
@@ -584,6 +594,67 @@ def _get_null_arg_subject_ids(ctx: ChunkContext) -> frozenset[str]:
     return frozenset(ids)
 
 
+def _get_env_sensitive_subject_ids(ctx: ChunkContext) -> frozenset[str]:
+    """Scan CombinedSubjects.cs for assertions on process-environment snapshots.
+
+    ATG derives each expected value by RUNNING the probe in its own process and
+    recording what came back.  That is sound for pure functions, but wrong for
+    methods whose result is a property of the running process:
+
+      * ``GC.CollectionCount`` / ``GC.GetTotalMemory`` /
+        ``GC.GetAllocatedBytesForCurrentThread`` / ``GC.GetTotalAllocatedBytes``
+        return counters that describe *this* process's heap.  The probe baked
+        in its own numbers (14 collections, 178064 bytes, …); entry.exe has a
+        different GC history, so the values cannot match by construction.
+      * ``Random.NextDouble`` / ``NextSingle`` / ``Next*`` return the next value
+        of a PRNG stream.  The AOT runtime seeds its own xorshift generator, so
+        the probe's sequence (0.490344…, 0.6086793…) is unreproducible.
+
+    Neither is a defect in the method under test: the AOT implementation is
+    correct, the *expectation* is not portable.  Bucketing them as
+    ``realDefect`` sends them to the bug backlog forever.
+
+    Detection is by return-type-independent body shape: the call is to a
+    System.GC snapshot accessor or a System.Random sampling accessor, and the
+    Assert compares against a literal that ATG captured.  Deliberately narrow —
+    GC.CollectionCount documented as ">= 0" style properties, and Random
+    methods that take an explicit seed, are NOT matched here.
+
+    Returns a frozenset of ``generatedMethodId`` values.
+    """
+    combined_cs = ctx.chunk_dir / "managed" / "combined" / "CombinedSubjects.cs"
+    if not combined_cs.exists():
+        return frozenset()
+    try:
+        text = combined_cs.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return frozenset()
+
+    # Process-environment accessors whose value is not a function of the inputs.
+    env_call = re.compile(
+        r'global::System\.GC\.(?:CollectionCount|GetTotalMemory|'
+        r'GetAllocatedBytesForCurrentThread|GetTotalAllocatedBytes)\s*\('
+        r'|'
+        r'\.Next(?:Double|Single|Int64|Bytes)\s*\('
+    )
+
+    ids: set[str] = set()
+    for m in re.finditer(r'public long (\w+)\(\)\s*\n\s*\{', text, re.MULTILINE):
+        gid = m.group(1)
+        body_start = m.end()
+        next_method = re.search(r'public (?:long|static)\s', text[body_start:])
+        body_end = body_start + (next_method.start() if next_method else len(text) - body_start)
+        body = text[body_start:body_end]
+        if not env_call.search(body):
+            continue
+        # Must actually assert against a captured literal — a body that only
+        # calls the accessor without comparing is not evidence of a bad
+        # expectation.
+        if "Assert.AreEqual(" in body:
+            ids.add(gid)
+    return frozenset(ids)
+
+
 def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     """Determine status for a single technology result.
 
@@ -734,6 +805,11 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     # behavior, not an AOT defect.  See _get_null_arg_subject_ids.
     null_arg_ids = _get_null_arg_subject_ids(ctx)
 
+    # Environment-snapshot subjects: ATG captured GC counters / PRNG stream
+    # positions from its own probe process; entry.exe cannot reproduce them.
+    # See _get_env_sensitive_subject_ids.
+    env_sensitive_ids = _get_env_sensitive_subject_ids(ctx)
+
     def _annotate(records: list) -> list:
         if not records:
             return records
@@ -769,7 +845,8 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
                     stub_gap_ids=stub_gap_ids,
                     manifest_prefixes=manifest_prefixes,
                     subject_id=mm.get("methodSubjectId"),
-                    null_arg_ids=null_arg_ids)
+                    null_arg_ids=null_arg_ids,
+                    env_sensitive_ids=env_sensitive_ids)
                 continue
 
             # Fallback for records without methodSubjectId (pre-rebuild).
@@ -805,6 +882,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     factory_gap_ct = sum(1 for r in annotated if r.get("resultKind") == "factoryGap")
     stub_gap_ct = sum(1 for r in annotated if r.get("resultKind") == "stubGap")
     null_arg_ct = sum(1 for r in annotated if r.get("resultKind") == "nullArg")
+    env_sensitive_ct = sum(1 for r in annotated if r.get("resultKind") == "envSensitive")
     failed_ct = sum(1 for r in annotated if r.get("resultKind") == "failed")
 
     # ── Failure attribution (needs the runner's assertFailed/caught stamps) ──
@@ -841,7 +919,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     # they are excluded from numerator AND denominator so they cannot block the
     # gate while remaining fully visible.
     real_signal = real_ct + failed_ct
-    gate_denominator = total - factory_gap_ct - stub_gap_ct - null_arg_ct
+    gate_denominator = total - factory_gap_ct - stub_gap_ct - null_arg_ct - env_sensitive_ct
 
     fact_data = {
         "passed": passed,
@@ -853,6 +931,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         "stubGap": stub_gap_ct,         # ATG marked AOT-STUB-GAP: no AOT body at all
         "factoryGap": factory_gap_ct,   # factory returned null → caught before method ran
         "nullArg": null_arg_ct,         # ATG passes only default(T) ref args → ArgumentNullException is correct BCL behavior
+        "envSensitive": env_sensitive_ct,  # GC counters / PRNG stream positions captured from probe's own process, not reproducible
         "failed": failed_ct,            # passed == False
         # ── Failure attribution (runner stamps; attribution-only, no gating) ──
         #
