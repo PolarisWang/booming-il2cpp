@@ -903,7 +903,19 @@ public sealed class TestEmitter
                or "WriteString" or "WriteNumber" or "WriteBoolean"
                or "WriteNull" or "WriteNullValue" or "WriteBooleanValue"
                or "WritePropertyName" or "WriteRawValue" or "WriteCommentValue"
-               or "WriteTo")
+               or "WriteTo"
+               or "WriteNumberValue" or "WriteStringValue")
+            return true;
+
+        // JsonDocument / JsonElement / JsonProperty .WriteTo(Utf8JsonWriter):
+        // the bare-object subjects pass default(Utf8JsonWriter)! and the managed
+        // implementation raises ArgumentNullException.  The native stub
+        // (ChaosUtf8JsonWriterWriteTo) replicates that contract.
+        if (declaringType is not null
+            && (declaringType.Contains("System.Text.Json.JsonDocument", StringComparison.Ordinal)
+                || declaringType.Contains("System.Text.Json.JsonElement", StringComparison.Ordinal)
+                || declaringType.Contains("System.Text.Json.JsonProperty", StringComparison.Ordinal))
+            && method.Name is "WriteTo")
             return true;
 
         return false;

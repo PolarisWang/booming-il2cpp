@@ -142,6 +142,53 @@ public sealed partial class NativeAotLoweringPlanner
                 "ChaosUtf8JsonWriterWriteNumberUInt64", wNumOnly, wNumOnlyR,
                 new[] { "System.UInt64" });
 
+            // ── WriteNumberValue (value-only overloads) → void ──
+            // "Value" suffix methods have no property-name argument: valid only
+            // inside an array or at the root.  Same ABI slots as WriteNumber's
+            // value-only overloads.
+            RegisterUtf8WriterVoid(registry, "WriteNumberValue",
+                "ChaosUtf8JsonWriterWriteNumberValueInt", wNumOnly, wNumOnlyR,
+                new[] { "System.Int64" });
+            RegisterUtf8WriterVoid(registry, "WriteNumberValue",
+                "ChaosUtf8JsonWriterWriteNumberValueDouble", wNumOnly, wNumOnlyR,
+                new[] { "System.Double" });
+            RegisterUtf8WriterVoid(registry, "WriteNumberValue",
+                "ChaosUtf8JsonWriterWriteNumberValueFloat",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { wAbi, intAbi }),
+                new HashSet<int> { 0, 1 }, new[] { "System.Single" });
+            RegisterUtf8WriterVoid(registry, "WriteNumberValue",
+                "ChaosUtf8JsonWriterWriteNumberValueUInt", wNumOnly, wNumOnlyR,
+                new[] { "System.UInt64" });
+            // Decimal is a 16-byte value type passed by pointer to the box.
+            var wDec = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { wAbi, objAbi });
+            var wDecR = new HashSet<int> { 0, 1 };
+            RegisterUtf8WriterVoid(registry, "WriteNumberValue",
+                "ChaosUtf8JsonWriterWriteNumberValueDecimal", wDec, wDecR,
+                new[] { "System.Decimal" });
+
+            // ── WriteStringValue (value-only overloads) → void ──
+            RegisterUtf8WriterVoid(registry, "WriteStringValue",
+                "ChaosUtf8JsonWriterWriteStringValueStr",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { wAbi, strAbi }),
+                strR, new[] { "System.String" });
+            // DateTime / DateTimeOffset / Guid: struct values passed by pointer.
+            RegisterUtf8WriterVoid(registry, "WriteStringValue",
+                "ChaosUtf8JsonWriterWriteStringValueStruct", wDec, wDecR,
+                new[] { "System.DateTime" });
+            RegisterUtf8WriterVoid(registry, "WriteStringValue",
+                "ChaosUtf8JsonWriterWriteStringValueStruct", wDec, wDecR,
+                new[] { "System.DateTimeOffset" });
+            RegisterUtf8WriterVoid(registry, "WriteStringValue",
+                "ChaosUtf8JsonWriterWriteStringValueStruct", wDec, wDecR,
+                new[] { "System.Guid" });
+            // JsonEncodedText: encoded value, no managed string decode.
+            RegisterUtf8WriterVoid(registry, "WriteStringValue",
+                "ChaosUtf8JsonWriterWriteStringValueEncoded", wDec, wDecR,
+                new[] { "System.Text.Json.JsonEncodedText" });
+
             // ── WriteBoolean(string propertyName, bool value) → void ──
             var wBool = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                 new[] { wAbi, strAbi, intAbi });
@@ -163,11 +210,37 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(), new HashSet<int> { 0, 1 });
 
             // ── WriteTo(Utf8JsonWriter) → void ──
-            RegisterUtf8WriterVoid(registry, "WriteTo",
-                "ChaosUtf8JsonWriterWriteTo",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
-                    new[] { wAbi, wAbi }),
-                new HashSet<int> { 0, 1 }, new[] { "System.Text.Json.Utf8JsonWriter" });
+            //
+            // The ATG WriteTo subjects belong to JsonDocument, JsonElement and
+            // JsonProperty — NOT to Utf8JsonWriter itself.  Each forwards to the
+            // same native stub: the shared behaviour is "a null target writer is
+            // an ArgumentNullException", which is what the bare-object subjects
+            // pass.  Receiver-typed slots are created per declaring type so the
+            // shape lookup key matches the subject's static type.
+            var jdocAbi = CreateNativeIntAbiSlot(
+                "System.Text.Json/System.Text.Json.JsonDocument",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var jelemAbi = CreateNativeIntAbiSlot(
+                "System.Text.Json/System.Text.Json.JsonElement",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var jpropAbi = CreateNativeIntAbiSlot(
+                "System.Text.Json/System.Text.Json.JsonProperty",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            var writeToR = new HashSet<int> { 0, 1 };
+            foreach (var (typeName, recvAbi) in new[]
+            {
+                ("System.Text.Json.JsonDocument", jdocAbi),
+                ("System.Text.Json.JsonElement", jelemAbi),
+                ("System.Text.Json.JsonProperty", jpropAbi),
+            })
+            {
+                registry.Register(typeName, "WriteTo",
+                    new[] { "System.Text.Json.Utf8JsonWriter" }, ShapeKind.SimpleForward,
+                    "ChaosUtf8JsonWriterWriteTo",
+                    new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                        new[] { recvAbi, wAbi }),
+                    CreateVoidAbiSlot(), writeToR);
+            }
         }
 
         private static void RegisterUtf8WriterVoid(
