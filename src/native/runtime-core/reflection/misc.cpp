@@ -234,19 +234,16 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR typ
     flags = NormalizeBindingFlags(flags);
     auto* desc = ResolveTypeFromReflectionOrGcHandle(type);
 
+    // The generated code indexes the result as a chaos_managed_array (inline
+    // elements right after the header, length at offset 24).  A hand-built
+    // buffer with an out-of-line `elements` pointer has a different bit layout:
+    // the [0] element read then yields the buffer's own length field — a value
+    // without the reflection-handle tag bit — so FieldInfo.GetValue decoded it
+    // to null and Assert.AreEqual failed on a legit-looking 0 (B7 si=128/133).
+    // Allocate a real managed array and copy the encoded handles inline.
     constexpr CHAOS_IL2CPP_UINT32 kMaxFields = 256;
-    struct FieldsBuf {
-        ThinLockableHeader header;
-        CHAOS_IL2CPP_UINT8  element_type_shape;
-        CHAOS_IL2CPP_INTPTR element_type_info;
-        CHAOS_IL2CPP_INTPTR length;
-        CHAOS_IL2CPP_INTPTR* elements;
-    };
-    thread_local FieldsBuf s_buf{};
-    thread_local CHAOS_IL2CPP_INTPTR s_elements[kMaxFields]{};
-
-    uint32_t total = 0;
     const ReflectionQueryFieldDescriptor* fields = nullptr;
+    CHAOS_IL2CPP_UINT32 total = 0;
 
     if (desc != nullptr && desc->fields != nullptr) {
         total = desc->field_count > kMaxFields ? kMaxFields : desc->field_count;
@@ -265,20 +262,26 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR typ
 
     if (fields == nullptr) return 0;
 
+    thread_local CHAOS_IL2CPP_INTPTR s_handles[kMaxFields]{};
     uint32_t idx = 0;
     for (CHAOS_IL2CPP_UINT32 i = 0; i < total; i++) {
         if (MatchFieldFlags(fields[i].flags, flags)) {
-            s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+            s_handles[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
                 EncodeReflectionQueryFieldHandle(&fields[i]));
         }
     }
+    if (idx == 0) return 0;
 
-    s_buf = FieldsBuf{};
-    s_buf.element_type_shape = 1;
-    s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(idx);
-    s_buf.elements = s_elements;
-
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
+    auto* arr = reinterpret_cast<chaos::il2cpp::jit::chaos_managed_array*>(
+        ChaosArrayNew1D(
+            &chaos::il2cpp::jit::chaos_type_info_managed_array.hot,
+            &chaos::il2cpp::jit::chaos_type_info_managed_array.hot,
+            chaos::il2cpp::jit::chaos_type_shape_value,
+            static_cast<CHAOS_IL2CPP_INTPTR>(idx)));
+    if (arr == nullptr) return 0;
+    std::memcpy(chaos::il2cpp::jit::chaos_array_get_elements(arr),
+                s_handles, idx * sizeof(CHAOS_IL2CPP_INTPTR));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
 // ── GetPropertiesBindingflags ──────────────────────────────────────

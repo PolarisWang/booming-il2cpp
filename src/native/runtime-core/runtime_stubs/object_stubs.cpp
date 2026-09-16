@@ -6,6 +6,7 @@
 #include "generated_code_compat.h"
 
 #include <cstring>
+#include <cstdio>
 
 #include "gc/gc_layout.h"
 #include "gc/gc_helpers.h"
@@ -31,7 +32,21 @@ CHAOS_IL2CPP_INTPTR ChaosObjectEqualsStatic(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2C
     // MethodTable symbol is not visible in the runtime TU.  A null type_info on
     // either side degrades the check to payload equality; both non-null and
     // different means different runtime types.
-    if (*l != *r && *l != nullptr && *r != nullptr) return 0;
+    //
+    // EXCEPT: the codegen MethodTable (chaos_mt_*) and the runtime shadow type
+    // (what object_new installs via ResolveTypeByName) are two DISTINCT
+    // TypeInfoHot instances describing the SAME type — reflection_box_via_runtime
+    // produces the latter, codegen literal boxes the former, and pointer
+    // inequality wrongly failed every cross-compare (B7 si=128/133:
+    // Assert.AreEqual(2147483647, FieldInfo.GetValue(...)) → assertFailed=true).
+    // The stable_id is the type's codegen-computed identity (FNV64 of the
+    // subject id, ComputeStableTypeId) and is identical for both instances, so
+    // it is the honest same-type test.
+    if (*l != *r && *l != nullptr && *r != nullptr) {
+        const auto* lti = static_cast<const chaos::il2cpp::common::TypeInfoHot*>(*l);
+        const auto* rti = static_cast<const chaos::il2cpp::common::TypeInfoHot*>(*r);
+        if (lti->stable_id != rti->stable_id) return 0;
+    }
     return std::memcmp(reinterpret_cast<const unsigned char*>(left) + 8,
                        reinterpret_cast<const unsigned char*>(right) + 8, 8) == 0 ? 1 : 0;
 }

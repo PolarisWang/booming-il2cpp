@@ -595,25 +595,28 @@ static CHAOS_IL2CPP_INTPTR reflection_alloc_boxed_bool(CHAOS_IL2CPP_INT32 value)
     std::memcpy(storage + 8, &v, sizeof(v));
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
 }
-// Box through the runtime's own object model: object_new allocates with a
-// REAL type_info header (the MethodTable symbol is not visible in the runtime
-// TU, so a hand-built zeroed-header box breaks every downstream type_info
-// consumer — assertion Equals dereferenced it and faulted).  Payload is the
-// canonical CHAOS_IL2CPP_INTPTR slot at offset 8.
+// Box a field constant in the canonical codegen flavor: 16B storage with an
+// 8-byte (zeroed) PureTypeHeader + CHAOS_IL2CPP_INTPTR payload at offset 8.
+//
+// Two earlier flavors both failed the assertion cross-compare:
+//  - raw int64 returns: callers dereference them as object pointers → SEH.
+//  - object_new instances: the shadow-object model's 16-byte ThinLockableHeader
+//    puts the first field at offset 16, while codegen boxes (chaos_boxed_type_*,
+//    payload @8) — what Assert.AreEqual's literal side produces — sit at 8.
+//    ChaosObjectEqualsStatic then compares the header pad as the payload.
+// The zeroed header is deliberate and accepted: ChaosObjectEqualsStatic
+// degrades a null type_info to payload-only comparison, and the previous
+// ResolveTypeByName-based identity lookup returned 0 for BCL primitives like
+// System.Int32 in per-family builds (they are not reflection-query types),
+// which nulled the whole box (B7 si=128/133).
 static CHAOS_IL2CPP_INTPTR reflection_box_via_runtime(
-    const char* type_full_name, CHAOS_IL2CPP_INT64 value) noexcept {
-    auto* abi = GetRuntimeAbiV0();
-    auto* runtime = GetCurrentRuntimeState();
-    auto* thread = GetCurrentThreadState();
-    if (abi == nullptr || runtime == nullptr || thread == nullptr) return 0;
-    const auto type_handle = ResolveTypeByName(type_full_name);
-    if (type_handle == 0) return 0;
-    auto* obj = abi->object_new(runtime, thread, type_handle);
-    if (obj == nullptr) return 0;
-    *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
-        reinterpret_cast<unsigned char*>(obj) + 8) =
-        static_cast<CHAOS_IL2CPP_INTPTR>(value);
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(obj);
+    const char* /*type_full_name*/, CHAOS_IL2CPP_INT64 value) noexcept {
+    auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(16));
+    if (storage == nullptr) return 0;
+    std::memset(storage, 0, 16);
+    const CHAOS_IL2CPP_INTPTR v = static_cast<CHAOS_IL2CPP_INTPTR>(value);
+    std::memcpy(storage + 8, &v, sizeof(v));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
 }
 
 static CHAOS_IL2CPP_INTPTR reflection_box_constant(
