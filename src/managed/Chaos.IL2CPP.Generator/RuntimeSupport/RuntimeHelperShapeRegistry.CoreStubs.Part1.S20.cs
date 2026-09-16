@@ -392,6 +392,82 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterXmlDomVoid(registry, "System.Xml.XmlDocument", "LoadXml",
                 "ChaosXmlDocumentLoadXml", docStr2, dsr, new[] { "System.String" });
 
+            // ── XmlDocument residual factories (T2) ──
+            // CreateNode / CreateDocumentType / CreateXmlDeclaration /
+            // CreateProcessingInstruction / Validate / ImportNode / ReadNode /
+            // Load(Stream) / Save(Stream) — the shapes whose ABI slots were
+            // straightforward and the previous run only covered the string-1-arg
+            // subset.  All native implementations currently raise
+            // ArgumentNullException/ArgumentException for null args and
+            // NotSupportedException for valid inputs that need a real DOM tree.
+            //
+            // CreateNode(string nodeTypeString, string name, string ns) → XmlNode
+            registry.Register("System.Xml.XmlDocument", "CreateNode",
+                new[] { "System.String", "System.String", "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlDocumentCreateNodeStr",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, strAbi, strAbi, strAbi }),
+                nodeAbi, new HashSet<int> { 0, 1, 2, 3 });
+
+            // CreateDocumentType(name, pubid, sysid, subset) → XmlDocumentType
+            registry.Register("System.Xml.XmlDocument", "CreateDocumentType",
+                new[] { "System.String", "System.String", "System.String", "System.String" },
+                ShapeKind.SimpleForward,
+                "ChaosXmlDocumentCreateDocumentType",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, strAbi, strAbi, strAbi, strAbi }),
+                nodeAbi, new HashSet<int> { 0, 1, 2, 3, 4 });
+
+            // CreateXmlDeclaration(version, encoding, standalone) → XmlDeclaration
+            registry.Register("System.Xml.XmlDocument", "CreateXmlDeclaration",
+                new[] { "System.String", "System.String", "System.String" },
+                ShapeKind.SimpleForward,
+                "ChaosXmlDocumentCreateXmlDeclaration",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, strAbi, strAbi, strAbi }),
+                nodeAbi, new HashSet<int> { 0, 1, 2, 3 });
+
+            // CreateProcessingInstruction(target, data) → XmlProcessingInstruction
+            registry.Register("System.Xml.XmlDocument", "CreateProcessingInstruction",
+                new[] { "System.String", "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlDocumentCreateProcessingInstruction",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, strAbi, strAbi }),
+                nodeAbi, new HashSet<int> { 0, 1, 2 });
+
+            // ReadNode(XmlReader) → XmlNode
+            var readerAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.XmlReader",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            registry.Register("System.Xml.XmlDocument", "ReadNode",
+                new[] { "System.Xml.XmlReader" }, ShapeKind.SimpleForward,
+                "ChaosXmlDocumentReadNode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, readerAbi }),
+                nodeAbi, new HashSet<int> { 0, 1 });
+
+            // ImportNode(XmlNode, bool) → XmlNode
+            registry.Register("System.Xml.XmlDocument", "ImportNode",
+                new[] { "System.Xml.XmlNode", "System.Boolean" }, ShapeKind.SimpleForward,
+                "ChaosXmlDocumentImportNode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, nodeAbi, intAbi }),
+                nodeAbi, new HashSet<int> { 0, 1, 2 });
+
+            // Validate(ValidationEventHandler) → void
+            RegisterXmlDomVoid(registry, "System.Xml.XmlDocument", "Validate",
+                "ChaosXmlDocumentValidate",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, objAbi }),
+                new HashSet<int> { 0, 1 }, new[] { "System.Xml.Schema.ValidationEventHandler" });
+
+            // Save(Stream) → void  (return slot is the stream handle)
+            RegisterXmlDomVoid(registry, "System.Xml.XmlDocument", "Save",
+                "ChaosXmlDocumentSaveStream",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, objAbi }),
+                new HashSet<int> { 0, 1 }, new[] { "System.IO.Stream" });
+
             // ── XmlCharacterData ──
             registry.Register("System.Xml.XmlCharacterData", "Substring",
                 new[] { "System.Int32", "System.Int32" }, ShapeKind.SimpleForward,

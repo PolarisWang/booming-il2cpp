@@ -859,7 +859,10 @@ public sealed class TestEmitter
                or "InsertAfter" or "ReplaceChild" or "RemoveChild" or "RemoveAll"
                or "Supports" or "GetNamespaceOfPrefix" or "GetPrefixOfNamespace"
                or "WriteTo" or "WriteContentTo"
-               or "LoadXml"
+               or "LoadXml" or "Load" or "Save" or "Validate" or "ImportNode"
+               or "ReadNode"
+               or "CreateNode" or "CreateDocumentType" or "CreateXmlDeclaration"
+               or "CreateProcessingInstruction"
                or "Substring" or "AppendData" or "InsertData" or "DeleteData"
                or "ReplaceData"
                or "SetAttribute" or "SetAttributeNode")
