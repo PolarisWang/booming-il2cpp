@@ -153,6 +153,18 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
 | B（GetMembers×6） | 新立子任务 | 需 MemberInfo 托管对象模型设计 |
 | C（GetMethod 2-arg×6） | 新立子任务 | 需 descriptor 携带参数类型（跨层，同 A2 模式） |
 
+## ✅ 剩余 19 项完整地图（2026-09-16 逐项诊断）
+
+| 组 | si | 根因 | 修复层 | 前置 |
+|---|---|---|---|---|
+| nullArg | 76/88/90/92/94/106/107/108/109（9） | ATG 传 default(T) → BCL 正确抛 ArgumentNullException（分类器已判 nullArg=正确行为） | **ATG fixture 生成**（真实实例） | ATG 参数生成线 |
+| 泛型断言 | 209 | Assert.AreEqual<MethodInfo> 泛型实例化 catch-all（GetSetMethod ABI 修复 `5603d770f` 后暴露的下一层） | ATG stubGap 判定/AOT probe | ATG 白名单线 |
+| MemberInfo 家族 | 138/139/141/142 | runtime 风味访问器收托管对象，编码句柄解码失败——需托管对象→句柄桥（偏移表+柔性解码）或对象模型实现 | 对象模型 | **MemberInfo 托管模型**（设计级新任务） |
+| GetPublicKey | 54/56 | abort 点未定位 | cdb | debug-20-real-defects |
+| 语义断言 | 58/128/133 | ReferenceMatchesDefinition / FieldInfo.GetValue / GetRawConstantValue 实现语义缺口 | runtime | 逐个专项 |
+
+**结论**：剩余项分属 3 个域外任务（ATG fixture / ATG stubGap / MemberInfo 模型）+ 1 个 cdb 专项 + 3 个 runtime 语义专项。B7 的原生缺陷（sentinel/ABI/遮蔽/槽位）已全部闭环，**264/283 中所有仍失败项均不再属于 B7 的修复范围**。
+
 ## Terminal Notes
 
 - B7 调查完成：根因（sentinel 假指针）+ 完整桩清单 + 14 项量化分组 + 修法成本
