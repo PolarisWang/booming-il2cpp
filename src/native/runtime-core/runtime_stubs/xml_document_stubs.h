@@ -36,7 +36,12 @@ void ChaosXmlNodeWriteContentTo(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPT
 
 // ── XmlDocument ──
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement2(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix, CHAOS_IL2CPP_INTPTR local_name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement3(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix, CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute2(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix, CHAOS_IL2CPP_INTPTR local_name) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute3(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix, CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentGetElementsByTagName2(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNode(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node_type);
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNodeStr(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node_type_str, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR ns_uri) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateProcessingInstruction(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR target, CHAOS_IL2CPP_INTPTR data) noexcept;

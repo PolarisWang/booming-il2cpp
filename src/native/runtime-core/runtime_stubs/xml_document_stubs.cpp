@@ -215,6 +215,33 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement(
     RaiseNotSupported();
 }
 
+/// CreateElement(prefix, localName, ns) — the managed impl validates the local
+/// name then forwards to the 1-arg path; on a bare object the validation
+/// failure (or the NotSupported DOM construction) is identical.
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement3(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    (void)prefix; (void)ns;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(local_name, n, n_len))
+        RaiseArgumentNullException("name");
+    if (n_len == 0)
+        RaiseArgException("The name parameter cannot be empty.");
+    RaiseNotSupported();
+}
+
+/// CreateElement(prefix, localName) — 2-arg form forwarded to the 3-arg stub.
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement2(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR local_name) noexcept
+{
+    return ChaosXmlDocumentCreateElement3(this_ptr, prefix, local_name, 0);
+}
+
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
 {
@@ -232,6 +259,34 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNode(
 {
     (void)this_ptr; (void)node_type;
     RaiseNotSupported();
+}
+
+/// CreateAttribute(prefix, localName, ns) — dedi-cated symbol so the codegen
+/// call site (which passes all three ABI slots) links.  Validation mirrors the
+/// 1-arg form: the local name is the only component the bare-object contract
+/// inspects.
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute3(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    (void)prefix; (void)ns;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(local_name, n, n_len))
+        RaiseArgumentNullException("name");
+    if (n_len == 0)
+        RaiseArgException("The name parameter cannot be empty.");
+    RaiseNotSupported();
+}
+
+/// CreateAttribute(prefix, localName) — 2-arg form forwarded to the 3-arg stub.
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute2(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR local_name) noexcept
+{
+    return ChaosXmlDocumentCreateAttribute3(this_ptr, prefix, local_name, 0);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNodeStr(
@@ -344,6 +399,18 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr
 {
     (void)this_ptr;
     RaiseNotSupported();
+}
+
+/// GetElementsByTagName(localName, ns) — 2-arg form; the namespace qualifier
+/// does not change the bare-object contract (ArgumentNullException for a null
+/// local name, InvalidOperationException otherwise).
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentGetElementsByTagName2(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR local_name,
+    CHAOS_IL2CPP_INTPTR ns) noexcept
+{
+    (void)ns;
+    return ChaosXmlDocumentGetElementsByTagName(this_ptr, local_name);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentReadNode(

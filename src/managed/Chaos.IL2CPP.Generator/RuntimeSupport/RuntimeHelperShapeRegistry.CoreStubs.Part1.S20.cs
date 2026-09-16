@@ -385,6 +385,45 @@ public sealed partial class NativeAotLoweringPlanner
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { docAbi }),
                 objAbi, rawThis);
 
+            // ── XmlDocument multi-arg overloads ──
+            //
+            // Each shape key is (type, method, paramTypes), so the 2- and 3-arg
+            // overloads need their own registration even though the native stub
+            // validates only the first name argument.  The extra qualifier /
+            // namespace slots are accepted (raw INTPTR, passed through) and
+            // ignored by the stub: on a bare XmlDocument every overload throws the
+            // same ArgumentException/ArgumentNullException regardless of the
+            // additional parts, which is what the ATG subjects assert.
+            var docStr2Slots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { docAbi, strAbi, strAbi });
+            var docStr2R = new HashSet<int> { 0, 1, 2 };
+            var docStr3Slots = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { docAbi, strAbi, strAbi, strAbi });
+            var docStr3R = new HashSet<int> { 0, 1, 2, 3 };
+
+            // CreateElement(string prefix, string localName) / (…, string ns)
+            registry.Register("System.Xml.XmlDocument", "CreateElement",
+                new[] { "System.String", "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlDocumentCreateElement2", docStr2Slots, elemAbi, docStr2R);
+            registry.Register("System.Xml.XmlDocument", "CreateElement",
+                new[] { "System.String", "System.String", "System.String" },
+                ShapeKind.SimpleForward,
+                "ChaosXmlDocumentCreateElement3", docStr3Slots, elemAbi, docStr3R);
+
+            // CreateAttribute(string prefix, string localName) / (…, string ns)
+            registry.Register("System.Xml.XmlDocument", "CreateAttribute",
+                new[] { "System.String", "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlDocumentCreateAttribute2", docStr2Slots, attrAbi, docStr2R);
+            registry.Register("System.Xml.XmlDocument", "CreateAttribute",
+                new[] { "System.String", "System.String", "System.String" },
+                ShapeKind.SimpleForward,
+                "ChaosXmlDocumentCreateAttribute3", docStr3Slots, attrAbi, docStr3R);
+
+            // GetElementsByTagName(string localName, string ns)
+            registry.Register("System.Xml.XmlDocument", "GetElementsByTagName",
+                new[] { "System.String", "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlDocumentGetElementsByTagName2", docStr2Slots, objAbi, docStr2R);
+
             // ── XmlDocument: void-returning operations ──
             var dsr = new HashSet<int> { 0, 1 };
             var docStr2 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
