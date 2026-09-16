@@ -1039,6 +1039,28 @@ def _cache_entry_cached_at(cache, cache_key: str) -> str:
         return ""
 
 
+def _invalidate_stale_results(ctx: ChunkContext) -> None:
+    """Rename stale fact results when the build fails.
+
+    A failed build leaves the previous run's fact.json / fact-results.json in
+    the chunk results dir.  Consumers that read them without checking mtimes
+    (humans and dashboards alike) then mistake pre-fix numbers for current
+    ones — this produced a whole session of "the fix didn't work" against an
+    entry.exe that was never relinked (see B7 STATUS 2026-09-15).  Missing
+    data is recoverable; lying data is not.
+    """
+    results_dir = ctx.chunk_dir / "results"
+    for name in ("fact.json", "fact-results.json"):
+        stale = results_dir / name
+        if stale.exists():
+            marked = results_dir / f"{stale.stem}.stale{stale.suffix}"
+            try:
+                stale.replace(marked)
+                print(f"  [build] invalidated stale result: {name} → {marked.name}")
+            except OSError as exc:
+                print(f"  [build] WARNING: could not invalidate {name}: {exc}")
+
+
 def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     """Build stage: AutoTestGenerator -> subjects DLL -> TPG -> entry.exe."""
     start = time.perf_counter()
@@ -1657,6 +1679,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             print(f"  [TPG:out] {line}")
 
         if tpg_result.returncode != 0:
+            _invalidate_stale_results(ctx)
             return StageResult(
                 stage="build", status="error",
                 summary=f"TPG generate-dll failed (rc={tpg_result.returncode})",
@@ -1676,6 +1699,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
 
     entry_exe = ctx.entry_exe_path
     if not entry_exe.exists():
+        _invalidate_stale_results(ctx)
         return StageResult(
             stage="build", status="error",
             summary=f"entry.exe not produced at {entry_exe}",

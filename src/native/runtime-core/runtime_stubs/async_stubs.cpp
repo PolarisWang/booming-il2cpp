@@ -1273,9 +1273,13 @@ CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitToken(CHAOS_IL2CPP_INTPTR task_handle,
     return ChaosAsyncTaskWait(task_handle, -1);
 }
 
-/// `Task.Wait()` — the parameterless overload: a single-slot entry whose whole
-/// contract is "block until complete".  See the header for why this is its own
-/// symbol rather than a 2-arg call with -1 baked into an inline body.
+/// `Task.Wait()` — the parameterless overload: INFINITE wait.
+///
+/// Its own symbol (rather than reusing the 2-arg ChaosAsyncTaskWait with a -1
+/// baked into an inline body) because a GenericShapeResolution carrying
+/// DirectNativeSymbol makes codegen emit a direct call with the CALL SITE's
+/// arguments — the inline body's -1 is discarded, producing
+/// `ChaosAsyncTaskWait(handle)` against a 2-parameter definition (C2660).
 CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitInfinite(CHAOS_IL2CPP_INTPTR task_handle) noexcept
 {
     return ChaosAsyncTaskWait(task_handle, -1);

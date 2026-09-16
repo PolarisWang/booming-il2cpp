@@ -815,8 +815,14 @@ public sealed class TestEmitter
         // (ArgumentOutOfRangeException for a null/empty name,
         // ArgumentNullException for a null buffer, InvalidOperationException for
         // ResolveEntity at an invalid position).
+        //
+        // XmlValidatingReader & XmlNodeReader share the same exception contracts
+        // for GetAttribute/MoveToAttribute/ResolveEntity on a bare object, so
+        // they are included here too.
         if (declaringType is not null
-            && declaringType.Contains("System.Xml.XmlTextReader", StringComparison.Ordinal)
+            && (declaringType.Contains("System.Xml.XmlTextReader", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlValidatingReader", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlNodeReader", StringComparison.Ordinal))
             && method.Name is "MoveToAttribute" or "GetAttribute"
                or "ReadContentAsBase64" or "ReadContentAsBinHex"
                or "ReadElementContentAsBase64" or "ReadElementContentAsBinHex"
@@ -881,6 +887,35 @@ public sealed class TestEmitter
                or "GetNamedItem" or "AddNamespace" or "RemoveNamespace"
                or "LookupNamespace" or "LookupPrefix" or "HasNamespace"
                or "PopScope" or "PushScope")
+            return true;
+
+        // System.Text.Json.Utf8JsonWriter (M3): ATG subjects construct this type
+        // through SubjectInstanceFactory.Create<Utf8JsonWriter>() — a bare
+        // GetUninitializedObject instance whose instance methods throw
+        // ObjectDisposedException / InvalidOperationException / ArgumentNullException
+        // from the managed implementation.  The native stubs (json_writer_stubs.cpp)
+        // replicate those contracts.  Only methods with stubs are listed.
+        if (declaringType is not null
+            && declaringType.Contains("System.Text.Json.Utf8JsonWriter", StringComparison.Ordinal)
+            && method.Name is "Flush" or "Dispose" or "Reset"
+               or "WriteStartObject" or "WriteStartArray" or "WriteEndObject"
+               or "WriteEndArray"
+               or "WriteString" or "WriteNumber" or "WriteBoolean"
+               or "WriteNull" or "WriteNullValue" or "WriteBooleanValue"
+               or "WritePropertyName" or "WriteRawValue" or "WriteCommentValue"
+               or "WriteTo"
+               or "WriteNumberValue" or "WriteStringValue")
+            return true;
+
+        // JsonDocument / JsonElement / JsonProperty .WriteTo(Utf8JsonWriter):
+        // the bare-object subjects pass default(Utf8JsonWriter)! and the managed
+        // implementation raises ArgumentNullException.  The native stub
+        // (ChaosUtf8JsonWriterWriteTo) replicates that contract.
+        if (declaringType is not null
+            && (declaringType.Contains("System.Text.Json.JsonDocument", StringComparison.Ordinal)
+                || declaringType.Contains("System.Text.Json.JsonElement", StringComparison.Ordinal)
+                || declaringType.Contains("System.Text.Json.JsonProperty", StringComparison.Ordinal))
+            && method.Name is "WriteTo")
             return true;
 
         return false;

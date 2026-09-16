@@ -69,6 +69,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterXmlConvertGroup(registry);
             RegisterXmlTextReaderResidual(registry);
             RegisterXmlDomGroup(registry);
+            RegisterUtf8JsonWriterGroup(registry);
             RegisterMonitor(registry);
             RegisterThread(registry);
             RegisterThreadSleep(registry);
