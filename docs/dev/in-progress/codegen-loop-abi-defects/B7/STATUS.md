@@ -182,7 +182,21 @@ MemberInfo 在本运行时是编码句柄（descriptor 指针），没有托管�
   ↓ 已暴露
 层2  ✅ 已修（8bd4c84f8）：methods 表已发射进描述符
   ↓ 已暴露
-层1b 🔴→🟡 当前阻断（已精确定位，2026-09-15 cdb+stderr 探针闭环）：
+层1c 🟡 2026-09-16 新阻断（coerce v2 落地后）：**resolve_method_handle
+     switch 只有 5 个 case（全是测试 subject 自己声明的类型）**——
+     BCL 类型（System.String 等）不在 `_methodsGroupedByDeclaringType`
+     里，因此 coerce 成功建出托管 Type、runtime_type_handle 正确、
+     但 GetMethod("IndexOf") 仍在 switch 未命中 → 返 0 → NRE。
+     下一步（层3，object-model 味道）：codegen 时把 B3 方法描述符
+     （String 264 个方法等）也生成进 resolve_method_handle switch
+     （name → GetTypeHandleLiteral(methodSubjectId) 的伪方法句柄，
+     全部 codegen 期常量，无 runtime 依赖）。⚠️ 不要桥接 runtime 的
+     tag-bit 编码句柄——两种句柄风味不同，下游对象模型消费不了。
+  → coerce v2 已落地（b0661f06b）：as_managed_type 三路归一化
+     （托管对象原样 / 裸 TypeInfoHot* 经 stable_id→handle 映射 /
+     未知透传保持旧语义）。passed 253→254（si=146 转绿），零回归。
+     v1 教训（nullptr 崩溃）与 reserved_flags 被 enum flag 占用的
+     约束见 2026-09-15 记录。
      双重值模型错配，两层叠加：
      (a) typeof 折叠（A2.7）推裸 TypeInfoHot*，而【generated 对象模型】
          （native-aot.generated.cpp:28207 ChaosReflectionGetMethod，自
