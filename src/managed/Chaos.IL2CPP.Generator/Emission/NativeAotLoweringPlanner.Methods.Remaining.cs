@@ -493,6 +493,14 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("} // namespace chaos::il2cpp::codegen::" + codegenNamespace);
         sb.AppendLine();
 
+        // Managed reflection object-model accessors called directly from subject
+        // pages (global scope, extern "C"): definitions live on page 0 in the
+        // object model.  chaos_reflection_get_parameters_managed replaces the old
+        // C++-linkage ChaosReflectionGetParameters whose call sites were shadowed
+        // by the runtime's extern "C" symbol of the same name (see B7).
+        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_managed(CHAOS_IL2CPP_INTPTR chaos_method_value) noexcept;");
+        sb.AppendLine();
+
         // ── External runtime dispatch table (global scope) ──
         // Bridge thunks in page files call through kChaosExternalRuntimeFnTable[idx].
         // The array is defined in the module registration section.
@@ -873,7 +881,8 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("        static_cast<CHAOS_IL2CPP_UINTPTR>(1) << ((sizeof(CHAOS_IL2CPP_UINTPTR) * 8u) - 1u);");
         sb.AppendLine("    return static_cast<CHAOS_IL2CPP_INTPTR>(");
         sb.AppendLine("        reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kReflImage) | tag);");
-        sb.AppendLine("}");        sb.AppendLine("}  // namespace chaos::il2cpp::codegen::" + codegenNamespace);
+        sb.AppendLine("}");
+        sb.AppendLine("}  // namespace chaos::il2cpp::codegen::" + codegenNamespace);
 
         sb.AppendLine();
 

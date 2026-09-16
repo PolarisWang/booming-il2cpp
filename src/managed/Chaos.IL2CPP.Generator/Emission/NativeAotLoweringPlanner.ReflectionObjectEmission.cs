@@ -1161,7 +1161,13 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine("    }");
 				builder.AppendLine("}");
 
-				builder.AppendLine("CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameters(CHAOS_IL2CPP_INTPTR chaos_method_value)");
+				// extern "C" + snake_case: subject pages call this directly, and the
+				// old C++-linkage name ChaosReflectionGetParameters was SHADOWED by the
+				// runtime's extern "C" declaration (reflection_api.h) — the subject's
+				// call bound to the runtime version, which decodes a managed MethodInfo
+				// OBJECT pointer as a method handle, returns 0, and the caller's [0]
+				// null check FAIL_FASTs (B7 C-group tail abort).
+				builder.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_managed(CHAOS_IL2CPP_INTPTR chaos_method_value) noexcept");
 				builder.AppendLine("{");
 				builder.AppendLine("    if (chaos_method_value == 0)");
 				builder.AppendLine("    {");

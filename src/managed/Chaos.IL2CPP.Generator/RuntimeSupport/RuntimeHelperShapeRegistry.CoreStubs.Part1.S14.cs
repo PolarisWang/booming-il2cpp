@@ -51,7 +51,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0 });
 
             registry.Register("System.Reflection.MethodBase", "GetParameters", [],
-                ShapeKind.SimpleForward, "ChaosReflectionGetParameters",
+                ShapeKind.SimpleForward, "chaos_reflection_get_parameters_managed",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
