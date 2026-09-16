@@ -350,19 +350,30 @@ public sealed partial class NativeAotLoweringPlanner
                 }
                 PushSlotType(SlotType.NativeInt);
                 break;
+            // Float carriers push a BIT-ENCODED INTPTR (ChaosStoreFloat64/Float32)
+            // into a NativeInt slot, recording NativeInt on the type stack.  This
+            // is the single canonical eval-stack representation for float64/32:
+            // every consumer then handles it uniformly —
+            //   - stloc (NativeInt) stores the slot verbatim, no re-encoding
+            //   - FormatAbiArgumentExpression(Float64) → ChaosLoadFloat64(slot)
+            //   - ArgBuffer WriteF64 → ChaosLoadFloat64(slot)
+            // The previous `PushSlotType(Float64)` made stloc wrap the value in
+            // ChaosStoreFloat64 a second time; on an already-encoded INTPTR that
+            // is an implicit int64→double *numeric* conversion (not a bitcast),
+            // so Math::Cos(0.0) stored garbage instead of 1.0.
             case AotCoreIrAbiCarrierKind.Float32:
                 pushLines =
                 [
                     $"{indentation}{AllocateEvalStackTargetExpression()} = ChaosStoreFloat32({resultExpression});"
                 ];
-                PushSlotType(SlotType.Float32);
+                PushSlotType(SlotType.NativeInt);
                 break;
             case AotCoreIrAbiCarrierKind.Float64:
                 pushLines =
                 [
                     $"{indentation}{AllocateEvalStackTargetExpression()} = ChaosStoreFloat64({resultExpression});"
                 ];
-                PushSlotType(SlotType.Float64);
+                PushSlotType(SlotType.NativeInt);
                 break;
             case AotCoreIrAbiCarrierKind.Int64:
                 pushLines =

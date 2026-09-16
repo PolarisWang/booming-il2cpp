@@ -296,14 +296,16 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             case "ldc.r8":
                 {
-                    EmitEvalStackPush(builder, indentation, FormatFloat64Literal(GetRequiredDoubleOperand(instruction)), SlotType.Float64);
-                    PushSlotType(SlotType.Float64);
+                    EmitEvalStackPush(builder, indentation,
+                        $"ChaosStoreFloat64({FormatFloat64Literal(GetRequiredDoubleOperand(instruction))})");
+                    PushSlotType(SlotType.NativeInt);
                     break;
                 }
             case "ldc.r4":
                 {
-                    EmitEvalStackPush(builder, indentation, FormatFloat32Literal(GetRequiredSingleOperand(instruction)), SlotType.Float32);
-                    PushSlotType(SlotType.Float32);
+                    EmitEvalStackPush(builder, indentation,
+                        $"ChaosStoreFloat32({FormatFloat32Literal(GetRequiredSingleOperand(instruction))})");
+                    PushSlotType(SlotType.NativeInt);
                     break;
                 }
             case "ldarg":
@@ -762,8 +764,8 @@ public sealed partial class NativeAotLoweringPlanner
                     string _loadExpr = PrepareConvOvfValue();
                     ConsumeEvalStackValueExpression();
                     ConsumeSlotType();
-                    EmitEvalStackPush(builder, indentation, $"static_cast<float>({_loadExpr})", SlotType.Float32);
-                    PushSlotType(SlotType.Float32);
+                    EmitEvalStackPush(builder, indentation, $"ChaosStoreFloat32(static_cast<float>({_loadExpr}))");
+                    PushSlotType(SlotType.NativeInt);
                     break;
                 }
             case "conv.r8":
@@ -771,8 +773,8 @@ public sealed partial class NativeAotLoweringPlanner
                     string _loadExpr = PrepareConvOvfValue();
                     ConsumeEvalStackValueExpression();
                     ConsumeSlotType();
-                    EmitEvalStackPush(builder, indentation, $"static_cast<double>({_loadExpr})", SlotType.Float64);
-                    PushSlotType(SlotType.Float64);
+                    EmitEvalStackPush(builder, indentation, $"ChaosStoreFloat64(static_cast<double>({_loadExpr}))");
+                    PushSlotType(SlotType.NativeInt);
                     break;
                 }
             case "conv.u":

@@ -125,6 +125,11 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterRandomctor(registry);
             RegisterHashCodeToHashCode_1(registry);
 
+            // IEEE-754 special functions (Double/Math BitDecrement, CopySign, …).
+            // Without these every such subject fell through to the zero-argument
+            // external-runtime catch-all, which cannot see the operands.
+            RegisterIeee754SpecialFunctions(registry);
+
         }
 
     }

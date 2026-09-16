@@ -370,6 +370,294 @@ CHAOS_IL2CPP_FLOAT64 ChaosMathTanh(CHAOS_IL2CPP_FLOAT64 x) noexcept
     return std::tanh(x);
 }
 
+// ── Math kernel helpers (math_kernel_helpers.h) ──────────────────
+// The header carries inline C++ implementations for the IEEE-754 special
+// functions (BitDecrement / BitIncrement / CopySign / ScaleB / …) but those
+// are `inline` and have no C linkage, so codegen could not call them and every
+// System.Double::/System.Math:: subject for these fell through to the
+// zero-argument ChaosExternalRuntimeFallback catch-all — which receives only
+// the subject id (not the operands) and returns 0.  The subjects then compared
+// a fabricated 0 against the expected value.  These wrappers give the header
+// real extern "C" entry points, matching the ChaosMath* convention above.
+//
+// BitDecrement(0.0) == -5E-324 and BitIncrement(0.0) == 5E-324 are the
+// canonical .NET results; CHAOS_IL2CPP_NEXTAFTER implements them exactly.
+CHAOS_IL2CPP_FLOAT64 ChaosMathBitDecrement(CHAOS_IL2CPP_FLOAT64 value) noexcept
+{
+    return CHAOS_IL2CPP_NEXTAFTER(value, -CHAOS_IL2CPP_NUMERIC_LIMITS_INFINITY(double));
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathBitIncrement(CHAOS_IL2CPP_FLOAT64 value) noexcept
+{
+    return CHAOS_IL2CPP_NEXTAFTER(value, CHAOS_IL2CPP_NUMERIC_LIMITS_INFINITY(double));
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathCopySign(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_FLOAT64 y) noexcept
+{
+    return CHAOS_IL2CPP_COPYSIGN(x, y);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathScaleB(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_INT32 n) noexcept
+{
+    return CHAOS_IL2CPP_SCALBN(x, n);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathMaxMagnitude(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_FLOAT64 y) noexcept
+{
+    return (CHAOS_IL2CPP_ABS(x) >= CHAOS_IL2CPP_ABS(y)) ? x : y;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathMinMagnitude(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_FLOAT64 y) noexcept
+{
+    return (CHAOS_IL2CPP_ABS(x) <= CHAOS_IL2CPP_ABS(y)) ? x : y;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathIEEERemainder(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_FLOAT64 y) noexcept
+{
+    return CHAOS_IL2CPP_REMAINDER(x, y);
+}
+
+CHAOS_IL2CPP_INT32 ChaosMathILogB(CHAOS_IL2CPP_FLOAT64 value) noexcept
+{
+    return CHAOS_IL2CPP_ILOGB(value);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathReciprocalEstimate(CHAOS_IL2CPP_FLOAT64 value) noexcept
+{
+    return 1.0 / value;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathReciprocalSqrtEstimate(CHAOS_IL2CPP_FLOAT64 value) noexcept
+{
+    return 1.0 / CHAOS_IL2CPP_SQRT(value);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAcosh(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::acosh(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAsinh(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::asinh(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAtanh(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::atanh(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathCbrt(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::cbrt(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathHypot(CHAOS_IL2CPP_FLOAT64 x, CHAOS_IL2CPP_FLOAT64 y) noexcept
+{
+    return std::hypot(x, y);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathExp2(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::exp2(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathExpM1(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::expm1(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathLog2(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::log2(x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathLog1p(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::log1p(x);
+}
+
+// ── Single (float) overloads ─────────────────────────────────────
+// System.Single::X and System.MathF::X carry the same IEEE-754 special
+// functions as their Double counterparts.  Without these the float subjects
+// (System.Single::BitDecrement, System.MathF::BitIncrement, …) still fell
+// through to the operand-less catch-all and reported honest failures that
+// were indistinguishable from the double-side wiring being incomplete.
+CHAOS_IL2CPP_FLOAT32 ChaosMathBitDecrementF(CHAOS_IL2CPP_FLOAT32 value) noexcept
+{
+    return CHAOS_IL2CPP_NEXTAFTER(value, -CHAOS_IL2CPP_NUMERIC_LIMITS_INFINITY(float));
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathBitIncrementF(CHAOS_IL2CPP_FLOAT32 value) noexcept
+{
+    return CHAOS_IL2CPP_NEXTAFTER(value, CHAOS_IL2CPP_NUMERIC_LIMITS_INFINITY(float));
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathCopySignF(CHAOS_IL2CPP_FLOAT32 x, CHAOS_IL2CPP_FLOAT32 y) noexcept
+{
+    return CHAOS_IL2CPP_COPYSIGN(x, y);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathScaleBF(CHAOS_IL2CPP_FLOAT32 x, CHAOS_IL2CPP_INT32 n) noexcept
+{
+    return CHAOS_IL2CPP_SCALBN(x, n);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathMaxMagnitudeF(CHAOS_IL2CPP_FLOAT32 x, CHAOS_IL2CPP_FLOAT32 y) noexcept
+{
+    return (CHAOS_IL2CPP_ABS(x) >= CHAOS_IL2CPP_ABS(y)) ? x : y;
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathMinMagnitudeF(CHAOS_IL2CPP_FLOAT32 x, CHAOS_IL2CPP_FLOAT32 y) noexcept
+{
+    return (CHAOS_IL2CPP_ABS(x) <= CHAOS_IL2CPP_ABS(y)) ? x : y;
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathIEEERemainderF(CHAOS_IL2CPP_FLOAT32 x, CHAOS_IL2CPP_FLOAT32 y) noexcept
+{
+    return CHAOS_IL2CPP_REMAINDER(x, y);
+}
+
+CHAOS_IL2CPP_INT32 ChaosMathILogBF(CHAOS_IL2CPP_FLOAT32 value) noexcept
+{
+    return CHAOS_IL2CPP_ILOGB(value);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathReciprocalEstimateF(CHAOS_IL2CPP_FLOAT32 value) noexcept
+{
+    return 1.0f / value;
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathReciprocalSqrtEstimateF(CHAOS_IL2CPP_FLOAT32 value) noexcept
+{
+    return 1.0f / CHAOS_IL2CPP_SQRT(value);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAcoshF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::acosh(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAsinhF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::asinh(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAtanhF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::atanh(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathCbrtF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::cbrt(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathHypotF(CHAOS_IL2CPP_FLOAT32 x, CHAOS_IL2CPP_FLOAT32 y) noexcept
+{
+    return std::hypot(x, y);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathExp2F(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::exp2(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathExpM1F(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::expm1(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathLog2F(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::log2(x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathLog1pF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::log1p(x);
+}
+
+// Pi constants: .NET's AcosPi/SinPi/... divide or multiply by pi.  The
+// runtime has no shared PI macro, so define local ones (float width needs
+// its own literal to keep precision).
+static constexpr CHAOS_IL2CPP_FLOAT64 kChaosPi  = 3.14159265358979323846;
+static constexpr CHAOS_IL2CPP_FLOAT32 kChaosPiF = 3.14159265358979323846f;
+
+// ── Pi-scaled trig variants (System.Double::/System.Single::*Pi) ──
+// .NET 7+ exposes AcosPi/AsinPi/AtanPi/CosPi/SinPi/TanPi (and the 2-arg
+// Atan2Pi) as M_PI-scaled wrappers.  Each computes the base function of the
+// *scaled* argument so the result is exact in units of pi.
+CHAOS_IL2CPP_FLOAT64 ChaosMathAcosPi(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::acos(x) / kChaosPi;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAsinPi(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::asin(x) / kChaosPi;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAtanPi(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::atan(x) / kChaosPi;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathAtan2Pi(CHAOS_IL2CPP_FLOAT64 y, CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::atan2(y, x) / kChaosPi;
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathCosPi(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::cos(kChaosPi * x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathSinPi(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::sin(kChaosPi * x);
+}
+
+CHAOS_IL2CPP_FLOAT64 ChaosMathTanPi(CHAOS_IL2CPP_FLOAT64 x) noexcept
+{
+    return std::tan(kChaosPi * x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAcosPiF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::acos(x) / kChaosPiF;
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAsinPiF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::asin(x) / kChaosPiF;
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAtanPiF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::atan(x) / kChaosPiF;
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathAtan2PiF(CHAOS_IL2CPP_FLOAT32 y, CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::atan2(y, x) / kChaosPiF;
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathCosPiF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::cos(kChaosPiF * x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathSinPiF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::sin(kChaosPiF * x);
+}
+
+CHAOS_IL2CPP_FLOAT32 ChaosMathTanPiF(CHAOS_IL2CPP_FLOAT32 x) noexcept
+{
+    return std::tan(kChaosPiF * x);
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
 
