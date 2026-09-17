@@ -1645,6 +1645,54 @@ public sealed partial class NativeAotLoweringPlanner
                     }));
             }
 
+            // ── T3: Task.WaitAll / Task.WaitAny (blocking) ──
+            //
+            // Distinct from WhenAll/WhenAny above in BOTH contract and ABI shape:
+            //   * contract — these BLOCK the calling thread; WhenAll/WhenAny return
+            //     an aggregate Task and never block.
+            //   * ABI — these are STATIC and return Boolean / Int32 (not a Task
+            //     handle), so the return slot differs from the combinators'.
+            //
+            // Every chunk overload takes Task[] as its FIRST parameter; the
+            // timeout(int/TimeSpan) and CancellationToken parameters that some
+            // overloads add are NOT passed by codegen (static, receiver-less), so
+            // the shim carries exactly one slot — the array.  Matching on "first
+            // parameter is an array" therefore covers all of them without
+            // enumerating each signature.
+            IEnumerable<(string Method, string Native, bool ReturnsIndex)> blockers =
+            [
+                (Method: "WaitAll", Native: "chaos_task_wait_all", ReturnsIndex: false),
+                (Method: "WaitAny", Native: "chaos_task_wait_any", ReturnsIndex: true),
+            ];
+            foreach (var (method, native, returnsIndex) in blockers)
+            {
+                registry.RegisterGeneric(new GenericShapeDescriptor(
+                    TypeDisplayNamePrefix: "System.Threading.Tasks.Task",
+                    MethodName: method,
+                    Resolver: (planner, callee, typeArgs) =>
+                    {
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        // The array is the first managed parameter on every overload.
+                        if (paramTypes.Count < 1) return null;
+                        if (!paramTypes[0].Contains("[]", StringComparison.Ordinal)
+                            && !paramTypes[0].Contains("IEnumerable", StringComparison.Ordinal))
+                            return null;
+
+                        var symbol3 = GetExternalRuntimeHelperSymbol(callee);
+                        var src3 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol3,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
+                        [
+                            $"    return {native}(chaos_arg_0);",
+                        ]);
+                        return new GenericShapeResolution(src3, symbol3,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                CreateNativeIntAbiSlot()),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: native);
+                    }));
+            }
+
             // Task.WhenEach(Task[]) / Task.WhenEach<TResult>(Task<TResult>[]) — the
             // ORDER-PRESERVING completion stream.
             //

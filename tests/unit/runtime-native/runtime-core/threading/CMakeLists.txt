@@ -124,6 +124,16 @@ chaos_native_add_test(test_async_t1
     LABELS "unit;threading"
 )
 
+# async_t3_wait_test — T3: Task.WaitAll / Task.WaitAny (BLOCKING).  The
+# counter-example is WaitAllBlocksUntilPendingChildCompletes: a constant-
+# returning entry passes "did it return" and fails that test, so the blocking
+# contract is what is actually pinned.
+chaos_native_add_test(test_async_t3_wait
+    async_t3_wait_test.cpp
+    ${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/async_stubs.cpp
+    LABELS "unit;threading"
+)
+
 # async_task_exception_test — ASYNC-P1-3: exception propagation (Phase 1 exit
 # gate).  Links async_stubs.cpp directly so the real ChaosAsyncTask* entry
 # points are under test.

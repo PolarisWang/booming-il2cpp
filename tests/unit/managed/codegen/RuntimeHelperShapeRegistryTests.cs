@@ -1652,4 +1652,37 @@ public sealed class RuntimeHelperShapeRegistryTests
             fullAssemblyMode: true);
         return planner;
     }
+
+    // ── T3: WaitAll / WaitAny must match through the REAL registry ──────
+    //
+    // These use BuildDefault() — the same registry the pipeline builds — so a
+    // miss here is a registration/matching defect, not a pipeline artifact.
+    // The subject ids are taken verbatim from the chunk's generated fallback
+    // bodies (the exact strings codegen passes to TryMatchGenericShape).
+
+    [Theory]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAll:System.Boolean(System.Threading.Tasks.Task[],System.Int32)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAll:System.Void(System.Threading.Tasks.Task[])")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAny:System.Int32(System.Threading.Tasks.Task[])")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAny:System.Int32(System.Threading.Tasks.Task[],System.Int32)")]
+    public void T3_WaitAllWaitAny_BuildDefault_Matches(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+
+        var matched = registry.TryMatchGenericShape(callee, out var descriptor, out _);
+
+        Assert.True(matched, $"no generic descriptor matched '{callee}'");
+        Assert.NotNull(descriptor);
+
+        // The resolver must produce a concrete resolution, not null — a matched
+        // descriptor whose resolver declines is exactly the silent-fallthrough
+        // this test exists to catch.
+        var resolution = descriptor!.Resolver(null!, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+
+        var expected = callee.Contains("WaitAll")
+            ? "chaos_task_wait_all"
+            : "chaos_task_wait_any";
+        Assert.Equal(expected, resolution!.DirectNativeSymbol);
+    }
 }

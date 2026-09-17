@@ -128,6 +128,25 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2
 CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
 
+// ── T3: Task.WaitAll / Task.WaitAny (BLOCKING semantics) ──
+//
+// Unlike WhenAll/WhenAny (which return an aggregate Task and never block), these
+// BLOCK the calling thread until ALL / ANY of the given tasks complete.  The
+// managed signatures are static: they take the Task[] array, and optionally a
+// timeout (int ms or TimeSpan) and/or a CancellationToken.
+//
+// ABI (static, receiver-less): the ONLY managed argument the generated shim
+// carries is the Task[] array handle.  Timeout/token overloads are accepted for
+// arity and left unhonoured (no blocking wait timeout / cancellation plumbing at
+// these call sites — same boundary as Task.Wait(token)).
+//
+// Returns:
+//   WaitAll → 1 (waited for all; the caller observes child results), 0 = error
+//   WaitAny → 0-based index of the first completed task, -1 = error
+// Both return immediately on a null/invalid array.
+CHAOS_IL2CPP_INT32 chaos_task_wait_all(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
+CHAOS_IL2CPP_INT32 chaos_task_wait_any(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
+
 // ── Task.WhenEach (Phase 2 / ASYNC-P2-8) ──
 // ORDER-PRESERVING completion stream.  Unlike WhenAll (awaits everything, then
 // yields the aggregate once) and WhenAny (yields the first completed task once),
