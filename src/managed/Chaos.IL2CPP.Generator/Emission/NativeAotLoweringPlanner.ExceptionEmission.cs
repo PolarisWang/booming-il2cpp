@@ -45,7 +45,13 @@ public sealed partial class NativeAotLoweringPlanner
     // NativeInt (plain integer-as-pointer).  Consumers (conv.i4,
     // ceq, etc.) use this to emit ChaosLoadFloat32/ChaosLoadFloat64
     // before operating on the value.
-    private enum SlotType : byte { NativeInt, Int64, Float32, Float64, WideValue }
+    //
+    // UInt32 marks a slot carrying a 32-bit *unsigned* payload that has been
+    // zero-extended into the INTPTR slot.  It exists so comparisons can narrow
+    // back to 32 bits: an unsigned value >= 0x80000000 and the same bits read
+    // as int32 widen differently (zero- vs sign-extension), so a plain 64-bit
+    // INTPTR compare reports inequality for values that are equal at 32 bits.
+    private enum SlotType : byte { NativeInt, Int64, Float32, Float64, WideValue, UInt32 }
 
     /// <summary>Number of CHAOS_IL2CPP_INTPTR slots consumed by one WideValue.</summary>
     private const int WideValueSlotCount = 2;

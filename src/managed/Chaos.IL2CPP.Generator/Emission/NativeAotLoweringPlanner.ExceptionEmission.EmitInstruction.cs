@@ -546,16 +546,24 @@ public sealed partial class NativeAotLoweringPlanner
                     SlotType _lType = PeekSlotType();
                     string _lExpr = ConsumeEvalStackValueExpression();
                     ConsumeSlotType();
+                    // When either operand is an unsigned-32 payload, compare in
+                    // 32-bit space.  A UInt32 value >= 0x80000000 zero-extends
+                    // into its slot while the same bits as int32 sign-extend, so
+                    // a 64-bit INTPTR compare calls equal values unequal.
+                    bool _u32 = _rType == SlotType.UInt32 || _lType == SlotType.UInt32;
                     string _rLoad = _rType switch
                     {
                         SlotType.Float32 => $"ChaosLoadFloat32({_rExpr})",
                         SlotType.Float64 => $"ChaosLoadFloat64({_rExpr})",
+                        SlotType.UInt32 when _u32 => $"static_cast<CHAOS_IL2CPP_UINT32>({_rExpr})",
                         _ => $"static_cast<CHAOS_IL2CPP_INTPTR>({_rExpr})",
                     };
                     string _lLoad = _lType switch
                     {
                         SlotType.Float32 => $"ChaosLoadFloat32({_lExpr})",
                         SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
+                        SlotType.UInt32 when _u32 => $"static_cast<CHAOS_IL2CPP_UINT32>({_lExpr})",
+                        _ when _u32 => $"static_cast<CHAOS_IL2CPP_UINT32>({_lExpr})",
                         _ => $"static_cast<CHAOS_IL2CPP_INTPTR>({_lExpr})",
                     };
                     if (_state.Value!.ActiveStructuredSlotContext is not null)

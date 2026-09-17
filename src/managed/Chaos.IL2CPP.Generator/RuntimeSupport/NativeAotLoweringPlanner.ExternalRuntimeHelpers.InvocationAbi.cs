@@ -389,6 +389,18 @@ public sealed partial class NativeAotLoweringPlanner
                 ];
                 PushSlotType(SlotType.Int64);
                 break;
+            // UInt32 result: ZERO-extend into the INTPTR slot.  Routing it
+            // through the Int32 carrier (as the UInt32::Parse shapes used to)
+            // sign-extended values >= 0x80000000, so 3456789012 landed as
+            // 0xFFFFFFFFCE0A6A14 and stopped matching the same-width literal
+            // (which produces 0x00000000CE0A6A14 after the ldc.i4 fix).
+            case AotCoreIrAbiCarrierKind.UInt32:
+                pushLines =
+                [
+                    $"{indentation}{AllocateEvalStackTargetExpression()} = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT32>({resultExpression}));"
+                ];
+                PushSlotType(SlotType.UInt32);
+                break;
             default:
                 throw new NotSupportedException($"native-aot lowering does not support pushing ABI return carrier '{returnAbi.CarrierKindCode}'.");
         }

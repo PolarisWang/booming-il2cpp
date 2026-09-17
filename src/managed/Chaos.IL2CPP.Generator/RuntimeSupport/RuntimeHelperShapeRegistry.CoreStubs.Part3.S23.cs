@@ -674,7 +674,12 @@ public sealed partial class NativeAotLoweringPlanner
                         {
                             var uint32ReturnSlot = new AotCoreIrAbiSlotArtifact
                             {
-                                CarrierKindCode = AotCoreIrAbiCarrierKind.Int32,
+                                // UInt32 carrier: Parse returns an unsigned 32-bit
+                                // value, and values >= 0x80000000 must zero-extend
+                                // into the 64-bit slot (an Int32 carrier signed-
+                                // extended them, breaking equality with same-width
+                                // literals).
+                                CarrierKindCode = AotCoreIrAbiCarrierKind.UInt32,
                                 TypeShape = AotCoreIrTypeShapeKind.ValueType,
                             };
                             var stringSlot = CreateNativeIntAbiSlot(

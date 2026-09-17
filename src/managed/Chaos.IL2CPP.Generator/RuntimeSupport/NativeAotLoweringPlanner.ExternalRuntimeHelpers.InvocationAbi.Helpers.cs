@@ -321,6 +321,7 @@ public sealed partial class NativeAotLoweringPlanner
             AotCoreIrAbiCarrierKind.UInt8 => "CHAOS_IL2CPP_UINT8",
             AotCoreIrAbiCarrierKind.Int16 => "CHAOS_IL2CPP_INT16",
             AotCoreIrAbiCarrierKind.UInt16 => "CHAOS_IL2CPP_UINT16",
+            AotCoreIrAbiCarrierKind.UInt32 => "CHAOS_IL2CPP_UINT32",
             AotCoreIrAbiCarrierKind.Float32 => "float",
             AotCoreIrAbiCarrierKind.Float64 => "double",
             AotCoreIrAbiCarrierKind.Int64 => "CHAOS_IL2CPP_INT64",
@@ -405,6 +406,13 @@ public sealed partial class NativeAotLoweringPlanner
                 case AotCoreIrAbiCarrierKind.ByRefToValueType:
                     lines.Add($"    chaos_args[{i}] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_{i});");
                     break;
+                // UInt32 must ZERO-extend into the slot, not sign-extend: an
+                // unsigned value above 0x7FFFFFFF widened through INTPTR would
+                // otherwise become negative and disagree with a same-width
+                // literal comparison.  Explicit cast through UINT32 pins it.
+                case AotCoreIrAbiCarrierKind.UInt32:
+                    lines.Add($"    chaos_args[{i}] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT32>(chaos_fn_arg_{i}));");
+                    break;
                 case AotCoreIrAbiCarrierKind.Float32:
                     lines.Add($"    chaos_args[{i}] = ChaosStoreFloat32(chaos_fn_arg_{i});");
                     break;
@@ -461,6 +469,9 @@ public sealed partial class NativeAotLoweringPlanner
             AotCoreIrAbiCarrierKind.UInt8 => "static_cast<CHAOS_IL2CPP_UINT8>(" + sourceName + ")",
             AotCoreIrAbiCarrierKind.Int16 => "static_cast<CHAOS_IL2CPP_INT16>(" + sourceName + ")",
             AotCoreIrAbiCarrierKind.UInt16 => "static_cast<CHAOS_IL2CPP_UINT16>(" + sourceName + ")",
+            // Narrow through UINT32 first so the value is taken modulo 2^32
+            // rather than sign-extended out of the INTPTR slot.
+            AotCoreIrAbiCarrierKind.UInt32 => "static_cast<CHAOS_IL2CPP_UINT32>(" + sourceName + ")",
             AotCoreIrAbiCarrierKind.Float32 => "ChaosLoadFloat32(" + sourceName + ")",
             AotCoreIrAbiCarrierKind.Float64 => "ChaosLoadFloat64(" + sourceName + ")",
             AotCoreIrAbiCarrierKind.Int64 => "ChaosLoadInt64(" + sourceName + ")",
@@ -513,6 +524,7 @@ public sealed partial class NativeAotLoweringPlanner
             AotCoreIrAbiCarrierKind.UInt8 => "CHAOS_IL2CPP_UINT8",
             AotCoreIrAbiCarrierKind.Int16 => "CHAOS_IL2CPP_INT16",
             AotCoreIrAbiCarrierKind.UInt16 => "CHAOS_IL2CPP_UINT16",
+            AotCoreIrAbiCarrierKind.UInt32 => "CHAOS_IL2CPP_UINT32",
             AotCoreIrAbiCarrierKind.Float32 => "float",
             AotCoreIrAbiCarrierKind.Float64 => "double",
             AotCoreIrAbiCarrierKind.Int64 => "CHAOS_IL2CPP_INT64",
@@ -627,6 +639,7 @@ public sealed partial class NativeAotLoweringPlanner
             case AotCoreIrAbiCarrierKind.UInt8:
             case AotCoreIrAbiCarrierKind.Int16:
             case AotCoreIrAbiCarrierKind.UInt16:
+            case AotCoreIrAbiCarrierKind.UInt32:
             case AotCoreIrAbiCarrierKind.Float32:
                 return 4;
             case AotCoreIrAbiCarrierKind.Float64:
@@ -669,6 +682,10 @@ public sealed partial class NativeAotLoweringPlanner
         {
             case AotCoreIrAbiCarrierKind.Int32:
                 return $"WriteI32(static_cast<CHAOS_IL2CPP_INT32>({argName}))";
+            case AotCoreIrAbiCarrierKind.UInt32:
+                // Value is zero-extended in the slot; WriteI32 takes the low
+                // 32 bits which is exactly the unsigned payload.
+                return $"WriteI32(static_cast<CHAOS_IL2CPP_UINT32>({argName}))";
             case AotCoreIrAbiCarrierKind.Int8:
             case AotCoreIrAbiCarrierKind.UInt8:
             case AotCoreIrAbiCarrierKind.Int16:

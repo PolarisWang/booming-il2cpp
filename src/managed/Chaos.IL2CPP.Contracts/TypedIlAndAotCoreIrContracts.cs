@@ -235,6 +235,18 @@ public enum AotCoreIrAbiCarrierKind : byte
     /// underlying value type for ABI compatibility checks.
     /// </summary>
     ByRefToValueType = 14,
+
+    /// <summary>
+    /// Unsigned 32-bit integer carrier.
+    ///
+    /// Distinct from Int32 because the two differ in *widening*: a UInt32 value
+    /// ≥ 0x80000000 zero-extends when stored into a 64-bit slot, whereas an
+    /// Int32 sign-extends.  Collapsing them made UInt32::Parse return through a
+    /// signed carrier, so 3456789012 arrived as a negative int32 and every
+    /// comparison against a same-width literal disagreed (the literal
+    /// sign-extended, the value zero-extended).
+    /// </summary>
+    UInt32 = 15,
 }
 
 /// <summary>

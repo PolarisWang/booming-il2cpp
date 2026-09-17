@@ -122,6 +122,16 @@ public sealed partial class AotCoreIrLowering
             };
         }
 
+        if (string.Equals(typeIdentity, "System.UInt32", StringComparison.Ordinal))
+        {
+            return new AotCoreIrAbiSlotArtifact
+            {
+                CarrierKindCode = AotCoreIrAbiCarrierKind.UInt32,
+                TypeSubjectId = managedType?.SubjectId,
+                TypeShape = resolvedTypeShape,
+            };
+        }
+
         if (string.Equals(typeIdentity, "System.SByte", StringComparison.Ordinal))
         {
             return new AotCoreIrAbiSlotArtifact
