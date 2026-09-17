@@ -68,6 +68,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/xml_convert_stubs.cpp
     runtime_stubs/xml_document_stubs.cpp
     runtime_stubs/json_writer_stubs.cpp
+    runtime_stubs/json_serializer_stubs.cpp
     runtime_stubs/interlocked_stubs.cpp
     runtime_stubs/string_stubs.cpp
     runtime_stubs/exception_stubs.cpp

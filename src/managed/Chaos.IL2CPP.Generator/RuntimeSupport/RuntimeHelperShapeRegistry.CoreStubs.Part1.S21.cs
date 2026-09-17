@@ -256,5 +256,50 @@ public sealed partial class NativeAotLoweringPlanner
                 paramTypes, ShapeKind.SimpleForward, nativeSymbol,
                 abiSlots, CreateVoidAbiSlot(), rawIndices);
         }
+
+        /// <summary>
+        /// S21 Group B: JsonSerializer.SerializeToUtf8Bytes&lt;TValue&gt; scalar subset.
+        ///
+        /// The full JsonSerializer surface has no AOT body (no managed object-graph
+        /// walk), so these subjects fall through to a 0-arg catch-all that returns
+        /// null byte[] — and the one representative that actually ran then crashed
+        /// the byte[] assertion (SEH-FAULT 0xe0000001).  The subjects only ever
+        /// serialize primitive values, and for those the JSON text is fully
+        /// determined by the value (invariant culture, default options), so a
+        /// narrow native implementation is honest and complete:
+        /// SerializeToUtf8Bytes&lt;int&gt;(0, null) -&gt; [48].
+        ///
+        /// Only the Int32 overload is implemented now.  Other TValue kinds keep the
+        /// unverified/stub gap — they are NOT mis-serialized into a wrong value.
+        /// </summary>
+        private static void RegisterJsonSerializerUtf8BytesGroup(RuntimeHelperShapeRegistry registry)
+        {
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "JsonSerializer",
+                MethodName: "SerializeToUtf8Bytes",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (typeArgs is { Count: 1 } && typeArgs[0] == "System.Int32")
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                            [
+                                "    return ChaosJsonSerializerSerializeToUtf8BytesInt(chaos_arg_0, chaos_arg_1);",
+                            ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateInt32AbiSlot(),
+                                CreateNativeIntAbiSlot("System.Text.Json.JsonSerializerOptions", AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateNativeIntAbiSlot("System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                            new HashSet<int> { 0, 1 });
+                    }
+                    // Other TValue kinds keep the honest stub gap (return null via
+                    // the fallback) rather than returning a fabricated value.
+                    return null;
+                }));
+        }
     }
 }
