@@ -157,3 +157,19 @@ Assert_AreEqual_Double(ChaosLoadFloat64(chaos_arg_0),   // arg0=_s0 二次解码
 （`declType="double"` + `slotType=fType`），且位于 `ldloc` 的 E6 分支，
 **先于**本次修复的分支命中。本 chunk `_hld_` 出现 0 次故无法验证；
 需先找到能触发 hoisting 的 chunk 再修。
+
+### ⚠️ Follow-up（2026-09-17 回归观测）
+
+`2d5d8987f`（含 hoisting 修复 + 并发 agent 的 Batch 3）合并后 system chunk
+实测 `real 1732 / +34`，但出现 **1 项回归**：
+
+```
+System_StringTests::IndexOf_114_char_System_StringComparison_0  pass→fail
+（AOT=JIT 一致，caught=true, assertFailed=true）
+```
+
+该 subject 生成体**不含浮点 / 不触碰 hoisting / 无 _hld_**——即与浮点槽修复无关。
+同批 StringTests 另有 8 项 IndexOf 由 fail→pass（并发注册生效方向），
+指向并发 agent 在 `6466206db` 的 `ChaosStringIndexOfChar` shape：
+泛型 fallback 可能仍把 char / StringComparison 槽建成 ReferenceType 丢弃操作数。
+**需独立归因，勿在浮点槽修复面内排查。**
