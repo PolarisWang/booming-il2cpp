@@ -121,6 +121,43 @@ public long WriteStringAsync_66_string_1()
 `System.Private.Xml/xml` chunk，看这 84 个是否自然转 real。如果 ATG 侧仍需调整，
 这是需要联合定位的点。
 
+### 2.5 🔴 为什么「继续加 stub」不再有收益（本轮末尾实测得出）
+
+本文件 §1 的成果来自「native 实现 + shape 注册 + ATG 白名单」三件套。**该模式已到边界**。
+xml chunk 的 697 个 subject 里，real 只有 224，其余 473 个分布在 6 个桶，**每一个的卡点都不在 native 实现**：
+
+| 桶 | 数量 | 卡点 | 加 stub 有用吗 |
+|:---|:----:|:-----|:--------------:|
+| `unassertable` | 103 | void 方法，`value=42` 是结构性的（非缺口） | ❌ |
+| `failed` | 114 | ATG 生成形态与 fact 判定的交互 | ❌ |
+| `smoke` | 93 | **59 个是对象返回类型**（native 无法构造 managed 对象图）；34 个是标量 | ❌（59 个） |
+| `stubGap` | 84 | async（§2.1-2.3） | ❌ |
+| `realDefect` | 44 | 真实执行了，但结果与托管期望有差异 | ❌ |
+| `factoryGap` | 35 | 裸对象路径（`SubjectInstanceFactory.Create<T>` 返 null） | ❌ |
+
+**`failed` 的实证**（以 `XmlDocument.Load` 为例）：
+
+```csharp
+// ATG 生成（期望"调用必抛异常"）
+try { new System.Xml.XmlDocument().Load(default(string)!); throw new System.Exception("AOT stub did not throw"); } catch { }
+return 42L;
+```
+```json
+// fact 记录
+{"value": 0, "caught": true, "assertFailed": false, "resultKind": "failed"}
+```
+
+`caught=true` 说明 **native 确实抛了异常**（行为正确），但 runner 因异常逃逸到顶层而记
+`passed=false`。`classify_fact_record` 因缺 shape 元数据落到末尾的 `return "failed"`。
+**这不是 native 缺陷** —— 实现真实 DOM 树不会改变这些记录的分类。
+
+**`smoke` 的实证**：59 个的 `returnType` 是 `XmlNode`/`XmlElement`/`XmlAttribute`/
+`XmlNodeList`/`XPathNavigator` 等**对象类型**。native 层无法构造真实的 managed 对象图
+（那需要解释器或完整 managed DOM 实现），所以这些 subject 永远拿不到可断言的值。
+
+**结论**：XML 线的下一步需要**跨层能力**（async 基础设施 / managed 对象构造 / ATG-fact
+分类对齐），不在 stub 层。
+
 ### 2.4 验证命令（供 async 主线复跑）
 
 ```bash
@@ -217,7 +254,7 @@ git diff --cached --name-only    # 逐行核对
 | 项 | 状态 |
 |:---|:-----|
 | `d81f8a646` 的 pipeline 端到端 | ✅ 已跑（stubGap 84 确认），但当时 ATG DLL 曾被并行 agent 锁定 |
-| text-json 的最新指标 | ⚠️ 本轮最后一次跑是 09-16，之后未复跑 |
+| text-json 的最新指标 | ✅ 已复跑（2026-09-17）：stubGap **76**、failed **0**、realVerified **51/51 (100%)** |
 | 84 个 async 是否「只需 Phase M」 | ⚠️ **推断**，未实测。依据是同步面全部转 real 而 async 面不动，但未直接验证 ATG 的 async 分类逻辑 |
 | 其余 3 个 chunk（System.Xml.ReaderWriter 等） | ❌ 本轮未覆盖 |
 
@@ -229,9 +266,16 @@ git diff --cached --name-only    # 逐行核对
 
 ### 如果继续 JSON/XML 线
 
-- **M1 Utf8JsonReader**（读面，需 span 支持，重）— `roadmap-v1-01.md` Phase 3 唯一未做项
-- **M4 XmlDocument 的 Load/Save 真实实现** — 当前是 `NotSupportedException`，需真实 DOM 树
-- **剩余 3 个 XML chunk**（system-xml-serialization / xsl / schema）
+先读 **§2.5** —— 那 6 个桶的卡点全在跨层，stub 模式已到边界。
+
+**真正有空间的方向（按预估收益排序）**：
+
+| 方向 | 收益 | 卡点 | 是否建议 |
+|:-----|:-----|:-----|:--------:|
+| **M1 Utf8JsonReader** | 全新读面，不受既有桶限制 | 需 span 支持（重） | ✅ 最高价值 |
+| **ATG-fact 分类对齐** | 解放 failed 114 + smoke 34 标量 | 需理解 `classify_fact_record` 与 `has_codegen_shape` 的缺元数据分支 | ✅ 中 |
+| **M4 Load/Save 真 DOM 树** | 对象返回 smoke 59 的一部分 | native 无法构造 managed 对象图 | ⚠️ 需解释器配合 |
+| 剩余 3 个 XML chunk | 未知 | 未探索 | ❓ |
 
 ### 如果转 async 主线
 
@@ -246,8 +290,13 @@ git diff --cached --name-only    # 逐行核对
 > **交接人**: Claude Code（会话 `chaos-il2cpp`，2026-09-15 ~ 09-17）
 > **本轮性质**: XML 翻译层收口。**非 async 部分已清零**，剩余 84 个全部需要 async 能力。
 > **诚实标注**: §2.2 的「84 个只能等 Phase M」是**强推论**，不是实测结论；
-> §4 列出了全部未验证项。
+> §2.5 的「6 个桶都到边界」是本轮**实测**得出（含 Load/Save 与 smoke 对象返回的
+> 具体证据）；§4 列出了全部未验证项。
+>
+> ⚠️ **本轮末尾自我更正**：我在会话中曾建议做 M4（XmlDocument Load/Save 真实 DOM），
+> 实测后发现 **Load/Save 已在真实执行**（`caught=true`），卡点是 ATG/fact 分类而非
+> native 实现 —— 该建议已被 §2.5 推翻。**不要按旧建议做 M4。**
 >
 > ```
-> ——— 2026-09-17 / commit d81f8a646 ———
+> ——— 2026-09-17 / commit 83cfc091c ———
 > ```
