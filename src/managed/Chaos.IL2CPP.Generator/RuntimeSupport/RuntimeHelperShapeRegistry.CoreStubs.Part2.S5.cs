@@ -119,16 +119,22 @@ public sealed partial class NativeAotLoweringPlanner
                             slots.Add(CreateInt32AbiSlot());
                         var charParamSig = string.Join(", ", Enumerable.Range(0, slots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                         // (char) → start=0/count=whole; (char,int) → start=arg2; (char,int,int) → start/count
-                        // from args; a trailing StringComparison (an Int32 enum) is ignored.
+                        // from args.  A trailing StringComparison (an Int32 enum) is forwarded as the
+                        // comparison operand so the native can distinguish Ordinal (-1 on NUL) from
+                        // culture-aware (NUL found at start).  Overloads without a StringComparison
+                        // default to Ordinal (4) — the managed semantics measured on net10.0.
                         var startExpr = paramTypes.Count >= 2 && paramTypes[1] == "System.Int32"
                             ? "static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2)"
                             : "0";
                         var countExpr = paramTypes.Count >= 3 && paramTypes[2] == "System.Int32"
                             ? "static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3)"
                             : "-1";
+                        var comparisonExpr = paramTypes.Count >= 2 && paramTypes[1] == "System.StringComparison"
+                            ? "static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2)"
+                            : "4 /* Ordinal */";
                         var srcChar = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, charParamSig,
                         [
-                            $"    return ChaosStringIndexOfChar(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), {startExpr}, {countExpr});",
+                            $"    return ChaosStringIndexOfChar(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), {startExpr}, {countExpr}, {comparisonExpr});",
                         ]);
                         return new GenericShapeResolution(srcChar, symbol,
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(slots.ToArray()),

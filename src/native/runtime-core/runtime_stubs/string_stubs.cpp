@@ -288,8 +288,28 @@ CHAOS_IL2CPP_INT32 ChaosStringIndexOf(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTP
 // are UTF-8 bytes while the managed contract indexes UTF-16 code units; ASCII
 // chars map 1:1 between the two, and non-ASCII probes do not exist today
 // (accepted divergence — a >0x7F char reports not-found rather than guessing).
+//
+// `comparison` mirrors System.StringComparison (Ordinal=4, OrdinalIgnoreCase=5,
+// CurrentCulture=0, CurrentCultureIgnoreCase=1, InvariantCulture=2,
+// InvariantCultureIgnoreCase=3).  The generated shape passes 4 (Ordinal) for the
+// overloads that carry no StringComparison parameter, matching the managed default.
+//
+// Culture-aware comparisons special-case NUL: the CLR reports '\0' as found at
+// index 0 for ANY haystack under a culture-aware comparison (measured on
+// net10.0: `"".IndexOf('\0', CurrentCulture) == 0` and
+// `"abc".IndexOf('\0', CurrentCulture) == 0`, while Ordinal gives -1).
+// The remaining culture-sensitive case folding is NOT modelled (accepted
+// divergence, same class as the >0x7F note above) — only the NUL rule is
+// needed to satisfy the current probe surface.
+static bool ChaosComparisonIsOrdinal(CHAOS_IL2CPP_INT32 comparison) noexcept
+{
+    // Ordinal == 4, OrdinalIgnoreCase == 5; anything else is culture-aware.
+    return comparison == 4 || comparison == 5;
+}
+
 CHAOS_IL2CPP_INT32 ChaosStringIndexOfChar(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 ch,
-                                          CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 count) noexcept
+                                          CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 count,
+                                          CHAOS_IL2CPP_INT32 comparison) noexcept
 {
     str = resolve_string_arg(str);
     if (str == 0 || ch > 0x7F) return -1;
@@ -297,6 +317,9 @@ CHAOS_IL2CPP_INT32 ChaosStringIndexOfChar(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_
     const char* data = stub_string_data(reinterpret_cast<const void*>(str));
     const CHAOS_IL2CPP_INT32 len = static_cast<CHAOS_IL2CPP_INT32>(hdr->byte_count);
     if (start < 0 || start > len) return -1;
+    // Culture-aware NUL rule: '\0' is reported at the SEARCH START even when the
+    // haystack is empty (`"".IndexOf('\0', CurrentCulture) == 0` on net10.0).
+    if (ch == 0 && !ChaosComparisonIsOrdinal(comparison)) return start;
     CHAOS_IL2CPP_INT32 end = len;
     if (count >= 0 && start + count < len) end = start + count;
     const char target = static_cast<char>(ch);
@@ -317,6 +340,9 @@ CHAOS_IL2CPP_INT32 ChaosStringLastIndexOfChar(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2
     const CHAOS_IL2CPP_INT32 len = static_cast<CHAOS_IL2CPP_INT32>(hdr->byte_count);
     // .NET LastIndexOf(value, startIndex, count) scans backwards FROM startIndex:
     // hi = min(startIndex, len-1), low = hi - count + 1 (count<0 → whole prefix).
+    // No culture-aware char overload exists in .NET
+    // (LastIndexOf(char, StringComparison) does not compile), so this stays a
+    // plain ordinal scan — unlike ChaosStringIndexOfChar there is no NUL rule.
     CHAOS_IL2CPP_INT32 hi = start < 0 ? len - 1 : (start > len - 1 ? len - 1 : start);
     CHAOS_IL2CPP_INT32 lo = 0;
     if (count >= 0 && hi - count + 1 > 0) lo = hi - count + 1;
