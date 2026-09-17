@@ -140,6 +140,9 @@ public sealed partial class NativeAotLoweringPlanner
             // System.MathF (Float32) + System.BitConverter bit reinterpretation tails.
             RegisterMathFAndBitConverterBits(registry);
 
+            // Scalar IComparable<T>.CompareTo(object) instance members (+ Version/Decimal).
+            RegisterScalarCompareToMembers(registry);
+
         }
 
     }

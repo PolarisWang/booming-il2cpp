@@ -283,6 +283,51 @@ CHAOS_IL2CPP_INT32 ChaosStringIndexOf(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTP
     return -1;
 }
 
+// ── String::IndexOf/LastIndexOf(char[, ...]) ───────────────────────
+// Probe surface: string.Empty.IndexOf(default(char)) == -1.  The stub strings
+// are UTF-8 bytes while the managed contract indexes UTF-16 code units; ASCII
+// chars map 1:1 between the two, and non-ASCII probes do not exist today
+// (accepted divergence — a >0x7F char reports not-found rather than guessing).
+CHAOS_IL2CPP_INT32 ChaosStringIndexOfChar(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 ch,
+                                          CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 count) noexcept
+{
+    str = resolve_string_arg(str);
+    if (str == 0 || ch > 0x7F) return -1;
+    const auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
+    const char* data = stub_string_data(reinterpret_cast<const void*>(str));
+    const CHAOS_IL2CPP_INT32 len = static_cast<CHAOS_IL2CPP_INT32>(hdr->byte_count);
+    if (start < 0 || start > len) return -1;
+    CHAOS_IL2CPP_INT32 end = len;
+    if (count >= 0 && start + count < len) end = start + count;
+    const char target = static_cast<char>(ch);
+    for (CHAOS_IL2CPP_INT32 i = start; i < end; ++i)
+    {
+        if (data[i] == target) return i;
+    }
+    return -1;
+}
+
+CHAOS_IL2CPP_INT32 ChaosStringLastIndexOfChar(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 ch,
+                                              CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 count) noexcept
+{
+    str = resolve_string_arg(str);
+    if (str == 0 || ch > 0x7F) return -1;
+    const auto* hdr = reinterpret_cast<const StubStringHeader*>(str);
+    const char* data = stub_string_data(reinterpret_cast<const void*>(str));
+    const CHAOS_IL2CPP_INT32 len = static_cast<CHAOS_IL2CPP_INT32>(hdr->byte_count);
+    // .NET LastIndexOf(value, startIndex, count) scans backwards FROM startIndex:
+    // hi = min(startIndex, len-1), low = hi - count + 1 (count<0 → whole prefix).
+    CHAOS_IL2CPP_INT32 hi = start < 0 ? len - 1 : (start > len - 1 ? len - 1 : start);
+    CHAOS_IL2CPP_INT32 lo = 0;
+    if (count >= 0 && hi - count + 1 > 0) lo = hi - count + 1;
+    const char target = static_cast<char>(ch);
+    for (CHAOS_IL2CPP_INT32 i = hi; i >= lo; --i)
+    {
+        if (data[i] == target) return i;
+    }
+    return -1;
+}
+
 CHAOS_IL2CPP_INT32 ChaosStringCompare(CHAOS_IL2CPP_INTPTR str_a, CHAOS_IL2CPP_INTPTR str_b) noexcept
 {
     str_a = resolve_string_arg(str_a);

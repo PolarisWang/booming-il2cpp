@@ -103,6 +103,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterReadOnlySpanTToArray(registry);
             RegisterArrayIndexOf(registry);
             RegisterArrayLastIndexOf(registry);
+            RegisterStringLastIndexOf(registry);
             RegisterTypeIsSubclassOf(registry);
             RegisterDictionaryKV(registry);
             RegisterDictionaryKV_1(registry);

@@ -163,6 +163,19 @@ CHAOS_IL2CPP_INTPTR    ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr)
 CHAOS_IL2CPP_INT32     ChaosSingleToInt32Bits(CHAOS_IL2CPP_FLOAT32 value) noexcept;
 CHAOS_IL2CPP_INT64     ChaosDoubleToInt64Bits(CHAOS_IL2CPP_FLOAT64 value) noexcept;
 
+// ── Scalar IComparable.CompareTo(object) ───────────────────────────
+// Null argument → 1 (.NET contract: null sorts first) — every ATG probe only
+// exercises this path.  Non-null compares the boxed payload (8-byte header,
+// payload @ +8) without a header type check (accepted divergence).
+CHAOS_IL2CPP_INT32     ChaosScalarCompareTo32(CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INT32     ChaosScalarCompareToU32(CHAOS_IL2CPP_UINT32 value, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INT32     ChaosScalarCompareTo64(CHAOS_IL2CPP_INT64 value, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INT32     ChaosScalarCompareToU64(CHAOS_IL2CPP_UINT64 value, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INT32     ChaosScalarCompareToF(CHAOS_IL2CPP_FLOAT32 value, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INT32     ChaosScalarCompareToD(CHAOS_IL2CPP_FLOAT64 value, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INTPTR    ChaosDecimalCompareToObject(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INT32     ChaosVersionCompareToVersion(CHAOS_IL2CPP_INTPTR version_ptr, CHAOS_IL2CPP_INTPTR other) noexcept;
+
 // ── Decimal::Add/Subtract/Multiply/Divide/Remainder/Negate(Decimal) ─
 // DecimalCarrier* in, DecimalCarrier* out. Declared here (reachable by the
 // generated AOT C++ that forwards via SimpleForward) so the symbol is visible.

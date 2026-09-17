@@ -960,6 +960,80 @@ CHAOS_IL2CPP_INT64 ChaosDoubleToInt64Bits(CHAOS_IL2CPP_FLOAT64 value) noexcept
     return bits;
 }
 
+// ── Scalar IComparable.CompareTo(object) ───────────────────────────
+// Null argument → 1 (.NET contract: null sorts first).  Non-null compares the
+// boxed payload (8-byte header, payload @ +8); NaN handling follows the .NET
+// IComparable double/float semantics (NaN equal to itself, less than numbers).
+
+CHAOS_IL2CPP_INT32 ChaosScalarCompareTo32(CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 1;
+    const auto v = *reinterpret_cast<const CHAOS_IL2CPP_INT32*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj + 8));
+    return value < v ? -1 : (value > v ? 1 : 0);
+}
+CHAOS_IL2CPP_INT32 ChaosScalarCompareToU32(CHAOS_IL2CPP_UINT32 value, CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 1;
+    const auto v = *reinterpret_cast<const CHAOS_IL2CPP_UINT32*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj + 8));
+    return value < v ? -1 : (value > v ? 1 : 0);
+}
+CHAOS_IL2CPP_INT32 ChaosScalarCompareTo64(CHAOS_IL2CPP_INT64 value, CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 1;
+    const auto v = *reinterpret_cast<const CHAOS_IL2CPP_INT64*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj + 8));
+    return value < v ? -1 : (value > v ? 1 : 0);
+}
+CHAOS_IL2CPP_INT32 ChaosScalarCompareToU64(CHAOS_IL2CPP_UINT64 value, CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 1;
+    const auto v = *reinterpret_cast<const CHAOS_IL2CPP_UINT64*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj + 8));
+    return value < v ? -1 : (value > v ? 1 : 0);
+}
+CHAOS_IL2CPP_INT32 ChaosScalarCompareToF(CHAOS_IL2CPP_FLOAT32 value, CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 1;
+    const auto v = *reinterpret_cast<const CHAOS_IL2CPP_FLOAT32*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj + 8));
+    if (std::isnan(value) || std::isnan(v))
+        return (std::isnan(value) && std::isnan(v)) ? 0 : (std::isnan(value) ? -1 : 1);
+    return value < v ? -1 : (value > v ? 1 : 0);
+}
+CHAOS_IL2CPP_INT32 ChaosScalarCompareToD(CHAOS_IL2CPP_FLOAT64 value, CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 1;
+    const auto v = *reinterpret_cast<const CHAOS_IL2CPP_FLOAT64*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj + 8));
+    if (std::isnan(value) || std::isnan(v))
+        return (std::isnan(value) && std::isnan(v)) ? 0 : (std::isnan(value) ? -1 : 1);
+    return value < v ? -1 : (value > v ? 1 : 0);
+}
+CHAOS_IL2CPP_INTPTR ChaosDecimalCompareToObject(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 1;
+    // No decimal-compare primitive exists yet; the probed surface is null-only.
+    RaiseManagedException(
+        "System.ArgumentException",
+        "Object must be of type System.Decimal.");
+}
+CHAOS_IL2CPP_INT32 ChaosVersionCompareToVersion(CHAOS_IL2CPP_INTPTR version_ptr, CHAOS_IL2CPP_INTPTR other) noexcept
+{
+    if (other == 0) return 1;  // CompareTo(null) == 1 — both probed overloads land here
+    if (version_ptr == 0) return -1;
+    // Version object layout: 8-byte header, then _Major/_Minor/_Build/_Revision
+    // as four Int32 fields @ +8/+12/+16/+20 (-1 = "not defined", sorts first).
+    auto field = [](CHAOS_IL2CPP_INTPTR v, int idx) -> CHAOS_IL2CPP_INT32 {
+        return *reinterpret_cast<const CHAOS_IL2CPP_INT32*>(static_cast<CHAOS_IL2CPP_INTPTR>(v + 8 + 4 * idx));
+    };
+    for (int i = 0; i < 4; ++i)
+    {
+        const auto a = field(version_ptr, i);
+        const auto b = field(other, i);
+        if (a == b) continue;
+        if (a < 0) return -1;   // unset sorts before any defined component
+        if (b < 0) return 1;
+        return a < b ? -1 : 1;
+    }
+    return 0;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
 

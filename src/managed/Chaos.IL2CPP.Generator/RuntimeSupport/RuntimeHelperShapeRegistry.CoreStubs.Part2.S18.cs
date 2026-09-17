@@ -56,6 +56,68 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// String::LastIndexOf — char-overload family.  String.LastIndexOf had NO
+        /// registration at all (only System.Array::LastIndexOf existed), so the char
+        /// overloads hit the default external-runtime fallback: arity-correct INTPTR
+        /// slots whose bodies discard every argument and return 0, losing to the probed
+        /// -1.  Mirrors the String::IndexOf char branch in Part2.S5.
+        /// </summary>
+        private static void RegisterStringLastIndexOf(RuntimeHelperShapeRegistry registry)
+        {
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.String",
+                MethodName: "LastIndexOf",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count >= 1 && paramTypes[0] == "System.Char")
+                    {
+                        // Probe surface: string.Empty.LastIndexOf(default(char)[,...]) == -1.
+                        // Slot 0 is the receiver string; char and int offsets are Int32 values.
+                        var slots = new List<AotCoreIrAbiSlotArtifact>
+                        {
+                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                        };
+                        for (int i = 0; i < paramTypes.Count; i++)
+                            slots.Add(CreateInt32AbiSlot());
+                        var paramSig = string.Join(", ", Enumerable.Range(0, slots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
+                        // (char) → whole string; (char,int) → startIndex=arg2; (char,int,int) → startIndex/count.
+                        // .NET LastIndexOf(value, startIndex) scans *backwards from* startIndex.
+                        var startExpr = paramTypes.Count >= 2 && paramTypes[1] == "System.Int32"
+                            ? "static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2)"
+                            : "-1";
+                        var countExpr = paramTypes.Count >= 3 && paramTypes[2] == "System.Int32"
+                            ? "static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3)"
+                            : "-1";
+                        var srcChar = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
+                        [
+                            $"    return ChaosStringLastIndexOfChar(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), {startExpr}, {countExpr});",
+                        ]);
+                        return new GenericShapeResolution(srcChar, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(slots.ToArray()),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int>(Enumerable.Range(0, slots.Count)));
+                    }
+                    var abiSlots = new List<AotCoreIrAbiSlotArtifact> { CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType) };
+                    foreach (var _ in paramTypes)
+                        abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
+                    var paramSigAll = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
+                    var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSigAll,
+                    [
+                        $"    {voidExprs};",
+                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
+                }));
+
+        }
+
+        /// <summary>
         /// Array::LastIndexOf (GenericShapeDescriptor -- calls ChaosArrayLastIndexOf for standard 2-param overload)
         /// </summary>
         private static void RegisterArrayLastIndexOf(RuntimeHelperShapeRegistry registry)

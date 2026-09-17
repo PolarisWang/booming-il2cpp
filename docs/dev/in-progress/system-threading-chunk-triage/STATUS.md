@@ -5,6 +5,19 @@
 
 ## 执行进度（2026-09-17 下午更新，收尾快照）
 
+## Batch 2 收官（2026-09-17 晚，commit 后验证轮）
+
+- ✅ CompareTo(object) 20 类型矩阵 + Version 2 + Decimal 1（S27 `RegisterScalarCompareToMembers`
+  + `ChaosScalarCompareTo{32,U32,64,U64,F,D}` / `ChaosDecimalCompareToObject` / `ChaosVersionCompareToVersion`）
+- ✅ String IndexOf/LastIndexOf char 族 8 项（S5 char 分支 + S18 新增 RegisterStringLastIndexOf
+  + `ChaosString{,Last}IndexOfChar`，UTF-8/UTF-16 索引分歧已注释）
+- ✅ NumberStyles.None 守卫 +6 确认
+- 验证轮：AOT=JIT 完全一致；**原 270 失败目标 186 PASS / 1 fail（String.GetPinnableReference，
+  probe 为 byref XOR，准 unassertable）/ 83 被分类改动移出 fact 集**（对方 envSensitive/nullArg 线）
+- 附带修复：fact_chunk.py `meta_unique_fact` 未绑定（metadata 缺失时 UnboundLocalError，预存在）
+- 分母变化说明：3278→3716（对方分类线扩了 fact 集），绝对值不可跨轮直比
+
+
 > **当前状态**：Batch 1 已交付并验证（system 3008 → 3060 绿，+52）。
 > 验证循环暂停原因：**并发会话**正在同一工作树实施 Convert.ToChar/Convert 家族修复
 > （`Part1.S17.cs` 含 `[TMPDEBUG]` 调试输出，当前 WIP 使 TPG generate-dll 崩溃 rc=0xE0434352，

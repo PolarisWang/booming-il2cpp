@@ -104,6 +104,37 @@ public sealed partial class NativeAotLoweringPlanner
                             CreateInt32AbiSlot(),
                             new HashSet<int> { 0, 1 });
                     }
+                    if (paramTypes.Count >= 1 && paramTypes[0] == "System.Char")
+                    {
+                        // Probe surface: string.Empty.IndexOf(default(char)[,...]) == -1.
+                        // The old fallback made every slot a reference slot — the char
+                        // arrived as a handle and the body discarded everything returning
+                        // 0 (assert expected -1).  Slot 0 is the receiver string, the
+                        // char and the int offsets are Int32 values.
+                        var slots = new List<AotCoreIrAbiSlotArtifact>
+                        {
+                            CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                        };
+                        for (int i = 0; i < paramTypes.Count; i++)
+                            slots.Add(CreateInt32AbiSlot());
+                        var charParamSig = string.Join(", ", Enumerable.Range(0, slots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
+                        // (char) → start=0/count=whole; (char,int) → start=arg2; (char,int,int) → start/count
+                        // from args; a trailing StringComparison (an Int32 enum) is ignored.
+                        var startExpr = paramTypes.Count >= 2 && paramTypes[1] == "System.Int32"
+                            ? "static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2)"
+                            : "0";
+                        var countExpr = paramTypes.Count >= 3 && paramTypes[2] == "System.Int32"
+                            ? "static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_3)"
+                            : "-1";
+                        var srcChar = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, charParamSig,
+                        [
+                            $"    return ChaosStringIndexOfChar(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), {startExpr}, {countExpr});",
+                        ]);
+                        return new GenericShapeResolution(srcChar, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(slots.ToArray()),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int>(Enumerable.Range(0, slots.Count)));
+                    }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact> { CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType) };
                     foreach (var _ in paramTypes)
                         abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
