@@ -4,6 +4,40 @@
 > **上一轮交接**: `HANDOFF-2026-09-15.md`（本轮起点）
 > **本轮范围**: M5 XmlTextReader 收尾 → M6 XmlTextWriter → M3 Utf8JsonWriter → XML DOM 全族 → 非 async stubGap 清零
 > **结论**: **XML 翻译层的非 async stubGap 已全部清零**；剩余 84 个 stubGap 100% 是 async 方法，需 async 主线能力
+>
+> ## 🔴 2026-09-17 后续更正（必读，覆盖下文多个结论）
+>
+> 本文写就后，同一日的工作推翻了其中两项判断，**下文表格中的 stubGap / real
+> 数字均已失效**。执行下一轮前请以下表为准：
+>
+> | 项 | 本文原述 | 实测更正 |
+> |:---|:---------|:---------|
+> | XML chunk stubGap | 84 → 0 | **185** |
+> | XML chunk realTotal | 338 | **234** |
+> | XML chunk total | 659 | **746** |
+> | text-json stubGap | 76 | **177** |
+> | text-json realTotal | 51 | **5** |
+>
+> **两个原因**：
+>
+> 1. **84 个 `XmlWriter.*Async` 已实现**（commit `8391009af`）。但实测发现：ATG 的
+>    fixture 是 `XmlWriter.Create(new StringBuilder())`，其 `Settings.Async == false`，
+>    故正确语义是「参数校验通过后抛 `InvalidOperationException`」——**不是真异步写**。
+>    这批随后落进 `unassertable` 桶（返回类型为 `Task`，value 天然无法承载断言）。
+> 2. **发现并修复了一个更根本的 ATG 缺陷**（commit `def792ba3` + `dbddc7ec1`）：
+>    `ProbeEmitter` 从不发射 `CSharpExpressionBuilder` 引用的 `ReflectionSubjectSample`
+>    种子类型 → 任何含 **Type 参数**方法的类型，其 probe **必然编译失败**且**静默**
+>    （`probe-results.json` 产出 2 字节的 `[]`，无任何报错）→ 该类型**全部**方法退化为
+>    无保护的裸调用 → 断言 `(object)ret != null` 恒真 → **假绿**。
+>
+>    影响 **29 个类型、3 个 assembly**，全是地基类型（`System.Type`/`Attribute`/
+>    `Enum`/`Delegate`/`Array`/`JsonSerializer` 等）。修复后重跑，四个 chunk 的
+>    `stubGap` **全线上升**——那不是回归，是**假绿被揭为诚实的已知缺口**。
+>
+>    连带推翻了 reflection chunk 的「283/283 全绿」（其 216/283 落在失效类型下；
+>    真相为 stubGap 390 / real 47 / total 440）。
+>
+> **因此：本文 §1 的「stubGap 清零」应读作「该轮口径下的清零」**，不代表真实覆盖率。
 
 ---
 
