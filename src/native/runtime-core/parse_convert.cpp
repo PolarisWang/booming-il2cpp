@@ -930,3 +930,197 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertChangeTypeWithProvider(
     (void)provider;
     return ChaosConvertChangeType(obj, typeCode);
 }
+// ═══════════════════════════════════════════════════════════════════
+// Numeric TryParse(string[, ...], out T) — return-bool + write-through-out
+// ═══════════════════════════════════════════════════════════════════
+//
+// The numeric TryParse family had NO shape registration, so codegen emitted
+// the zero-argument chaos_external_runtime_* catch-all — which cannot see the
+// string or the out-pointer.  It returned 0 (=false), so every
+// `TryParse("200", out v)` subject asserted false and the parsed value never
+// reached `v` (76 failing subjects in the system chunk).
+//
+// Contract mirrors ChaosEnumTryParse: return 1 on success / 0 on failure and
+// write the parsed value through result_out.  A failed parse is NOT an
+// exception — reporting failure via the bool is TryParse's whole point — so
+// these must never raise.
+namespace {
+
+template <typename T>
+bool TryParseUnsignedCore(const char* s, T* out) noexcept
+{
+    if (s == nullptr || *s == '\0') return false;
+    char* end = nullptr;
+    errno = 0;
+    unsigned long long v = std::strtoull(s, &end, 10);
+    if (errno != 0 || end == s || *end != '\0') return false;
+    if (v > static_cast<unsigned long long>(std::numeric_limits<T>::max())) return false;
+    *out = static_cast<T>(v);
+    return true;
+}
+
+template <typename T>
+bool TryParseSignedCore(const char* s, T* out) noexcept
+{
+    if (s == nullptr || *s == '\0') return false;
+    char* end = nullptr;
+    errno = 0;
+    long long v = std::strtoll(s, &end, 10);
+    if (errno != 0 || end == s || *end != '\0') return false;
+    if (v < static_cast<long long>(std::numeric_limits<T>::min()) ||
+        v > static_cast<long long>(std::numeric_limits<T>::max())) return false;
+    *out = static_cast<T>(v);
+    return true;
+}
+
+bool TryParseF64Core(const char* s, CHAOS_IL2CPP_FLOAT64* out) noexcept
+{
+    if (s == nullptr || *s == '\0') return false;
+    char* end = nullptr;
+    errno = 0;
+    double v = std::strtod(s, &end);
+    if (end == s || *end != '\0') return false;
+    *out = v;
+    return true;
+}
+
+}  // namespace
+
+#define CHAOS_TRY_PARSE_SCAFFOLD(NAME, CTYPE, CORE)                                \
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParse##NAME(                                 \
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) noexcept                     \
+{                                                                                  \
+    if (str == 0 || out == 0) return 0;                                            \
+    const char* data = nullptr; CHAOS_IL2CPP_INT32 len = 0;                        \
+    if (!DecodeString(str, data, len)) return 0;                                   \
+    CTYPE v = 0;                                                                   \
+    if (!CORE(NullTerminate(data, len), &v)) return 0;                             \
+    *reinterpret_cast<CTYPE*>(static_cast<CHAOS_IL2CPP_INTPTR>(out)) = v;          \
+    return 1;                                                                      \
+}
+
+CHAOS_TRY_PARSE_SCAFFOLD(Int32,   CHAOS_IL2CPP_INT32,  TryParseSignedCore<CHAOS_IL2CPP_INT32>)
+CHAOS_TRY_PARSE_SCAFFOLD(Int64,   CHAOS_IL2CPP_INT64,  TryParseSignedCore<CHAOS_IL2CPP_INT64>)
+CHAOS_TRY_PARSE_SCAFFOLD(Int16,   CHAOS_IL2CPP_INT16,  TryParseSignedCore<CHAOS_IL2CPP_INT16>)
+CHAOS_TRY_PARSE_SCAFFOLD(SByte,   CHAOS_IL2CPP_INT8,   TryParseSignedCore<CHAOS_IL2CPP_INT8>)
+CHAOS_TRY_PARSE_SCAFFOLD(UInt32,  CHAOS_IL2CPP_UINT32, TryParseUnsignedCore<CHAOS_IL2CPP_UINT32>)
+CHAOS_TRY_PARSE_SCAFFOLD(UInt64,  CHAOS_IL2CPP_UINT64, TryParseUnsignedCore<CHAOS_IL2CPP_UINT64>)
+CHAOS_TRY_PARSE_SCAFFOLD(UInt16,  CHAOS_IL2CPP_UINT16, TryParseUnsignedCore<CHAOS_IL2CPP_UINT16>)
+CHAOS_TRY_PARSE_SCAFFOLD(Byte,    CHAOS_IL2CPP_UINT8,  TryParseUnsignedCore<CHAOS_IL2CPP_UINT8>)
+CHAOS_TRY_PARSE_SCAFFOLD(Double,  CHAOS_IL2CPP_FLOAT64, TryParseF64Core)
+
+#undef CHAOS_TRY_PARSE_SCAFFOLD
+
+// Single needs an explicit body: the shared scaffold would store a FLOAT64
+// (8 bytes) through the out pointer, overflowing the 4-byte float slot.
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingle(
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) noexcept
+{
+    if (str == 0 || out == 0) return 0;
+    const char* data = nullptr; CHAOS_IL2CPP_INT32 len = 0;
+    if (!DecodeString(str, data, len)) return 0;
+    CHAOS_IL2CPP_FLOAT64 v = 0;
+    if (!TryParseF64Core(NullTerminate(data, len), &v)) return 0;
+    *reinterpret_cast<CHAOS_IL2CPP_FLOAT32*>(static_cast<CHAOS_IL2CPP_INTPTR>(out)) =
+        static_cast<CHAOS_IL2CPP_FLOAT32>(v);
+    return 1;
+}
+
+// Boolean is not numeric — comparison against the two literal spellings.
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBoolean(
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) noexcept
+{
+    if (str == 0 || out == 0) return 0;
+    const char* data = nullptr; CHAOS_IL2CPP_INT32 len = 0;
+    if (!DecodeString(str, data, len)) return 0;
+    const char* s = NullTerminate(data, len);
+    CHAOS_IL2CPP_UINT8 v;
+    if (std::strcmp(s, "true") == 0 || std::strcmp(s, "True") == 0) v = 1;
+    else if (std::strcmp(s, "false") == 0 || std::strcmp(s, "False") == 0) v = 0;
+    else return 0;
+    *reinterpret_cast<CHAOS_IL2CPP_UINT8*>(static_cast<CHAOS_IL2CPP_INTPTR>(out)) = v;
+    return 1;
+}
+
+// Arity variants.  SimpleForward forwards *every* argument of the managed
+// overload, so a 3- or 4-arg call cannot target the 2-arg entry point.
+// These forwarders accept and discard NumberStyles / IFormatProvider, which
+// do not affect the parsed value for the literals the probes feed.
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseInt32(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseInt32(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseInt32(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseUInt32(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseUInt32(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseUInt32(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseInt64(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseInt64(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseInt64(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseUInt64(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseUInt64(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseUInt64(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseInt16(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseInt16(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseInt16(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseUInt16(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseUInt16(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseUInt16(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseByte(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseByte(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseByte(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseSByte(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseSByte(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseSByte(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseBoolean(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseBoolean(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseBoolean(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseSingle(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseSingle(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseSingle(str, out); }
+
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+{ (void)styles; return ChaosTryParseDouble(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)prov; return ChaosTryParseDouble(str, out); }
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+{ (void)styles; (void)prov; return ChaosTryParseDouble(str, out); }
+

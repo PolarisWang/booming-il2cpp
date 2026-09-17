@@ -134,6 +134,12 @@ public sealed partial class NativeAotLoweringPlanner
             // Scalar INumber<T> predicates + BitOperations static members.
             RegisterScalarINumberMembers(registry);
 
+            // Numeric TryParse(string[, ...], out T) — return-bool + write-through-out.
+            RegisterNumericTryParse(registry);
+
+            // System.MathF (Float32) + System.BitConverter bit reinterpretation tails.
+            RegisterMathFAndBitConverterBits(registry);
+
         }
 
     }
