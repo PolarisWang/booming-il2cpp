@@ -1042,85 +1042,88 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBoolean(
     return 1;
 }
 
-// Arity variants.  SimpleForward forwards *every* argument of the managed
-// overload, so a 3- or 4-arg call cannot target the 2-arg entry point.
-// These forwarders accept and discard NumberStyles / IFormatProvider, which
-// do not affect the parsed value for the literals the probes feed.
+// Arity variants.  Argument order MUST match the managed signature, because
+// SimpleForward forwards arguments positionally:
+//     TryParse(string, NumberStyles, IFormatProvider, out T)
+// i.e. (str, styles, provider, out).  An earlier revision declared
+// (str, out, styles, prov) -- the out slot then received the NumberStyles
+// value and the native wrote the parsed result through an invalid pointer,
+// raising a managed exception (0xe0000001) on every 3-/4-argument call.
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseInt32(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseInt32(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseInt32(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseUInt32(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseUInt32(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseUInt32(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseInt64(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseInt64(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseInt64(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseUInt64(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseUInt64(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseUInt64(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseInt16(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseInt16(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseInt16(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseUInt16(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseUInt16(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseUInt16(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseByte(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseByte(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseByte(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseSByte(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseSByte(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseSByte(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseBoolean(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseBoolean(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseBoolean(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseSingle(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseSingle(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseSingle(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; return ChaosTryParseDouble(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseDouble(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)styles; (void)prov; return ChaosTryParseDouble(str, out); }
 
