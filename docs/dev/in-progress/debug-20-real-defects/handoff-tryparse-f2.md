@@ -173,3 +173,61 @@ System_StringTests::IndexOf_114_char_System_StringComparison_0  pass→fail
 指向并发 agent 在 `6466206db` 的 `ChaosStringIndexOfChar` shape：
 泛型 fallback 可能仍把 char / StringComparison 槽建成 ReferenceType 丢弃操作数。
 **需独立归因，勿在浮点槽修复面内排查。**
+
+---
+
+## 八、IndexOf_114 回归归因（2026-09-17，已闭环到根因）
+
+**结论：不是浮点槽/hoisting 缺陷**（该 subject 生成体不含浮点、不含 `_hld_`），
+而是并发 agent `6466206db`（system chunk Batch 2）新增的 **String.IndexOf(char,
+StringComparison) shape 语义缺口**。
+
+### 实测 .NET 语义（net10.0）
+
+| 调用 | 结果 |
+|---|---|
+| `"".IndexOf('\0', CurrentCulture/InvariantCulture/*IgnoreCase)` | **0** |
+| `"abc".IndexOf('\0', CurrentCulture)` | **0** |
+| `"".IndexOf('a', CurrentCulture)` | −1 |
+| `"".IndexOf('\0', Ordinal/OrdinalIgnoreCase)` | **−1** |
+| `"".IndexOf('\0')`（无比较 → 默认 Ordinal） | **−1** |
+
+即：**culture-aware 模式下 `'\0'` 恒命中 0**；Ordinal 模式则 −1。
+
+### 缺陷链路（生成代码实证）
+
+shape 注册了 3 参签名却**丢弃** `StringComparison`：
+
+```cpp
+chaos_external_runtime_..._IndexOf_System_Int32_System_Char_System_StringComparison_(
+        chaos_arg_0, chaos_arg_1, chaos_arg_2) {          // arg_2 = 比较 enum
+    return ChaosStringIndexOfChar(chaos_arg_0, (int32)chaos_arg_1, 0, -1);
+    //                                                           ^^^^^^ arg_2 未传
+}
+```
+
+native `ChaosStringIndexOfChar`（`string_stubs.cpp`）对未命中/空串一律 `return -1`，
+故 `AreEqual(0, ret)` 抛 AssertionException（caught=true）。
+
+### 为何此前"绿"
+
+stale 轮该 subject 的旧 catch-all `return 0` **恰好等于** 0 → 假绿
+（典型 `operand-less-catchall-false-green`）。Batch 2 换成真实现后暴露。
+
+同批 `IndexOf_112/113/115`（expects −1、无 culture）由假 fail 转真 pass，
+即 commit message 所述 "+8 IndexOf" 方向；**唯一真回归是本 subject**。
+
+### 修复（须跨 Batch2 两文件，勿在浮点面内做）
+
+1. `Part2.S5.cs` char 分支：`(char, StringComparison)` 时把 enum 传进 native
+2. `string_stubs.cpp ChaosStringIndexOfChar`：新增 comparison 形参；
+   culture-aware（非 Ordinal/OrdinalIgnoreCase）时 `ch == 0` 且 start 合法 → 返回 0；
+   Ordinal 保持 −1
+
+⚠️ **只改 native 无条件 `ch==0→0` 会打破 `IndexOf_112`**（Ordinal 期望 −1）——
+必须把 enum 传进去才能区分两种模式。
+
+### 附：同批未治愈项（非本次引入）
+
+`IndexOfAny_117/118`、`LastIndexOfAny_129/130` 共 6 项在 stale 轮**已是 fail**
+（新注册未覆盖或仍走 catch-all），非回归，属 Batch 2/3 遗留。
