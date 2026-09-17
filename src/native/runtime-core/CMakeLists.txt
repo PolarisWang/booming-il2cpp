@@ -63,6 +63,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/hashcode_stubs.cpp
     runtime_stubs/xml_nametable_stubs.cpp
     runtime_stubs/xml_writer_stubs.cpp
+    runtime_stubs/xml_writer_async_stubs.cpp
     runtime_stubs/xml_reader_stubs.cpp
     runtime_stubs/xml_convert_stubs.cpp
     runtime_stubs/xml_document_stubs.cpp

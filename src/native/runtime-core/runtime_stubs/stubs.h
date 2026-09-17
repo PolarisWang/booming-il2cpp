@@ -57,6 +57,7 @@ extern "C" {
 #include "simd_stubs.h"
 #include "xml_nametable_stubs.h"
 #include "xml_writer_stubs.h"
+#include "xml_writer_async_stubs.h"
 #include "xml_reader_stubs.h"
 #include "xml_convert_stubs.h"
 #include "xml_document_stubs.h"

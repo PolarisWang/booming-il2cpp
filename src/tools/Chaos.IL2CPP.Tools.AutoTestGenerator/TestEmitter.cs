@@ -828,9 +828,9 @@ public sealed class TestEmitter
         // throw is observed by the subject's enclosing catch, and fact records a
         // genuine value instead of the codegen-time `return 42L` smoke stub.
         //
-        // Async variants are deliberately EXCLUDED — they need the async state
-        // machine (Phase M) and currently fail on the managed side too, so the
-        // conservative skip remains correct for them.
+        // Async variants are EXCLUDED above and handled separately below: the
+        // suffix means the sync name list cannot match them, and their contract
+        // differs (see the *Async block).
         if (declaringType is not null
             && (declaringType.Contains("System.Xml.XmlTextWriter", StringComparison.Ordinal)
                 || declaringType.Contains("System.Xml.XmlWriter", StringComparison.Ordinal))
@@ -844,6 +844,39 @@ public sealed class TestEmitter
                or "WriteStartElement" or "WriteStartAttribute"
                or "WriteCData" or "WriteCharEntity" or "WriteString"
                or "WriteNode" or "WriteAttributes")
+            return true;
+
+        // XmlWriter *Async surface.  The generated subjects call these on
+        // `XmlWriter.Create(new StringBuilder())`, a writer whose
+        // Settings.Async is false; the BCL's async path refuses such a writer
+        // AFTER the argument validation it shares with the sync path, so the
+        // contract is two-stage:
+        //     invalid argument                  -> ArgumentNullException / ArgumentException
+        //     valid argument, non-async writer  -> InvalidOperationException
+        // Measured against .NET 8 for all 27 entries in
+        // xml_writer_async_stubs.cpp, which reproduces exactly that ordering.
+        //
+        // Earlier revisions of this file excluded async wholesale, on the
+        // belief that these methods "fail on the managed side too" and needed
+        // the phase-M state machine.  Neither part held up: the managed calls
+        // run and throw normally, and .GetAwaiter().GetResult() drives the
+        // state machine to completion inside the generated subject.  The
+        // subjects only lacked a shape registration and native body.
+        if (declaringType is not null
+            && (declaringType.Contains("System.Xml.XmlWriter", StringComparison.Ordinal)
+                || declaringType.Contains("System.Xml.XmlTextWriter", StringComparison.Ordinal))
+            && method.Name is "WriteStartDocumentAsync" or "WriteEndDocumentAsync"
+               or "WriteEndElementAsync" or "WriteFullEndElementAsync"
+               or "FlushAsync" or "DisposeAsync"
+               or "WriteStringAsync" or "WriteWhitespaceAsync" or "WriteCommentAsync"
+               or "WriteCDataAsync" or "WriteRawAsync" or "WriteNameAsync"
+               or "WriteNmTokenAsync" or "WriteEntityRefAsync"
+               or "WriteCharEntityAsync" or "WriteSurrogateCharEntityAsync"
+               or "WriteQualifiedNameAsync" or "WriteProcessingInstructionAsync"
+               or "WriteStartElementAsync" or "WriteDocTypeAsync"
+               or "WriteAttributeStringAsync" or "WriteElementStringAsync"
+               or "WriteCharsAsync" or "WriteBase64Async" or "WriteBinHexAsync"
+               or "WriteNodeAsync" or "WriteAttributesAsync")
             return true;
 
         // XmlConvert static methods: pure string→value transforms whose native
