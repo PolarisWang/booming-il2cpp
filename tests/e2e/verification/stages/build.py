@@ -1621,6 +1621,28 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [build] Cleaning stale cmake build dir: {native_build_dir}")
         shutil.rmtree(native_build_dir, ignore_errors=True)
 
+    # -- 7c. Purge stale generated page files --
+    # The AOT codegen pagination is content-based: when the lowering plan shifts,
+    # subjects move to different page numbers, and pages the new run no longer
+    # emits are LEFT BEHIND in codegen/generated.  CMake globs *.cpp, so the
+    # stale page compiles alongside the fresh one and the duplicate extern "C"
+    # definition resolves to whichever COMDAT the linker sees first — silently
+    # running the OLD method body (symptom: correct registration, fact still red).
+    # The converter re-emits the full page set every run, so deleting them all
+    # before TPG is always safe.
+    _codegen_gen_dir = ctx.native_dir / "codegen" / "generated"
+    if _codegen_gen_dir.is_dir():
+        _purged = 0
+        for _pattern in ("native-aot*.page*.cpp", "native-aot.page-*.cpp"):
+            for _stale in _codegen_gen_dir.glob(_pattern):
+                try:
+                    _stale.unlink()
+                    _purged += 1
+                except OSError as e:
+                    print(f"  [build] WARNING: could not purge stale page {_stale.name}: {e}")
+        if _purged:
+            print(f"  [build] Purged {_purged} stale generated page file(s)")
+
     # -- 8. Run TPG generate-dll --
     if not ensure_tool_built("Chaos.IL2CPP.Tools.TestProjectGenerator"):
         return StageResult(

@@ -64,6 +64,31 @@ CHAOS_IL2CPP_UINT64    ChaosParseUInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_I
 CHAOS_IL2CPP_UINT64    ChaosParseUInt64StylesProvider(
     CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept;
 
+// ── Numeric TryParse(string[, ...], out T) ─────────────────────────
+// Return-bool + write-through-out contract (mirrors ChaosEnumTryParse):
+// 1 on success with the parsed value stored through the out pointer,
+// 0 on failure (a failed parse is NOT an exception — never raise).
+// One symbol per managed overload arity, and the argument ORDER follows
+// the managed overload: (string[, NumberStyles][, IFormatProvider], out T)
+// — the out pointer is LAST.
+#define CHAOS_DECLARE_TRY_PARSE_FAMILY(Name)                                 \
+CHAOS_IL2CPP_INT32     ChaosTryParse##Name(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) noexcept;                                        \
+CHAOS_IL2CPP_INT32     ChaosTryParse##Name##Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR out) noexcept;                                        \
+CHAOS_IL2CPP_INT32     ChaosTryParse##Name##Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR format_provider, CHAOS_IL2CPP_INTPTR out) noexcept;                                   \
+CHAOS_IL2CPP_INT32     ChaosTryParse##Name##StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider, CHAOS_IL2CPP_INTPTR out) noexcept
+CHAOS_DECLARE_TRY_PARSE_FAMILY(Boolean);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(Byte);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(SByte);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(Int16);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(UInt16);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(Int32);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(UInt32);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(Int64);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(UInt64);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(Single);
+CHAOS_DECLARE_TRY_PARSE_FAMILY(Double);
+#undef CHAOS_DECLARE_TRY_PARSE_FAMILY
+
 // ── Format primitive to string ─────────────────────────────────────
 // Returns a newly allocated managed string (or 0 on OOM).
 CHAOS_IL2CPP_INTPTR    ChaosFormatDouble(double value) noexcept;

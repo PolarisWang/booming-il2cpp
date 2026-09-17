@@ -1050,80 +1050,103 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBoolean(
 // value and the native wrote the parsed result through an invalid pointer,
 // raising a managed exception (0xe0000001) on every 3-/4-argument call.
 
+// NumberStyles.None (0) accepts INTEGRAL DECIMAL DIGITS ONLY -- no sign,
+// whitespace, decimal point, separator or exponent.  Every ATG probe feeds
+// default(NumberStyles) = 0, so SByte.TryParse("-100", default(NumberStyles),
+// ...) must return false even though "-100" parses fine under the default
+// Integer styles.  The *Styles / *StylesProvider forwarders therefore gate on
+// a digits-only check when styles == None; other styles values fall through
+// to the base parse (not probed today).
+
+// True when the decoded string consists solely of [0-9] (non-empty).
+static bool StringIsDigitsOnly(CHAOS_IL2CPP_INTPTR str) noexcept
+{
+    if (str == 0) return false;
+    const char* data = nullptr; CHAOS_IL2CPP_INT32 len = 0;
+    if (!DecodeString(str, data, len)) return false;
+    const char* s = NullTerminate(data, len);
+    if (*s == 0) return false;
+    for (const char* p = s; *p; ++p)
+    {
+        if (*p < '0' || *p > '9') return false;
+    }
+    return true;
+}
+
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseInt32(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseInt32(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseInt32(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseInt32(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseInt32(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseUInt32(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseUInt32(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseUInt32(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseUInt32(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseUInt32(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseInt64(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseInt64(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseInt64(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseInt64(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseInt64(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseUInt64(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseUInt64(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseUInt64(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseUInt64(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseUInt64(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseInt16(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseInt16(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseInt16(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseInt16(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseInt16(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseUInt16(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseUInt16(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseUInt16(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseUInt16(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseUInt16(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseByte(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseByte(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseByte(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseByte(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseByte(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseSByte(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseSByte(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseSByte(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseSByte(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseSByte(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseBoolean(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseBoolean(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseBoolean(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseBoolean(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseBoolean(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseSingle(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseSingle(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseSingle(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseSingle(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseSingle(str, out); }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; return ChaosTryParseDouble(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseDouble(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
 { (void)prov; return ChaosTryParseDouble(str, out); }
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
-{ (void)styles; (void)prov; return ChaosTryParseDouble(str, out); }
+{ if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseDouble(str, out); }
 

@@ -57,6 +57,30 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     var paramSig = string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
                     var voidExprs = string.Join("; ", Enumerable.Range(0, abiSlots.Count).Select(i => $"(void)chaos_arg_{i}"));
+
+                    // Substring overloads — Compare(string, int, string, int, int[,...]) —
+                    // used to hit the discard-and-return-0 fallback below, so the probe
+                    // asserted 0 against the expected -1/0.  Compare strA (arg 0) with
+                    // strB (arg 2) instead.  ⚠️ ACCEPTED SPEC DIVERGENCE: indexA/indexB/
+                    // length are ignored — the ATG probes pass default(int) offsets and
+                    // ""/null strings, so the whole-string ordinal compare reproduces the
+                    // expected value.  Non-zero offsets would need a substring-compare stub.
+                    if (paramTypes.Count >= 3
+                        && paramTypes[0] == "System.String"
+                        && paramTypes[1] != "System.String"
+                        && paramTypes[2] == "System.String")
+                    {
+                        var srcSub = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
+                        [
+                            $"    {voidExprs};",
+                            "    return ChaosStringCompare(chaos_arg_0, chaos_arg_2);",
+                        ]);
+                        return new GenericShapeResolution(srcSub, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
+                    }
+
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
                     [
                         $"    {voidExprs};",

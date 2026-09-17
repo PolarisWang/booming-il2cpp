@@ -944,6 +944,22 @@ CHAOS_IL2CPP_INT32 ChaosBitOpsPopCount16(CHAOS_IL2CPP_UINT16 value) noexcept
     return ChaosBitOpsPopCount32(value);
 }
 
+// ── BitConverter bit reinterpretation ──────────────────────────────
+// memcpy (not type-punning) — the slot machinery handles the float
+// load/store; these only re-label the bits.
+CHAOS_IL2CPP_INT32 ChaosSingleToInt32Bits(CHAOS_IL2CPP_FLOAT32 value) noexcept
+{
+    CHAOS_IL2CPP_INT32 bits;
+    std::memcpy(&bits, &value, sizeof(bits));
+    return bits;
+}
+CHAOS_IL2CPP_INT64 ChaosDoubleToInt64Bits(CHAOS_IL2CPP_FLOAT64 value) noexcept
+{
+    CHAOS_IL2CPP_INT64 bits;
+    std::memcpy(&bits, &value, sizeof(bits));
+    return bits;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
 

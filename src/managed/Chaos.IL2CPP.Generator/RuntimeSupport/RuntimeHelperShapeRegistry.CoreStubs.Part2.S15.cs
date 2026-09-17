@@ -68,6 +68,38 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
                 new HashSet<int> { 0 });
 
+            // Math::Round(decimal, int / MidpointRounding[, MidpointRounding]) — the ATG probes
+            // call these through System.Math, but the same implementations were only registered
+            // under the System.Decimal key (Part1.S16), so the MathTests probes fell to the
+            // 0-arg catch-all.  Same native symbols, same Decimal-carrier ABI.
+            registry.Register("System.Math", "Round", ["System.Decimal", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosDecimalRoundDigits",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1 });
+            registry.Register("System.Math", "Round", ["System.Decimal", "System.MidpointRounding"],
+                ShapeKind.SimpleForward, "ChaosDecimalRoundMode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                    CreateInt32AbiSlot(),
+                }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1 });
+            registry.Register("System.Math", "Round", ["System.Decimal", "System.Int32", "System.MidpointRounding"],
+                ShapeKind.SimpleForward, "ChaosDecimalRoundDigitsMode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                {
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                    CreateInt32AbiSlot(), CreateInt32AbiSlot(),
+                }),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Decimal", AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1, 2 });
+
         }
 
         /// <summary>

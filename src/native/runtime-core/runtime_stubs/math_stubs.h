@@ -157,6 +157,12 @@ CHAOS_IL2CPP_INTPTR    ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) no
 CHAOS_IL2CPP_INTPTR    ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
 CHAOS_IL2CPP_INTPTR    ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
 
+// ── BitConverter bit reinterpretation ──────────────────────────────
+// Pure memcpy reinterpretation (no allocation, no raise).  These close the
+// zero-arg catch-all at the tail of the MathF / Parse probes.
+CHAOS_IL2CPP_INT32     ChaosSingleToInt32Bits(CHAOS_IL2CPP_FLOAT32 value) noexcept;
+CHAOS_IL2CPP_INT64     ChaosDoubleToInt64Bits(CHAOS_IL2CPP_FLOAT64 value) noexcept;
+
 // ── Decimal::Add/Subtract/Multiply/Divide/Remainder/Negate(Decimal) ─
 // DecimalCarrier* in, DecimalCarrier* out. Declared here (reachable by the
 // generated AOT C++ that forwards via SimpleForward) so the symbol is visible.

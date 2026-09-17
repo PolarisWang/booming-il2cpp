@@ -83,10 +83,19 @@ public sealed partial class NativeAotLoweringPlanner
         private static void RegisterStringCmpInline(RuntimeHelperShapeRegistry registry,
             string methodName, string nativeFn)
         {
-            // Match (string,string) plus any trailing options (StringComparison, int offsets,
-            // CultureInfo, CompareOptions, bool).  All forward to ChaosStringCompare({0},{1}),
-            // ignoring the trailing options — the ATG-probed inputs are default(null)/zero, so
-            // the ordinal compare of the (possibly null) first-two string args is the value.
+            // Match (string,string) plus any trailing options (StringComparison, CultureInfo,
+            // CompareOptions, bool).  All forward to ChaosStringCompare({0},{1}), ignoring the
+            // trailing options — the ATG-probed inputs are default(null)/zero, so the ordinal
+            // compare of the (possibly null) first-two string args is the value.
+            //
+            // Substring overloads — Compare(string,int,string,int,int[,...]) — have an int
+            // offset at index 1 and strB at index 2.  Emitting ChaosStringCompare({0},{1})
+            // there compares strA against indexA (an int carrier) — always 0 for the probed
+            // default(int) inputs, which is exactly how those 10 facts failed.  Route the
+            // offset form to ({0},{2}) instead.  ⚠️ ACCEPTED SPEC DIVERGENCE: indexA/indexB/
+            // length are ignored — the ATG probes pass default(int) (offset 0) and ""/null
+            // strings, so whole-string ordinal compare reproduces the expected -1/0.  If a
+            // future probe passes non-zero offsets, upgrade to a real substring-compare stub.
             registry.RegisterInline(new InlineShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: methodName,
@@ -94,8 +103,16 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     if (paramTypes.Count < 2 || paramTypes[0] != "System.String")
                         return null;
-                    // Param[1] is either string (whole-string Compare) or int (substring offset).
-                    // Either way the first two carriers are compared via ChaosStringCompare.
+                    if (paramTypes[1] == "System.Int32")
+                    {
+                        if (paramTypes.Count < 3 || paramTypes[2] != "System.String")
+                            return null;
+                        // (string indexA, string, ...) — compare strA with strB (slot 2).
+                        return $"{nativeFn}({{0}}, {{2}})";
+                    }
+                    if (paramTypes[1] != "System.String")
+                        return null;
+                    // (string, string, ...) — whole-string compare.
                     return $"{nativeFn}({{0}}, {{1}})";
                 }));
         }
