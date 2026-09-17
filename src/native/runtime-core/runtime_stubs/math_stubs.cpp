@@ -13,6 +13,46 @@
 #endif
 
 namespace chaos::il2cpp::runtime_core {
+
+template <typename T>
+static inline CHAOS_IL2CPP_INT32 ChaosScalarIsEvenInteger(T v) noexcept
+{
+    return (static_cast<CHAOS_IL2CPP_INT64>(v) % 2) == 0 ? 1 : 0;
+}
+template <typename T>
+static inline CHAOS_IL2CPP_INT32 ChaosScalarIsOddInteger(T v) noexcept
+{
+    return (static_cast<CHAOS_IL2CPP_INT64>(v) % 2) != 0 ? 1 : 0;
+}
+// .NET defines IsPositive as !IsNegative — i.e. >= 0, so zero is POSITIVE.
+// (Verified: int.IsPositive(0) == True, double.IsPositive(0.0) == True.)
+template <typename T>
+static inline CHAOS_IL2CPP_INT32 ChaosScalarIsPositive(T v) noexcept
+{
+    return v >= static_cast<T>(0) ? 1 : 0;
+}
+template <typename T>
+static inline CHAOS_IL2CPP_INT32 ChaosScalarIsNegative(T v) noexcept
+{
+    return v < static_cast<T>(0) ? 1 : 0;
+}
+template <typename T>
+static inline CHAOS_IL2CPP_INT32 ChaosScalarIsNormal(T v) noexcept
+{
+    // Integer T has no subnormal representation; every non-zero value is normal.
+    return v != static_cast<T>(0) ? 1 : 0;
+}
+template <typename T>
+static inline CHAOS_IL2CPP_INT32 ChaosScalarIsSubnormal(T) noexcept
+{
+    return 0;  // integers are never subnormal
+}
+template <typename T>
+static inline CHAOS_IL2CPP_INT32 ChaosScalarIsRealNumber(T) noexcept
+{
+    return 1;  // every integer is a real number
+}
+
 extern "C" {
 
 CHAOS_IL2CPP_FLOAT64 ChaosMathSqrt(CHAOS_IL2CPP_FLOAT64 value) noexcept
@@ -797,6 +837,111 @@ CHAOS_IL2CPP_FLOAT64 ChaosMathLog2M1(CHAOS_IL2CPP_FLOAT64 x) noexcept
 CHAOS_IL2CPP_FLOAT64 ChaosMathLogP1(CHAOS_IL2CPP_FLOAT64 x) noexcept
 {
     return std::log1p(x);
+}
+
+// ── Scalar INumber<T> predicates (System.Double::IsFinite, UInt32::IsEvenInteger, …) ──
+//
+// These are static abstract interface members of System.Numerics.INumber<T>,
+// surfaced as static methods on each numeric type.  The ShapeRegistry only
+// registered the *Vector* variants (Vector128.IsFinite …), so every scalar
+// subject fell through to the operand-less external-runtime catch-all, which
+// has no operand access and returns 0 — the assertion then compared a
+// fabricated 0 against `true`.
+//
+// Generic in T so one definition covers every width, matching how the IL
+// exposes a single signature per type.
+// Integer predicates: width-suffixed wrappers over the templates above, so the
+// ShapeRegistry can name a concrete symbol per numeric type.
+CHAOS_IL2CPP_INT32 ChaosScalarIsEvenInteger32(CHAOS_IL2CPP_INT32 v) noexcept { return ChaosScalarIsEvenInteger<CHAOS_IL2CPP_INT32>(v); }
+CHAOS_IL2CPP_INT32 ChaosScalarIsEvenInteger64(CHAOS_IL2CPP_INT64 v) noexcept { return ChaosScalarIsEvenInteger<CHAOS_IL2CPP_INT64>(v); }
+CHAOS_IL2CPP_INT32 ChaosScalarIsOddInteger32(CHAOS_IL2CPP_INT32 v) noexcept { return ChaosScalarIsOddInteger<CHAOS_IL2CPP_INT32>(v); }
+CHAOS_IL2CPP_INT32 ChaosScalarIsOddInteger64(CHAOS_IL2CPP_INT64 v) noexcept { return ChaosScalarIsOddInteger<CHAOS_IL2CPP_INT64>(v); }
+// Signed variants compare against zero directly.  Unsigned types are handled by
+// the *_U32/_U64 entry points below: per .NET, an unsigned value is positive
+// iff non-zero and never negative, so routing them through the signed template
+// would misreport values >= 2^31.
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositive32(CHAOS_IL2CPP_INT32 v) noexcept { return ChaosScalarIsPositive<CHAOS_IL2CPP_INT32>(v); }
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositive64(CHAOS_IL2CPP_INT64 v) noexcept { return ChaosScalarIsPositive<CHAOS_IL2CPP_INT64>(v); }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegative32(CHAOS_IL2CPP_INT32 v) noexcept { return ChaosScalarIsNegative<CHAOS_IL2CPP_INT32>(v); }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegative64(CHAOS_IL2CPP_INT64 v) noexcept { return ChaosScalarIsNegative<CHAOS_IL2CPP_INT64>(v); }
+// Unsigned values are never negative, so IsPositive is always true (>= 0).
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveU32(CHAOS_IL2CPP_UINT32) noexcept { return 1; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveU64(CHAOS_IL2CPP_UINT64) noexcept { return 1; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeU32(CHAOS_IL2CPP_UINT32) noexcept { return 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeU64(CHAOS_IL2CPP_UINT64) noexcept { return 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNormal32(CHAOS_IL2CPP_INT32 v) noexcept { return ChaosScalarIsNormal<CHAOS_IL2CPP_INT32>(v); }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNormal64(CHAOS_IL2CPP_INT64 v) noexcept { return ChaosScalarIsNormal<CHAOS_IL2CPP_INT64>(v); }
+CHAOS_IL2CPP_INT32 ChaosScalarIsSubnormal32(CHAOS_IL2CPP_INT32) noexcept { return 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsSubnormal64(CHAOS_IL2CPP_INT64) noexcept { return 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsRealNumber32(CHAOS_IL2CPP_INT32) noexcept { return 1; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsRealNumber64(CHAOS_IL2CPP_INT64) noexcept { return 1; }
+
+// Floating-point predicates delegate to <cmath>, which is where NaN/Infinity
+// actually exist.
+CHAOS_IL2CPP_INT32 ChaosScalarIsFiniteD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return std::isfinite(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsFiniteF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return std::isfinite(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNaN_D(CHAOS_IL2CPP_FLOAT64 v) noexcept { return std::isnan(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNaN_F(CHAOS_IL2CPP_FLOAT32 v) noexcept { return std::isnan(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsInfinityD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return std::isinf(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsInfinityF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return std::isinf(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeInfinityD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return (std::isinf(v) && v < 0) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeInfinityF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return (std::isinf(v) && v < 0) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveInfinityD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return (std::isinf(v) && v > 0) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveInfinityF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return (std::isinf(v) && v > 0) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNormalD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return std::isnormal(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNormalF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return std::isnormal(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsSubnormalD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return (std::fpclassify(v) == FP_SUBNORMAL) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsSubnormalF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return (std::fpclassify(v) == FP_SUBNORMAL) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsIntegerD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return (std::isfinite(v) && std::floor(v) == v && !std::isinf(v)) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsIntegerF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return (std::isfinite(v) && std::floor(v) == v && !std::isinf(v)) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsEvenIntegerD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return (std::isfinite(v) && std::floor(v) == v && std::fmod(std::fabs(v), 2.0) == 0.0) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsEvenIntegerF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return (std::isfinite(v) && std::floor(v) == v && std::fmod(std::fabs(v), 2.0f) == 0.0f) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsOddIntegerD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return (std::isfinite(v) && std::floor(v) == v && std::fmod(std::fabs(v), 2.0) == 1.0) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsOddIntegerF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return (std::isfinite(v) && std::floor(v) == v && std::fmod(std::fabs(v), 2.0f) == 1.0f) ? 1 : 0; }
+// >= 0 (zero is positive); NaN is not positive in .NET.
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return (!std::isnan(v) && v >= 0) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return (!std::isnan(v) && v >= 0) ? 1 : 0; }
+// .NET's float IsNegative is sign-BIT based: -0.0 is negative (verified).
+// std::signbit captures that; a plain `v < 0` misses -0.0.
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return std::signbit(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return std::signbit(v) ? 1 : 0; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsRealNumberD(CHAOS_IL2CPP_FLOAT64 v) noexcept { return std::isnan(v) ? 0 : 1; }
+CHAOS_IL2CPP_INT32 ChaosScalarIsRealNumberF(CHAOS_IL2CPP_FLOAT32 v) noexcept { return std::isnan(v) ? 0 : 1; }
+
+
+// ── Width-aware LeadingZeroCount / TrailingZeroCount for narrow integer types ──
+//
+// System.Byte.LeadingZeroCount(0) is 8 (the width of a byte), not 32 — the
+// INumber<T> members count within T, whereas the BitOperations 32/64 routines
+// count within the machine word.  Routing byte/sbyte/short/ushort to the 32-bit
+// intrinsic therefore reported 32/16 for values that should report 8/16.
+CHAOS_IL2CPP_INT32 ChaosBitOpsLeadingZeroCount8(CHAOS_IL2CPP_UINT8 value) noexcept
+{
+    if (value == 0) return 8;
+    return static_cast<CHAOS_IL2CPP_INT32>(ChaosBitOpsLeadingZeroCount32(value)) - 24;
+}
+CHAOS_IL2CPP_INT32 ChaosBitOpsLeadingZeroCount16(CHAOS_IL2CPP_UINT16 value) noexcept
+{
+    if (value == 0) return 16;
+    return static_cast<CHAOS_IL2CPP_INT32>(ChaosBitOpsLeadingZeroCount32(value)) - 16;
+}
+CHAOS_IL2CPP_INT32 ChaosBitOpsTrailingZeroCount8(CHAOS_IL2CPP_UINT8 value) noexcept
+{
+    if (value == 0) return 8;
+    return static_cast<CHAOS_IL2CPP_INT32>(ChaosBitOpsTrailingZeroCount32(value));
+}
+CHAOS_IL2CPP_INT32 ChaosBitOpsTrailingZeroCount16(CHAOS_IL2CPP_UINT16 value) noexcept
+{
+    if (value == 0) return 16;
+    return static_cast<CHAOS_IL2CPP_INT32>(ChaosBitOpsTrailingZeroCount32(value));
+}
+CHAOS_IL2CPP_INT32 ChaosBitOpsPopCount8(CHAOS_IL2CPP_UINT8 value) noexcept
+{
+    return ChaosBitOpsPopCount32(value);
+}
+CHAOS_IL2CPP_INT32 ChaosBitOpsPopCount16(CHAOS_IL2CPP_UINT16 value) noexcept
+{
+    return ChaosBitOpsPopCount32(value);
 }
 
 }  // extern "C"

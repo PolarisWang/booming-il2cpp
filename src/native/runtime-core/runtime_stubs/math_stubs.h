@@ -173,3 +173,65 @@ CHAOS_IL2CPP_INTPTR    ChaosDecimalMaxMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CH
 CHAOS_IL2CPP_INTPTR    ChaosDecimalMinMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
 
 
+
+// ── Scalar INumber<T> predicates (System.Double::IsFinite, UInt32::IsEvenInteger, …) ──
+// The ShapeRegistry previously registered only the Vector* variants, so every
+// scalar INumber subject fell through to the operand-less external-runtime
+// catch-all (returns 0 regardless of the operand).  D/F suffixes pick width.
+CHAOS_IL2CPP_INT32 ChaosScalarIsFiniteD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsFiniteF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNaN_D(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNaN_F(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsInfinityD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsInfinityF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeInfinityD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeInfinityF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveInfinityD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveInfinityF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNormalD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNormalF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsSubnormalD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsSubnormalF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsIntegerD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsIntegerF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsEvenIntegerD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsEvenIntegerF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsOddIntegerD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsOddIntegerF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsRealNumberD(CHAOS_IL2CPP_FLOAT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsRealNumberF(CHAOS_IL2CPP_FLOAT32 v) noexcept;
+
+// ── Scalar INumber<T> integer predicates (width-suffixed) ──
+CHAOS_IL2CPP_INT32 ChaosScalarIsEvenInteger32(CHAOS_IL2CPP_INT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsEvenInteger64(CHAOS_IL2CPP_INT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsOddInteger32(CHAOS_IL2CPP_INT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsOddInteger64(CHAOS_IL2CPP_INT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositive32(CHAOS_IL2CPP_INT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositive64(CHAOS_IL2CPP_INT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegative32(CHAOS_IL2CPP_INT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegative64(CHAOS_IL2CPP_INT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNormal32(CHAOS_IL2CPP_INT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNormal64(CHAOS_IL2CPP_INT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsSubnormal32(CHAOS_IL2CPP_INT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsSubnormal64(CHAOS_IL2CPP_INT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsRealNumber32(CHAOS_IL2CPP_INT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsRealNumber64(CHAOS_IL2CPP_INT64 v) noexcept;
+
+// Unsigned positive/negative (never negative; positive iff non-zero).
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveU32(CHAOS_IL2CPP_UINT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsPositiveU64(CHAOS_IL2CPP_UINT64 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeU32(CHAOS_IL2CPP_UINT32 v) noexcept;
+CHAOS_IL2CPP_INT32 ChaosScalarIsNegativeU64(CHAOS_IL2CPP_UINT64 v) noexcept;
+
+// Width-aware bit counts for narrow integer types (INumber<T> counts within T,
+// not within the machine word: Byte.LeadingZeroCount(0) == 8, not 32).
+CHAOS_IL2CPP_INT32 ChaosBitOpsLeadingZeroCount8(CHAOS_IL2CPP_UINT8 value) noexcept;
+CHAOS_IL2CPP_INT32 ChaosBitOpsTrailingZeroCount8(CHAOS_IL2CPP_UINT8 value) noexcept;
+CHAOS_IL2CPP_INT32 ChaosBitOpsLeadingZeroCount16(CHAOS_IL2CPP_UINT16 value) noexcept;
+CHAOS_IL2CPP_INT32 ChaosBitOpsTrailingZeroCount16(CHAOS_IL2CPP_UINT16 value) noexcept;
+CHAOS_IL2CPP_INT32 ChaosBitOpsPopCount8(CHAOS_IL2CPP_UINT8 value) noexcept;
+CHAOS_IL2CPP_INT32 ChaosBitOpsPopCount16(CHAOS_IL2CPP_UINT16 value) noexcept;

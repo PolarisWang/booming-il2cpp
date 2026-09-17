@@ -131,6 +131,9 @@ public sealed partial class NativeAotLoweringPlanner
             // external-runtime catch-all, which cannot see the operands.
             RegisterIeee754SpecialFunctions(registry);
 
+            // Scalar INumber<T> predicates + BitOperations static members.
+            RegisterScalarINumberMembers(registry);
+
         }
 
     }
