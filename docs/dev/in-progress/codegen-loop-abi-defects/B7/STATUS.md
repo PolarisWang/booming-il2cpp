@@ -356,3 +356,20 @@ sentinel 兜底桩已按本文件建议全部落地为真实实现，reflection 
 手动 cmake 只重链预编译 lib。详见 memory
 `b7-reflection-chunk-final-triage` 与
 `docs/dev/in-progress/atg-nullarg-exception-semantics/STATUS.md`。
+
+
+---
+
+## ✅ 最终收官（2026-09-17，283/283 全绿）
+
+上表 3 项已全部修复（commit `f59ceabab`，origin `d2bec8405`）：
+
+| si | 真根因 | 修复 |
+|---|---|---|
+| 54/56 | "循环头在范围内但不在 startIndex" 处理器把 reversed for 的循环体当前置块平铺发射（体发射两次） | Recovery.cs：前置块属注册循环体时直接 BuildLoop；方法 1366→938 行，while 结构正确 |
+| 58a | external-runtime 调用点对静态方法首参误发 receiver null-guard → blanket NRE | 调用点查 callee 静态性（IsStatic / _reflectionMethods Flags bit1），静态跳过守卫 |
+| 58b/c | ChaosReflectionAssemblyNameReferenceMatchesDefinition 从未注册 shape（ApiSurfaceScanner 映射表≠注册表）→ 0 参 catch-all 返 0；且 null 语义返 0 而 probe 实测 .NET10 (null,null)→true | 注册 shape（静态 2 引用槽）+ runtime 按 probe 实测语义修 null 处理 |
+
+**reflection chunk 265→283（本轮会话 +18）**，jit 同步 283/283，
+real 231/231 verified，单测无新增回归。经验已入 memory
+`b7-reflection-chunk-final-triage`。
