@@ -646,6 +646,14 @@ public sealed partial class NativeAotLoweringPlanner
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                     new[] { namedMapAbi, nodeAbi }),
                 objAbi, new HashSet<int> { 0, 1 });
+            // GetEnumerator() — no managed node backing on a real map's bare
+            // state; the native stub raises InvalidOperationException.
+            registry.Register("System.Xml.XmlNamedNodeMap", "GetEnumerator",
+                Array.Empty<string>(), ShapeKind.SimpleForward,
+                "ChaosXmlNodeGetEnumerator",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { namedMapAbi }),
+                objAbi, new HashSet<int> { 0 });
 
             // ── XmlNamespaceManager ──
             var nsMgrAbi = CreateNativeIntAbiSlot(
@@ -666,6 +674,19 @@ public sealed partial class NativeAotLoweringPlanner
                 Array.Empty<string>(), ShapeKind.SimpleForward,
                 "ChaosXmlNamespaceManagerGetEnumerator",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { nsMgrAbi }),
+                objAbi, rawThis);
+
+            // ── XmlWriterSettings.Clone() → XmlWriterSettings ──
+            // ATG builds a REAL settings object (KnownInstances) and calls Clone(),
+            // which the managed implementation rejects with
+            // InvalidOperationException.  The native stub raises the same.
+            var settingsAbi = CreateNativeIntAbiSlot(
+                "System.Private.Xml/System.Xml.XmlWriterSettings",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            registry.Register("System.Xml.XmlWriterSettings", "Clone",
+                Array.Empty<string>(), ShapeKind.SimpleForward,
+                "ChaosXmlWriterSettingsClone",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { settingsAbi }),
                 objAbi, rawThis);
         }
 

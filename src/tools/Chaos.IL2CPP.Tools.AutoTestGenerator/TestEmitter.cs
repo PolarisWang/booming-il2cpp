@@ -946,7 +946,7 @@ public sealed class TestEmitter
             && method.Name is "SetNamedItem" or "Append" or "Prepend" or "Item"
                or "GetNamedItem" or "AddNamespace" or "RemoveNamespace"
                or "LookupNamespace" or "LookupPrefix" or "HasNamespace"
-               or "PopScope" or "PushScope")
+               or "PopScope" or "PushScope" or "GetEnumerator")
             return true;
 
         // System.Text.Json.Utf8JsonWriter (M3): ATG subjects construct this type
@@ -965,6 +965,14 @@ public sealed class TestEmitter
                or "WritePropertyName" or "WriteRawValue" or "WriteCommentValue"
                or "WriteTo"
                or "WriteNumberValue" or "WriteStringValue")
+            return true;
+
+        // XmlWriterSettings.Clone() — the native stub raises the same
+        // InvalidOperationException the managed implementation does for a
+        // used instance.
+        if (declaringType is not null
+            && declaringType.Contains("System.Xml.XmlWriterSettings", StringComparison.Ordinal)
+            && method.Name is "Clone")
             return true;
 
         // JsonDocument / JsonElement / JsonProperty .WriteTo(Utf8JsonWriter):

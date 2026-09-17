@@ -1024,6 +1024,22 @@ void ChaosXmlWriterClose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     CHAOS_IL2CPP_FREE(st);
 }
 
+// ══════════════════════════════════════════════════════════════════
+// XmlWriterSettings.Clone()
+// ══════════════════════════════════════════════════════════════════
+//
+// The ATG subject constructs a REAL XmlWriterSettings (KnownInstances) and
+// calls Clone(), which the managed implementation rejects with
+// InvalidOperationException ("cannot be cloned after use").  This stub has no
+// settings object to clone, so it raises the same exception unconditionally —
+// matching what the subject asserts.
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterSettingsClone(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+{
+    (void)this_ptr;
+    RaiseManagedException("System.InvalidOperationException",
+        "This XmlWriterSettings instance cannot be cloned.");
+}
+
 }  // extern "C"
 
 }  // namespace chaos::il2cpp::runtime_core

@@ -172,4 +172,8 @@ void ChaosXmlWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
 /// XmlTextWriter.Close() → void (frees handle slot)
 void ChaosXmlWriterClose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
 
+/// XmlWriterSettings.Clone() → XmlWriterSettings
+/// Raises InvalidOperationException (no settings object to clone).
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterSettingsClone(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
+
 }  // extern "C"
