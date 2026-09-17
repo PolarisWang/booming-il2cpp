@@ -485,6 +485,13 @@ public sealed partial class NativeAotLoweringPlanner
         "System.Private.CoreLib/System.UInt64",
         "System.Private.CoreLib/System.Single",
         "System.Private.CoreLib/System.Double",
+        // System.Half is a 16-bit IEEE-754 float carried by the Float32 carrier.
+        // Omitting it made IsStructuredValueTypeSubjectId() classify Half as a
+        // *structured* value type, so its arguments took the box path and were
+        // passed as `&chaos_locals[N]` where the shape's Float32 slot expects the
+        // value directly — the native then reinterpreted a stack address as float
+        // bits.  (HalfTests::IsInteger/IsNormal/IsEvenInteger failed that way.)
+        "System.Private.CoreLib/System.Half",
         "System.Private.CoreLib/System.Char",
         "System.Private.CoreLib/System.IntPtr",
         "System.Private.CoreLib/System.UIntPtr",

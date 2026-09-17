@@ -1122,9 +1122,13 @@ public sealed partial class NativeAotLoweringPlanner
                     string sizeExpr = targetRef.SubjectId switch
                     {
                         "System.Byte" or "System.SByte" or "System.Boolean" => "1",
-                        "System.Int16" or "System.UInt16" or "System.Char" => "2",
+                        // Half is a 16-bit IEEE-754 float — without this it fell to
+                        // the `_ => "4"` default and reported twice its real size.
+                        "System.Int16" or "System.UInt16" or "System.Char"
+                            or "System.Half" or "System.Private.CoreLib/System.Half" => "2",
                         "System.Int32" or "System.UInt32" or "System.Single" => "4",
                         "System.Int64" or "System.UInt64" or "System.Double" => "8",
+                        "System.Int128" or "System.UInt128" or "System.Decimal" => "16",
                         "System.IntPtr" or "System.UIntPtr" => "sizeof(void*)",
                         _ => "4"
                     };

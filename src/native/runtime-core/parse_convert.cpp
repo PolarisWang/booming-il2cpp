@@ -362,10 +362,27 @@ extern "C" CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) noex
 
 extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32(CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    // Truncate through the signed path, then reinterpret — the bit pattern is
-    // what UInt32::Parse callers consume.  Values above Int32::MaxValue arrive
-    // as an already-wrapped negative int32 and reinterpret unchanged.
-    return static_cast<CHAOS_IL2CPP_UINT32>(ChaosConvertToInt32(value));
+    // Parse as unsigned directly.  The old implementation routed through the
+    // signed Int32 path (ChaosConvertToInt32), which rejects any literal above
+    // Int32::MaxValue with OverflowException even though UInt32::Parse allows
+    // up to UInt32::MaxValue (4294967295).  UInt32Tests::Parse_4/5/6 feed
+    // "3456789012" and failed on exactly that boundary.
+    const char* data = nullptr;
+    CHAOS_IL2CPP_INT32 len = 0;
+    if (!DecodeString(value, data, len))
+        return 0;
+    const char* s = NullTerminate(data, len);
+    char* end = nullptr;
+    errno = 0;
+    unsigned long result = std::strtoul(s, &end, 10);
+    if (errno != 0 || end == s ||
+        result > static_cast<unsigned long>(std::numeric_limits<CHAOS_IL2CPP_UINT32>::max()))
+    {
+        chaos::il2cpp::runtime_core::RaiseManagedException(
+            "System.OverflowException",
+            "Value was either too large or too small for a UInt32.");
+    }
+    return static_cast<CHAOS_IL2CPP_UINT32>(result);
 }
 
 // UInt32::Parse(string, NumberStyles[, IFormatProvider]) and the UInt64 family.
@@ -402,7 +419,24 @@ extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32StylesProvider(
 
 extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64(CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    return static_cast<CHAOS_IL2CPP_UINT64>(ChaosConvertToInt64(value));
+    // Same fix as ChaosParseUInt32: parse as unsigned so literals above
+    // Int64::MaxValue are not spuriously rejected.
+    const char* data = nullptr;
+    CHAOS_IL2CPP_INT32 len = 0;
+    if (!DecodeString(value, data, len))
+        return 0;
+    const char* s = NullTerminate(data, len);
+    char* end = nullptr;
+    errno = 0;
+    unsigned long long result = std::strtoull(s, &end, 10);
+    if (errno != 0 || end == s ||
+        result > static_cast<unsigned long long>(std::numeric_limits<CHAOS_IL2CPP_UINT64>::max()))
+    {
+        chaos::il2cpp::runtime_core::RaiseManagedException(
+            "System.OverflowException",
+            "Value was either too large or too small for a UInt64.");
+    }
+    return static_cast<CHAOS_IL2CPP_UINT64>(result);
 }
 
 extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64Styles(
