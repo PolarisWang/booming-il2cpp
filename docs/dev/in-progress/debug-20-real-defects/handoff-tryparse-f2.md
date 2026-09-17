@@ -231,3 +231,16 @@ stale 轮该 subject 的旧 catch-all `return 0` **恰好等于** 0 → 假绿
 
 `IndexOfAny_117/118`、`LastIndexOfAny_129/130` 共 6 项在 stale 轮**已是 fail**
 （新注册未覆盖或仍走 catch-all），非回归，属 Batch 2/3 遗留。
+
+### 修复已落地（commit 243ace6b5）
+
+`Part2.S5.cs` 转发 `StringComparison` + `ChaosStringIndexOfChar` 新增 comparison 形参
+（culture-aware 时 `ch==0 → return start`，含空串）。`LastIndexOf` 侧不改
+（.NET 无 `LastIndexOf(char, StringComparison)` 重载）。
+
+**等价性自测 10/10 通过**（对照 net10.0 实测的全部用例组合）。
+
+⚠️ **端到端 fact 数字未采信**：验证轮与并发会话共用 artifacts 根，命中
+`concurrent-pipeline-shares-artifacts-root` 判据 —— entry.exe(21:14) 早于
+codegen(21:23) 8 分钟，且 codegen 只 lower 2974/5502 methods（正常 9414）。
+**待并发会话静默后需重跑取数。**
