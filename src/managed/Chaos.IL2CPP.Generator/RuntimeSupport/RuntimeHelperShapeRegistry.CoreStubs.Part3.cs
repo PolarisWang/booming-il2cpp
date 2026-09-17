@@ -143,6 +143,9 @@ public sealed partial class NativeAotLoweringPlanner
             // Scalar IComparable<T>.CompareTo(object) instance members (+ Version/Decimal).
             RegisterScalarCompareToMembers(registry);
 
+            // Small-integer Parse multi-arg overloads (Byte/SByte/Int16/UInt16).
+            RegisterSmallIntParse(registry);
+
         }
 
     }

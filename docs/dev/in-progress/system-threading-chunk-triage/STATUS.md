@@ -5,6 +5,28 @@
 
 ## 执行进度（2026-09-17 下午更新，收尾快照）
 
+
+## Batch 3 状态（2026-09-17 深夜，交接快照）
+
+- ✅ 已生效（run 10/11 验证）：CompareTo 矩阵 20 值类型（value=1 全绿）、MathF、
+  Compare 子串、TryParse 全族、SmallInt Parse 注册已提交
+- ⚠️ wired-but-red（run 11）：String.IndexOf_112 char（helper 体已正确发射
+  ChaosStringIndexOfChar(arg0,arg1,0,-1) 但 subject 仍 value=0 —
+  疑似 char 族存在第三发射点或 page 残留，按 T2 多发射点判别法排查
+  `native/codegen/generated/` 的重复定义）
+- ⚠️ 注册未生效（run 11）：Byte/SByte/Int16/UInt16 Parse 多参（S27
+  RegisterSmallIntParse 已提交但 helper 仍是 0 参 catch-all — shape 键
+  paramTypes 未命中，需打印 GetMethodParameterTypesFromSubjectId 实际返回核对
+  （可能含返回类型前缀或命名空间差异））
+- ⏳ 未做：BitConverter.GetBytes 13（需先修 ChaosBitConverterGetBytes 的
+  length=1→4 + element_type_info 与 ChaosArrayNew1D 同源）、Guid 5、
+  Int128/UInt128 TryParse/GetBytes（128 位 carrier 缺失）、Array 族 24
+  （并行会话扩集项）
+- 🔴 工程陷阱（本轮反复踩）：pipeline 产物在 artifacts 树而数据根在 testing 树，
+  两边都可能有 fact-results.json 且会被缓存恢复覆盖成陈旧副本 — **认准
+  provenance.json / 文件 mtime 最新的一份**；工具构建时序竞争（编辑晚于
+  ensure_tool_built 则该轮不含新代码）。
+
 ## Batch 2 收官（2026-09-17 晚，commit 后验证轮）
 
 - ✅ CompareTo(object) 20 类型矩阵 + Version 2 + Decimal 1（S27 `RegisterScalarCompareToMembers`

@@ -1066,10 +1066,15 @@ public sealed partial class NativeAotLoweringPlanner
                     }
                     else if (_state.Value!.FloatLocalSlots is not null && _state.Value!.FloatLocalSlots.TryGetValue(slot, out var fType) && fType != SlotType.NativeInt)
                     {
-                        slotType = fType;
-                        declType = fType == SlotType.Float64 ? "double" : "float";
-                        string wrapper = fType == SlotType.Float64 ? "ChaosLoadFloat64" : "ChaosLoadFloat32";
-                        loadExpr = $"{wrapper}(chaos_locals[{slot}])";
+                        // Float locals live bit-encoded in the 8-byte chaos_locals
+                        // slot.  Hoist the RAW slot and keep the canonical
+                        // NativeInt tag, exactly like the non-hoisted ldloc path:
+                        // a decoded `double` tagged Float64 would be decoded a
+                        // second time by FormatAbiArgumentExpression(Float64) /
+                        // ceq, turning 3.14159 into ~0.
+                        slotType = SlotType.NativeInt;
+                        declType = "CHAOS_IL2CPP_INTPTR";
+                        loadExpr = $"chaos_locals[{slot}]";
                     }
                     else if (_state.Value!.StructLocalSlots is not null && _state.Value!.StructLocalSlots.Contains(slot))
                     {

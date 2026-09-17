@@ -115,5 +115,44 @@ public sealed partial class NativeAotLoweringPlanner
                 i32Slot,
                 new HashSet<int> { 0, 1 });
         }
+        /// <summary>
+        /// Small-integer <c>Parse(string[, NumberStyles][, IFormatProvider])</c>.
+        ///
+        /// Only Int32/Int64/UInt32/UInt64 Parse had registrations (Part3.S23); the
+        /// Byte/SByte/Int16/UInt16 multi-arg overloads fell to the zero-arg catch-all.
+        /// The probe literals fit comfortably in the 32-bit natives, so forward to
+        /// the existing ChaosParseInt32* family and let the Int32 return carrier
+        /// hold the value (the subject asserts the narrowed value).  ⚠️ Overflow
+        /// semantics (e.g. Byte.Parse("999") raising) are NOT implemented — not
+        /// probed today.
+        /// </summary>
+        private static void RegisterSmallIntParse(RuntimeHelperShapeRegistry registry)
+        {
+            var strSlot = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+            var stylesSlot = CreateInt32AbiSlot();
+            var providerSlot = CreateNativeIntAbiSlot(
+                "System.IFormatProvider", AotCoreIrTypeShapeKind.ReferenceType);
+            var retSlot = CreateInt32AbiSlot();
+
+            _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact> Slots(
+                params AotCoreIrAbiSlotArtifact[] slots) => new(slots);
+
+            foreach (var full in new[] { "System.Byte", "System.SByte", "System.Int16", "System.UInt16" })
+            {
+                registry.Register(full, "Parse", ["System.String"],
+                    ShapeKind.SimpleForward, "ChaosParseInt32",
+                    Slots(strSlot), retSlot, new HashSet<int> { 0 });
+                registry.Register(full, "Parse", ["System.String", "System.Globalization.NumberStyles"],
+                    ShapeKind.SimpleForward, "ChaosParseInt32Styles",
+                    Slots(strSlot, stylesSlot), retSlot, new HashSet<int> { 0, 1 });
+                registry.Register(full, "Parse", ["System.String", "System.IFormatProvider"],
+                    ShapeKind.SimpleForward, "ChaosParseInt32Provider",
+                    Slots(strSlot, providerSlot), retSlot, new HashSet<int> { 0, 1 });
+                registry.Register(full, "Parse", ["System.String", "System.Globalization.NumberStyles", "System.IFormatProvider"],
+                    ShapeKind.SimpleForward, "ChaosParseInt32StylesProvider",
+                    Slots(strSlot, stylesSlot, providerSlot), retSlot, new HashSet<int> { 0, 1, 2 });
+            }
+        }
     }
 }
