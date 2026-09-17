@@ -907,8 +907,17 @@ bool CountdownEventReset(uint32_t ce_id, int32_t count) noexcept {
 //   .call <module>+<ChaosDebugDumpRWLocks offset>()
 //   g
 // The rows go to the debuggee's stdout (one per live lock).
+// Export attribute: __declspec is MSVC-only — on gcc/clang it is a syntax
+// error, which broke the whole runtime_core archive (and therefore every
+// chunk's link) on the Linux nightly until it was guarded.
+#if defined(_MSC_VER)
+#define CHAOS_DEBUG_EXPORT __declspec(dllexport)
+#else
+#define CHAOS_DEBUG_EXPORT __attribute__((visibility("default")))
+#endif
+
 #if !defined(NDEBUG)
-extern "C" __declspec(dllexport) void ChaosDebugDumpRWLocks(void) {
+extern "C" CHAOS_DEBUG_EXPORT void ChaosDebugDumpRWLocks(void) {
     using namespace chaos::il2cpp::runtime_core::threading;
     for (uint32_t i = 1; i < kMaxRWLockCount; ++i) {
         auto& e = g_rwlocks[i];
