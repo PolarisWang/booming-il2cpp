@@ -370,6 +370,39 @@ public sealed class ProbeEmitter
         sb.AppendLine("    }");
         sb.AppendLine("}");
         sb.AppendLine();
+        // Metadata donor for the reflection-subject instance expressions emitted by
+        // CSharpExpressionBuilder (typeof(ReflectionSubjectSample), .GetMethod("SampleMethod"),
+        // ...).  Reflection member types are views over metadata, so probing them on a
+        // GetUninitializedObject instance verifies nothing; the factories take their
+        // instances from this type's real metadata instead.  The type must therefore
+        // exist in the same compilation unit as the expressions referencing it.
+        //
+        // TestEmitter emits the identical type for the subject compilation unit.  This
+        // emitter previously omitted it, so any type whose probe referenced one of those
+        // factories failed to compile (CS0246) and produced an EMPTY probe-results.json —
+        // silently degrading every method of that type to the unprobed path.  29 types
+        // were affected across System.Private.CoreLib (23), System.Private.Xml (4) and
+        // System.Text.Json (2), because the trigger is a *parameter* type (System.Type,
+        // Attribute, Enum, ...) rather than anything about the probed method itself.
+        sb.AppendLine("/// <summary>Metadata donor for reflection-subject probe instances.</summary>");
+        sb.AppendLine("[global::System.AttributeUsage(global::System.AttributeTargets.All)]");
+        sb.AppendLine("public sealed class ReflectionSubjectMarkerAttribute : global::System.Attribute { }");
+        sb.AppendLine();
+        sb.AppendLine("public interface IReflectionSubject { int SampleProperty { get; } }");
+        sb.AppendLine();
+        sb.AppendLine("[ReflectionSubjectMarker]");
+        sb.AppendLine("public class ReflectionSubjectSample : IReflectionSubject");
+        sb.AppendLine("{");
+        sb.AppendLine("    public int SampleField;");
+        sb.AppendLine("    public const string SampleConst = \"sample\";");
+        sb.AppendLine("    public int SampleProperty { get; set; }");
+        sb.AppendLine("    public event global::System.EventHandler? SampleEvent;");
+        sb.AppendLine("    public void SampleMethod(int sampleParameter)");
+        sb.AppendLine("    {");
+        sb.AppendLine("        SampleEvent?.Invoke(this, global::System.EventArgs.Empty);");
+        sb.AppendLine("    }");
+        sb.AppendLine("}");
+        sb.AppendLine();
         sb.AppendLine("/// <summary>Creates a subject instance for probing, tolerating types without a");
         sb.AppendLine("/// public parameterless constructor (e.g. System.String, collection types).</summary>");
         sb.AppendLine("public static class SubjectInstanceFactory");
