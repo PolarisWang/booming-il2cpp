@@ -20,47 +20,64 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    // Int32 overload — delegate to ChaosBitConverterGetBytes
-                    if (paramTypes.Count == 1 && paramTypes[0] == "System.Int32")
+                    if (paramTypes.Count == 1)
                     {
-                        var srcBytes = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                        [
-                            "    return ChaosBitConverterGetBytes(0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));",
-                        ]);
-                        return new GenericShapeResolution(srcBytes, symbol,
-                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                                CreateInt32AbiSlot()),
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new HashSet<int> { 0 });
-                    }
-                    // Single(Single) — delegate to ChaosBitConverterGetBytesFromSingle
-                    if (paramTypes.Count == 1 && paramTypes[0] == "System.Single")
-                    {
-                        var srcSingle = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            "CHAOS_IL2CPP_FLOAT32 chaos_arg_0",
-                        [
-                            "    return ChaosBitConverterGetBytesFromSingle(chaos_arg_0);",
-                        ]);
-                        return new GenericShapeResolution(srcSingle, symbol,
-                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float32, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new HashSet<int> { 0 });
-                    }
-                    // Double(Double) — delegate to ChaosBitConverterGetBytesFromDouble
-                    if (paramTypes.Count == 1 && paramTypes[0] == "System.Double")
-                    {
-                        var srcDbl = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            "CHAOS_IL2CPP_FLOAT64 chaos_arg_0",
-                        [
-                            "    return ChaosBitConverterGetBytesFromDouble(chaos_arg_0);",
-                        ]);
-                        return new GenericShapeResolution(srcDbl, symbol,
-                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new HashSet<int> { 0 });
+                        // Map the managed parameter to (carrier, C++ type, byte width).
+                        // Int128/UInt128 have no carrier — they fall through to the
+                        // return-0 fallback below.
+                        var (carrier, ctype, width) = paramTypes[0] switch
+                        {
+                            "System.Boolean" => ("Int32", "CHAOS_IL2CPP_INT32", 1),
+                            "System.Char" => ("Int32", "CHAOS_IL2CPP_INT32", 2),
+                            "System.SByte" => ("Int32", "CHAOS_IL2CPP_INT32", 1),
+                            "System.Int16" => ("Int32", "CHAOS_IL2CPP_INT32", 2),
+                            "System.UInt16" => ("Int32", "CHAOS_IL2CPP_INT32", 2),
+                            "System.Int32" => ("Int32", "CHAOS_IL2CPP_INT32", 4),
+                            "System.UInt32" => ("Int32", "CHAOS_IL2CPP_INT32", 4),
+                            "System.Int64" => ("Int64", "CHAOS_IL2CPP_INT64", 8),
+                            "System.UInt64" => ("Int64", "CHAOS_IL2CPP_INT64", 8),
+                            "System.Single" => ("Float32", "CHAOS_IL2CPP_FLOAT32", 4),
+                            "System.Double" => ("Float64", "CHAOS_IL2CPP_FLOAT64", 8),
+                            // Half rides the Float32 carrier (S25 precedent).  memcpy of
+                            // the low 2 bytes is exact for 0.0 (probed default); other
+                            // halves would need the Float16 bit pattern (accepted divergence).
+                            "System.Half" => ("Float32", "CHAOS_IL2CPP_FLOAT32", 2),
+                            _ => ("", "", 0),
+                        };
+                        if (carrier != "")
+                        {
+                            // Build the byte[] with the REAL allocator (ChaosArrayNew1D) so
+                            // the result is layout-identical to the probe's expected array
+                            // — header_data array MethodTable, element_type_shape=1,
+                            // element_type_info = byte TypeInfoHot*.  The earlier stubs
+                            // hand-rolled a ManagedArrayAccessor with header_data=0 /
+                            // element_type_info=nullptr, which the byte[] assertion path
+                            // rejects, and the Int32 entry even wrote length=1 for 4 bytes.
+                            var cmacro = carrier == "Int32" ? "CHAOS_IL2CPP_INT32"
+                                : carrier == "Int64" ? "CHAOS_IL2CPP_INT64"
+                                : carrier == "Float32" ? "CHAOS_IL2CPP_FLOAT32"
+                                : "CHAOS_IL2CPP_FLOAT64";
+                            var srcBytes = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                                $"{cmacro} chaos_arg_0",
+                            [
+                                "    auto* arr = reinterpret_cast<ManagedArrayAccessor*>(ChaosArrayNew1D(",
+                                "        chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(),",
+                                "        chaos_mt_System_Private_CoreLib_System_Byte.AsTypeInfoHot(),",
+                                $"        1, {width}));",
+                                "    if (arr == nullptr) return 0;",
+                                $"    const {ctype} v = chaos_arg_0;",
+                                $"    std::memcpy(accessor_get_elements(arr), &v, {width});",
+                                "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);",
+                            ]);
+                            return new GenericShapeResolution(srcBytes, symbol,
+                                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                    carrier == "Float32" ? new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float32, TypeShape = AotCoreIrTypeShapeKind.ValueType }
+                                    : carrier == "Float64" ? new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType }
+                                    : carrier == "Int64" ? new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }
+                                    : CreateInt32AbiSlot()),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                new HashSet<int> { 0 });
+                        }
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
                     foreach (var pt in paramTypes)
