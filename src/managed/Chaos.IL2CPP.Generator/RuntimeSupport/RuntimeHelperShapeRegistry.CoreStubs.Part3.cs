@@ -87,6 +87,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterSystemReflectionAssemblyName(registry);
             RegisterSystemReflectionAssemblyName_1(registry);
             RegisterSystemReflectionAssemblyNamePublicKey(registry);
+            RegisterSystemReflectionAssemblyNameReferenceMatches(registry);
             RegisterSystemReflectionFieldInfo(registry);
             RegisterSystemReflectionFieldInfo_1(registry);
             RegisterSystemReflectionFieldInfo_2(registry);

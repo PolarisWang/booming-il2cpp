@@ -256,6 +256,29 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (firstHeaderIdx > startIndex)
             {
+                // Reversed for-loop arriving mid-range: the blocks between
+                // startIndex and the header ARE the loop's body (Roslyn lays a
+                // C# `for` out body-first, condition-last, so the natural loop
+                // body precedes the condition block).  Emitting them as a plain
+                // pre-sequence duplicates the body unconditionally — the loop
+                // then runs it again under the condition (B7 si=54/56:
+                // Assert.AreEqual(byte[]) read [0] of an empty array before
+                // the loop test ever ran → CHAOS_IL2CPP_FAIL_FAST).  Hand the
+                // whole loop to BuildLoop from the header instead; only blocks
+                // BEFORE the body start are genuine pre-loop code.
+                if (cfg.LoopHeaders.TryGetValue(firstHeaderIdx, out var midRangeLoop) &&
+                    midRangeLoop.BodyIndices.Any(i => i >= startIndex && i < firstHeaderIdx))
+                {
+                    int firstBodyIdx = midRangeLoop.BodyIndices
+                        .Where(i => i >= startIndex && i < firstHeaderIdx).Min();
+                    var loopNodes = new List<StructuredIRNode>();
+                    for (int i = startIndex; i < firstBodyIdx; i++)
+                        loopNodes.Add(new IRBlock(cfg.Blocks[i].BodyInstructions, cfg.Blocks[i].Terminator));
+                    loopNodes.Add(BuildLoop(cfg, firstHeaderIdx, endIndex, midRangeLoop,
+                        loopHeaderOffset, loopExitOffsets, depth));
+                    return new IRSequence(loopNodes);
+                }
+
                 var preLoopNodes = new List<StructuredIRNode>();
                 for (int i = startIndex; i < firstHeaderIdx; i++)
                     preLoopNodes.Add(new IRBlock(cfg.Blocks[i].BodyInstructions, cfg.Blocks[i].Terminator));

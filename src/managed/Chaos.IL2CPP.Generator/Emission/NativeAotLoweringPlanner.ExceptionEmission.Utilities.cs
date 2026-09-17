@@ -194,6 +194,26 @@ public sealed partial class NativeAotLoweringPlanner
         stringBuilder6.AppendLine(ref handler);
     }
 
+    /// <summary>
+    /// Subject-id set of methods known to be STATIC, from two sources: the lowered
+    /// method artifacts (IsStatic) and the B3 reflection metadata collected from the
+    /// closure (kReflectionFlagStatic = 1u &lt;&lt; 1 in mFlags — Methods.ModuleData.cs).
+    /// BCL callees without a lowered body are only findable via the latter.
+    /// </summary>
+    private bool IsKnownStaticMethod(string subjectId)
+    {
+        if (_methodsBySubjectId.TryGetValue(subjectId, out var method))
+            return method.IsStatic;
+        _reflectionStaticMethodIds ??= new HashSet<string>(
+            _reflectionMethods
+                .Where(r => (r.Flags & (1u << 1)) != 0)
+                .Select(r => r.MethodSubjectId),
+            StringComparer.Ordinal);
+        return _reflectionStaticMethodIds.Contains(subjectId);
+    }
+
+    private HashSet<string>? _reflectionStaticMethodIds;
+
     private void EmitExternalRuntimeTableDispatch(StringBuilder builder, InvocationTarget invocationTarget, string indentation, bool enforceInstanceNullCheck, AotCoreIrInstructionArtifact? instruction = null)
     {
         string returnType = MapAbiSlotReturnType(invocationTarget.ReturnAbi);
@@ -285,7 +305,18 @@ public sealed partial class NativeAotLoweringPlanner
                     invocationTarget.DirectNativeSymbol == null &&
                     _state.Value!.CurrentMethodArtifact?.SubjectId is not null &&
                     _state.Value!.CurrentMethodArtifact.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal);
-                if (!isSubjectExtRuntime)
+
+                // Guard only the RECEIVER. For a STATIC callee the first slot is an
+                // ordinary reference parameter, not 'this' — guarding it overrides the
+                // callee's own null-handling contract with a blanket NRE (B7 si=58:
+                // AssemblyName.ReferenceMatchesDefinition(null, null) — .NET 10
+                // (probe-measured) returns true, the guard raised before the call).
+                string? calleeSubjectId = !string.IsNullOrEmpty(instruction?.Callee)
+                    ? instruction!.Callee
+                    : instruction?.TargetReference?.SubjectId;
+                bool calleeIsStatic = !string.IsNullOrEmpty(calleeSubjectId) && IsKnownStaticMethod(calleeSubjectId!);
+
+                if (!isSubjectExtRuntime && !calleeIsStatic)
                 {
                     builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
                     builder.AppendLine(indentation + "    {");

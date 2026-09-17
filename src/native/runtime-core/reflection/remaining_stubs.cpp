@@ -1790,10 +1790,15 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyNameToString(CHAOS_IL2CPP_INTPTR name
 // AssemblyName.ReferenceMatchesDefinition(a, b) — true when both refer to the
 // same simple name. The AOT model has no versioned binding, so simple-name
 // equality is the strongest correct answer.
+//
+// Null handling follows the MEASURED .NET 10 reference behavior (probe
+// results, System_Reflection_AssemblyName/probe-results.json): (null, null)
+// returns true — the reference runtime treats two absent definitions as
+// matching, it does NOT throw ArgumentNullException (B7 si=58). One null and
+// one non-null cannot refer to the same definition → false.
 CHAOS_IL2CPP_INT32 ChaosReflectionAssemblyNameReferenceMatchesDefinition(
     CHAOS_IL2CPP_INTPTR reference, CHAOS_IL2CPP_INTPTR definition) noexcept {
-    // Both handles are managed AssemblyName objects; compare their runtime_name_value
-    // strings (offset 16), not the object pointers as char data.
+    if (reference == 0 && definition == 0) return 1;
     if (reference == 0 || definition == 0) return 0;
     const char* a = DecodeAndNullTerminateString(
         ChaosReflectionGetAssemblyNameValue(reference));

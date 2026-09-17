@@ -176,5 +176,30 @@ public sealed partial class NativeAotLoweringPlanner
 
         }
 
+        /// <summary>
+        /// System.Reflection.AssemblyName::ReferenceMatchesDefinition(Boolean, AssemblyName, AssemblyName)
+        ///
+        /// Static method — no receiver slot, two AssemblyName reference slots.
+        /// This was unregistered, so it fell through to the catch-all fallback
+        /// which (for this subject) was emitted with zero parameters and answered
+        /// 0 — the probe-measured .NET answer for (null, null) is TRUE, so the
+        /// subject failed its `Assert.AreEqual(true, ...)` (B7 si=58).  The
+        /// native entry implements the measured semantics: (null, null) → true,
+        /// one-sided null → false, else simple-name equality.
+        /// </summary>
+        private static void RegisterSystemReflectionAssemblyNameReferenceMatches(RuntimeHelperShapeRegistry registry)
+        {
+            registry.Register("System.Reflection.AssemblyName", "ReferenceMatchesDefinition",
+                new[] { "System.Reflection.AssemblyName", "System.Reflection.AssemblyName" },
+                ShapeKind.SimpleForward, "ChaosReflectionAssemblyNameReferenceMatchesDefinition",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Reflection.AssemblyName", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType),
+                new HashSet<int> { 0, 1 });
+        }
+
     }
 }
