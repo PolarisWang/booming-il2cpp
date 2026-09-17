@@ -1661,10 +1661,8 @@ public sealed class RuntimeHelperShapeRegistryTests
     // bodies (the exact strings codegen passes to TryMatchGenericShape).
 
     [Theory]
-    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAll:System.Boolean(System.Threading.Tasks.Task[],System.Int32)")]
     [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAll:System.Void(System.Threading.Tasks.Task[])")]
     [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAny:System.Int32(System.Threading.Tasks.Task[])")]
-    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAny:System.Int32(System.Threading.Tasks.Task[],System.Int32)")]
     public void T3_WaitAllWaitAny_BuildDefault_Matches(string callee)
     {
         var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
@@ -1684,5 +1682,45 @@ public sealed class RuntimeHelperShapeRegistryTests
             ? "chaos_task_wait_all"
             : "chaos_task_wait_any";
         Assert.Equal(expected, resolution!.DirectNativeSymbol);
+    }
+
+    // ── T3: the timeout / CancellationToken overloads must NOT match ─────
+    //
+    // Regression guard for a silent-wrong-code defect, not a missing feature.
+    //
+    // The original T3 registration matched every overload whose FIRST parameter
+    // was an array, rendering a one-slot shim for all of them.  But
+    // DirectNativeSymbol makes codegen call the native symbol with the call
+    // site's own operands, so a one-slot shim for WaitAll(Task[], TimeSpan)
+    // left the TimeSpan unconsumed and passed its SLOT ADDRESS as the array
+    // handle.  UnpackTaskArray read length==0, WaitAll returned 0, and the
+    // caller took the false branch `ChaosLoadInt64(0)` — null dereference,
+    // STATUS_ACCESS_VIOLATION.
+    //
+    // The sibling masked it: WaitAny on the same shape returns -1 for an empty
+    // array WITHOUT dereferencing, so WaitAny_45 passed while WaitAll_39
+    // faulted.  Two identically-registered overloads, opposite outcomes.
+    //
+    // These bodies now fall through to the explicit external-runtime fallback —
+    // visibly unimplemented rather than plausibly wrong.  Wiring them properly
+    // needs a multi-slot shim AND a native signature that accepts the timeout
+    // (chaos_task_wait_all takes only the handle today).
+    [Theory]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAll:System.Boolean(System.Threading.Tasks.Task[],System.Int32)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAll:System.Boolean(System.Threading.Tasks.Task[],System.TimeSpan)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAll:System.Boolean(System.Threading.Tasks.Task[],System.Int32,System.Threading.CancellationToken)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAny:System.Int32(System.Threading.Tasks.Task[],System.Int32)")]
+    [InlineData("System.Private.CoreLib/System.Threading.Tasks.Task::WaitAny:System.Int32(System.Threading.Tasks.Task[],System.TimeSpan)")]
+    public void T3_WaitAllWaitAny_TimeoutOverloads_DoNotResolve(string callee)
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+
+        // Either no descriptor matches at all, or the matching descriptor's
+        // resolver declines.  Both are correct; a concrete resolution is not.
+        if (!registry.TryMatchGenericShape(callee, out var descriptor, out _))
+            return;
+
+        var resolution = descriptor!.Resolver(null!, callee, Array.Empty<string>());
+        Assert.Null(resolution);
     }
 }

@@ -1653,12 +1653,33 @@ public sealed partial class NativeAotLoweringPlanner
             //   * ABI — these are STATIC and return Boolean / Int32 (not a Task
             //     handle), so the return slot differs from the combinators'.
             //
-            // Every chunk overload takes Task[] as its FIRST parameter; the
-            // timeout(int/TimeSpan) and CancellationToken parameters that some
-            // overloads add are NOT passed by codegen (static, receiver-less), so
-            // the shim carries exactly one slot — the array.  Matching on "first
-            // parameter is an array" therefore covers all of them without
-            // enumerating each signature.
+            // ── Why ONLY the single-argument overload is matched ──
+            //
+            // The earlier version matched every overload whose FIRST parameter was
+            // an array, on the theory that "the shim carries exactly one slot — the
+            // array" covers them all.  That theory is wrong, and it produced a
+            // silent-wrong-code defect rather than a missing feature.
+            //
+            // `DirectNativeSymbol` makes codegen call the native symbol with the
+            // call site's OWN arguments, so the declared slot count must equal the
+            // CALLEE's arity — not the count of parameters we happen to forward.
+            // Registering a 1-slot shim for WaitAll(Task[], TimeSpan) left the
+            // second operand on the evaluation stack; the generated body did
+            // `_s1 = &chaos_locals[1]` (the TimeSpan slot address) and passed THAT
+            // as the array handle.  UnpackTaskArray then read length==0 from a
+            // TimeSpan, WaitAll returned 0, and the caller took the false branch
+            // `ChaosLoadInt64(0)` — a null dereference -> STATUS_ACCESS_VIOLATION.
+            //
+            // The failure was masked by a coincidence in the sibling: WaitAny on
+            // the same shape returns -1 for an empty array WITHOUT dereferencing,
+            // so it passed while WaitAll faulted.  Two identically-registered
+            // overloads, opposite outcomes — that asymmetry is the tell.
+            //
+            // Timeout/CTS overloads therefore fall through to the interpreter's
+            // explicit external-runtime fallback.  That is the honest outcome: a
+            // visibly unimplemented method, not a plausible-but-wrong one.  Wiring
+            // them properly needs a multi-slot shim plus a native signature that
+            // accepts the timeout (chaos_task_wait_all takes only the handle today).
             IEnumerable<(string Method, string Native, bool ReturnsIndex)> blockers =
             [
                 (Method: "WaitAll", Native: "chaos_task_wait_all", ReturnsIndex: false),
@@ -1672,8 +1693,8 @@ public sealed partial class NativeAotLoweringPlanner
                     Resolver: (planner, callee, typeArgs) =>
                     {
                         var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
-                        // The array is the first managed parameter on every overload.
-                        if (paramTypes.Count < 1) return null;
+                        // Exactly one managed parameter, and it is the task array.
+                        if (paramTypes.Count != 1) return null;
                         if (!paramTypes[0].Contains("[]", StringComparison.Ordinal)
                             && !paramTypes[0].Contains("IEnumerable", StringComparison.Ordinal))
                             return null;
