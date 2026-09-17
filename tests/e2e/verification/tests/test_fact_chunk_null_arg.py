@@ -211,3 +211,47 @@ def test_non_env_sensitive_shaped_failure_stays_realDefect():
         env_sensitive_ids=frozenset({"CollectionCount_10_int_0"}),
     )
     assert kind == "realDefect"
+
+
+def test_detects_enum_parse_empty_string(tmp_path):
+    """Enum.Parse(type, "", …) throws ArgumentException in .NET — invalid input.
+
+    Verified against net8.0: 'Must specify valid information for parsing in
+    the string.'  The AOT body reproduces it, so the record is
+    caught-before-assert — the same shape as a null argument.
+    """
+    _write_combined(tmp_path, """
+        public long Parse_13_System_Type_string_bool_3()
+        {
+            var result_13_3 = global::System.Enum.Parse(typeof(ReflectionSubjectSample), "", default(bool));
+            return (object)(result_13_3) != null ? 1L : 0L;
+        }
+
+        public static void Benchmark_Parse_13_System_Type_string_bool_3()
+        {
+        }
+    """)
+    ids = _get_null_arg_subject_ids(_make_ctx(tmp_path))
+    assert "Parse_13_System_Type_string_bool_3" in ids
+
+
+def test_enum_empty_scope_does_not_leak_to_other_empty_string_calls(tmp_path):
+    """A bare "" on a non-enum call must NOT be treated as invalid input.
+
+    Activator.CreateInstance("","") and friends appear in hundreds of subjects
+    that legitimately succeed or fail for unrelated reasons; classifying them
+    here would sweep real defects into this bucket.
+    """
+    _write_combined(tmp_path, """
+        public long CreateInstanceFrom_4_string_string_0()
+        {
+            var result_4_0 = global::System.Activator.CreateInstance("", "");
+            return (object)(result_4_0) != null ? 1L : 0L;
+        }
+
+        public static void Benchmark_CreateInstanceFrom_4_string_string_0()
+        {
+        }
+    """)
+    ids = _get_null_arg_subject_ids(_make_ctx(tmp_path))
+    assert "CreateInstanceFrom_4_string_string_0" not in ids

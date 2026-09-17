@@ -573,6 +573,19 @@ def _get_null_arg_subject_ids(ctx: ChunkContext) -> frozenset[str]:
     # `default(<RefType>)!` — the `!` is emitted only for reference-typed
     # defaults that are deliberately null (see ATG null-forgiving emission).
     null_default = re.compile(r'default\(\s*(?:global::)?[A-Za-z_][\w.]*\s*\)\s*!')
+    # Enum.Parse/Enum.TryParse with an empty name string.  ATG also emits "" for
+    # a string parameter's value set, and for Enum.Parse an empty string is as
+    # invalid as null: .NET throws ArgumentException("Must specify valid
+    # information for parsing in the string", verified on net8.0), which the
+    # AOT body reproduces via RaiseArgumentException.  The record is
+    # caught-before-assert with no assertion failure — the null-arg shape.
+    #
+    # Scoped to Enum.Parse/TryParse on purpose.  A bare `""` appears in hundreds
+    # of unrelated subjects (Activator.CreateInstance("",""), CreateInstanceFrom,
+    # …) that legitimately succeed or fail for other reasons; treating an empty
+    # string as broadly invalid would sweep real defects into this bucket.
+    enum_empty_name = re.compile(
+        r'global::System\.Enum\.(?:Parse|TryParse)\s*\(([^;]*?)\)\s*;', re.DOTALL)
 
     ids: set[str] = set()
     for m in re.finditer(r'public long (\w+)\(\)\s*\n\s*\{', text, re.MULTILINE):
@@ -581,11 +594,15 @@ def _get_null_arg_subject_ids(ctx: ChunkContext) -> frozenset[str]:
         next_method = re.search(r'public (?:long|static)\s', text[body_start:])
         body_end = body_start + (next_method.start() if next_method else len(text) - body_start)
         body = text[body_start:body_end]
-        if not null_default.search(body):
+
+        has_null_default = bool(null_default.search(body))
+        enum_empty = any('""' in call.group(1)
+                         for call in enum_empty_name.finditer(body))
+        if not has_null_default and not enum_empty:
             continue
-        # Require the call to use ONLY null literals for its reference args —
-        # a quoted non-empty string or a `new` expression means ATG injected a
-        # real value that may genuinely exercise the defect.  Keep those.
+        # Require the call to use ONLY null/empty literals for its reference
+        # args — a NON-empty quoted string or a `new` expression means ATG
+        # injected a real value that may genuinely exercise the defect.
         call_args = re.search(r'= [^\n]*?\((.*)\);', body, re.DOTALL)
         args = call_args.group(1) if call_args else body
         has_real_ref = bool(re.search(r'"[^"]+"', args)) or "new " in args
