@@ -1,0 +1,253 @@
+# JSON / XML 翻译层 — 收口交接（XML 侧完成）
+
+> **交接日期**: 2026-09-17
+> **上一轮交接**: `HANDOFF-2026-09-15.md`（本轮起点）
+> **本轮范围**: M5 XmlTextReader 收尾 → M6 XmlTextWriter → M3 Utf8JsonWriter → XML DOM 全族 → 非 async stubGap 清零
+> **结论**: **XML 翻译层的非 async stubGap 已全部清零**；剩余 84 个 stubGap 100% 是 async 方法，需 async 主线能力
+
+---
+
+## 1. 本轮成果（可复算）
+
+### 1.1 硬指标
+
+| 指标 | 09-15 交接 | 现在 | 变化 |
+|:-----|:----------:|:----:|:----:|
+| **XML chunk stubGap** | **637** | **84** | **-553 (-87%)** |
+| XML chunk realTotal | 229 | **338** | +109 (+48%) |
+| XML chunk unverifiedSmoke | 700 | **280** | -420 (-60%) |
+| **kCodegenFailureCount** | **17** ❌ | **0** ✅ | 硬门禁解除 |
+| text-json stubGap | 188 | **76** | -112 (-60%) |
+
+**复算方式**：
+```bash
+cat artifacts/foundation-dll/System.Private.Xml/chunks/xml/results/fact.json
+# 关键字段: stubGap / realTotal / realVerified / unverifiedSmoke
+```
+
+### 1.2 已完全清零的 XML 类型
+
+| 类型 | 09-15 stubGap | 现在 |
+|:-----|:-------------:|:----:|
+| XmlDocument | 72 | **0** |
+| XmlNode / XmlElement / XmlAttribute | 76 | **0** |
+| XmlCharacterData / XmlText / XmlCDataSection | 21 | **0** |
+| XmlTextReader / XmlValidatingReader / XmlNodeReader | 39 | **0** |
+| XmlWriter（同步面） / XmlTextWriter | 248 | **0** |
+| XmlConvert | 61 | **0** |
+| XmlNameTable / XmlNamespaceManager / 集合类 | 40 | **0** |
+| **XmlWriter.\*Async** | 84 | **84** ← 全部剩余 |
+
+### 1.3 提交清单（本轮，全部在 main）
+
+| 提交 | 内容 | 效果 |
+|:-----|:-----|:-----|
+| `fcdddce06` | M5 XmlTextReader native + S19 | kCodegenFailure 17 的来源消除 |
+| `98fc5042e` | `.ctor` ReturnAbi 改 Void | **17 → 0** |
+| `2d9c3220f` | 恒0桩实现（namespace/lineInfo/LookupNamespace） | — |
+| `60b024c25` | M6 XmlTextWriter 13 方法 | — |
+| `f9e904d9c` | XmlTextWriter 异常语义一致性 | 40 stubGap → 0 |
+| `9c7d7046f` | XmlWriter 抽象类 shape 注册 | — |
+| `2ce5d78e7` | ATG XmlWriter 抽象类白名单 | 208 → 118 |
+| `ea4810ff0` | WriteNode/WriteAttributes | — |
+| `9638d3431` | ATG Xml DOM fixture 构造 | real 264 → 318 |
+| `1b942da25` | XmlConvert native + S20 | 61 → 0 |
+| `a9d93cee4` | DOM stubs + reader 残差 | 160 → 部分 |
+| `585248f6a` | NameTable + NamespaceManager + 集合类 | — |
+| `33de2fca9` | M3 Utf8JsonWriter native + S21 | text-json 114 → 24 |
+| `3572fa456` | Utf8JsonWriter value-only 变体 | 99 → 76 |
+| `ac9ed349e` | ValidatingReader/NodeReader shape | — |
+| `a1c8a034e` | T2 XmlDocument 残差 shape | 72 → 28 |
+| `64b475be7` | ParameterInfo MethodTable extern | 解 C2065 第一层 |
+| `7dd6180b5` | ParameterInfo struct 无条件发射 | **解 C2065 链尾** |
+| `dcab99b88` | XmlDocument 多参重载 | 28 → 12 |
+| `ab37589db` | XmlNode XPath/Clone + XmlText.SplitText | 106 → 87 |
+| `d81f8a646` | XmlWriterSettings.Clone + NamedNodeMap.GetEnumerator | 87 → 84 |
+
+---
+
+## 2. 🔴 给 async 主线的输入（本文件最重要部分）
+
+### 2.1 剩余的 84 个 stubGap 全是 `System.Xml.XmlWriter` 的 `*Async` 方法
+
+**27 种方法，84 个 subject 变体**：
+
+```
+DisposeAsync(1)              WriteAttributesAsync(3)      WriteBase64Async(5)
+FlushAsync(1)                WriteBinHexAsync(5)          WriteCDataAsync(2)
+WriteCharEntityAsync(2)      WriteCharsAsync(5)           WriteCommentAsync(2)
+WriteDocTypeAsync(5)         WriteElementStringAsync(5)   WriteEndDocumentAsync(1)
+WriteEndElementAsync(1)      WriteEntityRefAsync(2)       WriteFullEndElementAsync(1)
+WriteNameAsync(2)            WriteNmTokenAsync(2)         WriteNodeAsync(6)
+WriteProcessingInstructionAsync(4)  WriteQualifiedNameAsync(4)  WriteRawAsync(6)
+WriteStartDocumentAsync(3)   WriteStartElementAsync(5)    WriteStringAsync(1)
+WriteSurrogateCharEntityAsync(3)  WriteWhitespaceAsync(2)
+WriteAttributeStringAsync(5)
+```
+
+### 2.2 为什么它们不能靠 stub 解决（已证实的判断）
+
+这 84 个 subject 的 ATG 生成形态是：
+
+```csharp
+public long WriteStringAsync_66_string_1()
+{
+    // AOT-STUB-GAP
+    // [UNVERIFIED] AOT stub: System.InvalidOperationException thrown by
+    //   new XmlTextWriter(new StringWriter()).WriteStringAsync("...")
+    return 42L;
+}
+```
+
+`value=42` = **ATG 在编译期写死的 smoke stub**，**根本不调用 native**。
+无论 native 侧怎么实现、白名单怎么加，都不会改变它。
+
+**证伪依据**：本轮的 XmlWriter *同步* 方法（同名、同类型、同样裸对象）通过
+「native 实现 + S20 注册 + ATG 白名单」三件套**全部转 real**（40→0、208→118→84）。
+同样的三件套对 `*Async` 无效 —— 差异只在 `Async` 后缀。
+
+### 2.3 它们真正需要什么
+
+`WriteXxxAsync` 返回 `Task`/`ValueTask`，ATG 无法为它们生成断言（返回类型是 async 状态机），
+所以永远走 smoke 分支。要让它们变成可断言/可验证，需要：
+
+| 需求 | 归属 |
+|:-----|:-----|
+| async 方法在 ATG 里能被识别为「可等待并断言」 | ATG 层 |
+| `Task`/`ValueTask` 的 native 实现（当前 `ChaosExternalRuntimeFallback`） | async 主线 Phase 1-3 |
+| async 状态机 lowering（`WriteStringAsync` 本身是 `async` 方法） | async 主线 Phase 2 |
+
+**具体请求**：async 主线在完成 Phase 2（状态机翻译引擎）后，回来复跑
+`System.Private.Xml/xml` chunk，看这 84 个是否自然转 real。如果 ATG 侧仍需调整，
+这是需要联合定位的点。
+
+### 2.4 验证命令（供 async 主线复跑）
+
+```bash
+cd D:/agent/chaos-il2cpp
+# 清 3 层缓存
+rm -rf artifacts/foundation-dll/System.Private.Xml/chunks/.hephaestus-cache \
+       tests/e2e/translation/System.Private.Xml/chunks/.hephaestus-cache \
+       testing/foundation-dll/System.Private.Xml/.hephaestus-cache \
+       artifacts/foundation-dll/System.Private.Xml/chunks/xml/{managed,results,native,build_jit_output} \
+       tests/e2e/translation/System.Private.Xml/chunks/xml/managed/.autogen
+# 跑
+CHAOS_FOUNDATION_DLL=$(pwd)/testing/foundation-dll PYTHONPATH=$(pwd)/tests/e2e \
+  python tests/e2e/verification/chunk_pipeline.py \
+  --assembly System.Private.Xml --chunk xml --stages build,fact --native-config check
+# 期望: stubGap 从 84 下降
+```
+
+---
+
+## 3. 本轮踩过的 6 个真坑（避免重踩）
+
+### 坑 1：`.ctor` shape 的 ReturnAbi 必须是 Void 🔴 最贵的一个
+
+**症状**：`kCodegenFailureCount=17`，pipeline 硬门禁 FAIL，17 个 `XmlTextReaderTests` subject 全变 stub。
+
+**根因**：`NativeAotLoweringPlanner.ExceptionEmission.Linear.cs:525` 硬性要求构造方法
+`ReturnAbi.CarrierKindCode == Void`。S19 把 `.ctor` 注册成 `CreateNativeIntAbiSlot()`（INTPTR）
+→ 抛 `NotSupportedException` → 被 `BuildMethodSourceSafe` 的泛化 catch 截获 → 计数 +1。
+
+**修法**：`CreateNativeIntAbiSlot()` → `CreateVoidAbiSlot()`（1 行）。
+
+**为什么难查**：pipeline 的 `build.py:975` 在 JIT 成功路径上**只打印 stdout**，
+codegen 的 stderr（含 `[codegen] WARNING: codegen failed for <SubjectId>, Root cause: ...`）
+被丢弃。要看到必须**直接跑 TPG 并捕获 stderr**：
+```bash
+dotnet exec <TPG.dll> generate-dll --jit --dll <subjects.dll> --metadata <meta.json> \
+  --output /tmp/x --config-tier check 2>&1 | grep -E "CODGEN-FAIL|codegen failed"
+```
+
+### 坑 2：`chaos_mt_` 与 `chaos_type_` 是**两个**符号面
+
+**症状**：`chaos_reflection_get_parameters_b3` 引用 `ParameterInfo`，报 C2065 → C2061 → C3536 → C2440 连锁。
+
+**根因**：`EmitMethodParameterNameCase` 同时用
+- `GetNativeTypeInfoSymbol()` → `chaos_mt_X.AsTypeInfoHot()`（MethodTable）
+- `GetNativeTypeSymbol()` → `chaos_type_X`（**完整 struct**，`NEW_GC` 要 `sizeof`）
+
+**只补 `chaos_mt_` 的 extern 声明不够** —— `chaos_type_X` 需要 object-model 阶段发射的
+完整 struct（含 `runtime_name_value` 字段，见 `GcTypeLayout.HasHardcodedGcRefs`）。
+
+**修法**（两处，分别在 `64b475be7` 与 `7dd6180b5`）：
+1. `RegisterExtraMethodTableSymbol` → `_extraMethodTableSymbols`（MethodTable extern）
+2. `EmitObjectModelDeclarations` 里**无条件** `TrackReferenceType(ParameterInfo)`
+   （因为该函数在 `CollectReflectionMemberMetadataFromClosure` **之前**跑，
+   无法预知闭包是否有带参方法）
+
+### 坑 3：shape 键 = (type, method, paramTypes)，多参重载必须独立注册
+
+`CreateElement(string)` 和 `CreateElement(string,string)` 是**不同的 shape 键**。
+只注册单参版本 → 多参 subject 全部落到 fallback。
+
+且 native 侧需要**独立符号**（`ChaosXmlDocumentCreateElement2` / `...3`）——
+用同一个 1 参符号会让 codegen 按多槽 ABI 生成调用 → `C2660: function does not take N arguments`。
+
+### 坑 4：ATG 白名单与 shape 注册是**两件事**
+
+- **shape 注册**（S20/S21）→ codegen 知道怎么调 native
+- **ATG 白名单**（`TestEmitter.ExternalStubRaisesManagedException`）→ ATG 生成
+  `try { call(); throw; } catch { }` 而非 `return 42L`
+
+**只做前者，stubGap 不动**。两者必须配对。
+
+### 坑 5：并行 agent 污染 —— 提交前必须逐文件核对
+
+本会话发生过两次：
+- 提交时被并行 agent 的 `math_stubs.cpp/h` 混入（需 `git reset --soft` 重做）
+- `async_stubs.cpp`、`exception_helpers.cpp`、`S24.cs` 出现并行 agent 的半成品编译错误
+
+**每次提交前**：
+```bash
+git add <显式文件列表>          # 禁 git add -A
+git diff --cached --name-only    # 逐行核对
+```
+
+### 坑 6：TPG 捆绑自己的 `Chaos.IL2CPP.Generator.dll`
+
+改 Generator 后**必须重建 TPG**，否则 TPG 用旧的 Generator.dll 跑。
+同理 native `chaos_runtime_core.lib` 在 SDK 里也有一份副本。
+
+---
+
+## 4. 未验证 / 不诚实项（必须明说）
+
+| 项 | 状态 |
+|:---|:-----|
+| `d81f8a646` 的 pipeline 端到端 | ✅ 已跑（stubGap 84 确认），但当时 ATG DLL 曾被并行 agent 锁定 |
+| text-json 的最新指标 | ⚠️ 本轮最后一次跑是 09-16，之后未复跑 |
+| 84 个 async 是否「只需 Phase M」 | ⚠️ **推断**，未实测。依据是同步面全部转 real 而 async 面不动，但未直接验证 ATG 的 async 分类逻辑 |
+| 其余 3 个 chunk（System.Xml.ReaderWriter 等） | ❌ 本轮未覆盖 |
+
+**不要假设 §2.2 的推断已被证实** —— 它是强推论而非实测结论。
+
+---
+
+## 5. 交接给下一轮的建议
+
+### 如果继续 JSON/XML 线
+
+- **M1 Utf8JsonReader**（读面，需 span 支持，重）— `roadmap-v1-01.md` Phase 3 唯一未做项
+- **M4 XmlDocument 的 Load/Save 真实实现** — 当前是 `NotSupportedException`，需真实 DOM 树
+- **剩余 3 个 XML chunk**（system-xml-serialization / xsl / schema）
+
+### 如果转 async 主线
+
+见 §2 —— 84 个方法的清单与验证命令已备好。
+⚠️ **转入前先确认 4 个 async worktree 的归属**（`async-t3` 处于 locked 状态，
+说明有 agent 正在工作）。
+
+---
+
+## 6. 签名
+
+> **交接人**: Claude Code（会话 `chaos-il2cpp`，2026-09-15 ~ 09-17）
+> **本轮性质**: XML 翻译层收口。**非 async 部分已清零**，剩余 84 个全部需要 async 能力。
+> **诚实标注**: §2.2 的「84 个只能等 Phase M」是**强推论**，不是实测结论；
+> §4 列出了全部未验证项。
+>
+> ```
+> ——— 2026-09-17 / commit d81f8a646 ———
+> ```
