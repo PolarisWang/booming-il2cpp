@@ -1,33 +1,95 @@
 # System.Threading.Tasks 生产级工程 — Roadmap
 
-> 版本：v1-01 | 创建：2026-09-07
-> 上游：brainstorm（手工状态机方案确认、C++20 coroutine 排除）
-> 定位：跨 4 域（运行时 + codegen 翻译 + 翻译管线 + 验证覆盖）的多阶段工程
+> 版本：v1-02 | 创建：2026-09-15 | 上次更新：2026-09-15
+> 上游设计：`design-v1-01.md` + `threading-production-readiness` Phase A–C 交付
+> dispatch_model：batch-sequential
 
 ## 一、目标
 
-将 C# `System.Threading.Tasks`（Task、async/await、ThreadPool、组合子、Parallel）在 chaos-il2cpp 的 AOT 翻译管线中达到**可生产级质量**，具体包括：
+将 `System.Threading.Tasks` 在 chaos-il2cpp AOT 翻译管线中达到生产级质量。
+与 v1-01 的关键变化：**分 5 批交付，每批一个 worktree**，批量小到可单 sprinter 完成。
 
-1. 所有 `async Task` 状态机的 IL 被正确翻译为 **native C++ 手工状态机**（非 C++20 coroutine 占位）
-2. `AsyncTaskMethodBuilder`、`AsyncValueTaskMethodBuilder` 的 builder 契约完整实现
-3. `ThreadPool` 的 native 线程池（`thread_pool.cpp`）投入真实使用，生命周期由 `RuntimeInit` 管理
-4. `ExecutionContext`/`SynchronizationContext` 跨 await 流正确
-5. `TaskCompletionSource`/`Task.Delay`/`Task.WhenAll`/`Task.WhenAny` 等组合子完整
-6. 热更新路径支持状态机方法替换
-7. 性能：AOT vs .NET8 差距 < 2×
-8. foundation-dll fact 验证覆盖 async/Task 核心方法
+## 二、与前置 roadmap 的关系
 
-## 二、范围边界
+`threading-production-readiness`（Phase 0–4 + Phase A/B/C）已交付：
 
-### 包含
-- `Task` / `Task<T>` / `ValueTask` / `ValueTask<T>` 的完整生命周期
-- `async/await` 状态机 → native C++ 手工状态机翻译
-- `AsyncTaskMethodBuilder` / `AsyncValueTaskMethodBuilder` builder 契约
-- `ThreadPool.QueueUserWorkItem` + 线程池原生实现
-- `Task.Run` / `Task.Factory.StartNew`
-- `Task.Delay`（timer 集成）
-- `TaskCompletionSource<T>`
-- `Task.WhenAll` / `Task.WhenAny`
+| 前置条件 | 状态 |
+|----------|------|
+| extern "C" ABI 出口层 | ✅ T2.0 |
+| 托管↔native 句柄绑定 | ✅ T2.1 |
+| receiver 槽位注入（Phase A） | ✅ 有参数实例方法可用 |
+| CancellationToken/ExecutionContext | ✅ T1.1/T1.2 |
+| ThreadPool 原生实现 + shutdown | ✅ 已在 runtime-core |
+| ctest 门禁 + benchmark | ✅ 36/36 全绿 + benchmark.json 有数据 |
+
+## 三、批次规划
+
+| Batch | Task 操作 | 入口数 | 新 native 入口 | 依赖 | 预估 |
+|-------|----------|--------|---------------|------|------|
+| **T1** | Delay / Wait / Wait(ms) / ConfigureAwait | ~10 | 无（已有 async_stubs 入口） | — | **2-3 天** |
+| T2 | StartNew / Task.Run | ~13 | `ChaosAsyncTaskStartNew` | T1 | 4-5 天 |
+| T3 | WhenAll / WhenAny / WaitAll / WaitAny | ~17 | `ChaosTaskWhenAllN` (多参数重载) | T1 | 5-7 天 |
+| T4 | ContinueWith / ContinueWith\<TR\> | ~36 | 无（已有混沌设备） | T1 | 5-8 天 |
+| T5 | TaskCompletionSource / WaitAsync | ~15 | Wire runt-compt | T1 | 3-5 天 |
+
+closure display-class（~60）贯穿所有批次——属于 lowering 固有模式，不单独设 batch，
+随各批次陆续覆盖。
+
+## 四、T1 详细规格
+
+### 4.1 操作列表
+
+| 调用点 | subject id（BCL 格式） | fallback 数 | 当前状态 |
+|--------|----------------------|------------|---------|
+| `Task::Delay(int)` | `System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)` | 5 | `chaos_external_runtime` |
+| `Task::Wait(ms)` | `System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void(System.Int32)` | 4 | fallback |
+| `Task.ConfigureAwait(bool)` | `System.Private.CoreLib/System.Threading.Tasks.Task::ConfigureAwait:System.Runtime.CompilerServices.ConfiguredTaskAwaitable(System.Boolean)` | 4 | fallback |
+| `ConfiguredTaskAwaitable.GetAwaiter` | （嵌套类型） | — | fallback |
+| `ConfiguredTaskAwaitable\`1` | — | — | fallback |
+
+### 4.2 现有 native 入口
+
+| 入口 | 在 async_stubs.cpp |
+|------|-------------------|
+| `ChaosAsyncTaskDelay` | ✅ 已注册 (`Part1.S16.cs`) |
+| `ChaosAsyncTaskGetAwaiter` | ✅ 已注册 |
+| `ChaosAsyncTaskAwaiterGetIsCompleted` | ✅ 已注册 |
+| `ChaosAsyncTaskAwaiterGetResultVoid/Value` | ✅ 已注册 |
+
+### 4.3 需要注册的内容
+
+| 原语 | 方法 | 参数 | 策略 |
+|------|------|------|------|
+| Task | Wait | [] | SimpleForward → `ChaosAsyncTaskWait`（新建，无限等待） |
+| Task | Wait | [System.Int32] | SimpleForward → `ChaosAsyncTaskWaitTimeout` |
+| Task | ConfigureAwait | [System.Boolean] | SimpleForward → `ChaosAsyncTaskConfigureAwait` |
+
+Wait 有一个**零参数重载**（phase A 之前就已可接，因零参数方法的唯一槽位 = receiver），
+加上 int 重载即可。ConfigureAwait 返回 `ConfiguredTaskAwaitable`——需要确认该值类型
+在 ABI 中如何载体化（可能是 INTPTR 指向栈上 carrier，同 TimeSpan 模式）。
+
+### 4.4 测试策略
+
+复用 `tests/unit/runtime-native/runtime-core/threading/async_task_state_test.cpp` /
+`async_integration_smoke_test.cpp` 的 native 测试框架。
+
+新增测试：
+- `ChaosAsyncTaskWait`：等待已完成的 Task → 立即返回
+- `ChaosAsyncTaskConfigureAwait`：返回非零 awaiter→ IsCompleted 可用
+
+## 五、执行策略
+
+```mermaid
+graph LR
+    Worktree-T1 --> Worktree-T2
+    Worktree-T1 --> Worktree-T3
+    Worktree-T1 --> Worktree-T4
+    Worktree-T1 --> Worktree-T5
+```
+
+每批一个独立 worktree，从 main 分支。T1 最先完成，其余并行或串行均可。
+
+---
 - `ConfigureAwait(false)` / `ConfigureAwait(true)`
 - `ExecutionContext` 跨 await 传播
 - `SynchronizationContext` 调度
