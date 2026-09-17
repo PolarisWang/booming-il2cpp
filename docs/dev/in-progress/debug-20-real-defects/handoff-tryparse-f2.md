@@ -1,5 +1,8 @@
 # TryParse 残差交接 — F2 家族（2 参核心）待运行时定位
 
+> ✅ **已闭环 2026-09-17**（commit `796bffab1`）。**本文件第二节的"已排除假设"表
+> 结论有误，勿再依据它排查**——真正根因在 codegen 翻译层，见文末「七、实际根因」。
+
 > **创建日期**: 2026-09-17
 > **上游**: `docs/dev/in-progress/debug-20-real-defects/triage-305-failures.md`（D 组）
 > **前置 commit**: `3361f6434`（TryParse 接线）+ `b9a82df25`（arity 参数顺序修复）
@@ -99,3 +102,58 @@ double.TryParse("3.14159")                        = True   ← 2 参默认非 No
 值得先按 `nullArg`/`envSensitive` 的思路做一次分类复核，再决定是否修复。
 剩余未接线类型：`DateTime` / `Guid` / `Decimal` / `TimeSpan` / `Int128` / `UInt128` /
 `Char` / `Version`（这些需要各自的 native，不是 shape 能解决的）。
+
+---
+
+## 七、实际根因（2026-09-17 闭环）
+
+**F2 不是 native 缺陷。** native 数据通路全程正确，实测埋点：
+
+```
+Double ok    s=3.14159 out=0x...bd8
+Double wrote v=3.14159 at 0x...bd8        ← 写入正确
+F2Probe1  d3 bool expected=1 actual=1     ← bool 断言通过
+F2Probe2  d3 expected=3.14159 actual=0    ← double 断言失败
+```
+
+真实根因是 **codegen eval 栈浮点槽的二次解码**（`ldloc` 的 `FloatLocalSlots`
+分支违反「位编码 INTPTR + NativeInt 标记」契约）：
+
+```cpp
+_s0 = ChaosStoreFloat64(3.14159);         // 位编码槽（正确）
+_d1 = ChaosLoadFloat64(chaos_locals[0]);  // 已解码成 double（正确）
+...
+Assert_AreEqual_Double(ChaosLoadFloat64(chaos_arg_0),   // arg0=_s0 二次解码【对】
+                       ChaosLoadFloat64(chaos_arg_1),   // arg1=_d1 二次解码【错】
+                       chaos_arg_2);
+```
+
+`_d1` 已是 `double`，被打上 `Float64`（=位编码）标记后消费者再包一层
+`ChaosLoadFloat64` → double 经 int64 隐式**数值**截断（`3.14159→3`）→ denormal ≈0。
+
+**修复**：`ExceptionEmission.EmitInstruction.cs` 的 `ldloc` 浮点分支改推原始槽
++ `PushSlotType(NativeInt)`，与 `ldc.r8` 等生产者对齐。
+
+**实测**：system chunk `real 1699 → 1725`（+26 fixed / 0 regressed），AOT=JIT。
+受益面超出 TryParse —— `XxxTests::CompareTo_N_object_0` 全族一并转绿。
+
+### ⚠️ 本文件中被推翻的三点
+
+| 本文档原文 | 实测 |
+|---|---|
+| 二、调用形态等 6 项"已排除" | 结论对，但**不充分** —— 漏掉了调用点实参的重复解码 |
+| 三、"异常发生在 out 指针写入附近" | ❌ out 写入完全正确；断言失败点在**读取/传参**侧 |
+| 一、F2 有 9 个成员 | ❌ 实际 2 个：Double/Single 的 `TryParse_14_string_*_3` |
+
+### 排查方法（可复用）
+
+浮点断言失败、但同族 **bool/整型断言通过**时：**直接对比生成代码里调用点的实参
+表达式与 `ldloc` 产出的表达式是否重复包装**。不要只看 native。
+判别关键是**同一调用内的不对称**（`chaos_arg_0` 对、`chaos_arg_1` 错）。
+
+### 已知同类残留（未修）
+
+`StructuredIR.Emit.cs:1067` 的 **HoistedInvariantLocals** 路径有相同缺陷
+（`declType="double"` + `slotType=fType`），且位于 `ldloc` 的 E6 分支，
+**先于**本次修复的分支命中。本 chunk `_hld_` 出现 0 次故无法验证；
+需先找到能触发 hoisting 的 chunk 再修。
