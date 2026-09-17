@@ -121,6 +121,45 @@ _UNASSERTABLE_RETURN_TYPES = frozenset({
 })
 
 
+# Callees whose contract LEGITIMATELY produces a negative return value, so a
+# negative reading is not a data anomaly.  Verified against .NET 8:
+#
+#   Math/MathF.ILogB    — ECMA-335 specifies FP_ILOGB0 == FP_ILOGBNAN ==
+#                         int.MinValue for zero/NaN input (measured: ILogB(0.0)
+#                         = -2147483648, ILogB(0.5) = -1).
+#   Math/MathF.BitDecrement
+#                       — returns the largest value BELOW its input, so any
+#                         input <= 0 yields a negative (measured:
+#                         BitDecrement(0.0) = -5E-324, a negative subnormal).
+#
+# Keyed on the callee rather than the value: the probe supplies input-dependent
+# results (ILogB(1.0) is 0, ILogB(0.5) is -1), so what is anomalous depends on
+# WHICH function ran, not on what it returned.  A blanket "ignore negatives"
+# would also swallow the real defect this check was written for — the tagged
+# pointer that leaks through an INT64 return slot as a large negative
+# (see the reflection line's 0x80007ff68290f0f0 case).
+#
+# Matched against the generated method id, which is "<MethodName>_<index>_..._<set>"
+# (e.g. "ILogB_38_double_0", "BitDecrement_20_float_0"); a leading "_" anchors the
+# name so a hypothetical "XILogB" would not match.
+_NEGATIVE_RETURN_METHOD_PREFIXES = (
+    "ILogB_",
+    "BitDecrement_",
+)
+
+
+def _is_legitimately_negative(subject_id: str) -> bool:
+    """True when a negative return value is expected for this callee.
+
+    The subject id ends with "<DeclaringType>::<GeneratedMethodId>:<ReturnType>",
+    so the generated method id is the segment after the last "::" up to the
+    first ":".
+    """
+    tail = subject_id.rsplit("::", 1)[-1]
+    gen_id = tail.split(":", 1)[0]
+    return gen_id.startswith(_NEGATIVE_RETURN_METHOD_PREFIXES)
+
+
 def _generated_method_id_from_subject_id(sid: str) -> str | None:
     """Extract the generatedMethodId from a CombinedSubjects SubjectId.
 
@@ -1038,6 +1077,10 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
     # Build metadata reference — None if unavailable (handled by callers)
     meta_total: int | None = None
     meta_fact_count: int | None = None
+    # Fallback denominator — must be bound even when the metadata file is
+    # missing entirely (e.g. after a build-stage invalidation), otherwise the
+    # `expected = ... else meta_unique_fact` lookup below raises UnboundLocalError.
+    meta_unique_fact: int | None = None
     meta_path = ctx.chunk_dir / "managed" / "subjects" / "subjects.metadata.json"
     if meta_path.exists():
         try:
@@ -1215,9 +1258,16 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
         summary_parts.append(f"errors: {'; '.join(errors)}")
 
     # Value warnings (from AOT results — count negative values as warnings)
+    #
+    # -1 is excluded because "not found" / "less than" are its documented
+    # meanings (BinarySearch, string.Compare, WaitForFullGC*).  Callees whose
+    # contract legitimately yields other negatives (Math.ILogB's FP_ILOGB0,
+    # Math.BitDecrement below zero) are excluded by name — see
+    # _is_legitimately_negative.
     value_warnings = sum(
         1 for r in aot_result["results"]
         if r.get("passed") and r.get("value", 0) < 0 and r.get("value", 0) != -1
+        and not _is_legitimately_negative(r.get("methodSubjectId", ""))
     )
     value_suspicious = value_warnings > 0
 
