@@ -121,7 +121,12 @@ public abstract class SnapshotTestBase
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         while (dir != null)
         {
-            if (File.Exists(Path.Combine(dir.FullName, ".git")))
+            // `.git` is a DIRECTORY in a normal checkout but a FILE (a gitdir
+            // pointer) inside a linked worktree.  Testing only File.Exists made
+            // every repo-root test fail when run from the primary checkout --
+            // the walk never matched and fell through to the throw below.
+            if (File.Exists(Path.Combine(dir.FullName, ".git")) ||
+                Directory.Exists(Path.Combine(dir.FullName, ".git")))
                 return dir.FullName;
             dir = dir.Parent;
         }
