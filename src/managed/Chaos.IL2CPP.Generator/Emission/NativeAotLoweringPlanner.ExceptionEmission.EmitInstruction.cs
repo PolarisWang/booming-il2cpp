@@ -341,14 +341,22 @@ public sealed partial class NativeAotLoweringPlanner
                         EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[{ldlocSlot}])");
                     else if (_state.Value!.FloatLocalSlots is not null && _state.Value!.FloatLocalSlots.TryGetValue(ldlocSlot, out var ldlocType) && ldlocType != SlotType.NativeInt)
                     {
-                        string wrapper = ldlocType switch
-                        {
-                            SlotType.Float32 => "ChaosLoadFloat32",
-                            SlotType.Float64 => "ChaosLoadFloat64",
-                            _ => throw new NotSupportedException(),
-                        };
-                        EmitEvalStackPush(builder, indentation, $"{wrapper}(chaos_locals[{ldlocSlot}])", ldlocType);
-                        PushSlotType(ldlocType);
+                        // Float locals are stored bit-encoded in the 8-byte chaos_locals
+                        // slot (same contract as the other float producers — ldc.r8,
+                        // EmitAbiReturnPush — which push ChaosStoreFloat*(...)).
+                        // Push the RAW slot verbatim and tag NativeInt, so every consumer
+                        // decodes exactly once:
+                        //   - stloc         -> stores the slot verbatim, no re-encode
+                        //   - FormatAbiArgumentExpression(Float64) -> ChaosLoadFloat64(slot)
+                        //   - ceq / ArgBuffer::WriteF64           -> ChaosLoadFloat64(slot)
+                        // Decoding here instead (the previous revision) put a decoded
+                        // `double` into a `_dN` slot while still tagging SlotType.Float64,
+                        // so consumers applied ChaosLoadFloat64 a second time.  That is an
+                        // implicit double->int64 *numeric* conversion (not a bitcast), which
+                        // turned 3.14159 into ~0 and failed e.g.
+                        // DoubleTests::TryParse_14_string_double_3.
+                        EmitEvalStackPush(builder, indentation, $"chaos_locals[{ldlocSlot}]");
+                        PushSlotType(SlotType.NativeInt);
                     }
                     else if (_state.Value!.Int64LocalSlots is not null && _state.Value!.Int64LocalSlots.Contains(ldlocSlot))
                     {
