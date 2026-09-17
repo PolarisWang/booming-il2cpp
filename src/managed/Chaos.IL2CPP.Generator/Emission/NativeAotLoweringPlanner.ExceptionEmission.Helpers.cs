@@ -51,11 +51,28 @@ public sealed partial class NativeAotLoweringPlanner
         {
             if (!string.Equals(instructions[i].Op, "initobj", StringComparison.Ordinal))
                 continue;
+            if (!string.Equals(instructions[i - 1].Op, "ldloca", StringComparison.Ordinal))
+                continue;
             // initobj only operates on value types per IL spec, so the
             // targetRef typeShape check is redundant. Explicitly omitted
             // because generic value types (e.g. Vector128<T>) may carry
             // an incorrect typeShape (ReferenceType=1) in the AOT core IR.
-            if (!string.Equals(instructions[i - 1].Op, "ldloca", StringComparison.Ordinal))
+            //
+            // Primitive-sized value types (System.Half, single-precision float
+            // etc.) keep VALUE semantics: a `default(Half)` compiles to
+            // `ldloca V; initobj Half`, and the later `ldloc V` must yield the
+            // zero VALUE (0.0f), not the address of the slot.  Treating it as a
+            // struct local made ldloc emit `&chaos_locals[N]`; the Float32 ABI
+            // marshaling then bit-cast that stack ADDRESS as float bits ->
+            // garbage (HalfTests::IsInteger/IsNormal/IsEvenInteger failed that
+            // way while IsRealNumber "passed" only because its NaN check
+            // accepts any garbage — a false green).  int/short/etc. avoid this
+            // because default(int) lowers to ldc.i4 0, never to ldloca+initobj.
+            var initTarget = instructions[i].TargetReference?.SubjectId;
+            if (initTarget is not null &&
+                (PrimitiveValueTypeSubjectIds.Contains(initTarget) ||
+                 PrimitiveValueTypeSubjectIds.Contains(
+                     initTarget.Replace("System.Private.CoreLib/", "", StringComparison.Ordinal))))
                 continue;
             structLocals.Add(GetRequiredIntOperand(instructions[i - 1]));
         }
