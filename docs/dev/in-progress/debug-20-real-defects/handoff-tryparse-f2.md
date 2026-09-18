@@ -244,3 +244,27 @@ stale 轮该 subject 的旧 catch-all `return 0` **恰好等于** 0 → 假绿
 `concurrent-pipeline-shares-artifacts-root` 判据 —— entry.exe(21:14) 早于
 codegen(21:23) 8 分钟，且 codegen 只 lower 2974/5502 methods（正常 9414）。
 **待并发会话静默后需重跑取数。**
+
+### 端到端取数：四次尝试均被并发污染（2026-09-18 上午记录）
+
+修复 commit `243ace6b5` 已落地且非污染面证据齐备（语义自测 10/10、生成代码实证、
+双构建 0 error）。但**端到端 fact 数字至今未取得**，四次尝试全部作废：
+
+| # | 时间 | 结果 | 污染判据 |
+|---|---|---|---|
+| 1 | 09-17 21:0x | 1214/3716 | entry.exe 早于 codegen 8min；codegen 仅 lower 2974/5502 |
+| 2 | 09-17 21:26 | ATG 超时 1200s | 同时 3 个会话跑同一 chunk（实测 cmdline） |
+| 3 | 09-18 10:2x | cmake build FAILED | 12× `chaos_type_id_*` undeclared + 10× C4335 行尾警告（半成品头文件） |
+| 4 | 09-18 10:4x | emit IOException | `native-aot.generated.cpp` 被另一进程占用；codegen 仅 lower 7132 |
+
+**判据**（与 `concurrent-pipeline-shares-artifacts-root` 一致）：
+启动时进程数=0 也**不足以保证**——对方可在我的 build 中途启动。
+
+**第 3 次的 `chaos_type_id_Chaos_TestFramework_Sdk_System_Attribute` /
+`_System_String` 未声明**：已核实**非本修复引入** ——
+本 commit 只改 `Part2.S5.cs` 的 char 分支 + `string_stubs`，
+`git diff 243ace6b5^ 243ace6b5 -- .../Emission/` 为空，
+不经手任何 type-id / iface_map 发射路径。该不对称是生成器既有 gap
+（`ObjectModelEmission.cs:994` 附近已有针对同类问题的补丁注释）。
+
+**结论**：端到端回归数据仍待接续；根因面已闭环，勿重开。
