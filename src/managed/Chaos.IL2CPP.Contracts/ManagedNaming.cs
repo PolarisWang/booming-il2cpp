@@ -115,6 +115,29 @@ public static class ManagedNaming
         return $"{declaringTypeSubjectId}::{methodName}({parameterSignature})";
     }
 
+    /// <summary>
+    /// Decompose a method SubjectId into its parts.
+    ///
+    /// Exposes <see cref="TryParseMethodSubjectIdComponents"/> so callers that need
+    /// to RESOLVE an already-known SubjectId to a declaration (e.g. the Loader's
+    /// on-demand definition lookup) do not have to re-implement the grammar —
+    /// a second parser would be free to drift from this one and silently
+    /// mis-resolve.
+    ///
+    /// Returns false for anything that is not a well-formed method SubjectId
+    /// (no <c>::</c>, no parenthesised parameter list, etc.) rather than throwing.
+    /// </summary>
+    public static bool TryParseMethodSubjectId(
+        string subjectId,
+        out string declaringTypeSubjectId,
+        out string methodName,
+        out string? returnType,
+        out string parameterSignature)
+    {
+        return TryParseMethodSubjectIdComponents(
+            subjectId, out declaringTypeSubjectId, out methodName, out returnType, out parameterSignature);
+    }
+
     public static string CreateMethodId(ManagedMethodModel method)
     {
         ArgumentNullException.ThrowIfNull(method);
