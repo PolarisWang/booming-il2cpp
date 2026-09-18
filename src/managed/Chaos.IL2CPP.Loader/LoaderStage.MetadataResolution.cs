@@ -230,7 +230,7 @@ public sealed partial class LoaderStage
                 methodName,
                 definitionSignature.ReturnType,
                 definitionParameterTypes,
-                GetDefinitionGenericParameterCount(metadataReader, memberReference.Parent)),
+                GetDefinitionGenericParameterCount(metadataReader, memberReference)),
             ReturnType = signature.ReturnType,
             ParameterTypes = parameterTypes,
             MetadataToken = MetadataTokens.GetToken(handle),
@@ -332,18 +332,38 @@ public sealed partial class LoaderStage
             : memberReference.DecodeMethodSignature(new GenericArityTypeProvider(), null).GenericParameterCount;
     }
 
+    /// <summary>
+    /// Generic arity of the method DEFINITION a member reference points at.
+    ///
+    /// A member reference's Parent is the MethodDefinition only for intra-assembly
+    /// calls; cross-assembly calls carry a TypeReference/parent handle instead, for
+    /// which the parent-based lookup below cannot report arity.  Returning 0 there
+    /// dropped the "`N" suffix from DefinitionSubjectId — e.g. the definition of
+    /// <c>Assert.AreEqual&lt;T&gt;</c> is <c>...Assert::AreEqual`1:...</c> but the
+    /// reference recorded <c>...Assert::AreEqual:...</c>.  The Loader's projection
+    /// then failed to find the definition and silently skipped the instantiation,
+    /// so closed instances never entered the closure and every such call fell
+    /// through to the external-runtime catch-all (a false green for assertions).
+    ///
+    /// The member reference's own signature describes that same definition, so its
+    /// MethodSignature carries the arity — the same source `SubjectId` already uses
+    /// via GetMemberReferenceGenericParameterCount.  Falling back to it keeps the two
+    /// keys consistent.
+    /// </summary>
     private static int GetDefinitionGenericParameterCount(
         MetadataReader metadataReader,
-        EntityHandle parentHandle)
+        MemberReference memberReference)
     {
-        return parentHandle.Kind switch
+        var parentHandle = memberReference.Parent;
+        if (parentHandle.Kind == HandleKind.MethodDefinition)
         {
-            HandleKind.MethodDefinition => metadataReader
+            return metadataReader
                 .GetMethodDefinition((MethodDefinitionHandle)parentHandle)
                 .GetGenericParameters()
-                .Count,
-            _ => 0,
-        };
+                .Count;
+        }
+
+        return GetMemberReferenceGenericParameterCount(memberReference);
     }
 
     private static FieldReferenceSummary DescribeFieldDefinition(

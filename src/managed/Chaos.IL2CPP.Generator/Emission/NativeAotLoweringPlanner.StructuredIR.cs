@@ -206,6 +206,17 @@ public sealed partial class NativeAotLoweringPlanner
             case AotCoreIrAbiCarrierKind.UInt16:
                 builder.AppendLine(indentation + $"return static_cast<CHAOS_IL2CPP_UINT16>({valueExpression});");
                 return;
+            // UInt32 is a carrier distinct from Int32 because the two differ in
+            // *widening* (unsigned zero-extends, signed sign-extends) — see
+            // AotCoreIrAbiCarrierKind.UInt32.  Omitting it here made every method
+            // that RETURNS a UInt32-carried value throw
+            // "does not support ABI return carrier", which surfaced as a
+            // [CODGEN-FAIL] stub — e.g. SubjectInstanceFactory.Create<System.UInt32>,
+            // a method-level generic instantiation that only started being lowered
+            // once the cross-assembly arity fix landed.
+            case AotCoreIrAbiCarrierKind.UInt32:
+                builder.AppendLine(indentation + $"return static_cast<CHAOS_IL2CPP_UINT32>({valueExpression});");
+                return;
             case AotCoreIrAbiCarrierKind.Float32:
                 // Typed slot (_fN) is already a float — return directly
                 if (valueExpression.StartsWith("_f", StringComparison.Ordinal))
