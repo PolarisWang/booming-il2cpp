@@ -11,6 +11,7 @@
 
 #include <chaos/async.h>
 #include <chaos/log.h>
+#include "exception_helpers.h"
 #include <chaos/profile.h>
 
 #include "async_stubs.h"
@@ -53,7 +54,12 @@ static void TaskRunCallback(void* state) noexcept {
 }
 
 CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept {
-    if (delegate_fn == 0) return 0;
+    if (delegate_fn == 0) {
+        // .NET contract: Task.Run(null) throws ArgumentNullException.  Returning 0
+        // made the probe's awaiter path raise NRE instead — wrong exception type.
+        RaiseManagedException(
+            "System.ArgumentNullException", "Value cannot be null. (Parameter 'action')");
+    }
 
     // Phase 6: GC-allocated so a live continuation (which stores the handle)
     // roots the task for the GC.  Falls back to the plain-new header inline
