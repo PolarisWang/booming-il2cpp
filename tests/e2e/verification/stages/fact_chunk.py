@@ -740,6 +740,49 @@ _NON_COMPARABLE_KIND_PAIRS = frozenset({
 })
 
 
+# Result kinds that represent an INFRASTRUCTURE gap rather than a measurement
+# of the method under test:
+#
+#   factoryGap    — the test's SubjectInstanceFactory.Create<T>() returned null
+#                   in AOT, so the emitted null-guard raised before the call.
+#   stubGap       — ATG marked the subject AOT-STUB-GAP: there is no AOT body,
+#                   so the call never executed.
+#   nullArg       — the subject passes default(T) reference args and the AOT
+#                   body correctly throws ArgumentNullException before asserting.
+#   envSensitive  — the expectation describes the probe's own process (GC
+#                   counters, PRNG stream position) and cannot be reproduced.
+#
+# None of these say anything about whether the method is implemented correctly,
+# so they are excluded from BOTH the gate numerator and the gate denominator.
+_EXCLUDED_FROM_GATE = frozenset({
+    "factoryGap",
+    "stubGap",
+    "nullArg",
+    "envSensitive",
+})
+
+
+def compute_gate_counts(annotated: list[dict]) -> tuple[int, int]:
+    """Return (gate_total, gate_passed) for a set of annotated fact records.
+
+    The numerator and the denominator MUST describe the same population.
+    ``gate_total`` removes the infrastructure-gap kinds above; ``gate_passed``
+    must therefore count only PASSING records drawn from that same remainder.
+
+    The previous implementation used the raw run-wide pass count as the
+    numerator while subtracting those kinds from the denominator, so the two
+    described different populations and the ratio could exceed 100%.  Measured
+    on the reflection chunk: gateTotal 50, gatePassed 440 (880%) — 390 of those
+    passes were stubGap records the denominator had already excluded, i.e.
+    methods that never executed were being counted as verified.
+    """
+    gate_total = sum(1 for r in annotated if r.get("resultKind") not in _EXCLUDED_FROM_GATE)
+    gate_passed = sum(
+        1 for r in annotated
+        if r.get("passed") and r.get("resultKind") not in _EXCLUDED_FROM_GATE)
+    return gate_total, gate_passed
+
+
 def split_cross_tech_diffs(
     aot_results: list[dict],
     jit_results: list[dict],
@@ -1049,8 +1092,8 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     # null / method has no AOT body), not defects in the method under test —
     # they are excluded from numerator AND denominator so they cannot block the
     # gate while remaining fully visible.
-    real_signal = real_ct + failed_ct
-    gate_denominator = total - factory_gap_ct - stub_gap_ct - null_arg_ct - env_sensitive_ct
+    # ── Gate numerator/denominator ──
+    gate_total, gate_passed = compute_gate_counts(annotated)
 
     fact_data = {
         "passed": passed,
@@ -1085,8 +1128,8 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         # are 0-by-absence rather than 0-by-measurement.
         "attributionAvailable": len(attr_records),
         # ── Gate numerator/denominator (factoryGap + stubGap excluded) ──
-        "gateTotal": gate_denominator,
-        "gatePassed": passed,
+        "gateTotal": gate_total,
+        "gatePassed": gate_passed,
         # ── JIT run (SEPARATE population — never mixed into the fields above) ──
         # Reported so a JIT-better-than-AOT gap is visible instead of being
         # silently folded into the AOT headline.  The cross-tech diff below is
