@@ -890,21 +890,34 @@ public sealed class DllScanner
         Assembly? assembly8 = null;
         if (mlc8 is not null)
         {
-            // When the TARGET DLL itself is a framework assembly (e.g.
-            // System.Private.CoreLib passed straight from the net10 runtime),
-            // loading it via fullPath would hand the MLC the NET10 build — the
-            // exact thing we must NOT compare against. Always prefer loading the
-            // net8 build of the framework core as the comparison surface.
+            // The comparison surface must be the NET8 build of the *same*
+            // assembly.  Loading fullPath (which points into the net10 runtime)
+            // hands the net8 MLC net10 metadata, so every "does net8 have this?"
+            // query is answered by net10 and comes back yes — B4 silently stops
+            // detecting anything.  That is not hypothetical: it is why
+            // TypeDescriptor.RegisterType<T> (net10-only) was emitted unguarded
+            // and broke the net8.0 combined build with CS0117.
+            //
+            // This used to special-case only System.Private.CoreLib/System.Runtime.
+            // The gap is any framework assembly net10 has moved ahead on, so
+            // resolve the net8 counterpart by filename instead of by a fixed list.
             var net8RuntimeDir = GetNet8RuntimeDirectory();
-            var isFrameworkCore = Path.GetFileName(fullPath) == "System.Private.CoreLib.dll" ||
-                                  Path.GetFileName(fullPath) == "System.Runtime.dll";
-            if (isFrameworkCore && net8RuntimeDir is not null)
+            var net8Counterpart = net8RuntimeDir is not null
+                ? Path.Combine(net8RuntimeDir, Path.GetFileName(fullPath))
+                : null;
+            if (net8Counterpart is not null && File.Exists(net8Counterpart))
             {
-                var net8CoreLib = Path.Combine(net8RuntimeDir, "System.Private.CoreLib.dll");
-                if (File.Exists(net8CoreLib))
-                    assembly8 = mlc8.LoadFromAssemblyPath(net8CoreLib);
+                try
+                {
+                    assembly8 = mlc8.LoadFromAssemblyPath(net8Counterpart);
+                }
+                catch
+                {
+                    // Not a framework assembly net8 ships (a first-party or
+                    // third-party net10-only DLL): fall through to the target.
+                }
             }
-            else
+            if (assembly8 is null)
             {
                 try
                 {
@@ -912,9 +925,10 @@ public sealed class DllScanner
                 }
                 catch
                 {
-                    // Non-framework target may still fail to load in the net8 MLC
-                    // (e.g. a pure net10 assembly). Fall back to net8 CoreLib for
-                    // type-only resolution.
+                    // Target cannot load in the net8 MLC at all (e.g. a pure
+                    // net10 assembly). Fall back to net8 CoreLib so type
+                    // resolution still works; methods absent there read as
+                    // net10-only, which is the safe direction.
                     if (net8RuntimeDir is not null)
                     {
                         var net8CoreLib = Path.Combine(net8RuntimeDir, "System.Private.CoreLib.dll");
@@ -1998,14 +2012,60 @@ public sealed class DllScanner
     }
 
     /// <summary>
+    /// Locate the dotnet installation root (the directory containing
+    /// <c>shared/</c> and <c>packs/</c>).
+    ///
+    /// <see cref="Environment.SpecialFolder.ProgramFiles"/> is a Windows concept:
+    /// on Linux and macOS it returns the empty string, so the old
+    /// ProgramFiles-relative probes resolved to a nonsense relative path,
+    /// failed <c>Directory.Exists</c>, and made every net8 lookup return null.
+    /// The effect was silent — <c>CreateNet8Mlc()</c> returned null, the whole
+    /// net10-only detection block was skipped, and net10-only APIs were emitted
+    /// unguarded into a multi-targeted build (CS0117 on the net8.0 leg).  Prefer
+    /// the environment overrides and the running runtime's own location, which
+    /// are correct on every platform, and keep ProgramFiles as the last resort
+    /// for a Windows host that sets neither.
+    /// </summary>
+    private static string? GetDotnetRootDirectory()
+    {
+        foreach (var envVar in new[] { "DOTNET_ROOT", "DOTNET_ROOT_X64" })
+        {
+            var fromEnv = Environment.GetEnvironmentVariable(envVar);
+            if (!string.IsNullOrWhiteSpace(fromEnv) && Directory.Exists(fromEnv))
+                return fromEnv;
+        }
+
+        // The running runtime lives at <root>/shared/Microsoft.NETCore.App/<ver>;
+        // walk up from there so this works without any env var set.
+        var runtimeDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
+        if (!string.IsNullOrEmpty(runtimeDir))
+        {
+            var sharedDir = Path.GetDirectoryName(runtimeDir);
+            var root = sharedDir is null ? null : Path.GetDirectoryName(sharedDir);
+            if (root is not null && Directory.Exists(Path.Combine(root, "shared")))
+                return root;
+        }
+
+        var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+        if (!string.IsNullOrWhiteSpace(programFiles))
+        {
+            var candidate = Path.Combine(programFiles, "dotnet");
+            if (Directory.Exists(candidate))
+                return candidate;
+        }
+
+        return null;
+    }
+
+    /// <summary>
     /// Locate the net8 runtime directory (e.g. ...Microsoft.NETCore.App\8.0.11\).
     /// Returns null when no net8 runtime is installed.
     /// </summary>
     private static string? GetNet8RuntimeDirectory()
     {
-        var sharedDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
-            "dotnet", "shared", "Microsoft.NETCore.App");
+        var root = GetDotnetRootDirectory();
+        if (root is null) return null;
+        var sharedDir = Path.Combine(root, "shared", "Microsoft.NETCore.App");
         if (!Directory.Exists(sharedDir)) return null;
         return Directory.GetDirectories(sharedDir, "8.0.*")
             .OrderByDescending(d => d)
@@ -2018,9 +2078,9 @@ public sealed class DllScanner
     /// </summary>
     private static string? GetNet8RefPackDirectory()
     {
-        var packsDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
-            "dotnet", "packs", "Microsoft.NETCore.App.Ref");
+        var root = GetDotnetRootDirectory();
+        if (root is null) return null;
+        var packsDir = Path.Combine(root, "packs", "Microsoft.NETCore.App.Ref");
         if (!Directory.Exists(packsDir)) return null;
         return Directory.GetDirectories(packsDir, "8.0.*")
             .OrderByDescending(d => d)
