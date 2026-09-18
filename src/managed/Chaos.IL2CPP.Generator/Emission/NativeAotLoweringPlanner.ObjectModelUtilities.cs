@@ -376,6 +376,9 @@ public sealed partial class NativeAotLoweringPlanner
 
     private static string GetTypeHandleLiteral(string subjectId)
     {
+        // Register: the type-handle switches (ReflectionObjectEmission, ModuleRegistration
+        // b3 resolver) case on these ids — same registry contract as GetNativeTypeIdSymbol.
+        ReferencedTypeIdSubjects.Add(subjectId);
         return GetPseudoMetadataHandleLiteral(subjectId, 33554432u);
     }
 
@@ -426,8 +429,40 @@ public sealed partial class NativeAotLoweringPlanner
 
     private static string GetNativeTypeIdSymbol(string subjectId)
     {
+        // 方案 B: single authoritative chaos_type_id_* registry.  Every composed
+        // symbol registers its subject id; the page emitter (NativeAotEmitter)
+        // appends a definition for any registered id the object-model type sets
+        // didn't emit, so consumer switches / iface arrays can never hit C2065
+        // again regardless of which emission file references the constant.
+        ReferencedTypeIdSubjects.Add(subjectId);
         return GetNativeSymbol("chaos_type_id_", subjectId);
     }
+
+    /// <summary>Subject ids whose chaos_type_id_* symbol was composed anywhere.</summary>
+    private static readonly HashSet<string> ReferencedTypeIdSubjects = new(StringComparer.Ordinal);
+
+    /// <summary>
+    /// Definitions for registered ids that the object-model emission never emitted.
+    /// Returns an empty string when everything referenced already has a definition
+    /// (presence is checked against the fully assembled page text).
+    /// </summary>
+    internal static string BuildMissingTypeIdDefinitions(string assembledPage)
+    {
+        if (ReferencedTypeIdSubjects.Count == 0) return string.Empty;
+        var sb = new StringBuilder();
+        foreach (var subjectId in ReferencedTypeIdSubjects.OrderBy(t => t, StringComparer.Ordinal))
+        {
+            var symbol = "chaos_type_id_" + SanitizeSubjectId(subjectId);
+            if (assembledPage.Contains("inline constexpr CHAOS_IL2CPP_UINT64 " + symbol + " =")) continue;
+            sb.Append("inline constexpr CHAOS_IL2CPP_UINT64 ").Append(symbol)
+              .Append(" = static_cast<CHAOS_IL2CPP_UINT64>(")
+              .Append(ComputeStableTypeId(subjectId).ToString())
+              .Append("ULL);\n");
+        }
+        return sb.ToString();
+    }
+
+    internal static void ResetReferencedTypeIdSubjects() => ReferencedTypeIdSubjects.Clear();
 
     private static string GetNativeTypeInfoSymbol(string subjectId)
     {
