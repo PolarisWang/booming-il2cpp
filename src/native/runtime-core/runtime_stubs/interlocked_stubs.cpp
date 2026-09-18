@@ -88,6 +88,22 @@ CHAOS_IL2CPP_INT32 ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept
         std::memory_order_acquire);
 }
 
+// Thread.VolatileRead(ref object) — the reference-typed overload.
+//
+// This is a SEPARATE function from ChaosVolatileRead above, not an alias: that
+// one returns INT32 and would truncate a 64-bit object reference to its low 32
+// bits.  The managed signature is `T VolatileRead(ref T)` with T = object, so
+// the return carrier must be pointer-sized.
+//
+// The read itself is an ordinary acquire load of the reference slot; on this
+// runtime that is the whole of the volatile contract for references.
+CHAOS_IL2CPP_INTPTR ChaosVolatileReadObject(CHAOS_IL2CPP_INTPTR ptr) noexcept
+{
+    return std::atomic_load_explicit(
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INTPTR>*>(ptr),
+        std::memory_order_acquire);
+}
+
 void ChaosVolatileWrite(CHAOS_IL2CPP_INTPTR ptr, CHAOS_IL2CPP_INT32 value) noexcept
 {
     std::atomic_store_explicit(

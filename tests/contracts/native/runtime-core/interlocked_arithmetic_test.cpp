@@ -156,4 +156,39 @@ TEST(InterlockedArithmetic, SeparateLocationsAreIndependent) {
     EXPECT_EQ(b, 1);
 }
 
+// ── Thread.VolatileRead(ref object) ─────────────────────────────────────────
+//
+// A separate function from ChaosVolatileRead (INT32) on purpose: this overload
+// returns a reference, so it must be pointer-sized.  Feeding it through the
+// Int32 helper would truncate a 64-bit reference to its low 32 bits — a corrupt
+// pointer rather than a clean failure — so the width is asserted directly.
+
+TEST(ThreadVolatileRead, Object_PreservesFullPointerWidth) {
+    // A value with bits set above bit 31, so a 32-bit truncation is visible.
+    CHAOS_IL2CPP_INTPTR stored =
+        static_cast<CHAOS_IL2CPP_INTPTR>(0x1234567890ABCDEFull);
+
+    EXPECT_EQ(ChaosVolatileReadObject(
+                  reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&stored)),
+              stored);
+}
+
+TEST(ThreadVolatileRead, Object_NullReadsAsZero) {
+    CHAOS_IL2CPP_INTPTR stored = 0;
+
+    EXPECT_EQ(ChaosVolatileReadObject(
+                  reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&stored)),
+              0);
+}
+
+// The generated test `VolatileRead_40_object_0` reads from a
+// `default(object)` field and expects null.  This is that exact case.
+TEST(ThreadVolatileRead, Object_DefaultSlotIsNull) {
+    CHAOS_IL2CPP_INTPTR slot = 0;  // a default(object) reference slot
+
+    EXPECT_EQ(ChaosVolatileReadObject(
+                  reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&slot)),
+              0);
+}
+
 }  // namespace

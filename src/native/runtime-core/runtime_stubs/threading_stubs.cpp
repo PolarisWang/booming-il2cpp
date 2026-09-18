@@ -159,6 +159,20 @@ CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept
     return 1;
 }
 
+// ── Thread.GetDomainID ──────────────────────────────────────────────────────
+//
+// .NET Core has a single AppDomain, so this is 1 by construction — verified
+// against .NET 8 (returns 1 on every run).  This is a real value, not a
+// placeholder: an earlier state returned 0 through the external-runtime
+// catch-all and made `Assert.AreEqual(1, Thread.GetDomainID())` fail.
+//
+// The .NET Framework semantics (per-domain increasing ids) do not apply here
+// because this runtime does not implement multiple domains.
+CHAOS_IL2CPP_INT32 chaos_thread_get_domain_id(void) noexcept
+{
+    return 1;
+}
+
 void chaos_thread_sleep(CHAOS_IL2CPP_INT32 timeout_ms) noexcept
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(timeout_ms));
