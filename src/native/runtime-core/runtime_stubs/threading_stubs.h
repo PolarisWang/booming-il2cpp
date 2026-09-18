@@ -78,6 +78,43 @@ CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept;
 // not apply because this runtime does not implement multiple domains.
 CHAOS_IL2CPP_INT32 chaos_thread_get_domain_id(void) noexcept;
 
+// ── LazyInitializer.EnsureInitialized<T> ────────────────────────────────────
+//
+// Managed contract (verified against .NET 8):
+//
+//   T EnsureInitialized(ref T target, ref bool initialized, ref object syncLock)
+//       If *initialized is false: store default(T) into *target, set
+//       *initialized = true, assign a non-null sentinel to *syncLock (the real
+//       BCL uses a lock object it constructs), and return the stored value.
+//       If *initialized is true: leave everything alone and return *target.
+//
+//   T EnsureInitialized(ref T target, ref bool initialized, ref object syncLock,
+//                       Func<T> valueFactory)
+//       Same, except the stored/returned value comes from invoking valueFactory.
+//       The factory is NOT invoked when *initialized is already true.
+//
+// The four `ref` slots arrive as pointers: target carries the T value on its
+// by-ref slot, `initialized` is a 1-byte bool at that address, and `syncLock`
+// is a reference slot.  `carrier` says how wide T is so the value can be
+// written and read back through the caller's storage.
+//
+// The factory overload takes the delegate as an opaque handle and invokes it
+// via chaos_delegate_object_invoke, reading its return into the target.
+
+CHAOS_IL2CPP_INTPTR chaos_lazy_initializer_ensure_initialized(
+    CHAOS_IL2CPP_INTPTR target_ref,
+    CHAOS_IL2CPP_INTPTR initialized_ref,
+    CHAOS_IL2CPP_INTPTR sync_lock_ref,
+    CHAOS_IL2CPP_INT32 carrier_width) noexcept;
+
+CHAOS_IL2CPP_INTPTR chaos_lazy_initializer_ensure_initialized_factory(
+    CHAOS_IL2CPP_INTPTR target_ref,
+    CHAOS_IL2CPP_INTPTR initialized_ref,
+    CHAOS_IL2CPP_INTPTR sync_lock_ref,
+    CHAOS_IL2CPP_INTPTR value_factory,
+    CHAOS_IL2CPP_INT32 carrier_width) noexcept;
+
+
 // Thread.Sleep: block the current thread for the specified timeout in milliseconds.
 void chaos_thread_sleep(CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
 

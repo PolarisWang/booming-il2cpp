@@ -247,4 +247,96 @@ TEST(InterlockedCompareExchange, Int64_ReturnsOriginalBothWays) {
     EXPECT_EQ(miss, 5);
 }
 
+// ── LazyInitializer.EnsureInitialized ───────────────────────────────────────
+//
+// The generated test drives:
+//
+//     int x = default; bool init = default; object sync = default;
+//     var r = LazyInitializer.EnsureInitialized(ref x, ref init, ref sync);
+//     Assert.AreEqual(0, r);  Assert.AreEqual(0, x);  Assert.AreEqual(true, init);
+//
+// Verified against .NET 8: on first call the target is set to default(T),
+// `initialized` becomes true, `syncLock` becomes a non-null object, and the
+// stored value is returned.  On a later call with `initialized` already true,
+// nothing is touched.
+
+// Local re-declarations — this file deliberately does not pull in the heavy
+// threading_stubs.h include chain.
+extern "C" {
+CHAOS_IL2CPP_INTPTR chaos_lazy_initializer_ensure_initialized(
+    CHAOS_IL2CPP_INTPTR target_ref, CHAOS_IL2CPP_INTPTR initialized_ref,
+    CHAOS_IL2CPP_INTPTR sync_lock_ref, CHAOS_IL2CPP_INT32 carrier_width) noexcept;
+}
+
+TEST(LazyInitializerEnsureInitialized, ThreeArg_InitializesAndReturnsValue) {
+    CHAOS_IL2CPP_INT32 target = 0;
+    CHAOS_IL2CPP_UINT8 initialized = 0;
+    CHAOS_IL2CPP_INTPTR sync_lock = 0;
+
+    auto r = chaos_lazy_initializer_ensure_initialized(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&target),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&initialized),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sync_lock),
+        4);
+
+    EXPECT_EQ(r, 0);            // default(int)
+    EXPECT_EQ(target, 0);
+    EXPECT_EQ(initialized, 1);  // flipped true
+    EXPECT_NE(sync_lock, 0);    // sentinel assigned
+}
+
+// The second call must not re-run anything: the caller's `initialized` flag is
+// the contract's whole point.  A pre-set flag with a modified target proves the
+// helper reads the flag rather than the target.
+TEST(LazyInitializerEnsureInitialized, AlreadyInitialized_LeavesTargetAlone) {
+    CHAOS_IL2CPP_INT32 target = 77;
+    CHAOS_IL2CPP_UINT8 initialized = 1;
+    CHAOS_IL2CPP_INTPTR sync_lock = 0;
+
+    auto r = chaos_lazy_initializer_ensure_initialized(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&target),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&initialized),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sync_lock),
+        4);
+
+    EXPECT_EQ(r, 77);           // returns what was already there
+    EXPECT_EQ(target, 77);      // NOT overwritten with default
+    EXPECT_EQ(initialized, 1);
+    EXPECT_EQ(sync_lock, 0);    // untouched
+}
+
+// Width matters: a 1-byte T must not be written as a pointer-sized slot, which
+// would clobber the neighbouring `initialized` byte in the caller's frame.
+TEST(LazyInitializerEnsureInitialized, ByteWidth_DoesNotClobberNeighbour) {
+    // Lay the storage out exactly like the generated caller does.
+    CHAOS_IL2CPP_UINT8 target = 0xAB;
+    CHAOS_IL2CPP_UINT8 initialized = 0;
+    CHAOS_IL2CPP_INTPTR sync_lock = 0;
+
+    auto r = chaos_lazy_initializer_ensure_initialized(
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&target),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&initialized),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sync_lock),
+        1);
+
+    EXPECT_EQ(r, 0);
+    EXPECT_EQ(target, 0);       // default(byte)
+    EXPECT_EQ(initialized, 1);  // survived — a width-8 write would have smashed it
+}
+
+// A null target has no storage to initialise; the helper must not dereference it.
+TEST(LazyInitializerEnsureInitialized, NullTarget_DoesNotCrash) {
+    CHAOS_IL2CPP_UINT8 initialized = 0;
+    CHAOS_IL2CPP_INTPTR sync_lock = 0;
+
+    auto r = chaos_lazy_initializer_ensure_initialized(
+        0,
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&initialized),
+        reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&sync_lock),
+        4);
+
+    EXPECT_EQ(r, 0);
+    EXPECT_EQ(initialized, 0);  // not initialised, because nothing was written
+}
+
 }  // namespace

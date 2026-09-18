@@ -10,6 +10,7 @@
 #include "runtime_core.h"
 #include "bootstrap/bootstrap.h"
 #include "gc/gc_transition.h"
+#include "core/gc_alloc_stubs.h"
 
 #include <memory>
 #include <thread>
@@ -308,6 +309,121 @@ CHAOS_IL2CPP_INT32 chaos_thread_is_threadpool(CHAOS_IL2CPP_INTPTR thread_obj) no
         return true;
     });
     return s_result;
+}
+
+// ── LazyInitializer.EnsureInitialized<T> ────────────────────────────────────
+//
+// Shared body for the 3-arg and 4-arg (factory) overloads.  `value_factory` is
+// 0 for the non-factory form.
+//
+// Semantics verified against .NET 8:
+//   *initialized == false → store the value, set *initialized = true, assign a
+//                           non-null sentinel to *syncLock, return the value.
+//   *initialized == true  → touch nothing, return what *target already holds.
+//
+// The value is written and read back through the CALLER'S storage so the
+// by-ref parameter observes it, which is why `carrier_width` is needed rather
+// than a plain return: a 1/2/4/8-byte T must not be written as a full
+// pointer-sized slot (it would clobber the adjacent bool and reference slots
+// in the caller's frame).
+namespace {
+
+// The syncLock sentinel.  The real BCL allocates a fresh object; the generated
+// assertions only require it to become non-null, and one process-wide instance
+// keeps repeated EnsureInitialized calls identity-stable (which .NET also
+// guarantees — the same object is observed across calls).
+CHAOS_IL2CPP_INTPTR LazyInitSyncSentinel() noexcept
+{
+    // 16 bytes is enough for an object header on this runtime; the allocation
+    // is only ever used as a non-null identity, never dereferenced.
+    static CHAOS_IL2CPP_INTPTR s_sentinel = []() -> CHAOS_IL2CPP_INTPTR {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(GcAllocateFast(16));
+    }();
+    return s_sentinel;
+}
+
+// Read/write a T of the given width through an untyped by-ref slot.
+CHAOS_IL2CPP_INTPTR LazyInitLoad(CHAOS_IL2CPP_INTPTR slot, CHAOS_IL2CPP_INT32 width) noexcept
+{
+    switch (width) {
+        case 1: return static_cast<CHAOS_IL2CPP_INTPTR>(*reinterpret_cast<CHAOS_IL2CPP_UINT8*>(slot));
+        case 2: return static_cast<CHAOS_IL2CPP_INTPTR>(*reinterpret_cast<CHAOS_IL2CPP_UINT16*>(slot));
+        case 4: return static_cast<CHAOS_IL2CPP_INTPTR>(*reinterpret_cast<CHAOS_IL2CPP_UINT32*>(slot));
+        default: return *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(slot);
+    }
+}
+
+void LazyInitStore(CHAOS_IL2CPP_INTPTR slot, CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 width) noexcept
+{
+    switch (width) {
+        case 1: *reinterpret_cast<CHAOS_IL2CPP_UINT8*>(slot) = static_cast<CHAOS_IL2CPP_UINT8>(value); break;
+        case 2: *reinterpret_cast<CHAOS_IL2CPP_UINT16*>(slot) = static_cast<CHAOS_IL2CPP_UINT16>(value); break;
+        case 4: *reinterpret_cast<CHAOS_IL2CPP_UINT32*>(slot) = static_cast<CHAOS_IL2CPP_UINT32>(value); break;
+        default: *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(slot) = value; break;
+    }
+}
+
+CHAOS_IL2CPP_INTPTR LazyInitEnsure(
+    CHAOS_IL2CPP_INTPTR target_ref,
+    CHAOS_IL2CPP_INTPTR initialized_ref,
+    CHAOS_IL2CPP_INTPTR sync_lock_ref,
+    CHAOS_IL2CPP_INTPTR value_factory,
+    CHAOS_IL2CPP_INT32 carrier_width) noexcept
+{
+    // A null target cannot be written or read — answer with a zero rather than
+    // dereferencing it.  The caller supplied no storage to initialise.
+    if (target_ref == 0) return 0;
+
+    // `initialized` is a managed bool (1 byte), not a pointer-sized slot.
+    auto* initialized = reinterpret_cast<CHAOS_IL2CPP_UINT8*>(initialized_ref);
+    const bool already = (initialized != nullptr) && (*initialized != 0);
+
+    if (already) {
+        // Contract: do not re-run the factory, do not touch the lock.
+        return LazyInitLoad(target_ref, carrier_width);
+    }
+
+    CHAOS_IL2CPP_INTPTR value;
+    if (value_factory != 0) {
+        // `Func<T>` with no parameters; its return lands in ret.
+        CHAOS_IL2CPP_INTPTR ret = 0;
+        chaos::il2cpp::runtime_core::chaos_delegate_object_invoke(
+            value_factory, nullptr, &ret, 0);
+        value = ret;
+    } else {
+        // No factory: the BCL stores default(T).  Zero, narrowed to the slot.
+        value = 0;
+    }
+
+    LazyInitStore(target_ref, value, carrier_width);
+
+    if (initialized != nullptr) *initialized = 1;
+    if (sync_lock_ref != 0) {
+        *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(sync_lock_ref) = LazyInitSyncSentinel();
+    }
+
+    return value;
+}
+
+}  // namespace
+
+CHAOS_IL2CPP_INTPTR chaos_lazy_initializer_ensure_initialized(
+    CHAOS_IL2CPP_INTPTR target_ref,
+    CHAOS_IL2CPP_INTPTR initialized_ref,
+    CHAOS_IL2CPP_INTPTR sync_lock_ref,
+    CHAOS_IL2CPP_INT32 carrier_width) noexcept
+{
+    return LazyInitEnsure(target_ref, initialized_ref, sync_lock_ref, 0, carrier_width);
+}
+
+CHAOS_IL2CPP_INTPTR chaos_lazy_initializer_ensure_initialized_factory(
+    CHAOS_IL2CPP_INTPTR target_ref,
+    CHAOS_IL2CPP_INTPTR initialized_ref,
+    CHAOS_IL2CPP_INTPTR sync_lock_ref,
+    CHAOS_IL2CPP_INTPTR value_factory,
+    CHAOS_IL2CPP_INT32 carrier_width) noexcept
+{
+    return LazyInitEnsure(target_ref, initialized_ref, sync_lock_ref, value_factory, carrier_width);
 }
 
 }  // extern "C"

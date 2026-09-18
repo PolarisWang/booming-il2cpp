@@ -243,5 +243,92 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
         }
 
+    /// <summary>
+    /// `LazyInitializer.EnsureInitialized&lt;T&gt;(ref T, ref bool, ref object)`
+    /// and its 4-argument `Func&lt;T&gt;` factory overload.
+    /// </summary>
+    /// <remarks>
+    /// Explicitly instantiated calls lower with the type argument in the method
+    /// name (`EnsureInitialized&lt;System.Int32&gt;:System.Int32(...)`), which no
+    /// exact registration can key on, so every one of them fell through to the
+    /// zero-argument catch-all and returned 0 — leaving `initialized` false and
+    /// the caller's target untouched.
+    ///
+    /// The native takes the type's WIDTH as an extra argument.  The by-ref slots
+    /// arrive as plain pointers and the value must be written through the
+    /// caller's storage; writing a 1/2/4-byte T as a full pointer-sized slot
+    /// would clobber the adjacent `bool` and reference slots in the caller's
+    /// frame, so the width is not optional.
+    /// </remarks>
+    private static void RegisterLazyInitializerEnsureInitializedGeneric(RuntimeHelperShapeRegistry registry)
+    {
+        registry.RegisterGeneric(new GenericShapeDescriptor(
+            TypeDisplayNamePrefix: "LazyInitializer",
+            MethodName: "EnsureInitialized",
+            Resolver: (planner, callee, typeArgs) =>
+            {
+                var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                // 3-arg (no factory) or 4-arg (with factory).  Any other arity
+                // would mean a shape this native does not implement.
+                if (paramTypes.Count != 3 && paramTypes.Count != 4) return null;
+
+                var typeArg = typeArgs is { Count: > 0 } ? typeArgs[0].Trim() : null;
+                var width = typeArg switch
+                {
+                    "System.Boolean" or "System.Byte" or "System.SByte" => "1",
+                    "System.Char" or "System.Int16" or "System.UInt16" => "2",
+                    "System.Int32" or "System.UInt32" or "System.Single" => "4",
+                    "System.Int64" or "System.UInt64" or "System.Double" => "8",
+                    "System.Object" or "System.String" => "8",
+                    _ => null,
+                };
+                if (width == null) return null;
+
+                var hasFactory = paramTypes.Count == 4;
+                var symbol = GetExternalRuntimeHelperSymbol(callee);
+                var nativeFn = hasFactory
+                    ? "chaos_lazy_initializer_ensure_initialized_factory"
+                    : "chaos_lazy_initializer_ensure_initialized";
+
+                // The shim signature mirrors the managed parameter list: three
+                // by-ref pointers, an optional factory handle, then the width
+                // this resolver supplies.
+                var src = hasFactory
+                    ? RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2, CHAOS_IL2CPP_INTPTR chaos_arg_3",
+                    [
+                        "    return " + nativeFn + "(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3, " + width + ");",
+                    ])
+                    : RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INTPTR chaos_arg_2",
+                    [
+                        "    return " + nativeFn + "(chaos_arg_0, chaos_arg_1, chaos_arg_2, " + width + ");",
+                    ]);
+
+                // All three by-ref slots are pointers; the factory is a delegate
+                // handle.  Every slot is an opaque pointer at the ABI level.
+                var paramAbis = hasFactory
+                    ? new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                    {
+                        CreateNativeIntAbiSlot(),
+                        CreateNativeIntAbiSlot(),
+                        CreateNativeIntAbiSlot(),
+                        CreateNativeIntAbiSlot(),
+                    })
+                    : new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                    {
+                        CreateNativeIntAbiSlot(),
+                        CreateNativeIntAbiSlot(),
+                        CreateNativeIntAbiSlot(),
+                    });
+
+                return new GenericShapeResolution(src, symbol, paramAbis,
+                    CreateNativeIntAbiSlot(),
+                    hasFactory
+                        ? new HashSet<int> { 0, 1, 2, 3 }
+                        : new HashSet<int> { 0, 1, 2 });
+            }));
+        }
+
     }
 }
