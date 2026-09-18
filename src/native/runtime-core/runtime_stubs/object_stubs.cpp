@@ -12,6 +12,7 @@
 #include "gc/gc_helpers.h"
 #include "core/gc_alloc_stubs.h"
 #include "module_registry.h"
+#include "runtime_stubs/async_stubs.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -141,6 +142,24 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetUninitializedObject(CHAOS_IL2CPP_INTPT
     auto& registry = GcLayoutRegistry::Instance();
     auto* layout = registry.Lookup(type_info->stable_id);
     if (layout == nullptr || layout->instance_size == 0) return 0;
+
+    // ⚠️ Task / Task<T> receivers must be LIVE task handles, not zeroed managed
+    // objects: every task operation (ContinueWith/Wait/GetAwaiter/…) consumes an
+    // AsyncTask handle, and SubjectInstanceFactory.Create<Task>() is the probe's
+    // only receiver supply (GetUninitializedObject path — Task has no usable
+    // public ctor).  A zeroed object made every instance-method fact fail with
+    // factoryGap (87 items in the threading-tasks chunk).  Hand back an
+    // already-completed task instead: methods then observe real completed-state
+    // semantics (Wait returns immediately, awaiters yield the default result).
+    {
+        const char* type_name = LookupTypeNameByInfoPtr(type_info);
+        if (type_name != nullptr &&
+            (std::strcmp(type_name, "Task") == 0 ||
+             std::strcmp(type_name, "Task`1") == 0))
+        {
+            return async_task_create_gc();
+        }
+    }
 
     // Allocate via GC fast path (zero-initialized).
     void* obj = GcAllocateFast(layout->instance_size);
