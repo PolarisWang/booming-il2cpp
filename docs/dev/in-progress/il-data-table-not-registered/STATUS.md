@@ -192,3 +192,101 @@ Preserve_6__0         passed=False  kind=factoryGap  caught=True
 
 > 教训已沉淀 memory：`extern-c-definition-in-namespace-vs-global-decl-c2733`
 > （含 C2598 / C2733 / `#define` 互斥三个 codegen 坑）
+
+---
+
+## 八、新增阻塞案例（2026-09-18）：闭包方法有槽无体
+
+> 来源：`generic-callee-shape-key` 批次 2 的残留项排查（commit `f8444bc5b`）。
+> **这是与第七节不同的现象** —— 第七节是「接线后负收益」，本节是
+> 「**根本没进表，且连 body 都没有**」。
+
+### 8.1 现象
+
+`threading` chunk 的 `EnsureInitialized_3_int_bool_object_System_Funcint_3`
+在 batch 2 修好 3 参形式后**仍然 failed**。entry.exe 实测：
+
+```
+Phase 3 catch-all: ...LazyInitializerTests+<>c::<EnsureInitialized_3_int_bool_object_System_Funcint_3>b__14_0:System.Int32()
+    — unresolvable subject raises NotImplementedException
+[SEH-FAULT] code=0xe0000001 si=141 ...EnsureInitialized_3_int_bool_object_System_Funcint_3
+```
+
+即：**那个 `() => default(int)` lambda 本身无法解析**，抛
+`NotImplementedException`，导致外层调用被 `caught`。
+
+### 8.2 关键测量（生成物判据）
+
+该闭包符号 `...LazyInitializerTests___c_EnsureInitialized_3_..._b__14_0`：
+
+| 角色 | 状态 |
+|---|---|
+| IR 中的 subjectId | ✅ **存在**（`aot-core-ir.json`） |
+| methods 清单 | ✅ **存在**（`native-aot.methods.json`） |
+| 生成代码中的 extern 声明 | ✅ 存在（`native-aot.generated.cpp:513`） |
+| dispatch 槽位 | ✅ **已分配**（slot `0x4FA`） |
+| **函数体定义** | ❌ **全仓搜索无定义** |
+| 在 IL 数据表中 | ❌ **不在**（表 151 条，无此项） |
+| 在 catch-all 字面量中 | ❌ **不在**（246 条，无此项） |
+
+**即：它有声明、有槽位、有 IR、有 methods 条目 —— 唯独没有 body。**
+
+### 8.3 与第七节的区别（重要）
+
+| | 第七节（IL-data 接线） | 本节（闭包） |
+|---|---|---|
+| 对象 | 表中已有的 51 条 | 表中**根本没有**的闭包 |
+| 接上 Phase 1 的效果 | **pass 359→340（变差）** | 不适用（不在表中，接不上） |
+| 性质 | 语义不等价的执行路径 | **发射/链接缺口** |
+
+**因此本节不能被第七节的负结论"顺带解释掉"** ——
+它连进 Phase 1 的资格都没有。
+
+### 8.4 影响面（**已定量：该 chunk 12/12 全缺**）
+
+对 `threading` chunk 生成物做了一次全量统计：
+
+```python
+decls = 匹配 extern "C" <ret> <sym>(...);       # 声明
+defs  = 匹配 extern "C" <ret> <sym>(...) {      # 定义
+```
+
+| 指标 | 数值 |
+|---|---:|
+| 闭包族符号（`___c_` / `___u_` ... `b__N`）**有声明** | **12** |
+| 其中**有函数体** | **0** |
+| **声明但无体** | **12（100%）** |
+
+12 个全部缺 body，涉及三族：
+
+| 族 | 闭包 |
+|---|---|
+| `LazyInitializerTests` | `EnsureInitialized_3_...b__14_0`、`Benchmark_...b__15_0` |
+| `SpinWaitTests` | `SpinUntil_2/3/4_...b__8_0 / b__14_0 / b__20_0` + 3 个 Benchmark 版 |
+| `ThreadPoolTests` | `QueueUserWorkItem_10/11_...b__23/24/28/29_0` |
+
+**这不是孤例，而是编译器生成闭包方法的发射路径普遍缺 body。**
+
+> ⚠️ **对 `QueueUserWorkItem` 的定性修正**：
+> 早先（`threading-remaining-12-triage.md`）把 ThreadPool 的 6 项整体归为
+> 「书面诚实边界，不修」。**该结论只对 4 项 `Get/SetMin/MaxThreads` 成立。**
+> `QueueUserWorkItem` / `UnsafeQueueUserWorkItem` 的失败**发生在方法本身**
+> （3 参重载无 native，`managed_primitive_entries.h` 只导出 2 参形态），
+> 闭包缺口是其**下游的第二道阻塞**，不是主因。
+> 两处修好后该项才可能转绿。
+
+### 8.5 待回答的问题
+
+1. 为什么闭包方法能在 IR / methods / dispatch 三处出现，却**不发射 body**？
+   是闭包特殊化被跳过，还是 `cctor` / 合成方法的已知排除？
+2. 该现象是否与 `create-t-sharing-failure-mechanism`（`Create<T>` 共享体）
+   同源？两者都涉及「符号与体不对应」。
+3. 修法方向：补发射 vs 让闭包走既有 delegate 路径（
+   `chaos_delegate_object_invoke`）—— 后者可能更省，因为闭包本就是
+   delegate target。
+
+### 8.6 不要做的事
+
+- **不要为它写占位实现**（恒返 0）—— 会重演 fake-pass，且掩盖真实缺口。
+- **不要把它并入第七节的接线尝试** —— 它不在表里，接不上；
+  且第七节的负结论已表明那条路收益为负。
