@@ -54,6 +54,7 @@ public sealed partial class NativeAotEmitter
         bool isFullAssembly = string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal);
         var planner = new NativeAotLoweringPlanner();
         planner.NamespaceFilter = namespaceFilter;
+        NativeAotLoweringPlanner.ResetReferencedTypeIdSubjects();
 
         // Gold Direct Link: load PGO profile for hot method direct calls
         if (!string.IsNullOrEmpty(goldProfilePath))
@@ -459,6 +460,17 @@ public sealed partial class NativeAotEmitter
         {
             sb.Append(section);
             sb.Append("\n\n");
+        }
+
+        // 方案 B: append definitions for any referenced-but-undefined chaos_type_id_*
+        // (single authoritative registry — see ObjectModelUtilities).  Appended inside
+        // the codegen namespace so same-namespace consumer switches resolve; per-page
+        // append is correct because inline constexpr has internal linkage per TU.
+        var missingTypeIds = NativeAotLoweringPlanner.BuildMissingTypeIdDefinitions(sb.ToString());
+        if (missingTypeIds.Length > 0)
+        {
+            sb.Append("\n// ── Late type-id definitions (registry-backed; see ObjectModelUtilities) ──\n");
+            sb.Append(missingTypeIds);
         }
 
         // Close namespace
