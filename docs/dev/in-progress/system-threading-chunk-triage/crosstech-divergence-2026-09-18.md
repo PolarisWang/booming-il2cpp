@@ -26,6 +26,63 @@
 
 ## 三、根因（flags 差异，实测坐实）
 
+### 3.0 flags 由 **codegen 模式**决定，不是运行时
+
+确切位置 `NativeAotLoweringPlanner.ModuleRegistration.cs:228-232`：
+
+```csharp
+string flags = _codegenMode.HasFlag(CodegenMode.Jit)
+    ? "0"
+    : methodsCallingExternal.Contains(entry.SubjectId)
+        ? "kHotpatchKeepNative | HotpatchEncodeArgCount(...)"
+        : "HotpatchEncodeArgCount(...)";
+```
+
+即：**AOT 模式下，凡 IL 调用 external-runtime subject 的方法**（含
+`SubjectInstanceFactory.Create<T>`）得到 `kHotpatchKeepNative` → 直接跑 native body，
+从不查分派表。JIT 模式下所有 entry flags 一律 `"0"`。
+
+### 3.1 两份 exe 的真实差异位置
+
+**页文件确实逐字节相同**（page-0004..0010、`chaos_generated_module.cpp`、
+`native-aot.generated.header.h` 全部 md5 相同），差异只在
+`subjects/native-aot.generated.cpp`：
+
+| 项 | AOT | JIT |
+|---|---|---|
+| 文件大小 | 8,726,164 B | 8,735,181 B |
+| `kHotpatchKeepNative` 出现次数 | **605** | **0** |
+| `ChaosJitRegisterAll()` 体 | `{}`（空） | 真实注册（`register_hotpatch_module` + `ChaosJitDataLoad` + `RegisterJitEntryMethods`） |
+| `kChaosExternalRuntimeSubjects` / IL 数据表 | 相同 | 相同 |
+
+JIT 的注册体由 `#ifdef CHAOS_IL2CPP_JIT_MODE` 门控
+（`NativeAotLoweringPlanner.Methods.cs:1385-1430`），该宏由 TPG 只在
+`build_jit_output/CMakeLists.txt:61` 注入；AOT 的 `native/CMakeLists.txt` 无此宏。
+
+### 3.2 为什么结果分歧
+
+JIT：flags=`0` → 调用经解释器/trampoline → 命中 catch-all
+`Chaos_TestFramework_SubjectInstanceFactory_Create` →
+`ChaosExternalRuntimeFallback(subject_id)` → Phase 3
+`RaiseManagedException(NotImplementedException)`（`interop_stubs.cpp:960+`）
+→ null 守卫触发 NRE → `caught=true`，方法未执行 → `factoryGap`。
+
+AOT：`kHotpatchKeepNative` → native body 直接跑，
+`Create<ValueTask>` 的 catch-all 不可达（它只经分派表可达）→ 返回结构性 42 → `unassertable`。
+
+### 3.3 ⚠️ Phase 1 是死代码（本轮新发现，独立于本问题）
+
+`ChaosExternalRuntimeFallback` 的 Phase 1（`_TryExecuteViaIlData`）**在任何 chunk 都不会执行**：
+`ChaosRegisterIlDataTable`（设置 `s_chaos_external_runtime_il_data`，
+`interop_stubs.cpp:710`）**全仓无任何调用者** —— 仅剩定义与头文件声明。
+
+即 `kChaosExternalRuntimeIlData[]` 表被发射了，但从未发布给运行时。
+**这是一个独立的潜在接线缺口**（与本次分歧无关，但值得单独立项排查）。
+
+> 更正：本文档早先版本曾暗示 Phase 1 可能解释 AOT 侧行为，**该说法不成立** —— Phase 1 两边都不执行。
+
+## 三·旧、flags 差异（现象层，保留）
+
 **AOT 与 JIT 的 hotpatch entry flags 不同：**
 
 ```cpp
