@@ -1691,12 +1691,13 @@ public sealed partial class NativeAotLoweringPlanner
                             // WhenAny(Task, Task) — the two-task overload had no
                             // registration; the 0-arg catch-all discarded both task
                             // handles (6 failing facts across Task / Task<T> spellings).
-                            var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            var symbolWA2 = GetExternalRuntimeHelperSymbol(callee);
+                            var srcWhenAny2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbolWA2,
                                 "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                             [
                                 "    return chaos_task_when_any2(chaos_arg_0, chaos_arg_1);",
                             ]);
-                            return new GenericShapeResolution(src2, symbol,
+                            return new GenericShapeResolution(srcWhenAny2, symbolWA2,
                                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                                 {
                                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
