@@ -716,6 +716,12 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) 
 }
 
 /// ShapeRegistry symbol for WhenAny(Task[]): extract from managed array handle.
+CHAOS_IL2CPP_INTPTR chaos_task_when_any2(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept
+{
+    CHAOS_IL2CPP_INTPTR tasks[2] = { a, b };
+    return WhenAllAnyInternal(tasks, 2, /*when_all=*/false, /*take_ownership=*/false);
+}
+
 CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept
 {
     return WhenAllAnyManagedArray(tasks_handle, /*when_all=*/false);

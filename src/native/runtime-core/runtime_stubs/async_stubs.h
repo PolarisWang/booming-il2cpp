@@ -128,6 +128,10 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2
 CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
 
+/// Task.WhenAny(Task, Task) — two-task specialization; builds a 2-element
+/// stack array and delegates to the shared combinator (no ownership transfer).
+CHAOS_IL2CPP_INTPTR chaos_task_when_any2(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept;
+
 // ── T3: Task.WaitAll / Task.WaitAny (BLOCKING semantics) ──
 //
 // Unlike WhenAll/WhenAny (which return an aggregate Task and never block), these
