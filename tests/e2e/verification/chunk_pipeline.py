@@ -79,9 +79,25 @@ def _load_pipeline_config() -> dict:
     Delegates to the side-effect-free parser in `_pipeline/pipeline_config.py`
     so the parsing rules are unit-testable (importing THIS module triggers an
     SDK build, which makes inline logic impractical to cover).
+
+    `_pipeline` is a sibling of THIS file's package (both live under
+    tests/e2e/verification/), so it is importable via the package's own parent —
+    which is already on sys.path by the time this runs, since importing
+    `verification` requires it.  Do NOT rely on `testing_tree_root()` here: that
+    resolves relative to CHAOS_FOUNDATION_DLL and points at `testing/`, which is
+    a different tree.
     """
-    from _pipeline.pipeline_config import load_pipeline_config
-    return load_pipeline_config(_PIPELINE_CONFIG_PATH)
+    import importlib.util as _ilu
+    from pathlib import Path as _P
+
+    spec = _ilu.spec_from_file_location(
+        "_pipeline_pipeline_config",
+        _P(__file__).resolve().parent / "_pipeline" / "pipeline_config.py")
+    if spec is None or spec.loader is None:
+        raise ImportError("cannot locate _pipeline/pipeline_config.py")
+    mod = _ilu.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.load_pipeline_config(_PIPELINE_CONFIG_PATH)
 
 
 _PIPELINE_CONFIG = _load_pipeline_config()
