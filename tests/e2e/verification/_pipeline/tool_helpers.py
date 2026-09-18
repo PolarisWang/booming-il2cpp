@@ -3,10 +3,94 @@
 
 from __future__ import annotations
 
+import contextlib
+import os
 import re
 import subprocess
 import sys
+import time
 from pathlib import Path
+
+
+@contextlib.contextmanager
+def _tool_build_lock(tool_name: str):
+    """Serialise builds of one tool across processes.
+
+    Parallel chunk pipelines each call ``ensure_tool_built`` for the *same*
+    shared project directory, so several ``dotnet build`` invocations race on
+    one ``obj/Debug/net8.0/`` and all but the winner fail (MSB4018, or CS2012
+    "being used by another process").  The loser's chunk dies before entry.exe
+    is produced, which the nightly reports as an opaque ``unknown``.
+
+    The lock is per-tool, not global: different tools still build in parallel.
+    Blocking (not failing) is the point — the workers that arrive second are
+    waiting on a build that is already producing what they need, so they take
+    the lock and then hit the up-to-date fast path.
+
+    POSIX uses ``fcntl.flock`` (advisory, released automatically if the holder
+    dies); Windows uses ``msvcrt.locking``.  If neither is available the build
+    proceeds unlocked rather than failing — the previous behaviour.
+    """
+    lock_dir = _repo_root() / "build" / ".tool-build-locks"
+    try:
+        lock_dir.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        yield
+        return
+    lock_path = lock_dir / f"{tool_name}.lock"
+
+    try:
+        fd = os.open(lock_path, os.O_CREAT | os.O_RDWR, 0o644)
+    except OSError:
+        yield
+        return
+
+    acquired = False
+    try:
+        deadline = time.monotonic() + _TOOL_BUILD_LOCK_TIMEOUT_S
+        if os.name == "nt":  # pragma: no cover - windows agent only
+            import msvcrt
+            while True:
+                try:
+                    msvcrt.locking(fd, msvcrt.LK_NBLCK, 1)
+                    acquired = True
+                    break
+                except OSError:
+                    if time.monotonic() > deadline:
+                        break
+                    time.sleep(0.5)
+        else:
+            import fcntl
+            while True:
+                try:
+                    fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    acquired = True
+                    break
+                except OSError:
+                    if time.monotonic() > deadline:
+                        break
+                    time.sleep(0.5)
+        if not acquired:
+            print(f"      [tool_helpers] lock timeout for {tool_name}; building unlocked")
+        yield
+    finally:
+        if acquired:
+            try:
+                if os.name == "nt":  # pragma: no cover
+                    import msvcrt
+                    msvcrt.locking(fd, msvcrt.LK_UNLCK, 1)
+                else:
+                    import fcntl
+                    fcntl.flock(fd, fcntl.LOCK_UN)
+            except OSError:
+                pass
+        os.close(fd)
+
+
+# Generous: a cold build of TPG transitively builds Generator + 10 other
+# projects.  Exceeding it falls back to an unlocked build rather than hanging
+# the nightly forever.
+_TOOL_BUILD_LOCK_TIMEOUT_S = 1800.0
 
 
 def _worktree_root() -> Path | None:
@@ -118,7 +202,16 @@ def ensure_tool_built(tool_name: str) -> bool:
     reference scan stops fast-path invalidation regressions where editing an
     upstream project (Generator) would otherwise leave a stale bundled copy in
     the tool's bin/Debug, causing the pipeline to run old generated code.
+
+    Serialised per tool (see _tool_build_lock): the cache check races as well
+    as the build, since a worker can stat the output DLL while another is
+    mid-write and conclude it is up to date.
     """
+    with _tool_build_lock(tool_name):
+        return _ensure_tool_built_locked(tool_name)
+
+
+def _ensure_tool_built_locked(tool_name: str) -> bool:
     proj = _tool_dir(tool_name) / f"{tool_name}.csproj"
     dll = tool_dll(tool_name)
     if dll.exists() and proj.exists():
