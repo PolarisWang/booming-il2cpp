@@ -242,4 +242,132 @@ public class OnDemandDefinitionResolverTests
         Assert.NotNull(method);
         return (MethodDefinitionHandle?)method!.Invoke(null, new[] { (object)md, typeIndex, subjectId });
     }
+
+    /// <summary>
+    /// Resolve definitions through the sparse (on-demand) path.
+    /// </summary>
+    private static IReadOnlyDictionary<string, ManagedMethodModel> ResolveOnDemand(
+        string assemblyPath, IReadOnlyCollection<string> definitionSubjectIds)
+    {
+        var loader = typeof(Chaos.IL2CPP.Loader.LoaderStage);
+        var method = loader.GetMethod("ResolveDefinitionsOnDemand",
+            BindingFlags.NonPublic | BindingFlags.Static);
+        Assert.NotNull(method);
+        return (IReadOnlyDictionary<string, ManagedMethodModel>)method!.Invoke(
+            null, new object[] { assemblyPath, definitionSubjectIds })!;
+    }
+
+    /// <summary>
+    /// Load an assembly the eager way (whole-assembly modelling) for comparison.
+    /// </summary>
+    private static object LoadAssemblyEagerly(string assemblyPath)
+    {
+        var loader = typeof(Chaos.IL2CPP.Loader.LoaderStage);
+        var method = loader.GetMethod("LoadAssembly",
+            BindingFlags.NonPublic | BindingFlags.Static);
+        Assert.NotNull(method);
+        return method!.Invoke(null, new object?[] { assemblyPath, null, false })!;
+    }
+
+    /// <summary>
+    /// THE core Task 2 property: a model produced by the sparse on-demand path
+    /// must be field-for-field identical to the one the eager whole-assembly path
+    /// produces for the same method.
+    ///
+    /// Without this, "it resolved something" could still mean "it resolved
+    /// something subtly different", and the difference would only surface much
+    /// later as a mis-lowered method.
+    /// </summary>
+    [Fact]
+    public void SparseResolution_MatchesEagerPath_FieldForField()
+    {
+        var sdk = Path.Combine(RepoRoot(), "artifacts", "foundation-dll", "System.Private.CoreLib",
+            "chunks", "threading-tasks", "managed", "Chaos.TestFramework.Sdk.dll");
+        if (!File.Exists(sdk))
+        {
+            return;
+        }
+
+        var definitions = DemandDefinitionsByAssembly("threading-tasks")
+            .TryGetValue("Chaos.TestFramework.Sdk", out var d) ? d : new List<string>();
+        Assert.NotEmpty(definitions);
+
+        var sparse = ResolveOnDemand(sdk, definitions);
+        Assert.NotEmpty(sparse);
+
+        var eager = LoadAssemblyEagerly(sdk);
+        var eagerMethods = (System.Collections.IEnumerable)eager.GetType()
+            .GetProperty("Methods")!.GetValue(eager)!;
+        var eagerBySubject = new Dictionary<string, ManagedMethodModel>(StringComparer.Ordinal);
+        foreach (ManagedMethodModel m in eagerMethods)
+        {
+            eagerBySubject[m.SubjectId] = m;
+        }
+
+        var compared = 0;
+        foreach (var (key, sparseModel) in sparse)
+        {
+            Assert.True(eagerBySubject.ContainsKey(sparseModel.SubjectId),
+                $"sparse produced SubjectId absent from eager load: {sparseModel.SubjectId}");
+            var eagerModel = eagerBySubject[sparseModel.SubjectId];
+
+            // Compare every field the model exposes.  MetadataToken is included
+            // deliberately: if the sparse path resolved a DIFFERENT overload it
+            // would differ here even when the SubjectId matched.
+            Assert.Equal(eagerModel.AssemblyName, sparseModel.AssemblyName);
+            Assert.Equal(eagerModel.DeclaringTypeSubjectId, sparseModel.DeclaringTypeSubjectId);
+            Assert.Equal(eagerModel.DeclaringTypeDisplayName, sparseModel.DeclaringTypeDisplayName);
+            Assert.Equal(eagerModel.Name, sparseModel.Name);
+            Assert.Equal(eagerModel.GenericParameterCount, sparseModel.GenericParameterCount);
+            Assert.Equal(eagerModel.ReturnType, sparseModel.ReturnType);
+            Assert.Equal(eagerModel.SubjectId, sparseModel.SubjectId);
+            Assert.Equal(eagerModel.DefinitionSubjectId, sparseModel.DefinitionSubjectId);
+            Assert.Equal(eagerModel.Signature, sparseModel.Signature);
+            Assert.Equal(eagerModel.IsStatic, sparseModel.IsStatic);
+            Assert.Equal(eagerModel.IsVirtual, sparseModel.IsVirtual);
+            Assert.Equal(eagerModel.IsFinal, sparseModel.IsFinal);
+            Assert.Equal(eagerModel.IsPreserved, sparseModel.IsPreserved);
+            Assert.Equal(eagerModel.IsUnmanagedCallersOnly, sparseModel.IsUnmanagedCallersOnly);
+            Assert.Equal(eagerModel.IsPreserveSig, sparseModel.IsPreserveSig);
+            Assert.Equal(eagerModel.MetadataToken, sparseModel.MetadataToken);
+            Assert.Equal(eagerModel.Parameters.Count, sparseModel.Parameters.Count);
+            for (var i = 0; i < eagerModel.Parameters.Count; i++)
+            {
+                Assert.Equal(eagerModel.Parameters[i].Name, sparseModel.Parameters[i].Name);
+                Assert.Equal(eagerModel.Parameters[i].Type, sparseModel.Parameters[i].Type);
+            }
+            Assert.Equal(eagerModel.Import, sparseModel.Import);
+            Assert.Equal(eagerModel.Body.Blocks.Count, sparseModel.Body.Blocks.Count);
+
+            compared++;
+        }
+
+        Assert.True(compared > 0, $"compared {compared} methods — expected at least one");
+    }
+
+    /// <summary>
+    /// The sparse path must not decode methods it was not asked for.  Decoding is
+    /// where the cost lives; resolving 1 definition should cost visibly less than
+    /// modelling the assembly, and must never return extra entries.
+    /// </summary>
+    [Fact]
+    public void SparseResolution_ReturnsExactlyTheRequestedKeys()
+    {
+        var sdk = Path.Combine(RepoRoot(), "artifacts", "foundation-dll", "System.Private.CoreLib",
+            "chunks", "threading-tasks", "managed", "Chaos.TestFramework.Sdk.dll");
+        if (!File.Exists(sdk))
+        {
+            return;
+        }
+
+        var one = new List<string>
+        {
+            "Chaos.TestFramework.Sdk/Chaos.TestFramework.SubjectInstanceFactory::Create`1:!!0()"
+        };
+
+        var sparse = ResolveOnDemand(sdk, one);
+
+        Assert.Single(sparse);
+        Assert.True(sparse.ContainsKey(one[0]));
+    }
 }

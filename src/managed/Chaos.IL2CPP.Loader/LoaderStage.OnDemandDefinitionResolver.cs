@@ -213,6 +213,13 @@ public sealed partial class LoaderStage
                 methodHandle,
                 summary);
 
+            // Field-for-field the same construction as the eager path in
+            // LoadMethods (LoaderStage.AssemblyLoading.cs:~415-440), so a model
+            // produced here is indistinguishable from one produced by loading the
+            // whole assembly.  In particular `Signature` is taken from the
+            // summary rather than recomposed, and `Import` is propagated — both
+            // were divergent in an earlier revision of this file and would have
+            // made the sparse path subtly unequal to the eager one.
             resolved[definitionSubjectId] = new ManagedMethodModel
             {
                 AssemblyName = assemblyName,
@@ -223,20 +230,16 @@ public sealed partial class LoaderStage
                 ReturnType = summary.ReturnType,
                 SubjectId = summary.SubjectId,
                 DefinitionSubjectId = summary.DefinitionSubjectId,
-                Signature = ManagedNaming.CreateMethodSignature(
-                    summary.ReturnType,
-                    declaringType.DisplayName,
-                    summary.Name,
-                    summary.Parameters.Select(parameter => parameter.Type).ToList()),
+                Signature = summary.Signature,
                 IsStatic = summary.IsStatic,
                 IsVirtual = summary.IsVirtual,
                 IsFinal = summary.IsFinal,
                 IsPreserved = summary.IsPreserved,
                 IsUnmanagedCallersOnly = summary.IsUnmanagedCallersOnly,
                 IsPreserveSig = summary.IsPreserveSig,
-                MetadataToken = MetadataTokens.GetToken(methodHandle),
+                MetadataToken = summary.MetadataToken,
                 Parameters = summary.Parameters,
-                Import = null,
+                Import = summary.Import,
                 Body = body,
             };
         }
