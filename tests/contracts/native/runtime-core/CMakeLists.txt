@@ -121,7 +121,8 @@ endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interlocked_arithmetic_test.cpp")
     chaos_native_add_test(chaos_interlocked_arithmetic_test
         interlocked_arithmetic_test.cpp
-        "${REPO_ROOT}/src/native/runtime-core/runtime_stubs/interlocked_stubs.cpp")
+        "${REPO_ROOT}/src/native/runtime-core/runtime_stubs/interlocked_stubs.cpp"
+        "${REPO_ROOT}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp")
 endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
     chaos_native_add_test(chaos_capacity_stress_test capacity_stress_test.cpp LABELS "stress")

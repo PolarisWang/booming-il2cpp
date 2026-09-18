@@ -12,6 +12,13 @@ void    ChaosInterlockedStoreNoBarrier(CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CP
 CHAOS_IL2CPP_INT32  ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept;
 void    ChaosVolatileWrite(CHAOS_IL2CPP_INTPTR ptr, CHAOS_IL2CPP_INT32 value) noexcept;
 
+// Reference-typed volatile read (`Thread.VolatileRead(ref object)`).
+//
+// Deliberately NOT an alias of ChaosVolatileRead: that returns INT32 and would
+// truncate a 64-bit object reference.  The managed signature is `T VolatileRead(ref T)`,
+// so the carrier here is pointer-sized.
+CHAOS_IL2CPP_INTPTR  ChaosVolatileReadObject(CHAOS_IL2CPP_INTPTR ptr) noexcept;
+
 // ── Int32 / UInt32 / UInt64 arithmetic ─────────────────────────
 //
 // These were defined in interlocked_stubs.cpp but never declared here, so no

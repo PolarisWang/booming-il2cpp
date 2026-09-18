@@ -100,6 +100,45 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Thread::GetDomainID
+        /// </summary>
+        /// <remarks>
+        /// Without this registration the callee matched no shape and lowered to
+        /// the zero-argument external-runtime catch-all, which returns 0 — and
+        /// `Assert.AreEqual(1, Thread.GetDomainID())` then failed.  .NET Core has
+        /// a single AppDomain, so 1 is the real value, not a placeholder.
+        /// </remarks>
+        private static void RegisterThreadGetDomainID(RuntimeHelperShapeRegistry registry)
+        {
+            registry.Register("System.Threading.Thread", "GetDomainID", [],
+                ShapeKind.SimpleForward, "chaos_thread_get_domain_id",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateInt32AbiSlot(),
+                EmptyRawArgumentIndices);
+
+        }
+
+        /// <summary>
+        /// Thread::VolatileRead (reference-typed overload)
+        /// </summary>
+        /// <remarks>
+        /// Registered against `System.Object&` and routed to ChaosVolatileReadObject,
+        /// NOT to the Int32 ChaosVolatileRead used by System.Volatile::Read — that
+        /// one returns INT32 and would truncate a 64-bit object reference to its
+        /// low 32 bits, producing a corrupt reference rather than a clean failure.
+        /// </remarks>
+        private static void RegisterThreadVolatileReadObject(RuntimeHelperShapeRegistry registry)
+        {
+            registry.Register("System.Threading.Thread", "VolatileRead", ["System.Object&"],
+                ShapeKind.SimpleForward, "ChaosVolatileReadObject",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+        }
+
+        /// <summary>
         /// Thread::Abort
         /// </summary>
         private static void RegisterThreadAbort(RuntimeHelperShapeRegistry registry)

@@ -64,7 +64,19 @@ CHAOS_IL2CPP_INT32 chaos_thread_reset_abort(void) noexcept;
 
 // Thread.Yield: yield the current thread's time slice.
 // Returns nonzero (true) on success to match .NET bool return.
+//
+// NOTE: the managed `Thread.Yield()` return value is NOT deterministic — it
+// alternates true/false across runs depending on whether another thread was
+// ready to run (measured against .NET 8 on one machine: 3 false, 2 true over
+// five runs).  Callers must not assert a fixed value on it.
 CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept;
+
+// Thread.GetDomainID: id of the current AppDomain.
+//
+// .NET Core has exactly one AppDomain, so this is 1 by construction (verified
+// against .NET 8).  The .NET Framework "increasing per-domain id" semantics do
+// not apply because this runtime does not implement multiple domains.
+CHAOS_IL2CPP_INT32 chaos_thread_get_domain_id(void) noexcept;
 
 // Thread.Sleep: block the current thread for the specified timeout in milliseconds.
 void chaos_thread_sleep(CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
