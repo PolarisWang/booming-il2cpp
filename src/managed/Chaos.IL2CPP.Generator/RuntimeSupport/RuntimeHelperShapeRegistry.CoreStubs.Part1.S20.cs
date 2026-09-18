@@ -665,11 +665,19 @@ public sealed partial class NativeAotLoweringPlanner
                     new[] { nsMgrAbi, strAbi, strAbi }),
                 new HashSet<int> { 0, 1, 2 },
                 new[] { "System.String", "System.String" });
+            // RemoveNamespace(string prefix, string uri) — TWO managed args, and
+            // SimpleForward forwards all of them positionally, so this needs its
+            // own 2-arg native symbol.  Registering the 1-arg
+            // ChaosXmlNamespaceManagerRemoveNamespace here sent the uri into the
+            // prefix slot: the real null check never saw it, the call returned
+            // normally, and the subject's "AOT stub did not throw" expectation
+            // failed (XmlNamespaceManagerTests::RemoveNamespace_3).
             RegisterXmlDomVoid(registry, "System.Xml.XmlNamespaceManager", "RemoveNamespace",
-                "ChaosXmlNamespaceManagerRemoveNamespace",
+                "ChaosXmlNamespaceManagerRemoveNamespace2",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
-                    new[] { nsMgrAbi, strAbi }),
-                new HashSet<int> { 0, 1 }, new[] { "System.String" });
+                    new[] { nsMgrAbi, strAbi, strAbi }),
+                new HashSet<int> { 0, 1, 2 },
+                new[] { "System.String", "System.String" });
             registry.Register("System.Xml.XmlNamespaceManager", "GetEnumerator",
                 Array.Empty<string>(), ShapeKind.SimpleForward,
                 "ChaosXmlNamespaceManagerGetEnumerator",

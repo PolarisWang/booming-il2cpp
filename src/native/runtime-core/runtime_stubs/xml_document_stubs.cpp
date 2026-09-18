@@ -675,9 +675,12 @@ void ChaosXmlNamespaceManagerAddNamespace(
     if (!ManagedStringView(uri, u, u_len))
         RaiseArgumentNullException("uri");
     // "xml" / "xmlns" are reserved and rejected by the managed implementation.
+    // An EMPTY prefix is NOT rejected: .NET 8 accepts ("", "") and ("", "u")
+    // (measured) — the earlier `p_len == 0` test wrongly raised ArgumentException
+    // and made XmlNamespaceManagerTests::AddNamespace_2_string_string_3 a
+    // realDefect.
     if ((p_len == 3 && std::strncmp(p, "xml", 3) == 0)
-        || (p_len == 5 && std::strncmp(p, "xmlns", 5) == 0)
-        || p_len == 0)
+        || (p_len == 5 && std::strncmp(p, "xmlns", 5) == 0))
         RaiseArgException("Prefix is reserved or invalid.");
     // Valid prefix/uri pair: no-op (the AOT subset keeps no namespace scope).
 }
@@ -691,6 +694,26 @@ void ChaosXmlNamespaceManagerRemoveNamespace(
     if (!ManagedStringView(prefix, p, p_len))
         RaiseArgumentNullException("prefix");
     // Removing a prefix that was never added is a silent no-op in the BCL.
+}
+
+/// RemoveNamespace(prefix, uri) — the 2-arg overload.  Both strings are
+/// validated (measured on .NET 8: null prefix OR null uri → ArgumentNullException;
+/// a well-formed pair is a no-op).  It needs its own symbol because
+/// SimpleForward forwards every managed argument positionally: the 1-arg entry
+/// above would receive the uri in the prefix slot and never see the null.
+void ChaosXmlNamespaceManagerRemoveNamespace2(
+    CHAOS_IL2CPP_INTPTR this_ptr,
+    CHAOS_IL2CPP_INTPTR prefix,
+    CHAOS_IL2CPP_INTPTR uri) noexcept
+{
+    (void)this_ptr;
+    const char* p = nullptr; size_t p_len = 0;
+    if (!ManagedStringView(prefix, p, p_len))
+        RaiseArgumentNullException("prefix");
+    const char* u = nullptr; size_t u_len = 0;
+    if (!ManagedStringView(uri, u, u_len))
+        RaiseArgumentNullException("uri");
+    // Valid prefix/uri pair: no-op (the AOT subset keeps no namespace scope).
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNamespaceManagerGetEnumerator(
