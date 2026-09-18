@@ -69,6 +69,21 @@ add_chaos_test(convert_stubs_test
     LABELS "unit;core"
 )
 
+# Interlocked Increment/Decrement arithmetic — every width the shape registry
+# claims.  interlocked_stubs.cpp is compiled directly (same GNU ar compat
+# pattern as the targets above).
+#
+# This target exists because the Int32/UInt32/UInt64 overloads had no shape
+# registered and silently lowered to the zero-argument external-runtime
+# catch-all (returning 0).  That is a wrong-value failure, not a link error, so
+# it is only observable by executing the helpers.
+add_chaos_test(interlocked_arithmetic_test
+    interlocked_arithmetic_test.cpp
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/interlocked_stubs.cpp"
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
+
 # T4-1: Runtime Stubs performance benchmarks
 # Compiles stub .cpp directly (same GNU ar compat pattern as unit tests).
 add_chaos_test(runtime_stubs_benchmark
