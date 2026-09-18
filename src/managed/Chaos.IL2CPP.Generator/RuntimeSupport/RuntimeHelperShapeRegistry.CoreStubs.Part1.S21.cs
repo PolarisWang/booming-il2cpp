@@ -201,11 +201,11 @@ public sealed partial class NativeAotLoweringPlanner
             var wResetS = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                 new[] { wAbi, objAbi });
             // Use an INTPTR return for the native factory's handle pattern.
-            registry.Register("System.Text.Json.Utf8JsonWriter", "Reset",
+            registry.Register("Utf8JsonWriter", "Reset",
                 new[] { "System.IO.Stream" }, ShapeKind.SimpleForward,
                 "ChaosUtf8JsonWriterResetStream", wResetS,
                 CreateVoidAbiSlot(), new HashSet<int> { 0, 1 });
-            registry.Register("System.Text.Json.Utf8JsonWriter", "Reset",
+            registry.Register("Utf8JsonWriter", "Reset",
                 new[] { "System.Buffers.IBufferWriter<System.Byte>" }, ShapeKind.SimpleForward,
                 "ChaosUtf8JsonWriterResetBufferWriter", wResetS,
                 CreateVoidAbiSlot(), new HashSet<int> { 0, 1 });
@@ -236,7 +236,7 @@ public sealed partial class NativeAotLoweringPlanner
             })
             {
                 registry.Register(typeName, "WriteTo",
-                    new[] { "System.Text.Json.Utf8JsonWriter" }, ShapeKind.SimpleForward,
+                    new[] { "Utf8JsonWriter" }, ShapeKind.SimpleForward,
                     "ChaosUtf8JsonWriterWriteTo",
                     new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                         new[] { recvAbi, wAbi }),
@@ -252,7 +252,7 @@ public sealed partial class NativeAotLoweringPlanner
             HashSet<int> rawIndices,
             string[] paramTypes)
         {
-            registry.Register("System.Text.Json.Utf8JsonWriter", methodName,
+            registry.Register("Utf8JsonWriter", methodName,
                 paramTypes, ShapeKind.SimpleForward, nativeSymbol,
                 abiSlots, CreateVoidAbiSlot(), rawIndices);
         }
