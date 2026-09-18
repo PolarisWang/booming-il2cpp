@@ -20,6 +20,7 @@
 #include <atomic>
 #include <chaos/pal/pal_eh.h>
 #include <csetjmp>
+#include <exception>
 
 #if defined(_WIN32)
 #define NOMINMAX
@@ -510,6 +511,33 @@ static int RunFactJsonMode() {
     // setjmp before each dispatch catches longjmp from the SIGABRT handler
     // or the CHAOS_IL2CPP_FAIL hook when AOT-generated code fires through
     // a noexcept boundary.  try/catch handles normal C++ exceptions.
+    //
+    // JSON-completeness backstop: records are streamed with printf as they are
+    // produced, so if the process dies mid-loop the output on stdout ends
+    // without the closing "]}".  The Python side then fails to parse it and
+    // reports "0/0 passed" for the whole chunk, discarding every record that
+    // did run — a crash in subject 31 of 273 reads as "this chunk verified
+    // nothing" instead of "subjects 0..30 ran, one of them crashed the
+    // process".  This handler closes the array so the surviving records stay
+    // parseable; it only fires on the abnormal paths (unhandled exception,
+    // terminate from a noexcept boundary) that bypass the printf below.
+    //
+    // It must NOT call std::abort(): the loop below installs a SIGABRT handler
+    // that longjmps back into the loop, so abort() would return control to the
+    // loop and it would keep printing records *after* the closing "]}",
+    // corrupting the stream a second way.  _exit() bypasses signal delivery
+    // entirely and terminates immediately.
+    static bool s_json_open = true;
+    std::set_terminate([]() {
+        if (s_json_open) {
+            s_json_open = false;
+            printf("]}\n");
+            std::fflush(stdout);
+        }
+        std::fprintf(stderr, "[FATAL] terminate inside fact loop — output closed early\n");
+        std::fflush(stderr);
+        _exit(134);
+    });
     printf("{\"factResults\":[");
     bool first = true;
     for (int si = 0; si < kCount; si++) {
@@ -567,6 +595,7 @@ static int RunFactJsonMode() {
         first = false;
     }
     printf("]}\n");
+    s_json_open = false;
     std::fflush(stdout);
     try {
         CHAOS_FACT_CHECK();

@@ -147,7 +147,15 @@ bool PalTryCallNoExcept(uint64_t (*fn)(uint64_t, uint64_t, uint64_t, uint64_t,
     if (g_pal_try_reentry > 1) {
         // Nested call: skip sigsetjmp to preserve the outer context.
         // If the inner call faults, the outer sigsetjmp/siglongjmp catches it.
-        out_result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+        // A C++ exception must be caught here too — this function is noexcept,
+        // so letting one escape calls std::terminate instead of reaching the
+        // caller's catch(...).
+        try {
+            out_result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+        } catch (...) {
+            --g_pal_try_reentry;
+            return true;
+        }
         --g_pal_try_reentry;
         return false;
     }
@@ -155,7 +163,24 @@ bool PalTryCallNoExcept(uint64_t (*fn)(uint64_t, uint64_t, uint64_t, uint64_t,
     g_pal_try_active = true;
     if (sigsetjmp(g_pal_try_jmp_buf, 1) == 0) {
         // Normal path: call the target function.
-        out_result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+        //
+        // The generated test body throws `chaos_managed_exception` when an
+        // assertion fails inside a method the AOT codegen could not give a
+        // native body.  Most of those are caught by the generated wrapper, but
+        // one that escapes reaches here — and because this function is
+        // `noexcept`, an escaping exception calls std::terminate().  That
+        // aborts the process mid-loop, truncating the streaming `factResults`
+        // JSON on stdout, which the Python side then fails to parse and
+        // reports as "0/0 passed" for the whole chunk.  Catch it and report
+        // it through the same `true` (caught) path the SIGSEGV handler uses,
+        // so the subject is recorded as failed and the loop continues.
+        try {
+            out_result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+        } catch (...) {
+            g_pal_try_active = false;
+            --g_pal_try_reentry;
+            return true;
+        }
         g_pal_try_active = false;
         --g_pal_try_reentry;
         return false;
