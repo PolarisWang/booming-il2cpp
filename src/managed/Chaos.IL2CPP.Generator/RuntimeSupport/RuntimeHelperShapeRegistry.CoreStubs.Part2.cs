@@ -133,6 +133,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterInterlockedCompareExchange(registry);
             RegisterInterlockedCompareExchange_1(registry);
             RegisterInterlockedCompareExchangeGeneric(registry);
+            RegisterLazyInitializerEnsureInitializedGeneric(registry);
 
         }
 
