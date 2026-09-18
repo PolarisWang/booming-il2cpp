@@ -110,6 +110,19 @@ endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/crypto_hash_behavior_test.cpp")
     chaos_native_add_test(chaos_crypto_hash_behavior_test crypto_hash_behavior_test.cpp)
 endif()
+# Interlocked Increment/Decrement arithmetic at every width the shape registry
+# claims.  interlocked_stubs.cpp is compiled directly (GNU ar format issue, same
+# as the string_stubs_test pattern in testing/).
+#
+# This target exists because the Int32/UInt32/UInt64 overloads had no shape
+# registered and silently lowered to the zero-argument external-runtime
+# catch-all (returning 0).  That is a wrong-VALUE failure, not a link error, so
+# it is only observable by executing the helpers — which is what this does.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interlocked_arithmetic_test.cpp")
+    chaos_native_add_test(chaos_interlocked_arithmetic_test
+        interlocked_arithmetic_test.cpp
+        "${REPO_ROOT}/src/native/runtime-core/runtime_stubs/interlocked_stubs.cpp")
+endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
     chaos_native_add_test(chaos_capacity_stress_test capacity_stress_test.cpp LABELS "stress")
 endif()
