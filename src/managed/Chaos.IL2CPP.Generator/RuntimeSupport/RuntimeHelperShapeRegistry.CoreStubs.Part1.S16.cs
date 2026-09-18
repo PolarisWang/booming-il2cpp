@@ -643,8 +643,7 @@ public sealed partial class NativeAotLoweringPlanner
                         return new GenericShapeResolution(srcSpan, symbol,
                             new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(slots.ToArray()),
                             CreateInt32AbiSlot(),
-                            new HashSet<int>(Enumerable.Range(0, slots.Count)),
-                            DirectNativeSymbol: "ChaosAsyncTaskWaitTimeSpan");
+                            new HashSet<int>(Enumerable.Range(0, slots.Count)));
                     }
                     return null; // other overloads (TimeSpan, CT) → interpreter
                 }));
