@@ -506,7 +506,7 @@ public sealed partial class NativeAotLoweringPlanner
                     // revert: disabling it makes all four
                     // ContinueWith_UnhonouredArgumentOverloads_ResolveToNull cases
                     // fail and routes the options overload in the real pipeline.
-                    if (paramTypes.Count != 1) return null;
+                    // (arity!=1 rejection moved below the multi-arg branch)
 
                     // A single-parameter overload whose parameter is not a
                     // delegate must not be routed either.  NOTE: this check is
@@ -515,10 +515,50 @@ public sealed partial class NativeAotLoweringPlanner
                     // every test green (verified by in-place revert).  It is kept
                     // deliberately as a guard for a future overload, and is
                     // labelled redundant rather than described as load-bearing.
+                    if (paramTypes.Count != 1) return null;
                     var only = paramTypes[0];
                     if (!IsAnyContinuationDelegate(only)) return null;
 
-                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    var symbolCw = GetExternalRuntimeHelperSymbol(callee);
+
+                    // Multi-arg overloads — (delegate, CancellationToken / TaskContinuationOptions /
+                    // TaskScheduler / object state [, ...]).  The resolver deliberately rejected
+                    // these (arity != 1), dropping the receiver+delegate into an operand-less
+                    // 0-arg catch-all.  Forward the FULL operand list instead; the extra
+                    // operands are accepted-and-ignored by chaos_task_continue_with (probes
+                    // pass defaults).  20 failing facts.
+                    if (paramTypes.Count >= 2 && IsAnyContinuationDelegate(paramTypes[0]))
+                    {
+                        var slotCount = paramTypes.Count + 1; // + receiver
+                        var cwSlots = new List<AotCoreIrAbiSlotArtifact> { CreateNativeIntAbiSlot() };
+                        foreach (var pt in paramTypes)
+                        {
+                            // TaskContinuationOptions is an enum → Int32 carrier; everything
+                            // else (delegate, CT struct, scheduler ref, object state) is INTPTR.
+                            cwSlots.Add(pt == "System.Threading.Tasks.TaskContinuationOptions"
+                                ? CreateInt32AbiSlot()
+                                : CreateNativeIntAbiSlot());
+                        }
+                        var cwSig = string.Join(", ", Enumerable.Range(0, slotCount).Select(i =>
+                        {
+                            var paramIndex = i - 1;
+                            var isInt32 = paramIndex >= 0 && paramTypes[paramIndex] == "System.Threading.Tasks.TaskContinuationOptions";
+                            return (isInt32 ? "CHAOS_IL2CPP_INT32" : "CHAOS_IL2CPP_INTPTR") + $" chaos_arg_{i}";
+                        }));
+                        var ignoreExprs = string.Join("; ", Enumerable.Range(2, slotCount - 2).Select(i => $"(void)chaos_arg_{i}"));
+                        var cwSrc = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbolCw, cwSig,
+                        [
+                            slotCount > 2 ? $"    {ignoreExprs};" : "",
+                            "    return chaos_task_continue_with(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(cwSrc, symbolCw,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(cwSlots.ToArray()),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int>(Enumerable.Range(0, slotCount)),
+                            DirectNativeSymbol: "chaos_task_continue_with");
+                    }
+
+                    var symbol = symbolCw;
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
