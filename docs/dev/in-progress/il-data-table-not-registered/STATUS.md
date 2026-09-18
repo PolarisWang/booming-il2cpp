@@ -70,9 +70,13 @@ ChaosJitRegisterAll();
    「runtime core 不带 codegen 产物链接」时的未解析符号。若改成直接 extern
    会破坏该性质；**应保持间接指针 + 由 codegen 侧发射注册函数**。
 
-## 五、✅ 收益已实测（本任务第一步已完成，2026-09-18）
+## 五、⚠️ 收益估算（⚠️ 结论已被第七节推翻）
 
-**结论：有收益，且收益明确 —— 应当接线。**
+> **本节的两个结论都不成立，保留作排查过程记录。**
+> - 「应当接线」→ ❌ 实测为负收益（359→340）
+> - 「51 个能走 Phase 1 执行真实 IL」→ ❌ 它们执行时全抛异常
+>
+> 仍有效的部分：**交集测量方法**与**交集数字 51**（说明表与 catch-all 确有重叠）。
 
 在 `threading-tasks` chunk 上做的交集测量：
 
@@ -119,3 +123,72 @@ Decimal::op_Inequality / String::op_Inequality / Exception::GetType
 Phase 1 在两边都未执行，不参与该分歧。
 
 本项是**排查中偶然发现的独立缺口**，单独立项。
+
+---
+
+## 七、❌ 接线尝试已实测并回退（2026-09-18）
+
+**结论：收益为负，已回退全部代码改动。**
+
+### 实施内容（三个文件）
+
+1. `ModuleRegistration.Dispatch.cs` — 在有 IL 数据的 chunk 里发射
+   `ChaosRegisterIlDataTables()` 定义所需信息（新增 `HasEmbeddedIlData`）
+2. `NativeAotLoweringPlanner.Methods.cs` — 在 **文件作用域**（globalDeclarations）
+   发射 `ChaosRegisterIlDataTables()` 定义；namespacePreamble 里加声明
+3. `chaos_runtime_host.h` — `Initialize()` 新增 Step 6 调用
+
+### 实测结果（threading-tasks，build+fact）
+
+| 指标 | 接线前 | **接线后** |
+|---|---|---|
+| AOT passed | **359/456** | **340/456** ⬇️ −19 |
+| `factoryGap` | 65 | **87** ⬆️ +22 |
+| JIT passed | 356/456 | 339/456 ⬇️ |
+
+**Phase 1 变得可达后，结果变差了。**
+
+### 为什么（机制）
+
+Phase 1 用解释器执行嵌入的 IL。这些 IL **执行时会抛异常**
+（`caught=True`），而不是正常返回：
+
+```
+Dispose_2__0          passed=False  kind=factoryGap  caught=True
+RunSynchronously_0__0 passed=False  kind=factoryGap  caught=True
+Wait_7__0             passed=False  kind=factoryGap  caught=True
+Preserve_6__0         passed=False  kind=factoryGap  caught=True
+```
+
+即：这些 subject 之前**经由 native body 静默通过**（或落 Phase 3 被记为
+可解释的失败），现在改走「解释器执行 IL → 抛异常」，反而**从 pass 变 fail**。
+
+### 这印证了本文档第五节的警告
+
+> ⚠️ 但这 51 个**不等于 51 个 fact 转绿**：Phase 1 走解释器执行 IL，
+> 结果正确性取决于该 IL 的执行路径（与 AOT native body 可能有差异）。
+
+该警告是对的，且实际情况比警告更差 —— **不是「不一定转绿」，而是「大面积转红」**。
+
+### 判定
+
+**Phase 1 不是「缺失的功能」，而是一条语义不等价的执行路径。**
+把它接上等于用「解释器跑一遍同一段 IL」替换「native body / 明确 fallback」，
+而解释器路径在当前成熟度下**成功率低于**原有路径。
+
+**因此「未接线」很可能是有意为之**（或至少：接线前必须先让解释器对该类 IL
+的执行成功率高于 native 路径）。
+
+### 回退状态
+
+三个源文件已 `git checkout` 回 HEAD，**工作区无本轮残留**。
+（`ObjectModelEmission.cs` / `ReflectionObjectEmission.cs` 的修改属**并发会话**，未触碰。）
+
+### 后续若要重做，前置条件
+
+1. 先量化：这 51 个 subject 的 IL 在解释器下的**成功率**（当前为 0% → 全抛）
+2. 修解释器侧的执行失败原因，而不是先接线
+3. 接线后必须 A/B 对比 **passed 总数**，不能只看「表里有几条」
+
+> 教训已沉淀 memory：`extern-c-definition-in-namespace-vs-global-decl-c2733`
+> （含 C2598 / C2733 / `#define` 互斥三个 codegen 坑）
