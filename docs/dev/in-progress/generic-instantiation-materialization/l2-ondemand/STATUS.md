@@ -76,6 +76,27 @@ P2 架构 ✅ 无冲突（eager→lazy 正确演进）／P3 热更 ➖ 中性。
   端到端验证 → 收尾），含回退策略与执行纪律。
 - `arch_review_mode: critical`（触及 loader + codegen 主线）
 
+## 执行进度
+
+| Task | 状态 | commit | 备注 |
+|---|---|---|---|
+| T1 类型→方法句柄轻索引 | ✅ 完成 | `ef6dadc2b` | 只走 TypeDefinitions 表；arity 取自 SubjectId 后缀不重算 |
+| T2 稀疏定义解析 | ✅ 完成 | `86223ff22` | 与 eager 路径**逐字段等价**（测试锁定，含 MetadataToken + compared>0 防假绿） |
+| T3 两阶段重排 | ⏳ 未开始 | — | 风险升高点：改变 pipeline 行为 |
+| T4 闭包种子 | ⏳ 未开始 | — | |
+| T5 端到端验证 | ⏳ 未开始 | — | 验收门：(a) CoreIR 有实例 **且** (b) 生成代码含实例 |
+| T6 收尾 | ⏳ 未开始 | — | |
+
+**T2 修正记录**：实现中发现自己初版有两处与 eager 路径不等价 ——
+`Signature` 自行重组（应为 `summary.Signature`）、`Import` 硬编码 null
+（应为 `summary.Import`）。已修正并由等价比对测试锁定。
+
+**已知并发**：另有会话在 Generator 侧处理 `Create<T>` 共享体失效
+（worktree `t7-threading-tasks` + `create-t-sharing-failure-mechanism.md`）。
+其结论：**即使 L2 物化正确，canonical 共享仍会把身份敏感方法烧死到
+字典序第一的实例化**。故 T5 的 factoryGap 降幅可能不如预期 —— 这是
+**已在计划中预告的失败形态**，届时按实测记录，不强行归因。
+
 ## 关键文档
 
 - `design-l2-ondemand-v1-01.md` — 本任务设计（含 spike 结论）
