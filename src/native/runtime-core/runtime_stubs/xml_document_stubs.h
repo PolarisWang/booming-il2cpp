@@ -91,6 +91,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNamedNodeMapSetNamedItem(CHAOS_IL2CPP_INTPTR this_pt
 // ── XmlNamespaceManager ──
 void ChaosXmlNamespaceManagerAddNamespace(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix, CHAOS_IL2CPP_INTPTR uri) noexcept;
 void ChaosXmlNamespaceManagerRemoveNamespace(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix) noexcept;
+void ChaosXmlNamespaceManagerRemoveNamespace2(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix, CHAOS_IL2CPP_INTPTR uri) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosXmlNamespaceManagerGetEnumerator(CHAOS_IL2CPP_INTPTR this_ptr) noexcept;
 
 }  // extern "C"

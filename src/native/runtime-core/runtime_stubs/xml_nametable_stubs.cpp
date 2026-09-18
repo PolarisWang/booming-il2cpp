@@ -165,7 +165,12 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetString(
     string_table::StringView view;
     if (!utf8_view_of_string(name, view))
     {
-        return 0;  // null string → null result.
+        // .NET 8's NameTable.Get(null) throws ArgumentNullException (measured);
+        // it does not return null.  Contrast with Get("") below, which is a
+        // well-formed lookup returning the interned empty string.
+        RaiseManagedException("System.ArgumentNullException",
+                              "Value cannot be null. (Parameter 'value')");
+        return 0;
     }
 
     // Query-only: never inserts. The empty string is a well-formed reference
@@ -199,11 +204,16 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddChars(
     CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) noexcept
 {
     if (this_ptr == 0) { RaiseNullReferenceException(); return 0; }
+    // A null key is NOT an error here: .NET 8's NameTable.Add(null, 0, 0)
+    // returns the interned empty string (measured), so it is handled the same
+    // as the empty window below rather than raising ArgumentNullException.
+    // (The previous ArgumentNullException contradicted the BCL and made
+    // NameTableTests::Add_1_System_Char_int_int_0 fail as a realDefect.)
     if (key == 0)
     {
-        RaiseManagedException("System.ArgumentNullException",
-                              "Value cannot be null. (Parameter 'key')");
-        return 0;
+        constexpr uint64_t kFnvOffsetBasis = 14695981039346656037ULL;
+        constexpr uint64_t kFnvEmpty = (kFnvOffsetBasis & ~(1ULL << 63)) | 1ULL;
+        return static_cast<CHAOS_IL2CPP_INTPTR>(kFnvEmpty | CHAOS_STRING_ID_TAG);
     }
     if (start < 0 || len < 0)
     {
@@ -241,9 +251,15 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetChars(
 {
     using namespace chaos::il2cpp::runtime_core;
     if (this_ptr == 0) { RaiseNullReferenceException(); return 0; }
-    if (key == 0) return 0;  // null array → null result (the string overload
-                              // also returns 0 for null input — contrast with
-                              // Add which throws ArgumentNullException).
+    // .NET 8's Get(null, 0, 0) returns the interned empty string (measured),
+    // not null and not a throw — same as the empty window below.  This mirrors
+    // the char[]-Add fix above; both previously contradicted the BCL.
+    if (key == 0)
+    {
+        constexpr uint64_t kFnvOffsetBasis = 14695981039346656037ULL;
+        constexpr uint64_t kFnvEmpty = (kFnvOffsetBasis & ~(1ULL << 63)) | 1ULL;
+        return static_cast<CHAOS_IL2CPP_INTPTR>(kFnvEmpty | CHAOS_STRING_ID_TAG);
+    }
 
     const auto* u16 = resolve_char_array_data(key);
     auto* utf8 = utf16_window_to_utf8(u16, start, len);
