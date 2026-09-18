@@ -64,6 +64,18 @@ P2 架构 ✅ 无冲突（eager→lazy 正确演进）／P3 热更 ➖ 中性。
 4. 闭包种子（`ExpandReachableMethods` 消费 demand 图）
 5. **端到端验证**（CoreIR 有实例 **且** 生成代码含实例）
 
+## Preflight Self-Review
+
+- `preflight_review: pass`
+- 依据：design 已批准、`blocking_questions: []`、无 roadmap-child 依赖、
+  无未清 authority 问题。可安全自动继续。
+
+## 计划
+
+- `plan-v1-01.md` — 6 个 Task（轻索引 → 稀疏解析 → 两阶段重排 → 闭包种子 →
+  端到端验证 → 收尾），含回退策略与执行纪律。
+- `arch_review_mode: critical`（触及 loader + codegen 主线）
+
 ## 关键文档
 
 - `design-l2-ondemand-v1-01.md` — 本任务设计（含 spike 结论）

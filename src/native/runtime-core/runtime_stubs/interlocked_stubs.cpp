@@ -155,5 +155,54 @@ CHAOS_IL2CPP_UINT32 ChaosInterlockedOrUInt32(CHAOS_IL2CPP_INTPTR location, CHAOS
         std::memory_order_seq_cst) | value;
 }
 
+// ═══════════════════════════════════════════════════════════════
+// Unsigned Increment/Decrement — UInt32 / UInt64
+//
+// The shape registry had no entry for these overloads, so
+// `Interlocked.Increment(ref uint)` lowered to the zero-argument catch-all
+// and returned 0.  `Assert.AreEqual(1, ...)` then failed with a wrong value
+// rather than a crash — the threading chunk's `failed` bucket.
+//
+// Return type follows the managed signature (UInt32 in, UInt32 out); the
+// atomic itself is width-identical to the signed helper, so the arithmetic
+// is the same operation.  Separate names keep the registry self-describing.
+// ═══════════════════════════════════════════════════════════════
+
+CHAOS_IL2CPP_UINT32 ChaosInterlockedIncrementUInt32(CHAOS_IL2CPP_INTPTR location) noexcept
+{
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_UINT32*>(location);
+    return std::atomic_fetch_add_explicit(
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_UINT32>*>(typedLocation),
+        CHAOS_IL2CPP_UINT32(1),
+        std::memory_order_seq_cst) + 1;
+}
+
+CHAOS_IL2CPP_UINT32 ChaosInterlockedDecrementUInt32(CHAOS_IL2CPP_INTPTR location) noexcept
+{
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_UINT32*>(location);
+    return std::atomic_fetch_sub_explicit(
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_UINT32>*>(typedLocation),
+        CHAOS_IL2CPP_UINT32(1),
+        std::memory_order_seq_cst) - 1;
+}
+
+CHAOS_IL2CPP_UINT64 ChaosInterlockedIncrementUInt64(CHAOS_IL2CPP_INTPTR location) noexcept
+{
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_UINT64*>(location);
+    return std::atomic_fetch_add_explicit(
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_UINT64>*>(typedLocation),
+        CHAOS_IL2CPP_UINT64(1),
+        std::memory_order_seq_cst) + 1;
+}
+
+CHAOS_IL2CPP_UINT64 ChaosInterlockedDecrementUInt64(CHAOS_IL2CPP_INTPTR location) noexcept
+{
+    auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_UINT64*>(location);
+    return std::atomic_fetch_sub_explicit(
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_UINT64>*>(typedLocation),
+        CHAOS_IL2CPP_UINT64(1),
+        std::memory_order_seq_cst) - 1;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core
