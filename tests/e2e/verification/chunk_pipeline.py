@@ -76,57 +76,12 @@ _PIPELINE_CONFIG_PATH = _FOUNDATION_DLL / "config" / "pipeline-config.yaml"
 def _load_pipeline_config() -> dict:
     """Load pipeline configuration from YAML.
 
-    Uses a lightweight parser (no pyyaml dependency) since the config
-    uses only simple key:value and nested key:value mappings.
+    Delegates to the side-effect-free parser in `_pipeline/pipeline_config.py`
+    so the parsing rules are unit-testable (importing THIS module triggers an
+    SDK build, which makes inline logic impractical to cover).
     """
-    config: dict = {}
-    path = _PIPELINE_CONFIG_PATH
-    if not path.exists():
-        return config
-
-    text = path.read_text(encoding="utf-8")
-    current_section: str | None = None
-    current_subsection: str | None = None
-    timeouts: dict[str, int] = {}
-
-    for line in text.splitlines():
-        stripped = line.strip()
-        if not stripped or stripped.startswith("#"):
-            continue
-
-        # Top-level key: pipeline:
-        m = re.match(r"^(\w[\w-]*):", stripped)
-        if m and not stripped.startswith(" "):
-            current_section = m.group(1)
-            continue
-
-        # Nested key under pipeline:
-        if current_section == "pipeline":
-            m = re.match(r"^  (\w[\w-]*):\s*(.*)", stripped)
-            if m:
-                key, val = m.group(1), m.group(2).strip()
-                if val:
-                    # Scalar value
-                    if val.isdigit():
-                        config[key] = int(val)
-                    elif val.lower() in ("true", "false"):
-                        config[key] = val.lower() == "true"
-                    else:
-                        config[key] = val
-                else:
-                    # Section header (e.g. timeouts:, defaultStages:)
-                    current_subsection = key
-            continue
-
-        # timeouts subsection
-        if current_section == "pipeline" and current_subsection == "timeouts":
-            m = re.match(r"^    (\w[\w-]*):\s*(\d+)", stripped)
-            if m:
-                timeouts[m.group(1)] = int(m.group(2))
-
-    if timeouts:
-        config["timeouts"] = timeouts
-    return config
+    from _pipeline.pipeline_config import load_pipeline_config
+    return load_pipeline_config(_PIPELINE_CONFIG_PATH)
 
 
 _PIPELINE_CONFIG = _load_pipeline_config()
