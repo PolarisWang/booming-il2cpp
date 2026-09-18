@@ -711,6 +711,81 @@ def _get_env_sensitive_subject_ids(ctx: ChunkContext) -> frozenset[str]:
     return frozenset(ids)
 
 
+# Kind pairs whose PASS/FAIL verdicts are NOT comparable across technologies.
+#
+#   unassertable  ↔  factoryGap
+#
+# `unassertable` means the method RAN but produced no assertable value
+# (value==42 is structural — void/async-void, or a smoke body that just returns
+# 42).  `factoryGap` means the method NEVER RAN: the test's
+# SubjectInstanceFactory.Create<T>() could not construct the subject, so the
+# emitted null-guard raised before the call.  Neither verdict is a conclusion
+# about the method's behaviour, so two of them cannot contradict each other —
+# reporting the mismatch as a cross-tech inconsistency is noise.
+#
+# Why the two technologies legitimately differ here: AOT marks subject methods
+# `kHotpatchKeepNative` so the native body runs, while JIT leaves the entry flags
+# at 0 and routes the method through the interpreter — that IS JIT mode's
+# purpose (see hotpatch_dispatch.h, "Dispatch priority").  For a body reaching
+# an unimplemented external-runtime helper, the interpreter raises where the
+# native path returns the structural 42.  Measured on the threading-tasks chunk:
+# AOT carries 605 `kHotpatchKeepNative` entries, JIT 0 across all 1061 entries,
+# yet only 3 subjects diverge — those whose bodies reach such a helper.
+#
+# Every other kind combination (real / failed / realDefect / stubGap / smoke /
+# nullArg / envSensitive / notSupported) is compared strictly: a real assertion
+# disagreeing across technologies is exactly the signal this diff exists for.
+_NON_COMPARABLE_KIND_PAIRS = frozenset({
+    frozenset({"unassertable", "factoryGap"}),
+})
+
+
+def split_cross_tech_diffs(
+    aot_results: list[dict],
+    jit_results: list[dict],
+) -> tuple[list[dict], list[dict]]:
+    """Split AOT/JIT verdict mismatches into (real_diffs, excluded).
+
+    A mismatch is a *real* cross-tech diff when the two technologies disagree
+    on something that is actually a conclusion about the method.  It is
+    *excluded* when the two verdicts come from a non-comparable kind pair (see
+    ``_NON_COMPARABLE_KIND_PAIRS``) — i.e. neither side asserted anything, so
+    there is nothing to contradict.
+
+    Records without a ``methodSubjectId`` fall back to a positional key, which
+    is why the enumerations are built with an index default.
+    """
+    aot_by_id = {r.get("methodSubjectId", f"idx_{i}"): r
+                 for i, r in enumerate(aot_results)}
+    jit_by_id = {r.get("methodSubjectId", f"idx_{i}"): r
+                 for i, r in enumerate(jit_results)}
+    diffs: list[dict] = []
+    excluded: list[dict] = []
+    for mid in sorted(set(aot_by_id) | set(jit_by_id)):
+        aot_rec = aot_by_id.get(mid, {})
+        jit_rec = jit_by_id.get(mid, {})
+        aot_pass = aot_rec.get("passed", False)
+        jit_pass = jit_rec.get("passed", False)
+        if aot_pass == jit_pass:
+            continue
+        aot_kind = aot_rec.get("resultKind")
+        jit_kind = jit_rec.get("resultKind")
+        entry = {
+            "methodSubjectId": mid,
+            "aotPassed": aot_pass,
+            "jitPassed": jit_pass,
+            "aotKind": aot_kind,
+            "jitKind": jit_kind,
+        }
+        if frozenset({aot_kind, jit_kind}) in _NON_COMPARABLE_KIND_PAIRS:
+            entry["reason"] = ("neither verdict is an assertion conclusion "
+                               "(method did not run, or ran without asserting)")
+            excluded.append(entry)
+        else:
+            diffs.append(entry)
+    return diffs, excluded
+
+
 def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     """Determine status for a single technology result.
 
@@ -1117,23 +1192,20 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
             errors.append(f"jit: {jit_result['error']}")
 
     # ── Cross-tech diff (AOT vs JIT) ──
+    #
+    # Compares the PASS/FAIL verdict of each method across the two executables.
+    # Not every mismatch is a defect — see split_cross_tech_diffs for the one
+    # pair (unassertable ↔ factoryGap) that is reported separately rather than
+    # as an inconsistency.
     cross_tech_diffs: list[dict] = []
+    cross_tech_excluded: list[dict] = []
     status = aot_status  # initial: AOT status; cross-tech + JIT upgrade may modify below
     if jit_result and aot_result.get("results") and jit_result.get("results"):
-        aot_by_id = {r.get("methodSubjectId", f"idx_{i}"): r
-                     for i, r in enumerate(aot_result["results"])}
-        jit_by_id = {r.get("methodSubjectId", f"idx_{i}"): r
-                     for i, r in enumerate(jit_result["results"])}
-        all_ids = set(aot_by_id) | set(jit_by_id)
-        for mid in sorted(all_ids):
-            aot_pass = aot_by_id.get(mid, {}).get("passed", False)
-            jit_pass = jit_by_id.get(mid, {}).get("passed", False)
-            if aot_pass != jit_pass:
-                cross_tech_diffs.append({
-                    "methodSubjectId": mid,
-                    "aotPassed": aot_pass,
-                    "jitPassed": jit_pass,
-                })
+        cross_tech_diffs, cross_tech_excluded = split_cross_tech_diffs(
+            aot_result["results"], jit_result["results"])
+        if cross_tech_excluded:
+            print(f"  [fact] Cross-tech diff: {len(cross_tech_excluded)} non-comparable "
+                  f"(unassertable<->factoryGap) pair(s) excluded from the diff")
         if cross_tech_diffs:
             print(f"  [fact] Cross-tech diff: {len(cross_tech_diffs)} method(s) with inconsistent AOT/JIT results")
             for d in cross_tech_diffs[:10]:
@@ -1294,6 +1366,7 @@ def run_fact_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRe
                        "returncode": jit_result["returncode"], "results": jit_result["results"]}}
                if jit_result else {}),
             **({"crossTechDiffs": cross_tech_diffs} if cross_tech_diffs else {}),
+            **({"crossTechExcluded": cross_tech_excluded} if cross_tech_excluded else {}),
         },
         duration_ms=int((time.perf_counter() - start) * 1000),
         value_suspicious=value_suspicious,
