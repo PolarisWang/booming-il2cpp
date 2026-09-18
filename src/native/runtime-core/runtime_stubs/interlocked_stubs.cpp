@@ -52,12 +52,23 @@ CHAOS_IL2CPP_INT64 ChaosInterlockedExchangeInt64(CHAOS_IL2CPP_INTPTR location, C
 CHAOS_IL2CPP_INT32 ChaosInterlockedCompareExchangeInt32(CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INT32 value, CHAOS_IL2CPP_INT32 comparand) noexcept
 {
     auto* typedLocation = reinterpret_cast<CHAOS_IL2CPP_INT32*>(location);
-    return std::atomic_compare_exchange_strong_explicit(
+    std::atomic_compare_exchange_strong_explicit(
         reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(typedLocation),
         &comparand,
         value,
         std::memory_order_seq_cst,
         std::memory_order_seq_cst);
+    // Return the ORIGINAL value, matching the managed contract
+    // (`T CompareExchange(ref T, T, T)` returns what the slot held, not whether
+    // the swap happened).  `atomic_compare_exchange_strong` overwrites
+    // `comparand` with the observed value, so `comparand` is that original
+    // either way — on success it is still the expected value.
+    //
+    // Returning the function's own bool (as this did) yields 0/1 instead: for
+    // `CompareExchange(ref 0, 0, 0)` the correct answer is 0 but the bool is 1,
+    // so the generated `Assert.AreEqual(0, result)` failed.  The Int64 sibling
+    // below already returned `comparand`; the two disagreed.
+    return comparand;
 }
 
 CHAOS_IL2CPP_INT64 ChaosInterlockedCompareExchangeInt64(CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_INT64 value, CHAOS_IL2CPP_INT64 comparand) noexcept

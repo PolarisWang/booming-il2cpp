@@ -173,5 +173,75 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0 });
         }
 
+        /// <summary>
+        /// `Interlocked.CompareExchange&lt;T&gt;(ref T, T, T)` — explicit generic
+        /// instantiations.
+        /// </summary>
+        /// <remarks>
+        /// The exact-shape registrations above cover the NON-generic spelling
+        /// (`Interlocked::CompareExchange:(System.Int32&,System.Int32,System.Int32)`).
+        /// An explicitly instantiated call lowers with the type argument baked
+        /// into the method name —
+        /// `Interlocked::CompareExchange&lt;System.Int32&gt;:System.Int32(...)` —
+        /// which `TryMatchShape` keys on verbatim, so it never matched the
+        /// non-generic entry and fell through to the zero-argument
+        /// external-runtime catch-all (returning 0).  `TryMatchGenericShape`
+        /// handles the angle-bracket spelling and is consulted first, so the fix
+        /// is a descriptor here rather than a change to the matching layer.
+        ///
+        /// The type argument is what selects the native: dispatching on
+        /// `typeArgs[0]` keeps `&lt;System.Int32&gt;` and `&lt;System.Int64&gt;` on
+        /// their own carriers.  Matching on the method name alone would collapse
+        /// them onto one symbol.
+        /// </remarks>
+        private static void RegisterInterlockedCompareExchangeGeneric(RuntimeHelperShapeRegistry registry)
+        {
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "Interlocked",
+                MethodName: "CompareExchange",
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    // Only the 3-argument `(ref T, T, T)` form is routable: the
+                    // native helpers below take (location, value, comparand).
+                    // A different arity would need its own symbol, and guessing
+                    // here would pass the wrong argument as the comparand.
+                    var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    if (paramTypes.Count != 3) return null;
+
+                    var typeArg = typeArgs is { Count: > 0 } ? typeArgs[0].Trim() : null;
+                    var (nativeSymbol, carrier) = typeArg switch
+                    {
+                        "System.Int32" => ("ChaosInterlockedCompareExchangeInt32", AotCoreIrAbiCarrierKind.Int32),
+                        "System.Int64" => ("ChaosInterlockedCompareExchangeInt64", AotCoreIrAbiCarrierKind.Int64),
+                        _ => (null, AotCoreIrAbiCarrierKind.Void),
+                    };
+                    if (nativeSymbol == null) return null;
+
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    return new GenericShapeResolution("", symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            new AotCoreIrAbiSlotArtifact
+                            {
+                                CarrierKindCode = carrier,
+                                TypeShape = AotCoreIrTypeShapeKind.ValueType
+                            },
+                            new AotCoreIrAbiSlotArtifact
+                            {
+                                CarrierKindCode = carrier,
+                                TypeShape = AotCoreIrTypeShapeKind.ValueType
+                            },
+                        }),
+                        new AotCoreIrAbiSlotArtifact
+                        {
+                            CarrierKindCode = carrier,
+                            TypeShape = AotCoreIrTypeShapeKind.ValueType
+                        },
+                        new HashSet<int> { 0 },
+                        DirectNativeSymbol: nativeSymbol);
+                }));
+        }
+
     }
 }

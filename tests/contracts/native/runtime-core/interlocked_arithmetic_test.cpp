@@ -191,4 +191,60 @@ TEST(ThreadVolatileRead, Object_DefaultSlotIsNull) {
               0);
 }
 
+// ── Interlocked.CompareExchange — return semantics ──────────────────────────
+//
+// The managed contract is `T CompareExchange(ref T location, T value, T comparand)`
+// returning the ORIGINAL value of `location`, NOT whether the swap happened.
+//
+// ChaosInterlockedCompareExchangeInt32 returned `atomic_compare_exchange_strong`'s
+// own bool instead, so `CompareExchange(ref 0, 0, 0)` answered 1 where .NET
+// answers 0 — a wrong value, and the generated `Assert.AreEqual(0, result)`
+// failed.  The Int64 sibling already returned the original, so the two helpers
+// disagreed with each other.
+//
+// Both outcomes are asserted: a success and a failure must BOTH return the
+// original, which is what distinguishes this contract from a bool.
+
+TEST(InterlockedCompareExchange, Int32_Success_ReturnsOriginal) {
+    CHAOS_IL2CPP_INT32 value = 5;
+    auto ptr = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&value);
+
+    // comparand matches → swap happens; result is the OLD value (5), not 1.
+    EXPECT_EQ(ChaosInterlockedCompareExchangeInt32(ptr, 99, 5), 5);
+    EXPECT_EQ(value, 99);  // slot updated
+}
+
+TEST(InterlockedCompareExchange, Int32_Mismatch_ReturnsOriginal) {
+    CHAOS_IL2CPP_INT32 value = 5;
+    auto ptr = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&value);
+
+    // comparand differs → no swap; result is still the current value (5), not 0.
+    EXPECT_EQ(ChaosInterlockedCompareExchangeInt32(ptr, 99, 7), 5);
+    EXPECT_EQ(value, 5);  // slot untouched
+}
+
+// The exact shape the generated test drives: `CompareExchange(ref 0, 0, 0)`.
+// A bool-returning helper answers 1 here; the correct answer is 0.
+TEST(InterlockedCompareExchange, Int32_ZeroComparand_ReturnsZero) {
+    CHAOS_IL2CPP_INT32 value = 0;
+    auto ptr = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&value);
+
+    EXPECT_EQ(ChaosInterlockedCompareExchangeInt32(ptr, 0, 0), 0);
+    EXPECT_EQ(value, 0);
+}
+
+// Pin the Int64 sibling too, so a future edit cannot make the two disagree
+// again in the other direction.
+TEST(InterlockedCompareExchange, Int64_ReturnsOriginalBothWays) {
+    CHAOS_IL2CPP_INT64 hit = 5;
+    auto ph = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&hit);
+    EXPECT_EQ(ChaosInterlockedCompareExchangeInt64(ph, 99, 5), 5);
+    EXPECT_EQ(hit, 99);
+
+    CHAOS_IL2CPP_INT64 miss = 5;
+    auto pm = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&miss);
+    EXPECT_EQ(ChaosInterlockedCompareExchangeInt64(pm, 99, 7), 5);
+    EXPECT_EQ(miss, 5);
+}
+
 }  // namespace
