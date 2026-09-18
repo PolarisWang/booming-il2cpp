@@ -305,12 +305,25 @@ public sealed partial class NativeAotLoweringPlanner
                 //
                 // Taking the ABI from `lowerableAotMethod` — the same method whose
                 // symbol we pass as DirectNativeSymbol — keeps the two in agreement.
+                //
+                // Symbol choice: prefer this method's OWN instantiation stub over the
+                // generic-sharing canonical body.  ResolveCallTargetNativeSymbol maps a
+                // reference-type instantiation to the canonical body (e.g. every
+                // Create<T> for a reference type collapses onto Create_JsonDocument),
+                // and that body needs a chaos_generic_context argument to know which T
+                // it is building.  This branch supplies no such argument, so the shared
+                // body silently constructed the canonical type instead of the caller's
+                // — Create<Utf8JsonWriter> produced a JsonDocument.  The per-instantiation
+                // stub has no such ambiguity: it is emitted with the concrete type
+                // baked in (chaos_mt_..._Utf8JsonWriter) and takes no context parameter.
+                var ownSymbol = TryGetInstantiationStubSymbol(lowerableAotMethod)
+                                ?? ResolveCallTargetNativeSymbol(lowerableAotMethod);
                 return new InvocationTarget(
-                    ResolveCallTargetNativeSymbol(lowerableAotMethod),
+                    ownSymbol,
                     GetMethodAbiParameterSlots(lowerableAotMethod),
                     lowerableAotMethod.ReturnAbi,
                     EmptyRawArgumentIndices,
-                    DirectNativeSymbol: ResolveCallTargetNativeSymbol(lowerableAotMethod));
+                    DirectNativeSymbol: ownSymbol);
             }
 
             return new InvocationTarget(
