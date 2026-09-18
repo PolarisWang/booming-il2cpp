@@ -12,6 +12,7 @@
 #include "gc/gc_helpers.h"
 #include "core/gc_alloc_stubs.h"
 #include "module_registry.h"
+#include <chaos/async.h>
 #include "runtime_stubs/async_stubs.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -124,22 +125,38 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetUninitializedObject(CHAOS_IL2CPP_INTPT
 {
     if (type_handle == 0) return 0;
 
-    // Read runtime_type_handle from System.Type object at offset 16.
-    CHAOS_IL2CPP_INTPTR inner_handle = 0;
-    std::memcpy(&inner_handle,
-        reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_INTPTR>(type_handle) + 16),
-        sizeof(inner_handle));
-    if (inner_handle == 0) return 0;
-
-    // Resolve TypeInfoHandle to TypeInfoHot* via module registry.
-    TypeInfoHandle th = static_cast<TypeInfoHandle>(inner_handle);
-    uint32_t module_id = static_cast<uint32_t>(th >> 32);
-    uint32_t token = static_cast<uint32_t>(th & 0xFFFFFFFFu);
-    auto* type_info = LookupTypeInfoPtr(module_id, token);
+    // Two forms arrive here:
+    //   A. RAW typeof(T) product — this codegen lowers typeof to the type's
+    //      TypeInfoHot* address itself (an image pointer, e.g. 0x7ff7...).
+    //      ResolveTypeRef-based reflection accessors consume handles, but the
+    //      generic-factory path (Create<T>) hands the pointer straight over.
+    //      Validate by looking the pointer's stable_id up in the layout registry.
+    //   B. Managed System.Type object — the runtime_type_handle lives at +16.
+    //      Validated by resolving the packed (module, token) through the module
+    //      registry.  Reading +16 on form A returned garbage and made every
+    //      generic-factory receiver null (87 factoryGap facts).
+    auto& registry = GcLayoutRegistry::Instance();
+    const TypeInfoHot* type_info = nullptr;
+    {
+        auto* direct = reinterpret_cast<const TypeInfoHot*>(type_handle);
+        if (registry.Lookup(direct->stable_id) != nullptr)
+            type_info = direct;
+    }
+    if (type_info == nullptr)
+    {
+        CHAOS_IL2CPP_INTPTR inner_handle = 0;
+        std::memcpy(&inner_handle,
+            reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_INTPTR>(type_handle) + 16),
+            sizeof(inner_handle));
+        if (inner_handle != 0)
+        {
+            TypeInfoHandle th = static_cast<TypeInfoHandle>(inner_handle);
+            type_info = LookupTypeInfoPtr(static_cast<uint32_t>(th >> 32),
+                                          static_cast<uint32_t>(th & 0xFFFFFFFFu));
+        }
+    }
     if (type_info == nullptr) return 0;
 
-    // Look up GcTypeLayout by stable_id to get instance size.
-    auto& registry = GcLayoutRegistry::Instance();
     auto* layout = registry.Lookup(type_info->stable_id);
     if (layout == nullptr || layout->instance_size == 0) return 0;
 
@@ -153,11 +170,14 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetUninitializedObject(CHAOS_IL2CPP_INTPT
     // semantics (Wait returns immediately, awaiters yield the default result).
     {
         const char* type_name = LookupTypeNameByInfoPtr(type_info);
+        fprintf(stderr, "[GUO] resolved type_name=%s stable_id=%llu\n", type_name ? type_name : "(null)", static_cast<unsigned long long>(type_info->stable_id));
         if (type_name != nullptr &&
             (std::strcmp(type_name, "Task") == 0 ||
              std::strcmp(type_name, "Task`1") == 0))
         {
-            return async_task_create_gc();
+            // Completed task: the probes immediately Wait()/await the receiver, so
+            // a live-but-pending handle would block the fact run forever (timed_out).
+            return chaos::il2cpp::common::async_task_from_result(0);
         }
     }
 
