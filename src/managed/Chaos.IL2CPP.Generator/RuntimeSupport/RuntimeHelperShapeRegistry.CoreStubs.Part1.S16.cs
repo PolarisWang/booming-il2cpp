@@ -1686,6 +1686,26 @@ public sealed partial class NativeAotLoweringPlanner
                     Resolver: (planner, callee, typeArgs) =>
                     {
                         var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        if (method == "WhenAny" && paramTypes.Count == 2)
+                        {
+                            // WhenAny(Task, Task) — the two-task overload had no
+                            // registration; the 0-arg catch-all discarded both task
+                            // handles (6 failing facts across Task / Task<T> spellings).
+                            var src2 = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                                "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                            [
+                                "    return chaos_task_when_any2(chaos_arg_0, chaos_arg_1);",
+                            ]);
+                            return new GenericShapeResolution(src2, symbol,
+                                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                                {
+                                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                }),
+                                CreateNativeIntAbiSlot(),
+                                new HashSet<int> { 0, 1 },
+                                DirectNativeSymbol: "chaos_task_when_any2");
+                        }
                         if (paramTypes.Count != 1 || !paramTypes[0].Contains("[]", StringComparison.Ordinal))
                             return null;
 
