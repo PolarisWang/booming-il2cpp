@@ -580,6 +580,32 @@ public sealed partial class NativeAotLoweringPlanner
                             new HashSet<int> { 0, 1 },
                             DirectNativeSymbol: "ChaosAsyncTaskWait");
                     }
+                    if (paramTypes.Count >= 1 && paramTypes[0] == "System.TimeSpan")
+                    {
+                        // Task.Wait(TimeSpan[, CancellationToken]) — the native
+                        // ChaosAsyncTaskWaitTimeSpan already existed (async_stubs.cpp:1361)
+                        // but was never registered ("dead code"); these overloads fell to
+                        // the 0-arg catch-all.  TimeSpan rides an Int64 ticks carrier.
+                        var slots = new List<AotCoreIrAbiSlotArtifact>
+                        {
+                            CreateNativeIntAbiSlot(),
+                            new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                        };
+                        if (paramTypes.Count >= 2)
+                            slots.Add(CreateNativeIntAbiSlot());
+                        var paramSig = string.Join(", ", Enumerable.Range(0, slots.Count).Select(i =>
+                            i == 1 ? "CHAOS_IL2CPP_INT64 chaos_arg_1" : $"CHAOS_IL2CPP_INTPTR chaos_arg_{i}"));
+                        var tokenExpr = paramTypes.Count >= 2 ? "chaos_arg_2" : "0";
+                        var srcSpan = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol, paramSig,
+                        [
+                            $"    return ChaosAsyncTaskWaitTimeSpan(chaos_arg_0, chaos_arg_1, {tokenExpr});",
+                        ]);
+                        return new GenericShapeResolution(srcSpan, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(slots.ToArray()),
+                            CreateInt32AbiSlot(),
+                            new HashSet<int>(Enumerable.Range(0, slots.Count)),
+                            DirectNativeSymbol: "ChaosAsyncTaskWaitTimeSpan");
+                    }
                     return null; // other overloads (TimeSpan, CT) → interpreter
                 }));
 
@@ -1567,9 +1593,29 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: (planner, callee, typeArgs) =>
                 {
                     var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                    var symbol = GetExternalRuntimeHelperSymbol(callee);
+                    if (paramTypes.Count >= 1 && paramTypes[0] == "System.TimeSpan")
+                    {
+                        // Task.Delay(TimeSpan[, TimeProvider][, CancellationToken]) — the
+                        // native chaos_task_delay_timespan_stub(Int64 ticks) already existed
+                        // (async_stubs.cpp:501) without a registration channel.  TimeProvider
+                        // / CancellationToken are accepted-and-ignored: the probes pass
+                        // default(...) (= null), and a null TimeProvider is semantically
+                        // TimeProvider.System.  ⚠️ CT cancellation semantics not wired.
+                        var srcSpan = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INT64 chaos_arg_0",
+                        [
+                            "    return chaos_task_delay_timespan_stub(chaos_arg_0);",
+                        ]);
+                        return new GenericShapeResolution(srcSpan, symbol,
+                            new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int64, TypeShape = AotCoreIrTypeShapeKind.ValueType }),
+                            CreateNativeIntAbiSlot(),
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: "chaos_task_delay_timespan_stub");
+                    }
                     if (paramTypes.Count != 1 || paramTypes[0] != "System.Int32")
                         return null;
-                    var symbol = GetExternalRuntimeHelperSymbol(callee);
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                         "CHAOS_IL2CPP_INT32 chaos_arg_0",
                     [
