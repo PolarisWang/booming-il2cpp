@@ -1058,6 +1058,9 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     null_arg_ct = sum(1 for r in annotated if r.get("resultKind") == "nullArg")
     env_sensitive_ct = sum(1 for r in annotated if r.get("resultKind") == "envSensitive")
     failed_ct = sum(1 for r in annotated if r.get("resultKind") == "failed")
+    # b03893810 removed this definition but left the "realTotal" summary field
+    # reading it — restore the legacy real-signal total (real + failed records).
+    real_signal = real_ct + failed_ct
 
     # ── Failure attribution (needs the runner's assertFailed/caught stamps) ──
     #
