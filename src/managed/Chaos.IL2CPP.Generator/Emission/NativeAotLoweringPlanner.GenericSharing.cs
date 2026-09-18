@@ -65,6 +65,23 @@ public sealed partial class NativeAotLoweringPlanner
             if (members.Length < 2)
                 continue; // Only one instantiation — no sharing opportunity
 
+            // ⚠️ Identity-dependent bodies are NOT shareable.  The canonical body is
+            // lowered with ONE concrete instantiation (lexicographically first), so
+            // any open definition whose body references its generic PARAMETER as a
+            // type (typeof(T), new T, GetUninitializedObject(typeof(T)), T-typed
+            // statics — spelled `!!` in the IR) would have that parameter burned in
+            // as the canonical's argument for every sharer.  Measured failure:
+            // SubjectInstanceFactory::Create<T> canonical = Create<System.Action>
+            // (lexicographically first of 11), so Task/Task<T>/TCS<T> receivers all
+            // became Action instances — 87 factoryGap facts in the threading-tasks
+            // chunk.  Sharing is an optimization: disabling it for these groups
+            // falls back to per-instantiation bodies (correct, larger binary).
+            if (methodsBySubjectId.TryGetValue(group.Key, out var openDefinition) &&
+                OpenDefinitionUsesGenericTypeParameter(openDefinition))
+            {
+                continue;
+            }
+
             // Separate into reference-type and value-type instantiations
             var refTypeInstantiations = new List<AotCoreIrMethodArtifact>();
             var valueTypeInstantiations = new List<AotCoreIrMethodArtifact>();
@@ -97,6 +114,37 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         return map;
+    }
+
+    /// <summary>
+    /// True when the open definition's IR references its generic PARAMETER as a
+    /// type identity — any instruction operand/callee/reference spelling containing
+    /// the generic-parameter marker <c>!!</c> (e.g. typeof(T) ldtoken, newobj T,
+    /// a call whose result type is !!0).  Such bodies cannot share a canonical
+    /// instantiation without burning that instantiation's identity into every sharer.
+    /// </summary>
+    private static bool OpenDefinitionUsesGenericTypeParameter(AotCoreIrMethodArtifact? openDefinition)
+    {
+        if (openDefinition?.Instructions is not { Count: > 0 } instructions)
+            return false;
+
+        foreach (var ins in instructions)
+        {
+            if (ins.Operand is string operandText && operandText.Contains("!!", StringComparison.Ordinal))
+                return true;
+            var dumped = ins.Operand?.ToString();
+            if (dumped is { } d && d.Contains("!!", StringComparison.Ordinal))
+                return true;
+            if (ins.Callee is { } callee && callee.Contains("!!", StringComparison.Ordinal))
+                return true;
+            if (ins.ResultType is { } resultType && resultType.Contains("!!", StringComparison.Ordinal))
+                return true;
+            if (ins.Reference?.SubjectId is { } refSid && refSid.Contains("!!", StringComparison.Ordinal))
+                return true;
+            if (ins.TargetReference?.SubjectId is { } targetSid && targetSid.Contains("!!", StringComparison.Ordinal))
+                return true;
+        }
+        return false;
     }
 
     /// <summary>
