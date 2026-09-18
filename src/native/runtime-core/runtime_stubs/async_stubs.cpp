@@ -490,9 +490,23 @@ static CHAOS_IL2CPP_INTPTR ChaosTaskDelayCore(uint32_t due_time_ms) noexcept {
     return handle;
 }
 
+/// Task.Delay(0) returns an ALREADY-COMPLETED task (.NET contract).  The
+/// TimerQueue path only fires on GateThreadLoop's 15ms tick, so a queued 0ms
+/// timer never observes completion in time — complete synchronously instead.
+static CHAOS_IL2CPP_INTPTR ChaosTaskDelayCompletedImmediately() noexcept {
+    auto* task = new (std::nothrow) AsyncTask();
+    if (task == nullptr) return 0;
+    task->completed.store(true, std::memory_order_release);
+    notify_task_completed(task);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
+}
+
 CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) noexcept
 {
-    if (millisecondsTimeout <= 0) {
+    if (millisecondsTimeout == 0) {
+        return ChaosTaskDelayCompletedImmediately();
+    }
+    if (millisecondsTimeout < 0) {
         return ChaosTaskDelayCore(0);
     }
     return ChaosTaskDelayCore(static_cast<uint32_t>(millisecondsTimeout));
@@ -506,6 +520,9 @@ CHAOS_IL2CPP_INTPTR chaos_task_delay_timespan_stub(CHAOS_IL2CPP_INT64 ticks) noe
         int64_t cnt = ticks / kTicksPerMs;
         if (cnt > static_cast<int64_t>(INT32_MAX)) cnt = INT32_MAX;
         ms = static_cast<CHAOS_IL2CPP_INT32>(cnt);
+    }
+    if (ms == 0) {
+        return ChaosTaskDelayCompletedImmediately();
     }
     return ChaosTaskDelayCore(static_cast<uint32_t>(ms));
 }
@@ -1068,7 +1085,10 @@ CHAOS_IL2CPP_INTPTR chaos_task_factory_start_new(
     CHAOS_IL2CPP_INTPTR /*factory*/, CHAOS_IL2CPP_INTPTR delegate_fn) noexcept
 {
     using namespace chaos::il2cpp::common;
-    if (delegate_fn == 0) return 0;
+    if (delegate_fn == 0) {
+        // .NET contract: StartNew(null) throws ArgumentNullException.
+        chaos::il2cpp::runtime_core::RaiseManagedException("System.ArgumentNullException", "Value cannot be null. (Parameter 'action')");
+    }
     return async_task_run(delegate_fn);
 }
 
@@ -1081,7 +1101,10 @@ CHAOS_IL2CPP_INTPTR chaos_task_run(
 {
     using namespace chaos::il2cpp::common;
     (void)token;
-    if (delegate_fn == 0) return 0;
+    if (delegate_fn == 0) {
+        // .NET contract: Task.Run(null) throws ArgumentNullException.
+        chaos::il2cpp::runtime_core::RaiseManagedException("System.ArgumentNullException", "Value cannot be null. (Parameter 'action')");
+    }
     return async_task_run(delegate_fn);
 }
 
