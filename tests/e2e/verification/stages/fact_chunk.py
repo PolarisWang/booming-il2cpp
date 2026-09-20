@@ -39,6 +39,71 @@ def _is_jit_enabled(chunk_dir: Path) -> bool:
     return config.get("jitEnabled", False)
 
 
+def _parse_fact_stdout(stdout: str) -> tuple[list[dict], bool]:
+    """Parse ``--fact-json`` stdout into (results, truncated).
+
+    ``entry.exe`` streams the document — it prints ``{"factResults":[`` then one
+    object per subject with an fflush after each — so a process killed mid-run
+    (deadlock, abort, watchdog) leaves a *prefix* of a valid array.  A plain
+    ``json.loads`` on that prefix fails, which is how a chunk with 448 healthy
+    subjects ends up reported as ``0/0 passed``.
+
+    Recover by closing the open array after the last complete object instead of
+    discarding everything.  Returns ``([], False)`` when no header is present,
+    so genuinely empty/garbage output is never dressed up as partial success.
+    """
+    header = '{"factResults":['
+    start = stdout.find(header)
+    if start < 0:
+        return [], False
+
+    # Fast path: the document is complete (process exited normally).
+    json_end = stdout.rfind("}") + 1
+    if json_end > start:
+        try:
+            parsed = json.loads(stdout[start:json_end])
+        except json.JSONDecodeError:
+            pass
+        else:
+            return parsed.get("factResults", []), False
+
+    # Truncated stream: keep every fully-emitted object after the header.
+    body = stdout[start + len(header):]
+    results: list[dict] = []
+    depth = 0
+    obj_start = -1
+    in_string = False
+    escaped = False
+    for i, ch in enumerate(body):
+        if in_string:
+            if escaped:
+                escaped = False
+            elif ch == "\\":
+                escaped = True
+            elif ch == '"':
+                in_string = False
+            continue
+        if ch == '"':
+            in_string = True
+        elif ch == "{":
+            if depth == 0:
+                obj_start = i
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0 and obj_start >= 0:
+                try:
+                    results.append(json.loads(body[obj_start:i + 1]))
+                except json.JSONDecodeError:
+                    # A malformed object means the stream is not trustworthy
+                    # past this point — stop rather than skip and continue.
+                    break
+                obj_start = -1
+        elif ch == "]" and depth == 0:
+            break
+    return results, True
+
+
 def _run_single_fact(exe_path: Path, tech: str) -> dict:
     """Run --fact-json for a single binary, return parsed results dict."""
     print(f"  [fact] [{tech}] Running {exe_path} --fact-json...")
@@ -47,25 +112,29 @@ def _run_single_fact(exe_path: Path, tech: str) -> dict:
             [str(exe_path), "--fact-json"],
             capture_output=True, timeout=600,
         )
-    except subprocess.TimeoutExpired:
-        return {"error": "timed_out", "returncode": -1, "stdout": "", "stderr": "",
-                "passed": 0, "total": 0, "results": [], "truncated": False}
+    except subprocess.TimeoutExpired as exc:
+        # A deadlocking subject parks the process forever. The streamed output
+        # produced before the park is still on stdout and still useful — keep
+        # it so one bad subject does not void the whole chunk (see
+        # _parse_fact_stdout). ``timeout`` kills the child before we get a
+        # CompletedProcess, so read the partial buffers off the exception.
+        partial_out = (exc.stdout or b"").decode("utf-8", errors="replace")
+        partial_err = (exc.stderr or b"").decode("utf-8", errors="replace")
+        fact_results, _ = _parse_fact_stdout(partial_out)
+        print(f"  [fact] [{tech}] TIMED OUT after 600s — recovered "
+              f"{len(fact_results)} subject result(s) emitted before the hang")
+        return {
+            "error": "timed_out", "returncode": -1,
+            "stdout": partial_out, "stderr": partial_err,
+            "passed": sum(1 for fr in fact_results if fr.get("passed")),
+            "total": len(fact_results),
+            "results": fact_results, "truncated": True,
+        }
 
     stdout = r.stdout.decode("utf-8", errors="replace") if r.stdout else ""
     stderr = r.stderr.decode("utf-8", errors="replace") if r.stderr else ""
 
-    # Parse JSON output — truncated output is treated as empty (not silently repaired)
-    fact_results = []
-    json_truncated = False
-    json_start = stdout.find("{")
-    json_end = stdout.rfind("}") + 1
-    if json_start >= 0 and json_end > json_start:
-        payload = stdout[json_start:json_end]
-        try:
-            parsed = json.loads(payload)
-            fact_results = parsed.get("factResults", [])
-        except (json.JSONDecodeError, KeyError):
-            json_truncated = True
+    fact_results, json_truncated = _parse_fact_stdout(stdout)
 
     passed = sum(1 for fr in fact_results if fr.get("passed"))
     total = len(fact_results)
@@ -854,11 +923,25 @@ def _tech_status(tech_result: dict, meta_total: int | None) -> str:
     Returns "error" when total==0 so silent failures (e.g. missing
     kHotpatchKeepNative flag on all subjects) are exposed rather than
     silently skipped.
+
+    ``meta_total`` is the subject count the run was supposed to produce.  When
+    a result carries far fewer than that, the run was cut short (deadlock
+    killed mid-stream — see _parse_fact_stdout) and the missing subjects were
+    never evaluated.  That must NOT surface as "partial": the pipeline promotes
+    ``partial`` to ``passed`` whenever JIT succeeds, so a chunk that evaluated
+    8 of 258 subjects would go green.  Report "error" instead — a truncated run
+    is a hard stop, not a soft degradation.
     """
     passed = tech_result["passed"]
     total = tech_result["total"]
     rc = tech_result["returncode"]
     if total == 0:
+        return "error"
+    # A run that stopped early (timed out / killed) yields a prefix of the real
+    # subject set. Guard on the truncation flag rather than on a count ratio:
+    # only the timeout path sets it, so a legitimately smaller-but-complete run
+    # is unaffected.
+    if tech_result.get("truncated") and meta_total is not None and total < meta_total:
         return "error"
     if rc == 0 and passed == total:
         return "passed"
