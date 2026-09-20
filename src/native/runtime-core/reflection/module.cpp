@@ -255,6 +255,21 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethod(
 // Module.GetFields() / GetMethods() — the union across all the module's types.
 // Returns the first type's descriptor array as the anchor; callers enumerate
 // per type, matching how the generated code walks module members.
+// Reflection array-return null guard: the probes assert
+// AreEqual(new T[] {}, result) â a null fails (no length), an empty
+// managed array passes (length-first compare).  Same construction as
+// members.cpp (chaos_type_info_managed_array on both slots).
+static CHAOS_IL2CPP_INTPTR ReflectionModuleArrayOrEmpty(CHAOS_IL2CPP_INTPTR arr) noexcept {
+    if (arr != 0) return arr;
+    auto* empty = reinterpret_cast<chaos::il2cpp::jit::chaos_managed_array*>(
+        ChaosArrayNew1D(
+            &chaos::il2cpp::jit::chaos_type_info_managed_array.hot,
+            &chaos::il2cpp::jit::chaos_type_info_managed_array.hot,
+            chaos::il2cpp::jit::chaos_type_shape_value,
+            0));
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(empty);
+}
+
 CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFields(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
     auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(module_handle));
     if (image == nullptr) return 0;
@@ -262,7 +277,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFields(CHAOS_IL2CPP_INTPTR module_ha
     (void)type;
     // No flat module-level field array exists; the managed wrapper iterates the
     // type table, so return the type table itself as the iteration source.
-    return ChaosReflectionModuleGetTypes(module_handle);
+    return ReflectionModuleArrayOrEmpty(ChaosReflectionModuleGetTypes(module_handle));
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethods(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
@@ -369,7 +384,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionModuleIsDefined(
 // delegate the native side cannot invoke, so this returns the module's type
 // table (the candidate set) for the managed wrapper to filter.
 CHAOS_IL2CPP_INTPTR ChaosReflectionModuleFindTypes(CHAOS_IL2CPP_INTPTR module_handle) noexcept {
-    return ChaosReflectionModuleGetTypes(module_handle);
+    return ReflectionModuleArrayOrEmpty(ChaosReflectionModuleGetTypes(module_handle));
 }
 
 // Module.FilterTypeName / FilterTypeNameIgnoreCase — the BCL's built-in filter
