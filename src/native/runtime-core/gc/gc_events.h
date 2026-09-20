@@ -196,6 +196,34 @@ void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
 /// Overwrite the target object of any GCHandle.
 void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept;
 
+// ── Object-move notification for raw-pointer-keyed side tables ─────────────
+//
+// GC relocates objects during Gen1 compaction/promotion and Gen2 compaction.
+// The GC rewrites the reference forms it knows about (old-gen slots, static
+// roots, thread stacks, GCHandles — see RelocateGen1References), but native
+// subsystems that key their own side tables by a RAW managed object address
+// are invisible to it: after a move those keys dangle at the vacated address.
+//
+// Rather than have the GC know about every such table (which would invert the
+// layering), subsystems register a callback here.  It is invoked after each
+// relocation batch with the old→new pairs, letting each table rewrite its own
+// keys while the old addresses are still mapped.
+//
+// Contract for implementations:
+//   - MUST be async-signal-safe in the sense of not allocating or throwing;
+//     it runs under a GC safepoint with mutators stopped.
+//   - MUST NOT call back into GC allocation or collection entry points.
+//   - @a old_addrs / @a new_addrs are parallel arrays of @a count entries.
+using GcMoveCallback = void (*)(const void* const* old_addrs,
+                                const void* const* new_addrs,
+                                CHAOS_IL2CPP_SIZE count);
+
+/// Register a callback invoked whenever objects are physically relocated.
+/// Passing nullptr unregisters.  Registrations are additive (multiple
+/// subsystems may each register one callback); up to kGcMaxMoveCallbacks
+/// are supported, after which registration is ignored.
+void GcRegisterMoveCallback(GcMoveCallback callback) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_GC_EVENTS_H_

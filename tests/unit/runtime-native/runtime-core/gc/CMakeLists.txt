@@ -207,6 +207,13 @@ chaos_native_add_test(test_gc_gen1
     LABELS "unit;gc"
 )
 
+# gc_raw_key_relocation_test — 裸托管指针键在 GC 搬移后的失效复现
+# (docs/dev/in-progress/raw-pointer-key-state-tables)
+chaos_native_add_test(test_gc_raw_key_relocation
+    gc_raw_key_relocation_test.cpp ${CHAOS_GC_BASE}
+    LABELS "unit;gc"
+)
+
 # gc_finalizer_test — Finalizer registration + execution
 chaos_native_add_test(test_gc_finalizer
     gc_finalizer_test.cpp ${CHAOS_GC_BASE}

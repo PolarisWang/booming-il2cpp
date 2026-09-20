@@ -196,6 +196,13 @@ Gen1CollectionResult GcGen1Collection() {
             static_cast<unsigned long long>(span));
         auto& tiny_layout = GcLayoutRegistry::Instance();
         char* tiny_cur = s_begin;
+        // Collect old→new pairs so external references can be rewritten after
+        // the objects physically move.  Without this the fast path promoted
+        // objects but left every old-gen slot / static root / thread stack /
+        // GCHandle pointing at the vacated Gen1 address — a cross-gen UAF
+        // (same class as GC-N6 mode3 that Phase 4e guards on the slow path).
+        std::vector<Gen1MoveEntry> tiny_moves;
+        tiny_moves.reserve(64);
         while (tiny_cur < s_bump) {
             result.objects_in_gen1++;
             const void* ti = *reinterpret_cast<const void* const*>(tiny_cur);
@@ -210,6 +217,8 @@ Gen1CollectionResult GcGen1Collection() {
             void* gen2_addr = G_OldGen().Allocate(obj_size, true);
             if (gen2_addr != nullptr) {
                 std::memcpy(gen2_addr, tiny_cur, obj_size);
+                tiny_moves.push_back({reinterpret_cast<uintptr_t>(tiny_cur),
+                                      reinterpret_cast<uintptr_t>(gen2_addr)});
                 result.objects_promoted++;
                 result.bytes_promoted += obj_size;
             } else {
@@ -223,6 +232,9 @@ Gen1CollectionResult GcGen1Collection() {
             result.bytes_promoted = 0;
             result.objects_promoted = 0;
         } else {
+            // Rewrite external references to the moved objects.  Must run while
+            // the old addresses are still mapped (same rationale as Phase 4e).
+            RelocateGen1References(tiny_moves);
             g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
             g_young_gen.gen1_prev_compact_end = nullptr;
         }
@@ -268,6 +280,12 @@ Gen1CollectionResult GcGen1Collection() {
                 static_cast<unsigned long long>(ec_count),
                 static_cast<unsigned long long>(span));
             char* ec2_cur = s_begin;
+            // Same rationale as Tier 1: record old→new so external references
+            // can be rewritten.  This tier handles the common "few objects in a
+            // large sparse span" case, which is exactly what a short-lived
+            // object churn workload produces.
+            std::vector<Gen1MoveEntry> ec_moves;
+            ec_moves.reserve(static_cast<size_t>(ec_count) + 1);
             while (ec2_cur < s_bump) {
                 const void* ti2 = *reinterpret_cast<const void* const*>(ec2_cur);
                 CHAOS_IL2CPP_SIZE sz2 = kGen1MaxEstObjectSize;
@@ -281,6 +299,8 @@ Gen1CollectionResult GcGen1Collection() {
                 void* gen2_addr = G_OldGen().Allocate(sz2, true);
                 if (gen2_addr != nullptr) {
                     std::memcpy(gen2_addr, ec2_cur, sz2);
+                    ec_moves.push_back({reinterpret_cast<uintptr_t>(ec2_cur),
+                                        reinterpret_cast<uintptr_t>(gen2_addr)});
                     result.objects_promoted++;
                     result.bytes_promoted += sz2;
                 } else {
@@ -293,6 +313,9 @@ Gen1CollectionResult GcGen1Collection() {
                 result.bytes_promoted = 0;
                 result.objects_promoted = 0;
             } else {
+                // Rewrite external references to the moved objects (Phase 4e
+                // equivalent for this fast path).
+                RelocateGen1References(ec_moves);
                 g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
                 g_young_gen.gen1_prev_compact_end = nullptr;
             }
@@ -332,6 +355,10 @@ Gen1CollectionResult GcGen1Collection() {
         // cannot be allocated (e.g., under extreme memory pressure).
         auto& drain_layout = GcLayoutRegistry::Instance();
         char* drain_cur = s_begin;
+        // Same rationale as the other fast paths: record old→new so external
+        // references are rewritten after the objects move.
+        std::vector<Gen1MoveEntry> drain_moves;
+        drain_moves.reserve(64);
         while (drain_cur < s_bump) {
             result.objects_in_gen1++;
             const void* ti = *reinterpret_cast<const void* const*>(drain_cur);
@@ -346,6 +373,8 @@ Gen1CollectionResult GcGen1Collection() {
             void* gen2_addr = G_OldGen().Allocate(obj_size, true);
             if (gen2_addr != nullptr) {
                 std::memcpy(gen2_addr, drain_cur, obj_size);
+                drain_moves.push_back({reinterpret_cast<uintptr_t>(drain_cur),
+                                       reinterpret_cast<uintptr_t>(gen2_addr)});
                 result.objects_promoted++;
                 result.bytes_promoted += obj_size;
             } else {
@@ -359,6 +388,8 @@ Gen1CollectionResult GcGen1Collection() {
             result.bytes_promoted = 0;
             result.objects_promoted = 0;
         } else {
+            // Rewrite external references to the moved objects.
+            RelocateGen1References(drain_moves);
             g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
             g_young_gen.gen1_prev_compact_end = nullptr;
         }

@@ -12,6 +12,7 @@
 #include "runtime_stubs/stub_common.h"
 #include "string_table.h"
 #include "gc_helpers.h"
+#include "gc_events.h"           // GcRegisterMoveCallback — re-key on object move
 #include "runtime_stubs/stream_state.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -92,6 +93,45 @@ static void remove_state(void* key) noexcept {
     StreamStateLock lock;
     g_stream_state.erase(key);
 }
+
+/// GC move callback — re-key g_stream_state entries whose object was relocated.
+///
+/// g_stream_state is keyed by the RAW managed object address.  When the GC
+/// compacts/promotes (Gen1 CRAG, Gen2 BGC), the object moves but the table key
+/// does not, so the state becomes unreachable and a later ctor for the same
+/// object silently creates a fresh default state (losing accumulated content).
+///
+/// The GC invokes this after every relocation batch while the old addresses are
+/// still mapped; we rewrite the keys to the new addresses.
+///
+/// Contract (see gc_events.h): runs under GC safepoint, must not allocate or
+/// throw.  std::vector::emplace_back / erase can allocate — so we only touch
+/// the map when at least one key actually matches, and pre-reserve nothing.
+static void GcOnObjectMoved(const void* const* old_addrs,
+                            const void* const* new_addrs,
+                            CHAOS_IL2CPP_SIZE count) noexcept {
+    if (count == 0) return;
+    try {
+        StreamStateLock lock;
+        for (CHAOS_IL2CPP_SIZE i = 0; i < count; i++) {
+            auto it = g_stream_state.find(const_cast<void*>(old_addrs[i]));
+            if (it == g_stream_state.end()) continue;
+            // node-based map: extract before re-inserting under the new key.
+            StreamState moved = std::move(it->second);
+            g_stream_state.erase(it);
+            g_stream_state[const_cast<void*>(new_addrs[i])] = std::move(moved);
+        }
+    } catch (...) {
+        // Never propagate out of a GC callback.  A failed re-key degrades to
+        // the pre-fix behaviour (state unreachable) rather than corrupting GC.
+    }
+}
+
+/// One-time registration of the move callback.
+static const bool g_stream_move_hook_registered = []() {
+    GcRegisterMoveCallback(&GcOnObjectMoved);
+    return true;
+}();
 
 extern "C" {
 

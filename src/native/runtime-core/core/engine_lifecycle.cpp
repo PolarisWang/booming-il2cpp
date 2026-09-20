@@ -640,6 +640,9 @@ int GcProcessDependentHandlesAfterBgc() noexcept {
     return total_kept;
 }
 
+// Forward declaration: defined below, right after GcRelocateHandles.
+void GcNotifyObjectMoves(const std::vector<std::pair<void*, void*>>& relocations) noexcept;
+
 void GcRelocateHandles(
     const std::vector<std::pair<void*, void*>>& relocations) noexcept {
     for (int s = 0; s < kHandleShardCount; s++) {
@@ -649,16 +652,88 @@ void GcRelocateHandles(
             if (obj == nullptr) continue;
             for (auto& r : relocations) {
                 if (r.first == obj) {
+                    // A pinned handle keeps its object alive AND is expected to
+                    // report as pinned for the object's CURRENT address.  The
+                    // pin_set is a separate raw-pointer-keyed table, so moving
+                    // object_instance without maintaining it leaves pin_set
+                    // holding the vacated address: GcIsPinnedObject(new_addr)
+                    // then answers false for an object that is still pinned.
+                    //
+                    // Mirror what GcSetHandleTarget() does on the non-relocation
+                    // path (remove old → add new).  Lock order is fixed
+                    // shard-mutex -> pin_set_mutex; both are leaf locks, and we
+                    // deliberately do NOT call GcSetHandleTarget() here because
+                    // it would re-acquire this same shard mutex (self-deadlock).
+                    if (kv.second.pinned || kv.second.async_pinned) {
+                        GcRemovePinnedObject(obj);
+                        GcAddPinnedObject(r.second);
+                    }
                     kv.second.object_instance = r.second;
+                    kv.second.points_to_nursery =
+                        RegionManager::Instance().IsNurseryPointer(r.second);
                     break;
                 }
             }
         }
     }
+
+    // Notify raw-pointer-keyed side tables AFTER all shard locks are released:
+    // a callback may take its own lock, and holding a shard mutex across it
+    // would widen the lock order graph for no benefit.
+    GcNotifyObjectMoves(relocations);
+}
+
+// ── Object-move notification (raw-pointer-keyed side tables) ───────
+//
+// See gc_events.h for the contract.  Kept in this TU so it sits alongside the
+// other GC-side lifecycle entry points and can be called from the relocation
+// paths without pulling a new translation unit into chaos_runtime_core.
+
+namespace {
+constexpr int kGcMaxMoveCallbacks = 8;
+GcMoveCallback g_gc_move_callbacks[kGcMaxMoveCallbacks] = {};
+std::mutex g_gc_move_callbacks_mutex;
+}  // namespace
+
+void GcRegisterMoveCallback(GcMoveCallback callback) noexcept {
+    std::lock_guard<std::mutex> lock(g_gc_move_callbacks_mutex);
+    if (callback == nullptr) {
+        for (int i = 0; i < kGcMaxMoveCallbacks; i++) g_gc_move_callbacks[i] = nullptr;
+        return;
+    }
+    for (int i = 0; i < kGcMaxMoveCallbacks; i++) {
+        if (g_gc_move_callbacks[i] == callback) return;  // already registered
+        if (g_gc_move_callbacks[i] == nullptr) {
+            g_gc_move_callbacks[i] = callback;
+            return;
+        }
+    }
+    // Table full: registration is best-effort (documented in gc_events.h).
+}
+
+/// Invoke every registered move callback with the relocation batch.
+/// Called from the GC relocation paths after objects have physically moved.
+void GcNotifyObjectMoves(const std::vector<std::pair<void*, void*>>& relocations) noexcept {
+    if (relocations.empty()) return;
+    GcMoveCallback snapshot[kGcMaxMoveCallbacks];
+    {
+        std::lock_guard<std::mutex> lock(g_gc_move_callbacks_mutex);
+        for (int i = 0; i < kGcMaxMoveCallbacks; i++) snapshot[i] = g_gc_move_callbacks[i];
+    }
+    std::vector<const void*> olds;
+    std::vector<const void*> news;
+    olds.reserve(relocations.size());
+    news.reserve(relocations.size());
+    for (const auto& r : relocations) {
+        olds.push_back(r.first);
+        news.push_back(r.second);
+    }
+    for (int i = 0; i < kGcMaxMoveCallbacks; i++) {
+        if (snapshot[i] != nullptr) snapshot[i](olds.data(), news.data(), olds.size());
+    }
 }
 
 // ── Pinned object set ─────────────────────────────────────────────
-
 void GcAddPinnedObject(void* obj) noexcept {
     if (obj == nullptr) return;
     std::lock_guard<std::mutex> lock(pin_set_mutex());
