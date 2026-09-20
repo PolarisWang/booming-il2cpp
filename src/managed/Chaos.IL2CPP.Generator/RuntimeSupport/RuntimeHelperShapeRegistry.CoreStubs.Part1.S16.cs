@@ -1680,7 +1680,7 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
             registry.Register("System.Threading.Tasks.Task", "RunSynchronously", ["System.Threading.Tasks.TaskScheduler"],
-                ShapeKind.SimpleForward, "chaos_noop_void",
+                ShapeKind.SimpleForward, "chaos_noop_void3",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
                     CreateNativeIntAbiSlot(),

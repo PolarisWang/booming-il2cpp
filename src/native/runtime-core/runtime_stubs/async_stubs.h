@@ -30,6 +30,7 @@ CHAOS_IL2CPP_INTPTR chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_await
 // declaration reachable from the generated TU it fails to compile with
 // C3861: 'chaos_noop_void': identifier not found.
 extern "C" void chaos_noop_void(CHAOS_IL2CPP_INTPTR dispose_target) noexcept;
+extern "C" void chaos_noop_void3(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b, CHAOS_IL2CPP_INTPTR c) noexcept;
 
 // TaskAwaiter stubs (DirectNativeSymbol for async state machine dispatch).
 // Generated code calls these when lowering async Task.GetResult() patterns.

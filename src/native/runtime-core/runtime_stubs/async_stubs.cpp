@@ -90,6 +90,11 @@ extern "C" void chaos_noop_void(CHAOS_IL2CPP_INTPTR) noexcept
     // No-op: the GC owns the lifetime, not managed Dispose.
 }
 
+extern "C" void chaos_noop_void3(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b, CHAOS_IL2CPP_INTPTR c) noexcept
+{
+    (void)a; (void)b; (void)c;
+}
+
 // ── Phase 6 / A: non-void GetResult void helpers (C2440 fix) ──
 // These return 0 as INTPTR instead of void, because the generated wrapper
 // assigns the call result to a slot variable regardless of the return type.
@@ -301,6 +306,13 @@ CHAOS_IL2CPP_INT32 ChaosAsyncTaskWait(CHAOS_IL2CPP_INTPTR task_handle, CHAOS_IL2
 {
     using namespace chaos::il2cpp::common;
     using namespace chaos::il2cpp::runtime_core;
+
+    {
+        auto* d = task_handle ? reinterpret_cast<AsyncTask*>(task_handle) : nullptr;
+        fprintf(stderr, "[WAIT] handle=%llx completed=%d timeout=%d\n",
+            static_cast<unsigned long long>(task_handle),
+            (d && d->completed.load(std::memory_order_acquire)) ? 1 : 0, timeout_ms);
+    }
 
     if (task_handle == 0) return 0;
     auto* task = reinterpret_cast<AsyncTask*>(task_handle);
