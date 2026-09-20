@@ -41,20 +41,31 @@ _TFM_TECH: dict[str, str] = {
 
 
 def _ensure_runner_built() -> bool:
-    """Build Chaos.TestFramework.Runtime for both net8.0 and net10.0."""
-    for tfm in ("net8.0", "net10.0"):
-        dll = _RUNTIME_PROJECT / "bin" / "Debug" / tfm / "Chaos.TestFramework.Runtime.dll"
-        if dll.exists():
-            continue
-        print(f"  [managed-benchmark] Building runner ({tfm})...")
-        result = subprocess.run(
-            ["dotnet", "build", str(_RUNTIME_PROJECT), "-f", tfm, "--nologo", "-v", "q"],
-            capture_output=True, text=True, timeout=180)
-        if result.returncode != 0:
-            print(f"  [managed-benchmark] ERROR: runner build failed for {tfm}")
-            for line in (result.stderr.splitlines() + result.stdout.splitlines())[-10:]:
-                print(f"      {line}")
-            return False
+    """Build Chaos.TestFramework.Runtime for both net8.0 and net10.0.
+
+    Serialised across processes: this project is shared by every chunk, and
+    without a lock parallel workers all see a missing DLL, all run
+    `dotnet build` on the same csproj, and all but one fail writing the same
+    obj/ intermediates (MSB4018 in GenerateRuntimeConfigurationFiles /
+    WriteToJsonFile).  The loser's chunk then dies in the benchmark stage for a
+    reason that has nothing to do with what it was measuring.
+    """
+    from .._pipeline.tool_helpers import _tool_build_lock
+
+    with _tool_build_lock("Chaos.TestFramework.Runtime"):
+        for tfm in ("net8.0", "net10.0"):
+            dll = _RUNTIME_PROJECT / "bin" / "Debug" / tfm / "Chaos.TestFramework.Runtime.dll"
+            if dll.exists():
+                continue
+            print(f"  [managed-benchmark] Building runner ({tfm})...")
+            result = subprocess.run(
+                ["dotnet", "build", str(_RUNTIME_PROJECT), "-f", tfm, "--nologo", "-v", "q"],
+                capture_output=True, text=True, timeout=180)
+            if result.returncode != 0:
+                print(f"  [managed-benchmark] ERROR: runner build failed for {tfm}")
+                for line in (result.stderr.splitlines() + result.stdout.splitlines())[-10:]:
+                    print(f"      {line}")
+                return False
     return True
 
 
