@@ -6,6 +6,14 @@
 > 必要背景：`CtorReturnsNativeHandle` 机制与本单位同族 —— 都是「native 返回句柄、
 > 通用生成路径当对象指针」。
 
+> ⚠️ **接手者先读这条（2026-09-20 追加）**：
+> 本交接文档自述的「C1 待办 + 遗留验证未做」**已经过时** —— C1 已由
+> `da9fe2c57` 落地、`8768cf2da` 合入 main，且 **threading chunk 的 build+fact
+> 验证已在合并前补做**（`b__` stub 24→0，`.ctor/.cctor` 6→6 不变）。
+> 教训：**「交接文档说未做」≠「现在仍未做」** —— 接手前必须查
+> `git log --grep` 与 merge commit 的 `regression_check` 段，不要只读交接自述。
+> 本文件真正仍有效的是 **§一~§八 的 box 拆解根因**（那部分未被修复）。
+
 ## 一、一句话根因
 
 **`RuntimeHelpers.GetUninitializedObject(Task)` 在运行时被改为返回 `AsyncTask` 句柄
