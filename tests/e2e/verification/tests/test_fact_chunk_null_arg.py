@@ -24,6 +24,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from stages.fact_chunk import (
+    _get_env_sensitive_subject_ids,
     _get_null_arg_subject_ids,
     classify_fact_record,
 )
@@ -211,6 +212,75 @@ def test_non_env_sensitive_shaped_failure_stays_realDefect():
         env_sensitive_ids=frozenset({"CollectionCount_10_int_0"}),
     )
     assert kind == "realDefect"
+
+
+# ── _get_env_sensitive_subject_ids: host-property accessors ────────────
+
+
+def test_detects_get_current_processor_id(tmp_path):
+    """Thread.GetCurrentProcessorId is a host property, not a function of input.
+
+    Measured defect: a subject asserted ``AreEqual(6, …)`` because the probe ran
+    on a 6-logical-CPU host.  Any other host (e.g. the 24-core dev machine, or a
+    CI runner) cannot reproduce the literal, so the failure is an unportable
+    expectation rather than an implementation defect.
+    """
+    _write_combined(tmp_path, """
+        public long GetCurrentProcessorId_60__0()
+        {
+            var result_60_0 = global::System.Threading.Thread.GetCurrentProcessorId();
+            Assert.AreEqual(6, result_60_0);
+            return (long)(result_60_0);
+        }
+
+        public static void Benchmark_GetCurrentProcessorId_60__0()
+        {
+            _ = global::System.Threading.Thread.GetCurrentProcessorId();
+        }
+    """)
+    ids = _get_env_sensitive_subject_ids(_make_ctx(tmp_path))
+    assert "GetCurrentProcessorId_60__0" in ids
+    # The Benchmark twin has no Assert and must not be bucketed.
+    assert "Benchmark_GetCurrentProcessorId_60__0" not in ids
+
+
+def test_detects_environment_processor_count(tmp_path):
+    """Environment.ProcessorCount carries the same host-dependence."""
+    _write_combined(tmp_path, """
+        public long ProcessorCount_12__0()
+        {
+            var result_12_0 = global::System.Environment.ProcessorCount;
+            Assert.AreEqual(6, result_12_0);
+            return (long)(result_12_0);
+        }
+    """)
+    ids = _get_env_sensitive_subject_ids(_make_ctx(tmp_path))
+    assert "ProcessorCount_12__0" in ids
+
+
+def test_host_accessor_without_assert_is_not_env_sensitive(tmp_path):
+    """Smoke bodies only call the accessor; they are not bad expectations."""
+    _write_combined(tmp_path, """
+        public long GetCurrentProcessorId_61__0()
+        {
+            _ = global::System.Threading.Thread.GetCurrentProcessorId();
+            return 42L;
+        }
+    """)
+    assert _get_env_sensitive_subject_ids(_make_ctx(tmp_path)) == frozenset()
+
+
+def test_pure_function_is_not_env_sensitive(tmp_path):
+    """A deterministic method asserting a real value must stay out of the bucket."""
+    _write_combined(tmp_path, """
+        public long Cos_8_double_0()
+        {
+            var result = global::System.Math.Cos(0.0);
+            Assert.AreEqual(1.0, result);
+            return 0L;
+        }
+    """)
+    assert _get_env_sensitive_subject_ids(_make_ctx(tmp_path)) == frozenset()
 
 
 def test_detects_enum_parse_empty_string(tmp_path):

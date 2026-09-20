@@ -51,11 +51,19 @@ public sealed class NegationTests : SnapshotTestBase
         var repoRoot = LocateRepoRoot();
         var testProjectDir = Path.Combine(
             repoRoot, "tests", "unit", "managed", "snapshot");
+
+        // Which emitted source the mismatch surfaces for depends on emission
+        // ORDER, which is an implementation detail that has already changed
+        // once (the capability manifest now precedes the .cpp).  Corrupt
+        // whichever file the harness checks first, so the test keeps asserting
+        // its real invariant — "a corrupted baseline makes the comparison
+        // fail, and names the corrupted file" — without pinning the order.
+        var firstSource = ProbeFirstEmittedSourceRelativePath("01-simple-add");
         var baselineFile = Path.Combine(
-            testProjectDir, "Baselines", "01-simple-add", "native-aot.generated.cpp");
+            testProjectDir, "Baselines", "01-simple-add", firstSource);
 
         Assert.True(File.Exists(baselineFile),
-            "Baseline file must exist for negation test");
+            $"Baseline file must exist for negation test: {baselineFile}");
 
         // Backup the original baseline
         var backup = baselineFile + ".negation-test-bak";
@@ -77,7 +85,7 @@ public sealed class NegationTests : SnapshotTestBase
                     AssertSnapshotMatches("01-simple-add"));
 
                 Assert.Equal("01-simple-add", ex.FixtureName);
-                Assert.Equal("native-aot.generated.cpp", ex.SourceRelativePath);
+                Assert.Equal(firstSource, ex.SourceRelativePath);
             }
             finally
             {

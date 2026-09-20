@@ -168,6 +168,14 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System
 
 
 
+MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ParameterInfo = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 10691557903995528663ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_ParameterInfo = static_cast<CHAOS_IL2CPP_UINT64>(10691557903995528663ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_String = {nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
@@ -356,6 +364,10 @@ static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLi
 
 
 
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ParameterInfo[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ParameterInfo, runtime_name_value))};
+
+
+
 static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
 
 
@@ -440,6 +452,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(10691557903995528663ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ParameterInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ParameterInfo, 1);
+
+
+
 	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
 
 
@@ -500,6 +516,10 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Reflection_ParameterInfo), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Reflection_ParameterInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ParameterInfo));
+
+
+
 	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
 
 
@@ -521,6 +541,30 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_Sys
 
 
 {
+
+
+
+	static const bool chaos_warned_16547187 = []() {
+
+
+
+		CHAOS_IL2CPP_LOG_WARN("ExternalRuntimeFallback",
+
+
+
+			"catch-all helper invoked: System.Private.CoreLib/System.Object — no native body; delegates to Phase 1/2, else returns 0");
+
+
+
+		return true;
+
+
+
+	}();
+
+
+
+	(void)chaos_warned_16547187;
 
 
 
@@ -3050,6 +3094,9 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 
 
+
+
+
 	static const ModuleDescriptor s_native_aot_module = {
 
 
@@ -3848,25 +3895,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayRefHelper_RunArrayRef(vo
 	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-	CHAOS_IL2CPP_INTPTR _s4{};
-
-
-	CHAOS_IL2CPP_INT64 _i0{};
-
-
-	CHAOS_IL2CPP_INT64 _i1{};
-
-
-	CHAOS_IL2CPP_INT64 _i2{};
-
-
-	CHAOS_IL2CPP_INT64 _i3{};
-
-
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 32) chaos_eval_stack{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_eval_stack{};
 
 
 	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;
@@ -3881,10 +3910,7 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayRefHelper_RunArrayRef(vo
 	chaos_locals[0] = _s0;
 
 
-	_acc_0 = _s0;
-
-
-	_i0 = _acc_0;
+	_s0 = chaos_locals[0];
 
 
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -3893,19 +3919,19 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayRefHelper_RunArrayRef(vo
 	_s2 = 0;
 
 
-	_i3 = _acc_0;
-
-
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-
-
 	{
 
 
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s4);
+		auto chaos_value_raw = _s2;
 
 
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_i3);
+		auto chaos_value = chaos_value_raw;
+
+
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+
+
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
 
 
 		if (chaos_array == nullptr)
@@ -3932,19 +3958,49 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayRefHelper_RunArrayRef(vo
 		}
 
 
-		const auto chaos_element = chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)));
 
 
-		_s3 = chaos_element;
+		chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+
+
+		GC_END_STUBBORN_CHANGE(chaos_array);
+
+
+		chaos_gc_dirty_card_dst_ref(chaos_array, reinterpret_cast<const void*>(chaos_value));
 
 
 	}
 
 
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = chaos_locals[0];
 
 
-	return static_cast<CHAOS_IL2CPP_INT32>(_s3);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+
+
+	{
+
+
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+
+
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+
+
+		const auto chaos_element = chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+
+
+		_s0 = chaos_element;
+
+
+	}
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+
+
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 
 
 	return {};
@@ -3974,6 +4030,22 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_ArrayRefHelper_RunArrayRef(vo
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 
 extern "C" const int kAotMethodCount = 1;
+
+// ASYNC-P2-8 A1: async iterator shapes encountered during codegen.
+
+// Non-zero means an `async IAsyncEnumerable<T>` / `async IAsyncEnumerator<T>`
+
+// state machine reached emission and could not be lowered. Those methods were
+
+// emitted as explicitly-labelled stubs; gate on this count rather than trusting
+
+// a green build. See docs/dev/in-progress/async-task-industrialization/
+
+// async-iterator-recon-2026-09-11.md.
+
+extern "C" const int kUnsupportedAsyncIteratorCount = 0;
+
+extern "C" const char* const kUnsupportedAsyncIteratorSubjects[1] = { nullptr };
 
 
 
