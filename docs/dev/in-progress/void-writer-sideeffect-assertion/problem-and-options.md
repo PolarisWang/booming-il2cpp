@@ -93,7 +93,7 @@ struct WriterState {
    ```
 4. 断言通过 → 该 subject 成为 `real`
 
-### 3.3 🔴 JSON 侧：**不是"加断言"，是"从零实现"**（修正）
+### 3.3 ⚠️ JSON 侧（此节结论**已被 §7 推翻**，保留作纠错记录）
 
 **初版判断错误**（曾写「JSON writer 大部分已实现，只缺 4 个容器方法」）——
 那是基于 `grep '函数总数 37 vs RaiseManagedException 7'` 的**误判**：
@@ -160,8 +160,135 @@ void ChaosUtf8JsonWriterWriteStringStr(...) noexcept
 
 | # | 问题 | 状态 |
 |:-:|:-----|:-----|
-| 1 | JSON writer 的输出从哪读（内部缓冲 vs IBufferWriter）？ | ❌ **未查** —— 需 spike |
-| 2 | ATG 如何识别"这是 writer 类"？ | ❌ 未定 |
-| 3 | 断言的期望值从哪来（probe 记录 vs .NET 8 实测）？ | ❌ 未定 |
+| 1 | ~~JSON writer 是否未实现~~ | ✅ **已澄清**：是 bare-object 语义复刻，native 行为正确（见 §7） |
+| 2 | JSON 侧断言什么？ | ✅ **已明确**：断言「抛 `InvalidOperationException`」（bare writer 的托管契约） |
+| 3 | ATG 如何识别"这是 writer 类"？ | ✅ `TestEmitter.cs:985-1030` **已有**显式列表 |
+| 4 | 断言的期望值从哪来？ | ⚠️ **未定**：probe 记录 vs .NET 8 实测 |
+| 5 | XML 侧输出读取接口的实现细节 | ⚠️ 未定 |
 
-**blocking_questions 非空 → 不得进入 writing-plans。**
+**仍有 2 项未清 → 不得进入 writing-plans。**
+
+---
+
+## 7. 🔴 重大修正：JSON 侧不是「未实现」，是「bare object 语义复刻」
+
+**本文档 §3.3 的「JSON 未实现」结论错误** —— 第二次判断失误。
+
+### 根因：ATG fixture 用 `GetUninitializedObject` 造对象
+
+`TestEmitter.cs:985-992` 的注释是决定性的：
+
+> *"ATG subjects construct this type through `SubjectInstanceFactory.Create<Utf8JsonWriter>()`
+> — a **bare** `GetUninitializedObject` instance whose instance methods throw
+> ObjectDisposedException / InvalidOperationException / ArgumentNullException
+> from the managed implementation. The native stubs (json_writer_stubs.cpp)
+> **replicate those contracts**."*
+
+### .NET 实测验证（本日）
+
+```csharp
+var w = (Utf8JsonWriter)RuntimeHelpers.GetUninitializedObject(typeof(Utf8JsonWriter));
+w.WriteString("k", "v");
+// → InvalidOperationException: Cannot write a JSON property within an array
+//   or as the first JSON token. Current token type is 'None'.
+```
+
+**对 bare writer 调用 WriteString 本来就抛 `InvalidOperationException`。**
+
+**native stub 的行为是正确的** —— 它在复刻 .NET 的 bare-object 语义。
+
+### 结论：JSON 与 XML 的性质**其实相同**
+
+| | XML writer | JSON writer |
+|:--|:----------:|:-----------:|
+| ATG fixture | `new XmlTextWriter(new StringWriter())`（**已初始化**） | `GetUninitializedObject`（**bare**） |
+| .NET 语义 | 正常写入 | 抛 `InvalidOperationException` |
+| native 行为 | 真实写入 | 复刻抛异常 |
+| **性质** | 已实现，缺断言 | **同样"实现"了（复刻语义），缺断言** |
+
+**两条线的工作性质相同**：都是「fixture 构造方式决定了语义，native 已复刻，
+但 void 返回无法断言」。
+
+### 我的两次判断失误记录
+
+| 次序 | 结论 | 错因 |
+|:----:|:-----|:-----|
+| 1 | "JSON 大部分已实现" | `grep '函数总数 vs RaiseManagedException'` 计数误判（内部调 `RaiseDisposedOrInvalid`） |
+| 2 | "JSON 未实现" | 没看 ATG 的 fixture 注释，误把"复刻异常语义"当成"没实现" |
+
+**教训**：判断实现程度**不能只看 native 代码有无"写入操作"** ——
+必须结合 **ATG 的 fixture 构造方式**判断期望语义。
+
+---
+
+## 8. 方案拍板（2026-09-20，用户确认）
+
+### 8.1 Blocker 1 清零：期望值来源 = 扩 probe 自动捕获
+
+**已确认可行**：`ProbeEmitter.cs` 已有 `serializableOutRefs` / `_outValues`
+捕获机制（`:250-256`），可**复用同一模式**扩展为捕获 writer 输出。
+
+```csharp
+// ProbeResult 现有字段（Models.cs:44-55）
+bool HasException,
+string? ExceptionType,        // ← JSON 侧断言直接用这个
+IReadOnlyList<string>? OutRefValues  // ← 扩展基础
+```
+
+**JSON 侧**：`HasException` + `ExceptionType` **已足够**（断言"抛 InvalidOperationException"）
+**XML 侧**：需扩展捕获「调用后的 writer 输出文本」
+
+### 8.2 Blocker 2 清零：新增 native 读取接口
+
+**用户拍板**：新增 `ChaosXmlWriterGetOutput(handle) -> managed string`
+
+**约束**（`xml_writer_stubs.cpp:15` 注释）：
+> *"the buffer is owned here; **recovery of the text is out of scope** for the write-path subset"*
+
+→ 该接口是**新增能力**，需实现：
+1. 读 `WriterState::buf`（已存在，含完整输出）
+2. 转成托管字符串返回（参考 `alloc_string` / `ChaosStringCreateFromUtf8`）
+
+### 8.3 最终方案
+
+| 侧 | 断言什么 | 期望值来源 | native 改动 |
+|:---|:---------|:-----------|:-----------|
+| **XML** | 调用后的输出文本 | 扩 probe 捕获 | 新增 `GetOutput` |
+| **JSON** | 抛出的异常类型 | `ProbeResult.HasException/ExceptionType`（已有） | 无 |
+
+### 8.4 边界
+
+**In scope**：
+- `XmlTextWriter` 的 void 写入方法（~50 个）
+- `Utf8JsonWriter` 的 void 方法（~104 个）
+- ATG：为这两类生成副作用断言（复用 `TestEmitter.cs:985-1030` 已有的识别列表）
+
+**非目标**：
+- `Task`/`ValueTask` 返回的 async 方法（47 个）—— 属 async 主线
+- 非 writer 类的 void 方法
+- 不改 fact 的 `real` 判据本身
+
+---
+
+## 9. 问题清零
+
+### blocking_questions: ✅ 已清零
+
+| # | 问题 | 结论 |
+|:-:|:-----|:-----|
+| 1 | JSON 是否未实现 | ✅ bare-object 语义复刻，native 正确（§7） |
+| 2 | JSON 断言什么 | ✅ 抛出的异常类型 |
+| 3 | ATG 如何识别 writer 类 | ✅ `TestEmitter.cs:985-1030` 已有显式列表 |
+| 4 | 期望值从哪来 | ✅ 扩 probe 自动捕获（§8.1） |
+| 5 | XML 输出读取 | ✅ 新增 `ChaosXmlWriterGetOutput`（§8.2） |
+
+### watch_items
+
+- W1：JSON 侧的 `WriteTo(Utf8JsonWriter)` 是 `JsonDocument/JsonElement` 的方法，
+  期望 `ArgumentNullException` —— 与 writer 自身方法的期望**不同**，需分别处理
+- W2：AOT/JIT 口径不一致（356 条）—— 本任务不处理，已记录
+- W3：probe 扩展会改变 `ProbeResult` schema —— 需确认下游兼容
+
+## 10. 下一步入口
+
+**blocking_questions = [] → 可进入 `writing-plans`**

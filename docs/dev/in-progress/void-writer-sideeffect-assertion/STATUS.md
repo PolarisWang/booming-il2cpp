@@ -10,12 +10,11 @@ current_dir: docs/dev/in-progress/void-writer-sideeffect-assertion
 关键文档:
   - problem-and-options.md
 
-blocking_questions:
-  - JSON writer 需从零实现，"XML+JSON 一起"的前提已被推翻 —— 需重新拍板范围
-  - ATG 如何识别"这是 writer 类"（未定）
-  - 断言的期望值从哪来（probe 记录 vs .NET 8 实测，未定）
-question_clearance: NOT-cleared
-clearance_confirmed_by_user: false
+blocking_questions: []
+question_clearance: cleared
+clearance_confirmed_by_user: true
+dispatch_model: sequential
+recommended_next_child: P0-01
 ```
 
 ## 问题
