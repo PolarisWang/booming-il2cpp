@@ -166,7 +166,19 @@ public sealed partial class NativeAotLoweringPlanner
         // (when IL data is embedded) or returns the graceful fallback default (when not).
         // Emitting FAIL here would crash any compiled caller that direct-calls the
         // display-class constructor.
-        if (method.SubjectId is not null && method.SubjectId.Contains("<>c::", StringComparison.Ordinal))
+        //
+        // SCOPE GUARD: only the constructors carry a `<>c::.<member>` that the
+        // structured emitter cannot lower (their newobj pushes an object onto the
+        // eval stack, which this body emitter has no slot for).  Lambda bodies —
+        // `<>c::<Enclosing> b__N` — are ordinary IL (e.g. `ldc.i4 0; ret`) and
+        // DO lower fine.  Matching the bare `<>c::` prefix starved every lambda of a
+        // real body and routed it to the Phase-3 NotImplementedException path
+        // (measured 12/12 in the threading chunk); the `b__` guard keeps the
+        // constructors on the fallback while letting lambdas emit normally.
+        var _isDisplayClassCtor = method.SubjectId is not null
+            && method.SubjectId.Contains("<>c::", StringComparison.Ordinal)
+            && !IsLambdaBodySubjectId(method.SubjectId);
+        if (_isDisplayClassCtor)
         {
             builder.AppendLine("// Interpreter-dispatch stub (display-class): " + method.SubjectId);
             var _fnDecl = FormatMethodDeclaration(method, _sharedContextSymbols);
@@ -700,6 +712,24 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         return false;
+    }
+
+    /// <summary>
+    /// True when a subject id is a compiler-generated closure (lambda) body, i.e.
+    /// a `<>c::&lt;Enclosing&gt;...b__N...` method.  Used to exclude lambdas from the
+    /// display-class-ctor fallback: those bodies are ordinary IL and lower fine,
+    /// while the `<>c::.ctor/.cctor` constructors are what the structured emitter
+    /// cannot handle.
+    /// </summary>
+    private static bool IsLambdaBodySubjectId(string subjectId)
+    {
+        if (string.IsNullOrEmpty(subjectId)) return false;
+        var afterCc = subjectId.Split(new[] { "<>c::" }, StringSplitOptions.None);
+        if (afterCc.Length < 2) return false;
+        var tail = afterCc[^1];
+        // Lambda bodies read like <>c::<EnsureInitialized_3_...>b__14_0; the
+        // constructors are <>c::.ctor / <>c::.cctor, distinguishable by b__.
+        return tail.Contains("b__", StringComparison.Ordinal);
     }
 
 }
