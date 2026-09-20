@@ -19,7 +19,7 @@ public static class Classifier
     /// Maps a matrix (typeName, memberName) to the native Chaos* symbol that
     /// implements it. Derived from src/native/runtime-core/reflection_api.h.
     /// </summary>
-    private static readonly Dictionary<string, string[]> KnownNativeImpls = new(StringComparer.Ordinal)
+    public static readonly Dictionary<string, string[]> KnownNativeImpls = new(StringComparer.Ordinal)
     {
         // ── Type resolution ──────────────────────────────────────────
         ["Type.GetTypeFromHandle"] = new[] { "ChaosReflectionGetTypeFromHandle" },

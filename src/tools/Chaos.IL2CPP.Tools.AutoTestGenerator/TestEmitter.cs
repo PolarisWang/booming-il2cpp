@@ -440,6 +440,36 @@ public sealed class TestEmitter
         set.ArgumentExpressions.Any(a =>
             a.StartsWith("default(", StringComparison.Ordinal) && a.TrimEnd().EndsWith("!"));
 
+    /// <summary>
+    /// True when the (declaring type, method) has a known native reflection
+    /// implementation (ApiSurfaceScanner Classifier.KnownNativeImpls).  For
+    /// these methods the AOT body calls the real native symbol — the managed
+    /// probe's recorded exception is the REAL contract (BCL behavior), so the
+    /// generated subject must assert the throw instead of emitting the
+    /// AOT-STUB-GAP `return 42L` marker that hides the implementation.
+    /// </summary>
+    private static bool HasKnownNativeImpl(MethodSignature method)
+    {
+        var declaring = method.DeclaringTypeFullName;
+        if (string.IsNullOrEmpty(declaring)) return false;
+        var lastDot = declaring.LastIndexOf('.');
+        var bareType = lastDot >= 0 ? declaring[(lastDot + 1)..] : declaring;
+        var memberName = method.Name;
+        foreach (var key in Chaos.IL2CPP.Tools.ApiSurfaceScanner.Classifier.KnownNativeImpls.Keys)
+        {
+            var dot = key.IndexOf('.');
+            if (dot < 0) continue;
+            if (!string.Equals(key[..dot], bareType, StringComparison.Ordinal)) continue;
+            var keyMember = key[(dot + 1)..];
+            if (string.Equals(keyMember, memberName, StringComparison.Ordinal)) return true;
+            // Accessor normalization: KnownNativeImpls is written from the
+            // contract viewpoint ("get_Name"); the probe records bare names.
+            if (keyMember.StartsWith("get_", StringComparison.Ordinal) && keyMember[4..] == memberName) return true;
+            if (keyMember.StartsWith("set_", StringComparison.Ordinal) && keyMember[4..] == memberName) return true;
+        }
+        return false;
+    }
+
     private void AppendAssert(StringBuilder sb, int mi, MethodSignature method, ValueSet set,
         ProbeResult? result, string callExpr, bool hasRefParam, bool hasAnyValidSet,
         bool isExternalAssembly, bool isPlainTask, bool isGenericTask)
@@ -475,7 +505,13 @@ public sealed class TestEmitter
             // Un-reproduced external stub: keep the [UNVERIFIED] skip.  The stub
             // returns default instead of throwing, so an Assert.Throws here would
             // fail against correct AOT code.
-            if (isExternalAssembly)
+            // S1 (reflection-final): methods with a known native implementation
+            // must NOT get the AOT-STUB-GAP marker — their AOT body calls the
+            // real native symbol, so the recorded exception is the real
+            // contract and must be asserted (falls through to the Throws
+            // emission below).  The marker stays only for methods the
+            // Classifier maps to no native symbol.
+            if (isExternalAssembly && !HasKnownNativeImpl(method))
             {
                 // P0-B (json-xml-production-readiness): emit an explicit machine-
                 // readable marker in addition to the human comment.  The fact layer
