@@ -457,16 +457,29 @@ public sealed class TestEmitter
             // "both sides throw" contract the caller actually depends on.
             if (isExternalAssembly && ExternalStubRaisesManagedException(method))
             {
-                // External stub that SHOULD throw but AOT body doesn't: catch any
-                // throw (if one happens) or fail with a bare throw if nothing was
-                // thrown.  We use a raw try/catch instead of Assert.ThrowsAny<>
-                // because Assert.Fail returns void and triggers C3313 in the
-                // generated C++ (const void chaos_result = Assert.Fail()).  A bare
-                // `throw` here translates to CHAOS_EH_THROW at runtime and hits
-                // the subject's enclosing catch, producing a real failed result.
+                // External stub that SHOULD throw, and whose AOT body now reproduces
+                // the managed exception (the shape must be registered first — see
+                // memory shape-registration-must-be-verified-by-generated-symbols).
+                //
+                // Assert BOTH halves with a raw try/catch instead of Assert.ThrowsAny<>:
+                //   - the expected exception type is thrown (typed catch)
+                //   - nothing else is, and it does not silently return
+                // Assert.Fail is avoided because it returns void and triggers C3313 in
+                // the generated C++ (const void chaos_result = Assert.Fail()); a bare
+                // `throw` translates to CHAOS_EH_THROW and hits the subject's enclosing
+                // catch, producing a real failed result.
+                //
+                // The typed catch is what makes this a real check rather than a smoke
+                // test: `catch { }` passed for ANY exception (and for a catch-all helper
+                // that merely returns 0, the self-thrown sentinel below made it pass
+                // too).  Measured on the JSON/XML line, the typed form surfaced 27
+                // subjects that had been silently passing; see
+                // void-writer-sideeffect-assertion/notes-stepA-spike2.md.
                 if (!hasRefParam)
                     sb.AppendLine(
-                        "            try { " + callExpr + @"; throw new System.Exception(""AOT stub did not throw""); } catch { }");
+                        "            try { " + callExpr + @"; throw new System.Exception(""AOT stub did not throw""); }" +
+                        $" catch ({result.ExceptionType}) {{ }}" +
+                        @" catch { throw new System.Exception(""wrong exception type""); }");
                 else
                     sb.AppendLine($"            // [smoke] {result.ExceptionType} thrown by {callExpr} (ref/out param cannot wrap in lambda)");
                 return;
