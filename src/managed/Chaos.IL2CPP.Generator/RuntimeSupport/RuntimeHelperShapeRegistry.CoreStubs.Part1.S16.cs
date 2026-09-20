@@ -1668,6 +1668,39 @@ public sealed partial class NativeAotLoweringPlanner
                         DirectNativeSymbol: "chaos_task_delay_stub");
                 }));
 
+            // ── Task lifecycle no-ops — RunSynchronously / Dispose / CECP::Complete ──
+            // These had no shape: the catch-all delegated to the Phase 1/2 interpreter,
+            // whose managed body parked forever on the AsyncTask-handle receivers
+            // (Create<Task> now supplies live completed tasks) — hanging the whole
+            // fact run.  On the probe receivers they are honest no-ops.
+            registry.Register("System.Threading.Tasks.Task", "RunSynchronously", [],
+                ShapeKind.SimpleForward, "chaos_noop_void",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+            registry.Register("System.Threading.Tasks.Task", "RunSynchronously", ["System.Threading.Tasks.TaskScheduler"],
+                ShapeKind.SimpleForward, "chaos_noop_void",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+            registry.Register("System.Threading.Tasks.Task", "Dispose", [],
+                ShapeKind.SimpleForward, "chaos_noop_void",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+            registry.Register("System.Threading.Tasks.ConcurrentExclusiveSchedulerPair", "Complete", [],
+                ShapeKind.SimpleForward, "chaos_noop_void",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot()),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0 });
+
             // Task.WhenAll(Task[])/Task.WhenAny(Task[]) — route the array combinator
             // to the native async_stubs helpers (which unpack the managed array and
             // produce an aggregate AsyncTask handle).  Returns the aggregate handle
