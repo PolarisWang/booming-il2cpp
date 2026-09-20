@@ -21,6 +21,13 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
+from verification.platforms import (
+    PatchLinkUnsupported,
+    select_strategy,
+    spec_for_current_platform,
+    verify_patch_active,
+    verify_patch_objects_linked,
+)
 from verification.stages.gating import classify_gate  # S1/S2 fact gate
 
 # Ensure testing/ is on sys.path so _pipeline.tool_helpers can be imported
@@ -48,20 +55,22 @@ class _HostArraysRebuildUnsupported(Exception):
     a *failure* (which returns False).  (#2)"""
 
 
-def _msvc_toolchain_available() -> bool:
-    """Whether the MSVC toolchain is actually active for this build.
+def _patch_link_strategy():
+    """The strategy that will make the patch symbols win on this platform.
 
-    The distinct-linking host-array patch relies on MSVC's /FORCE:MULTIPLE
-    (cl.exe/link.exe option).  clang-cl and MinGW also set sys.platform=='win32'
-    yet lack /FORCE:MULTIPLE, so a bare platform check is insufficient (#4)."""
-    if sys.platform != "win32":
-        return False
-    # cl.exe/link.exe on PATH (a 'Developer Prompt' / post-vcvars shell), or MSVC
-    # toolchain exported env vars (VS-imported CMake / msbuild set these).
-    if shutil.which("cl.exe") or shutil.which("link.exe"):
-        return True
-    return any(os.environ.get(v) for v in
-               ("VCToolsInstallDir", "VCINSTALLDIR", "VSINSTALLDIR", "VisualStudioVersion"))
+    Raises _HostArraysRebuildUnsupported when the platform offers no way to do
+    it.  The platform knowledge itself lives in verification/platform/ — this
+    stage no longer branches on sys.platform or on which compiler is installed.
+
+    Note this is genuinely different from "the build failed": an unsupported
+    toolchain is a legitimate skip (there is nothing to fix), whereas a strategy
+    that was selected and then failed is a failure the caller must report.
+    """
+    spec = spec_for_current_platform()
+    try:
+        return spec, select_strategy(spec.patch_link_strategies, spec.layout, spec.linker)
+    except PatchLinkUnsupported as exc:
+        raise _HostArraysRebuildUnsupported(str(exc)) from exc
 
 
 def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | None = None) -> bool:
@@ -277,34 +286,6 @@ def _regenerate_host_arrays(ctx, metadata: dict) -> bool:
     return True
 
 
-def _check_build_order(build_output: str, probe: str, must_precede: str) -> bool | None:
-    """Return whether `probe` compiled (in the cmake/msbuild build log) before `must_precede`.
-
-    Because MSVC /FORCE:MULTIPLE keeps the FIRST-compiled duplicate (LNK4006), merely
-    linking both files is insufficient — the *source order* decides which symbol wins.
-    MSBuild (VS generator) prints compilation lines alphabetically-ish per project, so we
-    look at the relative log position of the two *.cpp->*.obj compile steps (#1).
-
-    Returns:
-      * True  — order determined and `probe` comes first (patch symbols win).
-      * False — order determined and `probe` comes after (sentinel wins) → caller must fail.
-      * None  — the build log doesn't let us infer order (non-MSBuild generator / parallel
-                output); caller should fall back to a weaker existence check.
-    """
-    lines = [ln.strip() for ln in build_output.splitlines()]
-    probe_idx = None
-    precede_idx = None
-    for i, ln in enumerate(lines):
-        low = ln.lower()
-        if probe.lower() in low and probe_idx is None:
-            probe_idx = i
-        if must_precede.lower() in low and precede_idx is None:
-            precede_idx = i
-    if probe_idx is None or precede_idx is None:
-        return None
-    return probe_idx < precede_idx
-
-
 def _incremental_rebuild(ctx) -> bool:
     """Incremental cmake rebuild of entry.exe with patch-host-arrays.cpp linked.
 
@@ -335,21 +316,22 @@ def _incremental_rebuild(ctx) -> bool:
 
     import glob as _glob
 
-    # MSVC toolchain check (#4): /FORCE:MULTIPLE is a link.exe option required for the
-    # distinct-linking approach.  clang-cl/MinGW report sys.platform=='win32' too but do
-    # NOT provide it, so detect the MSVC toolchain rather than just the OS.
-    if not _msvc_toolchain_available():
-        raise _HostArraysRebuildUnsupported(
-            "MSVC toolchain not detected (cl.exe/link.exe not on PATH, no MSVC env "
-            "markers) — /FORCE:MULTIPLE required for duplicate-symbol host-array "
-            "relink; incremental rebuild unavailable on this toolchain")
+    # Which platform are we on, and how will the patch symbols be made to win?
+    # Raises _HostArraysRebuildUnsupported when the platform offers no way to do
+    # it — a legitimate skip, not a failure.
+    _spec, _strategy = _patch_link_strategy()
+    print(f"  [hotupdate] platform={_spec.name} linker={_spec.linker.name} "
+          f"strategy={_strategy.name}")
 
-    # Delete stale .obj to force MSBuild recompilation
-    obj_pattern = str(build_dir / "chaos_entry.dir" / "RelWithDebInfo" / "patch-host-arra*")
+    _config = "RelWithDebInfo"
+    _layout = _spec.layout
+
+    # Delete stale objects to force recompilation of the patch file.
+    obj_pattern = _layout.object_glob(build_dir, _config, "patch-host-arra")
     stale_objs = _glob.glob(obj_pattern)
     for o in stale_objs:
         os.remove(o)
-        print(f"  [hotupdate] Removed stale .obj: {os.path.basename(o)}")
+        print(f"  [hotupdate] Removed stale object: {os.path.basename(o)}")
 
     # Touch source to ensure timestamp changes
     os.utime(str(src_file), None)
@@ -451,7 +433,7 @@ def _incremental_rebuild(ctx) -> bool:
             print(f"  [hotupdate] cmake configure FAILED (rc={reconf.returncode})")
             return False
 
-        cmd = [cmake, "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "chaos_entry"]
+        cmd = [cmake, "--build", str(build_dir), "--config", _config, "--target", "chaos_entry"]
         print(f"  [hotupdate] Incremental rebuild...")
         result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=300)
         if result.returncode != 0:
@@ -460,30 +442,22 @@ def _incremental_rebuild(ctx) -> bool:
             print(f"  [hotupdate] Rebuild FAILED (rc={result.returncode})")
             return False
 
-        src = build_dir / "RelWithDebInfo" / "chaos_entry.exe"
+        src = _layout.executable(build_dir, _config, "chaos_entry")
         dst = ctx.chunk_dir / "native" / "entry.exe"
         if src.exists():
-            # Verify actual link order (#1): the build output should show the compilation order
-            # of source files.  If patch-host-arrays.cpp compiles AFTER runtime-patchdata.cpp,
-            # /FORCE:MULTIPLE keeps the sentinel symbols (0 patches) and the rebuild is a
-            # false-positive pass.  If the build output does not contain the compilation order
-            # (non-MSBuild generators), fall back to the .obj existence check.
-            if not _patched_cmake:
-                build_output = (result.stdout or "") + (result.stderr or "")
-                _order_ok = _check_build_order(build_output, "patch-host-arrays.cpp", "runtime-patchdata.cpp")
-                if _order_ok is False:
-                    print(f"  [hotupdate] ERROR: patch-host-arrays.cpp compiled AFTER "
-                          f"runtime-patchdata.cpp — /FORCE:MULTIPLE keeps the first "
-                          f"(sentinel). Returning failure to avoid false-positive pass.")
-                    return False
-                if _order_ok is None:
-                    # Build output didn't show compilation order — fall back to .obj existence
-                    fresh_objs = _glob.glob(str(build_dir / "chaos_entry.dir" / "RelWithDebInfo" / "patch-host-arra*"))
-                    if not fresh_objs:
-                        print(f"  [hotupdate] ERROR: No patch-host-arra*.obj found after rebuild — "
-                              f"patch was NOT linked. Returning failure to avoid false-positive pass.")
-                        return False
-                    print(f"  [hotupdate] patch-host-arra*.obj found, patch linked (order undetermined).")
+            # Confirm the patch file actually contributed an object.  This
+            # catches "the CMakeLists surgery silently did nothing", which
+            # otherwise looks exactly like success.
+            #
+            # Whether the patch *became active* is checked later, from the
+            # stage's own --hotupdate run (see verify_patch_active) — that run
+            # carries --patch-data, so it is the only one where "did patches
+            # apply" is a meaningful question.
+            if not verify_patch_objects_linked(_layout, build_dir, _config, "patch-host-arra"):
+                print(f"  [hotupdate] ERROR: no patch-host-arrays object found after "
+                      f"rebuild ({_layout.name} layout) — patch was NOT linked. "
+                      f"Returning failure to avoid a false-positive pass.")
+                return False
             shutil.copy2(src, dst)
             print(f"  [hotupdate] Rebuilt entry.exe: {dst.name} ({src.stat().st_size} bytes)")
             return True
@@ -809,6 +783,25 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         if total > 0 and len(baseline_fact) != total:
             json_truncated = True
             print(f"  [hotupdate] WARNING: JSON truncated — expected {total} baseline entries, got {len(baseline_fact)}")
+
+    # ── Patch-activation check ──
+    # Replaces the old MSBuild-log compile-order inference.  Order is now
+    # *guaranteed* by construction: the patch file is listed first in
+    # CHAOS_ENTRY_SOURCES (CMake preserves add_executable source order on every
+    # generator we use) and the linker keeps the first definition (MSVC
+    # LNK4006 / GNU ld --allow-multiple-definition — semantics verified equal).
+    # So instead of inferring the cause from a build log, observe the outcome:
+    # this run is the one that carried --patch-data, so a zero patch count here
+    # means the sentinel won the link and the build has no patches.
+    if hotupdate_data and patch_data_path:
+        _active, _detail = verify_patch_active(hotupdate_data)
+        if not _active:
+            return StageResult(
+                stage="hotupdate", status="failed",
+                summary=f"patch did not become active: {_detail}",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+        print(f"  [hotupdate] {_detail}")
 
     passed = hotupdate_data.get("passedMethods", 0)
     failed = hotupdate_data.get("failedMethods", 0)
