@@ -665,16 +665,22 @@ def _get_env_sensitive_subject_ids(ctx: ChunkContext) -> frozenset[str]:
       * ``Random.NextDouble`` / ``NextSingle`` / ``Next*`` return the next value
         of a PRNG stream.  The AOT runtime seeds its own xorshift generator, so
         the probe's sequence (0.490344…, 0.6086793…) is unreproducible.
+      * ``Thread.GetCurrentProcessorId`` / ``Environment.ProcessorCount`` /
+        ``Environment.TickCount*`` report a property of the *host* the probe
+        ran on.  The probe baked in its own machine's numbers (e.g. 6 logical
+        CPUs); a 24-core host cannot reproduce them, and neither can a CI
+        runner with yet another shape.
 
-    Neither is a defect in the method under test: the AOT implementation is
+    None is a defect in the method under test: the AOT implementation is
     correct, the *expectation* is not portable.  Bucketing them as
     ``realDefect`` sends them to the bug backlog forever.
 
     Detection is by return-type-independent body shape: the call is to a
-    System.GC snapshot accessor or a System.Random sampling accessor, and the
-    Assert compares against a literal that ATG captured.  Deliberately narrow —
-    GC.CollectionCount documented as ">= 0" style properties, and Random
-    methods that take an explicit seed, are NOT matched here.
+    System.GC snapshot accessor, a System.Random sampling accessor, or a
+    host-environment accessor, and the Assert compares against a literal that
+    ATG captured.  Deliberately narrow — GC.CollectionCount documented as
+    ">= 0" style properties, and Random methods that take an explicit seed,
+    are NOT matched here.
 
     Returns a frozenset of ``generatedMethodId`` values.
     """
@@ -692,6 +698,19 @@ def _get_env_sensitive_subject_ids(ctx: ChunkContext) -> frozenset[str]:
         r'GetAllocatedBytesForCurrentThread|GetTotalAllocatedBytes)\s*\('
         r'|'
         r'\.Next(?:Double|Single|Int64|Bytes)\s*\('
+        r'|'
+        # Host property, not a function of the inputs: processor count, the
+        # calling thread's processor id, and the tick counters all describe the
+        # machine/process the probe ran on.  Measured case: a
+        # `Thread.GetCurrentProcessorId_60__0` subject asserting AreEqual(6, …)
+        # because the probe host had 6 logical CPUs — unreproducible on any
+        # other host, and equally unreproducible by the AOT runtime which has no
+        # native body for the accessor at all.
+        r'\.GetCurrentProcessorId\s*\('
+        r'|'
+        r'(?:global::System\.)?Environment\.ProcessorCount\b'
+        r'|'
+        r'(?:global::System\.)?Environment\.TickCount(?:64)?\b'
     )
 
     ids: set[str] = set()

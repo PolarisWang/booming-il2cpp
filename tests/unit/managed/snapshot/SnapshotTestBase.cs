@@ -43,10 +43,20 @@ public abstract class SnapshotTestBase
             var fixtureAssemblyDll = Path.Combine(
                 testProjectDir, "FixtureAssembly", "bin", "SnapshotTestFixtures.dll");
             var dllDest = Path.Combine(tempDir, "SnapshotTestFixtures.dll");
-            if (File.Exists(fixtureAssemblyDll))
+            if (!File.Exists(fixtureAssemblyDll))
             {
-                File.Copy(fixtureAssemblyDll, dllDest, overwrite: true);
+                // Fail here, naming the missing prerequisite.  Silently skipping
+                // the copy (the previous behaviour) let the emitter run without
+                // its input assembly and surface as "Entry method ... not found"
+                // / FileNotFoundException from deep inside the planner, which
+                // reads as a codegen defect rather than an unbuilt fixture.
+                throw new FileNotFoundException(
+                    $"Fixture support assembly not built: {fixtureAssemblyDll}. " +
+                    "Run: dotnet build tests/unit/managed/snapshot/FixtureAssembly/ " +
+                    "(the project is not a ProjectReference of the test csproj, so " +
+                    "`dotnet test` alone does not build it).", fixtureAssemblyDll);
             }
+            File.Copy(fixtureAssemblyDll, dllDest, overwrite: true);
 
             // Switch CWD to tempDir so relative paths in closure manifest resolve correctly
             Environment.CurrentDirectory = tempDir;
@@ -71,7 +81,8 @@ public abstract class SnapshotTestBase
             foreach (var source in result.GeneratedSources)
             {
                 var baselineFile = Path.Combine(baselineDir, source.RelativePath);
-                var normalizedContent = NormalizeLineEndings(source.Contents);
+                var normalizedContent = NormalizeVolatileFields(
+                    NormalizeLineEndings(source.Contents), source.RelativePath);
 
                 if (isUpdateMode || !File.Exists(baselineFile))
                 {
@@ -83,8 +94,9 @@ public abstract class SnapshotTestBase
                 }
                 else
                 {
-                    var baselineContent = NormalizeLineEndings(
-                        File.ReadAllText(baselineFile));
+                    var baselineContent = NormalizeVolatileFields(
+                        NormalizeLineEndings(File.ReadAllText(baselineFile)),
+                        source.RelativePath);
 
                     if (!string.Equals(baselineContent, normalizedContent, StringComparison.Ordinal))
                     {
@@ -136,6 +148,93 @@ public abstract class SnapshotTestBase
         throw new DirectoryNotFoundException(
             "Could not locate repository root (.git entry). " +
             "Run tests from within the booming-il2cpp repository.");
+    }
+
+    /// <summary>
+    /// Emit a fixture once in a scratch directory and return the
+    /// <c>RelativePath</c> of the FIRST generated source — i.e. the file whose
+    /// baseline a mismatch would be reported against.
+    /// </summary>
+    /// <remarks>
+    /// Exists so the negation test does not pin emission ORDER.  Asserting a
+    /// specific file name couples the test to an implementation detail that has
+    /// already changed once (the capability manifest now precedes the .cpp), and
+    /// it broke for that reason alone.  The scratch emit never touches the
+    /// committed baselines.
+    /// </remarks>
+    protected static string ProbeFirstEmittedSourceRelativePath(string fixtureName)
+    {
+        var repoRoot = LocateRepoRoot();
+        var testProjectDir = Path.Combine(
+            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.CodeGen.SnapshotTests");
+        // Honour whichever tree this test assembly actually came from.
+        var baseDir = AppContext.BaseDirectory;
+        if (baseDir.Contains("tests" + Path.DirectorySeparatorChar + "unit"))
+        {
+            testProjectDir = Path.Combine(repoRoot, "tests", "unit", "managed", "snapshot");
+        }
+
+        var fixtureDir = Path.Combine(testProjectDir, "Fixtures", fixtureName);
+        var tempDir = Path.Combine(
+            Path.GetTempPath(), $"snapshot-probe-{fixtureName}-{Guid.NewGuid():N}");
+
+        var originalCwd = Environment.CurrentDirectory;
+        try
+        {
+            CopyDirectory(fixtureDir, tempDir);
+
+            var fixtureAssemblyDll = Path.Combine(
+                testProjectDir, "FixtureAssembly", "bin", "SnapshotTestFixtures.dll");
+            if (File.Exists(fixtureAssemblyDll))
+            {
+                File.Copy(fixtureAssemblyDll,
+                    Path.Combine(tempDir, "SnapshotTestFixtures.dll"), overwrite: true);
+            }
+
+            Environment.CurrentDirectory = tempDir;
+            var result = new NativeAotEmitter().Generate(
+                new NativeAotRequest(tempDir, tempDir));
+
+            var first = result.GeneratedSources.FirstOrDefault();
+            if (first == null)
+            {
+                throw new InvalidOperationException(
+                    $"Fixture '{fixtureName}' emitted no sources; cannot determine " +
+                    "which baseline the harness checks first.");
+            }
+            return first.RelativePath;
+        }
+        finally
+        {
+            Environment.CurrentDirectory = originalCwd;
+            try { Directory.Delete(tempDir, recursive: true); }
+            catch (IOException) { /* best effort */ }
+            catch (UnauthorizedAccessException) { /* best effort */ }
+        }
+    }
+
+    /// <summary>
+    /// Replace fields that vary run-to-run with a fixed placeholder so a
+    /// committed baseline can ever match.
+    /// </summary>
+    /// <remarks>
+    /// The capability manifest stamps <c>"generatedAt": "&lt;DateTime.UtcNow&gt;"</c>
+    /// (RuntimeHelperShapeRegistry.ExportManifest).  Left as-is, every run emits
+    /// different bytes, so no baseline is ever equal to the output: the suite
+    /// reports a mismatch on all 85 fixtures, and <c>SNAPSHOT_UPDATE=1</c>
+    /// "passes" only by writing that run's own timestamp back — which the very
+    /// next clean run then rejects again.  The timestamp carries no information
+    /// about the codegen under test, so it is normalised out of the comparison
+    /// on both sides.
+    /// </remarks>
+    private static string NormalizeVolatileFields(string content, string relativePath)
+    {
+        if (!relativePath.EndsWith("aot-capability-manifest.json", StringComparison.Ordinal))
+            return content;
+
+        return Regex.Replace(content,
+            "(\"generatedAt\"\\s*:\\s*)\"[^\"]*\"",
+            "$1\"<normalized>\"");
     }
 
     /// <summary>

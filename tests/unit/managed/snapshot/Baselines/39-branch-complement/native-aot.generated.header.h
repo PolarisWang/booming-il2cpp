@@ -5,6 +5,7 @@
 #include <chaos/type_info.h>  // MethodTable, TypeInfoV0 (complete type)
 #include "generated_code_compat.h"  // PureTypeHeader for delegate type definitions
 #include "ChaosGeneratedRuntimePrelude.h"  // chaos_managed_array for array-compat checks
+#include "reflection_query_model.h"  // ReflectionQueryImageDescriptor for the REF-RISK-7 image handle
 
 typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
 
@@ -154,6 +155,16 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo : public c
 
 
 
+struct chaos_type_System_Private_CoreLib_System_Reflection_ParameterInfo : public chaos_type_System_Private_CoreLib_System_Object
+
+{
+
+    CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
+
+};
+
+
+
 struct chaos_type_System_Private_CoreLib_System_String
 
 {
@@ -219,6 +230,8 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_MethodBase;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_MethodBase;
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_MethodInfo;
+struct chaos_type_System_Private_CoreLib_System_Reflection_ParameterInfo;
+struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_ParameterInfo;
 struct chaos_type_System_Private_CoreLib_System_String;
 struct chaos_boxed_type_System_Private_CoreLib_System_String;
 struct chaos_type_System_Private_CoreLib_System_Type;
@@ -242,6 +255,7 @@ extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Constructor
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ParameterInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_String;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Type;
 
@@ -259,17 +273,19 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Ref
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodBase;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_ParameterInfo;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type;
 
 extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_BranchCompareBHelper(void);
 extern "C" void chaos_ensure_type_initialized_System_Int32(void);
 extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_BranchUnsignedBHelper(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_ParameterInfo(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Object(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_String(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Action(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_MulticastDelegate(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Delegate(void);
-extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Object(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Type(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_MethodBase(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_MethodInfo(void);
@@ -291,10 +307,19 @@ CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clea
 
 } // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 
+extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_managed(CHAOS_IL2CPP_INTPTR chaos_method_value) noexcept;
+
 extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);
 
-
-// chaos_valuetype_* typedefs (safety net: TPG stub declarations)
-typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
+namespace chaos::il2cpp::codegen::SnapshotTestFixtures {
+// Image this TU publishes as the executing/calling assembly (REF-RISK-7).
+extern const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kReflImage;
+static inline CHAOS_IL2CPP_INTPTR chaos_executing_image_handle() noexcept {
+    const CHAOS_IL2CPP_UINTPTR tag =
+        static_cast<CHAOS_IL2CPP_UINTPTR>(1) << ((sizeof(CHAOS_IL2CPP_UINTPTR) * 8u) - 1u);
+    return static_cast<CHAOS_IL2CPP_INTPTR>(
+        reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kReflImage) | tag);
+}
+}  // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 

@@ -710,7 +710,13 @@ public sealed partial class NativeAotLoweringPlanner
 		// real (consistent) result instead of an unknown gap.
 		bool throwsNotSupported = callee.Contains(
 			"Serialization.Metadata.JsonMetadataServices::Create", StringComparison.Ordinal);
-		var warnGuard = "chaos_warned_" + System.Math.Abs(failSymbol.GetHashCode()).ToString();
+		// Deterministic guard name.  This was `failSymbol.GetHashCode()`, but .NET
+		// randomizes string hash codes per process, so the generated symbol (and
+		// with it the whole translation unit) differed on every run — codegen
+		// that is not reproducible, which fails any byte-comparison gate and
+		// defeats build caching.  FNV-1a over the symbol is stable across runs
+		// and matches the hashing convention already used in this planner.
+		var warnGuard = "chaos_warned_" + ComputeFNVHash(failSymbol.AsSpan()).ToString();
 		var bodyLines = new List<string>
 		{
 			"    static const bool " + warnGuard + " = []() {",
