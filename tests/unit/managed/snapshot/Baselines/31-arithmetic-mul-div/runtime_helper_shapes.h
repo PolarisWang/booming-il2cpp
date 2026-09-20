@@ -869,6 +869,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_THREADING_THREADPOOL_QUEUEUSERWORKITEM_SYSTEM_ACTION_1_SYSTEM_INT32_SYSTEM_BOOLEAN = 0x11A19329u,
     SHAPE_SYSTEM_THREADING_THREADPOOL_UNSAFEQUEUEUSERWORKITEM_SYSTEM_ACTION_1_SYSTEM_INT32_SYSTEM_BOOLEAN = 0xCB48DB9Fu,
     SHAPE_SYSTEM_THREADING_THREAD_ABORT_SYSTEM_OBJECT = 0xFF6159D7u,
+    SHAPE_SYSTEM_THREADING_THREAD_GETCURRENTPROCESSORID = 0xF3394F15u,
     SHAPE_SYSTEM_THREADING_THREAD_GETDOMAINID = 0x7DF084EEu,
     SHAPE_SYSTEM_THREADING_THREAD_GET_CURRENTTHREAD = 0x8CE16B91u,
     SHAPE_SYSTEM_THREADING_THREAD_GET_ISBACKGROUND = 0xD3F202A2u,
@@ -1287,7 +1288,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 1273u,
+    SHAPE_COUNT = 1274u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -5703,6 +5704,10 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_value_task_is_faulted(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_GETCURRENTPROCESSORID) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            chaos_thread_get_current_processor_id(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_GETDOMAINID) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             chaos_thread_get_domain_id(args...));
@@ -6198,7 +6203,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 1273u,
+static_assert(SHAPE_COUNT == 1274u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)
