@@ -169,11 +169,24 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetUninitializedObject(CHAOS_IL2CPP_INTPT
     // already-completed task instead: methods then observe real completed-state
     // semantics (Wait returns immediately, awaiters yield the default result).
     {
-        const char* type_name = LookupTypeNameByInfoPtr(type_info);
-        fprintf(stderr, "[GUO] resolved type_name=%s stable_id=%llu\n", type_name ? type_name : "(null)", static_cast<unsigned long long>(type_info->stable_id));
-        if (type_name != nullptr &&
-            (std::strcmp(type_name, "Task") == 0 ||
-             std::strcmp(type_name, "Task`1") == 0))
+        // Identify task-like receivers by STABLE_ID (FNV64 of the closure-
+        // qualified subject id).  LookupTypeNameByInfoPtr returns null for
+        // codegen TypeInfoHot instances (not module-registered), so name
+        // matching never fired.  Measured fingerprints:
+        //   Task = FNV64("Chaos.TestFramework.Sdk/System.Threading.Tasks.Task")
+        //   ConcurrentExclusiveSchedulerPair = FNV64(".../...ConcurrentExclusiveSchedulerPair")
+        static const CHAOS_IL2CPP_UINT64 kTaskLikeReceiverIds[] = {
+            13973664129490152178ULL,  // System.Threading.Tasks.Task
+            16910075678292704579ULL,  // System.Threading.Tasks.ConcurrentExclusiveSchedulerPair
+        };
+        bool taskLike = false;
+        for (const auto id : kTaskLikeReceiverIds)
+        {
+            if (type_info->stable_id == id) { taskLike = true; break; }
+        }
+        fprintf(stderr, "[GUO] stable_id=%llu taskLike=%d\n",
+                static_cast<unsigned long long>(type_info->stable_id), taskLike ? 1 : 0);
+        if (taskLike)
         {
             // Completed task: the probes immediately Wait()/await the receiver, so
             // a live-but-pending handle would block the fact run forever (timed_out).
