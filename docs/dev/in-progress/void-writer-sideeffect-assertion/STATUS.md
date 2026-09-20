@@ -9,12 +9,13 @@ current_dir: docs/dev/in-progress/void-writer-sideeffect-assertion
 上游: json-xml-industrialization Phase 2 阻塞
 关键文档:
   - problem-and-options.md
+  - plan-v1-01.md
 
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
 dispatch_model: sequential
-recommended_next_child: P0-01
+recommended_next_child: Step-A
 ```
 
 ## 问题
