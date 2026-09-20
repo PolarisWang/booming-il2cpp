@@ -584,14 +584,18 @@ void ChaosXmlWriterWriteFullEndElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 }
 
 /// WriteEndDocument() — closes every open element.
-/// Managed contract: nothing written yet → InvalidOperationException.
+/// Managed contract (measured on .NET 8): writing a document that never got a
+/// root ELEMENT throws ArgumentException("Document does not have a root
+/// element.") — not InvalidOperationException, and still so after
+/// WriteStartDocument() alone, since the declaration is not a root element.
+/// The probe records exactly System.ArgumentException for this subject, so the
+/// fact harness compares against that.
 void ChaosXmlWriterWriteEndDocument(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
-    if (st->depth == 0 && !st->start_doc_written && st->len == 0)
-        RaiseManagedException("System.InvalidOperationException",
-            "Document is in an invalid state.");
+    if (st->depth == 0)
+        RaiseArgumentException("Document does not have a root element.");
     while (st->depth > 0) ChaosXmlWriterWriteEndElement(this_ptr);
 }
 
