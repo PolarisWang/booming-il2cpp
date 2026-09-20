@@ -4,14 +4,16 @@ The runtime check replaced a post-hoc parse of the MSBuild build log.  The tests
 below pin the properties that made the replacement safe:
 
   * it must fail (not pass) when the patch did not take effect,
-  * it must not be fooled by engine log lines printed before the JSON payload,
+  * it must tolerate engine log noise / missing fields without crashing,
   * it must not require the build system's log format at all.
+
+Note it inspects the stage's *already-parsed* --hotupdate payload rather than
+running the binary itself — a bare `--hotupdate` has no patch data to apply, so
+re-running it would report zero patches on a healthy build.
 """
 
 from __future__ import annotations
 
-import json
-import stat
 import sys
 from pathlib import Path
 
@@ -26,68 +28,52 @@ from verification.platforms.patch_link import (  # noqa: E402
 )
 
 
-def _fake_entry(tmp_path: Path, stdout: str, exit_code: int = 0) -> Path:
-    """Create an executable that prints `stdout` (mimics entry.exe --hotupdate).
-
-    Written as a real script rather than a mock so the check exercises the actual
-    subprocess + parse path, including the "log lines precede JSON" case.
-    """
-    exe = tmp_path / "entry.exe"
-    payload = json.dumps(stdout)
-    exe.write_text(f"#!/bin/sh\nprintf '%s' {payload}\nexit {exit_code}\n")
-    exe.chmod(exe.stat().st_mode | stat.S_IEXEC | stat.S_IXGRP | stat.S_IXOTH)
-    return exe
-
-
 class TestVerifyPatchActive:
-    def test_passes_when_patches_applied(self, tmp_path: Path):
-        exe = _fake_entry(
-            tmp_path,
-            '{"baselineFact":[],"patchedFact":[{"si":0},{"si":1}]}',
+    def test_passes_when_patches_applied(self):
+        ok, detail = verify_patch_active(
+            {"baselineFact": [], "patchedFact": [{"si": 0}, {"si": 1}]},
+            expected_patch_count=2,
         )
-        ok, detail = verify_patch_active(exe, expected_patch_count=2)
         assert ok, detail
         assert "2" in detail
 
-    def test_fails_when_zero_patches_applied(self, tmp_path: Path):
+    def test_fails_when_zero_patches_applied(self):
         """The sentinel winning the link must be a failure, not a pass.
 
         This is the case the whole distinct-linking machinery exists to prevent:
         the binary runs, prints a well-formed payload, and simply did nothing.
         """
-        exe = _fake_entry(tmp_path, '{"baselineFact":[],"patchedFact":[]}')
-        ok, detail = verify_patch_active(exe, expected_patch_count=2)
+        ok, detail = verify_patch_active({"baselineFact": [], "patchedFact": []})
         assert not ok
         assert "0 patches" in detail
 
-    def test_tolerates_engine_log_lines_before_json(self, tmp_path: Path):
-        """Engine warnings go to stdout ahead of the payload; do not assume position 0."""
-        exe = _fake_entry(
-            tmp_path,
-            '[WARN][ABI] module validation failed\n'
-            '{"baselineFact":[],"patchedFact":[{"si":0}]}',
+    def test_fails_when_patched_fact_absent(self):
+        """A payload without patchedFact means the run never reached the patch phase."""
+        ok, detail = verify_patch_active({"baselineFact": [{"si": 0}]})
+        assert not ok
+        assert "patchedFact" in detail
+
+    def test_fails_on_empty_payload(self):
+        ok, detail = verify_patch_active({})
+        assert not ok
+
+    def test_flags_partial_patch_data(self):
+        ok, detail = verify_patch_active(
+            {"patchedFact": [{"si": 0}]}, expected_patch_count=5
         )
-        ok, detail = verify_patch_active(exe, expected_patch_count=1)
-        assert ok, detail
-
-    def test_fails_on_unparsable_payload(self, tmp_path: Path):
-        exe = _fake_entry(tmp_path, "not json at all")
-        ok, detail = verify_patch_active(exe, expected_patch_count=1)
         assert not ok
-        assert "JSON" in detail or "json" in detail
+        assert "fewer" in detail
 
-    def test_fails_when_binary_missing(self, tmp_path: Path):
-        ok, detail = verify_patch_active(tmp_path / "nope.exe", expected_patch_count=1)
-        assert not ok
-        assert "missing" in detail
+    def test_accepts_any_nonzero_when_no_expectation(self):
+        ok, _ = verify_patch_active({"patchedFact": [{"si": 0}]})
+        assert ok
 
-    def test_does_not_depend_on_build_log_format(self, tmp_path: Path):
+    def test_does_not_depend_on_build_log_format(self):
         """Regression guard for the reason this check exists at all.
 
         The old implementation inferred compile order from MSBuild's log text.
-        This check must work with no log input whatsoever — that is what makes
-        it portable to Ninja/Make and to future platforms.
+        This check consumes a parsed dict — no log input anywhere — which is what
+        makes it portable to Ninja/Make and to future platforms.
         """
-        exe = _fake_entry(tmp_path, '{"patchedFact":[{"si":0}]}')
-        ok, _ = verify_patch_active(exe, expected_patch_count=1)
+        ok, _ = verify_patch_active({"patchedFact": [{"si": 0}]})
         assert ok

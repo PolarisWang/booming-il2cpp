@@ -31,8 +31,6 @@ generator-independent.
 
 from __future__ import annotations
 
-import json
-import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
@@ -147,50 +145,41 @@ def verify_patch_objects_linked(layout: BuildTreeLayout, build_dir: Path, config
     return bool(_glob.glob(layout.object_glob(build_dir, config, patch_stem)))
 
 
-def verify_patch_active(
-    entry_exe: Path, expected_patch_count: int, timeout_s: int = 600
-) -> tuple[bool, str]:
-    """Confirm hotupdate actually applied patches, by running the binary.
+def verify_patch_active(hotupdate_data: dict, expected_patch_count: int = 0) -> tuple[bool, str]:
+    """Confirm hotupdate actually applied patches, from the run's parsed output.
 
     Replaces the old compile-order log parsing.  The property that matters is
-    not "which object linked first" but "did the patch become active" — and that
-    is observable directly, on any generator, from the run's own output.
+    not "which object linked first" but "did the patch become active" — and the
+    hotupdate stage already runs the binary (with ``--patch-data``) and parses
+    exactly that document, so this inspects the result instead of running the
+    binary a second time.
 
-    Returns ``(ok, detail)``; ``detail`` is meant for the stage log.
+    Why not run the binary here: a bare ``--hotupdate`` has no patch data to
+    apply, so it would report zero patches on a perfectly good build.  The
+    check must read the same run the stage already trusts.
+
+    ``expected_patch_count==0`` means "any non-zero count is acceptable"; pass a
+    real expectation when the caller knows how many entries were generated.
     """
-    if not entry_exe.exists():
-        return False, f"entry binary missing: {entry_exe}"
+    if not hotupdate_data:
+        return False, "no parsed --hotupdate payload"
 
-    try:
-        proc = subprocess.run(
-            [str(entry_exe), "--hotupdate"],
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            timeout=timeout_s,
+    patched = hotupdate_data.get("patchedFact")
+    if patched is None:
+        return False, (
+            "payload has no 'patchedFact' — the run did not reach the patch "
+            "phase, so patch activation is unverified"
         )
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        return False, f"could not run {entry_exe.name} --hotupdate: {exc}"
 
-    stdout = proc.stdout or ""
-    # The harness prints a JSON document; find it rather than assuming the whole
-    # stream is JSON, because engine log lines can precede it on stdout.
-    start = stdout.find("{")
-    end = stdout.rfind("}")
-    if start < 0 or end <= start:
-        return False, "no JSON payload on stdout from --hotupdate"
-
-    try:
-        payload = json.loads(stdout[start : end + 1])
-    except json.JSONDecodeError as exc:
-        return False, f"unparsable --hotupdate JSON: {exc}"
-
-    applied = payload.get("patchedFact") or payload.get("patched_count") or []
-    count = len(applied) if isinstance(applied, list) else int(applied or 0)
+    count = len(patched) if isinstance(patched, list) else int(patched or 0)
     if count <= 0:
         return False, (
-            f"hotupdate applied 0 patches (expected {expected_patch_count}) — "
+            f"hotupdate applied 0 patches (expected {expected_patch_count or '>0'}) — "
             "the sentinel won the link, so this build has no patches"
+        )
+    if expected_patch_count > 0 and count < expected_patch_count:
+        return False, (
+            f"hotupdate applied {count} patches, fewer than the "
+            f"{expected_patch_count} generated — partial patch data"
         )
     return True, f"hotupdate active: {count} patched entries"

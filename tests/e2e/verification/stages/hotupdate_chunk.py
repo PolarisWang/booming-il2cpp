@@ -445,30 +445,19 @@ def _incremental_rebuild(ctx) -> bool:
         src = _layout.executable(build_dir, _config, "chaos_entry")
         dst = ctx.chunk_dir / "native" / "entry.exe"
         if src.exists():
-            # Two independent checks, in increasing strength.
+            # Confirm the patch file actually contributed an object.  This
+            # catches "the CMakeLists surgery silently did nothing", which
+            # otherwise looks exactly like success.
             #
-            # (a) Objects linked — catches "the CMakeLists surgery silently did
-            #     nothing", which otherwise looks exactly like success.
+            # Whether the patch *became active* is checked later, from the
+            # stage's own --hotupdate run (see verify_patch_active) — that run
+            # carries --patch-data, so it is the only one where "did patches
+            # apply" is a meaningful question.
             if not verify_patch_objects_linked(_layout, build_dir, _config, "patch-host-arra"):
                 print(f"  [hotupdate] ERROR: no patch-host-arrays object found after "
                       f"rebuild ({_layout.name} layout) — patch was NOT linked. "
                       f"Returning failure to avoid a false-positive pass.")
                 return False
-
-            # (b) Patch actually active — run the binary and confirm the patch
-            #     took effect.  This replaces the old MSBuild-log compile-order
-            #     inference: order is now *guaranteed* by listing the patch file
-            #     first (CMake preserves add_executable source order on every
-            #     generator we use) and by the linker keeping the first
-            #     definition, so there is nothing left to discover by reading
-            #     logs.  Observing the outcome is stronger than inferring the
-            #     cause and is generator-independent.
-            if not _patched_cmake:
-                _active, _detail = verify_patch_active(src, expected_patch_count=1)
-                if not _active:
-                    print(f"  [hotupdate] ERROR: {_detail}")
-                    return False
-                print(f"  [hotupdate] {_detail}")
             shutil.copy2(src, dst)
             print(f"  [hotupdate] Rebuilt entry.exe: {dst.name} ({src.stat().st_size} bytes)")
             return True
@@ -794,6 +783,25 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
         if total > 0 and len(baseline_fact) != total:
             json_truncated = True
             print(f"  [hotupdate] WARNING: JSON truncated — expected {total} baseline entries, got {len(baseline_fact)}")
+
+    # ── Patch-activation check ──
+    # Replaces the old MSBuild-log compile-order inference.  Order is now
+    # *guaranteed* by construction: the patch file is listed first in
+    # CHAOS_ENTRY_SOURCES (CMake preserves add_executable source order on every
+    # generator we use) and the linker keeps the first definition (MSVC
+    # LNK4006 / GNU ld --allow-multiple-definition — semantics verified equal).
+    # So instead of inferring the cause from a build log, observe the outcome:
+    # this run is the one that carried --patch-data, so a zero patch count here
+    # means the sentinel won the link and the build has no patches.
+    if hotupdate_data and patch_data_path:
+        _active, _detail = verify_patch_active(hotupdate_data)
+        if not _active:
+            return StageResult(
+                stage="hotupdate", status="failed",
+                summary=f"patch did not become active: {_detail}",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+        print(f"  [hotupdate] {_detail}")
 
     passed = hotupdate_data.get("passedMethods", 0)
     failed = hotupdate_data.get("failedMethods", 0)
