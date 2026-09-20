@@ -176,14 +176,25 @@ public sealed partial class NativeAotLoweringPlanner
             var rawThis = new HashSet<int> { 0 };
 
             // ── Constructor: XmlTextWriter(TextWriter) ──
-            // Registered as a plain factory returning the handle.  codegen's
-            // newobj path consumes the returned INTPTR as the new instance, so
-            // the native factory's handle doubles as the managed reference.
+            // ReturnAbi MUST be Void: the structured-EH linear newobj lowering
+            // (EmitLinearNewObject) rejects a non-void constructor return with
+            // NotSupportedException — "requires void constructor return ABI" —
+            // which BuildMethodSourceSafe then swallows, replacing the whole
+            // subject body with a stub.  The symptom is nasty because the shape
+            // *resolves* fine and the native factory still returns the writer
+            // handle; what breaks is that `new XmlTextWriter(...)` never reaches
+            // the emitted body, so the following callvirt operates on whatever
+            // else is on the eval stack — here the StringWriter instance — and
+            // ChaosXmlWriter* then finds no WriterState for it and silently
+            // returns without raising (110 XmlTextWriter subjects were affected:
+            // realDefect + failed).  This is the same class as the earlier
+            // ctor-ABI bug; `CreateVoidAbiSlot()` is what the other .ctor
+            // registrations (e.g. System.Decimal) already use.
             registry.Register("System.Xml.XmlTextWriter", ".ctor",
                 new[] { "System.IO.TextWriter" },
                 ShapeKind.SimpleForward, "ChaosXmlTextWriterCreate",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { twAbi }),
-                CreateNativeIntAbiSlot(), rawThis);
+                CreateVoidAbiSlot(), rawThis);
 
             // ── 0-arg void methods (this only) ──
             var void0 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { ttAbi });
