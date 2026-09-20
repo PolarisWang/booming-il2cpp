@@ -77,10 +77,16 @@ extern "C" {
 void ChaosUtf8JsonWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
     CheckThis(this_ptr);
+    // A bare writer (GetUninitializedObject) has no output sink; the managed
+    // implementation throws ObjectDisposedException.  Measured on .NET 8/10:
+    //   bare.Flush() → ObjectDisposedException
+    // (Dispose() is the one exception — it does NOT throw on a bare instance.)
+    RaiseDisposedOrInvalid();
 }
 
 void ChaosUtf8JsonWriterDispose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
+    // Dispose on a bare instance is a documented no-op (measured: no exception).
     (void)this_ptr;
 }
 
@@ -88,16 +94,25 @@ CHAOS_IL2CPP_INTPTR ChaosUtf8JsonWriterResetStream(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR stream) noexcept
 {
     CheckThis(this_ptr);
-    if (stream == 0) RaiseArgumentNullException("stream");
-    return 0;
+    // The receiver check comes FIRST: a bare writer is "disposed" and every
+    // Reset overload reports that, regardless of the argument.  Measured:
+    //   bare.Reset(default(Stream)!)  → ObjectDisposedException
+    //   bare.Reset(Stream.Null)       → ObjectDisposedException
+    // Previously the null-argument check ran first, so a null argument yielded
+    // ArgumentNullException instead — a different type than the managed
+    // implementation, which the typed-catch assertion (A2) correctly rejected.
+    RaiseDisposedOrInvalid();
 }
 
 CHAOS_IL2CPP_INTPTR ChaosUtf8JsonWriterResetBufferWriter(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR buffer_writer) noexcept
 {
     CheckThis(this_ptr);
-    if (buffer_writer == 0) RaiseArgumentNullException("bufferWriter");
-    return 0;
+    // Same ordering as ResetStream: receiver validity precedes argument
+    // validation.  Measured: bare.Reset(default(IBufferWriter<byte>)!)
+    // → ObjectDisposedException.
+    (void)buffer_writer;
+    RaiseDisposedOrInvalid();
 }
 
 // ══════════════════════════════════════════════════════════════════
