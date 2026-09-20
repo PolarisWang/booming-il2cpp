@@ -95,3 +95,80 @@ return 42L;
 > ⚠️ 但要注意：`park_until_completed` 用的是 `wait_cv.wait()`，**超时无法中断它** ——
 > 需要 runner 层的**进程级/线程级**超时（如 watchdog + ExitThread），或改为
 > 对 `Wait()` 无参调用注入有限超时。**这需要在实施前验证可行性。**
+
+---
+
+# 补充（2026-09-20 深化）：真正的破坏点在 codegen 的 box 拆解
+
+## 一、修正前文的判断
+
+前文把根因归为「ATG 生成了会自我死锁的 probe」—— **不准确**。
+经过对生成物的逐层追踪，真正的破坏点在 **codegen 对
+`RuntimeHelpers.GetUninitializedObject` 返回值的处理**。
+
+## 二、完整链条（全部生成物实证）
+
+```
+si=8  TaskTests::Wait_7__0
+  ↓ 生成的 subject body
+Create<Task>() 的 __generic（per-instantiation，非共享）
+  ↓ 翻译自 Create<T> 的真实 IL（GetUninitializedObject 在 IL 里）
+{
+    _s1 = Chaos_mt_Task.AsTypeInfoHot();
+    _s1 = ChaosRuntimeHelpersGetUninitializedObject(_s1);
+           // ↑ object_stubs.cpp:193 —— taskLike 命中，返回【已完成的 AsyncTask 句柄】
+    auto* chaos_boxed = reinterpret_cast<chaos_boxed_type_..._Task*>(_s1);
+           // ↑ ★ 把【句柄】当【对象指针】重新解释
+    _s1 = &chaos_boxed->value;
+           // ↑ 返回 box 的 value 字段【地址】
+    chaos_locals[2] = _s1;
+    return _s1;
+}
+  ↓
+ChaosAsyncTaskWaitInfinite(那个地址)
+  ↓
+park_until_completed(伪指针, deadline=nullptr)
+  ↓ 该内存永不置 completed
+【永久 park】  stderr 末行：[PARK] task=... completed=0 deadline=0
+```
+
+## 三、判别证据
+
+| 证据 | 值 |
+|---|---|
+| `[GUO] ... taskLike=1` | 日志出现 8 次 —— **特判确实命中了** |
+| `object_stubs.cpp:193` | 返回 `async_task_from_result(0)`（**正确的完成句柄**） |
+| `__generic` 生成体 | 紧随其后做 `reinterpret_cast<chaos_boxed_type_Task*>` + `&...->value` |
+| `[WAIT] handle=23cfbdf1318 completed=0 timeout=-1` | Wait 收到的 handle **不是** GUO 返回的那个 |
+| `entry.exe` 进程 CPU=0 | **真阻塞**（非忙等），与 `wait_cv.wait()` 一致 |
+
+**⇒ `object_stubs.cpp` 的修复是对的，但被 `__generic` 的 box 拆解破坏。**
+
+## 四、为什么这是架构问题
+
+`__generic` 是**通用生成路径**（翻译 `Create<T>` 的真实 IL），其代码假定：
+> `GetUninitializedObject(t)` 返回一个**托管对象指针**，因此可以
+> `reinterpret_cast<chaos_boxed_type_X*>` 并取 `&->value`。
+
+而 Task 的运行时契约是：**用 `AsyncTask` 句柄表表示**，`GetUninitializedObject`
+被特意改造成返回**句柄**（`object_stubs.cpp:189-194`，为解 87 个 factoryGap）。
+
+**两者契约冲突** —— 通用生成的 box 拆解会破坏句柄。
+
+## 五、修法候选（待定）
+
+| 方案 | 内容 | 评价 |
+|---|---|---|
+| **Y1** codegen 对 Task 特判 | 在 `Create<T>` 生成路径识别 Task | 违反「通用生成器不加类型特例」 |
+| **Y2** `GetUninitializedObject` 返回真对象 | 回到 87 个 factoryGap | ❌ 倒退 |
+| **Y3** 句柄可识别标记 | 句柄表登记 + box 拆解前先查标记，是句柄则**透传不拆** | 较干净，需新机制 |
+| **Y4** 让 Task 不走 box 路径 | `Create<T>` 的 IL 里 `GetUninitializedObject` 结果本就该是引用，box 拆解对引用类型无意义 | 需论证 |
+
+**建议先确认**：`__generic` 的 box 拆解代码在 codegen 的哪一处发射
+（是不是 `EmitLinearNewObject` 之外的另一段），再定方案 —— **不直接动手**。
+
+## 六、影响面
+
+同一 `Create<T>` 家族共 **11 个 instantiation**（见 nativeSymbol 列表），
+其中 Task 类（Task / Task\<T\> / TCS / TCS\<T\> / ValueTask / TaskFactory …）
+**全部**受此冲突影响。这就是 threading-tasks 大批 `factoryGap` 的来源。
