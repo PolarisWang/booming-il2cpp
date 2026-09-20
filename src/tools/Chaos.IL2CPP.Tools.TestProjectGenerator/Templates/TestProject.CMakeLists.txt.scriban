@@ -162,6 +162,16 @@ set(CHAOS_CRYPTO_STUBS
 set(CHAOS_OBJECT_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/object_stubs.cpp"
 )
+# threading_stubs.cpp: compiled from PROJECT ROOT rather than taken from the
+# prebuilt lib, for the same reason array_stubs.cpp is — the shipped
+# libchaos_runtime_core may predate a newly-added entry.  Concretely,
+# chaos_thread_get_current_processor_id (Thread.GetCurrentProcessorId) had no
+# definition reachable on Windows and the link failed with LNK1120
+# "1 unresolved externals".  /FORCE:MULTIPLE already covers the overlap once the
+# prebuilt lib catches up.
+set(CHAOS_THREADING_STUBS
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp"
+)
 set(CHAOS_XML_READER_STUBS
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/xml_reader_stubs.cpp"
 )
@@ -211,6 +221,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_ENTRY_STUBS}
     ${CHAOS_CRYPTO_STUBS}
     ${CHAOS_OBJECT_STUBS}
+    ${CHAOS_THREADING_STUBS}
     ${CHAOS_GC_ALLOC_STUBS}
     ${CHAOS_XML_READER_STUBS}
     ${CHAOS_XML_WRITER_STUBS}

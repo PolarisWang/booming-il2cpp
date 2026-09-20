@@ -119,6 +119,34 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         /// <summary>
+        /// Thread::GetCurrentProcessorId
+        /// </summary>
+        /// <remarks>
+        /// Without this registration the callee matched no shape and lowered to
+        /// the zero-argument external-runtime catch-all, which returns 0 — so the
+        /// method was never actually implemented.
+        ///
+        /// The subject's expectation cannot be satisfied by any fixed value: the
+        /// ATG probe recorded ITS OWN host's reading (`Assert.AreEqual(6, …)` on a
+        /// 6-logical-CPU probe box), while GetCurrentProcessorId is a per-call
+        /// property of the calling thread.  The expectation is therefore
+        /// env-sensitive and is bucketed as such by the fact layer
+        /// (`_get_env_sensitive_subject_ids` in stages/fact_chunk.py) — the same
+        /// treatment Thread.Yield gets (see c013be67c).  Registering the shape
+        /// makes the method genuinely implemented and observable rather than a
+        /// silent 0 from the catch-all.
+        /// </remarks>
+        private static void RegisterThreadGetCurrentProcessorId(RuntimeHelperShapeRegistry registry)
+        {
+            registry.Register("System.Threading.Thread", "GetCurrentProcessorId", [],
+                ShapeKind.SimpleForward, "chaos_thread_get_current_processor_id",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                CreateInt32AbiSlot(),
+                EmptyRawArgumentIndices);
+
+        }
+
+        /// <summary>
         /// Thread::VolatileRead (reference-typed overload)
         /// </summary>
         /// <remarks>
