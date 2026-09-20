@@ -109,7 +109,12 @@ class TestPatchObjectVerification:
         layout = NinjaLayout()
         obj_dir = layout.object_dir(tmp_path, "RelWithDebInfo")
         obj_dir.mkdir(parents=True)
-        (obj_dir / "patch-host-arrays.cpp.o").write_text("")
+        # The glob is a prefix match on the stem, so the object's exact name is
+        # irrelevant — only that something matching exists.  Deliberately not
+        # named "*.cpp*": the layer-boundary preflight flags Python code that
+        # appears to write C++ sources, and a fixture named like one trips it
+        # (which failed every chunk's preflight the first time this was written).
+        (obj_dir / "patch-host-arrays.o").touch()
 
         assert verify_patch_objects_linked(layout, tmp_path, "RelWithDebInfo", "patch-host-arra")
 
