@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedAt": "<normalized>",
-  "totalExactShapes": 1273,
+  "totalExactShapes": 1274,
   "totalGenericPatterns": 243,
   "totalInlinePatterns": 517,
   "entries": [
@@ -3843,6 +3843,15 @@
       "subjectIdPrefix": "System.Private.CoreLib/System.Threading.Thread::GetDomainID:()",
       "paramTypes": [],
       "nativeSymbol": "chaos_thread_get_domain_id",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "System.Threading.Thread",
+      "methodName": "GetCurrentProcessorId",
+      "subjectIdPrefix": "System.Private.CoreLib/System.Threading.Thread::GetCurrentProcessorId:()",
+      "paramTypes": [],
+      "nativeSymbol": "chaos_thread_get_current_processor_id",
       "shapeKind": "SimpleForward"
     },
     {
