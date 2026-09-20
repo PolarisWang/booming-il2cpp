@@ -15,6 +15,12 @@
 #include <memory>
 #include <thread>
 
+#if defined(_WIN32)
+#include <windows.h>   // GetCurrentProcessorNumber
+#elif defined(__linux__)
+#include <sched.h>     // sched_getcpu
+#endif
+
 namespace chaos::il2cpp::runtime_core {
 
 // NOTE: MSVC generates C-linkage (undecorated) references when names are
@@ -172,6 +178,40 @@ CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept
 CHAOS_IL2CPP_INT32 chaos_thread_get_domain_id(void) noexcept
 {
     return 1;
+}
+
+// ── Thread.GetCurrentProcessorId ────────────────────────────────────────────
+//
+// Returns the processor the CALLING THREAD is currently running on — a
+// per-call host property, NOT the machine's processor count and NOT stable
+// across calls (the OS may migrate the thread between samples).  .NET 8
+// documents it as "for diagnostic use; the value is not guaranteed to be
+// consistent between calls".
+//
+// This exists because without it the callee matched no shape and lowered to the
+// zero-argument external-runtime catch-all, which returns 0.  The ATG probe had
+// captured ITS OWN host's value as the expectation (`Assert.AreEqual(6, …)` on a
+// 6-CPU probe box), so no fixed return value can satisfy the assertion.  The
+// expectation is therefore classified envSensitive at the fact layer
+// (_get_env_sensitive_subject_ids in stages/fact_chunk.py) — the same treatment
+// Thread.Yield already gets.  Returning a real reading here keeps the method
+// implemented and observable rather than silently 0.
+CHAOS_IL2CPP_INT32 chaos_thread_get_current_processor_id(void) noexcept
+{
+#if defined(_WIN32)
+    // Processor-group-local index of the calling thread.  windows.h is already
+    // used by sibling stub translation units (interop_stubs.cpp, pal_stubs.cpp);
+    // including it here keeps the platform call self-contained.
+    return static_cast<CHAOS_IL2CPP_INT32>(::GetCurrentProcessorNumber());
+#elif defined(__linux__)
+    const int cpu = ::sched_getcpu();
+    return cpu < 0 ? 0 : static_cast<CHAOS_IL2CPP_INT32>(cpu);
+#else
+    // No portable PAL accessor for "which CPU am I on".  Answer 0 (the valid
+    // index of the first processor) rather than guessing; the fact layer treats
+    // this subject as envSensitive regardless of the value.
+    return 0;
+#endif
 }
 
 void chaos_thread_sleep(CHAOS_IL2CPP_INT32 timeout_ms) noexcept

@@ -265,7 +265,6 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
 }
 
 // ══════════════════════════════════════════════════════════════════════
-// ══════════════════════════════════════════════════════════════════════
 // SpinLock — T2.5 (per-instance, receiver now injected by A.2)
 // ══════════════════════════════════════════════════════════════════════
 //
@@ -278,16 +277,70 @@ CHAOS_IL2CPP_INT32 ChaosManualResetEventSlimWaitTimeSpan(
 // The lock word is 0 (free) or the owning ThreadId.  Storing the id rather than
 // a bool is what lets Exit verify ownership — a mispaired Exit is detectable
 // instead of silently corrupting the lock.
+//
+// ⚠️ NOT EVERY RECEIVER ARRIVING HERE IS A STACK SLOT.  The value-type premise
+// above holds only when the callee is the BCL `System.Threading.SpinLock`
+// struct.  ATG also generates subjects over reference-type "SpinLock"-named
+// types (e.g. `Chaos.TestFramework.Sdk.SpinLock`, which codegen emits as
+// `struct ... : public System_Object`).  `SubjectInstanceFactory.Create<T>()`
+// builds those through RuntimeHelpers.GetUninitializedObject, and codegen then
+// passes `&chaos_locals[k]` — the address of the SLOT holding the object
+// pointer.  Interpreting those bytes as an `atomic<int32_t>` reads the
+// object's non-zero header, so CAS(0 -> self) can NEVER succeed and the
+// `for(;;)` below spins at 100% CPU forever.  That was a real fact-run
+// timeout, not a slow test.
+//
+// The guard below detects the impossible-for-a-free-lock case (the word is
+// neither 0 nor a ThreadId we could have stored) and answers instead of
+// spinning.  It is deliberately conservative: it must not turn a genuinely
+// contended lock into a silent success (see the S16 note that "the constructor
+// never ran" must not be indistinguishable from "the lock is held"), so the
+// caller is told the lock was NOT taken.
+
+namespace {
+
+/// Managed thread ids are dense ints allocated from `s_next_thread_id` starting
+/// at kMainThreadId + 1 (see thread_state.cpp).  No realistic run registers
+/// anywhere near this many threads, so a lock word at or above it is not an id
+/// this runtime ever wrote — it is the low half of an image pointer.
+constexpr CHAOS_IL2CPP_UINT32 kMaxThreadIdValue = 1u << 20;
+
+/// True when `word` cannot be a lock word this runtime ever wrote: a lock word
+/// is 0 (free) or the id of a thread that took it.  An object header /
+/// MethodTable pointer is a 64-bit-aligned image address whose low 32 bits sit
+/// far above any allocated thread id.
+///
+/// Reads the full 64-bit word so a pointer-slot is not mistaken for an int32:
+/// a stack-slot address like 0x0000007ff7xxxxxx has a low-32 that looks like a
+/// large int32, but the complete 64-bit value is unmistakably a user-space
+/// address.
+bool LooksLikeObjectHeaderNotLockWord(const void* slot) noexcept {
+    CHAOS_IL2CPP_UINT64 raw = 0;
+    std::memcpy(&raw, slot, sizeof(raw));
+    if (raw == 0) return false;                 // free lock word
+    const CHAOS_IL2CPP_UINT64 low = raw & 0xFFFFFFFFULL;
+    if (low != 0 && low < kMaxThreadIdValue) return false;   // a plausible ThreadId
+    return true;                                // neither 0 nor a plausible id
+}
+
+}  // anonymous namespace
 
 CHAOS_IL2CPP_INT32 ChaosSpinLockEnter(CHAOS_IL2CPP_INTPTR spinlock,
                                       CHAOS_IL2CPP_INTPTR lock_taken_out) noexcept
 {
     if (lock_taken_out == 0) return 0;
-    auto* word = reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(spinlock);
     if (spinlock == 0) {
         *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
         return 0;
     }
+    if (LooksLikeObjectHeaderNotLockWord(reinterpret_cast<const void*>(spinlock))) {
+        // Not a lock word: report "not acquired" rather than spinning forever.
+        // The caller's Assert.AreEqual(true, lockTaken) then fails loudly,
+        // which is the honest outcome — the receiver was never a SpinLock.
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+        return 0;
+    }
+    auto* word = reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(spinlock);
 
     const CHAOS_IL2CPP_INT32 self =
         chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
@@ -310,6 +363,10 @@ CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnter(CHAOS_IL2CPP_INTPTR spinlock,
         *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
         return 0;
     }
+    if (LooksLikeObjectHeaderNotLockWord(reinterpret_cast<const void*>(spinlock))) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+        return 0;
+    }
     auto* word = reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(spinlock);
     const CHAOS_IL2CPP_INT32 self =
         chaos::il2cpp::runtime_core::threading::GetCurrentThreadId();
@@ -329,6 +386,10 @@ CHAOS_IL2CPP_INT32 ChaosSpinLockTryEnterInt32(CHAOS_IL2CPP_INTPTR spinlock,
 {
     if (lock_taken_out == 0) return 0;
     if (spinlock == 0) {
+        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
+        return 0;
+    }
+    if (LooksLikeObjectHeaderNotLockWord(reinterpret_cast<const void*>(spinlock))) {
         *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lock_taken_out) = 0;
         return 0;
     }

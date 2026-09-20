@@ -78,6 +78,19 @@ CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept;
 // not apply because this runtime does not implement multiple domains.
 CHAOS_IL2CPP_INT32 chaos_thread_get_domain_id(void) noexcept;
 
+// Thread.GetCurrentProcessorId: processor the calling thread is currently on.
+//
+// A per-call HOST property, not the machine's processor count and not stable
+// across calls (the OS may migrate the thread).  .NET 8 documents it as
+// diagnostic-only with no consistency guarantee.
+//
+// Expected values are environment-snapshots captured from the ATG probe's own
+// machine, so the fact layer classifies these subjects envSensitive rather than
+// comparing against a fixed value (see stages/fact_chunk.py,
+// _get_env_sensitive_subject_ids).  This entry exists so the method is actually
+// implemented instead of falling through the zero-argument catch-all.
+CHAOS_IL2CPP_INT32 chaos_thread_get_current_processor_id(void) noexcept;
+
 // ── LazyInitializer.EnsureInitialized<T> ────────────────────────────────────
 //
 // Managed contract (verified against .NET 8):

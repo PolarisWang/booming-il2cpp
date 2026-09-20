@@ -77,6 +77,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterThreadSleep(registry);
             RegisterThreadYield(registry);
             RegisterThreadGetDomainID(registry);
+            RegisterThreadGetCurrentProcessorId(registry);
             RegisterThreadVolatileReadObject(registry);
             RegisterThreadAbort(registry);
             RegisterThreadInterrupt(registry);
