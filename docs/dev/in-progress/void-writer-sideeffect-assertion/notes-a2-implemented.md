@@ -71,8 +71,13 @@ CHAOS_IL2CPP_INTPTR ChaosUtf8JsonWriterResetStream(this_ptr, stream) {
 
 ## 5. 后续
 
-62 项失败需**逐个归因**：
-- `Reset` 系（预计占多数）→ native 未复刻 `ObjectDisposedException`，需修 native
-- 其余待分类
+62 项失败已归因（见 `notes-62-triage.md`）：
+
+- **主因（60+ 项）**：`(JsonEncodedText, X)` / `(string, DateTime)` 等**重载未注册 shape**
+  → 落 catch-all → 返回 0 不抛 → 断言失败
+- **`Reset` 2 项**：shape 匹配上了，但 native **未复刻** `ObjectDisposedException` 语义
+
+⚠️ **本文 §3 曾推测「59 项里主因是 Reset 系」——该推测错误**，
+实测主因是「未注册的重载」。数量分布要用数据说话。
 
 **这属于"暴露的缺陷"而非"A2 引入的回归"** —— A2 只是让它们可见。
