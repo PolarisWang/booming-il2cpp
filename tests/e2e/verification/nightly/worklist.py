@@ -58,6 +58,7 @@ def discover_worklist(config) -> list[WorkItem]:
 
     items: list[WorkItem] = []
     filter_set = set(config.assembly_filter) if config.assembly_filter else None
+    skipped_missing_source: list[str] = []
 
     for entry in sorted(foundation.iterdir(), key=lambda p: p.name):
         if not entry.is_dir():
@@ -80,8 +81,36 @@ def discover_worklist(config) -> list[WorkItem]:
         chunks = manifest.get("chunks", [])
         for ch in chunks:
             slug = ch.get("slug")
-            if slug:
-                items.append(WorkItem(assembly=name, slug=slug))
+            if not slug:
+                continue
+            # A partition entry is a claim about the *DLL's* namespaces, and it
+            # is regenerated from the DLL every run.  The chunk *source* under
+            # chunks/<slug>/managed/ is a committed translation-tree snapshot and
+            # falls behind whenever the DLL gains a namespace (or when a family's
+            # snapshot was taken before that chunk existed).  Such an entry has
+            # nothing for ATG to probe: the autogen step emits 0 subjects, no
+            # entry.exe is produced, and the chunk fails as an opaque `unknown`
+            # — a guaranteed failure that says nothing about code health and
+            # inflates the failure count (build #311: 5 of 19 linux failures,
+            # including ALL THREE System.Xml.ReaderWriter chunks).
+            #
+            # Only schedule chunks that actually have a source directory.  The
+            # skip is reported rather than silent: a chunk that vanishes from the
+            # worklist should be visible in the log, because the underlying
+            # translation-tree staleness is still worth knowing about.
+            if not (entry / "chunks" / slug / "managed").is_dir():
+                skipped_missing_source.append(f"{name}__{slug}")
+                continue
+            items.append(WorkItem(assembly=name, slug=slug))
+
+    if skipped_missing_source:
+        print(
+            f"  [worklist] skipped {len(skipped_missing_source)} chunk(s) declared in "
+            f"namespace-partition.json but absent from the translation tree "
+            f"(no chunks/<slug>/managed/):"
+        )
+        for key in skipped_missing_source:
+            print(f"    - {key}")
 
     items.sort(key=lambda w: (w.assembly, w.slug))
     return items
