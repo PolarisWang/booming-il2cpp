@@ -65,21 +65,38 @@ auto& state = get_or_create_state(reinterpret_cast<void*>(instance));
 | `s_rcw_table` | `com_rcw.cpp:18` | **COM IUnknown 指针** | ✅ 不受影响（非托管对象） |
 | `g_sync_block_stripes` | `core/sync_mutex.cpp:48` | — | ⚪ **死代码**（仅声明，无读写） |
 
-### 2.1 `pin_set` 的特殊严重性（比 `g_stream_state` 更值得先修）
+### 2.1 `pin_set` 的精确机制（🔴 本轮修正 —— 原文有过度推断）
 
-`pin_set` 记录「已被 pin 的对象」，`GcIsPinnedObject()` 被 GC **用来决定是否搬移**：
+**原文错误**：曾写「`GcIsPinnedObject` 被 GC 用来决定是否搬移，键失效 → 违反 pin 契约」。
 
-```cpp
-// engine_lifecycle.cpp:665/671/677
-pin_set()[obj] = true;        // GcAddPinnedObject
-pin_set().erase(obj);         // GcRemovePinnedObject
-return pin_set().contains(obj); // GcIsPinnedObject
-```
+**核实后的真实机制**（证据见下）：
 
-**该表的键自己会因搬移而失配** → `GcIsPinnedObject` 对被搬移的 pinned 对象返回
-`false` → **违反 pin 契约**（本该固定不动的对象被搬走）。
+1. GC 的搬移判定走 **`MarkSweepOldGen::pinned_roots_` → `pinned_compact_skip_`**
+   （`gc_old_gen.cpp:1901/2293/2534/3146`），通过 `AddPinnedRoot()` 注册
+   —— **与 `pin_set` 完全无关**。
+   `grep GcIsPinnedObject src/native/runtime-core/gc/*.cpp` → **零结果**。
 
-这不是「表数据过期」，而是**破坏 GC 自身的正确性判据**。
+   → 所以键失效**不会**导致「pinned 对象被搬走」。GC 的搬移正确性不受影响。
+
+2. 但 `pin_set` **确实会因搬移而失效**，机制是：
+   - `engine_lifecycle.cpp:321-329` 的 `GcSetHandleTarget` **有正确的维护逻辑**
+     （旧地址 `GcRemovePinnedObject` → 新地址 `GcAddPinnedObject`）
+   - **但 `GcSetHandleTarget` 全仓库零调用者**（`grep` 仅命中定义与声明）
+   - 而 GC 搬移实际走的是 `GcRelocateHandles`（`engine_lifecycle.cpp:643-657`），
+     它**只更新 `kv.second.object_instance`**，**不碰 `pin_set`**
+
+   → **一条从未被接线的维护路径**：pin_set 的同步逻辑写对了，但没人调它。
+
+3. **实际后果**：`GcIsPinnedObject(搬移后的对象)` 返回 `false`（键停在旧地址）。
+   调用方只有 `gc_events_test.cpp`（测试）；生产路径暂无消费者。
+   `GcAllocatePinned`（POH）走的是 `PohAllocate`，其对象本就不参与普通压缩。
+
+**严重度重估**：`pin_set` 从「🔴 破坏 GC 正确性判据」下调为
+「🟡 **维护路径未接线的记账缺陷**」—— 仍应修（逻辑已写好，接线成本低），
+但不是正确性事故。
+
+> ⚠️ 本轮同时发现 `AddPinnedRoot()` 亦**无调用者**（`pinned_roots_` 恒空）——
+> 这属 GC 域独立问题，**不在 W3 范围**，仅记录。
 
 ---
 
@@ -97,16 +114,65 @@ return pin_set().contains(obj); // GcIsPinnedObject
 
 ---
 
-## 4. 关键未知（必须先解决，否则方案无法定）
+## 4. 关键未知 —— 本轮已解决
 
-**⚠️ 当前没有任何已知测试命中该缺陷。** 这意味着：
+### 4.1 可复现性 ✅ 可构造（不再是 blocker）
 
-1. **严重度无法用现成 fact 数据量化** —— 不知道 threading/XML/其他 chunk 里
-   是否已有 subject 因此返回错值
-2. **修复无法验证** —— 需要一个能稳定触发 Gen1/Gen2 压缩的测试装置
+**既有可复用装置**：`tests/contracts/native/runtime-core/gc_gen1_test.cpp`
 
-这是本任务**最大的 blocking question**：先造出可复现的触发条件，还是先按
-代码证据直接修？
+它已验证的 Gen1 搬移原语：
+
+```cpp
+TestSingleLiveObject():
+    NurseryAllocate(...)                // 造 Gen0 引用持有 Gen1 对象
+    GcGen1Collect(...)                  // 触发收集
+    GC_CHECK(r.objects_promoted == 1)   // ← 对象被搬移
+    GC_CHECK(r.bytes_promoted >= 64)    // ← 地址变化
+```
+
+**复现方案**：新建测试 TU（或扩展 `gc_gen1_test.cpp`），
+同时 include `runtime_stubs/stream_state.h`，构造：
+
+```
+1. ChaosStringWriterCtor(obj)        // 向 g_stream_state 写入 obj 地址为键
+2. 保持 obj 存活 + NurseryAllocate 引用
+3. 触发 Gen1 收集（对象被搬移）
+4. 断言 find_state(新地址) == 原 state，或 find_state(旧地址) 已失效
+```
+
+⚠️ **限制**：该装置是 native 单测，验证的是「键失效」这一机制；
+**不等于**能复现端到端 fact 影响（§4.4 严重度仍需 fact 层数据）。
+
+### 4.2 `pin_set` 与 GC pin 机制的关系 ✅ 已澄清
+见 §2.1 —— 两者**无关**。GC 走 `pinned_roots_`；`pin_set` 是独立记账表。
+修 `pin_set` 不会与 GC 的 pin 机制打架。
+
+### 4.3 `g_stream_state` 的 handle 生命周期 ✅ 已澄清（反而简化）
+- `remove_state()` **定义了但零调用者**（`stream_stubs.cpp:91`）
+- `g_stream_state` **无任何外部清理路径**（全仓库 grep 仅命中定义）
+
+→ 该表**只增不减**，键在对象回收后成为悬垂键。
+→ **不需要设计释放逻辑**（本来就没有），只需保证搬移后键可解析。
+
+### 4.4 严重度 / 现网命中 ⚠️ 仍无数据
+无已知 fact 命中。但 §4.1 的装置可用于**主动构造**验证。
+本项从「blocking」降级为「执行期观察项」。
+
+### 4.5 死代码 `g_sync_block_stripes` ✅ 建议保留
+
+`sync_mutex.cpp:42` 注释自述新代码走 `ThinLockTable::Inflate`，旧 stripe
+仅 `DrainSyncBlocksForDomain`（域卸载路径）引用。**建议保留 + 标注**，
+删除需确认域卸载路径确实不用 —— 超出 W3 范围。
+
+---
+
+## 4bis. 本轮新发现（非 W3 范围，仅记录）
+
+- **`AddPinnedRoot()` 零调用者** → `MarkSweepOldGen::pinned_roots_` 恒空。
+  GC 的 pin 判定机制**未被接线**。（GC 域独立问题）
+- **`GcSetHandleTarget()` 零调用者** → handle 目标变更时的
+  `pin_set` 同步 + SATB 写屏障维护**从未生效**。（本项是 §2.1 的根因，属 W3）
+- **`remove_state()` 零调用者**（stream 表）→ 见 §4.3。（属 W3）
 
 ---
 
@@ -163,29 +229,48 @@ C 不解决问题。P1 > P2 的让位在此**不适用** —— 因为 B/C 的�
 
 ## 7. 问题清零
 
-### blocking_questions（**未清零**）
+### blocking_questions: ✅ 已清零（本轮）
 
-| # | 问题 | 状态 |
+| # | 问题 | 结论 |
 |:-:|:-----|:-----|
-| 1 | 是否先构造可复现触发装置？ | ❌ **未定** —— 影响方案可验证性 |
-| 2 | `pin_set` 改用 pinned handle 是否与 GC 自身 pin 机制冲突？ | ❌ **未查** |
-| 3 | `g_stream_state` 的 handle 生命周期如何管理（谁释放）？ | ❌ **未定** |
-| 4 | 严重度：现网是否有实际命中？ | ❌ **无数据** |
-| 5 | 死代码 `g_sync_block_stripes` 删除还是保留？ | ❌ 未定 |
+| 1 | 是否先构造可复现触发装置？ | ✅ **可构造** —— 复用 `gc_gen1_test.cpp` 的 Gen1 原语（§4.1）。建议**先建装置再修**，理由：本缺陷零 fact 命中，没有装置就无法证明修复有效 |
+| 2 | `pin_set` 改用 pinned handle 是否与 GC pin 冲突？ | ✅ **不冲突** —— GC 走 `pinned_roots_`，与 `pin_set` 无关（§2.1） |
+| 3 | `g_stream_state` handle 生命周期（谁释放） | ✅ **无需设计** —— 该表只增不减，本就无释放（§4.3） |
+| 4 | 严重度：现网是否有命中 | ⚠️ **降级为 watch_item** —— 无数据，但 §4.1 装置可主动验证 |
+| 5 | 死代码 `g_sync_block_stripes` 处置 | ✅ **保留 + 标注**（§4.5），删除超出范围 |
+
+### 方案收敛（严重度修正后）
+
+`pin_set` 从「正确性事故」下调为「维护路径未接线」后，**两个目标的最优修法不同**：
+
+| 目标 | 推荐修法 | 理由 |
+|:-----|:---------|:-----|
+| **`pin_set`** | **接线 `GcSetHandleTarget`**（非改键！） | 维护逻辑（:321-329）**已经写对了**，只是没人调。让 `GcRelocateHandles` 走它即可 —— **改动量最小、风险最低** |
+| **`g_stream_state`** | 方案 A：键改 GCHandle | 无现成维护路径可利用，必须换键形式 |
+
+⚠️ **这修正了原文档「统一改 GCHandle」的方案** —— `pin_set` 有更便宜的修法。
 
 ### watch_items
-- W-a：`GcRelocateHandles` 对 **strong handle** 是否也重定位（当前只在 LOH/Gen1/Gen2
-  压缩路径见到调用，需确认覆盖面）
+
+- W-a：`GcRelocateHandles` 对 strong handle 的重定位覆盖面（已见调用，需确认无遗漏路径）
+- W-b：fan-out 到 fact 层的影响（延迟时间/错值），当前无数据
+- W-c：`AddPinnedRoot()` 零调用者（GC 域独立问题，不在 W3）
+- W-d：`remove_state()` 零调用者 → `g_stream_state` 无界增长（W3 附带，可一并修）
 
 ---
 
 ## 8. 下一步入口
 
-**blocking_questions 非空 → 不得进入 writing-plans。**
+**blocking_questions = []**（W-c 除外，已明确划出范围）
 
-需继续 brainstorm 清零，重点：
-1. 先回答 §4（可复现性），它决定 A 能否被验证
-2. 若短期无触发手段 → 是否降级为"仅修 `pin_set`"（严重度最高且证据最硬）
+建议执行顺序（待用户确认）：
+
+1. **先建可复现装置**（§4.1）—— 用 `gc_gen1_test.cpp` 原语 + `stream_state.h`
+2. **修 `pin_set`**：接线 `GcSetHandleTarget`（最小改动）
+3. **修 `g_stream_state`**：键改 GCHandle（方案 A）
+4. 用装置验证两者，再跑相关 chunk 确认无回归
+
+⚠️ **仍不得直接进 writing-plans** —— 需用户确认上述边界与顺序。
 
 ---
 
