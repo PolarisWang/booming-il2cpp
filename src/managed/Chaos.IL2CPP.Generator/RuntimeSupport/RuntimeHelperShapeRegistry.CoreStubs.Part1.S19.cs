@@ -46,11 +46,18 @@ public sealed partial class NativeAotLoweringPlanner
             var thisOnly = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { ttAbi });
 
             // ── ctor(TextReader) ──
+            // ChaosXmlTextReaderCreate returns an opaque native handle into the
+            // reader side table; the handle — not the freshly allocated managed
+            // object address — is what every later `callvirt` must receive.
+            // Without this flag the return value is dropped and Resolve() sees a
+            // heap pointer where it expects a 1-based slot, silently returning
+            // null (reader/writer subjects then record caught=True / realDefect).
             registry.Register("System.Xml.XmlTextReader", ".ctor",
                 new[] { "System.IO.TextReader" },
                 ShapeKind.SimpleForward, "ChaosXmlTextReaderCreate",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { trAbi }),
-                CreateVoidAbiSlot(), new HashSet<int> { 0 });
+                CreateVoidAbiSlot(), new HashSet<int> { 0 },
+                ctorReturnsNativeHandle: true);
 
             // ── Read() -> bool ──
             registry.Register("System.Xml.XmlTextReader", "Read",
@@ -194,7 +201,8 @@ public sealed partial class NativeAotLoweringPlanner
                 new[] { "System.IO.TextWriter" },
                 ShapeKind.SimpleForward, "ChaosXmlTextWriterCreate",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { twAbi }),
-                CreateVoidAbiSlot(), rawThis);
+                CreateVoidAbiSlot(), rawThis,
+                ctorReturnsNativeHandle: true);
 
             // ── 0-arg void methods (this only) ──
             var void0 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { ttAbi });

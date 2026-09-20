@@ -125,6 +125,7 @@ public sealed partial class NativeAotLoweringPlanner
         AotCoreIrAbiSlotArtifact? extReturnAbi = null;
         IReadOnlySet<int>? extRawIndices = null;
         string? extDirectNativeSymbol = null;
+        bool extCtorReturnsNativeHandle = false;
         if (!string.IsNullOrEmpty(calleeOrTarget) &&
             TryCreateExternalRuntimeHelperDefinition(calleeOrTarget, out var helperDef))
         {
@@ -133,6 +134,7 @@ public sealed partial class NativeAotLoweringPlanner
             extReturnAbi = helperDef.ReturnAbi;
             extRawIndices = helperDef.RawArgumentIndices;
             extDirectNativeSymbol = helperDef.DirectNativeSymbol;
+            extCtorReturnsNativeHandle = helperDef.CtorReturnsNativeHandle;
 
             // Gold Direct Link (A3): Override DirectNativeSymbol for hot methods
             // identified by PGO profiling. Use the method's actual C++ function
@@ -186,7 +188,8 @@ public sealed partial class NativeAotLoweringPlanner
             instruction.TargetReference?.SharedGenericBodyId,
             instruction.TargetReference?.InstantiationStubId,
             instruction.TargetReference?.RuntimeGenericContext,
-            DirectNativeSymbol: extDirectNativeSymbol);
+            DirectNativeSymbol: extDirectNativeSymbol,
+            CtorReturnsNativeHandle: extCtorReturnsNativeHandle);
     }
 
 
@@ -274,7 +277,8 @@ public sealed partial class NativeAotLoweringPlanner
                     helperDefinition.ParameterAbis,
                     helperDefinition.ReturnAbi,
                     helperDefinition.RawArgumentIndices,
-                    DirectNativeSymbol: goldSymbol);
+                    DirectNativeSymbol: goldSymbol,
+                    CtorReturnsNativeHandle: helperDefinition.CtorReturnsNativeHandle);
             }
 
             // Extended Gold Direct Link: for ANY lowerable method that has a helper
@@ -323,7 +327,8 @@ public sealed partial class NativeAotLoweringPlanner
                     GetMethodAbiParameterSlots(lowerableAotMethod),
                     lowerableAotMethod.ReturnAbi,
                     EmptyRawArgumentIndices,
-                    DirectNativeSymbol: ownSymbol);
+                    DirectNativeSymbol: ownSymbol,
+                    CtorReturnsNativeHandle: helperDefinition!.CtorReturnsNativeHandle);
             }
 
             return new InvocationTarget(
@@ -331,7 +336,8 @@ public sealed partial class NativeAotLoweringPlanner
                 helperDefinition.ParameterAbis,
                 helperDefinition.ReturnAbi,
                 helperDefinition.RawArgumentIndices,
-                DirectNativeSymbol: helperDefinition.DirectNativeSymbol);
+                DirectNativeSymbol: helperDefinition.DirectNativeSymbol,
+                CtorReturnsNativeHandle: helperDefinition.CtorReturnsNativeHandle);
         }
 
         if (TryGetLowerableMethod(callee) is { } lowerableMethod)

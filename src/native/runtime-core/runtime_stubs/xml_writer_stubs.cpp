@@ -221,11 +221,22 @@ void ChaosXmlWriterWriteStartElement(
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
 
+    // Null is NOT an error here — XmlTextWriter degrades a null name to an
+    // empty one, consistently across every name parameter (measured .NET 8):
+    //   WriteStartElement(null)              -> "<"
+    //   WriteStartElement("")                -> "<"
+    //   WriteStartElement(null,"l",null)     -> "<l"
+    //   WriteStartAttribute(null,"a",null)   -> "<e a=\"v\""
+    //   WriteAttributeString(null,"v")       -> "<e =\"v\""
+    //   WriteComment(null)                   -> "<!---->"
+    // The previous ArgumentNullException was unreachable while these subjects
+    // sat in the `unassertable` bucket (never executed); the ctor-handle fix
+    // made them run, which surfaced the mismatch as caught=True/realDefect.
     char* name = ManagedStringDup(local_name);
     if (name == nullptr) {
-        RaiseManagedException("System.ArgumentNullException",
-                              "Value cannot be null. (Parameter 'localName')");
-        return;
+        name = static_cast<char*>(CHAOS_IL2CPP_MALLOC(1));
+        if (name == nullptr) return;
+        name[0] = '\0';
     }
 
     if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
@@ -905,17 +916,25 @@ void ChaosXmlWriterWriteStartElement3(
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
 
+    // A null localName is NOT an error in the managed writer: the qualified
+    // name simply degrades to the (possibly empty) prefix, and a null prefix
+    // with a null localName yields an element with an empty name.
+    // Measured on .NET 8:
+    //   WriteStartElement(null, "l",    null) -> "<l"
+    //   WriteStartElement(null, null,   null) -> "<"
+    //   WriteStartElement(null, "l",    null) + WriteEndElement() -> "<l />"
+    // Raising ArgumentException here (the previous behaviour) made every
+    // 3-arg subject that passes null record caught=True / realDefect once the
+    // ctor-handle fix let those subjects actually execute.
     const char* name = nullptr;
     size_t name_len = 0;
-    if (!ManagedStringView(local_name, name, name_len)) {
-        RaiseManagedException("System.ArgumentException",
-                              "The local name cannot be null.");
-        return;
-    }
+    ManagedStringView(local_name, name, name_len);
+    if (name == nullptr) { name = ""; name_len = 0; }
 
     const char* pfx = nullptr;
     size_t pfx_len = 0;
     ManagedStringView(prefix, pfx, pfx_len);
+    if (pfx == nullptr) { pfx = ""; pfx_len = 0; }
 
     if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
     CloseStartTag(st);
@@ -967,23 +986,30 @@ void ChaosXmlWriterWriteStartAttribute(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
-    if (st->depth == 0 || !st->in_start_tag) {
-        RaiseManagedException("System.InvalidOperationException",
-                              "Cannot start an attribute outside a start tag.");
-        return;
-    }
+
+    // XmlTextWriter.WriteStartAttribute does NOT require an open start tag.
+    // Measured .NET 8 (a fresh writer, nothing written yet):
+    //   WriteStartAttribute(null, null, null)  -> '="'
+    //   WriteStartAttribute(null, "a",  null)  -> 'a="'
+    // and after WriteStartElement("e"):
+    //   WriteStartAttribute(null, null, null)  -> '<e ="'
+    // The previous guard raised InvalidOperationException for depth==0, which
+    // only became observable once the ctor-handle fix moved these subjects out
+    // of the `unassertable` bucket and let them actually execute.
     (void)ns;
 
+    // Null localName degrades to an empty name rather than raising — same
+    // measured .NET 8 contract as WriteStartElement(prefix, localName, ns):
+    //   WriteStartElement("e"); WriteStartAttribute(null,"a",null);
+    //   WriteString("v"); WriteEndAttribute()  ->  "<e a=\"v\""
     const char* name = nullptr;
     size_t name_len = 0;
-    if (!ManagedStringView(local_name, name, name_len)) {
-        RaiseManagedException("System.ArgumentException",
-                              "The local name cannot be null.");
-        return;
-    }
+    ManagedStringView(local_name, name, name_len);
+    if (name == nullptr) { name = ""; name_len = 0; }
     const char* pfx = nullptr;
     size_t pfx_len = 0;
     ManagedStringView(prefix, pfx, pfx_len);
+    if (pfx == nullptr) { pfx = ""; pfx_len = 0; }
 
     AppendRaw(st, " ", 1);
     if (pfx_len > 0) { AppendRaw(st, pfx, pfx_len); AppendRaw(st, ":", 1); }

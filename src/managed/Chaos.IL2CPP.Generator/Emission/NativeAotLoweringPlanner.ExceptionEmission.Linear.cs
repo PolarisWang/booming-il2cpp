@@ -577,12 +577,44 @@ public sealed partial class NativeAotLoweringPlanner
                     ? (callerIsShared ? "chaos_generic_context" : "0")
                     : (callerIsShared ? ", chaos_generic_context" : ", 0");
             }
-            builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({ctorArgs2}{ctorCtxArg2});");
+            if (constructorTarget.CtorReturnsNativeHandle)
+            {
+                // Handle-returning constructor factory (e.g. XmlTextWriter /
+                // XmlTextReader).  The factory hands back an opaque native handle
+                // addressing its own side table; every later `callvirt` resolves
+                // state through that handle.  The managed object is still
+                // allocated above so the reference has real identity, but its
+                // ADDRESS must not be used as the handle — doing so makes the
+                // stub's Resolve() miss (it expects a 1-based slot) and silently
+                // return, which surfaces downstream as caught=True/realDefect.
+                //
+                // The shim's ABI stays Void (a .ctor conceptually returns nothing
+                // and EmitLinearNewObject rejects a non-Void ctor return ABI); the
+                // value is recovered here from the call's C++ return type, which
+                // CreateDefinitionFromShapeEntry reshapes to CHAOS_IL2CPP_INTPTR
+                // whenever this flag is set.
+                //
+                // This REPLACES the plain call below rather than adding to it:
+                // emitting both would invoke the factory twice per newobj and leak
+                // a handle slot on every construction.
+                builder.AppendLine($"{indentation}    const CHAOS_IL2CPP_INTPTR chaos_handle = {constructorTarget.TargetSymbol}({ctorArgs2}{ctorCtxArg2});");
+            }
+            else
+            {
+                builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({ctorArgs2}{ctorCtxArg2});");
+            }
             if (TypeHasFinalizer(requiredTargetReference.SubjectId))
             {
                 builder.AppendLine($"{indentation}    chaos_runtime_get_abi_v0()->gc_register_finalizable(chaos_object);");
             }
-            EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)");
+            if (constructorTarget.CtorReturnsNativeHandle)
+            {
+                EmitEvalStackPush(builder, indentation + "    ", "chaos_handle");
+            }
+            else
+            {
+                EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)");
+            }
             builder.AppendLine(indentation + "}");
             return;
         }

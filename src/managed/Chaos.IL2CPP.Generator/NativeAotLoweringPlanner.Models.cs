@@ -15,7 +15,8 @@ public sealed partial class NativeAotLoweringPlanner
         RuntimeGenericContextArtifact? RuntimeGenericContext = null,
         string? InlineCppExpression = null,
         int ExternalRuntimeTableIndex = -1,
-        string? DirectNativeSymbol = null);
+        string? DirectNativeSymbol = null,
+        bool CtorReturnsNativeHandle = false);
 
     private sealed record ExternalRuntimeHelperDefinition(
         string SubjectId,
@@ -26,7 +27,8 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlySet<int> RawArgumentIndices,
         IReadOnlySet<string>? ReferencedStaticFieldSubjectIds = null,
         string? DirectNativeSymbol = null,
-        string? DirectNativeHeader = null);
+        string? DirectNativeHeader = null,
+        bool CtorReturnsNativeHandle = false);
 
     private sealed record ExternalRuntimeDispatchEntry(
         string SubjectId,

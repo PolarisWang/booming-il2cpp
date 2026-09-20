@@ -883,14 +883,26 @@ public sealed partial class NativeAotLoweringPlanner
 		var argCount = effectiveAbis.Count;
 		var args = argCount == 0 ? string.Empty :
 			string.Join(", ", Enumerable.Range(0, argCount).Select(i => $"chaos_fn_arg_{i}"));
-		var bodyLines = entry.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void
-			? new[] { $"    {entry.NativeFnSymbol}({args});" }
-			: new[] { $"    return {entry.NativeFnSymbol}({args});" };
+		// A handle-returning constructor factory hands the caller an opaque native
+		// handle.  Its ABI is declared Void (a managed .ctor conceptually returns
+		// nothing, and EmitLinearNewObject rejects a non-Void ctor return ABI), so
+		// the C++ shim must be reshaped here: return INTPTR and `return` the
+		// factory value, which the call site then pushes in place of the freshly
+		// allocated managed object address.
+		var ctorReturnsHandle = entry.CtorReturnsNativeHandle;
+		if (ctorReturnsHandle)
+		{
+			returnType = "CHAOS_IL2CPP_INTPTR";
+		}
+		var bodyLines = (entry.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void || ctorReturnsHandle)
+			? new[] { $"    return {entry.NativeFnSymbol}({args});" }
+			: new[] { $"    {entry.NativeFnSymbol}({args});" };
 		return new ExternalRuntimeHelperDefinition(callee, symbol,
 			RenderSimpleExternalRuntimeHelper(returnType, symbol, parameterSignature, bodyLines),
 			effectiveAbis, entry.ReturnAbi, effectiveRawArgs,
 			entry.ReferencedStaticFieldSubjectIds,
-			DirectNativeSymbol: entry.NativeFnSymbol);
+			DirectNativeSymbol: entry.NativeFnSymbol,
+			CtorReturnsNativeHandle: ctorReturnsHandle);
 	}
 
 	/// <summary>

@@ -29,7 +29,8 @@ public sealed partial class NativeAotLoweringPlanner
             IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
             AotCoreIrAbiSlotArtifact ReturnAbi,
             IReadOnlySet<int>? RawArgumentIndices = null,
-            IReadOnlySet<string>? ReferencedStaticFieldSubjectIds = null)
+            IReadOnlySet<string>? ReferencedStaticFieldSubjectIds = null,
+            bool CtorReturnsNativeHandle = false)
         {
             public string CanonicalKey => BuildCanonicalKey(TypeDisplayName, MethodName, ParamTypeDisplayNames);
 
@@ -143,7 +144,8 @@ public sealed partial class NativeAotLoweringPlanner
             IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis,
             AotCoreIrAbiSlotArtifact returnAbi,
             IReadOnlySet<int>? rawArgumentIndices = null,
-            IReadOnlySet<string>? referencedStaticFieldSubjectIds = null)
+            IReadOnlySet<string>? referencedStaticFieldSubjectIds = null,
+            bool ctorReturnsNativeHandle = false)
         {
             var entry = new ShapeEntry(
                 typeDisplayName,
@@ -154,7 +156,8 @@ public sealed partial class NativeAotLoweringPlanner
                 parameterAbis,
                 returnAbi,
                 rawArgumentIndices,
-                referencedStaticFieldSubjectIds);
+                referencedStaticFieldSubjectIds,
+                ctorReturnsNativeHandle);
 
             var canonicalKey = entry.CanonicalKey;
             if (_entriesByCanonicalKey.ContainsKey(canonicalKey))
