@@ -161,3 +161,66 @@ typ = '.'.join(parts)                    # System.Text.Json.JsonDocument
 
 **建议**：以 **ref-pack 的 public API** 为分母（这是 .NET 生态标准的「公开面」定义），
 并在报告中标注「不含 internal」。
+
+---
+
+## 🔴 发现 6：ref-pack 是干净的公开面（决策依据）
+
+用同一扫描器扫 ref-pack 各版本：
+
+| 来源 | methods | **types** | 含 `JsonSerializer` | 类型性质 |
+|:-----|:-------:|:---------:|:-------------------:|:---------|
+| 仓库现有 manifest | 486 | **99** | ❌ | 混大量 internal |
+| ref-pack 8.0.11 | 312 | **17** | ✅ | 纯 public |
+| ref-pack 9.0.0 | 327 | **19** | ✅ | 纯 public |
+| ref-pack 10.0.6 | 342 | **19** | ✅ | 纯 public |
+
+### ref-pack 10.0.6 的全部 19 个类型
+
+```
+System.Runtime.InteropServices.JsonMarshal
+System.Text.Json.JsonDocument
+System.Text.Json.JsonElement (+ArrayEnumerator/ObjectEnumerator)
+System.Text.Json.JsonEncodedText
+System.Text.Json.JsonException
+System.Text.Json.JsonProperty
+System.Text.Json.JsonSerializer          ← 仓库 manifest 缺的
+System.Text.Json.JsonSerializerOptions
+System.Text.Json.Nodes.JsonArray / JsonObject
+System.Text.Json.Schema.JsonSchemaExporter
+System.Text.Json.Serialization.JsonConverterAttribute
+System.Text.Json.Serialization.JsonStringEnumConverter
+System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver
+System.Text.Json.Serialization.Metadata.JsonTypeInfoResolver
+System.Text.Json.Utf8JsonReader / Utf8JsonWriter
+```
+
+**全是业务方会用的公开类型**，无 internal。
+
+### 对比：仓库 manifest 的 99 个类型含大量 internal
+
+`ReadStack` / `WriteStack` / `WriteStackFrame` / `BitStack` /
+`PooledByteBufferWriter` / `ArrayBuffer` / `JsonDocument+MetadataDb` /
+`JsonSerializerOptions+CachingContext+CacheEntry` … ——
+这些**不是 public API**，业务方无法调用。
+
+### 结论：ref-pack 是唯一干净的公开面口径
+
+**决定由用户做出**（本文件记录数据依据，不代用户拍板）。
+
+**注意**：ref-pack 的 types 数少（19 vs 99）**不代表 API 少** ——
+486 vs 342 的差异主要是 **manifest 含 internal + 扫描器把 nested/compiler-generated
+类型也算进去了**。ref-pack 的 342 是**纯公开方法**。
+
+---
+
+## 🔴 发现 7：一个必须注意的反常
+
+ref-pack 的 `types` 只有 17-19 个，而 methods 有 312-342 个 ——
+**平均每类型 18 个方法**，分布高度集中（`Utf8JsonWriter` 一个类型就有 ~100 个重载）。
+
+**这意味着**：分母的**类型数少但方法数多**，所以「按类型算覆盖率」会产生
+严重误导（覆盖 1 个类型可能 = 覆盖 30% 的方法）。
+
+**报告中必须用「方法级」覆盖率，且对重载多的类型（Utf8JsonWriter/Utf8JsonReader）
+单独标注。**
