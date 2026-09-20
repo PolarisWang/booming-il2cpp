@@ -487,7 +487,40 @@ public sealed partial class NativeAotLoweringPlanner
                 System.Console.Error.WriteLine($"[SHAPE_DEBUG] TryMatchShape hash={hash} canonicalKey=|{canonicalKey}| found={found} entriesCount={_entriesByShapeId.Count}");
             }
 
-            return _entriesByShapeId.TryGetValue(hash, out entry);
+            if (_entriesByShapeId.TryGetValue(hash, out entry))
+                return true;
+
+            // ── 兜底：callee 的类型段可能是短名，而注册用全名 ──────────
+            // 实测两种形态（见 void-writer-sideeffect-assertion/notes-shape-mismatch-full-scan.md）：
+            //   System.Text.Json/JsonElement::WriteTo:...          ← 短名（失配 5 项属此类）
+            //   System.Private.Xml/System.Xml.NameTable::Add:...   ← 全名（正常）
+            // 注册一律用全名（如 System.Text.Json.JsonElement），故短名形态永不匹配，
+            // 静默落到 catch-all（返回 0、不复刻托管语义）。
+            //
+            // 兜底策略：把 callee 的短名与所有注册项按**短名**再比一次。
+            // 安全性依据：全量核对 475 个注册，(短名, 方法名) → 全名 映射**零歧义**
+            // （没有任何组合对应多个全名）。该分支只在精确匹配失败后执行，
+            // 对既有全名形态**零影响**。
+            if (typeDisplayName!.IndexOf('.') >= 0)
+                return false;   // 已含命名空间 → 精确匹配已失败，无兜底可言
+
+            foreach (var candidate in _entriesByShapeId.Values)
+            {
+                if (!string.Equals(candidate.MethodName, methodName, StringComparison.Ordinal))
+                    continue;
+                var lastDot = candidate.TypeDisplayName.LastIndexOf('.');
+                var candShort = lastDot >= 0
+                    ? candidate.TypeDisplayName[(lastDot + 1)..]
+                    : candidate.TypeDisplayName;
+                if (!string.Equals(candShort, typeDisplayName, StringComparison.Ordinal))
+                    continue;
+                if (!candidate.ParamTypeDisplayNames.SequenceEqual(paramTypes))
+                    continue;
+                entry = candidate;
+                return true;
+            }
+
+            return false;
         }
 
         public IReadOnlyCollection<ShapeEntry> Entries => _entriesByShapeId.Values;
