@@ -1090,6 +1090,19 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
             // TypeCode enum values (which don't implicitly convert to Type — CS1503).
             bool isTypeCode = paramTypes.Length >= 2 && paramTypes[1] == "System.TypeCode";
 
+            // Name alone does not identify the overload family.  XmlSchemaDatatype
+            // and XmlConvert also expose a 3-arg `ChangeType(object, Type,
+            // IXmlNamespaceResolver)` — same name, same arity, but the third
+            // parameter is not an IFormatProvider.  Injecting
+            // CultureInfo.InvariantCulture for it produces
+            //   error CS1503: cannot convert from 'CultureInfo' to 'IXmlNamespaceResolver'
+            // and fails the whole combined build.  The hardcoded third argument is
+            // valid only when the parameter actually accepts an IFormatProvider;
+            // otherwise fall through to the generic generator, which emits a
+            // correctly-typed instance.
+            bool thirdIsFormatProvider = paramTypes.Length < 3
+                || paramTypes[2] == "System.IFormatProvider";
+
             if (paramTypes.Length == 2)
             {
                 if (isTypeCode)
@@ -1104,8 +1117,9 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
                     AddUnique(sets, usedSignatures, methodIndex, ["true", "typeof(bool)"]);
                     AddUnique(sets, usedSignatures, methodIndex, ["\"hello\"", "typeof(string)"]);
                 }
+                return;
             }
-            else if (paramTypes.Length == 3)
+            else if (paramTypes.Length == 3 && thirdIsFormatProvider)
             {
                 if (isTypeCode)
                 {
@@ -1117,8 +1131,19 @@ if (ReflectionInstanceFactories.TryGetValue(typeName, out var reflectionExpr))
                     AddUnique(sets, usedSignatures, methodIndex, ["42", "typeof(int)", "System.Globalization.CultureInfo.InvariantCulture"]);
                     AddUnique(sets, usedSignatures, methodIndex, ["true", "typeof(bool)", "System.Globalization.CultureInfo.InvariantCulture"]);
                 }
+                return;
             }
-            return;
+            else if (paramTypes.Length == 3)
+            {
+                // Third parameter is not IFormatProvider (e.g. IXmlNamespaceResolver).
+                // Emit a correctly-typed pair and let the generic generator fill the rest.
+                if (!isTypeCode)
+                {
+                    AddUnique(sets, usedSignatures, methodIndex,
+                        ["42", "typeof(int)", "SubjectInstanceFactory.Create<" + CSharpSerializer.ToQualifiedCSharpType(paramTypes[2]) + ">()"]);
+                }
+                return;
+            }
         }
 
         // ── Enum.TryParse — only for System.Enum type ──
