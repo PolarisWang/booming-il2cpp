@@ -396,6 +396,18 @@ public sealed partial class NativeAotEmitter
         sb.Append("using namespace chaos::il2cpp::runtime_core;\n");
         sb.Append("using namespace chaos::il2cpp::jit;\n\n");
 
+        // 方案 B: append definitions for any referenced-but-undefined chaos_type_id_*
+        // (single authoritative registry — see ObjectModelUtilities).  Placed at the
+        // TOP of the namespace so consumers anywhere in the TU (some as early as the
+        // module-registration switch) see the definition before use.
+        var missingTypeIds = NativeAotLoweringPlanner.BuildMissingTypeIdDefinitions(sb.ToString());
+        if (missingTypeIds.Length > 0)
+        {
+            sb.Append("// ── Late type-id definitions (registry-backed; see ObjectModelUtilities) ──\n");
+            sb.Append(missingTypeIds);
+            sb.Append('\n');
+        }
+
         // Method declarations — included only on page 0 (first page).
         // Including them on every page multiplies memory by the page count,
         // causing OOM when there are 1000+ pages for subject-mode chunks.
@@ -466,12 +478,8 @@ public sealed partial class NativeAotEmitter
         // (single authoritative registry — see ObjectModelUtilities).  Appended inside
         // the codegen namespace so same-namespace consumer switches resolve; per-page
         // append is correct because inline constexpr has internal linkage per TU.
-        var missingTypeIds = NativeAotLoweringPlanner.BuildMissingTypeIdDefinitions(sb.ToString());
-        if (missingTypeIds.Length > 0)
-        {
-            sb.Append("\n// ── Late type-id definitions (registry-backed; see ObjectModelUtilities) ──\n");
-            sb.Append(missingTypeIds);
-        }
+        // (Late type-id definitions moved to the top of the namespace — a consumer
+        // switch as early as line ~2232 must see the definition before use.)
 
         // Close namespace
         sb.Append("\n}  // namespace chaos::il2cpp::codegen::");
