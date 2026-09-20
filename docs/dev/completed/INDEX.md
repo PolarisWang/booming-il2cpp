@@ -31,3 +31,4 @@
 | [child-fd-p1-baseline](child-fd-p1-baseline/STATUS.md) | 2 | 05/23 | Foundation DLL Phase 1 基线扫描 — 138/164 通过, 10 失败分类, 4 systemic issues |
 | [child-fd-p15-risk-ranking](child-fd-p15-risk-ranking/STATUS.md) | 3 | 05/23 | Foundation DLL Phase 1.5 风险排序 — 12 families 排序 P0(6)+P1(2)+P3(4), 4 SYS |
 | [foundation-dll-sdk-cleanup](foundation-dll-sdk-cleanup/STATUS.md) | 7 | 05/24 | SDK 输出清理 — 分发逻辑下沉到 runtime header, Python 生成 entry, pipeline 简化 |
+| [20260920-01-ctor-handle-abi-fix](20260920-01-ctor-handle-abi-fix/STATUS.md) | 7 | 09/20 | ctor native 句柄 ABI 修复 — 句柄式 stub 家族（XML pass 570→590, 20 改善 / 0 回退, 产物 diff 门通过） |
