@@ -32,3 +32,4 @@
 | [child-fd-p15-risk-ranking](child-fd-p15-risk-ranking/STATUS.md) | 3 | 05/23 | Foundation DLL Phase 1.5 风险排序 — 12 families 排序 P0(6)+P1(2)+P3(4), 4 SYS |
 | [foundation-dll-sdk-cleanup](foundation-dll-sdk-cleanup/STATUS.md) | 7 | 05/24 | SDK 输出清理 — 分发逻辑下沉到 runtime header, Python 生成 entry, pipeline 简化 |
 | [20260920-01-ctor-handle-abi-fix](20260920-01-ctor-handle-abi-fix/STATUS.md) | 7 | 09/20 | ctor native 句柄 ABI 修复 — 句柄式 stub 家族（XML pass 570→590, 20 改善 / 0 回退, 产物 diff 门通过） |
+| [20260920-02-raw-pointer-key-state-tables](20260920-02-raw-pointer-key-state-tables/STATUS.md) | 4 | 09/20 | GC 快路径漏调 RelocateGen1References（cross-gen UAF）+ 裸指针键表搬迁维护（pin_set / g_stream_state）；装置 3/3 通过 |
