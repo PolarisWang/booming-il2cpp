@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedAt": "<normalized>",
-  "totalExactShapes": 1278,
+  "totalExactShapes": 1307,
   "totalGenericPatterns": 256,
   "totalInlinePatterns": 517,
   "entries": [
@@ -3753,6 +3753,347 @@
         "Utf8JsonWriter"
       ],
       "nativeSymbol": "ChaosUtf8JsonWriterWriteTo",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteStartObject",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteStartObject:(System.String)",
+      "paramTypes": [
+        "System.String"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStartObjectStr",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteStartObject",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteStartObject:(System.Text.Json.JsonEncodedText)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStartObjectEncoded",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteStartArray",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteStartArray:(System.String)",
+      "paramTypes": [
+        "System.String"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStartArrayStr",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteStartArray",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteStartArray:(System.Text.Json.JsonEncodedText)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStartArrayEncoded",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteString",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteString:(System.String,System.DateTime)",
+      "paramTypes": [
+        "System.String",
+        "System.DateTime"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStringStrDateTime",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteString",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteString:(System.String,System.DateTimeOffset)",
+      "paramTypes": [
+        "System.String",
+        "System.DateTimeOffset"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStringStrDateTimeOffset",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteString",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteString:(System.String,System.Guid)",
+      "paramTypes": [
+        "System.String",
+        "System.Guid"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStringStrGuid",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteString",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteString:(System.Text.Json.JsonEncodedText,System.DateTime)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.DateTime"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStringEncodedDateTime",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteString",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteString:(System.Text.Json.JsonEncodedText,System.DateTimeOffset)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.DateTimeOffset"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStringEncodedDateTimeOffset",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteString",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteString:(System.Text.Json.JsonEncodedText,System.Guid)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.Guid"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStringEncodedGuid",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteString",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteString:(System.Text.Json.JsonEncodedText,System.Text.Json.JsonEncodedText)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.Text.Json.JsonEncodedText"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStringEncodedEncoded",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteString",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteString:(System.Text.Json.JsonEncodedText,System.String)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.String"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteStringEncodedStr",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.String,System.Int32)",
+      "paramTypes": [
+        "System.String",
+        "System.Int32"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberStrInt32",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.String,System.UInt32)",
+      "paramTypes": [
+        "System.String",
+        "System.UInt32"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberStrUInt32",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.String,System.Decimal)",
+      "paramTypes": [
+        "System.String",
+        "System.Decimal"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberStrDecimal",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.Text.Json.JsonEncodedText,System.Int32)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.Int32"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberEncodedInt32",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.Text.Json.JsonEncodedText,System.Int64)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.Int64"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberEncodedInt64",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.Text.Json.JsonEncodedText,System.UInt32)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.UInt32"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberEncodedUInt32",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.Text.Json.JsonEncodedText,System.UInt64)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.UInt64"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberEncodedUInt64",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.Text.Json.JsonEncodedText,System.Double)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.Double"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberEncodedDouble",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.Text.Json.JsonEncodedText,System.Single)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.Single"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberEncodedFloat",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.Text.Json.JsonEncodedText,System.Decimal)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.Decimal"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberEncodedDecimal",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumber",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumber:(System.Text.Json.JsonEncodedText,System.String)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.String"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberEncodedStr",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNull",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNull:(System.Text.Json.JsonEncodedText)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNullEncoded",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteBoolean",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteBoolean:(System.Text.Json.JsonEncodedText,System.Boolean)",
+      "paramTypes": [
+        "System.Text.Json.JsonEncodedText",
+        "System.Boolean"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteBooleanEncoded",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteRawValue",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteRawValue:(System.String,System.Boolean)",
+      "paramTypes": [
+        "System.String",
+        "System.Boolean"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteRawValueStrBool",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteRawValue",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteRawValue:(System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E,System.Boolean)",
+      "paramTypes": [
+        "System.Buffers.ReadOnlySequence\u003CSystem.Byte\u003E",
+        "System.Boolean"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteRawValueSequenceBool",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumberValue",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumberValue:(System.Int32)",
+      "paramTypes": [
+        "System.Int32"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberValueInt32",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "Utf8JsonWriter",
+      "methodName": "WriteNumberValue",
+      "subjectIdPrefix": "System.Private.CoreLib/Utf8JsonWriter::WriteNumberValue:(System.UInt32)",
+      "paramTypes": [
+        "System.UInt32"
+      ],
+      "nativeSymbol": "ChaosUtf8JsonWriterWriteNumberValueUInt32",
       "shapeKind": "SimpleForward"
     },
     {
