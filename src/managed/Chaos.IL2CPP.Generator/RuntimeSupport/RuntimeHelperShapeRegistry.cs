@@ -463,10 +463,68 @@ public sealed partial class NativeAotLoweringPlanner
             return false;
         }
 
+        /// <summary>
+        /// Resolve a bare parameter type name (e.g. <c>JsonEncodedText</c>, as it
+        /// appears in an AOT core-IR subject id) to the fully-qualified spelling a
+        /// registration uses (e.g. <c>System.Text.Json.JsonEncodedText</c>).
+        ///
+        /// The map is built from the registrations themselves, so it cannot drift
+        /// from them.  A bare name that maps to more than one full name is left
+        /// UNRESOLVED (returns null) — missing a match is recoverable and visible,
+        /// whereas routing A's call to B's implementation is not.
+        /// </summary>
+        /// <returns>The full name, or null when unknown or ambiguous.</returns>
+        private string? ResolveBareParamTypeName(string bareName)
+        {
+            _bareToFullParamTypes ??= BuildBareParamTypeMap();
+            return _bareToFullParamTypes.TryGetValue(bareName, out var full) ? full : null;
+        }
+
+        private Dictionary<string, string> BuildBareParamTypeMap()
+        {
+            var seen = new Dictionary<string, string>(StringComparer.Ordinal);
+            var ambiguous = new HashSet<string>(StringComparer.Ordinal);
+
+            foreach (var e in _entriesByShapeId.Values)
+            {
+                foreach (var p in e.ParamTypeDisplayNames)
+                {
+                    // Strip an assembly qualifier if present: "Asm/System.Foo" -> "System.Foo"
+                    var slash = p.IndexOf('/');
+                    var qualified = slash >= 0 ? p[(slash + 1)..] : p;
+
+                    // Only types that actually carry a namespace are candidates;
+                    // a generic form like ReadOnlySequence<System.Byte> keeps its
+                    // angle brackets and is handled by exact match instead.
+                    if (qualified.IndexOf('.') < 0 || qualified.IndexOf('<') >= 0)
+                        continue;
+
+                    var lastDot = qualified.LastIndexOf('.');
+                    var bare = qualified[(lastDot + 1)..];
+
+                    if (seen.TryGetValue(bare, out var existing))
+                    {
+                        if (!string.Equals(existing, qualified, StringComparison.Ordinal))
+                            ambiguous.Add(bare);
+                    }
+                    else
+                    {
+                        seen[bare] = qualified;
+                    }
+                }
+            }
+
+            foreach (var a in ambiguous)
+                seen.Remove(a);
+
+            return seen;
+        }
+
+        private Dictionary<string, string>? _bareToFullParamTypes;
+
         /// <summary>Try to match a callee SubjectId to a registered shape by display-name-based shape key.</summary>
         public bool TryMatchShape(string callee, [NotNullWhen(true)] out ShapeEntry? entry)
-        {
-            entry = null;
+        {            entry = null;
             if (string.IsNullOrEmpty(callee)) return false;
 
             var typeDisplayName = GetTypeDisplayNameFromSubjectId(callee);
@@ -489,6 +547,46 @@ public sealed partial class NativeAotLoweringPlanner
 
             if (_entriesByShapeId.TryGetValue(hash, out entry))
                 return true;
+
+            // ── 兜底 A：形参类型名是裸名，而注册用全名 ──────────────
+            // 与下方「类型段短名」兜底是同一类缺陷的第二个实例，区别是被比较的
+            // 对象不同：那次是 typeDisplayName，这次是**形参类型名**。
+            //
+            // 实测（同一次构建的两个产物互相矛盾）：
+            //   aot-capability-manifest.json: WritePropertyName:(System.Text.Json.JsonEncodedText)
+            //   aot-core-ir.json            : WritePropertyName:System.Void(JsonEncodedText)
+            // 注册用前者（全名，S21.cs:68），匹配读后者（裸名）。
+            // GetMethodParameterTypesFromSubjectIdImpl 只做 SplitTopLevelTypeList，
+            // **不补命名空间**，故规范键永不相等，静默落 catch-all。
+            //
+            // 影响面不止个别项：core-IR 中凡 System.Text.Json 命名空间的形参
+            // 一律以裸名出现（JsonSerializerOptions x232 / JsonEncodedText x90 /
+            // JsonDocument x86 / JsonElement x74 / JsonDocumentOptions x42）。
+            //
+            // 安全性依据：从**注册表自身**建「裸名 → 全名」映射；若某裸名对应
+            // 多个全名则**不映射**（宁可不命中，也不把 A 的调用导到 B 的实现）。
+            // 实测 52 个裸名中仅 `Object` 有歧义（System.Object 与
+            // System.Private.CoreLib/System.Object 同一类型，不同写法）。
+            if (paramTypes.Any(p => p.IndexOf('.') < 0))
+            {
+                var expanded = new string[paramTypes.Count];
+                var allResolvable = true;
+                for (int pi = 0; pi < paramTypes.Count; pi++)
+                {
+                    var p = paramTypes[pi];
+                    if (p.IndexOf('.') >= 0) { expanded[pi] = p; continue; }
+                    var resolved = ResolveBareParamTypeName(p);
+                    if (resolved is null) { allResolvable = false; break; }
+                    expanded[pi] = resolved;
+                }
+
+                if (allResolvable)
+                {
+                    var expandedKey = BuildCanonicalKey(typeDisplayName!, methodName!, expanded);
+                    if (_entriesByShapeId.TryGetValue(Fnv1aHash(expandedKey), out entry))
+                        return true;
+                }
+            }
 
             // ── 兜底：callee 的类型段可能是短名，而注册用全名 ──────────
             // 实测两种形态（见 void-writer-sideeffect-assertion/notes-shape-mismatch-full-scan.md）：
