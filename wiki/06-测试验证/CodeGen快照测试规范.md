@@ -33,27 +33,27 @@
 ## 2. 项目结构
 
 ```
-tests/snapshots/
-├── Chaos.IL2CPP.Generator.SnapshotTests/
-│   ├── Chaos.IL2CPP.Generator.SnapshotTests.csproj
-│   ├── SnapshotTestBase.cs              # 基类：加载夹具 → emitter → 对比基线
-│   ├── SnapshotTheoryData.cs            # 自动发现所有 fixture 目录
-│   ├── Infrastructure/
-│   │   └── TempFixtureHost.cs           # 从 fixture 目录加载 → 写临时目录
-│   ├── Baselines/                       # 基线输出（Git 追踪）
-│   │   ├── 01-simple-add/
-│   │   │   └── generated/
-│   │   │       ├── native-aot.generated.cpp
-│   │   │       └── runtime_helper_shapes.h
-│   │   └── ...
-│   └── Fixtures/                        # IR 夹具（Git 追踪）
-│       ├── 01-simple-add/
-│       │   ├── native-aot.lowering-plan.json
-│       │   ├── aot-core-ir.json
-│       │   ├── closure.manifest.json
-│       │   ├── metadata-registration.json
-│       │   └── supplemental-metadata-template.json
-│       └── ...
+tests/unit/managed/snapshot/
+├── Chaos.IL2CPP.CodeGen.SnapshotTests.csproj
+├── SnapshotTestBase.cs                  # 基类：加载夹具 → emitter → 对比基线
+├── SnapshotTests.cs                     # 自动发现所有 fixture 目录
+├── FixtureRepository.cs                 # 从 fixture 目录加载 → 写临时目录
+├── Baselines/                           # 基线输出（Git 追踪）
+│   ├── 01-simple-add/
+│   │   ├── chaos_generated_module.cpp
+│   │   ├── native-aot.generated.cpp
+│   │   ├── native-aot.generated.header.h
+│   │   ├── native-aot.methods.json
+│   │   └── runtime_helper_shapes.h
+│   └── ...
+└── Fixtures/                            # IR 夹具（Git 追踪）
+    ├── 01-simple-add/
+    │   ├── native-aot.lowering-plan.json
+    │   ├── aot-core-ir.json
+    │   ├── closure.manifest.json
+    │   ├── metadata-registration.json
+    │   └── supplemental-metadata-template.json
+    └── ...
 ```
 
 ## 3. 夹具规范
@@ -99,7 +99,7 @@ chaos-il2cpp convert-to-cpp --assembly TestSubject.dll --output artifacts/test-s
 ### 4.1 运行快照测试
 
 ```powershell
-dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests/
+dotnet test tests/unit/managed/snapshot/
 ```
 
 ### 4.2 更新基线
@@ -108,7 +108,7 @@ dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests/
 
 ```powershell
 $env:SNAPSHOT_UPDATE = "1"
-dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests/
+dotnet test tests/unit/managed/snapshot/
 ```
 
 然后通过 `git diff` 审查基线变化，确认无误后提交。

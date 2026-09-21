@@ -121,7 +121,7 @@ assert not failures, failures
 
 如果本轮改动涉及 codegen (emitter / planner / RuntimeSupport / Scriban 模板)，完成前必须运行快照测试并确认以下事项：
 
-- 运行 `dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests/` 是否通过
+- 运行 `dotnet test tests/unit/managed/snapshot/` 是否通过
 - 如果基线有变更，是否已通过 `git diff` 审查
 - 新增 IL 模式时是否补了对应夹具和基线
 - 基线更新是否使用了 `SNAPSHOT_UPDATE=1` 模式
