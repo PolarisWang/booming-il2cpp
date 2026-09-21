@@ -84,6 +84,11 @@ public sealed partial class NativeAotLoweringPlanner
                     EmitIRExceptionRegion(builder, er, method, indentation);
                     break;
 
+                case IRMultiCatchRegion multi:
+                    EmitMultiCatchRegion(builder, multi, method, indentation,
+                        indentation + "    ", indentation + "        ");
+                    break;
+
                 case IRPcDispatch pcDispatch:
                     EmitPcDispatch(builder, pcDispatch, method, indentation);
                     break;
@@ -1353,6 +1358,7 @@ public sealed partial class NativeAotLoweringPlanner
                     break;
                 }
 
+
             case IRExceptionKind.TryFinally:
                 {
                     // Declared OUTSIDE the CHAOS_EH_TRY_FINALLY brace (that macro opens a scope),
@@ -1410,6 +1416,96 @@ public sealed partial class NativeAotLoweringPlanner
                 throw new NotSupportedException(
                     "StructuredIR: unknown exception kind '" + er.Kind + "'");
         }
+    }
+
+    /// <summary>
+    /// Emits one <c>try</c> with several <c>catch</c> clauses (see
+    /// <see cref="IRMultiCatchRegion"/>).
+    ///
+    /// Shape produced — the try body runs exactly ONCE, then each clause is tried
+    /// in source order until one matches:
+    ///
+    /// <code>
+    /// CHAOS_EH_TRY
+    ///     &lt;try body&gt;
+    /// CHAOS_EH_CATCH_BEGIN
+    ///     if (match(A)) { &lt;handler A&gt; ; goto chaos_catch_end_N; }
+    ///     if (match(B)) { &lt;handler B&gt; ; goto chaos_catch_end_N; }
+    ///     CHAOS_EH_RETHROW;          // no clause matched
+    /// chaos_catch_end_N: ;
+    /// CHAOS_EH_END
+    /// </code>
+    ///
+    /// The <c>goto</c> matters: without it, a clause that matched would fall
+    /// through into the following clauses' match tests.  It jumps to the label
+    /// just inside <c>CHAOS_EH_END</c>, i.e. the end of the whole catch block.
+    ///
+    /// A clause with a null <c>CatchTypeSubjectId</c> is a bare <c>catch { }</c>
+    /// and is emitted as an unconditional handler (the C# compiler only ever
+    /// places it last).
+    ///
+    /// The <c>goto</c> target is declared per-region via a monotonically
+    /// increasing suffix so nested/multiple regions in one method cannot collide.
+    /// </summary>
+    private void EmitMultiCatchRegion(
+        StringBuilder builder,
+        IRMultiCatchRegion multi,
+        AotCoreIrMethodArtifact method,
+        string indentation,
+        string inner,
+        string bodyIndent)
+    {
+        if (multi.Clauses.Count == 0)
+        {
+            // Degenerate: a try with no catch.  Emit the body bare so the method
+            // still lowers rather than silently dropping instructions.
+            EmitStructuredIRNode(builder, multi.TryBody, method, indentation);
+            return;
+        }
+
+        int regionId = _multiCatchRegionCounter++;
+        string endLabel = "chaos_multi_catch_end_" + regionId;
+
+        int preTryDepth = _state.Value!.ActiveStructuredSlotContext?.Depth ?? 0;
+        builder.AppendLine(indentation + "CHAOS_EH_TRY");
+        EmitStructuredIRNode(builder, multi.TryBody, method, bodyIndent);
+        _state.Value!.ActiveStructuredSlotContext?.RestoreDepth(preTryDepth);
+        builder.AppendLine(indentation + "CHAOS_EH_CATCH_BEGIN");
+
+        for (int i = 0; i < multi.Clauses.Count; i++)
+        {
+            var clause = multi.Clauses[i];
+            bool isLast = i == multi.Clauses.Count - 1;
+
+            if (clause.CatchTypeSubjectId is null)
+            {
+                // Bare `catch { }` — matches everything; runs unconditionally.
+                // Only the last clause may be typeless (guaranteed by C#), so no
+                // goto is needed on this path.
+                EmitEvalStackPush(builder, inner, "CHAOS_EH_EXCEPTION_OBJ");
+                EmitStructuredIRNode(builder, clause.HandlerBody, method, bodyIndent);
+                break;
+            }
+
+            string typeInfoSym = GetNativeTypeInfoSymbol(clause.CatchTypeSubjectId);
+            builder.AppendLine(inner + "{");
+            builder.AppendLine(inner + "    if (chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, "
+                + typeInfoSym + "))");
+            builder.AppendLine(inner + "    {");
+            EmitEvalStackPush(builder, inner + "        ", "CHAOS_EH_EXCEPTION_OBJ");
+            EmitStructuredIRNode(builder, clause.HandlerBody, method, inner + "        ");
+            builder.AppendLine(inner + "        goto " + endLabel + ";");
+            builder.AppendLine(inner + "    }");
+            builder.AppendLine(inner + "}");
+
+            // Nothing matched any clause -> propagate, matching C# semantics for a
+            // catch set with no matching handler.
+            if (isLast)
+                builder.AppendLine(inner + "CHAOS_EH_RETHROW;");
+        }
+
+        builder.AppendLine(indentation + endLabel + ": ;");
+        builder.AppendLine(indentation + "CHAOS_EH_END");
     }
 
 
@@ -2152,17 +2248,32 @@ public sealed partial class NativeAotLoweringPlanner
         // Build the shared try body tree
         var tryTree = BuildExceptionPartitionTree(multiCatch.TryInstructions, offsets);
 
-        // For each catch region, create a sequential IRExceptionRegion with the shared try body.
-        // The catch regions are siblings (sequential), not nested.
+        // Emit ONE try block carrying all clauses, in source order.
+        //
+        // This previously emitted N sibling IRExceptionRegion nodes, each wrapping
+        // the same tryTree — i.e. N sequential CHAOS_EH_TRY blocks, so the try body
+        // ran N times and only the last clause could ever be reached.  Measured on
+        // System.Text.Json/Reset_0_Stream_0: the body's Create + Reset calls each
+        // appeared twice in the generated C++, and the second block's catch matched
+        // System.Object (every exception), swallowing the ObjectDisposedException the
+        // first clause had correctly handled and then throwing
+        // "wrong exception type" — failing the subject.
+        //
+        // Clauses are ordered as written in source; the bare `catch { }` (null type)
+        // is last by construction and is emitted as an unconditional handler.
+        var clauses = new List<IRMultiCatchClause>(multiCatch.CatchRegions.Count);
         for (int i = 0; i < multiCatch.CatchRegions.Count; i++)
         {
             var handlerTree = BuildExceptionPartitionTree(multiCatch.HandlerInstructionsList[i], offsets);
-            nodes.Add(new IRExceptionRegion(
-                IRExceptionKind.TryCatch,
-                tryTree,
-                handlerTree,
-                CatchTypeSubjectId: multiCatch.CatchRegions[i].CatchTypeSubjectId));
+            clauses.Add(new IRMultiCatchClause(
+                multiCatch.CatchRegions[i].CatchTypeSubjectId,
+                handlerTree));
         }
+
+        if (clauses.Count > 0)
+            nodes.Add(new IRMultiCatchRegion(tryTree, clauses));
+        else
+            nodes.Add(tryTree);
 
         // Build IR tree for tail (instructions after all handlers)
         if (multiCatch.TailInstructions.Count > 0)

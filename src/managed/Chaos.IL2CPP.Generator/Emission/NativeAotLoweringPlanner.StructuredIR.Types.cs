@@ -135,6 +135,32 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrInstructionArtifact>? FilterInstructions = null,
         IReadOnlyList<int>? RegionExitTargetOffsets = null
     ) : StructuredIRNode;
+
+    /// <summary>
+    /// A single <c>try</c> with several <c>catch</c> clauses — the C# shape
+    /// <c>try { … } catch (A) { … } catch (B) { … }</c>.
+    ///
+    /// This must NOT be modelled as N sequential <see cref="IRExceptionRegion"/>s
+    /// sharing one try body: that emits N separate <c>CHAOS_EH_TRY</c> blocks and
+    /// therefore runs the try body N times, with only the last catch reachable.
+    /// C# semantics are one execution of the try body with the clauses tried in
+    /// order, so the emission is one try block containing a match chain.
+    ///
+    /// <paramref name="Clauses"/> is ordered as written in source: the first entry
+    /// is the first <c>catch</c>.  A null <c>CatchTypeSubjectId</c> on a clause
+    /// means a bare <c>catch { }</c> (matches anything), which the C# compiler only
+    /// ever places last.
+    /// </summary>
+    internal sealed record IRMultiCatchRegion(
+        StructuredIRNode TryBody,
+        IReadOnlyList<IRMultiCatchClause> Clauses,
+        IReadOnlyList<int>? RegionExitTargetOffsets = null
+    ) : StructuredIRNode;
+
+    internal sealed record IRMultiCatchClause(
+        string? CatchTypeSubjectId,
+        StructuredIRNode HandlerBody);
+
     // Async IR nodes (F6)
     internal enum AsyncAwaiterKind { TaskAwaiter, TaskAwaiterOfT, ValueTaskAwaiter, YieldAwaitable, ConfiguredTaskAwaiter, CustomAwaiter }
     internal sealed record IRAwait(string Expr, AsyncAwaiterKind Kind, StructuredIRNode Cont, bool Sync = false) : StructuredIRNode;

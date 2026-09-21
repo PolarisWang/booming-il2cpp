@@ -550,6 +550,10 @@ public sealed partial class NativeAotLoweringPlanner
 
     private string BuildMethodSourceSafe(AotCoreIrMethodArtifact method)
     {
+        // Multi-catch `goto` labels must be unique within the emitted function and
+        // stable across runs, so the counter restarts for each method body rather
+        // than growing across the whole assembly.
+        _multiCatchRegionCounter = 0;
         try
         {
             return BuildMethodSource(method);

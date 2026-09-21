@@ -475,6 +475,13 @@ public sealed partial class NativeAotLoweringPlanner
     private readonly Dictionary<string, int> _externalRuntimeSubjects = new(StringComparer.Ordinal);
 
     /// <summary>
+    /// Monotonic counter used to give each multi-catch region a unique
+    /// <c>goto</c> target label.  Reset per method body emission so labels stay
+    /// short and deterministic.
+    /// </summary>
+    private int _multiCatchRegionCounter;
+
+    /// <summary>
     /// Collects all chaos_external_runtime_* symbols referenced during method body emission.
     /// Populated by <see cref="EmitInvocation"/> when DirectNativeSymbol is set to an
     /// external runtime stub.  Used by <see cref="BuildTypeDeclarationsCode"/> to emit
