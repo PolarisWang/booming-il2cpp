@@ -102,7 +102,12 @@ jobs:
         run: dotnet build testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
 
       - name: Run Snapshot Tests
+        if: runner.os == 'Windows'
         run: dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/ --configuration Release --no-restore -v n
+
+      - name: Skip Snapshot Tests (Linux runner — Windows-host-only baselines)
+        if: runner.os != 'Windows'
+        run: echo "::notice::Snapshot tests skipped on Linux. Baselines are regenerated against the Windows generator's shape enumeration, so a Linux host drifts deterministically; the snapshot-unit stage (windows-latest) covers this comparison."
 
       - name: Run MetadataWriter Tests
         run: dotnet test testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n
