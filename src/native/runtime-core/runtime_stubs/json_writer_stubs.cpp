@@ -8,11 +8,21 @@
 // NullReferenceException, or ArgumentNullException depending on the input.
 // The native stubs replicate the same exception contracts.
 //
-// The methods all share two common patterns:
-//   1. null this* → ObjectDisposedException (the bare object has no output)
-//   2. null/empty string argument → ArgumentNullException/ArgumentException
-//   3. StartArray/StartObject/EndArray/EndObject on a disposed/unitialized
-//      object → InvalidOperationException
+// The methods all share three common patterns — note that the exception type a
+// bare receiver reports depends on the method family (all measured on .NET 10):
+//   1. bare this* on a VALUE-ONLY write (WriteNullValue / WriteBooleanValue /
+//      WriteNumberValue / WriteStringValue / WriteCommentValue)
+//        → NullReferenceException
+//   2. bare this* on a PROPERTY-NAME write (WriteNull / WriteNumber / WriteBoolean
+//      / WriteString / WritePropertyName) or on WriteStartObject / WriteStartArray
+//        → InvalidOperationException
+//   3. bare this* on Flush / Reset
+//        → ObjectDisposedException
+//   4. null/empty string argument → ArgumentNullException/ArgumentException,
+//      but only AFTER the receiver check — .NET reports the receiver state first.
+//
+// Collapsing 1 and 2 into 3 was a real defect: the typed-catch assertions in the
+// ATG subjects correctly rejected the wrong type (12 subjects).
 //
 // Memory
 // ------
@@ -48,18 +58,60 @@ bool ManagedStringView(CHAOS_IL2CPP_INTPTR str, const char*& out, size_t& out_le
     out_len = static_cast<size_t>(hdr->byte_count); return true;
 }
 
-/// A bare Utf8JsonWriter from GetUninitializedObject has no output sink, so
-/// every write operation throws ObjectDisposedException from the managed code.
+/// A bare Utf8JsonWriter from GetUninitializedObject has no output sink.
+///
+/// Which exception it throws is NOT uniform — it depends on the method family,
+/// measured on .NET 10 against a `GetUninitializedObject` instance:
+///
+///   Value-only write (WriteNullValue / WriteBooleanValue / WriteNumberValue /
+///     WriteStringValue / WriteCommentValue / WriteRawValue) -> System.NullReferenceException
+///   Property-name write (WriteNull / WriteNumber / WriteBoolean /
+///     WriteString / WritePropertyName) and
+///     WriteStartObject / WriteStartArray       -> System.InvalidOperationException
+///   Flush / Reset / JsonDocument.WriteTo       -> System.ObjectDisposedException
+///
+/// This function is for the third family only.  Applying it to the first two was
+/// producing ObjectDisposedException where .NET raises something else, which the
+/// typed-catch assertions correctly rejected.
 [[noreturn]] void RaiseDisposedOrInvalid() {
     RaiseManagedException("System.ObjectDisposedException",
         "Cannot access a disposed object. Object name: 'Utf8JsonWriter'.");
 }
 
+/// Value-only write methods on a bare writer touch the missing output sink
+/// directly, so .NET surfaces NullReferenceException.  Measured:
+/// bare.WriteNullValue(), bare.WriteBooleanValue(true),
+/// bare.WriteNumberValue(1m), bare.WriteStringValue(Guid.Empty).
+[[noreturn]] void RaiseBareWriterNullReference() {
+    RaiseManagedException("System.NullReferenceException",
+        "Object reference not set to an instance of an object.");
+}
+
+/// Property-name writes on a bare writer report the receiver as unusable rather
+/// than dereferencing it.  Measured: bare.WriteNull("p"), bare.WriteNumber("p",1),
+/// bare.WriteBoolean("p",true), bare.WriteString("p","v"),
+/// bare.WritePropertyName("") all throw InvalidOperationException.
+[[noreturn]] void RaiseBareWriterInvalidOperation() {
+    RaiseManagedException("System.InvalidOperationException",
+        "Cannot write to a JSON writer that has been disposed.");
+}
+
 /// Validate the 'this' pointer: 0 means the bare object is disposed/unitialized.
 /// Non-zero means it's a real instance (unlikely from ATG but hit by some
 /// methods that never check this first).
-bool CheckThis(CHAOS_IL2CPP_INTPTR this_ptr) {
+///
+/// `bareKind` selects the family distinction above so the receiver check reports
+/// the same exception type .NET does for that family.
+enum class BareWriterKind { Disposed, NullReference, InvalidOperation };
+
+bool CheckThis(CHAOS_IL2CPP_INTPTR this_ptr,
+               BareWriterKind bareKind = BareWriterKind::Disposed) {
     if (this_ptr == 0) {
+        switch (bareKind) {
+            case BareWriterKind::NullReference:    RaiseBareWriterNullReference();
+            case BareWriterKind::InvalidOperation: RaiseBareWriterInvalidOperation();
+            case BareWriterKind::Disposed:         break;
+        }
         RaiseDisposedOrInvalid();
         return false;
     }
@@ -155,25 +207,28 @@ void ChaosUtf8JsonWriterWriteStringStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
     CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
-    // A disposed/bare writer throws InvalidOperationException for property
-    // writes with valid arguments.
-    if (n_len == 0)
-        RaiseManagedException("System.ArgumentException",
-            "Property name cannot be empty.");
+    // Ordering matters, and .NET's order is: null argument > receiver state >
+    // empty-string argument.  Measured on a bare instance:
+    //   WriteString(null, null) -> ArgumentNullException
+    //   WriteString("",   null) -> InvalidOperationException   (NOT ArgumentException)
+    //   WriteString("p",  null) -> InvalidOperationException
+    // So the empty-name ArgumentException must not be raised while the receiver
+    // is still bare — the bare writer is reported first.
+    (void)n_len;
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 void ChaosUtf8JsonWriterWriteStringStrOnly(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     if (value == 0) RaiseArgumentNullException("value");
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 void ChaosUtf8JsonWriterWriteStringEncodedText(
@@ -181,10 +236,10 @@ void ChaosUtf8JsonWriterWriteStringEncodedText(
     CHAOS_IL2CPP_INTPTR property_name,
     CHAOS_IL2CPP_INTPTR encoded_text) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     if (property_name == 0) RaiseArgumentNullException("propertyName");
     (void)encoded_text;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -195,120 +250,121 @@ void ChaosUtf8JsonWriterWriteNumberStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
     CHAOS_IL2CPP_INT64 value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 void ChaosUtf8JsonWriterWriteNumberStrDouble(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
     double value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 void ChaosUtf8JsonWriterWriteNumberStrFloat(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
     float value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 void ChaosUtf8JsonWriterWriteNumberStrUInt(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
     CHAOS_IL2CPP_INT64 value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 void ChaosUtf8JsonWriterWriteNumberInt(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 void ChaosUtf8JsonWriterWriteNumberDouble(
     CHAOS_IL2CPP_INTPTR this_ptr, double value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 void ChaosUtf8JsonWriterWriteNumberFloat(
     CHAOS_IL2CPP_INTPTR this_ptr, float value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 void ChaosUtf8JsonWriterWriteNumberUInt(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 void ChaosUtf8JsonWriterWriteNumberUInt64(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 // ══════════════════════════════════════════════════════════════════
 // WriteNumberValue / WriteStringValue — value-only overloads
 //
 // These are the "current position" variants (no property name): valid only
-// inside an array or at the root.  On a bare/disposed instance the managed
-// implementation throws ObjectDisposedException before any position check.
+// inside an array or at the root.  On a bare/disposed instance .NET throws
+// NullReferenceException — the missing sink is dereferenced, not reported as a
+// disposed object (measured; see RaiseBareWriterNullReference).
 // ══════════════════════════════════════════════════════════════════
 
 void ChaosUtf8JsonWriterWriteNumberValueInt(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 void ChaosUtf8JsonWriterWriteNumberValueDouble(
     CHAOS_IL2CPP_INTPTR this_ptr, double value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 void ChaosUtf8JsonWriterWriteNumberValueFloat(
     CHAOS_IL2CPP_INTPTR this_ptr, float value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 /// WriteNumberValue(decimal) — Decimal arrives as a 16-byte value that does not
@@ -316,25 +372,29 @@ void ChaosUtf8JsonWriterWriteNumberValueFloat(
 void ChaosUtf8JsonWriterWriteNumberValueDecimal(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 void ChaosUtf8JsonWriterWriteNumberValueUInt(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 void ChaosUtf8JsonWriterWriteStringValueStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    CheckThis(this_ptr);
-    if (value == 0) RaiseArgumentNullException("value");
-    RaiseDisposedOrInvalid();
+    // Receiver state outranks argument validation: on a bare writer .NET throws
+    // NullReferenceException even for a null value argument (measured —
+    // bare.WriteStringValue((string)null) -> NullReferenceException), so the
+    // value check must not run first.
+    CheckThis(this_ptr, BareWriterKind::NullReference);
+    (void)value;
+    RaiseBareWriterNullReference();
 }
 
 /// WriteStringValue(DateTime / DateTimeOffset / Guid) — value types that do not
@@ -343,19 +403,19 @@ void ChaosUtf8JsonWriterWriteStringValueStr(
 void ChaosUtf8JsonWriterWriteStringValueStruct(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 /// WriteStringValue(JsonEncodedText) — already-encoded text; the bare writer
-/// still fails the disposed check first.
+/// still fails the receiver check first (NullReferenceException, same family).
 void ChaosUtf8JsonWriterWriteStringValueEncoded(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)encoded;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -366,21 +426,22 @@ void ChaosUtf8JsonWriterWriteBooleanStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
     CHAOS_IL2CPP_INT32 value) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
     (void)value;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 void ChaosUtf8JsonWriterWriteBooleanValue(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 value) noexcept
 {
-    CheckThis(this_ptr);
+    // Value-only write on a bare writer: .NET raises NullReferenceException
+    // (measured), not ObjectDisposedException.
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
-    // A bare object's value-only methods throw InvalidOperationException.
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -390,18 +451,19 @@ void ChaosUtf8JsonWriterWriteBooleanValue(
 void ChaosUtf8JsonWriterWriteNullStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 void ChaosUtf8JsonWriterWriteNullValue(
     CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
-    CheckThis(this_ptr);
-    RaiseDisposedOrInvalid();
+    // Value-only write on a bare writer: NullReferenceException (measured).
+    CheckThis(this_ptr, BareWriterKind::NullReference);
+    RaiseBareWriterNullReference();
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -411,19 +473,19 @@ void ChaosUtf8JsonWriterWriteNullValue(
 void ChaosUtf8JsonWriterWritePropertyNameStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 void ChaosUtf8JsonWriterWritePropertyNameEncoded(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     if (encoded == 0) RaiseArgumentNullException("encodedText");
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterInvalidOperation();
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -433,14 +495,14 @@ void ChaosUtf8JsonWriterWritePropertyNameEncoded(
 void ChaosUtf8JsonWriterWriteRawValueStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR json) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     if (json == 0) RaiseArgumentNullException("json");
     const char* j = nullptr; size_t j_len = 0;
     if (!ManagedStringView(json, j, j_len) || j_len == 0)
         RaiseManagedException("System.ArgumentException",
             "The JSON payload cannot be empty.");
     (void)j;
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -450,9 +512,9 @@ void ChaosUtf8JsonWriterWriteRawValueStr(
 void ChaosUtf8JsonWriterWriteCommentValue(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR comment) noexcept
 {
-    CheckThis(this_ptr);
+    CheckThis(this_ptr, BareWriterKind::NullReference);
     if (comment == 0) RaiseArgumentNullException("comment");
-    RaiseDisposedOrInvalid();
+    RaiseBareWriterNullReference();
 }
 
 /// WriteTo(Utf8JsonWriter) — JsonDocument/JsonElement/JsonProperty surface.
