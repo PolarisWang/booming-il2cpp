@@ -6,6 +6,40 @@
 
 ---
 
+## ⚡ 2026-09-21 下午续报（会话 2）— 三层复合阻断解除，stubGap 118→8
+
+> **先读本节再读下文**：下文的「stubGap 118 / realDefect 8」基线全部跑在 **09:49 陈旧 entry.exe** 上。
+
+### 已修复（commit `d55628cf3`，已提交 main）
+
+1. **重复 shape 注册全灭 codegen**：`IsDefined(Assembly,Type)` 被 Part1.S16（S2 冲刺）与 Part2.S6（并行会话）双注册 → `BuildDefault()` 每次抛 `Shape already registered` → **全部 codegen 零更新**，管线静默跑陈旧 exe。修复=删 Part1.S16 重复块，保留 Part2.S6 完整版（4 receiver），并修正其 Member/Module/Param 返回槽 NativeInt→Int32（原生返回 `CHAOS_IL2CPP_INT32`）。
+2. **异常表发射语法错误**（cb129e362 从未编译成功过）：Dispatch.cs:852 每条 standalone `static const` 收尾写成 `},` 而非 `};` → C2226/C2143/C2447 级联（**kExcDesc0 不报、从 kExcDesc1 才开始**，极具迷惑性）。
+3. **110 个假 stubGap**：`TestEmitter.HasKnownNativeImpl` 只查 `KnownNativeImpls`，不认 `WholeTypeRealViaDispatch`（CA 78 + TypeDelegator 32）→ 对实际有真实 AOT body 的方法发射 `return 42L`。修复=HasKnownNativeImpl 增加该集合查表。
+
+### 最新实测（fresh exe，AOT=JIT 双侧一致）
+
+```
+stubGap 118→8（余量: ReflectionContext 5 / AssemblyNameProxy 2 / AssemblyName 1 — 全是 NotSupportedWholeTypes 候选）
+UNVERIFIED smoke 119→9；failed 23（原样）；real 14；realDefect 8（原样）；unassertable 13
+passed 241/272
+```
+
+### 🔴 realDefect 8 的真面目（T1 下一步）
+
+不再是「静默返 0」— 直跑 `entry.exe --fact-json 2>&1` 实测 **SEH-FAULT 0xe0000001（CHAOS_IL2CPP_FAIL）**：
+- `Assembly.GetForwardedTypes`/`GetManifestResourceNames`：native 已返回 `ChaosArrayNew1D` 空托管数组（module.cpp 同模式已翻绿，函数体本身不是崩溃点）；subject 现发射真实调用 + `Assert.AreEqual(new System.Type[]{}, result)` → **崩溃点疑似 Assert.AreEqual 的数组比较路径**（未实现 lowering），异常被 caught → value=0。
+- 其余 6 项（GetCustomAttributesData/GetOptional|RequiredCustomModifiers/GetIndexParameters/GetSetMethod×2）同批triage。
+- 下一步：对 `GetForwardedTypes_7__0` 用 cdb/trace 抓 CHAOS_IL2CPP_FAIL 的确切 call site；判定是 Assert 数组比较 lowering 缺口还是 Type[] 元素类型编码问题。
+
+### 工具链补充纪律（本轮新增踩坑）
+
+11. **接手先 `stat entry.exe`** 对比最后相关 commit 时间 — commit 时间戳 ≠ 产物内容，fact 数字只会和 exe 构建时间一样新。
+12. **Generator 源码改完先手跑 `dotnet build src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator`**（连同 ATG）— `ensure_tool_built` 曾一次漏判（源 13:19 > DLL 12:03 仍跑旧码）。
+13. **生成物语法错误排查路径**：MSBuild `-v:d` 抓 cl 命令 → `/P /C` 预处理 → 编 `.i` 复现 → 二分。首报错误行会晚于真实毒点（error recovery）。
+14. **cwd 漂移**：Bash 前台 `cd` 会跨调用残留，相对路径 stat/ls 可能指向错误目录 — 排查时始终绝对路径。
+
+---
+
 ## 一、已完成（全部推送 main）
 
 ### 反射 chunk（`reflection` chunk）
