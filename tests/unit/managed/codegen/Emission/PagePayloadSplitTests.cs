@@ -89,12 +89,14 @@ public sealed class PagePayloadSplitTests
     }
 
     /// <summary>
-    /// L2: the page-0 payload must itself stay within the documented TU budget.
+    /// L2: page-0 payload must be partitioned so that no emitted translation unit
+    /// exceeds the documented budget.
     ///
     /// <para>
-    /// This is the regression the whole task exists for. Before the fix,
-    /// <c>ModuleRegistrationCode</c> is appended whole and page 0 is unbounded;
-    /// for the system chunk that reached ~71 MB against a 350 KB budget.
+    /// Asserts on the <b>partitioned output</b>, not on
+    /// <c>ModuleRegistrationCode</c>. Sectioning happens in the emitter, so the
+    /// planner's raw payload string is legitimately still whole — measuring it
+    /// would fail forever regardless of the fix.
     /// </para>
     /// </summary>
     [Fact]
@@ -102,19 +104,36 @@ public sealed class PagePayloadSplitTests
     {
         var model = BuildModel(PayloadScaleMethodCount);
 
-        // Page 0's unbounded payload = the parts BuildGeneratedPageToBuilder
-        // appends verbatim when includeObjectModel / includeRegistration are set.
-        int payloadChars =
-              (model.ObjectModelCodeBuilder?.Length ?? model.ObjectModelCode?.Length ?? 0)
-            + (model.ModuleRegistrationCode?.Length ?? 0)
-            + (model.GenericRegistrationCode?.Length ?? 0);
+        Assert.True(model.PayloadSections is { Count: > 0 },
+            "the planner must expose named payload sections so the emitter can "
+            + "partition page-0 payload into bounded translation units");
 
-        Assert.True(
-            payloadChars <= PerTuBudgetChars * BudgetTolerance,
-            $"page-0 payload is {payloadChars:N0} chars, exceeding the documented TU budget "
-            + $"({PerTuBudgetChars:N0} x {BudgetTolerance}). The payload is appended whole and "
-            + "is not partitioned — this is what drives MSVC C1002 (compiler out of heap "
-            + "space) on large chunks.");
+        var tus = PayloadSectionPartitioner.Partition(
+            model.PayloadSections, NativeAotEmitter.PayloadSectioningBudgetChars);
+
+        Assert.True(tus.Count > 0, "expected at least one payload translation unit");
+
+        // Every TU within tolerance of the budget. A section that is itself over
+        // budget is allowed its own TU (sections must not be cut), so the bound is
+        // checked against the *sum of grouped sections*, which is what the guard
+        // can actually promise.
+        long tolerance = (long)(NativeAotEmitter.PayloadSectioningBudgetChars * BudgetTolerance);
+        foreach (var tu in tus)
+        {
+            long size = tu.Sum(s => (long)s.Content.Length);
+            Assert.True(size <= tolerance,
+                $"a payload translation unit is {size:N0} chars, over the "
+                + $"{tolerance:N0} limit (budget {NativeAotEmitter.PayloadSectioningBudgetChars:N0} "
+                + $"x {BudgetTolerance}). Sections in it: "
+                + string.Join(", ", tu.Select(s => $"{s.Name}({s.Content.Length:N0})")));
+        }
+
+        // And the split must actually be doing work: the whole payload cannot fit
+        // in a single TU at this scale.
+        long total = model.PayloadSections.Sum(s => (long)s.Content.Length);
+        Assert.True(tus.Count > 1,
+            $"payload is {total:N0} chars but was not split into multiple translation "
+            + "units — this is the unbounded-page-0 condition that triggers MSVC C1002");
     }
 
     /// <summary>

@@ -1270,30 +1270,63 @@ public sealed partial class NativeAotLoweringPlanner
         var cryptoAotIrCode = BuildCryptoAotIrCode();
         var moduleRegistrationCode = BuildModuleRegistration();
         var moduleRegSb = new StringBuilder(moduleRegistrationCode, 65536);
+
+        // ── Payload sectioning ────────────────────────────────────────────
+        // Page 0's payload used to be one unbounded string, which made the
+        // page-0 translation unit grow without limit (measured 71 MB for the
+        // system chunk, against a documented 350 KB budget). Record each block
+        // under a stable name as it is appended so the emitter can partition
+        // them into bounded TUs on section boundaries.
+        //
+        // The blocks are appended in a fixed order; `Order` mirrors that order
+        // so partitioning can re-sort deterministically.
+        _payloadSections = new List<PayloadSection>();
+        var payloadSections = (List<PayloadSection>)_payloadSections;
+        int sectionOrder = 0;
+        void AddSection(string name, string content)
+        {
+            if (string.IsNullOrEmpty(content)) return;
+            payloadSections.Add(new PayloadSection
+            {
+                Name = name,
+                Content = content,
+                Order = sectionOrder++,
+            });
+        }
+
+        // The module-registration block is the base of the StringBuilder, so it
+        // has to be recorded first to keep section order aligned with text order.
+        AddSection("modulereg", moduleRegistrationCode);
+
         if (!string.IsNullOrEmpty(nameIndexCode))
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(nameIndexCode);
+            AddSection("hotpatch", nameIndexCode);
         }
         if (!string.IsNullOrEmpty(externalRuntimeTableCode))
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(externalRuntimeTableCode);
+            AddSection("extruntime", externalRuntimeTableCode);
         }
         if (!string.IsNullOrEmpty(exceptionTypeTableCode))
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(exceptionTypeTableCode);
+            AddSection("exctypes", exceptionTypeTableCode);
         }
         if (!string.IsNullOrEmpty(cryptoAotIrCode))
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(cryptoAotIrCode);
+            AddSection("crypto", cryptoAotIrCode);
         }
         if (!string.IsNullOrEmpty(aotRegistrationCode))
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(aotRegistrationCode);
+            AddSection("aotreg", aotRegistrationCode);
         }
         if (!string.IsNullOrEmpty(abiManifestCode))
         {
@@ -1301,7 +1334,9 @@ public sealed partial class NativeAotLoweringPlanner
         }
         if (_methodTableEntries.Count > 0)
         {
-            moduleRegSb.Append(BuildMethodTableInitialization());
+            var methodTableInitCode = BuildMethodTableInitialization();
+            moduleRegSb.Append(methodTableInitCode);
+            AddSection("methodtable", methodTableInitCode);
         }
 
         // Step 1: Emit pure-data dispatch tables.
@@ -1313,6 +1348,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(dispatchEntryCode);
+            AddSection("dispatch", dispatchEntryCode);
         }
 
         // Step 1.5: Emit GC slot map section for precise stack root scanning.
@@ -1323,6 +1359,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(gcSlotMapCode);
+            AddSection("gcslotmap", gcSlotMapCode);
         }
 
         // Step 1.75: Emit bridge/import thunks in the registration-only section so they
@@ -1331,21 +1368,27 @@ public sealed partial class NativeAotLoweringPlanner
         // for calls crossing the managed/native boundary.
         if (_bridgeImportThunks is { Count: > 0 })
         {
-            moduleRegSb.Append(Environment.NewLine);
-            moduleRegSb.Append("// ── Bridge/import thunks ──");
-            moduleRegSb.Append(Environment.NewLine);
+            // Thunks are emitted into their own StringBuilder first so the block can
+            // be recorded as a payload section without re-scanning the shared one.
+            var thunkSb = new StringBuilder();
+            thunkSb.Append("// ── Bridge/import thunks ──");
+            thunkSb.Append(Environment.NewLine);
             if (_bridgeImportThunks.Values.Any(t => t.ExternalRuntimeTableIndex >= 0))
             {
                 // Forward-declare the external runtime dispatch table. The actual definition
                 // is emitted in BuildExternalRuntimeDispatchTable (above in Step 1).
-                moduleRegSb.Append("extern \"C\" void* kChaosExternalRuntimeFnTable[];");
-                moduleRegSb.Append(Environment.NewLine);
+                thunkSb.Append("extern \"C\" void* kChaosExternalRuntimeFnTable[];");
+                thunkSb.Append(Environment.NewLine);
             }
             foreach (var thunk in _bridgeImportThunks.Values
                 .OrderBy(t => t.ThunkSymbol, StringComparer.Ordinal))
             {
-                EmitBridgeImportThunk(moduleRegSb, thunk);
+                EmitBridgeImportThunk(thunkSb, thunk);
             }
+
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(thunkSb);
+            AddSection("bridgethunks", thunkSb.ToString());
         }
 
         // Step 2: Emit CodeRegistrationV0, MetadataRegistrationV0, CodegenRegistrationOptionsV0
@@ -1356,6 +1399,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(codeRegistrationCode);
+            AddSection("codereg", codeRegistrationCode);
         }
 
         // Step 3: Emit ReflectionQueryImageDescriptor for module.image,
@@ -1368,6 +1412,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(reflectionQueryCode);
+            AddSection("reflection", reflectionQueryCode);
         }
         else if (methodCount > 0)
         {
@@ -1375,8 +1420,11 @@ public sealed partial class NativeAotLoweringPlanner
             // kReflImage definition so the ModuleDescriptor's .image field
             // (which always references kReflImage) has a linkable symbol.
             // See also: reflImageForwardDecl below.
+            const string emptyReflImage =
+                "const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kReflImage = {};";
             moduleRegSb.Append(Environment.NewLine);
-            moduleRegSb.Append("const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kReflImage = {};");
+            moduleRegSb.Append(emptyReflImage);
+            AddSection("reflection", emptyReflImage);
         }
 
         // Build extern "C" kAotMethodCount at file scope for Python-generated runtime-entry.cpp link-time visibility.
@@ -1535,6 +1583,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 namespacePreamble.AppendLine("extern \"C\" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;");
         }
         moduleRegistrationCode = namespacePreamble.ToString() + moduleRegSb.ToString();
+        PayloadSections = _payloadSections;
 
         // Phase 1 diagnostics: log StructuredIR coverage summary
         LogPhase1Summary();
@@ -1765,6 +1814,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             CapabilityManifestJson = _shapeRegistry.ExportManifest(),
             EnumMetadataHeaderContent = enumMetaHeader,
             ModuleRegistrationCode = moduleRegistrationCode,
+            PayloadSections = _payloadSections,
             WorkloadAbi = loweringPlan.WorkloadAbi,
             GlobalDeclarations = globalDeclarations,
             EntryFunctionCode = _entryFunctionCode ?? "",

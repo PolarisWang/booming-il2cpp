@@ -23,6 +23,26 @@ public sealed partial class NativeAotEmitter
 
 
     /// <summary>
+    /// Minimum method count before page-0 payload is split into its own
+    /// translation units.
+    ///
+    /// <para>
+    /// Below this, the payload is small enough that keeping it inline on page 0
+    /// is both simpler and fine for the compiler — and it keeps the generated
+    /// file set stable for the many small snapshot fixtures. The value mirrors
+    /// <c>autoPageSize</c>: method paging already engages at this count, so
+    /// binding to it keeps "methods are paged" and "payload is paged" in step.
+    /// </para>
+    /// </summary>
+    internal const int PayloadSectioningThresholdMethods = 500;
+
+    /// <summary>
+    /// Per-translation-unit budget for split payload, in characters.
+    /// Mirrors <c>sizeThresholdChars</c> in the method partitioner.
+    /// </summary>
+    internal const int PayloadSectioningBudgetChars = 350_000;
+
+    /// <summary>
     /// Builds the shared header content emitted as native-aot.generated.header.h.
     /// Contains extern TypeInfoV0 declarations so every translation unit page has
     /// access to all type symbols without ODR violations from duplicate inline defs.
@@ -51,6 +71,36 @@ public sealed partial class NativeAotEmitter
     {
         var sources = new List<NativeAotGeneratedSource>();
         var artifacts = new List<NativeAotGeneratedArtifactRef>();
+
+        // ── Payload sectioning ────────────────────────────────────────────
+        // When the planner exposed named payload sections AND the model is large
+        // enough to need it, page-0's payload is emitted as its own bounded TUs
+        // instead of being appended whole to page 0. This is the fix for
+        // MSVC C1002 / C1060 on large chunks: page 0 used to grow without limit
+        // regardless of how finely the methods were partitioned.
+        bool usePayloadSections =
+            templateModel.PayloadSections is { Count: > 0 }
+            && templateModel.Methods.Count >= PayloadSectioningThresholdMethods;
+        if (usePayloadSections)
+        {
+            var payloadTus = PayloadSectionPartitioner
+                .Partition(templateModel.PayloadSections, PayloadSectioningBudgetChars);
+
+            for (int i = 0; i < payloadTus.Count; i++)
+            {
+                string content = PayloadSectionPartitioner.Render(payloadTus[i]);
+                sources.Add(new NativeAotGeneratedSource
+                {
+                    RelativePath = PayloadSectionPartitioner.TranslationUnitFileName("payload", i),
+                    Contents = content,
+                });
+                artifacts.Add(new NativeAotGeneratedArtifactRef
+                {
+                    Kind = "generatedTranslationUnit",
+                    Path = PayloadSectionPartitioner.TranslationUnitFileName("payload", i),
+                });
+            }
+        }
 
         // Always include the shape dispatch header
         sources.Add(new NativeAotGeneratedSource
@@ -266,7 +316,7 @@ public sealed partial class NativeAotEmitter
                     // Page 0 includes inline TypeInfoV0 → no shared header needed
                     var pageBuilder = BuildGeneratedPageToBuilder(
                         templateModel, methodSections, includes,
-                        includeRegistration: true,
+                        includeRegistration: !usePayloadSections,
                         includeObjectModel: true,
                         perPageTypeDeclarations: pageTypeDecl,
                         perPageIncludes: pageIncludes);
@@ -286,7 +336,7 @@ public sealed partial class NativeAotEmitter
                 {
                     string content = BuildGeneratedPage(
                         templateModel, pageMethods,
-                        includeRegistration: isFirstPage,
+                        includeRegistration: isFirstPage && !usePayloadSections,
                         includeObjectModel: isFirstPage);
                     sources.Add(new NativeAotGeneratedSource
                     {

@@ -996,4 +996,18 @@ public sealed partial class NativeAotLoweringPlanner
         /// Set during planning; empty means "no exception table entries".
         /// </summary>
         private IReadOnlyList<AotCoreIrMethodArtifact> _aotCoreIrMethodsForExceptionTable = Array.Empty<AotCoreIrMethodArtifact>();
+
+        /// <summary>
+        /// The page-0 payload broken into named sections, in text order. Set by
+        /// <c>Create</c> (NativeAotLoweringPlanner.Methods.cs) so the emitter can
+        /// partition it into bounded translation units on section boundaries.
+        /// Empty when payload sectioning is disabled.
+        /// </summary>
+        private IReadOnlyList<PayloadSection> _payloadSections = Array.Empty<PayloadSection>();
+
+        internal IReadOnlyList<PayloadSection> PayloadSections
+        {
+            get => _payloadSections;
+            private set => _payloadSections = value;
+        }
 }

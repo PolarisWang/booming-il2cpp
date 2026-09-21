@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,24 +15,24 @@ namespace Chaos.IL2CPP.Generator;
 /// apply the size budget to it the same way it already does for methods.
 /// </para>
 /// </summary>
-internal sealed class PayloadSection
+public sealed class PayloadSection
 {
     /// <summary>
     /// Stable identifier for the section, used to derive the emitted file name.
     /// Must be filesystem-safe and unique within a payload.
     /// </summary>
-    internal required string Name { get; init; }
+    public required string Name { get; init; }
 
     /// <summary>
     /// The C++ text of the section.
     /// </summary>
-    internal required string Content { get; init; }
+    public required string Content { get; init; }
 
     /// <summary>
     /// Relative ordering of this section within the payload. Sections are emitted
     /// in ascending order; ties broken by <see cref="Name"/> for determinism.
     /// </summary>
-    internal int Order { get; init; }
+    public int Order { get; init; }
 }
 
 /// <summary>
@@ -47,14 +47,14 @@ internal sealed class PayloadSection
 /// relationships, and the guard tests assert content conservation.
 /// </para>
 /// </summary>
-internal static class PayloadSectionPartitioner
+public static class PayloadSectionPartitioner
 {
     /// <summary>
     /// Maximum number of characters to accumulate into one translation unit.
     /// Mirrors <c>sizeThresholdChars</c> in <c>NativeAotEmitter.Shared.cs</c>,
     /// whose comment documents MSVC C1060 avoidance as its purpose.
     /// </summary>
-    internal const int DefaultBudgetChars = 350_000;
+    public const int DefaultBudgetChars = 350_000;
 
     /// <summary>
     /// Groups sections into translation units, respecting the budget.
@@ -65,7 +65,7 @@ internal static class PayloadSectionPartitioner
     /// itself larger than the budget gets a TU to itself (never split).
     /// </para>
     /// </summary>
-    internal static IReadOnlyList<IReadOnlyList<PayloadSection>> Partition(
+    public static IReadOnlyList<IReadOnlyList<PayloadSection>> Partition(
         IReadOnlyList<PayloadSection> sections,
         int budgetChars = DefaultBudgetChars)
     {
@@ -117,13 +117,13 @@ internal static class PayloadSectionPartitioner
     /// <c>native-aot.*.page-*.cpp</c> family so both the flat CMake glob
     /// (<c>subjects/*.cpp</c>) and the non-flat fallback patterns match it.
     /// </summary>
-    internal static string TranslationUnitFileName(string groupName, int index)
+    public static string TranslationUnitFileName(string groupName, int index)
         => $"native-aot.{groupName}.page-{index + 1:D4}.cpp";
 
     /// <summary>
     /// Concatenates a group's sections back into their emitted text.
     /// </summary>
-    internal static string Render(IReadOnlyList<PayloadSection> group)
+    public static string Render(IReadOnlyList<PayloadSection> group)
     {
         ArgumentNullException.ThrowIfNull(group);
         var sb = new StringBuilder();

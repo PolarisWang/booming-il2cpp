@@ -110,6 +110,17 @@ public sealed record NativeAotTemplateModel
     public required string ModuleRegistrationCode { get; init; }
 
     /// <summary>
+    /// Module-registration payload split into named sections, in text order.
+    /// The emitter uses these to partition page-0 payload into bounded
+    /// translation units. Empty when payload sectioning is disabled
+    /// (&lt;= <see cref="NativeAotEmitter.PayloadSectioningThresholdMethods"/> methods),
+    /// which is the case for small fixtures and for callers that build a model
+    /// directly rather than through the planner.
+    /// </summary>
+    public IReadOnlyList<PayloadSection> PayloadSections { get; init; }
+        = Array.Empty<PayloadSection>();
+
+    /// <summary>
     /// C++ code emitted at file scope (outside the codegen namespace)
     /// for global variables shared across translation units. Currently
     /// used for the __chaos_assert_failures counter in verification builds.
