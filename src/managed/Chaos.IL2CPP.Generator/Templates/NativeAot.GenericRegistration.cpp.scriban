@@ -1,44 +1,52 @@
 {{~ if has_type_arg_tokens ~}}
-{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[] = { {{ type_arg_tokens_text }} };
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[] = { {{ type_arg_tokens_text }} };
 {{~ else ~}}
-{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
 {{~ end ~}}
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 kGenericTypeArgTokensCount = {{ type_arg_tokens_count }}u;
 
 {{~ if has_type_entries ~}}
-{{ indentation }}static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[] = {
+{{ indentation }}extern const GenericTypeRegistrationEntryV0 kGenericTypeEntries[] = {
 {{~ for entry in type_entries ~}}
 {{ indentation }}{{ tab }}{{ entry }},
 {{~ end ~}}
 {{ indentation }}};
 {{~ else ~}}
-{{ indentation }}static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 0, 0, 0 } };
+{{ indentation }}extern const GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 0, 0, 0 } };
 {{~ end ~}}
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 kGenericTypeEntriesCount = {{ type_entries_count }}u;
 
 {{~ if has_method_arg_tokens ~}}
-{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[] = { {{ method_arg_tokens_text }} };
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[] = { {{ method_arg_tokens_text }} };
 {{~ else ~}}
-{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[1] = { 0 };
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[1] = { 0 };
 {{~ end ~}}
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 kGenericMethodArgTokensCount = {{ method_arg_tokens_count }}u;
 
 {{~ if has_method_entries ~}}
-{{ indentation }}static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[] = {
+{{ indentation }}extern const GenericMethodRegistrationEntryV0 kGenericMethodEntries[] = {
 {{~ for entry in method_entries ~}}
 {{ indentation }}{{ tab }}{{ entry }},
 {{~ end ~}}
 {{ indentation }}};
 {{~ else ~}}
-{{ indentation }}static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { { 0, 0, 0, 0 } };
+{{ indentation }}extern const GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { { 0, 0, 0, 0 } };
 {{~ end ~}}
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 kGenericMethodEntriesCount = {{ method_entries_count }}u;
 
 {{~ if has_method_aot_entries ~}}
-{{ indentation }}static constexpr GenericMethodAotEntryV0 s_method_aot_entries[] = {
+{{ indentation }}extern const GenericMethodAotEntryV0 s_method_aot_entries[] = {
 {{~ for entry in method_aot_entries ~}}
 {{ indentation }}{{ tab }}{{ entry }},
 {{~ end ~}}
 {{ indentation }}};
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 s_method_aot_entriesCount = {{ method_aot_entries_count }}u;
 
-{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[] = { {{ method_aot_arg_tokens_text }} };
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[] = { {{ method_aot_arg_tokens_text }} };
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_argsCount = {{ method_aot_arg_tokens_count }}u;
 {{~ else ~}}
-{{ indentation }}static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
-{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+{{ indentation }}extern const GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 s_method_aot_entriesCount = 0u;
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+{{ indentation }}extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_argsCount = 0u;
 {{~ end ~}}

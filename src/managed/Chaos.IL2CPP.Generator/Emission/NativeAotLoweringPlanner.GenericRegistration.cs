@@ -74,15 +74,27 @@ public partial class NativeAotLoweringPlanner
             ["indentation"] = "",
             ["has_type_arg_tokens"] = typeArgTokens.Count > 0,
             ["type_arg_tokens_text"] = string.Join(", ", typeArgTokens),
+            // Companion counts. Cross-TU consumers cannot use sizeof() on these
+            // arrays (an `extern const T[]` declaration is an incomplete type —
+            // C2070: illegal sizeof operand), so each table publishes its element
+            // count as its own symbol. The fallback branches emit a 1-element
+            // placeholder array, but report count 0 — the placeholder exists only
+            // to keep the symbol defined, it carries no entries.
+            ["type_arg_tokens_count"] = typeArgTokens.Count,
             ["has_type_entries"] = typeEntries.Count > 0,
             ["type_entries"] = typeEntryStrings,
+            ["type_entries_count"] = typeEntries.Count,
             ["has_method_arg_tokens"] = methodArgTokens.Count > 0,
             ["method_arg_tokens_text"] = string.Join(", ", methodArgTokens),
+            ["method_arg_tokens_count"] = methodArgTokens.Count,
             ["has_method_entries"] = methodEntries.Count > 0,
             ["method_entries"] = methodEntryStrings,
+            ["method_entries_count"] = methodEntries.Count,
             ["has_method_aot_entries"] = methodAotEntries.Count > 0,
             ["method_aot_entries"] = methodAotEntryStrings,
+            ["method_aot_entries_count"] = methodAotEntries.Count,
             ["method_aot_arg_tokens_text"] = string.Join(", ", methodAotArgTokens),
+            ["method_aot_arg_tokens_count"] = methodAotArgTokens.Count,
         };
 
         builder.AppendLine(

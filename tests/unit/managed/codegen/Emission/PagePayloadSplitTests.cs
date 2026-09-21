@@ -235,4 +235,93 @@ public sealed class PagePayloadSplitTests
                 + "declared `extern`.");
         }
     }
+
+    // ── Count-scalar contract ───────────────────────────────────────────────
+    //
+    // Making a table cross-TU-visible forces `static constexpr` -> `extern const`,
+    // which drops the definition from the consumer's view. That breaks every
+    // `sizeof(table) / sizeof(table[0])` expression: `sizeof` needs a COMPLETE
+    // type, and a cross-TU declaration is necessarily incomplete.
+    //
+    //   extern const U32 kTbl[];  + sizeof(kTbl)  ->  C2070: illegal sizeof operand
+    //   extern const U32 kTbl[2]; + sizeof(kTbl)  ->  compiles (dimension unknown here)
+    //
+    // So each table needs a companion count scalar, and consumers must read that
+    // instead of computing it with sizeof. These tests pin the companion contract.
+
+    /// <summary>
+    /// Every cross-TU table must have a companion count scalar emitted next to
+    /// its definition.
+    /// </summary>
+    [Fact]
+    public void CrossTuTables_EmitCompanionCountScalar()
+    {
+        var model = BuildModel(PayloadScaleMethodCount);
+
+        string genericReg = (model.GenericRegistrationCode ?? "")
+                          + "\n" + (model.ModuleRegistrationCode ?? "");
+        Assert.False(string.IsNullOrEmpty(genericReg),
+            "expected generic-registration code to be emitted for this model");
+
+        // Tables that the code-registration block consumes across sections.
+        string[] crossTuTables =
+        {
+            "kGenericTypeArgTokens",
+            "kGenericTypeEntries",
+            "kGenericMethodArgTokens",
+            "kGenericMethodEntries",
+            "s_method_aot_entries",
+            "s_method_aot_entry_args",
+        };
+
+        foreach (string table in crossTuTables)
+        {
+            if (!Regex.IsMatch(genericReg, @"\b" + Regex.Escape(table) + @"\b"))
+                continue; // not emitted for this model (empty generics)
+
+            string countSymbol = table + "Count";
+            Assert.True(
+                Regex.IsMatch(genericReg, @"\b" + Regex.Escape(countSymbol) + @"\b"),
+                $"'{table}' is emitted but its companion count scalar '{countSymbol}' is not. "
+                + "Cross-TU consumers cannot use sizeof() on an incomplete array type "
+                + "(C2070), so the count has to be published as its own symbol.");
+        }
+    }
+
+    /// <summary>
+    /// The consumer must no longer derive counts via <c>sizeof</c> for the
+    /// cross-TU tables — it has to use the companion scalars.
+    /// </summary>
+    [Fact]
+    public void CodeRegistration_DoesNotUseSizeofOnCrossTuTables()
+    {
+        var model = BuildModel(PayloadScaleMethodCount);
+
+        // The consumer block lives in the module-registration payload.
+        string payload =
+              (model.ObjectModelCodeBuilder?.ToString() ?? model.ObjectModelCode ?? "")
+            + (model.ModuleRegistrationCode ?? "");
+
+        string[] crossTuTables =
+        {
+            "kGenericTypeArgTokens",
+            "kGenericTypeEntries",
+            "kGenericMethodArgTokens",
+            "kGenericMethodEntries",
+            "s_method_aot_entries",
+            "s_method_aot_entry_args",
+        };
+
+        foreach (string table in crossTuTables)
+        {
+            var sizeofPattern = new Regex(
+                @"sizeof\s*\(\s*" + Regex.Escape(table) + @"\s*\)",
+                RegexOptions.Multiline);
+
+            Assert.False(sizeofPattern.IsMatch(payload),
+                $"found `sizeof({table})` in the consumer payload. Once the table is declared "
+                + "cross-TU (`extern const T[]`), the declaration is an incomplete type and "
+                + "sizeof fails with C2070. Use the companion `" + table + "Count` scalar.");
+        }
+    }
 }

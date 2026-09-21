@@ -24,7 +24,7 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_{{ type_group.safe
 };
 
 {{~ end ~}}
-static const ReflectionQueryTypeDescriptor kReflTypes[{{ type_group_count }}] = {
+extern const ReflectionQueryTypeDescriptor kReflTypes[{{ type_group_count }}] = {
 {{~ for type_group in type_groups ~}}
     {{~ if type_group.fields && type_group.fields.size > 0 ~}}
     { {{ type_group.metadata_token_hex }}u, "{{ type_group.subject_id_literal }}", "{{ type_group.subject_id_literal }}", "{{ type_group.namespace_literal }}", "{{ type_group.name_literal }}", "{{ type_group.name_literal }}", nullptr, kReflFields_{{ type_group.safe_name }}, {{ type_group.fields.size }}u, nullptr, 0u,
@@ -36,7 +36,7 @@ static const ReflectionQueryTypeDescriptor kReflTypes[{{ type_group_count }}] = 
 {{~ end ~}}
 };
 
-static const ReflectionQueryTypeDescriptor* kReflTypePtrs[{{ type_group_count }}] = {
+extern const ReflectionQueryTypeDescriptor* const kReflTypePtrs[{{ type_group_count }}] = {
 {{~ for i in type_group_indices ~}}
     &kReflTypes[{{ i }}],
 {{~ end ~}}
