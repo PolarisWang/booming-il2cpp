@@ -242,6 +242,145 @@ public sealed partial class NativeAotLoweringPlanner
                         new[] { recvAbi, wAbi }),
                     CreateVoidAbiSlot(), writeToR);
             }
+
+            RegisterUtf8JsonWriterOverloadGaps(registry, wAbi, strAbi, objAbi, intAbi, voidAbi, rawThis);
+        }
+
+        /// <summary>
+        /// B1: the overloads that had no native implementation at all.
+        ///
+        /// Every entry here needed a NEW native symbol — none could reuse an
+        /// existing one, because the shape key is an exact (method, paramTypes)
+        /// tuple and the C++ stub is selected by that key.  Two registers with
+        /// the same (method, paramTypes) would also throw "Shape already
+        /// registered" and kill codegen for the whole chunk.
+        ///
+        /// Exception semantics (measured on .NET 10 against a bare
+        /// GetUninitializedObject instance):
+        ///   * property-name writes  -> InvalidOperationException
+        ///   * value-only writes     -> NullReferenceException
+        ///   * WriteRawValue         -> NRE, except an empty payload ->
+        ///                              InvalidOperationException
+        /// The native stubs mirror exactly that; see json_writer_stubs.cpp.
+        /// </summary>
+        private static void RegisterUtf8JsonWriterOverloadGaps(
+            RuntimeHelperShapeRegistry registry,
+            AotCoreIrAbiSlotArtifact wAbi,
+            AotCoreIrAbiSlotArtifact strAbi,
+            AotCoreIrAbiSlotArtifact objAbi,
+            AotCoreIrAbiSlotArtifact intAbi,
+            AotCoreIrAbiSlotArtifact voidAbi,
+            HashSet<int> rawThis)
+        {
+            // Parameter type display names, spelled the way the AOT core-IR does.
+            const string TStr = "System.String";
+            const string TEnc = "System.Text.Json.JsonEncodedText";
+            const string TBool = "System.Boolean";
+            const string TDateTime = "System.DateTime";
+            const string TDateTimeOffset = "System.DateTimeOffset";
+            const string TGuid = "System.Guid";
+            const string TInt32 = "System.Int32";
+            const string TUInt32 = "System.UInt32";
+            const string TInt64 = "System.Int64";
+            const string TUInt64 = "System.UInt64";
+            const string TDecimal = "System.Decimal";
+            const string TDouble = "System.Double";
+            const string TSingle = "System.Single";
+
+            var thisAndName = new HashSet<int> { 0, 1 };
+            var thisNameValue = new HashSet<int> { 0, 1, 2 };
+
+            void Reg(string method, string symbol, AotCoreIrAbiSlotArtifact[] slots,
+                     HashSet<int> raw, params string[] paramTypes) =>
+                registry.Register("Utf8JsonWriter", method, paramTypes,
+                    ShapeKind.SimpleForward, symbol,
+                    new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(slots),
+                    voidAbi, raw);
+
+            var wNameValue = new[] { wAbi, objAbi, objAbi };
+            var wNameInt = new[] { wAbi, objAbi, intAbi };
+            var wStrNameValue = new[] { wAbi, strAbi, objAbi };
+
+            // ── WriteStartObject / WriteStartArray property-name forms ──
+            Reg("WriteStartObject", "ChaosUtf8JsonWriterWriteStartObjectStr",
+                new[] { wAbi, strAbi }, thisAndName, TStr);
+            Reg("WriteStartObject", "ChaosUtf8JsonWriterWriteStartObjectEncoded",
+                new[] { wAbi, objAbi }, thisAndName, TEnc);
+            Reg("WriteStartArray", "ChaosUtf8JsonWriterWriteStartArrayStr",
+                new[] { wAbi, strAbi }, thisAndName, TStr);
+            Reg("WriteStartArray", "ChaosUtf8JsonWriterWriteStartArrayEncoded",
+                new[] { wAbi, objAbi }, thisAndName, TEnc);
+
+            // ── WriteString(propertyName, non-string value) ──
+            // NOTE: (System.String, JsonEncodedText) is deliberately absent — it is
+            // already registered above at the WriteString(string,string) block,
+            // pointing at ChaosUtf8JsonWriterWriteStringEncodedText.  Registering it
+            // again throws "Shape already registered" and kills ALL codegen for the
+            // chunk (the whole pipeline then silently reuses a stale entry.exe).
+            // string property name + struct value
+            Reg("WriteString", "ChaosUtf8JsonWriterWriteStringStrDateTime",
+                wStrNameValue, thisNameValue, TStr, TDateTime);
+            Reg("WriteString", "ChaosUtf8JsonWriterWriteStringStrDateTimeOffset",
+                wStrNameValue, thisNameValue, TStr, TDateTimeOffset);
+            Reg("WriteString", "ChaosUtf8JsonWriterWriteStringStrGuid",
+                wStrNameValue, thisNameValue, TStr, TGuid);
+            // JsonEncodedText property name + struct/encoded/string value
+            Reg("WriteString", "ChaosUtf8JsonWriterWriteStringEncodedDateTime",
+                wNameValue, thisNameValue, TEnc, TDateTime);
+            Reg("WriteString", "ChaosUtf8JsonWriterWriteStringEncodedDateTimeOffset",
+                wNameValue, thisNameValue, TEnc, TDateTimeOffset);
+            Reg("WriteString", "ChaosUtf8JsonWriterWriteStringEncodedGuid",
+                wNameValue, thisNameValue, TEnc, TGuid);
+            Reg("WriteString", "ChaosUtf8JsonWriterWriteStringEncodedEncoded",
+                wNameValue, thisNameValue, TEnc, TEnc);
+            Reg("WriteString", "ChaosUtf8JsonWriterWriteStringEncodedStr",
+                wNameValue, thisNameValue, TEnc, TStr);
+
+            // ── WriteNumber(propertyName, scalar) missing widths ──
+            // NOTE: WriteNumber(System.String, System.UInt64) is already registered
+            // elsewhere in this file — do NOT add it again ("Shape already
+            // registered" aborts codegen for the entire chunk).
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberStrInt32",
+                wNameInt, thisNameValue, TStr, TInt32);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberStrUInt32",
+                wNameInt, thisNameValue, TStr, TUInt32);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberStrDecimal",
+                wStrNameValue, thisNameValue, TStr, TDecimal);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberEncodedInt32",
+                wNameInt, thisNameValue, TEnc, TInt32);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberEncodedInt64",
+                new[] { wAbi, objAbi, objAbi }, thisNameValue, TEnc, TInt64);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberEncodedUInt32",
+                wNameInt, thisNameValue, TEnc, TUInt32);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberEncodedUInt64",
+                new[] { wAbi, objAbi, objAbi }, thisNameValue, TEnc, TUInt64);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberEncodedDouble",
+                new[] { wAbi, objAbi, objAbi }, thisNameValue, TEnc, TDouble);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberEncodedFloat",
+                new[] { wAbi, objAbi, objAbi }, thisNameValue, TEnc, TSingle);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberEncodedDecimal",
+                wNameValue, thisNameValue, TEnc, TDecimal);
+            Reg("WriteNumber", "ChaosUtf8JsonWriterWriteNumberEncodedStr",
+                wNameValue, thisNameValue, TEnc, TStr);
+
+            // ── WriteNull / WriteBoolean with JsonEncodedText name ──
+            Reg("WriteNull", "ChaosUtf8JsonWriterWriteNullEncoded",
+                new[] { wAbi, objAbi }, thisAndName, TEnc);
+            Reg("WriteBoolean", "ChaosUtf8JsonWriterWriteBooleanEncoded",
+                new[] { wAbi, objAbi, intAbi }, thisNameValue, TEnc, TBool);
+
+            // ── WriteRawValue(payload, skipInputValidation) ──
+            Reg("WriteRawValue", "ChaosUtf8JsonWriterWriteRawValueStrBool",
+                new[] { wAbi, strAbi, intAbi }, thisNameValue, TStr, TBool);
+            Reg("WriteRawValue", "ChaosUtf8JsonWriterWriteRawValueSequenceBool",
+                new[] { wAbi, objAbi, intAbi }, thisNameValue,
+                "System.Buffers.ReadOnlySequence<System.Byte>", TBool);
+
+            // ── WriteNumberValue missing widths ──
+            Reg("WriteNumberValue", "ChaosUtf8JsonWriterWriteNumberValueInt32",
+                new[] { wAbi, intAbi }, thisAndName, TInt32);
+            Reg("WriteNumberValue", "ChaosUtf8JsonWriterWriteNumberValueUInt32",
+                new[] { wAbi, intAbi }, thisAndName, TUInt32);
         }
 
         private static void RegisterUtf8WriterVoid(
