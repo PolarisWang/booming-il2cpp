@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_GenericHelper_UseGeneric",
+      "subjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
@@ -14,6 +15,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_Wrapper_System_Int32__ctor",
+      "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
       "paramCount": 2,
       "params": [
         {

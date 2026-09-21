@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_LdftnHelper_GetFnPtr",
+      "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
@@ -14,6 +15,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_TargetHelper_GetValue",
+      "subjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

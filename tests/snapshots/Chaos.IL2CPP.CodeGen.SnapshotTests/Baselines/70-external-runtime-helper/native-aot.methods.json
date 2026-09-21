@@ -2,11 +2,12 @@
   "schemaVersion": 2,
   "assemblyName": "SnapshotTestFixtures",
   "methodCount": 1,
-  "defaultStringId": 5395473506543290551,
+  "defaultStringId": 3371539652088180991,
   "methods": [
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_StringConcatHelper_TestConcat",
+      "subjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

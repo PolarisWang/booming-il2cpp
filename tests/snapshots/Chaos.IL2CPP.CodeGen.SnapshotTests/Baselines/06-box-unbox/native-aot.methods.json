@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_BoxingHelper_BoxAndUnbox",
+      "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

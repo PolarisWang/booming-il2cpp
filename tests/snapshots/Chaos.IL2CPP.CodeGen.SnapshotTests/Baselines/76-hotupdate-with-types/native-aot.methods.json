@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_HotUpdateWithTypesDemo_Run",
+      "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

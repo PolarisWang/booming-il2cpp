@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_CallVirtHelper_CreateAndUse",
+      "subjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

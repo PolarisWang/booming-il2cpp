@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_InternalHelper_Double",
+      "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
       "paramCount": 1,
       "params": [
         {
@@ -19,6 +20,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_MultiDispatcher_DispatchBoth",
+      "subjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

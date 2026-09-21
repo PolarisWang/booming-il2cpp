@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_CrossAssemblyComCaller_CallIt",
+      "subjectId": "SnapshotTestFixtures/CrossAssemblyComCaller::CallIt:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
@@ -14,6 +15,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_IComInternal_Compute",
+      "subjectId": "SnapshotTestFixtures/IComInternal::Compute:System.Int32(System.Int32)",
       "paramCount": 2,
       "params": [
         {
@@ -30,6 +32,7 @@
     {
       "index": 2,
       "nativeSymbol": "SomeOtherAssembly_IComExternal_Compute",
+      "subjectId": "SomeOtherAssembly/IComExternal::Compute:System.Int32(System.Int32)",
       "paramCount": 2,
       "params": [
         {

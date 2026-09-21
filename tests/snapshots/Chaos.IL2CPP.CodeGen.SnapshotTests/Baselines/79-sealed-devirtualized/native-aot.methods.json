@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual",
+      "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
@@ -14,6 +15,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_SealedHelper_GetValueVirtual",
+      "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
       "paramCount": 1,
       "params": [
         {

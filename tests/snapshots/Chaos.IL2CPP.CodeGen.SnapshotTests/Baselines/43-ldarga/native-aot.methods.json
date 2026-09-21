@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_LdargaHelper_RunLdarga",
+      "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
       "paramCount": 1,
       "params": [
         {

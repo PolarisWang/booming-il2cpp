@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_HasInstanceFields__ctor",
+      "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
       "paramCount": 2,
       "params": [
         {
@@ -23,6 +24,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields",
+      "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_DelegateHelper_RunDelegate",
+      "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
@@ -14,6 +15,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_Helper_GetValue",
+      "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_EhFaultHelper_TryFault",
+      "subjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
       "paramCount": 1,
       "params": [
         {

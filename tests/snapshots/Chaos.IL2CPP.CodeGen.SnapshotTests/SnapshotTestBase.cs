@@ -71,7 +71,8 @@ public abstract class SnapshotTestBase
             foreach (var source in result.GeneratedSources)
             {
                 var baselineFile = Path.Combine(baselineDir, source.RelativePath);
-                var normalizedContent = NormalizeLineEndings(source.Contents);
+                var normalizedContent = NormalizeVolatileFields(
+                    NormalizeLineEndings(source.Contents), source.RelativePath);
 
                 if (isUpdateMode || !File.Exists(baselineFile))
                 {
@@ -83,8 +84,9 @@ public abstract class SnapshotTestBase
                 }
                 else
                 {
-                    var baselineContent = NormalizeLineEndings(
-                        File.ReadAllText(baselineFile));
+                    var baselineContent = NormalizeVolatileFields(
+                        NormalizeLineEndings(File.ReadAllText(baselineFile)),
+                        source.RelativePath);
 
                     if (!string.Equals(baselineContent, normalizedContent, StringComparison.Ordinal))
                     {
@@ -153,6 +155,30 @@ public abstract class SnapshotTestBase
             var relPath = Path.GetRelativePath(sourceDir, subDir);
             CopyDirectory(subDir, Path.Combine(destDir, relPath));
         }
+    }
+
+    /// <summary>
+    /// Replace fields that vary run-to-run with a fixed placeholder so a
+    /// committed baseline can ever match.
+    /// </summary>
+    /// <remarks>
+    /// The capability manifest stamps <c>"generatedAt": "&lt;DateTime.UtcNow&gt;"</c>
+    /// (RuntimeHelperShapeRegistry.ExportManifest).  Left as-is, every run emits
+    /// different bytes, so no baseline is ever equal to the output: the suite
+    /// reports a mismatch on all 85 fixtures, and <c>SNAPSHOT_UPDATE=1</c>
+    /// "passes" only by writing that run's own timestamp back — which the very
+    /// next clean run then rejects again.  The timestamp carries no information
+    /// about the codegen under test, so it is normalised out of the comparison
+    /// on both sides.
+    /// </remarks>
+    private static string NormalizeVolatileFields(string content, string relativePath)
+    {
+        if (!relativePath.EndsWith("aot-capability-manifest.json", StringComparison.Ordinal))
+            return content;
+
+        return Regex.Replace(content,
+            "(\"generatedAt\"\\s*:\\s*)\"[^\"]*\"",
+            "$1\"<normalized>\"");
     }
 
     /// <summary>

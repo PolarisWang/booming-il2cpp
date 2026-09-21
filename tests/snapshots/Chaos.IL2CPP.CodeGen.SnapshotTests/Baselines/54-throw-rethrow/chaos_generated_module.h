@@ -30,6 +30,10 @@
 // Forward declaration of ChaosRuntimeHost (defined in chaos_runtime_host.h).
 class ChaosRuntimeHost;
 
+// chaos_valuetype_* typedefs (opaque 32-bit managed value types)
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Int32;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_System_Exception;
+
 
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -45,7 +49,7 @@ struct Functions {
                     CHAOS_IL2CPP_INT32
         );
     } snapshotTestFixtures_ThrowHelper;
-    int32_t method_count;
+    CHAOS_IL2CPP_INT32 method_count;
 };
 
 extern const Functions kFunctions;
@@ -72,7 +76,7 @@ struct SnapshotTestFixtures_ThrowHelper {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 1;
+    static constexpr CHAOS_IL2CPP_INT32 MethodCount = 1;
 };
 
 
@@ -82,3 +86,9 @@ struct SnapshotTestFixtures_ThrowHelper {
 /// @param host  Pointer to an initialized ChaosRuntimeHost instance.
 /// @return true on success.
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host);
+
+/// Run every type's static constructor (.cctor) in this module so static
+/// fields are initialized before the entry point runs. App-mode entry calls
+/// this after ChaosGeneratedModuleActivate().
+/// @return true on success.
+bool ChaosRunModuleStaticConstructors();

@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_LdcI8Helper_RunLdcI8",
+      "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

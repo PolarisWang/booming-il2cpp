@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_ArrayRefHelper_RunArrayRef",
+      "subjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

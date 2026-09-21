@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_CallvirtHelper_RunCallvirt",
+      "subjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
@@ -14,6 +15,7 @@
     {
       "index": 1,
       "nativeSymbol": "SnapshotTestFixtures_InstanceHelper_GetValue",
+      "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
       "paramCount": 1,
       "params": [
         {

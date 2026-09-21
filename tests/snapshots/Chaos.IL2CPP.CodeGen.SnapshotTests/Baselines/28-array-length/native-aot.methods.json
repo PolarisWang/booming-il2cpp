@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_ArrayLengthHelper_RunLength",
+      "subjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false

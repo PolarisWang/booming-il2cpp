@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_EhFinallyHelper_TryFinally_Only",
+      "subjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
       "paramCount": 1,
       "params": [
         {

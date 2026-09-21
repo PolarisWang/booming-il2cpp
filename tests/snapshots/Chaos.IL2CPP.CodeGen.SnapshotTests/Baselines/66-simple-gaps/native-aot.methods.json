@@ -7,6 +7,7 @@
     {
       "index": 0,
       "nativeSymbol": "SnapshotTestFixtures_SimpleGapsHelper_RunLdnull",
+      "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
       "paramCount": 0,
       "params": [],
       "isInstance": false
