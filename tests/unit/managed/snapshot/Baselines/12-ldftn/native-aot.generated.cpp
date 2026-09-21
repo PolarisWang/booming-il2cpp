@@ -3330,6 +3330,36 @@ extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount = 0;
 
 
 
+// --- Exception Type Table (compile-time name -> type descriptor) ---
+
+
+// Each entry carries a ReflectionQueryTypeDescriptor whose type_info_ptr is
+
+
+// the chaos_mt_* MethodTable for that type (defined in this same TU, so the
+
+
+// address needs no external linkage).  ResolveTypeByName() in
+
+
+// chaos_runtime_core encodes the descriptor pointer as a tag-bit handle,
+
+
+// which ResolveTypeDescriptor() decodes without needing a module id or
+
+
+// metadata token -- neither of which an exception type has.
+
+
+extern "C" const ChaosExceptionTypeEntryV0 kChaosExceptionTypes[1] = { { nullptr, nullptr } };
+
+
+extern "C" const CHAOS_IL2CPP_INT32 kChaosExceptionTypeCount = 0;
+
+
+
+
+
 // (no method AOT entries for this module)
 
 

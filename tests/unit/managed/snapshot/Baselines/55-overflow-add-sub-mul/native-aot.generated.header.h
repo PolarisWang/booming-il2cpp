@@ -67,11 +67,59 @@ struct chaos_type_System_Private_CoreLib_System_MulticastDelegate : public chaos
 
 
 
-struct chaos_type_System_Private_CoreLib_System_OverflowException
+struct chaos_type_System_Private_CoreLib_System_Exception
 
 {
 
     ThinLockableHeader header{};
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_SystemException : public chaos_type_System_Private_CoreLib_System_Exception
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_ArithmeticException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_OverflowException : public chaos_type_System_Private_CoreLib_System_ArithmeticException
+
+{
 
     CHAOS_IL2CPP_INTPTR _message = 0;
 
@@ -230,8 +278,12 @@ struct chaos_type_System_Private_CoreLib_System_Action {
     CHAOS_IL2CPP_UINT32 _pad = 0;
 };
 struct chaos_boxed_type_System_Private_CoreLib_System_Action;
+struct chaos_type_System_Private_CoreLib_System_ArithmeticException;
+struct chaos_boxed_type_System_Private_CoreLib_System_ArithmeticException;
 struct chaos_type_System_Private_CoreLib_System_Delegate;
 struct chaos_boxed_type_System_Private_CoreLib_System_Delegate;
+struct chaos_type_System_Private_CoreLib_System_Exception;
+struct chaos_boxed_type_System_Private_CoreLib_System_Exception;
 struct chaos_type_System_Private_CoreLib_System_MulticastDelegate;
 struct chaos_boxed_type_System_Private_CoreLib_System_MulticastDelegate;
 struct chaos_type_System_Private_CoreLib_System_Object;
@@ -254,6 +306,8 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_ParameterInfo;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_ParameterInfo;
 struct chaos_type_System_Private_CoreLib_System_String;
 struct chaos_boxed_type_System_Private_CoreLib_System_String;
+struct chaos_type_System_Private_CoreLib_System_SystemException;
+struct chaos_boxed_type_System_Private_CoreLib_System_SystemException;
 struct chaos_type_System_Private_CoreLib_System_Type;
 struct chaos_boxed_type_System_Private_CoreLib_System_Type;
 
@@ -266,7 +320,9 @@ extern MethodTable chaos_mt_SnapshotTestFixtures_OverflowHelper;
 extern MethodTable chaos_mt_SnapshotTestFixtures_OverflowUnHelper;
 extern MethodTable chaos_mt_System_Int32;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Action;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_ArithmeticException;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Delegate;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Exception;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_MulticastDelegate;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Object;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_OverflowException;
@@ -278,6 +334,7 @@ extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ParameterInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_String;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_SystemException;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Type;
 
 
@@ -285,7 +342,9 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_OverflowHelp
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_OverflowUnHelper;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Int32;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArithmeticException;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Delegate;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Exception;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_MulticastDelegate;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_OverflowException;
@@ -297,6 +356,7 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Ref
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_ParameterInfo;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_SystemException;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type;
 
 extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_OverflowHelper(void);
@@ -305,6 +365,9 @@ extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_OverflowUnHel
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_ParameterInfo(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Object(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_OverflowException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_ArithmeticException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_SystemException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Exception(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_String(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Action(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_MulticastDelegate(void);

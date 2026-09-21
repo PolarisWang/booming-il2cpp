@@ -120,19 +120,27 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System
 
 
 
-MethodTable chaos_mt_System_Private_CoreLib_System_DivideByZeroException = {nullptr, nullptr, 14499175579798713746ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-
-
-
-inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_DivideByZeroException = static_cast<CHAOS_IL2CPP_UINT64>(14499175579798713746ULL);
-
-
-
 MethodTable chaos_mt_System_Private_CoreLib_System_Exception = {nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
 
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_UINT64>(10972282733316558392ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_SystemException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Exception), nullptr, 6390980575627721479ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_SystemException = static_cast<CHAOS_IL2CPP_UINT64>(6390980575627721479ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_DivideByZeroException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 14499175579798713746ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_DivideByZeroException = static_cast<CHAOS_IL2CPP_UINT64>(14499175579798713746ULL);
 
 
 
@@ -360,11 +368,15 @@ static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLi
 
 
 
-static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_DivideByZeroException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_DivideByZeroException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_DivideByZeroException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_DivideByZeroException, _stackTrace))};
-
-
-
 static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_SystemException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_SystemException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_SystemException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_SystemException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_DivideByZeroException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_DivideByZeroException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_DivideByZeroException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_DivideByZeroException, _stackTrace))};
 
 
 
@@ -452,11 +464,15 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
-	registry.Register(14499175579798713746ULL, sizeof(chaos_type_System_Private_CoreLib_System_DivideByZeroException), kGcOffsets_chaos_type_System_Private_CoreLib_System_DivideByZeroException, 3);
-
-
-
 	registry.Register(10972282733316558392ULL, sizeof(chaos_type_System_Private_CoreLib_System_Exception), kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception, 3);
+
+
+
+	registry.Register(6390980575627721479ULL, sizeof(chaos_type_System_Private_CoreLib_System_SystemException), kGcOffsets_chaos_type_System_Private_CoreLib_System_SystemException, 3);
+
+
+
+	registry.Register(14499175579798713746ULL, sizeof(chaos_type_System_Private_CoreLib_System_DivideByZeroException), kGcOffsets_chaos_type_System_Private_CoreLib_System_DivideByZeroException, 3);
 
 
 
@@ -524,11 +540,15 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
-	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_DivideByZeroException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_DivideByZeroException) + sizeof(chaos_mt_System_Private_CoreLib_System_DivideByZeroException));
-
-
-
 	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Exception), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Exception) + sizeof(chaos_mt_System_Private_CoreLib_System_Exception));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_SystemException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_SystemException) + sizeof(chaos_mt_System_Private_CoreLib_System_SystemException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_DivideByZeroException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_DivideByZeroException) + sizeof(chaos_mt_System_Private_CoreLib_System_DivideByZeroException));
 
 
 
@@ -3336,6 +3356,84 @@ extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount = 0;
 
 
 
+// --- Exception Type Table (compile-time name -> type descriptor) ---
+
+
+// Each entry carries a ReflectionQueryTypeDescriptor whose type_info_ptr is
+
+
+// the chaos_mt_* MethodTable for that type (defined in this same TU, so the
+
+
+// address needs no external linkage).  ResolveTypeByName() in
+
+
+// chaos_runtime_core encodes the descriptor pointer as a tag-bit handle,
+
+
+// which ResolveTypeDescriptor() decodes without needing a module id or
+
+
+// metadata token -- neither of which an exception type has.
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc0 = {
+
+
+	0u, "System.Private.CoreLib/System.DivideByZeroException", "System.Private.CoreLib/System.DivideByZeroException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_DivideByZeroException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc1 = {
+
+
+	0u, "System.Private.CoreLib/System.Exception", "System.Private.CoreLib/System.Exception", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_Exception };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc2 = {
+
+
+	0u, "System.Private.CoreLib/System.SystemException", "System.Private.CoreLib/System.SystemException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_SystemException };
+
+
+extern "C" const ChaosExceptionTypeEntryV0 kChaosExceptionTypes[] = {
+
+
+	{ "System.DivideByZeroException", &kExcDesc0 },
+
+
+	{ "System.Exception", &kExcDesc1 },
+
+
+	{ "System.SystemException", &kExcDesc2 },
+
+
+};
+
+
+extern "C" const CHAOS_IL2CPP_INT32 kChaosExceptionTypeCount = 3;
+
+
+
+
+
 // (no method AOT entries for this module)
 
 
@@ -3915,55 +4013,64 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_EhMultipleCatchHelper_Multipl
 	CHAOS_EH_CATCH_BEGIN
 
 
-		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_DivideByZeroException.AsTypeInfoHot()))
+		{
 
 
-		{ CHAOS_EH_RETHROW; }
+			if (chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_DivideByZeroException.AsTypeInfoHot()))
 
 
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			{
 
 
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
+				_s0 = CHAOS_EH_EXCEPTION_OBJ;
 
 
-			chaos_locals[0] = _s0;
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
 
 
-	CHAOS_EH_END
+				chaos_locals[0] = _s0;
 
 
-	CHAOS_EH_TRY
+				goto chaos_multi_catch_end_0;
 
 
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
+			}
 
 
-			_s1 = chaos_args[0];
+		}
 
 
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosDiv(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+		{
 
 
-			chaos_locals[0] = _s0;
+			if (chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Exception.AsTypeInfoHot()))
 
 
-	CHAOS_EH_CATCH_BEGIN
+			{
 
 
-		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Exception.AsTypeInfoHot()))
+				_s0 = CHAOS_EH_EXCEPTION_OBJ;
 
 
-		{ CHAOS_EH_RETHROW; }
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-2);
 
 
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+				chaos_locals[0] = _s0;
 
 
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-2);
+				goto chaos_multi_catch_end_0;
 
 
-			chaos_locals[0] = _s0;
+			}
+
+
+		}
+
+
+		CHAOS_EH_RETHROW;
+
+
+	chaos_multi_catch_end_0: ;
 
 
 	CHAOS_EH_END

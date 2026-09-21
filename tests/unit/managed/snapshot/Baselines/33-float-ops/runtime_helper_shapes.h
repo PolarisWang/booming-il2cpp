@@ -844,6 +844,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_THREADING_SYNCHRONIZATIONCONTEXT_GET_CURRENT = 0xD79F3B10u,
     SHAPE_SYSTEM_THREADING_SYNCHRONIZATIONCONTEXT_SETSYNCHRONIZATIONCONTEXT = 0x3F90BF9Du,
     SHAPE_SYSTEM_THREADING_SYNCHRONIZATIONCONTEXT__CTOR = 0x00E6905Eu,
+    SHAPE_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_COMPLETE = 0x29AC4B3Cu,
     SHAPE_SYSTEM_THREADING_TASKS_TASKCOMPLETIONSOURCE_SETCANCELED = 0x6D36FC06u,
     SHAPE_SYSTEM_THREADING_TASKS_TASKCOMPLETIONSOURCE_SETEXCEPTION_SYSTEM_EXCEPTION = 0x5D6D9C76u,
     SHAPE_SYSTEM_THREADING_TASKS_TASKCOMPLETIONSOURCE_SETRESULT = 0x984A9DF0u,
@@ -855,8 +856,11 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_THREADING_TASKS_TASK_CONFIGUREAWAIT_SYSTEM_BOOLEAN = 0x1C9B2AA5u,
     SHAPE_SYSTEM_THREADING_TASKS_TASK_CONFIGUREAWAIT_SYSTEM_THREADING_TASKS_CONFIGUREAWAITOPTIONS = 0x58562B77u,
     SHAPE_SYSTEM_THREADING_TASKS_TASK_DELAY_SYSTEM_INT32 = 0x991E23D6u,
+    SHAPE_SYSTEM_THREADING_TASKS_TASK_DISPOSE = 0x311892C5u,
     SHAPE_SYSTEM_THREADING_TASKS_TASK_FROMEXCEPTION_SYSTEM_EXCEPTION = 0xF8FBD387u,
     SHAPE_SYSTEM_THREADING_TASKS_TASK_GETAWAITER = 0x88655D0Bu,
+    SHAPE_SYSTEM_THREADING_TASKS_TASK_RUNSYNCHRONOUSLY = 0x2CCC87C3u,
+    SHAPE_SYSTEM_THREADING_TASKS_TASK_RUNSYNCHRONOUSLY_SYSTEM_THREADING_TASKS_TASKSCHEDULER = 0x03ABC6F6u,
     SHAPE_SYSTEM_THREADING_TASKS_TASK_WAIT_SYSTEM_THREADING_CANCELLATIONTOKEN = 0xF91F6478u,
     SHAPE_SYSTEM_THREADING_TASKS_TASK_YIELD = 0x21E4D84Du,
     SHAPE_SYSTEM_THREADING_TASKS_VALUETASK_ASTASK = 0xB694606Au,
@@ -1288,7 +1292,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 1274u,
+    SHAPE_COUNT = 1278u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -2645,18 +2649,6 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_REFLECTION_CUSTOMATTRIBUTEEXTENSIONS_ISDEFINED_SYSTEM_REFLECTION_ASSEMBLY_SYSTEM_TYPE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosReflectionIsDefined(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_REFLECTION_CUSTOMATTRIBUTEEXTENSIONS_ISDEFINED_SYSTEM_REFLECTION_MEMBERINFO_SYSTEM_TYPE) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-            ChaosReflectionMemberIsDefinedForTarget(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_REFLECTION_CUSTOMATTRIBUTEEXTENSIONS_ISDEFINED_SYSTEM_REFLECTION_MODULE_SYSTEM_TYPE) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-            ChaosReflectionMemberIsDefinedForTarget(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_REFLECTION_CUSTOMATTRIBUTEEXTENSIONS_ISDEFINED_SYSTEM_REFLECTION_PARAMETERINFO_SYSTEM_TYPE) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-            ChaosReflectionMemberIsDefinedForTarget(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_REFLECTION_FIELDINFO_GETRAWCONSTANTVALUE) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -4029,6 +4021,9 @@ void DispatchVoid(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_THREADING_EXECUTIONCONTEXT_RESTOREFLOW) {
         chaos_execution_context_restore_flow(args...);
     }
+    else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_COMPLETE) {
+        chaos_noop_void(args...);
+    }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_TASKCOMPLETIONSOURCE_SETCANCELED) {
         chaos_tcs_set_canceled(args...);
     }
@@ -4037,6 +4032,15 @@ void DispatchVoid(Args... args) {
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_TASKCOMPLETIONSOURCE_SETRESULT) {
         chaos_tcs_set_result_void(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_TASK_DISPOSE) {
+        chaos_noop_void(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_TASK_RUNSYNCHRONOUSLY) {
+        chaos_noop_void(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_THREADING_TASKS_TASK_RUNSYNCHRONOUSLY_SYSTEM_THREADING_TASKS_TASKSCHEDULER) {
+        chaos_noop_void3(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_THREADING_THREAD_ABORT_SYSTEM_OBJECT) {
         chaos_thread_abort(args...);
@@ -5436,6 +5440,18 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosObjectGetHashCode(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_REFLECTION_CUSTOMATTRIBUTEEXTENSIONS_ISDEFINED_SYSTEM_REFLECTION_MEMBERINFO_SYSTEM_TYPE) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosReflectionMemberIsDefinedForTarget(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_REFLECTION_CUSTOMATTRIBUTEEXTENSIONS_ISDEFINED_SYSTEM_REFLECTION_MODULE_SYSTEM_TYPE) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosReflectionMemberIsDefinedForTarget(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_REFLECTION_CUSTOMATTRIBUTEEXTENSIONS_ISDEFINED_SYSTEM_REFLECTION_PARAMETERINFO_SYSTEM_TYPE) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosReflectionMemberIsDefinedForTarget(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_ISINITONLY) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosReflectionFieldGetIsInitOnly(args...));
@@ -6203,7 +6219,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 1274u,
+static_assert(SHAPE_COUNT == 1278u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

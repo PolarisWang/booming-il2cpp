@@ -120,7 +120,31 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System
 
 
 
-MethodTable chaos_mt_System_Private_CoreLib_System_OverflowException = {nullptr, nullptr, 531363262308024406ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+MethodTable chaos_mt_System_Private_CoreLib_System_Exception = {nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_UINT64>(10972282733316558392ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_SystemException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Exception), nullptr, 6390980575627721479ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_SystemException = static_cast<CHAOS_IL2CPP_UINT64>(6390980575627721479ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_ArithmeticException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 6479818754936000364ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArithmeticException = static_cast<CHAOS_IL2CPP_UINT64>(6479818754936000364ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_OverflowException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_ArithmeticException), nullptr, 531363262308024406ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
 
@@ -352,6 +376,18 @@ static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLi
 
 
 
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_SystemException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_SystemException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_SystemException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_SystemException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_ArithmeticException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArithmeticException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArithmeticException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArithmeticException, _stackTrace))};
+
+
+
 static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_OverflowException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_OverflowException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_OverflowException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_OverflowException, _stackTrace))};
 
 
@@ -440,6 +476,18 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(10972282733316558392ULL, sizeof(chaos_type_System_Private_CoreLib_System_Exception), kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception, 3);
+
+
+
+	registry.Register(6390980575627721479ULL, sizeof(chaos_type_System_Private_CoreLib_System_SystemException), kGcOffsets_chaos_type_System_Private_CoreLib_System_SystemException, 3);
+
+
+
+	registry.Register(6479818754936000364ULL, sizeof(chaos_type_System_Private_CoreLib_System_ArithmeticException), kGcOffsets_chaos_type_System_Private_CoreLib_System_ArithmeticException, 3);
+
+
+
 	registry.Register(531363262308024406ULL, sizeof(chaos_type_System_Private_CoreLib_System_OverflowException), kGcOffsets_chaos_type_System_Private_CoreLib_System_OverflowException, 3);
 
 
@@ -505,6 +553,18 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Action), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Action) + sizeof(chaos_mt_System_Private_CoreLib_System_Action));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Exception), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Exception) + sizeof(chaos_mt_System_Private_CoreLib_System_Exception));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_SystemException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_SystemException) + sizeof(chaos_mt_System_Private_CoreLib_System_SystemException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArithmeticException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArithmeticException) + sizeof(chaos_mt_System_Private_CoreLib_System_ArithmeticException));
 
 
 
@@ -3401,6 +3461,69 @@ extern "C" void* kChaosExternalRuntimeFnTable[1] = { nullptr };
 
 
 extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount = 0;
+
+
+
+
+
+// --- Exception Type Table (compile-time name -> type descriptor) ---
+
+
+// Each entry carries a ReflectionQueryTypeDescriptor whose type_info_ptr is
+
+
+// the chaos_mt_* MethodTable for that type (defined in this same TU, so the
+
+
+// address needs no external linkage).  ResolveTypeByName() in
+
+
+// chaos_runtime_core encodes the descriptor pointer as a tag-bit handle,
+
+
+// which ResolveTypeDescriptor() decodes without needing a module id or
+
+
+// metadata token -- neither of which an exception type has.
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc0 = {
+
+
+	0u, "System.Private.CoreLib/System.Exception", "System.Private.CoreLib/System.Exception", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_Exception };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc1 = {
+
+
+	0u, "System.Private.CoreLib/System.OverflowException", "System.Private.CoreLib/System.OverflowException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_OverflowException };
+
+
+extern "C" const ChaosExceptionTypeEntryV0 kChaosExceptionTypes[] = {
+
+
+	{ "System.Exception", &kExcDesc0 },
+
+
+	{ "System.OverflowException", &kExcDesc1 },
+
+
+};
+
+
+extern "C" const CHAOS_IL2CPP_INT32 kChaosExceptionTypeCount = 2;
 
 
 

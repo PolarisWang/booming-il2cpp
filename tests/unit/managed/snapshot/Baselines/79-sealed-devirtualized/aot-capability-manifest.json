@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "generatedAt": "<normalized>",
-  "totalExactShapes": 1274,
-  "totalGenericPatterns": 243,
+  "totalExactShapes": 1278,
+  "totalGenericPatterns": 256,
   "totalInlinePatterns": 517,
   "entries": [
     {
@@ -5198,6 +5198,44 @@
       "typeDisplayName": "System.IDisposable",
       "methodName": "Dispose",
       "subjectIdPrefix": "System.Private.CoreLib/System.IDisposable::Dispose:()",
+      "paramTypes": [],
+      "nativeSymbol": "chaos_noop_void",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "System.Threading.Tasks.Task",
+      "methodName": "RunSynchronously",
+      "subjectIdPrefix": "System.Private.CoreLib/System.Threading.Tasks.Task::RunSynchronously:()",
+      "paramTypes": [],
+      "nativeSymbol": "chaos_noop_void",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "System.Threading.Tasks.Task",
+      "methodName": "RunSynchronously",
+      "subjectIdPrefix": "System.Private.CoreLib/System.Threading.Tasks.Task::RunSynchronously:(System.Threading.Tasks.TaskScheduler)",
+      "paramTypes": [
+        "System.Threading.Tasks.TaskScheduler"
+      ],
+      "nativeSymbol": "chaos_noop_void3",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "System.Threading.Tasks.Task",
+      "methodName": "Dispose",
+      "subjectIdPrefix": "System.Private.CoreLib/System.Threading.Tasks.Task::Dispose:()",
+      "paramTypes": [],
+      "nativeSymbol": "chaos_noop_void",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "System.Threading.Tasks.ConcurrentExclusiveSchedulerPair",
+      "methodName": "Complete",
+      "subjectIdPrefix": "System.Private.CoreLib/System.Threading.Tasks.ConcurrentExclusiveSchedulerPair::Complete:()",
       "paramTypes": [],
       "nativeSymbol": "chaos_noop_void",
       "shapeKind": "SimpleForward"
@@ -14709,6 +14747,71 @@
       "kind": "generic-pattern",
       "typeDisplayNamePrefix": "System.Threading.Tasks.TaskFactory",
       "methodName": "ContinueWhenAny"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAll"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAny"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAll"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAny"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAll"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAny"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAll"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAny"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAll"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "WaitAny"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "SignalAndWait"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "SignalAndWait"
+    },
+    {
+      "kind": "generic-pattern",
+      "typeDisplayNamePrefix": "System.Threading.WaitHandle",
+      "methodName": "SignalAndWait"
     },
     {
       "kind": "generic-pattern",
