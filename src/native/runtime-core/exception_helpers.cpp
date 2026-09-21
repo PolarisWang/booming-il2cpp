@@ -22,9 +22,25 @@
 #endif
 
 #include "runtime_core.h"
+// For ReflectionQueryTypeDescriptor + EncodeReflectionQueryTypeHandle: the
+// compile-time exception table hands back a descriptor pointer that the rest of
+// the runtime decodes as a tag-encoded TypeInfoHandle.
+#include "reflection_query_model.h"
+// For ChaosExceptionTypeEntryV0 (the generated kChaosExceptionTypes element type).
+#include <chaos/type_info.h>
 
 #include <cstdlib>
 #include <cstring>
+
+// ── Generated exception type table (global scope) ────────────────────────────
+// The `extern "C"` linkage specification must sit at global scope — MSVC rejects
+// it inside a namespace (C2598), which is where ResolveTypeByName lives.
+// The `extern` keyword is load-bearing too: without it these would be read as
+// tentative definitions and fail with "unknown size"/"must be initialized".
+extern "C" {
+extern const chaos::il2cpp::common::ChaosExceptionTypeEntryV0 kChaosExceptionTypes[];
+extern const int32_t kChaosExceptionTypeCount;
+}
 
 // ── TLS definitions for exception_jmp.h ──────────────────────────────
 // g_chaos_exception_obj is always defined so that the SEH/SETJMP paths
@@ -86,6 +102,31 @@ extern "C" void ChaosReflectionSetExceptionMetadata(
 TypeInfoHandle ResolveTypeByName(const char* fully_qualified_name) {
     if (fully_qualified_name == nullptr || fully_qualified_name[0] == '\0') {
         return 0;
+    }
+
+    // ── Fast path: the compile-time exception table ──────────────────────
+    // Exception types are only *thrown* by native stubs, never lowered, so no
+    // instruction references them and the reflection image scanned below does
+    // not contain them.  Without this lookup every exception type resolved to 0
+    // and the runtime raised a NULL exception object that no catch clause could
+    // ever match.  The table is emitted by codegen (BuildExceptionTypeTable);
+    // each entry points at a ReflectionQueryTypeDescriptor whose type_info_ptr
+    // is that type's MethodTable.  The tag-bit encoding lets
+    // ResolveTypeDescriptor() decode the handle without a module id or metadata
+    // token — neither of which an exception type has.
+    {
+        for (int32_t i = 0; i < kChaosExceptionTypeCount; i++) {
+            const char* entry_name = kChaosExceptionTypes[i].name;
+            if (entry_name == nullptr) continue;
+            const char* a = entry_name;
+            const char* b = fully_qualified_name;
+            while (*a != '\0' && *a == *b) { ++a; ++b; }
+            if (*a == '\0' && *b == '\0') {
+                return EncodeReflectionQueryTypeHandle(
+                    static_cast<const ReflectionQueryTypeDescriptor*>(
+                        kChaosExceptionTypes[i].type_descriptor));
+            }
+        }
     }
 
     // Split at the LAST '.' to get namespace and type name.

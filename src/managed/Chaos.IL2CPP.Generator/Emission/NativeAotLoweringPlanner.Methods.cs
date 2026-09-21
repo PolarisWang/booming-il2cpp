@@ -1255,6 +1255,11 @@ public sealed partial class NativeAotLoweringPlanner
             helperSymbolBySubjectId: externalRuntimeHelpers?
                 .Where(h => !string.IsNullOrEmpty(h.TargetSymbol))
                 .ToDictionary(h => h.SubjectId, h => h.TargetSymbol, StringComparer.Ordinal));
+        // The exception table lets ResolveTypeByName() resolve types that are only
+        // thrown (never lowered), so RaiseManagedException can build a managed
+        // exception object with the right runtime type instead of a NULL one.
+        _aotCoreIrMethodsForExceptionTable = methodsForLowering;
+        var exceptionTypeTableCode = BuildExceptionTypeTable();
         var cryptoAotIrCode = BuildCryptoAotIrCode();
         var moduleRegistrationCode = BuildModuleRegistration();
         var moduleRegSb = new StringBuilder(moduleRegistrationCode, 65536);
@@ -1267,6 +1272,11 @@ public sealed partial class NativeAotLoweringPlanner
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(externalRuntimeTableCode);
+        }
+        if (!string.IsNullOrEmpty(exceptionTypeTableCode))
+        {
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append(exceptionTypeTableCode);
         }
         if (!string.IsNullOrEmpty(cryptoAotIrCode))
         {
