@@ -29,7 +29,7 @@ passed 241/272
 不再是「静默返 0」— 直跑 `entry.exe --fact-json 2>&1` 实测 **SEH-FAULT 0xe0000001（CHAOS_IL2CPP_FAIL）**：
 - `Assembly.GetForwardedTypes`/`GetManifestResourceNames`：native 已返回 `ChaosArrayNew1D` 空托管数组（module.cpp 同模式已翻绿，函数体本身不是崩溃点）；subject 现发射真实调用 + `Assert.AreEqual(new System.Type[]{}, result)` → **崩溃点疑似 Assert.AreEqual 的数组比较路径**（未实现 lowering），异常被 caught → value=0。
 - 其余 6 项（GetCustomAttributesData/GetOptional|RequiredCustomModifiers/GetIndexParameters/GetSetMethod×2）同批triage。
-- 下一步：对 `GetForwardedTypes_7__0` 用 cdb/trace 抓 CHAOS_IL2CPP_FAIL 的确切 call site；判定是 Assert 数组比较 lowering 缺口还是 Type[] 元素类型编码问题。
+- **已锁定判别式**（本轮末）：23 failed + 8 realDefect 的 subject 体全部以 `Assert.AreEqual(new T[]{ }, result)` 开头（T=引用类型），且 **AOT/JIT 双侧同红**；唯一通过的同构样本 `GetPublicKey_2__0` 用 `Array.Empty<byte>()`（T=byte 基元）。发射层已核对（page-0010.cpp:4729 起的 `GetForwardedTypes_7__0` body）：`new Type[0]` → `ChaosArrayNew1D(&chaos_type_info_managed_array.hot, chaos_mt_System_Private_CoreLib_System_Type.AsTypeInfoHot(), 1, 0)` → `chaos_stub_definition_...Assert__AreEqual_1...`。byte 与 Type 的发射形态完全一致 → **唯一变量是元素类型的 MethodTable**（`System.Type` 的 MT 可能是反射编码伪 MT / `.AsTypeInfoHot()` 返回坏指针 → 数组 header 残 → AreEqual 内 `isinst IEnumerable`/`GetEnumerator()` 接口分派 FAIL）。与记忆 [[typeof-fold-vs-object-model-mismatch]]（typeof 折叠 TypeInfoHot 不可被反射解码，架构级）同族。下一步：对比运行期 `chaos_mt_System_Private_CoreLib_System_Type` 与 `_Byte` 的 MT 值/AsTypeInfoHot 输出，定位坏指针来源。
 
 ### 工具链补充纪律（本轮新增踩坑）
 
