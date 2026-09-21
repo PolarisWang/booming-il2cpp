@@ -338,6 +338,55 @@ public sealed partial class NativeAotLoweringPlanner
             NativeAotTemplateCatalog.GetHotpatchTableTemplate(), model);
     }
 
+    /// <summary>
+    /// Splits the hotpatch method-name index into bounded chunks so the emitted
+    /// text stays within the per-translation-unit budget.
+    ///
+    /// <para>
+    /// The hotpatch block is one coherent unit — <c>s_hotpatch_module</c> points at
+    /// all of <c>s_hotpatch_methods</c>, <c>s_hotpatch_types</c>,
+    /// <c>s_hotpatch_slots</c> and <c>s_hotpatch_entries</c> — and
+    /// <c>s_hotpatch_types[i].first_method_index</c> indexes into
+    /// <c>s_hotpatch_methods</c> <b>globally</b>. That is why chunks are emitted
+    /// with an explicit base offset rather than being re-indexed: the global index
+    /// space must be preserved exactly, or name lookups silently resolve to the
+    /// wrong method.
+    /// </para>
+    ///
+    /// <para>
+    /// Returns <c>null</c> when the block is small enough to emit whole, so the
+    /// common case keeps its existing single-file shape.
+    /// </para>
+    /// </summary>
+    internal static (IReadOnlyList<string> ChunkNames, IReadOnlyList<int> ChunkOffsets, IReadOnlyList<int> ChunkCounts)?
+        PlanHotpatchMethodChunks(int totalMethodCount, int estimatedCharsPerMethod, int budgetChars)
+    {
+        if (totalMethodCount <= 0 || estimatedCharsPerMethod <= 0 || budgetChars <= 0)
+            return null;
+
+        int totalChars = totalMethodCount * estimatedCharsPerMethod;
+        if (totalChars <= budgetChars)
+            return null;   // fits in one TU — nothing to do
+
+        int perChunk = Math.Max(1, budgetChars / estimatedCharsPerMethod);
+        int chunkCount = (totalMethodCount + perChunk - 1) / perChunk;
+
+        var names = new List<string>(chunkCount);
+        var offsets = new List<int>(chunkCount);
+        var counts = new List<int>(chunkCount);
+
+        for (int i = 0; i < chunkCount; i++)
+        {
+            int offset = i * perChunk;
+            int count = Math.Min(perChunk, totalMethodCount - offset);
+            names.Add($"s_hotpatch_methods_{i}");
+            offsets.Add(offset);
+            counts.Add(count);
+        }
+
+        return (names, offsets, counts);
+    }
+
     // --- CustomAttribute blob data emission ---
     // Builds the binary blob, offset array, and materializer switch for
     // per-module CustomAttribute query support. Supports 5 entity kinds:
