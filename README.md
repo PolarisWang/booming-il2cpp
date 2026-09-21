@@ -57,7 +57,7 @@ cmake --build artifacts/presets/debug --target chaos_runtime_core
 dotnet build src/managed/Chaos.IL2CPC.Pipeline
 
 # Run snapshot tests
-dotnet test tests/snapshots/Chaos.IL2CPP.Generator.SnapshotTests
+dotnet test tests/unit/managed/snapshot
 ```
 
 ## Build Configurations

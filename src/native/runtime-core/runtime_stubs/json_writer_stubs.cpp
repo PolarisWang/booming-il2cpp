@@ -185,6 +185,58 @@ void ChaosUtf8JsonWriterWriteStartArray(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
         "Cannot write to a JSON writer that has been disposed.");
 }
 
+// ── Property-name overloads ──────────────────────────────────────────────
+// WriteStartObject(string|JsonEncodedText) / WriteStartArray(string|JsonEncodedText).
+//
+// Measured on a bare instance: all four throw InvalidOperationException — the
+// property-name form is the InvalidOperation family even though the 0-arg form
+// is too (same family here, unlike the value-only writes).  Distinct symbols per
+// parameter list are mandatory: C++ cannot resolve same-name overloads across
+// translation units reliably, and the shape registration keys on an exact
+// (method, paramTypes) tuple, so each needs its own entry anyway.
+
+// Property-name overloads.  Null argument is checked first (.NET reports
+// ArgumentNullException before the receiver state); the string form validates
+// the name, the JsonEncodedText form carries its own payload.
+
+void ChaosUtf8JsonWriterWriteStartObjectStr(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(property_name, n, n_len))
+        RaiseArgumentNullException("propertyName");
+    (void)n; (void)n_len;
+    RaiseBareWriterInvalidOperation();
+}
+
+void ChaosUtf8JsonWriterWriteStartObjectEncoded(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
+    (void)encoded_name;
+    RaiseBareWriterInvalidOperation();
+}
+
+void ChaosUtf8JsonWriterWriteStartArrayStr(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(property_name, n, n_len))
+        RaiseArgumentNullException("propertyName");
+    (void)n; (void)n_len;
+    RaiseBareWriterInvalidOperation();
+}
+
+void ChaosUtf8JsonWriterWriteStartArrayEncoded(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
+    (void)encoded_name;
+    RaiseBareWriterInvalidOperation();
+}
+
 void ChaosUtf8JsonWriterWriteEndObject(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 {
     CheckThis(this_ptr);
@@ -242,9 +294,173 @@ void ChaosUtf8JsonWriterWriteStringEncodedText(
     RaiseBareWriterInvalidOperation();
 }
 
+// ── WriteString(propertyName, non-string value) ──────────────────────────
+// The value is a struct (DateTime/DateTimeOffset/Guid), an already-encoded
+// JsonEncodedText, or another string.  All of them arrive as INTPTR carriers;
+// on a bare writer .NET throws InvalidOperationException for every one of them
+// (measured), so the value payload itself is not inspected.
+//
+// Each (propertyNameForm, valueForm) pair needs its OWN symbol: the shape
+// registry keys on an exact (method, paramTypes) tuple, and C++ overload
+// resolution cannot be relied on across translation units.
+
+#define CHAOS_UJW_STRING_VALUE_OVERLOAD(suffix, nameType, valueType)               \
+    void ChaosUtf8JsonWriterWriteString##suffix(                                  \
+        CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,          \
+        valueType value) noexcept                                                 \
+    {                                                                             \
+        CheckThis(this_ptr, BareWriterKind::InvalidOperation);                    \
+        const char* n = nullptr; size_t n_len = 0;                                \
+        if (!ManagedStringView(property_name, n, n_len))                          \
+            RaiseArgumentNullException("propertyName");                           \
+        (void)n; (void)n_len; (void)value;                                        \
+        RaiseBareWriterInvalidOperation();                                        \
+    }
+
+// value = DateTime / DateTimeOffset / Guid (8- or 16-byte structs by pointer)
+CHAOS_UJW_STRING_VALUE_OVERLOAD(StrDateTime,          System.String, CHAOS_IL2CPP_INTPTR)
+CHAOS_UJW_STRING_VALUE_OVERLOAD(StrDateTimeOffset,    System.String, CHAOS_IL2CPP_INTPTR)
+CHAOS_UJW_STRING_VALUE_OVERLOAD(StrGuid,              System.String, CHAOS_IL2CPP_INTPTR)
+CHAOS_UJW_STRING_VALUE_OVERLOAD(EncodedDateTime,      JsonEncodedText, CHAOS_IL2CPP_INTPTR)
+CHAOS_UJW_STRING_VALUE_OVERLOAD(EncodedDateTimeOffset, JsonEncodedText, CHAOS_IL2CPP_INTPTR)
+CHAOS_UJW_STRING_VALUE_OVERLOAD(EncodedGuid,          JsonEncodedText, CHAOS_IL2CPP_INTPTR)
+CHAOS_UJW_STRING_VALUE_OVERLOAD(EncodedEncoded,       JsonEncodedText, CHAOS_IL2CPP_INTPTR)
+CHAOS_UJW_STRING_VALUE_OVERLOAD(EncodedStr,           JsonEncodedText, CHAOS_IL2CPP_INTPTR)
+
+#undef CHAOS_UJW_STRING_VALUE_OVERLOAD
+
+// WriteString(string propertyName, JsonEncodedText value) — string name form.
+void ChaosUtf8JsonWriterWriteStringStrEncoded(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
+    CHAOS_IL2CPP_INTPTR encoded_value) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(property_name, n, n_len))
+        RaiseArgumentNullException("propertyName");
+    (void)n; (void)n_len; (void)encoded_value;
+    RaiseBareWriterInvalidOperation();
+}
+
+// ── WriteNull(JsonEncodedText) / WriteBoolean(JsonEncodedText, bool) ──────
+void ChaosUtf8JsonWriterWriteNullEncoded(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
+    (void)encoded_name;
+    RaiseBareWriterInvalidOperation();
+}
+
+void ChaosUtf8JsonWriterWriteBooleanEncoded(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name,
+    CHAOS_IL2CPP_INT32 value) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::InvalidOperation);
+    (void)encoded_name; (void)value;
+    RaiseBareWriterInvalidOperation();
+}
+
+// ── WriteRawValue(payload, skipInputValidation) ──────────────────────────
+// Value-only write (no property name).  .NET validates an EMPTY payload first
+// and reports ArgumentException; a non-empty payload reaches the missing sink
+// and reports NullReferenceException.  Measured:
+//   WriteRawValue("[1]", false) -> NullReferenceException
+//   WriteRawValue("[1]", true)  -> NullReferenceException
+//   WriteRawValue("",    false) -> ArgumentException
+void ChaosUtf8JsonWriterWriteRawValueStrBool(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR json,
+    CHAOS_IL2CPP_INT32 skip_input_validation) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::NullReference);
+    const char* j = nullptr; size_t j_len = 0;
+    if (!ManagedStringView(json, j, j_len))
+        RaiseArgumentNullException("json");
+    (void)skip_input_validation;
+    if (j_len == 0)
+        RaiseManagedException("System.ArgumentException",
+            "The JSON payload cannot be empty.");
+    RaiseBareWriterNullReference();
+}
+
+/// WriteRawValue(ReadOnlySequence<byte>, bool) — value-only write, so an empty
+/// payload is validated first and reports ArgumentException, while a non-empty
+/// payload reaches the missing sink and reports NullReferenceException.
+///
+/// Measured on .NET 10:
+///   WriteRawValue(default(seq), false) -> ArgumentException   (the ATG fixture)
+///   WriteRawValue(default(seq), true)  -> ArgumentException
+///   WriteRawValue(empty seq,    false) -> ArgumentException
+///   WriteRawValue(seq "[1]",    false) -> NullReferenceException
+///
+/// Emptiness is NOT "the carrier is null": a default sequence arrives as a
+/// NON-null pointer to a struct whose first two words are 0 (start == end).
+/// Instrumented: default(ReadOnlySequence<byte>) -> words = [0 0 <ptr> 0].
+/// Reading the immediate first pointer as a null check never fired and let a
+/// default sequence fall through to the NRE branch — the opposite of what .NET
+/// does.  So test the sequence's own start/end words.
+void ChaosUtf8JsonWriterWriteRawValueSequenceBool(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR json_sequence,
+    CHAOS_IL2CPP_INT32 skip_input_validation) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::NullReference);
+    (void)skip_input_validation;
+
+    // ReadOnlySequence<T> is laid out as (SequencePosition start, SequencePosition end)
+    // and each SequencePosition is (object segment, int index).  A default/empty
+    // sequence has start == end, so the whole first two words are zero.
+    bool empty_payload = true;
+    if (json_sequence != 0)
+    {
+        const auto* words = reinterpret_cast<const CHAOS_IL2CPP_UINT64*>(json_sequence);
+        empty_payload = (words[0] == 0 && words[1] == 0);
+    }
+
+    if (empty_payload)
+        RaiseManagedException("System.ArgumentException",
+            "The JSON payload cannot be empty.");
+    RaiseBareWriterNullReference();
+}
+
 // ══════════════════════════════════════════════════════════════════
 // WriteNumber overloads
 // ══════════════════════════════════════════════════════════════════
+
+// WriteNumber(propertyName, scalar) scalar-width variants.  The existing
+// WriteNumberStr covers Int64 / Double / Float via separate symbols; the Int32,
+// UInt32, UInt64 and decimal widths were absent entirely, and the
+// JsonEncodedText property-name form had no variant at all.  Every one of them
+// throws InvalidOperationException on a bare writer (measured), so the payload
+// is carried but not inspected.
+#define CHAOS_UJW_NUMBER_OVERLOAD(suffix, nameAbi, valueAbi)                       \
+    void ChaosUtf8JsonWriterWriteNumber##suffix(                                   \
+        CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,           \
+        valueAbi value) noexcept                                                   \
+    {                                                                              \
+        CheckThis(this_ptr, BareWriterKind::InvalidOperation);                     \
+        const char* n = nullptr; size_t n_len = 0;                                 \
+        if (!ManagedStringView(property_name, n, n_len))                           \
+            RaiseArgumentNullException("propertyName");                            \
+        (void)n; (void)n_len; (void)value;                                         \
+        RaiseBareWriterInvalidOperation();                                         \
+    }
+
+// string property name
+CHAOS_UJW_NUMBER_OVERLOAD(StrInt32,  System.String,   CHAOS_IL2CPP_INT32)
+CHAOS_UJW_NUMBER_OVERLOAD(StrUInt32, System.String,   CHAOS_IL2CPP_UINT32)
+CHAOS_UJW_NUMBER_OVERLOAD(StrUInt64, System.String,   CHAOS_IL2CPP_UINT64)
+// decimal arrives as a pointer to the boxed 16-byte payload.
+CHAOS_UJW_NUMBER_OVERLOAD(StrDecimal, System.String,  CHAOS_IL2CPP_INTPTR)
+// JsonEncodedText property name
+CHAOS_UJW_NUMBER_OVERLOAD(EncodedInt32,  JsonEncodedText, CHAOS_IL2CPP_INT32)
+CHAOS_UJW_NUMBER_OVERLOAD(EncodedInt64,  JsonEncodedText, CHAOS_IL2CPP_INT64)
+CHAOS_UJW_NUMBER_OVERLOAD(EncodedUInt32, JsonEncodedText, CHAOS_IL2CPP_UINT32)
+CHAOS_UJW_NUMBER_OVERLOAD(EncodedUInt64, JsonEncodedText, CHAOS_IL2CPP_UINT64)
+CHAOS_UJW_NUMBER_OVERLOAD(EncodedDouble, JsonEncodedText, double)
+CHAOS_UJW_NUMBER_OVERLOAD(EncodedFloat,  JsonEncodedText, float)
+CHAOS_UJW_NUMBER_OVERLOAD(EncodedDecimal, JsonEncodedText, CHAOS_IL2CPP_INTPTR)
+CHAOS_UJW_NUMBER_OVERLOAD(EncodedStr,    JsonEncodedText, CHAOS_IL2CPP_INTPTR)
+
+#undef CHAOS_UJW_NUMBER_OVERLOAD
 
 void ChaosUtf8JsonWriterWriteNumberStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
@@ -345,6 +561,26 @@ void ChaosUtf8JsonWriterWriteNumberUInt64(
 
 void ChaosUtf8JsonWriterWriteNumberValueInt(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::NullReference);
+    (void)value;
+    RaiseBareWriterNullReference();
+}
+
+// WriteNumberValue(Int32) / (UInt32) — the two widths that had no native variant
+// at all.  Same value-only family as the others: NullReferenceException on a
+// bare writer (measured across every width: byte/sbyte/short/ushort/int/uint/
+// long/ulong/float/double/decimal/char).
+void ChaosUtf8JsonWriterWriteNumberValueInt32(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 value) noexcept
+{
+    CheckThis(this_ptr, BareWriterKind::NullReference);
+    (void)value;
+    RaiseBareWriterNullReference();
+}
+
+void ChaosUtf8JsonWriterWriteNumberValueUInt32(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_UINT32 value) noexcept
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;

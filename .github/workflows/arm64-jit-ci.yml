@@ -60,7 +60,7 @@ jobs:
       - name: Restore .NET dependencies
         run: |
           dotnet restore src/managed/Chaos.IL2CPP.Generator/
-          dotnet restore tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+          dotnet restore tests/unit/managed/snapshot/
 
       - name: Build Chaos.IL2CPP.Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore

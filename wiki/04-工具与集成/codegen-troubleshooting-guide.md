@@ -275,11 +275,11 @@ ctest -R test_codegen_abi -V
 ctest -R test_codegen_il_smoke -V
 
 # 运行快照测试（Linux/macOS 需加前缀）
-SNAPSHOT_UPDATE=1 dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+SNAPSHOT_UPDATE=1 dotnet test tests/unit/managed/snapshot/
 
 # 更新所有基线
 $env:SNAPSHOT_UPDATE=1
-dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+dotnet test tests/unit/managed/snapshot/
 
 # 验证 foundation-dll family
 cd testing/foundation-dll && python -m _core.cli verify-family System.Private.CoreLib/garbage-collection

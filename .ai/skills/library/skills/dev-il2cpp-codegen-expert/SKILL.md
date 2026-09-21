@@ -116,7 +116,7 @@ description: dev-il2cpp-codegen-expert — il2cpp CodeGen 专家
 
 | 项目 | 说明 |
 |------|------|
-| 位置 | `tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/` |
+| 位置 | `tests/unit/managed/snapshot/` |
 | 基线 | 88 个夹具目录（01-simple-add 到 88-eh-fault-finally） |
 | 核心文件 | `SnapshotTestBase.cs`, `SnapshotTests.cs`, `FixtureRepository.cs` |
 | 更新方式 | `SNAPSHOT_UPDATE=1` 环境变量 |
@@ -179,7 +179,7 @@ classification: domains=[CodeGen] mode=knowledge-inject expert=dev-il2cpp-codege
 ### Step 3：验证
 
 1. **编译**：`dotnet build` C# 项目
-2. **Snapshot 测试**：运行 `tests/snapshots/` 下的 snapshot 测试
+2. **Snapshot 测试**：运行 `tests/unit/managed/snapshot/` 下的 snapshot 测试
    - 如果基线需更新：`SNAPSHOT_UPDATE=1`
    - 检查 git diff 确认基线变更符合预期
 3. **验证器**：运行 `NativeCodegenValidator`（9 条规则）
