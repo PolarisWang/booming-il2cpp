@@ -1701,6 +1701,19 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
+            // ── CustomAttributeExtensions::IsDefined(Assembly, Type) ──
+            // Native ChaosReflectionIsDefined exists (remaining_stubs.cpp:22).
+            registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
+                ["System.Reflection.Assembly", "System.Type"],
+                ShapeKind.SimpleForward, "ChaosReflectionIsDefined",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(),
+                    CreateNativeIntAbiSlot(),
+                }),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
+
             // Task.WhenAll(Task[])/Task.WhenAny(Task[]) — route the array combinator
             // to the native async_stubs helpers (which unpack the managed array and
             // produce an aggregate AsyncTask handle).  Returns the aggregate handle
