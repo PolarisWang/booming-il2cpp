@@ -52,19 +52,24 @@ RAISE_RE = re.compile(r'RaiseManagedException\s*\(\s*"([^"]+)"')
 def collect_raised_types() -> dict[str, list[str]]:
     """Map exception type name -> sorted list of files that raise it."""
     found: dict[str, list[str]] = {}
-    for path in STUB_GLOB_DIR.rglob("*.cpp"):
-        try:
-            text = path.read_text(encoding="utf-8", errors="replace")
-        except OSError:
-            continue
-        for match in RAISE_RE.finditer(text):
-            name = match.group(1)
-            # Only exception-shaped names; guards against a stub passing a
-            # message string in the type position.
-            if "Exception" not in name:
+    # Scan .cpp AND .h: the RaiseXxx convenience wrappers live in
+    # exception_helpers.h — their "System.NullReferenceException" etc. literals
+    # are invisible to a *.cpp-only glob, which is exactly how NRE went missing
+    # from FileOnlyExceptionTypeNames and every native NRE raised a NULL object.
+    for pattern in ("*.cpp", "*.h"):
+        for path in STUB_GLOB_DIR.rglob(pattern):
+            try:
+                text = path.read_text(encoding="utf-8", errors="replace")
+            except OSError:
                 continue
-            rel = path.relative_to(REPO_ROOT).as_posix()
-            found.setdefault(name, []).append(rel)
+            for match in RAISE_RE.finditer(text):
+                name = match.group(1)
+                # Only exception-shaped names; guards against a stub passing a
+                # message string in the type position.
+                if "Exception" not in name:
+                    continue
+                rel = path.relative_to(REPO_ROOT).as_posix()
+                found.setdefault(name, []).append(rel)
     return {k: sorted(set(v)) for k, v in found.items()}
 
 

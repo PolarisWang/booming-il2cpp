@@ -563,7 +563,13 @@ public static class Classifier
     /// <summary>
     /// Whole-type APIs that are structurally impossible under AOT.
     /// </summary>
-    private static readonly HashSet<string> NotSupportedWholeTypes = new(StringComparer.Ordinal)
+    /// <remarks>
+    /// Consumed by AutoTestGenerator TestEmitter.IsAotNotSupported so these
+    /// types' methods emit Assert.Throws instead of the AOT-STUB-GAP
+    /// `return 42L` body (ReflectionContext/AssemblyNameProxy etc. were the
+    /// last 7 stubGap residues after the CA/TypeDelegator sweep).
+    /// </remarks>
+    public static readonly HashSet<string> NotSupportedWholeTypes = new(StringComparer.Ordinal)
     {
         "MethodBody",                // IL byte arrays do not exist under AOT
         "LocalVariableInfo",         // requires IL/method body metadata
