@@ -14,6 +14,7 @@
 // assembly (returning null instead fails the caller's Assert.AreEqual).
 // Declared here rather than relying on the including TU's transitive includes.
 #include "../runtime_stubs/array_stubs.h"
+#include "../ChaosGeneratedRuntimePrelude.h"
 
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
@@ -40,8 +41,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsDefined(CHAOS_IL2CPP_INTPTR assembly, CHAOS
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR /*param*/) noexcept {
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 // ── Parameter default values (real implementations) ─────────────────
@@ -449,8 +449,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetForwardedTypes(CHAOS_IL2CPP_INTPTR
     // type closure is statically known and no forwarding indirection exists, so
     // an empty result is the *correct* semantic answer, not a stub.
     if (assembly == 0) return 0;
-    static const CHAOS_IL2CPP_INTPTR s_emptyArray = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<CHAOS_IL2CPP_INTPTR*>(&s_emptyArray));
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetManifestResourceNames(CHAOS_IL2CPP_INTPTR assembly) noexcept {
@@ -458,8 +457,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetManifestResourceNames(CHAOS_IL2CPP
     // model, so the manifest resource list is genuinely empty here. Same
     // rationale as GetForwardedTypes above.
     if (assembly == 0) return 0;
-    static const CHAOS_IL2CPP_INTPTR s_emptyArray = 0;
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<CHAOS_IL2CPP_INTPTR*>(&s_emptyArray));
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetModules(CHAOS_IL2CPP_INTPTR assembly) noexcept {
@@ -483,8 +481,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetEntryPoint(CHAOS_IL2CPP_INTPTR ass
 
 // ── ParameterInfo stubs ─────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPTR /*param*/) noexcept {
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 // ── FieldInfo stubs (Phase 1.2+: ModuleRegistry Tier 0 flags) ─────────
@@ -646,8 +643,7 @@ CHAOS_IL2CPP_INT64 ChaosReflectionFieldGetRawConstantValue(CHAOS_IL2CPP_INTPTR f
 
 // ── PropertyInfo stubs (Phase 1.2+: EEClass property flags) ───────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetIndexParameters(CHAOS_IL2CPP_INTPTR /*prop*/) noexcept {
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 CHAOS_IL2CPP_INT32 ChaosReflectionPropertyGetCanRead(CHAOS_IL2CPP_INTPTR prop) noexcept {
@@ -1118,8 +1114,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetOptionalCustomModifiers(CHAOS_IL2C
     auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
         static_cast<PropertyInfoHandle>(prop));
     if (decoded == nullptr) return 0;
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR prop) noexcept {
@@ -1164,8 +1159,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetHasDefaultValue(CHAOS_IL2CPP_INTPTR p
 // empty set matches a parameter with no modifiers.
 CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetOptionalCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept {
     if (param == 0) return 0;
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionParamGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR param) noexcept {
@@ -1429,8 +1423,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetOptionalCustomModifiers(CHAOS_IL2CPP_
     auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryFieldDescriptor>(
         static_cast<FieldInfoHandle>(field));
     if (decoded == nullptr) return 0;
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionFieldGetRequiredCustomModifiers(CHAOS_IL2CPP_INTPTR field) noexcept {
@@ -1468,8 +1461,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionPropertyGetIndexParametersVersion(CHAOS_IL2CP
     auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryPropertyDescriptor>(
         static_cast<PropertyInfoHandle>(prop));
     if (decoded == nullptr) return 0;
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 // PropertyInfo.GetValue / SetValue — route through the accessor methods
@@ -1511,8 +1503,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionEventGetOtherMethods(CHAOS_IL2CPP_INTPTR evt)
     auto* decoded = TryDecodeReflectionQueryHandle<ReflectionQueryEventDescriptor>(
         static_cast<EventInfoHandle>(evt));
     if (decoded == nullptr) return 0;
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 // TypeInfo.GenericTypeParameters — the type's own generic parameter list. The
@@ -1688,8 +1679,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetFiles(CHAOS_IL2CPP_INTPTR assembly
     auto* image = TryDecodeReflectionQueryImageHandle(static_cast<ImageHandle>(assembly));
     if (image == nullptr) return 0;
     // The BCL returns an empty array when the manifest has no file table.
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetReferencedAssemblies(CHAOS_IL2CPP_INTPTR assembly) noexcept {
@@ -1697,8 +1687,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetReferencedAssemblies(CHAOS_IL2CPP_
     if (image == nullptr) return 0;
     // References are resolved and linked at AOT build time and are not retained
     // in the descriptor; the empty set is the truthful answer.
-    static CHAOS_IL2CPP_INTPTR s_empty[1] = {0};
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+    return ChaosArrayNew1D(&chaos::il2cpp::jit::chaos_type_info_managed_array.hot, &chaos::il2cpp::jit::chaos_type_info_managed_array.hot, chaos::il2cpp::jit::chaos_type_shape_value, 0);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionAssemblyGetObjectData(CHAOS_IL2CPP_INTPTR assembly) noexcept {
