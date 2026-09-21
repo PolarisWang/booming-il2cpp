@@ -547,7 +547,13 @@ public sealed class TestEmitter
                 // avoids false-positive passes: if ALL inputs (including non-null
                 // ones) crash with NRE/ANE, the method is fundamentally broken in
                 // AOT, and a Throws<NRE> test would pass by coincidence only.
-                if (!hasAnyValidSet)
+                // S1 (reflection-final): for methods with a known native
+                // implementation, the AOT null-guard raising NRE is the
+                // deterministic contract (the receiver was supplied by the
+                // real-instance factory, not an uninitialized artifact), so
+                // Assert.Throws is a real test — keep it even when all value
+                // sets fail.  The smoke skip stays for unmapped methods.
+                if (!hasAnyValidSet && !HasKnownNativeImpl(method))
                 {
                     var nullRelated = exType == "System.NullReferenceException" ||
                                       exType == "System.ArgumentNullException";
