@@ -1,0 +1,28 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.MarshalByRefObject::GetLifetimeService:System.Object()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Object",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.MarshalByRefObject::InitializeLifetimeService:System.Object()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Object",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

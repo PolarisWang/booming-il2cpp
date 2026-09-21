@@ -756,4 +756,121 @@ public sealed partial class NativeAotLoweringPlanner
         return sb.ToString();
     }
 
+        /// <summary>
+        /// Emit the compile-time "exception type name -> TypeInfo" table.
+        ///
+        /// Why this exists
+        /// ---------------
+        /// RaiseManagedException() (native, exception_helpers.cpp) turns a
+        /// fully-qualified type name into a TypeInfoHandle and then builds the
+        /// managed exception object.  Its only lookup mechanism was
+        /// ResolveTypeByName(), which scans the reflection query image
+        /// (kReflImage).  That image only contains types reachable from the
+        /// closure's member tables, so exception types — which are merely
+        /// *thrown* by native stubs, never lowered — are absent.  The lookup then
+        /// returned 0 and the runtime called chaos_raise_exception(0): a NULL
+        /// exception object that no chaos_eh_match_type can ever match, so every
+        /// `catch (SomeException)` failed even though the throw itself happened.
+        ///
+        /// This table closes that gap at compile time.  The entries live in the
+        /// same TU as the chaos_mt_* MethodTables (so the addresses are already
+        /// correct and the symbols need no external linkage), and only this small
+        /// table — not the whole BCL — crosses into the runtime.
+        ///
+        /// Consumer: ResolveTypeByName() in chaos_runtime_core checks it before
+        /// falling back to the reflection image scan.
+        /// </summary>
+        internal string BuildExceptionTypeTable()
+        {
+            // Collect exception type subject ids from the IR: every catch clause
+            // names one, and each of those has its own base chain (added by
+            // CollectReferenceTypeBaseSubjectIds' Pass 1b).
+            var typeIds = new SortedSet<string>(StringComparer.Ordinal);
+            foreach (var method in _aotCoreIrMethodsForExceptionTable)
+            {
+                foreach (var region in method.ExceptionRegions)
+                {
+                    var catchType = region.CatchTypeSubjectId;
+                    if (string.IsNullOrEmpty(catchType)) continue;
+                    var dc = catchType.IndexOf("::");
+                    var typeSubjectId = dc > 0 ? catchType.Substring(0, dc) : catchType;
+                    if (string.IsNullOrEmpty(typeSubjectId)) continue;
+                    typeIds.Add(typeSubjectId);
+
+                    // Walk the base chain so `catch (Exception)` can match any of
+                    // them.  Bounded to guard against a malformed cycle.
+                    var chainId = typeSubjectId;
+                    for (int depth = 0; depth < 16; depth++)
+                    {
+                        var baseId = GetSyntheticReferenceTypeBaseSubjectId(chainId);
+                        if (string.IsNullOrEmpty(baseId) || typeIds.Contains(baseId)) break;
+                        typeIds.Add(baseId);
+                        chainId = baseId;
+                    }
+                }
+            }
+
+            // A type can only be referenced here if its MethodTable has a
+            // DEFINITION in this TU; referencing a declaration-only symbol would
+            // produce LNK2001 (see the note in ChaosRegisterReflectionMembers).
+            var emitTypes = typeIds
+                .Where(id => _referenceTypeBaseSubjectIds.ContainsKey(id))
+                .ToList();
+
+            var sb = new StringBuilder(4096);
+            sb.AppendLine("// --- Exception Type Table (compile-time name -> type descriptor) ---");
+            sb.AppendLine("// Each entry carries a ReflectionQueryTypeDescriptor whose type_info_ptr is");
+            sb.AppendLine("// the chaos_mt_* MethodTable for that type (defined in this same TU, so the");
+            sb.AppendLine("// address needs no external linkage).  ResolveTypeByName() in");
+            sb.AppendLine("// chaos_runtime_core encodes the descriptor pointer as a tag-bit handle,");
+            sb.AppendLine("// which ResolveTypeDescriptor() decodes without needing a module id or");
+            sb.AppendLine("// metadata token -- neither of which an exception type has.");
+            if (emitTypes.Count == 0)
+            {
+                // Always emit both symbols so the runtime can reference them
+                // unconditionally without a link error.
+                sb.AppendLine("extern \"C\" const ChaosExceptionTypeEntryV0 kChaosExceptionTypes[1] = { { nullptr, nullptr } };");
+                sb.AppendLine("extern \"C\" const CHAOS_IL2CPP_INT32 kChaosExceptionTypeCount = 0;");
+                return sb.ToString();
+            }
+
+            for (int i = 0; i < emitTypes.Count; i++)
+            {
+                var bare = emitTypes[i];
+                sb.Append("static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc")
+                  .Append(i)
+                  .AppendLine(" = {");
+                // metadata_token, subject_id, definition_subject_id, namespace, name,
+                // display_name, generic_type_definition
+                sb.Append("    0u, \"").Append(EscapeCppStringLiteral(bare)).Append("\", \"")
+                  .Append(EscapeCppStringLiteral(bare)).AppendLine("\", nullptr, nullptr, nullptr, nullptr,");
+                // fields/count, properties/count, events/count, methods/count
+                sb.AppendLine("    nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,");
+                // generic_parameters, generic_param_count, reserved_flags, type_info_ptr
+                sb.Append("    nullptr, 0u, 0u, &")
+                  .Append(GetNativeMethodTableSymbol(bare))
+                  .AppendLine(" },");
+            }
+
+            sb.AppendLine("extern \"C\" const ChaosExceptionTypeEntryV0 kChaosExceptionTypes[] = {");
+            for (int i = 0; i < emitTypes.Count; i++)
+            {
+                var bare = emitTypes[i];
+                var slash = bare.IndexOf('/');
+                var displayName = slash >= 0 ? bare.Substring(slash + 1) : bare;
+                sb.Append("    { \"").Append(EscapeCppStringLiteral(displayName))
+                  .Append("\", &kExcDesc").Append(i).AppendLine(" },");
+            }
+            sb.AppendLine("};");
+            sb.Append("extern \"C\" const CHAOS_IL2CPP_INT32 kChaosExceptionTypeCount = ")
+              .Append(emitTypes.Count)
+              .AppendLine(";");
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Methods used to discover which exception types the module can throw.
+        /// Set during planning; empty means "no exception table entries".
+        /// </summary>
+        private IReadOnlyList<AotCoreIrMethodArtifact> _aotCoreIrMethodsForExceptionTable = Array.Empty<AotCoreIrMethodArtifact>();
 }

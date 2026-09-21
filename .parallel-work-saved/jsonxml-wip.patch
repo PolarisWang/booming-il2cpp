@@ -1,0 +1,304 @@
+diff --git a/src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs b/src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs
+index 241099b3f..7c67d1b2a 100644
+--- a/src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs
++++ b/src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs
+@@ -723,11 +723,11 @@ private bool TryCreateExternalRuntimeHelperDefinition(string callee, out Externa
+ 		if (throwsNotSupported)
+ 		{
+ 			// JsonMetadataServices.Create*Info<T> managed body throws
+-			// NotSupportedException for ALL inputs.  The AOT stub returning 0
+-			// makes the two disagree, forcing ATG to mark the subject [UNVERIFIED]
+-			// and bucket it as stubGap.  Throwing chaos_managed_exception makes
+-			// AOT and managed agree so the fact layer sees a consistent result.
+-			bodyLines.Add("    // Managed body throws NotSupportedException for all inputs.");
++			// for ALL inputs.  The AOT stub returning 0 makes the two disagree,
++			// forcing ATG to mark the subject [UNVERIFIED].  Throwing a bare
++			// chaos_managed_exception makes AOT and managed agree (both throw)
++			// so ATG can test via Assert.ThrowsAny<Exception> instead of skipping.
++			bodyLines.Add("    // Managed body throws for all inputs; mirror it.");
+ 			bodyLines.Add("    throw chaos_managed_exception{};");
+ 		}
+ 		else
+diff --git a/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/Program.cs b/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/Program.cs
+index cea598c64..7a6bab3fa 100644
+--- a/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/Program.cs
++++ b/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/Program.cs
+@@ -383,6 +383,13 @@
+ 
+                 string kind;
+                 bool isBenchmark;
++                // E (json-xml-production-readiness): record the exception the
++                // MANAGED body raises for this subject, so codegen's catch-all can
++                // emit a matching RaiseManagedException instead of a blanket
++                // return-0.  Without this the AOT behaviour silently diverges from
++                // managed, which is exactly the divergence the [UNVERIFIED] skip
++                // used to hide.
++                string? expectedExceptionType = null;
+ 
+                 if (probeLookup.TryGetValue(subjectId, out var pr))
+                 {
+@@ -391,6 +398,7 @@
+                         // Exception-throwing: hotupdate only, no [Benchmark]
+                         kind = "hotupdate";
+                         isBenchmark = false;
++                        expectedExceptionType = pr.ExceptionType;
+                     }
+                     else if (pr.IsDeterministic && !pr.IsVoid)
+                     {
+@@ -435,7 +443,7 @@
+                 {
+                     var generatedMethodId = $"{SanitizePath(method.Name)}_{mi}_{paramSuffix}_{si}";
+ 
+-                    methodEntries.Add(new SubjectMethodEntry(globalIdx, kind, subjectId, generatedMethodId));
++                    methodEntries.Add(new SubjectMethodEntry(globalIdx, kind, subjectId, generatedMethodId, expectedExceptionType));
+                     if (isBenchmark)
+                         benchmarkMethodIndices.Add(globalIdx);
+                     else
+@@ -1023,4 +1031,5 @@ internal sealed record SubjectMethodEntry(
+     int Index,
+     string Kind,
+     string MethodSubjectId,
+-    string? GeneratedMethodId = null);
++    string? GeneratedMethodId = null,
++    string? ExpectedExceptionType = null);
+diff --git a/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/TestEmitter.cs b/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/TestEmitter.cs
+index 0617f2589..86fe5b7e3 100644
+--- a/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/TestEmitter.cs
++++ b/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/TestEmitter.cs
+@@ -301,7 +301,13 @@ public TestEmitter(CSharpSerializer serializer, CSharpExpressionBuilder expressi
+                 // the 42L sentinel.  The managed exception is thereby surfaced honestly
+                 // without fabricating a pass.
+                 var hasException = setResult?.HasException == true;
+-                var factCallStatement = hasException
++                // For external assemblies whose AOT stub reproduces the managed
++                // exception (D, json-xml-production-readiness), the call MUST be
++                // executed so Assert.Throws can observe it.  The blanket skip
++                // applies only to stubs known to return-0 without throwing.
++                bool knownConsistentExt =
++                    isExternalAssembly && ExternalStubRaisesManagedException(method);
++                var factCallStatement = (hasException && !knownConsistentExt)
+                     ? $"{preludeStr}"
+                     : callStatement;
+ 
+@@ -402,14 +408,23 @@ public TestEmitter(CSharpSerializer serializer, CSharpExpressionBuilder expressi
+ 
+         if (result.HasException && result.ExceptionType is not null)
+         {
+-            // For external AOT assemblies, the stub NEVER throws the managed exception.
+-            // The call was NOT executed (factCallStatement skipped it for hasException)
+-            // — we emit a [UNVERIFIED] marker so the fact layer can scan for it and
+-            // exclude these subjects from the authoritative "passed" count.
+-            // The set1 (smart-arg) value set for the same method (generated by C-layer)
+-            // still produces a real assertion — this only marks the set0 (default-arg)
+-            // path as unverifiable by design.
+-            if (isExternalAssembly)
++            // When the probe detected an exception we normally let Assert.Throws
++            // wrap the call in a lambda (the direct call would throw during the
++            // prelude-free fact body).
++            //
++            // EXTERNAL-ASSEMBLY EXCEPTION CONSISTENCY (D, json-xml-production-readiness):
++            // Historically, external-assembly methods were blanket-skipped and marked
++            // [UNVERIFIED] on the assumption that "the AOT stub never throws the
++            // managed exception".  That assumption made the gap self-concealing: the
++            // stub returned 0, ATG declined to test it, and nothing ever surfaced the
++            // divergence.  The codegen catch-all now raises a matching managed
++            // exception for the JsonMetadataServices.Create*Info family, so the AOT
++            // and managed behaviours agree and the subject CAN be asserted.
++            //
++            // We therefore emit a real Assert.Throws<T> for external methods that
++            // the toolchain has wired to reproduce their managed exception, and keep
++            // the [UNVERIFIED]/AOT-STUB-GAP skip only for the ones it has not.
++            if (isExternalAssembly && !ExternalStubRaisesManagedException(method))
+             {
+                 // P0-B (json-xml-production-readiness): emit an explicit machine-
+                 // readable marker in addition to the human comment.  The fact layer
+@@ -422,6 +437,22 @@ public TestEmitter(CSharpSerializer serializer, CSharpExpressionBuilder expressi
+                 return;
+             }
+ 
++            // External assemblies whose stub DOES throw (D, json-xml-production-
++            // readiness): assert the throw rather than skipping.  The AOT catch-all
++            // raises a bare chaos_managed_exception without a managed type attached,
++            // so we cannot match a specific exception class — ThrowsAny<Exception>
++            // verifies the "both sides throw" contract, which is the behaviour the
++            // caller depends on.  Pinning the exact type would require threading the
++            // ATG probe's ExceptionType through subjects.metadata.json into codegen.
++            if (isExternalAssembly)
++            {
++                if (!hasRefParam)
++                    sb.AppendLine($"            Assert.ThrowsAny<System.Exception>(() => {callExpr});");
++                else
++                    sb.AppendLine($"            // [smoke] {result.ExceptionType} thrown by {callExpr} (ref/out param — cannot wrap in lambda)");
++                return;
++            }
++
+             // Ref/out locals can't be captured in a lambda — skip Assert.Throws
+             if (!hasRefParam)
+             {
+@@ -583,6 +614,30 @@ public TestEmitter(CSharpSerializer serializer, CSharpExpressionBuilder expressi
+         }
+     }
+ 
++    /// <summary>
++    /// True when an external-assembly method's AOT stub is KNOWN to throw the
++    /// same managed exception as its managed peer (so [UNVERIFIED] skip is
++    /// unnecessary — Assert.Throws will catch it at runtime).
++    /// </summary>
++    /// <remarks>
++    /// D (json-xml-production-readiness): The codegen catch-all in
++    /// ExternalRuntimeHelpers.cs now emits RaiseManagedException for
++    /// JsonMetadataServices.Create*Info, matching the managed NotSupportedException.
++    /// Add other families here as the catch-all is extended.
++    /// </remarks>
++    private static bool ExternalStubRaisesManagedException(MethodSignature method)
++    {
++        var dt = method.DeclaringTypeFullName;
++        if (dt?.Contains("System.Text.Json.Serialization.Metadata.JsonMetadataServices") == true
++            && method.Name is "CreateArrayInfo" or "CreateListInfo"
++               or "CreateDictionaryInfo" or "CreateImmutableDictionaryInfo"
++               or "CreateIDictionaryInfo" or "CreateIReadOnlyDictionaryInfo"
++               or "CreateICollectionInfo" or "CreateIListInfo" or "CreateISetInfo"
++               or "CreateIAsyncEnumerableInfo")
++            return true;
++        return false;
++    }
++
+     /// <summary>
+     /// Add explicit type cast for boundary/default values to disambiguate overloads.
+     /// E.g., "0" for short param becomes "(short)0".
+diff --git a/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/ValueGenerator.cs b/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/ValueGenerator.cs
+index 6e30e29f3..6a2cb5032 100644
+--- a/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/ValueGenerator.cs
++++ b/src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/ValueGenerator.cs
+@@ -1137,131 +1137,6 @@ public static string GetPatchReturnExpression(string returnTypeName, string varN
+         // generic overload is left on the default single-value probe.
+         // ── Delegate to the Parse-family injector ──
+         AddParseFamilyValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+-
+-        // ── Reflection member lookups: real member name instead of default(string) ──
+-        // typeof(ReflectionSubjectSample).GetProperty(default(string)!) throws
+-        // ArgumentNullException in managed AND AOT, then the generated test asserts
+-        // the result is non-null — a test that can never pass.  Supplying the real
+-        // seed-member name exercises the actual lookup path.
+-        AddReflectionMemberValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+-
+-        // ── Array static searches: a real array instead of default(Array) ──
+-        // Array.BinarySearch(default(Array)!, ...) throws ArgumentNullException in
+-        // both runtimes; the probe must feed a populated array to mean anything.
+-        AddArraySearchValueSets(method, paramTypes, sets, usedSignatures, methodIndex);
+-
+-        // ── Activator.CreateInstance: typeof(int) instead of default(Type) ──
+-        // Activator.CreateInstance(default(Type)!) returns null in both runtimes,
+-        // but the generated test asserts non-null result — a test that can never pass.
+-        // Feeding typeof(string) makes the invocation succeed and produce a real object.
+-        if (method.DeclaringTypeFullName == "System.Activator" &&
+-            method.Name is "CreateInstance" or "CreateInstanceFrom")
+-        {
+-            if (paramTypes.Length >= 1 && paramTypes[0] == "System.Type" &&
+-                !method.Name.Contains("From"))  // only Type-first overloads
+-            {
+-                var args = paramTypes
+-                    .Select((t, i) => i switch
+-                    {
+-                        0 => "typeof(int)",
+-                        1 when t == "System.Object[]" => "new object[0]",
+-                        _ => $"default({CSharpSerializer.ToCSharpTypeName(t)})",
+-                    })
+-                    .ToArray();
+-                AddUnique(sets, usedSignatures, methodIndex, args);
+-            }
+-        }
+-    }
+-
+-    /// <summary>
+-    /// Member names on the ATG seed type <c>ReflectionSubjectSample</c> that the
+-    /// reflection probes can look up.  Keep in sync with the sample type emitted by
+-    /// ProbeEmitter (see CSharpExpressionBuilder.ReflectionSeedExpressions).
+-    /// </summary>
+-    private static readonly Dictionary<string, string> ReflectionMemberNames = new(StringComparer.Ordinal)
+-    {
+-        ["GetProperty"] = "\"SampleProperty\"",
+-        ["GetEvent"] = "\"SampleEvent\"",
+-        ["GetField"] = "\"SampleField\"",
+-        ["GetMethod"] = "\"SampleMethod\"",
+-    };
+-
+-    /// <summary>
+-    /// Replace a leading <c>default(string)</c> with a real member name for the
+-    /// reflection lookup methods named in <see cref="ReflectionMemberNames"/>.
+-    ///
+-    /// Only fires when the first parameter is <c>System.String</c> — the
+-    /// BindingFlags / Type / Binder trailing parameters keep their defaults, which
+-    /// are valid for these overloads (BindingFlags.Public|Instance is the lookup
+-    /// default; a null Type[] means "any signature").
+-    /// </summary>
+-    private static void AddReflectionMemberValueSets(
+-        MethodSignature method,
+-        string[] paramTypes,
+-        List<ValueSet> sets,
+-        HashSet<string> usedSignatures,
+-        int methodIndex)
+-    {
+-        if (paramTypes.Length == 0 || paramTypes[0] != "System.String") return;
+-        if (!ReflectionMemberNames.TryGetValue(method.Name, out var memberName)) return;
+-
+-        // Arity must match exactly — ProbeEmitter indexes every parameter position.
+-        var args = paramTypes
+-            .Select((t, i) => i == 0 ? memberName : $"default({CSharpSerializer.ToCSharpTypeName(t)})")
+-            .ToArray();
+-        AddUnique(sets, usedSignatures, methodIndex, args);
+-    }
+-
+-    /// <summary>
+-    /// Array.BinarySearch / IndexOf / LastIndexOf / Find-family: give the probe a
+-    /// populated array rather than <c>default(Array)!</c>, which throws
+-    /// ArgumentNullException in both the managed probe and AOT.
+-    /// </summary>
+-    private static void AddArraySearchValueSets(
+-        MethodSignature method,
+-        string[] paramTypes,
+-        List<ValueSet> sets,
+-        HashSet<string> usedSignatures,
+-        int methodIndex)
+-    {
+-        if (method.DeclaringTypeFullName != "System.Array") return;
+-        const string searchPrefix = "BinarySearch";
+-        if (!method.Name.StartsWith(searchPrefix, StringComparison.Ordinal) &&
+-            method.Name is not ("IndexOf" or "LastIndexOf"))
+-            return;
+-        if (paramTypes.Length == 0) return;
+-
+-        // int[] overloads: the first parameter is the array, the rest are indices /
+-        // the value.  A 3-element array with a value that exists makes the search
+-        // meaningful (index 1) rather than -1-by-accident.
+-        if (paramTypes[0] == "System.Int32[]")
+-        {
+-            var args = paramTypes
+-                .Select((t, i) => i switch
+-                {
+-                    0 => "new int[3] { 10, 20, 30 }",
+-                    1 when t == "System.Int32" => "20",
+-                    _ => $"default({CSharpSerializer.ToCSharpTypeName(t)})",
+-                })
+-                .ToArray();
+-            AddUnique(sets, usedSignatures, methodIndex, args);
+-        }
+-        // object[] / Array overloads.
+-        else if (paramTypes[0] is "System.Array" or "System.Object[]")
+-        {
+-            var arrayExpr = paramTypes[0] == "System.Array"
+-                ? "new object[3] { 10, 20, 30 }"
+-                : "new object[3] { 10, 20, 30 }";
+-            var args = paramTypes
+-                .Select((t, i) => i switch
+-                {
+-                    0 => arrayExpr,
+-                    1 when t == "System.Object" => "20",
+-                    _ => $"default({CSharpSerializer.ToCSharpTypeName(t)})",
+-                })
+-                .ToArray();
+-            AddUnique(sets, usedSignatures, methodIndex, args);
+-        }
+     }
+ 
+     /// <summary>

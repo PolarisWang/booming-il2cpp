@@ -1,0 +1,32 @@
+
+CHUNK                                                     F_tot  F_nom  real  unassert  smoke?  fail  real%   B_okB_stub   HU_semHU_pch   GATE
+----------------------------------------------------------------------------------------------------------------------------------------------
+System.Collections.Immutable/global-ns                       32    32     0        4      28     0   0.0%      0    0        0     0   FAIL
+System.IO.Compression.ZipFile/global-ns                     140   140     0        0     140     0   0.0%      0    0        0     0   FAIL
+System.Net.ServerSentEvents/global-ns                         4     4     0        4       0     0   0.0%      0    0        0     0   FAIL
+System.Net.Sockets/system-net-sockets                       537   536     0      192     344     1   0.0%      0    0        0     0   FAIL
+System.ObjectModel/global-ns                                 10    10     0        3       7     0   0.0%      0    0        0     0   FAIL
+System.Private.CoreLib/system                              3779  3779  1405      275    2099     0  37.2%      0    0        0     0   PASS
+System.Private.CoreLib/text                                 801   801   191        0     610     0  23.8%    801    0        0     0   PASS
+System.Private.CoreLib/text-2                               801   801   191        0     610     0  23.8%    801    0        0     0   PASS
+System.Private.Xml/system-xml-serialization                 156   156    67        0      89     0  42.9%    156    0        0     0   PASS
+System.Private.Xml/system-xml-xsl                           250   250     2        0     248     0   0.8%      0    0        0     0   FAIL
+System.Private.Xml/xml                                     1147  1147    72        0    1075     0   6.3%   1147    0        0     0   PASS
+System.Reflection.Metadata/global-ns                         49    49     4        0      45     0   8.2%     49    0        0     0   PASS
+System.Reflection.Metadata/system-reflection-metadata       404   404    31        0     373     0   7.7%    404    0        0     0   PASS
+System.Reflection.Metadata/system-reflection-metadata-ecma335    334   334    92        0     242     0  27.5%    334    0        0     0   PASS
+System.Runtime.InteropServices/global-ns                     34    33     8        0      25     1  23.5%      0    0        0     0   PASS
+System.Runtime.Serialization.Formatters/global-ns            84    84     3        0      81     0   3.6%     84    0        0     0   FAIL
+System.Security.Claims/global-ns                             43    43     7        0      36     0  16.3%      0    0        0     0   PASS
+System.Security.Cryptography/security-cryptography         1262  1261   178        0    1083     1  14.1%      0    0        0     0   PASS
+System.Security.Cryptography/system-security-cryptography-x509certificates    302   302    59        0     243     0  19.5%    302    0        0     0   PASS
+System.Security.Principal.Windows/global-ns                  43    43     5        0      38     0  11.6%     43    0        0     0   PASS
+System.Text.Json/global-ns                                   34    34     0        0      34     0   0.0%      0    0        0     0   FAIL
+System.Text.Json/system-text-json-serialization-converters     96    96    10        0      86     0  10.4%     96    0        0     0   PASS
+System.Text.Json/text-json                                  312   311     4        0     307     1   1.3%      0    0        0     0   FAIL
+System.Threading.Tasks.Parallel/global-ns                   107   107     6        0     101     0   5.6%    107    0        0     0   PASS
+----------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                   10761 10757 2335     478  79444            4324    0       0     0  gated_b=9  gated_hu=9
+
+Gate ratio threshold: 0.05  |  Gated chunks: 9
+  gated list: System.Collections.Immutable/global-ns, System.IO.Compression.ZipFile/global-ns, System.Net.ServerSentEvents/global-ns, System.Net.Sockets/system-net-sockets, System.ObjectModel/global-ns, System.Private.Xml/system-xml-xsl, System.Runtime.Serialization.Formatters/global-ns, System.Text.Json/global-ns, System.Text.Json/text-json

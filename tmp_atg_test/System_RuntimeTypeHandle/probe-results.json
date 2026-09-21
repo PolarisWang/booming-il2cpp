@@ -1,0 +1,41 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::FromIntPtr:System.RuntimeTypeHandle(System.IntPtr)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.RuntimeTypeHandle",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::ToIntPtr:System.IntPtr(System.RuntimeTypeHandle)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.IntPtr",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.RuntimeTypeHandle::GetModuleHandle:System.ModuleHandle()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.ModuleHandle",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

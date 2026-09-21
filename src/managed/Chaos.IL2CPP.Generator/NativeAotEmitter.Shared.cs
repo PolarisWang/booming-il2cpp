@@ -904,6 +904,9 @@ public sealed partial class NativeAotEmitter
         // may emit the same externally-visible function (e.g. generic instantiation
         // stubs that collapse to the same chaos_stub_definition_*), causing C2084.
         var seenDefinitions = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
+        // Duplicate-definition body skipping state (see the _fnSig check below).
+        bool _skippingDupDefinition = false;
+        int _skipDupDefinitionDepth = 0;
         foreach (string _line in content.Split('\n'))
         {
             string _t = _line.Trim();
@@ -956,8 +959,29 @@ public sealed partial class NativeAotEmitter
                 {
                     string _fnSig = _t.Substring(0, _parenPos).TrimEnd();
                     if (!seenDefinitions.Add(_fnSig))
+                    {
+                        // Duplicate definition: skip the signature AND its whole
+                        // body block.  Skipping only the signature line left a
+                        // naked `{ body }` (C2447 missing function header) — the
+                        // AreEqual<ref-type> instantiation stubs hit exactly that
+                        // once reflection types entered the closure as generic
+                        // arguments.  Track brace depth until the body closes.
+                        _skipDupDefinitionDepth = 0;
+                        _skippingDupDefinition = true;
                         continue;
+                    }
                 }
+            }
+            if (_skippingDupDefinition)
+            {
+                foreach (var ch in _line)
+                {
+                    if (ch == '{') _skipDupDefinitionDepth++;
+                    else if (ch == '}') _skipDupDefinitionDepth--;
+                }
+                if (_skipDupDefinitionDepth <= 0)
+                    _skippingDupDefinition = false;
+                continue;
             }
             sb.AppendLine(_line);
         }

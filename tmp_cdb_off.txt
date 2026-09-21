@@ -1,0 +1,3 @@
+sxe -c ".echo FAULT; r rip; g" av
+g
+q

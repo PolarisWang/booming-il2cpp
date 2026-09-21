@@ -268,6 +268,32 @@ inline MethodTable* TypeInfoHot::AsMethodTable() noexcept {
 // exactly one encoding, eliminating tag-bit collisions and handle identity bugs.
 // ═══════════════════════════════════════════════════════════════════════════
 
+// ═══════════════════════════════════════════════════════════════════════════
+// Exception type table — compile-time "fully-qualified name -> MethodTable"
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Generated code emits `kChaosExceptionTypes[]` (plus `kChaosExceptionTypeCount`)
+// listing every exception type the module can throw, together with the address
+// of its MethodTable — a symbol that already exists in the same translation unit.
+//
+// Why the runtime needs it: RaiseManagedException() must build a managed
+// exception object with the right runtime type.  Its only lookup path used to be
+// the reflection query image, which never contains exception types (they are
+// only *thrown*, never lowered), so the lookup returned 0 and the runtime raised
+// a NULL exception object that no catch clause could ever match.
+//
+// Names are stored WITHOUT the assembly prefix (e.g. "System.ObjectDisposedException"),
+// matching the string RaiseManagedException is called with.
+struct ChaosExceptionTypeEntryV0 {
+    const char* name; // fully-qualified type name, no assembly prefix
+    /// Address of the ReflectionQueryTypeDescriptor emitted alongside this entry.
+    /// The runtime turns it into a TypeInfoHandle via
+    /// EncodeReflectionQueryTypeHandle() (a tag-bit + pointer encoding), which
+    /// ResolveTypeDescriptor() resolves WITHOUT needing a module id or metadata
+    /// token — neither of which an exception type has.
+    const void*  type_descriptor;
+};
+
 }  // namespace chaos::il2cpp::common
 
 using namespace chaos::il2cpp::common;

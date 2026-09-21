@@ -214,6 +214,13 @@ chaos_native_add_test(test_gc_raw_key_relocation
     LABELS "unit;gc"
 )
 
+# gc_gen1_crossgen_ref_test — 跨代引用在 Gen1 搬移后的正确性（端到端验证）
+# (docs/dev/completed/20260920-02-raw-pointer-key-state-tables)
+chaos_native_add_test(test_gc_gen1_crossgen_ref
+    gc_gen1_crossgen_ref_test.cpp ${CHAOS_GC_BASE}
+    LABELS "unit;gc"
+)
+
 # gc_finalizer_test — Finalizer registration + execution
 chaos_native_add_test(test_gc_finalizer
     gc_finalizer_test.cpp ${CHAOS_GC_BASE}

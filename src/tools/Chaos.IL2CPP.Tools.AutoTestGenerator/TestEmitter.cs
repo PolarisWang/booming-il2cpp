@@ -729,6 +729,64 @@ public sealed class TestEmitter
         set.ArgumentExpressions.Any(a =>
             a.StartsWith("default(", StringComparison.Ordinal) && a.TrimEnd().EndsWith("!"));
 
+    /// <summary>
+    /// True when the (declaring type, method) has a known native reflection
+    /// implementation (ApiSurfaceScanner Classifier.KnownNativeImpls).  For
+    /// these methods the AOT body calls the real native symbol — the managed
+    /// probe's recorded exception is the REAL contract (BCL behavior), so the
+    /// generated subject must assert the throw instead of emitting the
+    /// AOT-STUB-GAP `return 42L` marker that hides the implementation.
+    /// </summary>
+    private static bool HasKnownNativeImpl(MethodSignature method)
+    {
+        var declaring = method.DeclaringTypeFullName;
+        if (string.IsNullOrEmpty(declaring)) return false;
+        var lastDot = declaring.LastIndexOf('.');
+        var bareType = lastDot >= 0 ? declaring[(lastDot + 1)..] : declaring;
+        var memberName = method.Name;
+        foreach (var key in Chaos.IL2CPP.Tools.ApiSurfaceScanner.Classifier.KnownNativeImpls.Keys)
+        {
+            var dot = key.IndexOf('.');
+            if (dot < 0) continue;
+            if (!string.Equals(key[..dot], bareType, StringComparison.Ordinal)) continue;
+            var keyMember = key[(dot + 1)..];
+            if (string.Equals(keyMember, memberName, StringComparison.Ordinal)) return true;
+            // Accessor normalization: KnownNativeImpls is written from the
+            // contract viewpoint ("get_Name"); the probe records bare names.
+            if (keyMember.StartsWith("get_", StringComparison.Ordinal) && keyMember[4..] == memberName) return true;
+            if (keyMember.StartsWith("set_", StringComparison.Ordinal) && keyMember[4..] == memberName) return true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Methods that are structurally impossible in AOT (runtime dynamic
+    /// assembly loading, Binder abstract dispatch) â classified as
+    /// not-supported per the three-tier system.  The AOT catch-all raises,
+    /// so the generated subject asserts a throw (catch-any â the exact
+    /// exception type depends on the runtime entry).
+    /// </summary>
+    private static readonly HashSet<string> AotNotSupportedMethods = new(StringComparer.Ordinal)
+    {
+        "Assembly.Load", "Assembly.LoadFile", "Assembly.LoadFrom",
+        "Assembly.UnsafeLoadFrom", "Assembly.ReflectionOnlyLoad",
+        "Assembly.ReflectionOnlyLoadFrom", "Assembly.ReflectionOnlyLoadFrom_",
+        "Assembly.LoadModule", "Assembly.LoadWithPartialName",
+        "Assembly.CreateInstance", "Assembly.GetSatelliteAssembly",
+        "Assembly.CreateInstance_",
+        "Binder.BindToField", "Binder.BindToMethod", "Binder.SelectMethod",
+        "Binder.SelectProperty", "Binder.ChangeType", "Binder.ReorderArgumentArray",
+    };
+
+    private static bool IsAotNotSupported(MethodSignature method)
+    {
+        var declaring = method.DeclaringTypeFullName;
+        if (string.IsNullOrEmpty(declaring)) return false;
+        var lastDot = declaring.LastIndexOf('.');
+        var bareType = lastDot >= 0 ? declaring[(lastDot + 1)..] : declaring;
+        return AotNotSupportedMethods.Contains(bareType + "." + method.Name);
+    }
+
     private void AppendAssert(StringBuilder sb, int mi, MethodSignature method, ValueSet set,
         ProbeResult? result, string callExpr, bool hasRefParam, bool hasAnyValidSet,
         bool isExternalAssembly, bool isPlainTask, bool isGenericTask)
@@ -746,16 +804,29 @@ public sealed class TestEmitter
             // "both sides throw" contract the caller actually depends on.
             if (isExternalAssembly && ExternalStubRaisesManagedException(method))
             {
-                // External stub that SHOULD throw but AOT body doesn't: catch any
-                // throw (if one happens) or fail with a bare throw if nothing was
-                // thrown.  We use a raw try/catch instead of Assert.ThrowsAny<>
-                // because Assert.Fail returns void and triggers C3313 in the
-                // generated C++ (const void chaos_result = Assert.Fail()).  A bare
-                // `throw` here translates to CHAOS_EH_THROW at runtime and hits
-                // the subject's enclosing catch, producing a real failed result.
+                // External stub that SHOULD throw, and whose AOT body now reproduces
+                // the managed exception (the shape must be registered first — see
+                // memory shape-registration-must-be-verified-by-generated-symbols).
+                //
+                // Assert BOTH halves with a raw try/catch instead of Assert.ThrowsAny<>:
+                //   - the expected exception type is thrown (typed catch)
+                //   - nothing else is, and it does not silently return
+                // Assert.Fail is avoided because it returns void and triggers C3313 in
+                // the generated C++ (const void chaos_result = Assert.Fail()); a bare
+                // `throw` translates to CHAOS_EH_THROW and hits the subject's enclosing
+                // catch, producing a real failed result.
+                //
+                // The typed catch is what makes this a real check rather than a smoke
+                // test: `catch { }` passed for ANY exception (and for a catch-all helper
+                // that merely returns 0, the self-thrown sentinel below made it pass
+                // too).  Measured on the JSON/XML line, the typed form surfaced 27
+                // subjects that had been silently passing; see
+                // void-writer-sideeffect-assertion/notes-stepA-spike2.md.
                 if (!hasRefParam)
                     sb.AppendLine(
-                        "            try { " + callExpr + @"; throw new System.Exception(""AOT stub did not throw""); } catch { }");
+                        "            try { " + callExpr + @"; throw new System.Exception(""AOT stub did not throw""); }" +
+                        $" catch ({result.ExceptionType}) {{ }}" +
+                        @" catch { throw new System.Exception(""wrong exception type""); }");
                 else
                     sb.AppendLine($"            // [smoke] {result.ExceptionType} thrown by {callExpr} (ref/out param cannot wrap in lambda)");
                 return;
@@ -764,7 +835,21 @@ public sealed class TestEmitter
             // Un-reproduced external stub: keep the [UNVERIFIED] skip.  The stub
             // returns default instead of throwing, so an Assert.Throws here would
             // fail against correct AOT code.
-            if (isExternalAssembly)
+            // S1 (reflection-final): methods with a known native implementation
+            // must NOT get the AOT-STUB-GAP marker — their AOT body calls the
+            // real native symbol, so the recorded exception is the real
+            // contract and must be asserted (falls through to the Throws
+            // emission below).  The marker stays only for methods the
+            // Classifier maps to no native symbol.
+            // S1: AOT-not-supported methods (dynamic loading, Binder) raise via
+            // the catch-all â assert the throw instead of emitting the marker.
+            if (isExternalAssembly && !HasKnownNativeImpl(method) && IsAotNotSupported(method))
+            {
+                if (!hasRefParam)
+                    sb.AppendLine($"            Assert.Throws(() => {callExpr});");
+                return;
+            }
+            if (isExternalAssembly && !HasKnownNativeImpl(method))
             {
                 // P0-B (json-xml-production-readiness): emit an explicit machine-
                 // readable marker in addition to the human comment.  The fact layer
@@ -787,7 +872,13 @@ public sealed class TestEmitter
                 // avoids false-positive passes: if ALL inputs (including non-null
                 // ones) crash with NRE/ANE, the method is fundamentally broken in
                 // AOT, and a Throws<NRE> test would pass by coincidence only.
-                if (!hasAnyValidSet)
+                // S1 (reflection-final): for methods with a known native
+                // implementation, the AOT null-guard raising NRE is the
+                // deterministic contract (the receiver was supplied by the
+                // real-instance factory, not an uninitialized artifact), so
+                // Assert.Throws is a real test — keep it even when all value
+                // sets fail.  The smoke skip stays for unmapped methods.
+                if (!hasAnyValidSet && !HasKnownNativeImpl(method))
                 {
                     var nullRelated = exType == "System.NullReferenceException" ||
                                       exType == "System.ArgumentNullException";

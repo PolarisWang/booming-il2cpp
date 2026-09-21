@@ -1,0 +1,96 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "managedClosureManifest",
+  "assemblyName": "CombinedSubjects",
+  "entrySubjectId": "",
+  "inputAssemblyPath": "artifacts/foundation-dll/System.Private.Xml/chunks/xml/managed/CombinedSubjects.dll",
+  "additionalAssemblyPaths": [
+    "artifacts/foundation-dll/System.Private.Xml/chunks/xml/managed/Chaos.TestFramework.Sdk.dll"
+  ],
+  "resolvedAssemblies": [
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "path": "artifacts/foundation-dll/System.Private.Xml/chunks/xml/managed/Chaos.TestFramework.Sdk.dll"
+    },
+    {
+      "assemblyName": "CombinedSubjects",
+      "path": "artifacts/foundation-dll/System.Private.Xml/chunks/xml/managed/CombinedSubjects.dll"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
+    },
+    {
+      "assemblyName": "System.Console",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Console.dll"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
+    },
+    {
+      "assemblyName": "System.Threading",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Threading.dll"
+    },
+    {
+      "assemblyName": "System.Xml.ReaderWriter",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Xml.ReaderWriter.dll"
+    },
+    {
+      "assemblyName": "System.Xml.XPath",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Xml.XPath.dll"
+    }
+  ],
+  "fullAssemblyClosure": true,
+  "inputModuleVersionId": "f966f998-7a47-419d-9eed-e107669ae482",
+  "artifacts": [
+    {
+      "kind": "typedIlIr",
+      "path": "typed-il-ir.json"
+    },
+    {
+      "kind": "aotCoreIr",
+      "path": "aot-core-ir.json"
+    },
+    {
+      "kind": "aotManifest",
+      "path": "aot-manifest.json"
+    },
+    {
+      "kind": "metadataRegistration",
+      "path": "metadata-registration.json"
+    },
+    {
+      "kind": "supplementalMetadataTemplate",
+      "path": "hot-update/supplemental-metadata-template.json"
+    },
+    {
+      "kind": "codeRegistration",
+      "path": "code-registration.json"
+    },
+    {
+      "kind": "genericInstantiationDemandGraph",
+      "path": "generic-instantiation-demand-graph.json"
+    },
+    {
+      "kind": "genericCapabilityMatrix",
+      "path": "generic-capability-matrix.json"
+    },
+    {
+      "kind": "optimizationFacts",
+      "path": "optimization-facts.json"
+    },
+    {
+      "kind": "preserveDescriptor",
+      "path": "preserve-descriptor.json"
+    },
+    {
+      "kind": "nativeReferenceLoweringPlan",
+      "path": "native-reference.lowering-plan.json"
+    },
+    {
+      "kind": "nativeAotLoweringPlan",
+      "path": "native-aot.lowering-plan.json"
+    }
+  ]
+}

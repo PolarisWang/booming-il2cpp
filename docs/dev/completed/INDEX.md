@@ -33,3 +33,4 @@
 | [foundation-dll-sdk-cleanup](foundation-dll-sdk-cleanup/STATUS.md) | 7 | 05/24 | SDK 输出清理 — 分发逻辑下沉到 runtime header, Python 生成 entry, pipeline 简化 |
 | [20260920-01-ctor-handle-abi-fix](20260920-01-ctor-handle-abi-fix/STATUS.md) | 7 | 09/20 | ctor native 句柄 ABI 修复 — 句柄式 stub 家族（XML pass 570→590, 20 改善 / 0 回退, 产物 diff 门通过） |
 | [20260920-02-raw-pointer-key-state-tables](20260920-02-raw-pointer-key-state-tables/STATUS.md) | 4 | 09/20 | GC 快路径漏调 RelocateGen1References（cross-gen UAF）+ 裸指针键表搬迁维护（pin_set / g_stream_state）；装置 3/3 通过 |
+| [20260920-03-void-writer-sideeffect-assertion](20260920-03-void-writer-sideeffect-assertion/STATUS.md) | 3 | 09/20 | void 方法可验证化 — typed catch 实施（unassertable 33→3）；附带修 5 项 shape 静默失配；揭露 JSON writer 零写入实现 |

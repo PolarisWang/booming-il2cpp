@@ -1,0 +1,15 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Exception",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

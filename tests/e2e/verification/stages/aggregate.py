@@ -547,8 +547,12 @@ def run_aggregate(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageRes
                 # gap, NOT a correctness failure — the methods that ran all passed.
                 # Report it as a distinct coverage indicator, not a SEVERE error.
                 chunks_with_coverage_gap += 1
+                # ⚠️ 措辞注意：`passed` 含 stubGap/smoke（未执行或无断言），
+                # 故不能写成 "all N that ran passed" —— 那些没 run。
+                _real_passed = fact.get("realPassed", 0)
                 print(f"  [aggregate] COVERAGE-GAP: {chunk_slug} only {total}/{meta} methods dispatchable "
-                      f"({gap_ratio:.0%} not AOT-lowered); all {passed}/{total} that ran passed")
+                      f"({gap_ratio:.0%} not AOT-lowered); {_real_passed}/{total} real-verified"
+                      f" (nominal {passed}/{total} passed, incl. non-executing stubs)")
             else:
                 chunks_with_meta_mismatch += 1
                 print(f"  [aggregate] ERROR: {chunk_slug} fact total={total} != {meta_label}={meta} (gap={gap}, {gap_ratio:.1%})")

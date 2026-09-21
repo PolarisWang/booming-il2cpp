@@ -1,0 +1,155 @@
+# JSON / XML 工业化 — STATUS
+
+```yaml
+task_id: json-xml-industrialization
+task_type: roadmap
+phase: "Phase 0 完成 → Phase 1"
+lifecycle_status: in-progress
+current_dir: docs/dev/in-progress/json-xml-industrialization
+创建日期: 2026-09-20
+entry_skill: dev-il2cpp → dev-brainstorm → dev-roadmap
+parent_task_id: null
+
+roadmap_or_plan: roadmap-v2-01.md
+上游基线: docs/dev/review/json-xml-industrialization-gap-2026-09-20.md（本日实测）
+前身: docs/dev/in-progress/json-xml-production-readiness/roadmap-v1-01.md
+关键文档:
+  - phase0-findings.md      # Phase 0 的 7 项发现（含 2 处自我纠错）
+  - phase0-report.md        # Phase 0 交付报告
+  - api-coverage-matrix-v2.json  # 覆盖矩阵产物
+
+blocking_questions: []
+question_clearance: cleared
+clearance_confirmed_by_user: true
+dispatch_model: hybrid
+child_execution_mode: auto
+auto_continue: true
+auto_stop_policy: blocking-only
+merge_granularity: 阶段边界
+recommended_next_child: P1-01
+```
+
+## Phase 0 完成结论（2026-09-20）
+
+**提交**：`0262d6873`
+
+### 硬指标
+
+**矩阵从 100% unclassified → 0% unclassified。**
+
+| 档位（按方法重载数，分母 1603） | 数量 | 占比 |
+|:--------------------------------|:----:|:----:|
+| **real** | **238** | **14.8%** |
+| not-covered | 652 | 40.7% |
+| unassertable | 211 | 13.2% |
+| stub | 202 | 12.6% |
+| failed | 122 | 7.6% |
+| smoke | 98 | 6.1% |
+| factory-gap | 70 | 4.4% |
+| **fake-green** | **10** | 0.6% |
+
+**`real 14.8%` 与实测 `realVerified 14.4%` 同量级** —— 两个独立口径互相印证。
+
+### 分母口径（用户拍板）
+
+ref-pack 8.0.11 的 public API（System.Text.Json 312 + System.Xml.ReaderWriter 442）
++ shared 8.0.11 的 System.Private.Xml（849，ref-pack 无此程序集）= **1603**。
+
+### Phase 0 挖出的关键问题（7 项发现）
+
+1-2. manifest 不含 `JsonSerializer`；fact 与 manifest 无法直接 join（0%）
+3. `passed` 包含 `stubGap` 的机制**已代码级确认**（`fact_chunk.py:139`）
+4. **量化**：manifest 缺 1 个类型 = 漏 42% 测试对象
+5-6. **根因**：现有 manifest 扫的是含 internal 的实现程序集；ref-pack 才是纯 public
+7. 分布高度不均 → 禁用「类型覆盖率」
+
+### 执行中的两处自我纠错
+
+- **类型名规范化**：早期「去重复段」启发式产出 `System.Private.Xml.System.Xml.NameTable`
+  （多一层前缀）→ 改用「按首个 `.` 切分丢弃 assembly 段」
+- **聚合口径**：按方法名键统计会把 213 条 real 坍缩成 17 个键 → 改为双口径
+
+### 已知局限（随产物引用）
+
+- 映射为方法名级**不含参数** → 覆盖率为**下限估计**
+- `not-covered 40.7%` **不等于未实现**（含从未生成测试的 API）
+- 分母中四成 API 从未进入验证范围 → **可能低估工作量**，Phase 4 重估
+
+## 下一步入口
+
+**Phase 1（假绿清零）**：修复三个口径陷阱 + 消除 `passed` 虚高。
+估算 1 会话。
+
+## 边界拍板
+
+**覆盖**：`System.Text.Json`(486) / `System.Private.Xml`(849) / `System.Xml.ReaderWriter`(442)
+的 public method 面。
+
+**非目标**：不追求 100% real；不重构 `ExternalRuntimeFallback`；不为凑覆盖率加无断言 smoke；
+**不并行跑同一个 chunk**。
+
+## authority 决策
+
+| 决策 | 结论 | 来源 |
+|:-----|:-----|:-----|
+| 终端数 | **1 个 + Workflow** | 用户拍板 |
+| 起点 | **先建度量**（Phase 0） | 用户拍板 |
+| v1 roadmap | **演进为 v2**（保留 v1 作参考） | 用户拍板 |
+| 合回粒度 | **阶段边界** | 用户拍板 |
+
+## 当前结论
+
+### 基线（本日实测，非历史快照）
+
+5 个可跑 chunk 合计：`total=1478, realVerified=213 (14.4%), stubGap=756 (51.2%)`。
+
+| chunk | total | realVerified | stubGap |
+|:------|:-----:|:------------:|:-------:|
+| Xml/xml | 746 | 136 (18.2%) | 185 |
+| Xml/serialization | 138 | 63 (45.7%) | 68 |
+| Xml/xsl | 251 | 4 (1.6%) | 246 |
+| Json/text-json | 247 | 2 (0.8%) | 177 |
+| Json/converters | 96 | 8 (8.3%) | 80 |
+
+### 阶段划分（6 阶段，17-24 会话）
+
+| Phase | 目标 | 估算 |
+|:-----:|:-----|:----:|
+| 0 | 度量基建（矩阵 unclassified <10%） | 1-2 |
+| 1 | 假绿清零 + 三口径修复 | 1 |
+| 2 | P0 核心 API（realVerified >60%） | 4-6 |
+| 3 | stubGap 收敛（<10%） | 6-8 |
+| 4 | failed 对账 + 未跑 chunk | 3-4 |
+| 5 | 性能 + 语义 + 归档 | 2-3 |
+
+## 风险评估摘要
+
+| 风险 | 等级 | 缓解 |
+|:-----|:----:|:-----|
+| **artifacts 并发污染** | 🔴 高 | §5.2 红线：不并行跑同 chunk + 三条判据 |
+| 估算误差（外推） | 🟡 中 | Phase 0 后用真标尺重估 |
+| stubGap 藏真缺陷 | 🟡 中 | Phase 4 强制对账 |
+| 单终端吞吐 | 🟢 低 | 用 Workflow 补并行调查 |
+| `global-ns` 跑失败 | 🟡 中 | Phase 4 处理（已排除与本日修复相关） |
+
+## 调度设计要点（本 roadmap 核心）
+
+**单终端下 workflow + worktree 的语义与多终端不同**：
+
+- **Workflow** = agent 级并行（**共享工作树**）→ 只能做只读调查/分析
+- **worktree** = 隔离高风险实验，**不是**并行开发手段
+
+**最佳 Workflow 落点**：Phase 0（并行扫 chunk 数据）、Phase 4（并行对账 failed）——
+均为纯调查，无共享写入。
+
+**必须串行**：Phase 2/3 的实现（改共享源文件）、任何 pipeline 运行。
+
+## 未验证 / 诚实标注
+
+- 估算是基于 5 个 chunk **外推**到 8 chunk + 3 assembly，**非精确度量**
+- 未纳入 `System.Xml.ReaderWriter`(442) 实测 —— 可能显著改变总量
+- Phase 0 完成后应**重估**后续阶段
+
+## 下一步入口
+
+**Phase 0**：`dev-executing-plans` + Workflow（并行扫 chunk 数据建矩阵）

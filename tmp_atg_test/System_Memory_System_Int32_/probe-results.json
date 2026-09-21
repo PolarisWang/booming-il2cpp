@@ -1,0 +1,80 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Int32\u003E::Slice:System.Memory\u003CSystem.Int32\u003E(System.Int32)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Memory\u003CSystem.Int32\u003E",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Int32\u003E::Slice:System.Memory\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Memory\u003CSystem.Int32\u003E",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Int32\u003E::CopyTo:System.Void(System.Memory\u003CSystem.Int32\u003E)",
+    "isVoid": true,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": "System.Void",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Int32\u003E::TryCopyTo:System.Boolean(System.Memory\u003CSystem.Int32\u003E)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 4,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Int32\u003E::Pin:System.Buffers.MemoryHandle()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Buffers.MemoryHandle",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 5,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.Memory\u003CSystem.Int32\u003E::ToArray:System.Int32[]()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Int32[]",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

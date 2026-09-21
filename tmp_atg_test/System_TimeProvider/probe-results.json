@@ -1,0 +1,80 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeProvider::GetUtcNow:System.DateTimeOffset()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.DateTimeOffset",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeProvider::GetLocalNow:System.DateTimeOffset()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.DateTimeOffset",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeProvider::GetTimestamp:System.Int64()",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Int64",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeProvider::GetElapsedTime:System.TimeSpan(System.Int64,System.Int64)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.TimeSpan",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 4,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeProvider::GetElapsedTime:System.TimeSpan(System.Int64)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.TimeSpan",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 5,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeProvider::CreateTimer:System.Threading.ITimer(System.Threading.TimerCallback,System.Object,System.TimeSpan,System.TimeSpan)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Threading.ITimer",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeZone::GetUtcOffset:System.TimeSpan(System.DateTime)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.TimeSpan",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeZone::ToUniversalTime:System.DateTime(System.DateTime)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.DateTime",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeZone::ToLocalTime:System.DateTime(System.DateTime)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.DateTime",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeZone::GetDaylightChanges:System.Globalization.DaylightTime(System.Int32)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Globalization.DaylightTime",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 4,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeZone::IsDaylightSavingTime:System.Boolean(System.DateTime)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 5,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.TimeZone::IsDaylightSavingTime:System.Boolean(System.DateTime,System.Globalization.DaylightTime)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

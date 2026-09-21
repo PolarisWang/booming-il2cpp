@@ -1,0 +1,9 @@
+
+Microsoft (R) Windows Debugger Version 10.0.22621.2428 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+CommandLine: "" --fact-json
+Cannot execute '"" --fact-json', Win32 error 0n87
+    "The parameter is incorrect."
+Debuggee initialization failed, Win32 error 0n87
+The parameter is incorrect.

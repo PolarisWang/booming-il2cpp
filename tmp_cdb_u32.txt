@@ -1,0 +1,3 @@
+sxe -c ".echo AV; r rip; kb 2; g" av
+g
+q

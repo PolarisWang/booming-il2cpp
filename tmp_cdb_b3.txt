@@ -1,0 +1,5 @@
+.logopen /t D:\agent\chaos-il2cpp\tmp_cdb_p3.log
+x chaos_entry!chaos_reflection_get_parameters_b3*
+sxn av
+bp chaos_entry!chaos_reflection_get_parameters_b3 ".printf \"P3 h=%p\n\", @rcx; g"
+g

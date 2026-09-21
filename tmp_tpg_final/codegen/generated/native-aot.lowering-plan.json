@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "CombinedSubjects",
+  "entrySubjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::AreEqual:System.Void(System.Boolean,System.Boolean,System.String)",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_AreEqual_System_Boolean_System_Boolean_System_String",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

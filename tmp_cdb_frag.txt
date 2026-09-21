@@ -1,0 +1,3 @@
+sxe -c "g" av
+g
+q

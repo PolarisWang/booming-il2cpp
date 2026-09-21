@@ -617,6 +617,48 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return "System.Private.CoreLib/System.MulticastDelegate";
 		}
+
+		// ── Exception hierarchy ────────────────────────────────────────────
+		// Exception types never appear as an instruction TargetReference (they are
+		// only *thrown* by native stubs), so CollectReferenceTypeBaseSubjectIds
+		// cannot see them and every one of their MethodTables was emitted with
+		// parent == nullptr.  chaos_is_type_compatible walks that parent chain,
+		// so a broken chain means `catch (Exception)` cannot match a derived
+		// exception at all — the opposite of C# semantics.
+		//
+		// The chain below is measured against .NET 8/10 (see
+		// docs/dev/in-progress/aot-exception-type-resolution/design-analysis.md):
+		//   ObjectDisposedException     -> InvalidOperationException
+		//   InvalidOperationException   -> SystemException
+		//   ArgumentNullException       -> ArgumentException
+		//   ArgumentOutOfRangeException -> ArgumentException
+		//   OverflowException           -> ArithmeticException
+		//   everything else             -> SystemException
+		//   SystemException             -> Exception
+		string? baseName = subjectIdDisplayName switch
+		{
+			"System.ObjectDisposedException" => "System.InvalidOperationException",
+			"System.InvalidOperationException" => "System.SystemException",
+			"System.ArgumentNullException" => "System.ArgumentException",
+			"System.ArgumentOutOfRangeException" => "System.ArgumentException",
+			"System.ArgumentException" => "System.SystemException",
+			"System.OverflowException" => "System.ArithmeticException",
+			"System.ArithmeticException" => "System.SystemException",
+			"System.SystemException" => "System.Exception",
+			_ => null,
+		};
+		if (baseName != null)
+		{
+			return "System.Private.CoreLib/" + baseName;
+		}
+		// Any other exception type derives directly from SystemException, EXCEPT
+		// System.Exception itself (which derives from Object and is handled by the
+		// general object-model path when it appears as a real reference type).
+		if (subjectIdDisplayName.EndsWith("Exception", StringComparison.Ordinal) &&
+			!string.Equals(subjectIdDisplayName, "System.Exception", StringComparison.Ordinal))
+		{
+			return "System.Private.CoreLib/System.SystemException";
+		}
 		return null;
 	}
 

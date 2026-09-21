@@ -1203,6 +1203,20 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     fact_data = {
         "passed": passed,
         "total": total,
+        # ── 口径说明（机器可读；防止 `passed` 被误读为"验证通过"）──────
+        # `passed` 是**原生 runner 的运行结果**：只要没有 Assert.* 抛出就记 True。
+        # 因此 stubGap（ATG 写死 42L、从未调用 native）与 smoke（无断言）也会
+        # 计入 passed。**`passed` 不是品质指标。**
+        # 真正表达"执行了且断言通过"的字段是 `realVerified`。
+        #
+        # 实测虚高幅度（2026-09-20，JSON/XML 线）：
+        #   text-json          passed 209 vs realVerified   2  (104.5x)
+        #   system-xml-xsl     passed 251 vs realVerified   4  ( 62.8x)
+        #   json-converters    passed  94 vs realVerified   8  ( 11.8x)
+        #   xml                passed 590 vs realVerified 136  (  4.3x)
+        # 消费方若只需一个"可信通过数"，请用 `verifiedPassed` 或 `realVerified`。
+        "verifiedPassed": real_ct,
+        "passedIsNotVerification": True,
         # ── Runtime-derived real-vs-smoke (single source of truth) ──
         "realVerified": real_ct,        # value != 42: genuine assertion value
         "unassertable": unassertable_ct,  # void/async-void: 42 is structural

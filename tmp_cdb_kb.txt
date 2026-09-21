@@ -1,0 +1,6 @@
+sxe av
+g
+kb 200
+kP
+!analyze -v
+q

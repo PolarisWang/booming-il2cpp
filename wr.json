@@ -1,0 +1,1815 @@
+{
+  "total_count": 40,
+  "workflow_runs": [
+    {
+      "id": 34487378615,
+      "name": "Pipeline",
+      "node_id": "WFR_kwLOR0Bv-M8AAAAIB5uitw",
+      "head_branch": "main",
+      "head_sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+      "path": ".github/workflows/pipeline.yml",
+      "display_title": "Pipeline",
+      "run_number": 127,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflow_id": 349872732,
+      "check_suite_id": 93424607280,
+      "check_suite_node_id": "CS_kwDOR0Bv-M8AAAAVwIpgMA",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34487378615",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34487378615",
+      "pull_requests": [
+
+      ],
+      "created_at": "2026-09-10T14:11:08Z",
+      "updated_at": "2026-09-10T14:49:31Z",
+      "actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-server-smoke.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/publish-smoke.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-build.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/metadata-writer-unit.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/ubsan.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/arm64-jit.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-asan.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-unit.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codeql-stage.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codegen-unit.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/aot-smoke.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-stress.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hygiene.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/snapshot-unit.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hybrid-jit.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/native-integration.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-verify.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/clang-tidy-stage.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/style-csharp.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/provenance-archive.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-unit.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-dll.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-deploy.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-baseline-stage.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/secret-scan-stage.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-perf.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-linux-tsan.yml@abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "sha": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+          "ref": "refs/heads/main"
+        }
+      ],
+      "run_started_at": "2026-09-10T14:11:08Z",
+      "triggering_actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34487378615/jobs",
+      "logs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34487378615/logs",
+      "check_suite_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-suites/93424607280",
+      "artifacts_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34487378615/artifacts",
+      "cancel_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34487378615/cancel",
+      "rerun_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34487378615/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/workflows/349872732",
+      "head_commit": {
+        "id": "abae1a3d9533ba0f80a5c3f3c709d8b96263eb31",
+        "tree_id": "9f0ff61cf9d759558ec4b8eea32643feb9f50870",
+        "message": "fix(build): provision googletest for linux-x64-native and linux-x64-reference (M2-N1/ENG-35138)\n\nroot_cause: foundation-dll smoke on Linux compiles tests/unit/runtime-native\ngtest tests (gc_bit_utils, etc.), but neither linux-x64-native nor\nlinux-x64-reference branches in CMakeLists.txt provisioned googletest.  The\nbuild died with 'fatal error: gtest/gtest.h: No such file or directory' at the\nfirst gtest include in gc_bit_utils_test.cpp.\n\nThe windows-x64-reference branch had googletest (added when the CI round-7\ngtest_main.lib fix was applied), and linux-arm64-native also had it (added for\nthe ARM64 JIT test harness), but the two x64 Linux branches were overlooked.\n\nfix_strategy: add FetchContent googletest block (same URL_HASH as the Windows\nbranch, with gtest_force_shared_crt OFF for GCC) to both linux-x64-reference\nand linux-x64-native branches, before fmt or any subdirectory that transitively\ndepends on gtest.\n\nregression_check: same pattern as windows-x64-reference (line 77) and\nlinux-arm64-native (line 564) — confirmed working on those branches.",
+        "timestamp": "2026-09-10T14:09:41Z",
+        "author": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        },
+        "committer": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        }
+      },
+      "repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      },
+      "head_repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      }
+    },
+    {
+      "id": 34485489896,
+      "name": "Pipeline",
+      "node_id": "WFR_kwLOR0Bv-M8AAAAIB37Q6A",
+      "head_branch": "main",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "path": ".github/workflows/pipeline.yml",
+      "display_title": "Pipeline",
+      "run_number": 124,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflow_id": 349872732,
+      "check_suite_id": 93419216343,
+      "check_suite_node_id": "CS_kwDOR0Bv-M8AAAAVwDgd1w",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "pull_requests": [
+
+      ],
+      "created_at": "2026-09-10T13:53:31Z",
+      "updated_at": "2026-09-10T14:38:35Z",
+      "actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/publish-smoke.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-dll.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/native-integration.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/provenance-archive.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-server-smoke.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hygiene.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codeql-stage.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-asan.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-deploy.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/snapshot-unit.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hybrid-jit.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-baseline-stage.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codegen-unit.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-linux-tsan.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/secret-scan-stage.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-verify.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/ubsan.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-unit.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/aot-smoke.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/metadata-writer-unit.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-unit.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-perf.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/arm64-jit.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-build.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/clang-tidy-stage.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-stress.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/style-csharp.yml@982c4b5579cfe06186ed7638b46655900c67d52d",
+          "sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+          "ref": "refs/heads/main"
+        }
+      ],
+      "run_started_at": "2026-09-10T13:53:31Z",
+      "triggering_actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896/jobs",
+      "logs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896/logs",
+      "check_suite_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-suites/93419216343",
+      "artifacts_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896/artifacts",
+      "cancel_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896/cancel",
+      "rerun_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/workflows/349872732",
+      "head_commit": {
+        "id": "982c4b5579cfe06186ed7638b46655900c67d52d",
+        "tree_id": "aa07edd6c054cbf0d4f22689799f58f1bd2e8bec",
+        "message": "fix(ci): grant docs-deploy its Pages permissions at the caller (M2-N1/ENG-35138)\n\nroot_cause: 'startup_failure' on every pipeline dispatch after 517abca01.  A\nreusable workflow invoked with 'uses:' cannot request more permissions than the\ncalling job grants; pipeline.yml called docs-deploy.yml without a permissions\nblock, so the run got the default read-only GITHUB_TOKEN and the workflow\nfailed validation before any job started.  Declaring permissions inside\ndocs-deploy.yml alone is not enough — the grant must come from the caller.\nThis is the same pattern already used for gc-stress / gc-perf / jit-baseline\n(contents: write) and codeql (security-events: write).\n\nfix_strategy: add permissions: {pages: write, id-token: write} to the\ndocs-deploy dispatcher job in pipeline.yml.\n\nregression_check: YAML parses; dispatch now starts instead of startup_failure.",
+        "timestamp": "2026-09-10T13:53:08Z",
+        "author": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        },
+        "committer": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        }
+      },
+      "repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      },
+      "head_repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      }
+    },
+    {
+      "id": 34485268259,
+      "name": "Pipeline",
+      "node_id": "WFR_kwLOR0Bv-M8AAAAIB3tvIw",
+      "head_branch": "main",
+      "head_sha": "517abca01f00a63022f4d026d7af808352646eb5",
+      "path": ".github/workflows/pipeline.yml",
+      "display_title": "Pipeline",
+      "run_number": 122,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "startup_failure",
+      "workflow_id": 349872732,
+      "check_suite_id": 93418588314,
+      "check_suite_node_id": "CS_kwDOR0Bv-M8AAAAVwC6Img",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485268259",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485268259",
+      "pull_requests": [
+
+      ],
+      "created_at": "2026-09-10T13:51:26Z",
+      "updated_at": "2026-09-10T13:51:28Z",
+      "actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codeql-stage.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hygiene.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-server-smoke.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-dll.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/provenance-archive.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-linux-tsan.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-stress.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/ubsan.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-build.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/metadata-writer-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/secret-scan-stage.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-baseline-stage.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-perf.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codegen-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/publish-smoke.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-asan.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/native-integration.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/style-csharp.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/snapshot-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-deploy.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-verify.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/arm64-jit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/aot-smoke.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hybrid-jit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/clang-tidy-stage.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        }
+      ],
+      "run_started_at": "2026-09-10T13:51:26Z",
+      "triggering_actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485268259/jobs",
+      "logs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485268259/logs",
+      "check_suite_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-suites/93418588314",
+      "artifacts_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485268259/artifacts",
+      "cancel_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485268259/cancel",
+      "rerun_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485268259/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/workflows/349872732",
+      "head_commit": {
+        "id": "517abca01f00a63022f4d026d7af808352646eb5",
+        "tree_id": "801550e26d155c2236dbb85cba4e7d893f0f8238",
+        "message": "fix(ci): restore docs Doxyfile + Pages id-token permission (M2-N1/ENG-35138)\n\nroot_cause (two independent defects behind the docs-build/docs-deploy failures):\n1. docs/native-api/Doxyfile did not exist.  It was added by 7ca967c45 then\n   lost in the ci-r7-clean tree overwrite.  'doxygen <missing-file>' prints\n   help text and exits 1, so docs-build could never succeed.\n2. docs-deploy uses actions/deploy-pages@v4 which authenticates via OIDC;\n   without id-token: write it fails with 'Unable to get\n   ACTIONS_ID_TOKEN_REQUEST_URL env variable'.\n3. Repo-level Pages was never enabled (API 404 'Not Found').\n\nfix_strategy:\n1. Restore Doxyfile + README from 7ca967c45; verified both INPUT paths\n   (contracts/native/v0, src/native/common/chaos) exist.\n2. Add pages: write + id-token: write to the docs-deploy job.\n3. Enabled Pages on the repo with build_type=workflow (out-of-band API call).\n\nregression_check: this is the first run where docs-build can reach the doxygen\ninvocation at all; docs-deploy next run should proceed past OIDC.",
+        "timestamp": "2026-09-10T13:44:32Z",
+        "author": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        },
+        "committer": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        }
+      },
+      "repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      },
+      "head_repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      }
+    },
+    {
+      "id": 34484587837,
+      "name": "Pipeline",
+      "node_id": "WFR_kwLOR0Bv-M8AAAAIB3ENPQ",
+      "head_branch": "main",
+      "head_sha": "517abca01f00a63022f4d026d7af808352646eb5",
+      "path": ".github/workflows/pipeline.yml",
+      "display_title": "Pipeline",
+      "run_number": 121,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "startup_failure",
+      "workflow_id": 349872732,
+      "check_suite_id": 93416642587,
+      "check_suite_node_id": "CS_kwDOR0Bv-M8AAAAVwBDYGw",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34484587837",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34484587837",
+      "pull_requests": [
+
+      ],
+      "created_at": "2026-09-10T13:44:59Z",
+      "updated_at": "2026-09-10T13:45:01Z",
+      "actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/clang-tidy-stage.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-stress.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-linux-tsan.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codeql-stage.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-dll.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/metadata-writer-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/provenance-archive.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hybrid-jit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/secret-scan-stage.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/publish-smoke.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hygiene.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-perf.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/aot-smoke.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-deploy.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-server-smoke.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codegen-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/snapshot-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-verify.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/arm64-jit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/native-integration.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-baseline-stage.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-asan.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/ubsan.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/style-csharp.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-unit.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-build.yml@517abca01f00a63022f4d026d7af808352646eb5",
+          "sha": "517abca01f00a63022f4d026d7af808352646eb5",
+          "ref": "refs/heads/main"
+        }
+      ],
+      "run_started_at": "2026-09-10T13:44:59Z",
+      "triggering_actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34484587837/jobs",
+      "logs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34484587837/logs",
+      "check_suite_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-suites/93416642587",
+      "artifacts_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34484587837/artifacts",
+      "cancel_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34484587837/cancel",
+      "rerun_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34484587837/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/workflows/349872732",
+      "head_commit": {
+        "id": "517abca01f00a63022f4d026d7af808352646eb5",
+        "tree_id": "801550e26d155c2236dbb85cba4e7d893f0f8238",
+        "message": "fix(ci): restore docs Doxyfile + Pages id-token permission (M2-N1/ENG-35138)\n\nroot_cause (two independent defects behind the docs-build/docs-deploy failures):\n1. docs/native-api/Doxyfile did not exist.  It was added by 7ca967c45 then\n   lost in the ci-r7-clean tree overwrite.  'doxygen <missing-file>' prints\n   help text and exits 1, so docs-build could never succeed.\n2. docs-deploy uses actions/deploy-pages@v4 which authenticates via OIDC;\n   without id-token: write it fails with 'Unable to get\n   ACTIONS_ID_TOKEN_REQUEST_URL env variable'.\n3. Repo-level Pages was never enabled (API 404 'Not Found').\n\nfix_strategy:\n1. Restore Doxyfile + README from 7ca967c45; verified both INPUT paths\n   (contracts/native/v0, src/native/common/chaos) exist.\n2. Add pages: write + id-token: write to the docs-deploy job.\n3. Enabled Pages on the repo with build_type=workflow (out-of-band API call).\n\nregression_check: this is the first run where docs-build can reach the doxygen\ninvocation at all; docs-deploy next run should proceed past OIDC.",
+        "timestamp": "2026-09-10T13:44:32Z",
+        "author": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        },
+        "committer": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        }
+      },
+      "repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      },
+      "head_repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      }
+    },
+    {
+      "id": 34481648441,
+      "name": "Pipeline",
+      "node_id": "WFR_kwLOR0Bv-M8AAAAIB0QzOQ",
+      "head_branch": "main",
+      "head_sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+      "path": ".github/workflows/pipeline.yml",
+      "display_title": "Pipeline",
+      "run_number": 119,
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "failure",
+      "workflow_id": 349872732,
+      "check_suite_id": 93408346263,
+      "check_suite_node_id": "CS_kwDOR0Bv-M8AAAAVv5JAlw",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34481648441",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34481648441",
+      "pull_requests": [
+
+      ],
+      "created_at": "2026-09-10T13:16:48Z",
+      "updated_at": "2026-09-10T13:52:10Z",
+      "actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "run_attempt": 1,
+      "referenced_workflows": [
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codegen-unit.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/arm64-jit.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/ubsan.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/aot-smoke.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-unit.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/native-integration.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/jit-baseline-stage.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/secret-scan-stage.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-unit.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/style-csharp.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-perf.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/publish-smoke.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-build.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/metadata-writer-unit.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-stress.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/snapshot-unit.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/provenance-archive.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hygiene.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-asan.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/codeql-stage.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-dll.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-server-smoke.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/clang-tidy-stage.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/foundation-verify.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/gc-linux-tsan.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/docs-deploy.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        },
+        {
+          "path": "PolarisWang/booming-il2cpp/.github/workflows/hybrid-jit.yml@38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "sha": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+          "ref": "refs/heads/main"
+        }
+      ],
+      "run_started_at": "2026-09-10T13:16:48Z",
+      "triggering_actor": {
+        "login": "PolarisWang",
+        "id": 11873127,
+        "node_id": "MDQ6VXNlcjExODczMTI3",
+        "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/PolarisWang",
+        "html_url": "https://github.com/PolarisWang",
+        "followers_url": "https://api.github.com/users/PolarisWang/followers",
+        "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+        "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+        "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+        "repos_url": "https://api.github.com/users/PolarisWang/repos",
+        "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "jobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34481648441/jobs",
+      "logs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34481648441/logs",
+      "check_suite_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-suites/93408346263",
+      "artifacts_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34481648441/artifacts",
+      "cancel_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34481648441/cancel",
+      "rerun_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34481648441/rerun",
+      "previous_attempt_url": null,
+      "workflow_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/workflows/349872732",
+      "head_commit": {
+        "id": "38fc1a285cdd329ebcb6c1731fa7f3662f5dab9b",
+        "tree_id": "e52e49bf9ecbecf3dd0d465135da1ce8cb582a08",
+        "message": "fix(publish): sanitize method name in DeriveEntryCall for async/top-level entry\n\nRoslyn generates <Main>$ / <Main> for async Task Main entry points\n(and <Main>$ for top-level statements).  The DeriveEntryCall method used\nthe bare SubjectId method name (e.g. \"<Main>\") to construct the proxy\ncall, producing:\n  AsyncDemo2_Program::<Main>(chaos_args)  // C2589: '<' illegal\n\nThe codegen-emitted proxy struct uses the sanitized name _Main_ instead\n(Sanitize replaces punctuation with underscores).  Sanitize the method\nname before constructing the proxy call expression, matching what the\ngenerated chaos_generated_module.h actually exports.\n\nregression_check: samples/HelloWorld publish -> entry.exe -> 'Hello from\nchaos-il2cpp!' exit 0.  Named-class sync Main is unaffected (method name\ncontains no punctuation, Sanitize is idempotent).\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+        "timestamp": "2026-09-10T13:14:29Z",
+        "author": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        },
+        "committer": {
+          "name": "PolarisWong",
+          "email": "maynardwolf27@gmail.com"
+        }
+      },
+      "repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      },
+      "head_repository": {
+        "id": 1195405304,
+        "node_id": "R_kgDOR0Bv-A",
+        "name": "booming-il2cpp",
+        "full_name": "PolarisWang/booming-il2cpp",
+        "private": false,
+        "owner": {
+          "login": "PolarisWang",
+          "id": 11873127,
+          "node_id": "MDQ6VXNlcjExODczMTI3",
+          "avatar_url": "https://avatars.githubusercontent.com/u/11873127?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/PolarisWang",
+          "html_url": "https://github.com/PolarisWang",
+          "followers_url": "https://api.github.com/users/PolarisWang/followers",
+          "following_url": "https://api.github.com/users/PolarisWang/following{/other_user}",
+          "gists_url": "https://api.github.com/users/PolarisWang/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/PolarisWang/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/PolarisWang/subscriptions",
+          "organizations_url": "https://api.github.com/users/PolarisWang/orgs",
+          "repos_url": "https://api.github.com/users/PolarisWang/repos",
+          "events_url": "https://api.github.com/users/PolarisWang/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/PolarisWang/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "html_url": "https://github.com/PolarisWang/booming-il2cpp",
+        "description": "il2cpp project",
+        "fork": false,
+        "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp",
+        "forks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/forks",
+        "keys_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/keys{/key_id}",
+        "collaborators_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/collaborators{/collaborator}",
+        "teams_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/teams",
+        "hooks_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/hooks",
+        "issue_events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/events{/number}",
+        "events_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/events",
+        "assignees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/assignees{/user}",
+        "branches_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/branches{/branch}",
+        "tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/tags",
+        "blobs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/blobs{/sha}",
+        "git_tags_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/tags{/sha}",
+        "git_refs_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/refs{/sha}",
+        "trees_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/trees{/sha}",
+        "statuses_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/statuses/{sha}",
+        "languages_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/languages",
+        "stargazers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/stargazers",
+        "contributors_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contributors",
+        "subscribers_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscribers",
+        "subscription_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/subscription",
+        "commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/commits{/sha}",
+        "git_commits_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/git/commits{/sha}",
+        "comments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/comments{/number}",
+        "issue_comment_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues/comments{/number}",
+        "contents_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/contents/{+path}",
+        "compare_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/compare/{base}...{head}",
+        "merges_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/merges",
+        "archive_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/{archive_format}{/ref}",
+        "downloads_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/downloads",
+        "issues_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/issues{/number}",
+        "pulls_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/pulls{/number}",
+        "milestones_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/milestones{/number}",
+        "notifications_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/notifications{?since,all,participating}",
+        "labels_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/labels{/name}",
+        "releases_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/releases{/id}",
+        "deployments_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/deployments"
+      }
+    }
+  ]
+}

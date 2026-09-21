@@ -1,0 +1,19 @@
+// runtime-patchdata.cpp — Auto-generated
+// Provides kPatchData[], kPatchDataSize, kPatchDataHostClassName.
+//
+// The per-method host arrays (kPatchDataHostNamespace / TypeNames /
+// MethodNames / Count) are defined ONLY in patch-host-arrays.cpp.  They used
+// to be defined here as "weak" sentinels so the hotupdate pipeline's strong
+// definitions would win at link time, but MSVC's CHAOS_SENTINEL_WEAK expanded
+// to nothing — both objects carried strong definitions and /FORCE:MULTIPLE
+// silently kept this sentinel (kPatchDataCount=0), so ApplyPatchFromMemoryEx
+// never received the host-name overrides and every patch failed Phase 1
+// resolution.  Keeping the symbols in exactly one translation unit removes the
+// duplicate-definition hazard on every toolchain.
+#include <cstddef>
+#include <cstdint>
+
+// ── Sentinel (no embedded patch data) ──
+extern const uint8_t kPatchData[1] = { 0 };
+extern const size_t kPatchDataSize = 0;
+extern const char* const kPatchDataHostClassName = nullptr;

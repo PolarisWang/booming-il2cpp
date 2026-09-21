@@ -111,6 +111,32 @@ public sealed partial class NativeAotLoweringPlanner
                     string typeSubjectId = region.CatchTypeSubjectId.Substring(0, dc);
                     if (!dictionary.ContainsKey(typeSubjectId))
                         dictionary[typeSubjectId] = null;
+
+                    // Also register the whole base chain of the caught exception type.
+                    //
+                    // A caught exception type never appears as an instruction
+                    // TargetReference, so Pass 1 cannot see it OR its ancestors.
+                    // Without this the emitted MethodTable for, say,
+                    // ArgumentNullException has parent == nullptr, and
+                    // chaos_is_type_compatible (which walks that chain) then fails
+                    // to match `catch (Exception)` against it — the opposite of C#.
+                    //
+                    // The chain is the same one GetSyntheticReferenceTypeBaseSubjectId
+                    // encodes (delegates + the exception hierarchy).  It is walked
+                    // purely by name, so this stays a static, allocation-light loop.
+                    var chainTypeId = typeSubjectId;
+                    for (int depth = 0; depth < 16; depth++)
+                    {
+                        string? chainBase = GetSyntheticReferenceTypeBaseSubjectId(chainTypeId);
+                        if (string.IsNullOrEmpty(chainBase))
+                            break;
+                        var dcb = chainBase.IndexOf("::");
+                        string chainBaseId = dcb > 0 ? chainBase.Substring(0, dcb) : chainBase;
+                        if (dictionary.ContainsKey(chainBaseId))
+                            break;
+                        dictionary[chainBaseId] = null;
+                        chainTypeId = chainBase;
+                    }
                 }
             }
         }

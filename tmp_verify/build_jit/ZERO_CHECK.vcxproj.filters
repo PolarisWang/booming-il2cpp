@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\chaos-il2cpp\tmp_verify\build_jit\CMakeFiles\64cb4c99b5fdcf7da432765d81b7eb30\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{D5551A7B-0200-326D-93C5-DAD76982B8BD}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

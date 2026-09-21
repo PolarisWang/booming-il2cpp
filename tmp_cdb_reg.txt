@@ -1,0 +1,6 @@
+.logopen /t D:\agent\chaos-il2cpp\tmp_cdb_reg2.log
+sxn av
+bp chaos_entry!ChaosRegisterExternalType ".printf \"REG fnv=%08x desc=%p ti=%p\n\", @ecx, @rdx, poi(@rdx+88); g"
+bp chaos_entry!ChaosFindReflectionTypeByTypeInfo ".printf \"FIND ti=%p\n\", @rcx; g"
+g
+q
