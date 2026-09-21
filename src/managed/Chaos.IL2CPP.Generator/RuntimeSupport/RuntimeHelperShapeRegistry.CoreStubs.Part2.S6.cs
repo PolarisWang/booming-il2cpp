@@ -60,7 +60,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     CreateNativeIntAbiSlot("System.Reflection.MemberInfo", AotCoreIrTypeShapeKind.ReferenceType),
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-                }), CreateNativeIntAbiSlot(),
+                }), CreateInt32AbiSlot(),
                 new HashSet<int> { 0, 1 });
 
             registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
@@ -70,7 +70,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     CreateNativeIntAbiSlot("System.Reflection.Module", AotCoreIrTypeShapeKind.ReferenceType),
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-                }), CreateNativeIntAbiSlot(),
+                }), CreateInt32AbiSlot(),
                 new HashSet<int> { 0, 1 });
 
             registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
@@ -80,7 +80,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     CreateNativeIntAbiSlot("System.Reflection.ParameterInfo", AotCoreIrTypeShapeKind.ReferenceType),
                     CreateNativeIntAbiSlot("System.Type", AotCoreIrTypeShapeKind.ReferenceType),
-                }), CreateNativeIntAbiSlot(),
+                }), CreateInt32AbiSlot(),
                 new HashSet<int> { 0, 1 });
         }
 

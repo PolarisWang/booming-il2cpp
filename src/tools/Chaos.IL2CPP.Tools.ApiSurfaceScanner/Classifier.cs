@@ -534,7 +534,11 @@ public static class Classifier
     /// ByToken — see RuntimeHelperShapeRegistry.CoreStubs.Part2.S1/S6, which
     /// register the Assembly/MemberInfo/Module/ParameterInfo receivers.
     /// </summary>
-    private static readonly HashSet<string> WholeTypeRealViaDispatch = new(StringComparer.Ordinal)
+    /// <remarks>
+    /// Consumed by AutoTestGenerator TestEmitter.HasKnownNativeImpl so these
+    /// methods do NOT get the AOT-STUB-GAP `return 42L` body.
+    /// </remarks>
+    public static readonly HashSet<string> WholeTypeRealViaDispatch = new(StringComparer.Ordinal)
     {
         "CustomAttributeExtensions",
         // TypeDelegator forwards every member query to the Type it wraps. Measured:

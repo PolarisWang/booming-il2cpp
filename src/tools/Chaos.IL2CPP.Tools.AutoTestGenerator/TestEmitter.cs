@@ -454,6 +454,14 @@ public sealed class TestEmitter
         if (string.IsNullOrEmpty(declaring)) return false;
         var lastDot = declaring.LastIndexOf('.');
         var bareType = lastDot >= 0 ? declaring[(lastDot + 1)..] : declaring;
+        // Whole-type dispatch (Classifier rule 1b): every overload of these
+        // types routes to a registered real native entry point (shape registry
+        // Part2.S1/S6 for CustomAttributeExtensions; TypeDelegator forwards to
+        // its wrapped Type).  Without this check the ATG kept emitting the
+        // AOT-STUB-GAP `return 42L` body for methods whose AOT body actually
+        // calls the real native symbol — 78 CA + 32 TypeDelegator stubGaps.
+        if (Chaos.IL2CPP.Tools.ApiSurfaceScanner.Classifier.WholeTypeRealViaDispatch.Contains(bareType))
+            return true;
         var memberName = method.Name;
         foreach (var key in Chaos.IL2CPP.Tools.ApiSurfaceScanner.Classifier.KnownNativeImpls.Keys)
         {

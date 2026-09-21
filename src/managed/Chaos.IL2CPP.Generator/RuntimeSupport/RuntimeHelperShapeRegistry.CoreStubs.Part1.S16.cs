@@ -1701,18 +1701,12 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0 });
 
-            // ── CustomAttributeExtensions::IsDefined(Assembly, Type) ──
-            // Native ChaosReflectionIsDefined exists (remaining_stubs.cpp:22).
-            registry.Register("System.Reflection.CustomAttributeExtensions", "IsDefined",
-                ["System.Reflection.Assembly", "System.Type"],
-                ShapeKind.SimpleForward, "ChaosReflectionIsDefined",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                {
-                    CreateNativeIntAbiSlot(),
-                    CreateNativeIntAbiSlot(),
-                }),
-                CreateInt32AbiSlot(),
-                new HashSet<int> { 0, 1 });
+            // ── CustomAttributeExtensions::IsDefined ──
+            // Registered in Part2.S6 (RegisterCustomAttributeExtensionsIsDefined) —
+            // covers Assembly + MemberInfo/Module/ParameterInfo receivers.
+            // Registering the Assembly overload here too throws
+            // "Shape already registered" in BuildDefault, which kills ALL codegen
+            // and silently leaves the pipeline on a stale entry.exe.
 
             // ── CustomAttributeExtensions static wrappers ──            // The per-type native primitives exist (Assembly/Module/Member/Param).            // The static class dispatches on the receiver â register per receiver.            // MemberInfo receivers            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes", ["System.Reflection.MemberInfo"],                ShapeKind.SimpleForward, "ChaosReflectionMemberGetCustomAttributes",                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),                CreateNativeIntAbiSlot(), new HashSet<int> { 0 });            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes", ["System.Reflection.MemberInfo", "System.Boolean"],                ShapeKind.SimpleForward, "ChaosReflectionMemberGetCustomAttributes",                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2] { CreateNativeIntAbiSlot(), CreateInt32AbiSlot() }),                CreateNativeIntAbiSlot(), new HashSet<int> { 0, 1 });            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributesData", ["System.Reflection.MemberInfo"],                ShapeKind.SimpleForward, "ChaosReflectionMemberGetCustomAttributesData",                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),                CreateNativeIntAbiSlot(), new HashSet<int> { 0 });            // Assembly receivers            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes", ["System.Reflection.Assembly"],                ShapeKind.SimpleForward, "ChaosReflectionAssemblyGetCustomAttributes",                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),                CreateNativeIntAbiSlot(), new HashSet<int> { 0 });            // Module receivers            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes", ["System.Reflection.Module"],                ShapeKind.SimpleForward, "ChaosReflectionModuleGetCustomAttributes",                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),                CreateNativeIntAbiSlot(), new HashSet<int> { 0 });            // ParameterInfo receivers            registry.Register("System.Reflection.CustomAttributeExtensions", "GetCustomAttributes", ["System.Reflection.ParameterInfo"],                ShapeKind.SimpleForward, "ChaosReflectionParamGetCustomAttributes",                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),                CreateNativeIntAbiSlot(), new HashSet<int> { 0 });
             // Task.WhenAll(Task[])/Task.WhenAny(Task[]) — route the array combinator

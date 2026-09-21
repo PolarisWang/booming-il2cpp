@@ -782,10 +782,34 @@ public sealed partial class NativeAotLoweringPlanner
         /// </summary>
         internal string BuildExceptionTypeTable()
         {
-            // Collect exception type subject ids from the IR: every catch clause
-            // names one, and each of those has its own base chain (added by
-            // CollectReferenceTypeBaseSubjectIds' Pass 1b).
+            // The table must cover the RAISE set, not just the CATCH set.
+            //
+            // Consumer is ResolveTypeByName(), which RaiseManagedException calls with
+            // the name of the exception a *native stub* is about to throw.  Those
+            // stub sources live in chaos_runtime_core and are not readable from here,
+            // so the raise set is supplied as data: every exception type raised by
+            // src/native/runtime-core/runtime_stubs/*.cpp (see FileOnlyExceptionTypeNames
+            // — regenerate with tools/scan_raised_exception_types.py).
+            //
+            // Collecting only catch types (the original behaviour) systematically
+            // missed types that are thrown but never caught in the chunk: measured on
+            // text-json, the table held 4 entries while json_writer_stubs.cpp raised
+            // System.ObjectDisposedException and System.ArgumentException — neither
+            // present.  ResolveTypeByName then returned 0, RaiseManagedException
+            // raised a NULL object, and chaos_eh_match_type could never match, so the
+            // typed-catch assertions failed against correct native behaviour.
             var typeIds = new SortedSet<string>(StringComparer.Ordinal);
+
+            // (a) Raise set: types thrown by hand-written native stubs.
+            foreach (var raised in FileOnlyExceptionTypeNames)
+            {
+                if (!string.IsNullOrEmpty(raised)) typeIds.Add(raised);
+            }
+
+            // (b) Catch set: every catch clause names a type, and each of those has
+            //     its own base chain (added by CollectReferenceTypeBaseSubjectIds
+            //     Pass 1b).  Kept as well — catching a type that is never thrown in
+            //     this chunk still needs a resolvable descriptor.
             foreach (var method in _aotCoreIrMethodsForExceptionTable)
             {
                 foreach (var region in method.ExceptionRegions)
@@ -813,9 +837,42 @@ public sealed partial class NativeAotLoweringPlanner
             // A type can only be referenced here if its MethodTable has a
             // DEFINITION in this TU; referencing a declaration-only symbol would
             // produce LNK2001 (see the note in ChaosRegisterReflectionMembers).
+            //
+            // The gate is _allEmittedTypeSubjectIds — the set of types whose
+            // chaos_mt_* definition is actually emitted.  Gating on
+            // _referenceTypeBaseSubjectIds instead is WRONG here: that map is built
+            // from the lowering closure, so it holds only a handful of exception
+            // types and silently drops the rest.  Measured on text-json: 13 raised
+            // types, 10 rejected as "undefined" even though their MethodTables are
+            // defined in the very same TU (verified by grep on the generated .cpp).
+            //
+            // Raise-set names arrive as plain reflection names ("System.Exception");
+            // catch-set names as subject ids ("System.Private.CoreLib/System.Exception").
+            // Normalise both onto the subject-id form before the lookup.
+            var definedTypeIds = _allEmittedTypeSubjectIds ?? new HashSet<string>(StringComparer.Ordinal);
             var emitTypes = typeIds
-                .Where(id => _referenceTypeBaseSubjectIds.ContainsKey(id))
+                .Select(NormalizeExceptionTypeSubjectId)
+                .Where(id => !string.IsNullOrEmpty(id) && definedTypeIds.Contains(id!))
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(id => id, StringComparer.Ordinal)
                 .ToList();
+
+            // Not an error: a raised type with no MethodTable in this TU is resolved
+            // by the reflection-image fallback instead.  Reported so the gap is
+            // visible rather than silent.
+            var unemittedTypes = typeIds
+                .Select(NormalizeExceptionTypeSubjectId)
+                .Where(id => !string.IsNullOrEmpty(id) && !definedTypeIds.Contains(id!))
+                .Distinct(StringComparer.Ordinal)
+                .OrderBy(id => id, StringComparer.Ordinal)
+                .ToList();
+            if (unemittedTypes.Count > 0)
+            {
+                System.Console.Error.WriteLine(
+                    "[codegen] exception table: " + unemittedTypes.Count +
+                    " type(s) have no MethodTable in this TU (reflection-image fallback " +
+                    "must resolve them): " + string.Join(", ", unemittedTypes));
+            }
 
             var sb = new StringBuilder(4096);
             sb.AppendLine("// --- Exception Type Table (compile-time name -> type descriptor) ---");
@@ -847,9 +904,16 @@ public sealed partial class NativeAotLoweringPlanner
                 // fields/count, properties/count, events/count, methods/count
                 sb.AppendLine("    nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,");
                 // generic_parameters, generic_param_count, reserved_flags, type_info_ptr
+                // NOTE: each kExcDesc is a standalone `static const` variable, so the
+                // closing brace must be followed by a SEMICOLON.  A trailing comma
+                // here is the *C++11 aggregate-allowance trap*: the compiler accepts
+                // it on its own, but then treats the next `static const <type>` line
+                // as an illegal second declarator of the same declaration.
+                // Falls over with a cascade (C2226/C2143/C2447) that starts on the
+                // entry AFTER kExcDesc0 — which makes the first entry look innocent.
                 sb.Append("    nullptr, 0u, 0u, &")
                   .Append(GetNativeMethodTableSymbol(bare))
-                  .AppendLine(" },");
+                  .AppendLine(" };");
             }
 
             sb.AppendLine("extern \"C\" const ChaosExceptionTypeEntryV0 kChaosExceptionTypes[] = {");
@@ -866,6 +930,65 @@ public sealed partial class NativeAotLoweringPlanner
               .Append(emitTypes.Count)
               .AppendLine(";");
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Exception types raised by the hand-written native stubs the AOT codegen
+        /// links against, in plain reflection-name form.
+        ///
+        /// These live in <c>src/native/runtime-core/runtime_stubs/*.cpp</c> as
+        /// <c>RaiseManagedException("System.FooException", ...)</c> call sites.  That
+        /// directory is not reachable from the Generator at codegen time, so the set
+        /// is carried here as data rather than derived.
+        ///
+        /// Regenerate with: <c>python tools/scan_raised_exception_types.py</c>
+        /// (that script also serves as the negative control for this list).
+        /// </summary>
+        private static readonly string[] FileOnlyExceptionTypeNames =
+        {
+            "System.ArgumentException",
+            "System.ArgumentNullException",
+            "System.ArgumentOutOfRangeException",
+            "System.DivideByZeroException",
+            "System.Exception",
+            "System.FormatException",
+            "System.InvalidOperationException",
+            "System.NotImplementedException",
+            "System.NotSupportedException",
+            "System.ObjectDisposedException",
+            "System.OverflowException",
+            "System.Threading.Tasks.TaskCanceledException",
+            "System.Xml.XmlException",
+        };
+
+        /// <summary>
+        /// Maps a plain reflection name ("System.Exception") or an already-qualified
+        /// subject id ("System.Private.CoreLib/System.Exception") onto the subject-id
+        /// form used by <see cref="_referenceTypeBaseSubjectIds"/>.
+        ///
+        /// BCL exception types live in System.Private.CoreLib, which is also what the
+        /// runtime image scan resolves them against — matching that keeps this table
+        /// consistent with the fallback path in ResolveTypeByName.
+        /// Returns null when the name cannot be qualified.
+        /// </summary>
+        private static string? NormalizeExceptionTypeSubjectId(string typeId)
+        {
+            if (string.IsNullOrEmpty(typeId)) return null;
+            if (typeId.IndexOf('/') > 0) return typeId;
+
+            // "System.Threading.Tasks.TaskCanceledException" -> namespace/name split
+            // on the LAST dot, mirroring ResolveTypeByName's own split.
+            var lastDot = typeId.LastIndexOf('.');
+            if (lastDot <= 0) return null;
+
+            var ns = typeId.Substring(0, lastDot);
+            var name = typeId.Substring(lastDot + 1);
+            var assembly = ns.StartsWith("System.", StringComparison.Ordinal)
+                || ns == "System"
+                ? "System.Private.CoreLib"
+                : ns.Split('.')[0];
+
+            return $"{assembly}/{typeId}";
         }
 
         /// <summary>
