@@ -691,11 +691,20 @@ public sealed class RuntimeHelperShapeRegistryTests
     }
 
     [Fact]
-    public void TaskRun_CancellationTokenOverload_ResolvesToNull()
+    public void TaskRun_CancellationTokenOverload_RoutesToNativeRunner()
     {
-        // CT overloads deliberately fall through to the interpreter until
-        // Phase 3 (CancellationToken wiring) — their resolver must return null
-        // so codegen does not route them to async_task_run (which ignores the CT).
+        // T2 (524101330) wired the CT overloads to chaos_task_run(delegate, token).
+        // The token is accepted but deliberately NOT honoured — there is no
+        // cancellation plumbing at this call site yet.  Before that wiring the
+        // call returned 0 through the external-runtime fallback (producing no
+        // task at all), so queueing the delegate and ignoring the token is
+        // strictly an improvement; a cancelled token simply does not stop the
+        // work.  That is a documented limitation, not a regression.
+        //
+        // This test previously asserted the resolver returned null ("CT overloads
+        // fall through to the interpreter until Phase 3").  T2 made that false but
+        // did not update the test, leaving code and test contradicting each other
+        // from 2026-09-16 onward.  The resolver's behaviour is the intended one.
         var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
         Assert.True(registry.TryMatchGenericShape(
             "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)",
@@ -706,7 +715,12 @@ public sealed class RuntimeHelperShapeRegistryTests
         var resolution = descriptor!.Resolver(planner,
             "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)",
             Array.Empty<string>());
-        Assert.Null(resolution);
+
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_run", resolution!.DirectNativeSymbol);
+        // The shim takes both callee arguments, so the token is passed through to
+        // the native entry rather than being dropped on the evaluation stack.
+        Assert.Equal(2, resolution.ParameterAbis.Count);
     }
 
     // ── Task.Factory registration (ASYNC-P2-5) ─────────────────────────────
