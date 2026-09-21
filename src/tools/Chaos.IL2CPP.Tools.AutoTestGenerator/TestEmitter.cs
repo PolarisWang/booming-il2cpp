@@ -46,6 +46,295 @@ public sealed class TestEmitter
     // Chaos.TestFramework.Sdk is the only assembly compiled into the AOT image.
     private const string AotInternalAssemblyPrefix = "Chaos.TestFramework.Sdk";
 
+    /// <summary>
+    /// One entry of the external-stub exception-reproduction whitelist.
+    /// </summary>
+    /// <param name="TypeFragments">
+    /// Substrings that identify the declaring type.  A method matches when its
+    /// declaring type contains ANY of these (ordinal), or when
+    /// <paramref name="ExactTypeNames"/> lists it explicitly.
+    /// </param>
+    /// <param name="ExactTypeNames">
+    /// Exact declaring-type names.  Preferred over <paramref name="TypeFragments"/>
+    /// because a fragment such as "System.Xml.XmlNode" also matches
+    /// "System.Xml.XmlNodeList" and "System.Xml.XmlNodeReader"; use fragments only
+    /// where the broad match is the intent.
+    /// </param>
+    /// <param name="Methods">
+    /// Method names this entry covers.  Exact match, ordinal.
+    /// </param>
+    /// <param name="NativeSymbol">
+    /// The native entry point that performs the validation and raises the same
+    /// exception the managed implementation does.  Named so the guard test can
+    /// assert the symbol actually exists — an entry pointing at a symbol that was
+    /// renamed or removed is a silent false-red factory.
+    /// </param>
+    /// <param name="Rationale">
+    /// Why the AOT body is expected to throw here.  This is the claim the entry
+    /// makes; the guard test cannot verify it, so it is recorded for review.
+    /// </param>
+    internal sealed record ExceptionReproductionEntry(
+        string[] TypeFragments,
+        string[] ExactTypeNames,
+        string[] Methods,
+        string NativeSymbol,
+        string Rationale)
+    {
+        public bool Matches(string? declaringType, string methodName)
+        {
+            if (declaringType is null) return false;
+            if (!Methods.Contains(methodName, StringComparer.Ordinal)) return false;
+
+            foreach (var exact in ExactTypeNames)
+            {
+                if (string.Equals(declaringType, exact, StringComparison.Ordinal)) return true;
+            }
+            foreach (var fragment in TypeFragments)
+            {
+                if (declaringType.Contains(fragment, StringComparison.Ordinal)) return true;
+            }
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// The external-stub exception-reproduction whitelist.
+    /// </summary>
+    /// <remarks>
+    /// A method listed here is one whose AOT body is expected to RAISE the same
+    /// exception the managed probe observed, so ATG emits the try/throw
+    /// reproduction form instead of the <c>return 42L</c> stub-gap form.
+    ///
+    /// <para>
+    /// <b>Listing a method whose AOT body does NOT throw converts an honest
+    /// stub-gap into a false red.</b> That is the failure this table must not
+    /// invite, so each entry states the native symbol that is supposed to throw
+    /// and the reason it does.  <see cref="ExceptionReproductionGuard"/> asserts
+    /// the symbols exist and that the declared method sets do not overlap; see
+    /// the test project for the executable form.
+    /// </para>
+    ///
+    /// <para>
+    /// The historical form of this whitelist was eleven hand-written
+    /// <c>if (declaringType.Contains(...) &amp;&amp; method.Name is ...)</c> blocks
+    /// with no test coverage, which made "just add another name" the path of
+    /// least resistance.  Expressing it as data does not by itself prove the
+    /// AOT body throws, but it does make each claim name its symbol and rationale,
+    /// and gives the guard something concrete to check.
+    /// </para>
+    /// </remarks>
+    private static readonly ExceptionReproductionEntry[] ExceptionReproductionTable =
+    [
+        new(
+            TypeFragments: ["System.Text.Json.Serialization.Metadata.JsonMetadataServices"],
+            ExactTypeNames: [],
+            Methods:
+            [
+                "CreateArrayInfo", "CreateListInfo", "CreateDictionaryInfo",
+                "CreateImmutableDictionaryInfo", "CreateIDictionaryInfo",
+                "CreateIReadOnlyDictionaryInfo", "CreateICollectionInfo",
+                "CreateIListInfo", "CreateISetInfo", "CreateIAsyncEnumerableInfo",
+            ],
+            NativeSymbol: "ChaosExternalRuntimeFallback",
+            Rationale:
+                "Metadata source-generator hooks whose managed body throws " +
+                "NotSupportedException for every input; the catch-all emits a real " +
+                "throw for these (see NativeAotLoweringPlanner.ExternalRuntimeHelpers " +
+                "throwsNotSupported) rather than returning 0."),
+
+        new(
+            TypeFragments: ["System.Xml.XmlTextWriter", "System.Xml.XmlWriter"],
+            ExactTypeNames: [],
+            Methods:
+            [
+                "WriteDocType", "WriteProcessingInstruction", "WriteEntityRef",
+                "WriteEndElement", "WriteFullEndElement", "WriteEndAttribute",
+                "WriteEndDocument", "WriteName", "WriteQualifiedName", "WriteNmToken",
+                "WriteSurrogateCharEntity", "WriteChars", "WriteRaw", "WriteBase64",
+                "WriteBinHex", "LookupPrefix", "WriteValue", "WriteAttributeString",
+                "WriteElementString", "WriteStartElement", "WriteStartAttribute",
+                "WriteCData", "WriteCharEntity", "WriteString", "WriteNode",
+                "WriteAttributes",
+            ],
+            NativeSymbol: "xml_writer_stubs.cpp",
+            Rationale:
+                "Argument-validation surface.  Native stubs raise ArgumentNullException " +
+                "(null name/buffer/ns), ArgumentException (empty name, invalid surrogate " +
+                "pair) and InvalidOperationException (no open element/attribute/document)."),
+
+        new(
+            TypeFragments: ["System.Xml.XmlWriter", "System.Xml.XmlTextWriter"],
+            ExactTypeNames: [],
+            Methods:
+            [
+                "WriteStartDocumentAsync", "WriteEndDocumentAsync", "WriteEndElementAsync",
+                "WriteFullEndElementAsync", "FlushAsync", "DisposeAsync",
+                "WriteStringAsync", "WriteWhitespaceAsync", "WriteCommentAsync",
+                "WriteCDataAsync", "WriteRawAsync", "WriteNameAsync", "WriteNmTokenAsync",
+                "WriteEntityRefAsync", "WriteCharEntityAsync",
+                "WriteSurrogateCharEntityAsync", "WriteQualifiedNameAsync",
+                "WriteProcessingInstructionAsync", "WriteStartElementAsync",
+                "WriteDocTypeAsync", "WriteAttributeStringAsync",
+                "WriteElementStringAsync", "WriteCharsAsync", "WriteBase64Async",
+                "WriteBinHexAsync", "WriteNodeAsync", "WriteAttributesAsync",
+            ],
+            NativeSymbol: "xml_writer_async_stubs.cpp",
+            Rationale:
+                "Two-stage contract: invalid argument -> ArgumentNullException/" +
+                "ArgumentException; valid argument on a non-async writer -> " +
+                "InvalidOperationException.  Measured against .NET 8 for all 27 entries."),
+
+        new(
+            TypeFragments: ["System.Xml.XmlConvert"],
+            ExactTypeNames: [],
+            Methods:
+            [
+                "ToBoolean", "ToByte", "ToSByte", "ToInt16", "ToUInt16", "ToInt32",
+                "ToUInt32", "ToInt64", "ToUInt64", "ToSingle", "ToDouble", "ToDecimal",
+                "ToChar", "ToGuid", "ToTimeSpan", "ToDateTime", "ToDateTimeOffset",
+                "VerifyName", "VerifyNCName", "VerifyNMTOKEN", "VerifyPublicId",
+                "VerifyWhitespace", "VerifyXmlChars",
+            ],
+            NativeSymbol: "xml_convert_stubs.cpp",
+            Rationale:
+                "Pure string->value transforms.  Native stubs raise FormatException " +
+                "(malformed/empty), ArgumentNullException (null string), " +
+                "OverflowException (out of range) and XmlException (Verify* predicates)."),
+
+        new(
+            TypeFragments:
+            [
+                "System.Xml.XmlTextReader", "System.Xml.XmlValidatingReader",
+                "System.Xml.XmlNodeReader",
+            ],
+            ExactTypeNames: [],
+            Methods:
+            [
+                "MoveToAttribute", "GetAttribute", "ReadContentAsBase64",
+                "ReadContentAsBinHex", "ReadElementContentAsBase64",
+                "ReadElementContentAsBinHex", "ResolveEntity",
+            ],
+            NativeSymbol: "xml_reader_stubs.cpp",
+            Rationale:
+                "Qualified attribute lookups and byte[]-buffer content readers.  Native " +
+                "stubs raise ArgumentOutOfRangeException (null/empty name), " +
+                "ArgumentNullException (null buffer) and InvalidOperationException " +
+                "(ResolveEntity at an invalid position)."),
+
+        new(
+            TypeFragments:
+            [
+                "System.Xml.XmlNode", "System.Xml.XmlDocument", "System.Xml.XmlElement",
+                "System.Xml.XmlAttribute", "System.Xml.XmlCharacterData",
+                "System.Xml.XmlText", "System.Xml.XmlCDataSection",
+                "System.Xml.XmlComment", "System.Xml.XmlWhitespace",
+                "System.Xml.XmlSignificantWhitespace", "System.Xml.XmlDeclaration",
+                "System.Xml.XmlDocumentType", "System.Xml.XmlEntityReference",
+                "System.Xml.XmlProcessingInstruction", "System.Xml.XmlNotation",
+                "System.Xml.XmlEntity",
+            ],
+            ExactTypeNames: [],
+            Methods:
+            [
+                "AppendChild", "PrependChild", "InsertBefore", "InsertAfter",
+                "ReplaceChild", "RemoveChild", "RemoveAll", "Supports",
+                "GetNamespaceOfPrefix", "GetPrefixOfNamespace", "WriteTo",
+                "WriteContentTo", "Clone", "CloneNode", "GetEnumerator", "SelectNodes",
+                "SelectSingleNode", "SplitText", "LoadXml", "Load", "Save", "Validate",
+                "ImportNode", "ReadNode", "CreateNode", "CreateDocumentType",
+                "CreateXmlDeclaration", "CreateProcessingInstruction", "CreateElement",
+                "CreateAttribute", "GetElementsByTagName", "CreateEntityReference",
+                "CreateNavigator", "Substring", "AppendData", "InsertData",
+                "DeleteData", "ReplaceData", "SetAttribute", "SetAttributeNode",
+            ],
+            NativeSymbol: "xml_document_stubs.cpp",
+            Rationale:
+                "DOM types.  ATG subjects use SubjectInstanceFactory.Create<T>() with " +
+                "bare objects (not real document trees), so every instance method " +
+                "throws NRE / InvalidOperationException / ArgumentException.  Only " +
+                "methods with native stubs are listed: an open 'any method on these " +
+                "types' predicate pulls in object-returning members whose MethodTable " +
+                "symbols are not emitted, producing LNK2001 against chaos_mt_*."),
+
+        new(
+            TypeFragments: ["System.Xml.XmlNameTable", "System.Xml.NameTable"],
+            ExactTypeNames: [],
+            Methods: ["Get", "Add"],
+            NativeSymbol: "xml_nametable_stubs.cpp",
+            Rationale:
+                "Native stubs raise ArgumentNullException for null input and return " +
+                "null for empty/non-existent lookups.  ATG subjects construct via " +
+                "KnownInstances, so the methods really execute."),
+
+        new(
+            TypeFragments:
+            [
+                "System.Xml.XmlAttributeCollection", "System.Xml.XmlNodeList",
+                "System.Xml.XmlNamedNodeMap", "System.Xml.XmlNamespaceManager",
+            ],
+            ExactTypeNames: [],
+            Methods:
+            [
+                // "GetEnumerator" is also claimed by the DOM entry above, which
+                // reaches XmlNodeList / XmlAttributeCollection through its
+                // XmlNode / XmlAttribute fragments.  For those two types both
+                // entries return true either way; for XmlNamedNodeMap and
+                // XmlNamespaceManager ONLY this entry matches, so the name has to
+                // stay here.  The overlap is real but harmless, and is recorded as
+                // an explicit allowance in the guard test rather than left to
+                // depend on declaration order.
+                "SetNamedItem", "Append", "Prepend", "Item", "GetNamedItem",
+                "AddNamespace", "RemoveNamespace", "LookupNamespace", "LookupPrefix",
+                "HasNamespace", "PopScope", "PushScope", "GetEnumerator",
+            ],
+            NativeSymbol: "xml_document_stubs.cpp",
+            Rationale:
+                "Native stubs replicate the managed validation: ArgumentException for " +
+                "a foreign node, InvalidOperationException for an uninitialized " +
+                "collection, ArgumentNullException for null args."),
+
+        new(
+            TypeFragments: ["System.Text.Json.Utf8JsonWriter"],
+            ExactTypeNames: [],
+            Methods:
+            [
+                "Flush", "Dispose", "Reset", "WriteStartObject", "WriteStartArray",
+                "WriteEndObject", "WriteEndArray", "WriteString", "WriteNumber",
+                "WriteBoolean", "WriteNull", "WriteNullValue", "WriteBooleanValue",
+                "WritePropertyName", "WriteRawValue", "WriteCommentValue", "WriteTo",
+                "WriteNumberValue", "WriteStringValue",
+            ],
+            NativeSymbol: "json_writer_stubs.cpp",
+            Rationale:
+                "Subjects construct via SubjectInstanceFactory.Create<Utf8JsonWriter>() " +
+                "— a bare GetUninitializedObject instance whose instance methods throw " +
+                "ObjectDisposedException / InvalidOperationException / " +
+                "ArgumentNullException from the managed implementation."),
+
+        new(
+            TypeFragments: ["System.Xml.XmlWriterSettings"],
+            ExactTypeNames: [],
+            Methods: ["Clone"],
+            NativeSymbol: "xml_writer_stubs.cpp",
+            Rationale:
+                "Native stub raises the same InvalidOperationException the managed " +
+                "implementation does for a used instance."),
+
+        new(
+            TypeFragments:
+            [
+                "System.Text.Json.JsonDocument", "System.Text.Json.JsonElement",
+                "System.Text.Json.JsonProperty",
+            ],
+            ExactTypeNames: [],
+            Methods: ["WriteTo"],
+            NativeSymbol: "ChaosUtf8JsonWriterWriteTo",
+            Rationale:
+                "Bare-object subjects pass default(Utf8JsonWriter)! and the managed " +
+                "implementation raises ArgumentNullException; the native stub " +
+                "replicates that contract."),
+    ];
+
     // Types that need explicit casts to disambiguate overloads
     private static readonly HashSet<string> CastNeededTypes = new(StringComparer.Ordinal)
     {
@@ -778,249 +1067,42 @@ public sealed class TestEmitter
     }
 
     /// <summary>
-    /// True when an external-assembly method's AOT body is KNOWN to throw the same
-    /// managed exception as its managed peer, so the [UNVERIFIED] skip is
-    /// unnecessary and Assert.Throws can observe the throw at runtime.
+    /// Whether the AOT body for this method is expected to raise the exception the
+    /// managed probe observed, so the try/throw reproduction form can be emitted.
     /// </summary>
     /// <remarks>
-    /// F (json-xml-production-readiness): the codegen catch-all emits
-    /// <c>throw chaos_managed_exception{}</c> for JsonMetadataServices.Create*Info,
-    /// whose managed body throws for every input (source-generator hooks).  Extend
-    /// this list as the catch-all gains other well-known throwing families.
+    /// Matches against <see cref="ExceptionReproductionTable"/>. Keep additions
+    /// there, not here — the table requires a native symbol and a rationale, and
+    /// the guard test asserts the symbol exists.
     /// </remarks>
-    /// <summary>
-    /// Whether the AOT side reproduces the managed exception for this method,
-    /// meaning the subject can execute the real call instead of degenerating
-    /// into a codegen-time smoke stub.
-    ///
-    /// <para>
-    /// Accepts the concrete <c>XmlTextWriter</c> AND the abstract
-    /// <c>XmlWriter</c> declaring type.  The latter matters because ATG
-    /// synthesizes subjects from the API surface of the abstract class
-    /// (<c>System_Xml_XmlWriterTests</c> calls <c>XmlWriter.Create(...)</c>, whose
-    /// static type is the abstract base).  Both entry points land on the same
-    /// native symbols — the registry registers the abstract receiver type
-    /// against the same writer stubs — so the same argument-validation contract
-    /// holds for either one.
-    /// </para>
-    /// </summary>
     private static bool ExternalStubRaisesManagedException(MethodSignature method)
     {
-        var declaringType = method.DeclaringTypeFullName;
-        if (declaringType?.Contains(
-                "System.Text.Json.Serialization.Metadata.JsonMetadataServices",
-                StringComparison.Ordinal) == true
-            && method.Name is "CreateArrayInfo" or "CreateListInfo"
-               or "CreateDictionaryInfo" or "CreateImmutableDictionaryInfo"
-               or "CreateIDictionaryInfo" or "CreateIReadOnlyDictionaryInfo"
-               or "CreateICollectionInfo" or "CreateIListInfo" or "CreateISetInfo"
-               or "CreateIAsyncEnumerableInfo")
-            return true;
+        return TryFindExceptionReproductionEntry(method, out _);
+    }
 
-        // XmlTextWriter / XmlWriter argument-validation surface (W1+W2,
-        // json-xml-production-readiness).  The native stubs in
-        // xml_writer_stubs.cpp raise the same managed exceptions the BCL does:
-        //   ArgumentNullException   — null name/buffer/ns
-        //   ArgumentException       — empty name, invalid surrogate pair
-        //   InvalidOperationException — no open element / attribute / document
-        // Emitting the try/throw-reprobe form (rather than the [UNVERIFIED] skip)
-        // turns these subjects into real results: the native call executes, the
-        // throw is observed by the subject's enclosing catch, and fact records a
-        // genuine value instead of the codegen-time `return 42L` smoke stub.
-        //
-        // Async variants are EXCLUDED above and handled separately below: the
-        // suffix means the sync name list cannot match them, and their contract
-        // differs (see the *Async block).
-        if (declaringType is not null
-            && (declaringType.Contains("System.Xml.XmlTextWriter", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlWriter", StringComparison.Ordinal))
-            && method.Name is "WriteDocType" or "WriteProcessingInstruction"
-               or "WriteEntityRef" or "WriteEndElement" or "WriteFullEndElement"
-               or "WriteEndAttribute" or "WriteEndDocument" or "WriteName"
-               or "WriteQualifiedName" or "WriteNmToken"
-               or "WriteSurrogateCharEntity" or "WriteChars" or "WriteRaw"
-               or "WriteBase64" or "WriteBinHex" or "LookupPrefix"
-               or "WriteValue" or "WriteAttributeString" or "WriteElementString"
-               or "WriteStartElement" or "WriteStartAttribute"
-               or "WriteCData" or "WriteCharEntity" or "WriteString"
-               or "WriteNode" or "WriteAttributes")
-            return true;
-
-        // XmlWriter *Async surface.  The generated subjects call these on
-        // `XmlWriter.Create(new StringBuilder())`, a writer whose
-        // Settings.Async is false; the BCL's async path refuses such a writer
-        // AFTER the argument validation it shares with the sync path, so the
-        // contract is two-stage:
-        //     invalid argument                  -> ArgumentNullException / ArgumentException
-        //     valid argument, non-async writer  -> InvalidOperationException
-        // Measured against .NET 8 for all 27 entries in
-        // xml_writer_async_stubs.cpp, which reproduces exactly that ordering.
-        //
-        // Earlier revisions of this file excluded async wholesale, on the
-        // belief that these methods "fail on the managed side too" and needed
-        // the phase-M state machine.  Neither part held up: the managed calls
-        // run and throw normally, and .GetAwaiter().GetResult() drives the
-        // state machine to completion inside the generated subject.  The
-        // subjects only lacked a shape registration and native body.
-        if (declaringType is not null
-            && (declaringType.Contains("System.Xml.XmlWriter", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlTextWriter", StringComparison.Ordinal))
-            && method.Name is "WriteStartDocumentAsync" or "WriteEndDocumentAsync"
-               or "WriteEndElementAsync" or "WriteFullEndElementAsync"
-               or "FlushAsync" or "DisposeAsync"
-               or "WriteStringAsync" or "WriteWhitespaceAsync" or "WriteCommentAsync"
-               or "WriteCDataAsync" or "WriteRawAsync" or "WriteNameAsync"
-               or "WriteNmTokenAsync" or "WriteEntityRefAsync"
-               or "WriteCharEntityAsync" or "WriteSurrogateCharEntityAsync"
-               or "WriteQualifiedNameAsync" or "WriteProcessingInstructionAsync"
-               or "WriteStartElementAsync" or "WriteDocTypeAsync"
-               or "WriteAttributeStringAsync" or "WriteElementStringAsync"
-               or "WriteCharsAsync" or "WriteBase64Async" or "WriteBinHexAsync"
-               or "WriteNodeAsync" or "WriteAttributesAsync")
-            return true;
-
-        // XmlConvert static methods: pure string→value transforms whose native
-        // stubs (xml_convert_stubs.cpp) raise the same exceptions the BCL does
-        // (FormatException for malformed/empty input, ArgumentNullException for
-        // a null string, OverflowException for out-of-range values) and the same
-        // XmlException for the Verify* XSD-name predicates.
-        if (declaringType is not null
-            && declaringType.Contains("System.Xml.XmlConvert", StringComparison.Ordinal)
-            && method.Name is "ToBoolean" or "ToByte" or "ToSByte"
-               or "ToInt16" or "ToUInt16" or "ToInt32" or "ToUInt32"
-               or "ToInt64" or "ToUInt64" or "ToSingle" or "ToDouble"
-               or "ToDecimal" or "ToChar" or "ToGuid" or "ToTimeSpan"
-               or "ToDateTime" or "ToDateTimeOffset"
-               or "VerifyName" or "VerifyNCName" or "VerifyNMTOKEN"
-               or "VerifyPublicId" or "VerifyWhitespace" or "VerifyXmlChars")
-            return true;
-
-        // XmlTextReader residual surface (M5 follow-up): the qualified attribute
-        // lookups, the byte[]-buffer content readers and ResolveEntity.  The
-        // native stubs raise the same exceptions the managed reader does
-        // (ArgumentOutOfRangeException for a null/empty name,
-        // ArgumentNullException for a null buffer, InvalidOperationException for
-        // ResolveEntity at an invalid position).
-        //
-        // XmlValidatingReader & XmlNodeReader share the same exception contracts
-        // for GetAttribute/MoveToAttribute/ResolveEntity on a bare object, so
-        // they are included here too.
-        if (declaringType is not null
-            && (declaringType.Contains("System.Xml.XmlTextReader", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlValidatingReader", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlNodeReader", StringComparison.Ordinal))
-            && method.Name is "MoveToAttribute" or "GetAttribute"
-               or "ReadContentAsBase64" or "ReadContentAsBinHex"
-               or "ReadElementContentAsBase64" or "ReadElementContentAsBinHex"
-               or "ResolveEntity")
-            return true;
-
-        // Xml DOM types: XmlNode / XmlDocument / XmlElement / XmlAttribute /
-        // XmlCharacterData.  ATG subjects use SubjectInstanceFactory.Create<T>()
-        // with bare objects (not real document trees), so every instance method
-        // throws NRE, InvalidOperationException or ArgumentException.
-        //
-        // Only the methods with native stubs (xml_document_stubs.cpp) are listed
-        // — an open "any method on these types" predicate would pull in
-        // object-returning members whose MethodTable symbols are not emitted,
-        // producing LNK2001 against chaos_mt_*.
-        if (declaringType is not null
-            && (declaringType.Contains("System.Xml.XmlNode", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlDocument", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlElement", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlAttribute", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlCharacterData", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlText", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlCDataSection", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlComment", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlWhitespace", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlSignificantWhitespace", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlDeclaration", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlDocumentType", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlEntityReference", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlProcessingInstruction", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlNotation", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlEntity", StringComparison.Ordinal))
-            && method.Name is "AppendChild" or "PrependChild" or "InsertBefore"
-               or "InsertAfter" or "ReplaceChild" or "RemoveChild" or "RemoveAll"
-               or "Supports" or "GetNamespaceOfPrefix" or "GetPrefixOfNamespace"
-               or "WriteTo" or "WriteContentTo"
-               or "Clone" or "CloneNode" or "GetEnumerator"
-               or "SelectNodes" or "SelectSingleNode" or "SplitText"
-               or "LoadXml" or "Load" or "Save" or "Validate" or "ImportNode"
-               or "ReadNode"
-               or "CreateNode" or "CreateDocumentType" or "CreateXmlDeclaration"
-               or "CreateProcessingInstruction"
-               or "CreateElement" or "CreateAttribute" or "GetElementsByTagName"
-               or "CreateEntityReference" or "CreateNavigator"
-               or "Substring" or "AppendData" or "InsertData" or "DeleteData"
-               or "ReplaceData"
-               or "SetAttribute" or "SetAttributeNode")
-            return true;
-
-        // XmlNameTable: native stubs raise ArgumentNullException for null input
-        // and return null for empty/non-existent lookups.  ATG subjects construct
-        // via KnownInstances → real NameTable instance, so methods execute.
-        if (declaringType is not null
-            && (declaringType.Contains("System.Xml.XmlNameTable", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.NameTable", StringComparison.Ordinal))
-            && method.Name is "Get" or "Add")
-            return true;
-
-        // XmlAttributeCollection / XmlNodeList / XmlNamedNodeMap /
-        // XmlNamespaceManager: native stubs replicate the managed validation
-        // (ArgumentException for a foreign node, InvalidOperationException for an
-        // uninitialized collection, ArgumentNullException for null args).
-        if (declaringType is not null
-            && (declaringType.Contains("System.Xml.XmlAttributeCollection", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlNodeList", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlNamedNodeMap", StringComparison.Ordinal)
-                || declaringType.Contains("System.Xml.XmlNamespaceManager", StringComparison.Ordinal))
-            && method.Name is "SetNamedItem" or "Append" or "Prepend" or "Item"
-               or "GetNamedItem" or "AddNamespace" or "RemoveNamespace"
-               or "LookupNamespace" or "LookupPrefix" or "HasNamespace"
-               or "PopScope" or "PushScope" or "GetEnumerator")
-            return true;
-
-        // System.Text.Json.Utf8JsonWriter (M3): ATG subjects construct this type
-        // through SubjectInstanceFactory.Create<Utf8JsonWriter>() — a bare
-        // GetUninitializedObject instance whose instance methods throw
-        // ObjectDisposedException / InvalidOperationException / ArgumentNullException
-        // from the managed implementation.  The native stubs (json_writer_stubs.cpp)
-        // replicate those contracts.  Only methods with stubs are listed.
-        if (declaringType is not null
-            && declaringType.Contains("System.Text.Json.Utf8JsonWriter", StringComparison.Ordinal)
-            && method.Name is "Flush" or "Dispose" or "Reset"
-               or "WriteStartObject" or "WriteStartArray" or "WriteEndObject"
-               or "WriteEndArray"
-               or "WriteString" or "WriteNumber" or "WriteBoolean"
-               or "WriteNull" or "WriteNullValue" or "WriteBooleanValue"
-               or "WritePropertyName" or "WriteRawValue" or "WriteCommentValue"
-               or "WriteTo"
-               or "WriteNumberValue" or "WriteStringValue")
-            return true;
-
-        // XmlWriterSettings.Clone() — the native stub raises the same
-        // InvalidOperationException the managed implementation does for a
-        // used instance.
-        if (declaringType is not null
-            && declaringType.Contains("System.Xml.XmlWriterSettings", StringComparison.Ordinal)
-            && method.Name is "Clone")
-            return true;
-
-        // JsonDocument / JsonElement / JsonProperty .WriteTo(Utf8JsonWriter):
-        // the bare-object subjects pass default(Utf8JsonWriter)! and the managed
-        // implementation raises ArgumentNullException.  The native stub
-        // (ChaosUtf8JsonWriterWriteTo) replicates that contract.
-        if (declaringType is not null
-            && (declaringType.Contains("System.Text.Json.JsonDocument", StringComparison.Ordinal)
-                || declaringType.Contains("System.Text.Json.JsonElement", StringComparison.Ordinal)
-                || declaringType.Contains("System.Text.Json.JsonProperty", StringComparison.Ordinal))
-            && method.Name is "WriteTo")
-            return true;
-
+    /// <summary>
+    /// Resolve the whitelist entry covering <paramref name="method"/>, if any.
+    /// Exposed so the guard test can inspect the matched entry rather than only
+    /// the boolean.
+    /// </summary>
+    internal static bool TryFindExceptionReproductionEntry(
+        MethodSignature method, out ExceptionReproductionEntry? entry)
+    {
+        foreach (var candidate in ExceptionReproductionTable)
+        {
+            if (candidate.Matches(method.DeclaringTypeFullName, method.Name))
+            {
+                entry = candidate;
+                return true;
+            }
+        }
+        entry = null;
         return false;
     }
+
+    /// <summary>The whitelist, exposed for the guard test.</summary>
+    internal static IReadOnlyList<ExceptionReproductionEntry> ExceptionReproductionEntries
+        => ExceptionReproductionTable;
 
     private static string SanitizeIdentifier(string name)
     {

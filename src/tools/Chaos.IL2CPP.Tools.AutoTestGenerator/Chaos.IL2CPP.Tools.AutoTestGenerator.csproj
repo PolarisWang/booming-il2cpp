@@ -11,6 +11,12 @@
     <Compile Remove="output/**/*.cs" />
   </ItemGroup>
   <ItemGroup>
+    <!-- The exception-reproduction whitelist (TestEmitter.ExceptionReproductionTable)
+         is internal, so the guard test that asserts every entry names a real native
+         symbol and a non-overlapping method set can reach it. -->
+    <InternalsVisibleTo Include="Chaos.IL2CPP.Tools.AutoTestGenerator.Tests" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.18.1" />
     <PackageReference Include="System.Reflection.MetadataLoadContext" Version="8.0.0" />
   </ItemGroup>

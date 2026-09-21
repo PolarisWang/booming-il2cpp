@@ -3020,5 +3020,171 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
         }
 
+        /// <summary>
+        /// WaitHandle's static wait family — WaitAll / WaitAny / SignalAndWait.
+        /// Argument validation only; no blocking wait is modelled.
+        /// </summary>
+        /// <remarks>
+        /// Managed contract (measured against .NET 8 <b>and</b> net10 — identical
+        /// on both; see waithandle-contracts.md):
+        /// <c>null</c> array → ArgumentNullException, empty array →
+        /// ArgumentException, any <c>null</c> element → ArgumentNullException, and
+        /// the check runs BEFORE any wait and is identical across every overload.
+        /// <c>SignalAndWait</c> takes two single handles rather than an array.
+        ///
+        /// <para>
+        /// <b>Why every arity is registered separately.</b> The native entry takes
+        /// only the array (or the two handles); the timeout operand is validated
+        /// and dropped. That makes it tempting to register one wide shim and
+        /// forward just the first slot — and that is precisely the defect this
+        /// file's Task blockers above document: <c>DirectNativeSymbol</c> passes
+        /// the call site's OWN arguments, so the declared slot count must equal
+        /// the CALLEE's arity. A 1-slot shim registered for
+        /// <c>WaitAll(WaitHandle[], TimeSpan)</c> leaves the TimeSpan on the
+        /// evaluation stack, codegen then reads <c>&amp;chaos_locals[1]</c> as the
+        /// array handle, and the callee dereferences a TimeSpan —
+        /// STATUS_ACCESS_VIOLATION.
+        /// </para>
+        ///
+        /// <para>
+        /// <b>Why this must cover EVERY overload.</b> This family was previously
+        /// attempted with only the 2-operand shim registered. The result was the
+        /// worst of both worlds rather than a partial win: the 2-arg overloads
+        /// resolved to real native validation while their siblings kept falling
+        /// through to the <c>chaos_external_runtime_*</c> catch-all, which returns
+        /// 0 without raising. ATG — which had been told by the whitelist to expect
+        /// a managed exception here — then saw "no throw" and recorded the whole
+        /// assembly as failed. A half-wired family converts honest gaps into false
+        /// reds, so either every overload is registered or none is.
+        /// </para>
+        ///
+        /// <para>
+        /// The <c>exitContext</c> overloads (<c>…, Int32, Boolean</c> /
+        /// <c>…, TimeSpan, Boolean</c>) are the .NET Framework context-propagation
+        /// form. They exist in the reference surface and are validated identically,
+        /// so they are registered on the same footing as the rest.
+        /// </para>
+        /// </remarks>
+        private static void RegisterWaitHandleStatics(RuntimeHelperShapeRegistry registry)
+        {
+            const string WaitHandle = "System.Threading.WaitHandle";
+
+            // Array-form family: WaitAll / WaitAny, shared by every overload.
+            //
+            // (method, arity, timeout type) — the timeout operand is carried so the
+            // slot list matches the callee exactly; it is unused by the native side.
+            IEnumerable<(string Method, string Native, int Arity, string[] Timeout)> arrayForm =
+            [
+                ("WaitAll", "chaos_wait_handle_validate", 1, []),
+                ("WaitAny", "chaos_wait_handle_validate", 1, []),
+                ("WaitAll", "chaos_wait_handle_validate", 2, ["System.Int32"]),
+                ("WaitAny", "chaos_wait_handle_validate", 2, ["System.Int32"]),
+                ("WaitAll", "chaos_wait_handle_validate", 2, ["System.TimeSpan"]),
+                ("WaitAny", "chaos_wait_handle_validate", 2, ["System.TimeSpan"]),
+                ("WaitAll", "chaos_wait_handle_validate", 3, ["System.Int32", "System.Boolean"]),
+                ("WaitAny", "chaos_wait_handle_validate", 3, ["System.Int32", "System.Boolean"]),
+                ("WaitAll", "chaos_wait_handle_validate", 3, ["System.TimeSpan", "System.Boolean"]),
+                ("WaitAny", "chaos_wait_handle_validate", 3, ["System.TimeSpan", "System.Boolean"]),
+            ];
+            foreach (var (method, native, arity, timeout) in arrayForm)
+            {
+                var paramTypes = new List<string> { "System.Threading.WaitHandle[]" };
+                paramTypes.AddRange(timeout);
+                RegisterWaitHandleShim(registry, WaitHandle, method, paramTypes, native,
+                    leadingArgs: 1, // the array; the timeout operands are dropped
+                    validate: $"{native}(chaos_arg_0)");
+            }
+
+            // SignalAndWait(toSignal, toWaitOn [, timeout [, exitContext]]) —
+            // two single handles instead of an array, and both are validated.
+            IEnumerable<(int Arity, string[] Timeout)> pairForm =
+            [
+                (2, []),
+                (4, ["System.Int32", "System.Boolean"]),
+                (4, ["System.TimeSpan", "System.Boolean"]),
+            ];
+            foreach (var (arity, timeout) in pairForm)
+            {
+                var paramTypes = new List<string>
+                {
+                    "System.Threading.WaitHandle",
+                    "System.Threading.WaitHandle",
+                };
+                paramTypes.AddRange(timeout);
+                RegisterWaitHandleShim(registry, WaitHandle, "SignalAndWait", paramTypes,
+                    "chaos_wait_handle_validate_pair",
+                    leadingArgs: 2,
+                    validate: "chaos_wait_handle_validate_pair(chaos_arg_0, chaos_arg_1)");
+            }
+        }
+
+        /// <summary>
+        /// Emit and register one WaitHandle shim whose slot count equals
+        /// <paramref name="paramTypes"/>.Count.
+        /// </summary>
+        /// <remarks>
+        /// <paramref name="leadingArgs"/> is how many of those slots the native
+        /// entry actually consumes; the rest exist only so the declared arity
+        /// matches the callee and nothing is left on the evaluation stack. They
+        /// are explicitly <c>(void)</c>-cast rather than silently ignored so the
+        /// generated source shows they were considered.
+        /// </remarks>
+        private static void RegisterWaitHandleShim(
+            RuntimeHelperShapeRegistry registry,
+            string typeName,
+            string methodName,
+            IReadOnlyList<string> paramTypes,
+            string nativeSymbol,
+            int leadingArgs,
+            string validate)
+        {
+            var helperSymbol = GetExternalRuntimeHelperSymbol(
+                $"System.Private.CoreLib/{typeName}::{methodName}({string.Join(",", paramTypes)})");
+
+            var slots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
+            var rawArgs = new HashSet<int>();
+            var pointerParams = new List<string>(paramTypes.Count);
+            for (var i = 0; i < paramTypes.Count; i++)
+            {
+                slots.Add(CreateNativeIntAbiSlot());
+                rawArgs.Add(i);
+                pointerParams.Add($"CHAOS_IL2CPP_INTPTR chaos_arg_{i}");
+            }
+
+            var body = new List<string>();
+            for (var i = leadingArgs; i < paramTypes.Count; i++)
+            {
+                body.Add($"    (void)chaos_arg_{i};");
+            }
+            body.Add($"    return {validate};");
+
+            var source = RenderSimpleExternalRuntimeHelper(
+                "CHAOS_IL2CPP_INT32", helperSymbol, string.Join(", ", pointerParams), body);
+
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: typeName,
+                MethodName: methodName,
+                Resolver: (planner, callee, typeArgs) =>
+                {
+                    // The descriptor matches on type prefix + method name, which is
+                    // also true of any overload added to the BCL later.  Compare the
+                    // actual parameter list so an unrecognised overload falls to the
+                    // catch-all instead of being handed a shim with the wrong arity.
+                    var actual = GetMethodParameterTypesFromSubjectId(callee);
+                    if (actual.Count != paramTypes.Count) return null;
+                    for (var i = 0; i < actual.Count; i++)
+                    {
+                        if (!actual[i].StartsWith(paramTypes[i], StringComparison.Ordinal))
+                            return null;
+                    }
+
+                    return new GenericShapeResolution(source, helperSymbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(slots.ToArray()),
+                        CreateInt32AbiSlot(),
+                        rawArgs,
+                        DirectNativeSymbol: nativeSymbol);
+                }));
+        }
+
     }
 }
