@@ -187,3 +187,85 @@ CHAOS_EH_END
 2. 第一个 catch 的正确匹配被第二个 catch 吞掉
 
 **这是本 chunk 之外也应受影响的代码生成缺陷**，不限于 JSON/XML 线。
+
+---
+
+## 10. 修复落地与验证（2026-09-21，提交 `322af0276`）
+
+### 实施
+
+新增与既有 `IRExceptionRegion` **并存**的 IR 节点（单 catch 路径完全不动）：
+
+```
+IRMultiCatchRegion(TryBody, Clauses[])      // 一个 try + 多个 catch
+IRMultiCatchClause(CatchTypeSubjectId, HandlerBody)
+```
+
+`EmitMultiCatchRegion` 在**同一个 `CHAOS_EH_TRY`** 内发射按序匹配链：
+
+```cpp
+CHAOS_EH_TRY
+    <try body —— 只执行一次>
+CHAOS_EH_CATCH_BEGIN
+    if (match(ObjectDisposedException)) { <h1> ; goto chaos_multi_catch_end_0; }
+    if (match(System.Object))           { <h2> ; goto chaos_multi_catch_end_0; }
+    CHAOS_EH_RETHROW;                  // 全部不匹配
+chaos_multi_catch_end_0: ;
+CHAOS_EH_END
+```
+
+标签用**每方法重置**的单调计数器（`BuildMethodSourceSafe` 入口重置）保证唯一且确定性。
+
+### text-json 指标（build+fact 实测）
+
+| metric | 修复前 | 修复后 | delta |
+|:-------|:------:|:------:|:-----:|
+| **passed** | 181 | **200** | **+19** |
+| **factoryGap** | 62 | **43** | **−19** |
+| preAssertionRaise | 65 | 46 | −19 |
+| unassertable | 3 | 22 | +19 |
+| realVerified | 2 | 2 | 0 |
+| stubGap | 176 | 176 | 0 |
+
+### 生成体结构（一手核对）
+
+| 指标 | 修复前 | 修复后 |
+|:-----|:------:|:------:|
+| text-json 内「try 体重复」的方法 | 114 | **0** |
+| 使用新多 catch 发射的方法 | — | **114** |
+| `Reset_0_Stream_0` 的 `CHAOS_EH_TRY` 数 | 2 | **1** |
+| `Reset_0_Stream_0` 的 `Create` 调用数 | 2 | **1** |
+
+### 🔴 诚实标注：这 19 项**没有**变成 `real`
+
+`Reset_0_Stream_0` 的 fact 记录变化：
+
+```json
+// 修复前
+{"passed": false, "value": 0,  "caught": true,  "resultKind": "factoryGap"}
+// 修复后
+{"passed": true,  "value": 42, "caught": false, "resultKind": "unassertable"}
+```
+
+`Reset` 返回 **void**，`value=42` 是 ATG 的结构性 sentinel，
+故分类器判 `unassertable`（"执行正确但无可断言值"）。
+
+**这是准确的分类，不是假绿** —— `caught=false` 且 typed catch 已按序命中，
+证明异常语义现在是对的。真实收益是 **19 个 subject 不再因降低缺陷而失败**。
+
+要把它们变成 `real` 需要 void 断言基础设施（副作用断言），
+属独立任务，见 `20260920-03-void-writer-sideeffect-assertion`。
+
+### 影响面确认：修复范围正确，未波及其它 chunk
+
+**System.Private.Xml / xml chunk**（同类回归核对）：
+
+| metric | 文档基线（2026-09-20） | 修复后 |
+|:-------|:---------------------:|:------:|
+| realVerified | 136 | **136** ✅ |
+| stubGap | 185 | **185** ✅ |
+| total | 746 | 746 ✅ |
+
+**无回归**。XML chunk 内「try 体重复」方法 = **0**、
+使用多 catch 发射 = **0** ——
+该 chunk 的测试体不走 A2 typed-catch 形态，**本修复对其无影响，符合预期**。
