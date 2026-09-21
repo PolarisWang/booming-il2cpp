@@ -3,6 +3,10 @@
 // references them, but GC unit tests don't have generated AOT modules.
 
 #include <cstdint>
+// For ChaosExceptionTypeEntryV0 — the element type of kChaosExceptionTypes.
+// Must be the real definition, not a forward declaration: the stub defines an
+// array of these, so the type has to be complete.
+#include <chaos/type_info.h>
 
 extern "C" {
 
@@ -18,6 +22,42 @@ int32_t     kChaosExternalRuntimeCount = 0;
 // Note: ChaosResolveExternalRuntimeFnTable is provided by
 // chaos_interpreter (hotpatch_resolve.cpp), NOT defined here to avoid
 // duplicate symbol conflicts when chaos_interpreter is linked.
+
+// Exception type table — normally provided by codegen output.
+//
+// exception_helpers.cpp (ResolveTypeByName) references these unconditionally
+// since cb129e362 added the compile-time exception-type lookup, but the table is
+// only ever emitted into the per-project generated ChaosGeneratedModule.cpp
+// (NativeAotLoweringPlanner.ModuleRegistration.Dispatch.cs, BuildExceptionTypeTable).
+// A standalone test target links chaos_runtime_core without any generated module,
+// so it must supply them — same situation as kChaosExternalRuntime* above.
+//
+// The emitter's own comment states the intent: "Always emit both symbols so the
+// runtime can reference them unconditionally without a link error."  That holds
+// for a generated module; this file carries the same contract for test binaries.
+//
+// Count 0 is the safe value: the lookup loop in ResolveTypeByName is
+// `for (i = 0; i < kChaosExceptionTypeCount; ++i)`, so it iterates zero times and
+// falls through to the existing reflection-image path, which is exactly the
+// pre-cb129e362 behaviour.
+//
+// Both symbols are const-qualified in the referencing TU
+// (exception_helpers.cpp: `extern const ChaosExceptionTypeEntryV0 ...[]` /
+// `extern const int32_t ...Count`).  Const-ness is part of the symbol's type:
+// dropping it here would declare a DIFFERENT symbol, leave the original
+// unresolved, and keep the LNK2001.  The array is sized 1 and never dereferenced
+// because the count is 0.
+//
+// The explicit `extern` keyword is LOAD-BEARING, exactly as the comment in
+// exception_helpers.cpp says of the referencing side.  `extern "C"` sets
+// language linkage (i.e. name mangling) but does NOT change storage-class
+// linkage: a namespace-scope `const` still defaults to INTERNAL linkage.  Without
+// `extern` these two definitions are compiled as internal symbols, never reach
+// the object's symbol table, and the LNK2001 persists with NO compiler
+// diagnostic to explain it.  Verified with a 5-line repro: the same block with
+// and without `extern` yields zero vs two External symbols.
+extern const ChaosExceptionTypeEntryV0 kChaosExceptionTypes[1] = { { nullptr, nullptr } };
+extern const int32_t kChaosExceptionTypeCount = 0;
 
 }  // extern "C"
 

@@ -146,4 +146,34 @@ void chaos_thread_set_priority(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT3
 // Thread.IsThreadPoolThread: query whether thread is a ThreadPool worker.
 CHAOS_IL2CPP_INT32 chaos_thread_is_threadpool(CHAOS_IL2CPP_INTPTR thread_obj) noexcept;
 
+// ── WaitHandle static overloads: argument validation ──────────────────────
+//
+// Managed contract (measured against .NET 8 AND net10 — identical on both):
+//
+//   WaitHandle.WaitAll (WaitHandle[])              → null arr: ArgumentNullException
+//   WaitHandle.WaitAll (WaitHandle[], int|TimeSpan [, bool])
+//   WaitHandle.WaitAny (WaitHandle[], ...)         → null arr: ArgumentNullException
+//                                                  → empty arr: ArgumentException
+//   WaitHandle.SignalAndWait (WaitHandle, WaitHandle [, ...])
+//
+// The validation runs BEFORE any wait, and it is IDENTICAL across every
+// overload — the timeout operand does not participate.  That is what makes a
+// single shared entry point sufficient: each registered shim keeps the callee's
+// own arity (see the arity note in CoreStubs.Part1.S16.cs) but forwards only
+// the array handle here.
+//
+// A null ELEMENT (not just a null array) is also an ArgumentNullException —
+// measured with `WaitAll(new WaitHandle[]{ ev, null! }, 0)`.
+//
+// Ordering matters and is asserted by the contract test: null-check precedes
+// empty-check, because `WaitAll(null!, …)` must raise ArgumentNullException and
+// not ArgumentException.
+CHAOS_IL2CPP_INT32 chaos_wait_handle_validate(CHAOS_IL2CPP_INTPTR wait_handles) noexcept;
+
+// Same validation for the two-handle SignalAndWait form, where each operand is
+// a single WaitHandle rather than an array.  Null either one → ArgumentNullException.
+CHAOS_IL2CPP_INT32 chaos_wait_handle_validate_pair(
+    CHAOS_IL2CPP_INTPTR to_signal,
+    CHAOS_IL2CPP_INTPTR to_wait_on) noexcept;
+
 }  // extern "C"

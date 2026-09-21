@@ -90,6 +90,13 @@ endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/synchronization_smoke.cpp")
     chaos_native_add_test(chaos_synchronization_smoke synchronization_smoke.cpp)
 endif()
+# WaitHandle static-overload argument validation (null/empty array, null
+# element).  Contract measured against .NET 8 + net10; see the header comment
+# in the test source for why this is validation-only.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/waithandle_validate_contract_test.cpp")
+    chaos_native_add_test(chaos_waithandle_validate_contract
+        waithandle_validate_contract_test.cpp)
+endif()
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/monitor_stress_test.cpp")
     chaos_native_add_test(chaos_monitor_stress_test monitor_stress_test.cpp LABELS "stress")
 endif()

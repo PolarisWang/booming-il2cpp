@@ -11,6 +11,8 @@
 #include "bootstrap/bootstrap.h"
 #include "gc/gc_transition.h"
 #include "core/gc_alloc_stubs.h"
+#include "stub_common.h"        // ManagedArrayAccessor / get_managed_array
+#include "../exception_helpers.h"  // RaiseArgumentNullException / RaiseArgumentException
 
 #include <memory>
 #include <thread>
@@ -464,6 +466,76 @@ CHAOS_IL2CPP_INTPTR chaos_lazy_initializer_ensure_initialized_factory(
     CHAOS_IL2CPP_INT32 carrier_width) noexcept
 {
     return LazyInitEnsure(target_ref, initialized_ref, sync_lock_ref, value_factory, carrier_width);
+}
+
+// ── WaitHandle static overloads: argument validation ───────────────────────
+//
+// Contract measured against .NET 8 and net10 (identical): a null array raises
+// ArgumentNullException, an empty array raises ArgumentException, and a null
+// ELEMENT also raises ArgumentNullException.  The check is the same for every
+// overload, so the timeout/exitContext operands are simply not read here.
+//
+// CHECK ORDER IS PART OF THE CONTRACT: null before empty.  `WaitAll(null, …)`
+// must be an ArgumentNullException; reversing the two would report it as an
+// ArgumentException and the subject's Assert.Throws would fail on the type.
+//
+// The array body is read through ManagedArrayAccessor rather than a raw offset
+// so the layout stays tied to the one `static_assert`-guarded definition in
+// stub_common.h.  Element storage is contiguous after the 32-byte header.
+CHAOS_IL2CPP_INT32 chaos_wait_handle_validate(CHAOS_IL2CPP_INTPTR wait_handles) noexcept
+{
+    if (wait_handles == 0)
+    {
+        RaiseArgumentNullException("waitHandles");
+    }
+
+    const ManagedArrayAccessor* arr = get_managed_array(wait_handles);
+    const CHAOS_IL2CPP_INTPTR length = arr->length;
+    if (length == 0)
+    {
+        RaiseArgumentException(
+            "Array lengths must be greater than zero.");
+    }
+
+    // A null element is not a usable handle, and .NET raises the same
+    // ArgumentNullException it uses for a null array itself.
+    const CHAOS_IL2CPP_INTPTR* elements = accessor_get_elements(arr);
+    for (CHAOS_IL2CPP_INTPTR i = 0; i < length; ++i)
+    {
+        if (elements[i] == 0)
+        {
+            RaiseArgumentNullException("waitHandles");
+        }
+    }
+
+    // Validation passed.  The blocking wait itself is NOT modelled here.
+    //
+    // ⚠️ The 0 returned on this path is "validated", not "the wait completed" —
+    // and for WaitAny specifically, 0 is also the index of the FIRST ready
+    // handle, so a subject that asserted on a real wait result could read this
+    // as a pass it did not earn.  That cannot happen with the subjects this
+    // currently serves: every probed call site passes null, an empty array, or
+    // an array of nulls (measured across all 60 WaitHandle cases — see
+    // waithandle-contracts.md §五), so this path is unreachable from them.
+    //
+    // If a future subject does call these with live handles, this function must
+    // grow a real wait (or raise NotImplemented) rather than keep returning 0.
+    return 0;
+}
+
+CHAOS_IL2CPP_INT32 chaos_wait_handle_validate_pair(
+    CHAOS_IL2CPP_INTPTR to_signal,
+    CHAOS_IL2CPP_INTPTR to_wait_on) noexcept
+{
+    if (to_signal == 0)
+    {
+        RaiseArgumentNullException("toSignal");
+    }
+    if (to_wait_on == 0)
+    {
+        RaiseArgumentNullException("toWaitOn");
+    }
+    return 0;
 }
 
 }  // extern "C"

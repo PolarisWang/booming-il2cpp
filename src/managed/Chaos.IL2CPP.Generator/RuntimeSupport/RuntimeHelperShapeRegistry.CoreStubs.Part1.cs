@@ -122,6 +122,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterReaderWriterLockSlimAndSemaphoreSlim(registry);
             RegisterManualResetEventSlim(registry);
             RegisterSpinPrimitivesAndThreadPool(registry);
+            RegisterWaitHandleStatics(registry);
             RegisterValueTask(registry);
             RegisterHotBclNoOps(registry);
             RegisterParallelLoops(registry);
