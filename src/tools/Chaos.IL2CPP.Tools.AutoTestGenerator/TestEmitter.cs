@@ -470,6 +470,34 @@ public sealed class TestEmitter
         return false;
     }
 
+    /// <summary>
+    /// Methods that are structurally impossible in AOT (runtime dynamic
+    /// assembly loading, Binder abstract dispatch) â classified as
+    /// not-supported per the three-tier system.  The AOT catch-all raises,
+    /// so the generated subject asserts a throw (catch-any â the exact
+    /// exception type depends on the runtime entry).
+    /// </summary>
+    private static readonly HashSet<string> AotNotSupportedMethods = new(StringComparer.Ordinal)
+    {
+        "Assembly.Load", "Assembly.LoadFile", "Assembly.LoadFrom",
+        "Assembly.UnsafeLoadFrom", "Assembly.ReflectionOnlyLoad",
+        "Assembly.ReflectionOnlyLoadFrom", "Assembly.ReflectionOnlyLoadFrom_",
+        "Assembly.LoadModule", "Assembly.LoadWithPartialName",
+        "Assembly.CreateInstance", "Assembly.GetSatelliteAssembly",
+        "Assembly.CreateInstance_",
+        "Binder.BindToField", "Binder.BindToMethod", "Binder.SelectMethod",
+        "Binder.SelectProperty", "Binder.ChangeType", "Binder.ReorderArgumentArray",
+    };
+
+    private static bool IsAotNotSupported(MethodSignature method)
+    {
+        var declaring = method.DeclaringTypeFullName;
+        if (string.IsNullOrEmpty(declaring)) return false;
+        var lastDot = declaring.LastIndexOf('.');
+        var bareType = lastDot >= 0 ? declaring[(lastDot + 1)..] : declaring;
+        return AotNotSupportedMethods.Contains(bareType + "." + method.Name);
+    }
+
     private void AppendAssert(StringBuilder sb, int mi, MethodSignature method, ValueSet set,
         ProbeResult? result, string callExpr, bool hasRefParam, bool hasAnyValidSet,
         bool isExternalAssembly, bool isPlainTask, bool isGenericTask)
@@ -524,6 +552,14 @@ public sealed class TestEmitter
             // contract and must be asserted (falls through to the Throws
             // emission below).  The marker stays only for methods the
             // Classifier maps to no native symbol.
+            // S1: AOT-not-supported methods (dynamic loading, Binder) raise via
+            // the catch-all â assert the throw instead of emitting the marker.
+            if (isExternalAssembly && !HasKnownNativeImpl(method) && IsAotNotSupported(method))
+            {
+                if (!hasRefParam)
+                    sb.AppendLine($"            Assert.Throws(() => {callExpr});");
+                return;
+            }
             if (isExternalAssembly && !HasKnownNativeImpl(method))
             {
                 // P0-B (json-xml-production-readiness): emit an explicit machine-
