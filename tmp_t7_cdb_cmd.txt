@@ -1,0 +1,1 @@
+sxe -c "s;~*k 200;qd" ehh;g

@@ -1,0 +1,6 @@
+sxe av
+g
+ln
+u rip L20
+? rip-0x7ff6de500000
+q

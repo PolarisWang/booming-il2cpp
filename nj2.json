@@ -1,0 +1,3467 @@
+{
+  "total_count": 29,
+  "jobs": [
+    {
+      "id": 102898584173,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9TvKbQ",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898584173",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898584173",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:33Z",
+      "started_at": "2026-09-10T13:53:35Z",
+      "completed_at": "2026-09-10T13:53:47Z",
+      "name": "resolve",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:53:36Z",
+          "completed_at": "2026-09-10T13:53:37Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:53:37Z",
+          "completed_at": "2026-09-10T13:53:43Z"
+        },
+        {
+          "name": "Resolve enabled stages from profile",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:53:43Z",
+          "completed_at": "2026-09-10T13:53:45Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:53:45Z",
+          "completed_at": "2026-09-10T13:53:45Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:53:45Z",
+          "completed_at": "2026-09-10T13:53:45Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898584173",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000008986,
+      "runner_name": "GitHub Actions 1000008986",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671120,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0eEA",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671120",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671120",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:53:51Z",
+      "completed_at": "2026-09-10T13:58:13Z",
+      "name": "gc-linux-tsan / gc-linux-tsan",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:53:51Z",
+          "completed_at": "2026-09-10T13:53:58Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:53:58Z",
+          "completed_at": "2026-09-10T13:54:32Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:54:32Z",
+          "completed_at": "2026-09-10T13:54:39Z"
+        },
+        {
+          "name": "Install system dependencies (gcc-14 + ninja)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:54:39Z",
+          "completed_at": "2026-09-10T13:54:50Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:54:50Z",
+          "completed_at": "2026-09-10T13:55:02Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:55:02Z",
+          "completed_at": "2026-09-10T13:55:39Z"
+        },
+        {
+          "name": "Configure CMake (linux-x64-native, TSAN)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:55:39Z",
+          "completed_at": "2026-09-10T13:55:44Z"
+        },
+        {
+          "name": "Build Native Runtime + GC tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T13:55:44Z",
+          "completed_at": "2026-09-10T13:58:08Z"
+        },
+        {
+          "name": "Run GC Unit Tests under TSAN",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T13:58:08Z",
+          "completed_at": "2026-09-10T13:58:10Z"
+        },
+        {
+          "name": "Run GC concurrency stress tests (TSAN, SCALE=50)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-09-10T13:58:10Z",
+          "completed_at": "2026-09-10T13:58:10Z"
+        },
+        {
+          "name": "Upload GC Linux TSAN test output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T13:58:10Z",
+          "completed_at": "2026-09-10T13:58:11Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-09-10T13:58:11Z",
+          "completed_at": "2026-09-10T13:58:11Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22,
+          "started_at": "2026-09-10T13:58:11Z",
+          "completed_at": "2026-09-10T13:58:11Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23,
+          "started_at": "2026-09-10T13:58:11Z",
+          "completed_at": "2026-09-10T13:58:11Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671120",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000008987,
+      "runner_name": "GitHub Actions 1000008987",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671219,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0ecw",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671219",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671219",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:55:09Z",
+      "completed_at": "2026-09-10T14:18:20Z",
+      "name": "gc-server-smoke / gc-server-smoke",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:55:10Z",
+          "completed_at": "2026-09-10T13:55:12Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:55:12Z",
+          "completed_at": "2026-09-10T13:55:34Z"
+        },
+        {
+          "name": "Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:55:34Z",
+          "completed_at": "2026-09-10T13:56:57Z"
+        },
+        {
+          "name": "Run microsoft/setup-msbuild@v2",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:56:57Z",
+          "completed_at": "2026-09-10T13:56:58Z"
+        },
+        {
+          "name": "Restore Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:56:58Z",
+          "completed_at": "2026-09-10T13:57:09Z"
+        },
+        {
+          "name": "Build Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:57:09Z",
+          "completed_at": "2026-09-10T13:57:45Z"
+        },
+        {
+          "name": "Configure CMake (Server GC ON)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:57:45Z",
+          "completed_at": "2026-09-10T13:58:11Z"
+        },
+        {
+          "name": "Build Native Runtime + GC tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T13:58:11Z",
+          "completed_at": "2026-09-10T14:18:11Z"
+        },
+        {
+          "name": "Run Server GC coordinator/heap-manager tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T14:18:11Z",
+          "completed_at": "2026-09-10T14:18:12Z"
+        },
+        {
+          "name": "Run Server GC general stress (SCALE=50)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-09-10T14:18:12Z",
+          "completed_at": "2026-09-10T14:18:12Z"
+        },
+        {
+          "name": "Run Server GC multi-heap stress (SCALE=45)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T14:18:12Z",
+          "completed_at": "2026-09-10T14:18:12Z"
+        },
+        {
+          "name": "Upload Server GC test output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-09-10T14:18:12Z",
+          "completed_at": "2026-09-10T14:18:14Z"
+        },
+        {
+          "name": "Post Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23,
+          "started_at": "2026-09-10T14:18:14Z",
+          "completed_at": "2026-09-10T14:18:15Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24,
+          "started_at": "2026-09-10T14:18:15Z",
+          "completed_at": "2026-09-10T14:18:17Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25,
+          "started_at": "2026-09-10T14:18:17Z",
+          "completed_at": "2026-09-10T14:18:17Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671219",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000008994,
+      "runner_name": "GitHub Actions 1000008994",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671289,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0euQ",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671289",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671289",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:55:45Z",
+      "completed_at": "2026-09-10T14:14:48Z",
+      "name": "gc-unit / gc-unit",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:55:46Z",
+          "completed_at": "2026-09-10T13:55:47Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:55:47Z",
+          "completed_at": "2026-09-10T13:56:06Z"
+        },
+        {
+          "name": "Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:56:06Z",
+          "completed_at": "2026-09-10T13:57:15Z"
+        },
+        {
+          "name": "Run microsoft/setup-msbuild@v2",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:57:15Z",
+          "completed_at": "2026-09-10T13:57:15Z"
+        },
+        {
+          "name": "Restore Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:57:15Z",
+          "completed_at": "2026-09-10T13:57:26Z"
+        },
+        {
+          "name": "Build Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:57:26Z",
+          "completed_at": "2026-09-10T13:57:53Z"
+        },
+        {
+          "name": "Configure CMake",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:57:53Z",
+          "completed_at": "2026-09-10T13:58:14Z"
+        },
+        {
+          "name": "Build Native Runtime + GC tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T13:58:14Z",
+          "completed_at": "2026-09-10T14:14:42Z"
+        },
+        {
+          "name": "Run GC Unit Tests (exclude stress/benchmark/soak)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T14:14:42Z",
+          "completed_at": "2026-09-10T14:14:42Z"
+        },
+        {
+          "name": "Run GC concurrency stress tests (SCALE=50)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-09-10T14:14:42Z",
+          "completed_at": "2026-09-10T14:14:42Z"
+        },
+        {
+          "name": "Run young-collector tests (now fully deterministic after fix)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T14:14:42Z",
+          "completed_at": "2026-09-10T14:14:43Z"
+        },
+        {
+          "name": "Skip young-collector (non-Windows runner)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-09-10T14:14:43Z",
+          "completed_at": "2026-09-10T14:14:43Z"
+        },
+        {
+          "name": "Upload GC test output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-09-10T14:14:43Z",
+          "completed_at": "2026-09-10T14:14:44Z"
+        },
+        {
+          "name": "Post Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25,
+          "started_at": "2026-09-10T14:14:44Z",
+          "completed_at": "2026-09-10T14:14:44Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26,
+          "started_at": "2026-09-10T14:14:44Z",
+          "completed_at": "2026-09-10T14:14:46Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27,
+          "started_at": "2026-09-10T14:14:46Z",
+          "completed_at": "2026-09-10T14:14:47Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671289",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000008996,
+      "runner_name": "GitHub Actions 1000008996",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671291,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0euw",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671291",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671291",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:55:55Z",
+      "completed_at": "2026-09-10T13:57:17Z",
+      "name": "gc-stress / gc-stress",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:55:57Z",
+          "completed_at": "2026-09-10T13:56:00Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:56:00Z",
+          "completed_at": "2026-09-10T13:56:56Z"
+        },
+        {
+          "name": "Build Generator",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 3,
+          "started_at": "2026-09-10T13:56:56Z",
+          "completed_at": "2026-09-10T13:57:10Z"
+        },
+        {
+          "name": "Cache nightly reports (cross-run trend accumulation)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4,
+          "started_at": "2026-09-10T13:57:10Z",
+          "completed_at": "2026-09-10T13:57:10Z"
+        },
+        {
+          "name": "Cache windows-x64-reference native build",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5,
+          "started_at": "2026-09-10T13:57:10Z",
+          "completed_at": "2026-09-10T13:57:10Z"
+        },
+        {
+          "name": "Configure native (windows-x64-reference root preset)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-09-10T13:57:10Z",
+          "completed_at": "2026-09-10T13:57:10Z"
+        },
+        {
+          "name": "Build Native Runtime + GC tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7,
+          "started_at": "2026-09-10T13:57:10Z",
+          "completed_at": "2026-09-10T13:57:10Z"
+        },
+        {
+          "name": "Run GC stress/soak/benchmark tiers (driver, stress-only)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 8,
+          "started_at": "2026-09-10T13:57:10Z",
+          "completed_at": "2026-09-10T13:57:10Z"
+        },
+        {
+          "name": "Upload GC stress output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T13:57:10Z",
+          "completed_at": "2026-09-10T13:57:11Z"
+        },
+        {
+          "name": "Upload GC stress JSON report",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-09-10T13:57:11Z",
+          "completed_at": "2026-09-10T13:57:11Z"
+        },
+        {
+          "name": "Upload GC stress reports (gc_stress_report_*.json)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T13:57:11Z",
+          "completed_at": "2026-09-10T13:57:11Z"
+        },
+        {
+          "name": "Collect GC perf metrics (BENCH, lines -> current + baseline + thresholds)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-09-10T13:57:11Z",
+          "completed_at": "2026-09-10T13:57:11Z"
+        },
+        {
+          "name": "Compare GC perf against baseline (perf advisory, not a hard red)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-09-10T13:57:11Z",
+          "completed_at": "2026-09-10T13:57:11Z"
+        },
+        {
+          "name": "Publish GC stress summary (run-page, green or red)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-09-10T13:57:11Z",
+          "completed_at": "2026-09-10T13:57:12Z"
+        },
+        {
+          "name": "Save GC stress report + metrics into cross-run cache",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 15,
+          "started_at": "2026-09-10T13:57:12Z",
+          "completed_at": "2026-09-10T13:57:12Z"
+        },
+        {
+          "name": "Update GC perf baseline (manual dispatch only — fills pending values + commits)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 16,
+          "started_at": "2026-09-10T13:57:12Z",
+          "completed_at": "2026-09-10T13:57:12Z"
+        },
+        {
+          "name": "Upload current GC metrics",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-09-10T13:57:12Z",
+          "completed_at": "2026-09-10T13:57:12Z"
+        },
+        {
+          "name": "Upload GC thresholds/baseline (for inspection)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18,
+          "started_at": "2026-09-10T13:57:12Z",
+          "completed_at": "2026-09-10T13:57:13Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 36,
+          "started_at": "2026-09-10T13:57:13Z",
+          "completed_at": "2026-09-10T13:57:15Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 37,
+          "started_at": "2026-09-10T13:57:15Z",
+          "completed_at": "2026-09-10T13:57:15Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671291",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000008998,
+      "runner_name": "GitHub Actions 1000008998",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671295,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0evw",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671295",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671295",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:53:51Z",
+      "completed_at": "2026-09-10T14:14:01Z",
+      "name": "gc-asan / gc-asan",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:53:53Z",
+          "completed_at": "2026-09-10T13:53:56Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:53:56Z",
+          "completed_at": "2026-09-10T13:54:13Z"
+        },
+        {
+          "name": "Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:54:13Z",
+          "completed_at": "2026-09-10T13:54:44Z"
+        },
+        {
+          "name": "Run microsoft/setup-msbuild@v2",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:54:44Z",
+          "completed_at": "2026-09-10T13:54:44Z"
+        },
+        {
+          "name": "Restore Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:54:44Z",
+          "completed_at": "2026-09-10T13:55:01Z"
+        },
+        {
+          "name": "Build Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:55:01Z",
+          "completed_at": "2026-09-10T13:55:37Z"
+        },
+        {
+          "name": "Configure CMake (ASAN)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:55:37Z",
+          "completed_at": "2026-09-10T13:56:16Z"
+        },
+        {
+          "name": "Build Native Runtime + GC tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T13:56:16Z",
+          "completed_at": "2026-09-10T14:13:05Z"
+        },
+        {
+          "name": "Locate & copy ASan runtime DLL",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T14:13:05Z",
+          "completed_at": "2026-09-10T14:13:53Z"
+        },
+        {
+          "name": "Run GC Unit Tests under ASAN",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-09-10T14:13:53Z",
+          "completed_at": "2026-09-10T14:13:54Z"
+        },
+        {
+          "name": "Upload ASAN test output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T14:13:54Z",
+          "completed_at": "2026-09-10T14:13:56Z"
+        },
+        {
+          "name": "Post Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-09-10T14:13:56Z",
+          "completed_at": "2026-09-10T14:13:56Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22,
+          "started_at": "2026-09-10T14:13:56Z",
+          "completed_at": "2026-09-10T14:13:58Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23,
+          "started_at": "2026-09-10T14:13:58Z",
+          "completed_at": "2026-09-10T14:13:59Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671295",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000008988,
+      "runner_name": "GitHub Actions 1000008988",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671442,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0fUg",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671442",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671442",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:55:06Z",
+      "completed_at": "2026-09-10T13:57:33Z",
+      "name": "metadata-writer-unit / metadata-writer-unit",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:55:07Z",
+          "completed_at": "2026-09-10T13:55:08Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:55:08Z",
+          "completed_at": "2026-09-10T13:56:01Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:56:01Z",
+          "completed_at": "2026-09-10T13:56:27Z"
+        },
+        {
+          "name": "Setup Visual Studio Developer Command Prompt",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:56:27Z",
+          "completed_at": "2026-09-10T13:56:28Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:56:28Z",
+          "completed_at": "2026-09-10T13:56:52Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:56:52Z",
+          "completed_at": "2026-09-10T13:57:18Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Driver",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:57:18Z",
+          "completed_at": "2026-09-10T13:57:25Z"
+        },
+        {
+          "name": "Build MetadataWriter Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T13:57:25Z",
+          "completed_at": "2026-09-10T13:57:29Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-09-10T13:57:29Z",
+          "completed_at": "2026-09-10T13:57:29Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-09-10T13:57:29Z",
+          "completed_at": "2026-09-10T13:57:31Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-09-10T13:57:31Z",
+          "completed_at": "2026-09-10T13:57:31Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671442",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000008993,
+      "runner_name": "GitHub Actions 1000008993",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671556,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0fxA",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671556",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671556",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:55:46Z",
+      "completed_at": "2026-09-10T13:59:12Z",
+      "name": "aot-smoke / aot-smoke",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:55:47Z",
+          "completed_at": "2026-09-10T13:55:48Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:55:48Z",
+          "completed_at": "2026-09-10T13:58:02Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:58:02Z",
+          "completed_at": "2026-09-10T13:58:11Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:58:11Z",
+          "completed_at": "2026-09-10T13:58:20Z"
+        },
+        {
+          "name": "Cache NuGet packages",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:58:20Z",
+          "completed_at": "2026-09-10T13:58:26Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:58:26Z",
+          "completed_at": "2026-09-10T13:59:00Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Driver",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:59:00Z",
+          "completed_at": "2026-09-10T13:59:06Z"
+        },
+        {
+          "name": "Run AOT Smoke Check",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T13:59:06Z",
+          "completed_at": "2026-09-10T13:59:06Z"
+        },
+        {
+          "name": "Upload AOT Smoke Results",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T13:59:06Z",
+          "completed_at": "2026-09-10T13:59:07Z"
+        },
+        {
+          "name": "Post Cache NuGet packages",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 16,
+          "started_at": "2026-09-10T13:59:07Z",
+          "completed_at": "2026-09-10T13:59:09Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 17,
+          "started_at": "2026-09-10T13:59:09Z",
+          "completed_at": "2026-09-10T13:59:09Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18,
+          "started_at": "2026-09-10T13:59:09Z",
+          "completed_at": "2026-09-10T13:59:10Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19,
+          "started_at": "2026-09-10T13:59:10Z",
+          "completed_at": "2026-09-10T13:59:10Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671556",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000008997,
+      "runner_name": "GitHub Actions 1000008997",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671562,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0fyg",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671562",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671562",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:57:35Z",
+      "completed_at": "2026-09-10T14:00:41Z",
+      "name": "snapshot-unit / snapshot-unit",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:36Z",
+          "completed_at": "2026-09-10T13:57:38Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:38Z",
+          "completed_at": "2026-09-10T13:58:54Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:58:54Z",
+          "completed_at": "2026-09-10T13:59:20Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:59:20Z",
+          "completed_at": "2026-09-10T13:59:43Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:59:43Z",
+          "completed_at": "2026-09-10T14:00:13Z"
+        },
+        {
+          "name": "Build FixtureAssembly",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T14:00:13Z",
+          "completed_at": "2026-09-10T14:00:16Z"
+        },
+        {
+          "name": "Run Snapshot Tests",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-09-10T14:00:16Z",
+          "completed_at": "2026-09-10T14:00:37Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-09-10T14:00:37Z",
+          "completed_at": "2026-09-10T14:00:37Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-09-10T14:00:37Z",
+          "completed_at": "2026-09-10T14:00:39Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-09-10T14:00:39Z",
+          "completed_at": "2026-09-10T14:00:40Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671562",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000009007,
+      "runner_name": "GitHub Actions 1000009007",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671568,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0f0A",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671568",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671568",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:57:30Z",
+      "completed_at": "2026-09-10T13:58:25Z",
+      "name": "gc-perf / gc-perf",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:30Z",
+          "completed_at": "2026-09-10T13:57:31Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:31Z",
+          "completed_at": "2026-09-10T13:58:20Z"
+        },
+        {
+          "name": "Collect GC perf metrics (BENCH, lines -> current + baseline + thresholds)",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 3,
+          "started_at": "2026-09-10T13:58:20Z",
+          "completed_at": "2026-09-10T13:58:21Z"
+        },
+        {
+          "name": "Compare GC perf against baseline (perf advisory, not a hard red)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4,
+          "started_at": "2026-09-10T13:58:21Z",
+          "completed_at": "2026-09-10T13:58:21Z"
+        },
+        {
+          "name": "Update GC perf baseline (manual dispatch only — fills pending values + commits)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5,
+          "started_at": "2026-09-10T13:58:21Z",
+          "completed_at": "2026-09-10T13:58:21Z"
+        },
+        {
+          "name": "Upload current GC metrics",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:58:21Z",
+          "completed_at": "2026-09-10T13:58:21Z"
+        },
+        {
+          "name": "Upload GC thresholds/baseline (for inspection)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:58:21Z",
+          "completed_at": "2026-09-10T13:58:22Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-09-10T13:58:22Z",
+          "completed_at": "2026-09-10T13:58:24Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-09-10T13:58:24Z",
+          "completed_at": "2026-09-10T13:58:24Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671568",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000009003,
+      "runner_name": "GitHub Actions 1000009003",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671586,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0f4g",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671586",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671586",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:56:36Z",
+      "completed_at": "2026-09-10T13:58:38Z",
+      "name": "hybrid-jit / hybrid-jit",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:56:37Z",
+          "completed_at": "2026-09-10T13:56:38Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:56:38Z",
+          "completed_at": "2026-09-10T13:57:21Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:57:21Z",
+          "completed_at": "2026-09-10T13:57:28Z"
+        },
+        {
+          "name": "Setup MSBuild (Windows)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4,
+          "started_at": "2026-09-10T13:57:28Z",
+          "completed_at": "2026-09-10T13:57:28Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:57:28Z",
+          "completed_at": "2026-09-10T13:57:34Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:57:34Z",
+          "completed_at": "2026-09-10T13:58:04Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Driver",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:58:04Z",
+          "completed_at": "2026-09-10T13:58:12Z"
+        },
+        {
+          "name": "Configure CMake",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T13:58:12Z",
+          "completed_at": "2026-09-10T13:58:25Z"
+        },
+        {
+          "name": "Build Native Libraries",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 9,
+          "started_at": "2026-09-10T13:58:25Z",
+          "completed_at": "2026-09-10T13:58:37Z"
+        },
+        {
+          "name": "Configure Native Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 10,
+          "started_at": "2026-09-10T13:58:37Z",
+          "completed_at": "2026-09-10T13:58:37Z"
+        },
+        {
+          "name": "Build Native Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11,
+          "started_at": "2026-09-10T13:58:37Z",
+          "completed_at": "2026-09-10T13:58:37Z"
+        },
+        {
+          "name": "Run Hybrid Mode Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-09-10T13:58:37Z",
+          "completed_at": "2026-09-10T13:58:37Z"
+        },
+        {
+          "name": "Run Full JIT Regression (sanity check)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-09-10T13:58:37Z",
+          "completed_at": "2026-09-10T13:58:37Z"
+        },
+        {
+          "name": "Upload Hybrid Test Output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-09-10T13:58:37Z",
+          "completed_at": "2026-09-10T13:58:37Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 27,
+          "started_at": "2026-09-10T13:58:37Z",
+          "completed_at": "2026-09-10T13:58:37Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 28,
+          "started_at": "2026-09-10T13:58:37Z",
+          "completed_at": "2026-09-10T13:58:37Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 29,
+          "started_at": "2026-09-10T13:58:37Z",
+          "completed_at": "2026-09-10T13:58:38Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671586",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009001,
+      "runner_name": "GitHub Actions 1000009001",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671635,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0gEw",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671635",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671635",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:54:20Z",
+      "completed_at": "2026-09-10T13:57:41Z",
+      "name": "foundation-verify / foundation-verify",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:54:23Z",
+          "completed_at": "2026-09-10T13:54:25Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:54:25Z",
+          "completed_at": "2026-09-10T13:54:46Z"
+        },
+        {
+          "name": "Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:54:46Z",
+          "completed_at": "2026-09-10T13:56:22Z"
+        },
+        {
+          "name": "Restore & Build Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:56:22Z",
+          "completed_at": "2026-09-10T13:57:03Z"
+        },
+        {
+          "name": "Restore & Build TPG",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:57:03Z",
+          "completed_at": "2026-09-10T13:57:15Z"
+        },
+        {
+          "name": "Restore & Build ATG",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:57:15Z",
+          "completed_at": "2026-09-10T13:57:36Z"
+        },
+        {
+          "name": "Build SDK (cmake)",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 7,
+          "started_at": "2026-09-10T13:57:36Z",
+          "completed_at": "2026-09-10T13:57:37Z"
+        },
+        {
+          "name": "Run Small Batch",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 8,
+          "started_at": "2026-09-10T13:57:37Z",
+          "completed_at": "2026-09-10T13:57:37Z"
+        },
+        {
+          "name": "Upload Reports",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T13:57:37Z",
+          "completed_at": "2026-09-10T13:57:37Z"
+        },
+        {
+          "name": "Post Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 17,
+          "started_at": "2026-09-10T13:57:37Z",
+          "completed_at": "2026-09-10T13:57:37Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 18,
+          "started_at": "2026-09-10T13:57:37Z",
+          "completed_at": "2026-09-10T13:57:40Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19,
+          "started_at": "2026-09-10T13:57:40Z",
+          "completed_at": "2026-09-10T13:57:40Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671635",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000008991,
+      "runner_name": "GitHub Actions 1000008991",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671640,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0gGA",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671640",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671640",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:57:50Z",
+      "completed_at": "2026-09-10T13:59:45Z",
+      "name": "arm64-jit / arm64-jit",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:51Z",
+          "completed_at": "2026-09-10T13:57:53Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:53Z",
+          "completed_at": "2026-09-10T13:58:29Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:58:29Z",
+          "completed_at": "2026-09-10T13:58:39Z"
+        },
+        {
+          "name": "Install QEMU + ARM64 cross toolchain",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:58:39Z",
+          "completed_at": "2026-09-10T13:58:55Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:58:55Z",
+          "completed_at": "2026-09-10T13:59:06Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:59:06Z",
+          "completed_at": "2026-09-10T13:59:36Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Driver",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:59:36Z",
+          "completed_at": "2026-09-10T13:59:42Z"
+        },
+        {
+          "name": "Configure CMake (linux-arm64-smoke)",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 8,
+          "started_at": "2026-09-10T13:59:42Z",
+          "completed_at": "2026-09-10T13:59:43Z"
+        },
+        {
+          "name": "Build ARM64 Native Libraries + Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 9,
+          "started_at": "2026-09-10T13:59:43Z",
+          "completed_at": "2026-09-10T13:59:43Z"
+        },
+        {
+          "name": "Run ARM64 JIT Tests under QEMU",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 10,
+          "started_at": "2026-09-10T13:59:43Z",
+          "completed_at": "2026-09-10T13:59:43Z"
+        },
+        {
+          "name": "Upload ARM64 Test Output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T13:59:43Z",
+          "completed_at": "2026-09-10T13:59:43Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 21,
+          "started_at": "2026-09-10T13:59:43Z",
+          "completed_at": "2026-09-10T13:59:43Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22,
+          "started_at": "2026-09-10T13:59:43Z",
+          "completed_at": "2026-09-10T13:59:43Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23,
+          "started_at": "2026-09-10T13:59:43Z",
+          "completed_at": "2026-09-10T13:59:43Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671640",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009010,
+      "runner_name": "GitHub Actions 1000009010",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671677,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0gPQ",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671677",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671677",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:54:17Z",
+      "completed_at": "2026-09-10T13:57:45Z",
+      "name": "ubsan / ubsan",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:54:18Z",
+          "completed_at": "2026-09-10T13:54:19Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:54:19Z",
+          "completed_at": "2026-09-10T13:54:26Z"
+        },
+        {
+          "name": "Install system dependencies (gcc-14 + ninja)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:54:26Z",
+          "completed_at": "2026-09-10T13:54:43Z"
+        },
+        {
+          "name": "Configure CMake (linux-x64-native, UBSan)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:54:43Z",
+          "completed_at": "2026-09-10T13:54:53Z"
+        },
+        {
+          "name": "Build Native Runtime + tests under UBSan",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:54:53Z",
+          "completed_at": "2026-09-10T13:57:40Z"
+        },
+        {
+          "name": "Run native contracts under UBSan",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:57:40Z",
+          "completed_at": "2026-09-10T13:57:42Z"
+        },
+        {
+          "name": "Upload UBSan output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:57:42Z",
+          "completed_at": "2026-09-10T13:57:43Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-09-10T13:57:43Z",
+          "completed_at": "2026-09-10T13:57:43Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-09-10T13:57:43Z",
+          "completed_at": "2026-09-10T13:57:43Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671677",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000008989,
+      "runner_name": "GitHub Actions 1000008989",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671683,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0gQw",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671683",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671683",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:57:47Z",
+      "completed_at": "2026-09-10T14:00:45Z",
+      "name": "foundation-dll / foundation-dll",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:48Z",
+          "completed_at": "2026-09-10T13:57:51Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:51Z",
+          "completed_at": "2026-09-10T13:58:51Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:58:51Z",
+          "completed_at": "2026-09-10T13:58:59Z"
+        },
+        {
+          "name": "Setup MSBuild (Windows)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4,
+          "started_at": "2026-09-10T13:58:59Z",
+          "completed_at": "2026-09-10T13:58:59Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:58:59Z",
+          "completed_at": "2026-09-10T13:59:18Z"
+        },
+        {
+          "name": "Cache NuGet packages",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:59:18Z",
+          "completed_at": "2026-09-10T13:59:19Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:59:19Z",
+          "completed_at": "2026-09-10T13:59:54Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Driver",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T13:59:54Z",
+          "completed_at": "2026-09-10T13:59:58Z"
+        },
+        {
+          "name": "Build FixtureAssembly",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T13:59:58Z",
+          "completed_at": "2026-09-10T14:00:00Z"
+        },
+        {
+          "name": "Run Snapshot Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 10,
+          "started_at": "2026-09-10T14:00:00Z",
+          "completed_at": "2026-09-10T14:00:00Z"
+        },
+        {
+          "name": "Skip Snapshot Tests (Linux runner — covered by snapshot-unit on Windows)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T14:00:00Z",
+          "completed_at": "2026-09-10T14:00:00Z"
+        },
+        {
+          "name": "Install Linux system dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-09-10T14:00:00Z",
+          "completed_at": "2026-09-10T14:00:13Z"
+        },
+        {
+          "name": "Configure CMake",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-09-10T14:00:13Z",
+          "completed_at": "2026-09-10T14:00:18Z"
+        },
+        {
+          "name": "Build Native Libraries",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 14,
+          "started_at": "2026-09-10T14:00:18Z",
+          "completed_at": "2026-09-10T14:00:43Z"
+        },
+        {
+          "name": "Configure Native Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 15,
+          "started_at": "2026-09-10T14:00:43Z",
+          "completed_at": "2026-09-10T14:00:43Z"
+        },
+        {
+          "name": "Build Native Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 16,
+          "started_at": "2026-09-10T14:00:43Z",
+          "completed_at": "2026-09-10T14:00:43Z"
+        },
+        {
+          "name": "Restore benchmark regression history (cross-run baseline)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 17,
+          "started_at": "2026-09-10T14:00:43Z",
+          "completed_at": "2026-09-10T14:00:43Z"
+        },
+        {
+          "name": "Determine CI Mode",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 18,
+          "started_at": "2026-09-10T14:00:43Z",
+          "completed_at": "2026-09-10T14:00:43Z"
+        },
+        {
+          "name": "Run Foundation-DLL Pipeline",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 19,
+          "started_at": "2026-09-10T14:00:43Z",
+          "completed_at": "2026-09-10T14:00:43Z"
+        },
+        {
+          "name": "Render & publish nightly report (dashboard + cross-day sumport)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20,
+          "started_at": "2026-09-10T14:00:43Z",
+          "completed_at": "2026-09-10T14:00:44Z"
+        },
+        {
+          "name": "Upload Foundation-DLL Results",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-09-10T14:00:44Z",
+          "completed_at": "2026-09-10T14:00:44Z"
+        },
+        {
+          "name": "Post PR Comment (on failure or regression)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 22,
+          "started_at": "2026-09-10T14:00:44Z",
+          "completed_at": "2026-09-10T14:00:44Z"
+        },
+        {
+          "name": "Post Cache NuGet packages",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 42,
+          "started_at": "2026-09-10T14:00:44Z",
+          "completed_at": "2026-09-10T14:00:44Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 43,
+          "started_at": "2026-09-10T14:00:44Z",
+          "completed_at": "2026-09-10T14:00:44Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 44,
+          "started_at": "2026-09-10T14:00:44Z",
+          "completed_at": "2026-09-10T14:00:45Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 45,
+          "started_at": "2026-09-10T14:00:45Z",
+          "completed_at": "2026-09-10T14:00:45Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671683",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009009,
+      "runner_name": "GitHub Actions 1000009009",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671702,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0gVg",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671702",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671702",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:54:17Z",
+      "completed_at": "2026-09-10T13:55:04Z",
+      "name": "hygiene / hygiene",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:54:17Z",
+          "completed_at": "2026-09-10T13:54:18Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:54:18Z",
+          "completed_at": "2026-09-10T13:54:56Z"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:54:56Z",
+          "completed_at": "2026-09-10T13:54:57Z"
+        },
+        {
+          "name": "Install PyYAML",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:54:57Z",
+          "completed_at": "2026-09-10T13:55:00Z"
+        },
+        {
+          "name": "Run central hygiene gate",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5,
+          "started_at": "2026-09-10T13:55:00Z",
+          "completed_at": "2026-09-10T13:55:02Z"
+        },
+        {
+          "name": "clang-format check",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-09-10T13:55:02Z",
+          "completed_at": "2026-09-10T13:55:02Z"
+        },
+        {
+          "name": "Upload hygiene report",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7,
+          "started_at": "2026-09-10T13:55:02Z",
+          "completed_at": "2026-09-10T13:55:02Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-09-10T13:55:02Z",
+          "completed_at": "2026-09-10T13:55:02Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14,
+          "started_at": "2026-09-10T13:55:02Z",
+          "completed_at": "2026-09-10T13:55:02Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-09-10T13:55:02Z",
+          "completed_at": "2026-09-10T13:55:02Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671702",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000008990,
+      "runner_name": "GitHub Actions 1000008990",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671733,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0gdQ",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671733",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671733",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:57:56Z",
+      "completed_at": "2026-09-10T14:07:58Z",
+      "name": "secret-scan / Detect leaked secrets",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:56Z",
+          "completed_at": "2026-09-10T13:57:57Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:57Z",
+          "completed_at": "2026-09-10T14:00:59Z"
+        },
+        {
+          "name": "gitleaks scan",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 3,
+          "started_at": "2026-09-10T14:00:59Z",
+          "completed_at": "2026-09-10T14:07:56Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T14:07:56Z",
+          "completed_at": "2026-09-10T14:07:57Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T14:07:57Z",
+          "completed_at": "2026-09-10T14:07:57Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671733",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009011,
+      "runner_name": "GitHub Actions 1000009011",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671764,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0glA",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671764",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671764",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:57:08Z",
+      "completed_at": "2026-09-10T13:57:49Z",
+      "name": "clang-tidy / clang-tidy",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:09Z",
+          "completed_at": "2026-09-10T13:57:10Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:10Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Compute changed native sources",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Skip notice (no native source changes)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Install clang-tidy (LLVM 18)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Configure CMake (linux-x64-clang-tidy)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Warm build (establish baseline, analysis runs here too)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Re-analyze changed translation units",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 8,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Set P0 regex",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 9,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Filter P0 warnings in changed files (exit 1 on any P0)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 10,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Report total warnings",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Upload clang-tidy report",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671764",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009002,
+      "runner_name": "GitHub Actions 1000009002",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671769,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0gmQ",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671769",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671769",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:55:38Z",
+      "completed_at": "2026-09-10T14:37:38Z",
+      "name": "jit-unit / jit-unit",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:55:38Z",
+          "completed_at": "2026-09-10T13:55:40Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:55:40Z",
+          "completed_at": "2026-09-10T13:56:27Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:56:27Z",
+          "completed_at": "2026-09-10T13:57:03Z"
+        },
+        {
+          "name": "Setup Visual Studio Developer Command Prompt",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:57:03Z",
+          "completed_at": "2026-09-10T13:57:04Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:57:04Z",
+          "completed_at": "2026-09-10T13:57:34Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:57:34Z",
+          "completed_at": "2026-09-10T13:58:05Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Driver",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:58:05Z",
+          "completed_at": "2026-09-10T13:58:13Z"
+        },
+        {
+          "name": "Build MetadataWriter Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T13:58:13Z",
+          "completed_at": "2026-09-10T13:58:17Z"
+        },
+        {
+          "name": "Configure CMake (windows-x64-reference)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T13:58:17Z",
+          "completed_at": "2026-09-10T13:58:44Z"
+        },
+        {
+          "name": "Build Native Libraries",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-09-10T13:58:44Z",
+          "completed_at": "2026-09-10T14:33:09Z"
+        },
+        {
+          "name": "Configure Native Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T14:33:09Z",
+          "completed_at": "2026-09-10T14:33:14Z"
+        },
+        {
+          "name": "Build Native Tests",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 12,
+          "started_at": "2026-09-10T14:33:14Z",
+          "completed_at": "2026-09-10T14:37:33Z"
+        },
+        {
+          "name": "Run Codegen Native Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-09-10T14:37:33Z",
+          "completed_at": "2026-09-10T14:37:33Z"
+        },
+        {
+          "name": "Run Common Native Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 14,
+          "started_at": "2026-09-10T14:37:33Z",
+          "completed_at": "2026-09-10T14:37:33Z"
+        },
+        {
+          "name": "Upload JIT test output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15,
+          "started_at": "2026-09-10T14:37:33Z",
+          "completed_at": "2026-09-10T14:37:34Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 29,
+          "started_at": "2026-09-10T14:37:34Z",
+          "completed_at": "2026-09-10T14:37:34Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 30,
+          "started_at": "2026-09-10T14:37:34Z",
+          "completed_at": "2026-09-10T14:37:36Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 31,
+          "started_at": "2026-09-10T14:37:36Z",
+          "completed_at": "2026-09-10T14:37:36Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671769",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000008995,
+      "runner_name": "GitHub Actions 1000008995",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671836,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0g3A",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671836",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671836",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:57:19Z",
+      "completed_at": "2026-09-10T13:58:32Z",
+      "name": "native-integration / native-integration",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:20Z",
+          "completed_at": "2026-09-10T13:57:21Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:21Z",
+          "completed_at": "2026-09-10T13:58:16Z"
+        },
+        {
+          "name": "Build Generator",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 3,
+          "started_at": "2026-09-10T13:58:16Z",
+          "completed_at": "2026-09-10T13:58:26Z"
+        },
+        {
+          "name": "Cache nightly reports (cross-run trend accumulation)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4,
+          "started_at": "2026-09-10T13:58:26Z",
+          "completed_at": "2026-09-10T13:58:26Z"
+        },
+        {
+          "name": "Cache windows-x64-reference native build",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5,
+          "started_at": "2026-09-10T13:58:26Z",
+          "completed_at": "2026-09-10T13:58:26Z"
+        },
+        {
+          "name": "Configure native (windows-x64-reference root preset)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 6,
+          "started_at": "2026-09-10T13:58:26Z",
+          "completed_at": "2026-09-10T13:58:26Z"
+        },
+        {
+          "name": "Build Native Runtime",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 7,
+          "started_at": "2026-09-10T13:58:26Z",
+          "completed_at": "2026-09-10T13:58:26Z"
+        },
+        {
+          "name": "Run contracts-native suite (full native, known-fail reconciled)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 8,
+          "started_at": "2026-09-10T13:58:26Z",
+          "completed_at": "2026-09-10T13:58:26Z"
+        },
+        {
+          "name": "Publish native nightly summary (run-page, green or red)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T13:58:26Z",
+          "completed_at": "2026-09-10T13:58:27Z"
+        },
+        {
+          "name": "Save native nightly report into cross-run cache",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 10,
+          "started_at": "2026-09-10T13:58:27Z",
+          "completed_at": "2026-09-10T13:58:27Z"
+        },
+        {
+          "name": "Upload native nightly output",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T13:58:27Z",
+          "completed_at": "2026-09-10T13:58:27Z"
+        },
+        {
+          "name": "Upload native nightly report",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-09-10T13:58:27Z",
+          "completed_at": "2026-09-10T13:58:27Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 24,
+          "started_at": "2026-09-10T13:58:27Z",
+          "completed_at": "2026-09-10T13:58:30Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25,
+          "started_at": "2026-09-10T13:58:30Z",
+          "completed_at": "2026-09-10T13:58:30Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671836",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000009004,
+      "runner_name": "GitHub Actions 1000009004",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671878,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0hBg",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671878",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671878",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:56:37Z",
+      "completed_at": "2026-09-10T13:57:11Z",
+      "name": "docs-build / docs-build",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:56:38Z",
+          "completed_at": "2026-09-10T13:56:39Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:56:39Z",
+          "completed_at": "2026-09-10T13:56:46Z"
+        },
+        {
+          "name": "Install doxygen",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:56:46Z",
+          "completed_at": "2026-09-10T13:57:05Z"
+        },
+        {
+          "name": "Generate docs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:57:05Z",
+          "completed_at": "2026-09-10T13:57:07Z"
+        },
+        {
+          "name": "Stage verification reports for Pages",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:57:07Z",
+          "completed_at": "2026-09-10T13:57:07Z"
+        },
+        {
+          "name": "Upload docs artifact",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:57:07Z",
+          "completed_at": "2026-09-10T13:57:09Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-09-10T13:57:09Z",
+          "completed_at": "2026-09-10T13:57:09Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-09-10T13:57:09Z",
+          "completed_at": "2026-09-10T13:57:09Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671878",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009000,
+      "runner_name": "GitHub Actions 1000009000",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898671904,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0hIA",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898671904",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898671904",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:55:03Z",
+      "completed_at": "2026-09-10T13:56:35Z",
+      "name": "jit-baseline / jit-baseline",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:55:04Z",
+          "completed_at": "2026-09-10T13:55:05Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:55:05Z",
+          "completed_at": "2026-09-10T13:55:40Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:55:40Z",
+          "completed_at": "2026-09-10T13:55:48Z"
+        },
+        {
+          "name": "Setup MSBuild (Windows)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 4,
+          "started_at": "2026-09-10T13:55:48Z",
+          "completed_at": "2026-09-10T13:55:48Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T13:55:48Z",
+          "completed_at": "2026-09-10T13:55:59Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T13:55:59Z",
+          "completed_at": "2026-09-10T13:56:25Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Driver",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T13:56:25Z",
+          "completed_at": "2026-09-10T13:56:31Z"
+        },
+        {
+          "name": "Configure CMake",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 8,
+          "started_at": "2026-09-10T13:56:31Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Build Native Libraries",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 9,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Configure Native Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 10,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Build Native Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 11,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Run JIT Regression Tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Run JIT Benchmarks",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Collect JIT Metrics",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 14,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Compare Against Baseline (hard gate)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 15,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Upload JIT Metrics",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 16,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Update Baseline (explicit dispatch only — real commit back)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 17,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Post PR Comment (regression detected)",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 18,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 35,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:33Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 36,
+          "started_at": "2026-09-10T13:56:33Z",
+          "completed_at": "2026-09-10T13:56:34Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 37,
+          "started_at": "2026-09-10T13:56:34Z",
+          "completed_at": "2026-09-10T13:56:34Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898671904",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000008992,
+      "runner_name": "GitHub Actions 1000008992",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898672006,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0hhg",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898672006",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898672006",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:57:20Z",
+      "completed_at": "2026-09-10T13:58:08Z",
+      "name": "style-csharp / style-csharp",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:21Z",
+          "completed_at": "2026-09-10T13:57:22Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:22Z",
+          "completed_at": "2026-09-10T13:57:55Z"
+        },
+        {
+          "name": "Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:57:55Z",
+          "completed_at": "2026-09-10T13:58:05Z"
+        },
+        {
+          "name": "dotnet format verify on changed files",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T13:58:05Z",
+          "completed_at": "2026-09-10T13:58:05Z"
+        },
+        {
+          "name": "Upload format log",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 5,
+          "started_at": "2026-09-10T13:58:05Z",
+          "completed_at": "2026-09-10T13:58:05Z"
+        },
+        {
+          "name": "Post Run actions/setup-dotnet@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T13:58:05Z",
+          "completed_at": "2026-09-10T13:58:05Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-09-10T13:58:05Z",
+          "completed_at": "2026-09-10T13:58:06Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T13:58:06Z",
+          "completed_at": "2026-09-10T13:58:06Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898672006",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009005,
+      "runner_name": "GitHub Actions 1000009005",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898672032,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0hoA",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898672032",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898672032",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:57:30Z",
+      "completed_at": "2026-09-10T14:03:32Z",
+      "name": "codegen-unit / codegen-unit",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:31Z",
+          "completed_at": "2026-09-10T13:57:33Z"
+        },
+        {
+          "name": "Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:33Z",
+          "completed_at": "2026-09-10T13:59:48Z"
+        },
+        {
+          "name": "Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:59:48Z",
+          "completed_at": "2026-09-10T14:00:24Z"
+        },
+        {
+          "name": "Setup Visual Studio Developer Command Prompt",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T14:00:24Z",
+          "completed_at": "2026-09-10T14:00:25Z"
+        },
+        {
+          "name": "Restore .NET dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T14:00:25Z",
+          "completed_at": "2026-09-10T14:00:53Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Generator",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T14:00:53Z",
+          "completed_at": "2026-09-10T14:01:37Z"
+        },
+        {
+          "name": "Build Chaos.IL2CPP.Driver",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-09-10T14:01:37Z",
+          "completed_at": "2026-09-10T14:01:48Z"
+        },
+        {
+          "name": "Build MetadataWriter Tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-09-10T14:01:48Z",
+          "completed_at": "2026-09-10T14:01:52Z"
+        },
+        {
+          "name": "Build codegen test fixtures",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-09-10T14:01:52Z",
+          "completed_at": "2026-09-10T14:02:03Z"
+        },
+        {
+          "name": "Code Coverage Collection (with threshold)",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-09-10T14:02:03Z",
+          "completed_at": "2026-09-10T14:03:27Z"
+        },
+        {
+          "name": "Upload Coverage Report",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-09-10T14:03:27Z",
+          "completed_at": "2026-09-10T14:03:28Z"
+        },
+        {
+          "name": "Post Setup .NET 8 SDK",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21,
+          "started_at": "2026-09-10T14:03:28Z",
+          "completed_at": "2026-09-10T14:03:28Z"
+        },
+        {
+          "name": "Post Checkout repository",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 22,
+          "started_at": "2026-09-10T14:03:28Z",
+          "completed_at": "2026-09-10T14:03:31Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 23,
+          "started_at": "2026-09-10T14:03:31Z",
+          "completed_at": "2026-09-10T14:03:31Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898672032",
+      "labels": [
+        "windows-latest"
+      ],
+      "runner_id": 1000009006,
+      "runner_name": "GitHub Actions 1000009006",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102898672496,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0jcA",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898672496",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898672496",
+      "status": "completed",
+      "conclusion": "skipped",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:53:48Z",
+      "completed_at": "2026-09-10T13:53:48Z",
+      "name": "publish-smoke",
+      "steps": [
+
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898672496",
+      "labels": [
+
+      ],
+      "runner_id": null,
+      "runner_name": null,
+      "runner_group_id": null,
+      "runner_group_name": null
+    },
+    {
+      "id": 102898672787,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9T0kkw",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102898672787",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102898672787",
+      "status": "completed",
+      "conclusion": "skipped",
+      "created_at": "2026-09-10T13:53:48Z",
+      "started_at": "2026-09-10T13:53:48Z",
+      "completed_at": "2026-09-10T13:53:48Z",
+      "name": "codeql",
+      "steps": [
+
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102898672787",
+      "labels": [
+
+      ],
+      "runner_id": null,
+      "runner_name": null,
+      "runner_group_id": null,
+      "runner_group_name": null
+    },
+    {
+      "id": 102899896940,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9U_SbA",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102899896940",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102899896940",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T13:57:12Z",
+      "started_at": "2026-09-10T13:57:44Z",
+      "completed_at": "2026-09-10T13:57:54Z",
+      "name": "docs-deploy / docs-deploy",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T13:57:45Z",
+          "completed_at": "2026-09-10T13:57:46Z"
+        },
+        {
+          "name": "Deploy to GitHub Pages",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T13:57:46Z",
+          "completed_at": "2026-09-10T13:57:52Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T13:57:52Z",
+          "completed_at": "2026-09-10T13:57:52Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102899896940",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009008,
+      "runner_name": "GitHub Actions 1000009008",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102914956320,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9jWcIA",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102914956320",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102914956320",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-09-10T14:37:38Z",
+      "started_at": "2026-09-10T14:37:41Z",
+      "completed_at": "2026-09-10T14:37:45Z",
+      "name": "pipeline-finish (aggregate)",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T14:37:42Z",
+          "completed_at": "2026-09-10T14:37:42Z"
+        },
+        {
+          "name": "Run fail=0",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 2,
+          "started_at": "2026-09-10T14:37:42Z",
+          "completed_at": "2026-09-10T14:37:42Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T14:37:42Z",
+          "completed_at": "2026-09-10T14:37:42Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102914956320",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009078,
+      "runner_name": "GitHub Actions 1000009078",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    },
+    {
+      "id": 102914998022,
+      "run_id": 34485489896,
+      "workflow_name": "Pipeline",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/runs/34485489896",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOR0Bv-M8AAAAX9jY_Bg",
+      "head_sha": "982c4b5579cfe06186ed7638b46655900c67d52d",
+      "url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/actions/jobs/102914998022",
+      "html_url": "https://github.com/PolarisWang/booming-il2cpp/actions/runs/34485489896/job/102914998022",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-09-10T14:37:45Z",
+      "started_at": "2026-09-10T14:37:49Z",
+      "completed_at": "2026-09-10T14:38:34Z",
+      "name": "provenance-archive / provenance-archive",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-09-10T14:37:50Z",
+          "completed_at": "2026-09-10T14:37:51Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-09-10T14:37:51Z",
+          "completed_at": "2026-09-10T14:38:30Z"
+        },
+        {
+          "name": "Write provenance manifest",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-09-10T14:38:30Z",
+          "completed_at": "2026-09-10T14:38:30Z"
+        },
+        {
+          "name": "Annotate stage results",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-09-10T14:38:30Z",
+          "completed_at": "2026-09-10T14:38:30Z"
+        },
+        {
+          "name": "Summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-09-10T14:38:30Z",
+          "completed_at": "2026-09-10T14:38:30Z"
+        },
+        {
+          "name": "Upload provenance manifest",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-09-10T14:38:30Z",
+          "completed_at": "2026-09-10T14:38:32Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-09-10T14:38:32Z",
+          "completed_at": "2026-09-10T14:38:32Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-09-10T14:38:32Z",
+          "completed_at": "2026-09-10T14:38:32Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/PolarisWang/booming-il2cpp/check-runs/102914998022",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000009079,
+      "runner_name": "GitHub Actions 1000009079",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

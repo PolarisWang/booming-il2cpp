@@ -1,0 +1,78 @@
+
+CHUNK                                                     F_tot  F_nom  real  unassert  smoke?  fail  real%   B_okB_stub   HU_semHU_pch   CT_okCT_tot   GATE
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+System.Collections.Immutable/global-ns                       32    32     0        0      32     0   0.0%      0    0        0     0       0     0   FAIL
+System.Collections.NonGeneric/global-ns                      62    62    15        0      47     0  24.2%      0    0        0     0       0     0   PASS
+System.ComponentModel.TypeConverter/component-model         556   556   151        0     405     0  27.2%      0    0        0     0       0     0   PASS
+System.ComponentModel.TypeConverter/global-ns                83    83    26        0      57     0  31.3%      0    0        0     0       0     0   PASS
+System.ComponentModel.TypeConverter/system-componentmodel-design     31    31     6        0      25     0  19.4%      0    0        0     0       0     0   PASS
+System.Data.Common/global-ns                                 24    24     2        0      22     0   8.3%      0    0        0     0       0     0   PASS
+System.Data.Common/system-data                              700   700    39        0     661     0   5.6%      0    0        0     0       0     0   PASS
+System.Data.Common/system-data-common                       408   408    35        0     373     0   8.6%      0    0        0     0       0     0   PASS
+System.Data.Common/system-data-sqltypes                     361   361    34        0     327     0   9.4%      0    0        0     0       0     0   PASS
+System.Diagnostics.DiagnosticSource/diagnostics             136   136    50        0      86     0  36.8%      0    0        0     0       0     0   PASS
+System.Diagnostics.DiagnosticSource/global-ns               123   123    63        0      60     0  51.2%      0    0        0     0       0     0   PASS
+System.Formats.Asn1/system-formats-asn1                      77    77     6        0      71     0   7.8%      0    0        0     0       0     0   PASS
+System.IO.Compression.Brotli/global-ns                       48    48     1        0      47     0   2.1%      0    0        0     0       0     0   FAIL
+System.IO.Compression.ZipFile/global-ns                     164   164     0        0     164     0   0.0%      0    0        0     0       0     0   FAIL
+System.IO.Pipelines/system-io-pipelines                      26    26     4        0      22     0  15.4%      0    0        0     0       0     0   PASS
+System.Linq.Expressions/global-ns                           669   669    87        0     582     0  13.0%      0    0        0     0       0     0   PASS
+System.Linq/global-ns                                       215   215     8        0     207     0   3.7%      0    0        0     0       0     0   FAIL
+System.Net.Http/global-ns                                   143   143    22        0     121     0  15.4%      0    0        0     0       0     0   PASS
+System.Net.Http/system-net-http                             127   127     2        0     125     0   1.6%      0    0        0     0       0     0   FAIL
+System.Net.ServerSentEvents/global-ns                         4     4     0        0       4     0   0.0%      0    0        0     0       0     0   FAIL
+System.Net.Sockets/system-net-sockets                       537   536     0        0     536     1   0.0%      0    0        0     0       0     0   FAIL
+System.ObjectModel/global-ns                                 10    10     0        0      10     0   0.0%      0    0        0     0       0     0   FAIL
+System.Private.CoreLib/buffers                               25    25    12        0      13     0  48.0%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/globalization                        786   779   167        0     612     7  21.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/globalization-2                      786   779   167        0     612     7  21.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/io                                  1470  1463    37        0    1426     7   2.5%      0    0        0     0       0     0   FAIL
+System.Private.CoreLib/io-2                                1470  1463    37        0    1426     7   2.5%      0    0        0     0       0     0   FAIL
+System.Private.CoreLib/io-3                                1470  1463    37        0    1426     7   2.5%      0    0        0     0       0     0   FAIL
+System.Private.CoreLib/numerics                             188   183   141        0      42     5  75.0%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/numerics-2                           188   183   141        0      42     5  75.0%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/numerics-3                           188   183   141        0      42     5  75.0%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/numerics-4                           188   183   141        0      42     5  75.0%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/reflection                           462   460     8        0     452     2   1.7%      0    0        0     0       0     0   FAIL
+System.Private.CoreLib/runtime-interop                      485   479    47        0     432     6   9.7%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/runtime-interop-2                    485   479    47        0     432     6   9.7%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system                              3779  3779  1405        0    2374     0  37.2%      0    0        0     0     356   356   PASS
+System.Private.CoreLib/system-10                           3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-11                           3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-12                           3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-2                            3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-3                            3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-4                            3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-5                            3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-6                            3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-7                            3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-8                            3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-9                            3779  3779  1405        0    2374     0  37.2%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/system-collections                    88    88    22        0      66     0  25.0%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/text                                 801   801   191        0     610     0  23.8%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/text-2                               801   801   191        0     610     0  23.8%      0    0        0     0       0     0   PASS
+System.Private.CoreLib/threading-tasks                      456   456    78        0     378     0  17.1%      0    0        0     0       0     0   PASS
+System.Private.Xml/system-xml-serialization                 156   156    67        0      89     0  42.9%      0    0        0     0       0     0   PASS
+System.Private.Xml/system-xml-xsl                           250   250     2        0     248     0   0.8%      0    0        0     0       0     0   FAIL
+System.Private.Xml/xml                                     1147  1147    72        0    1075     0   6.3%      0    0        0     0       0     0   PASS
+System.Reflection.Metadata/global-ns                         49    49     4        0      45     0   8.2%      0    0        0     0       0     0   PASS
+System.Reflection.Metadata/system-reflection-metadata       404   404    31        0     373     0   7.7%      0    0        0     0       0     0   PASS
+System.Reflection.Metadata/system-reflection-metadata-ecma335    334   334    92        0     242     0  27.5%      0    0        0     0       0     0   PASS
+System.Runtime.InteropServices/global-ns                     34    33     8        0      25     1  23.5%      0    0        0     0       0     0   PASS
+System.Runtime.Serialization.Formatters/global-ns            84    84     3        0      81     0   3.6%      0    0        0     0       0     0   FAIL
+System.Security.Claims/global-ns                             43    43     7        0      36     0  16.3%      0    0        0     0       0     0   PASS
+System.Security.Cryptography/security-cryptography         1262  1261   178        0    1083     1  14.1%      0    0        0     0       0     0   PASS
+System.Security.Cryptography/security-cryptography-2       1262  1261   178        0    1083     1  14.1%      0    0        0     0       0     0   PASS
+System.Security.Cryptography/system-security-cryptography-x509certificates    302   302    59        0     243     0  19.5%      0    0        0     0       0     0   PASS
+System.Security.Principal.Windows/global-ns                  43    43     5        0      38     0  11.6%      0    0        0     0       0     0   PASS
+System.Text.Json/global-ns                                   34    34     0        0      34     0   0.0%      0    0        0     0       0     0   FAIL
+System.Text.Json/system-text-json-serialization-converters     96    96    10        0      86     0  10.4%      0    0        0     0       0     0   PASS
+System.Text.Json/text-json                                  312   311     4        0     307     1   1.3%      0    0        0     0       0     0   FAIL
+System.Threading.Tasks.Parallel/global-ns                   107   107     6        0     101     0   5.6%      0    0        0     0       0     0   PASS
+System.Xml.ReaderWriter/system-xml-schema                    51    51    49        0       2     0  96.1%      0    0        0     0       0     0   PASS
+System.Xml.ReaderWriter/xml                                 411   375   306        0      69    36  74.5%      0    0        0     0       0     0   PASS
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                     66602  66492  20097        0   46395   110              0    0        0     0     356   356  gated_b=16  gated_hu=16
+
+Gate ratio threshold: 0.0  |  Gated chunks: 16
+  gated list: System.Collections.Immutable/global-ns, System.IO.Compression.Brotli/global-ns, System.IO.Compression.ZipFile/global-ns, System.Linq/global-ns, System.Net.Http/system-net-http, System.Net.ServerSentEvents/global-ns, System.Net.Sockets/system-net-sockets, System.ObjectModel/global-ns, System.Private.CoreLib/io, System.Private.CoreLib/io-2, System.Private.CoreLib/io-3, System.Private.CoreLib/reflection, System.Private.Xml/system-xml-xsl, System.Runtime.Serialization.Formatters/global-ns, System.Text.Json/global-ns, System.Text.Json/text-json

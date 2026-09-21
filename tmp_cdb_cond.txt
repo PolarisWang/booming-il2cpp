@@ -1,0 +1,4 @@
+sxe av
+.foreach (i {0}) { }
+bp /1 @$exr
+g

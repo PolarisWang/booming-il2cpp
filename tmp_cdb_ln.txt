@@ -1,0 +1,6 @@
+sxe av
+g
+ln
+u rip L30
+? rip-0x4f860000
+q

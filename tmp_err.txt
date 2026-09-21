@@ -1,0 +1,7 @@
+[2026-09-13T12:22:03][DEBUG][GCConfig] nursery=67108864 gen1=0 max_tlab=32768 loh=87040 mark_workers=8 hard_mb=0 soft_mb=0 young_mult=2000 full_mult=2000 cooldown=256 min_gc_ms=50 bgc_workers=8 mark_slice_us=2000
+[2026-09-13T12:22:03][INFO][GcLowMem] low-memory monitor started
+[2026-09-13T12:22:03][DEBUG][codegen] T4 VEH handler registered
+[2026-09-13T12:22:03][DEBUG][GcEvents] registered callback 0x7ff70e1ef280 at slot 0
+[2026-09-13T12:22:03][DEBUG][GCConfig] nursery=67108864 gen1=0 max_tlab=32768 loh=87040 mark_workers=8 hard_mb=0 soft_mb=0 young_mult=2000 full_mult=2000 cooldown=256 min_gc_ms=50 bgc_workers=8 mark_slice_us=2000
+[2026-09-13T12:22:03][DEBUG][codegen] T4 VEH handler registered
+[2026-09-13T12:22:03][DEBUG][GcEvents] registered callback 0x7ff70e1ef280 at slot 1

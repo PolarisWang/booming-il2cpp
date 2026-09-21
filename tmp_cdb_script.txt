@@ -1,0 +1,3 @@
+.logopen /t D:\agent\chaos-il2cpp\tmp_cdb_l.log
+sxe -c "kb 200;.exr -1;q" av
+g

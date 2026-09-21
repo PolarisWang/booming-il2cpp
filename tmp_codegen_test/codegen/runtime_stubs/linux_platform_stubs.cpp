@@ -1,0 +1,76 @@
+// linux_platform_stubs.cpp — Stub definitions for symbols not available on Linux
+//
+// Provides minimal stub definitions for:
+//   - AOT/external runtime symbols (normally from generated code)
+//   - Debugger symbols (normally from chaos_debugger, Windows-only)
+//   - Bootstrap functions requiring codegen bridge
+//
+// These stubs allow test executables to link on Linux.  They are NOT
+// functionally correct — they are build-compatibility stubs only.
+//
+// Windows note: This file uses GCC __attribute__((weak)) and is only
+// needed on Linux.  On MSVC, the AOT/debugger symbols are provided by
+// prebuilt libraries, so skip this file entirely.
+
+#ifndef _WIN32
+
+#include <cstdint>
+
+// ════════════════════════════════════════════════════════════════════════════
+// AOT hotpatch module symbol
+// ════════════════════════════════════════════════════════════════════════════
+
+// Normally defined in generated code (chaos_generated_module.cpp).
+// On Linux (reference build), no AOT module is loaded.
+// Weak to allow test object files to override with their own definition.
+extern "C" __attribute__((weak)) const int chaos_il2cpp_aot_hotpatch_module = 0;
+
+// ════════════════════════════════════════════════════════════════════════════
+// External runtime symbols (from external_runtime module or generated code)
+// ════════════════════════════════════════════════════════════════════════════
+
+extern "C" __attribute__((weak)) const int kChaosExternalRuntimeCount = 0;
+extern "C" __attribute__((weak)) const void* const kChaosExternalRuntimeSubjects[1] = {nullptr};
+extern "C" __attribute__((weak)) const void* const kChaosExternalRuntimeFnTable[1] = {nullptr};
+
+// ════════════════════════════════════════════════════════════════════════════
+// Debugger stubs (normally in chaos_debugger, Windows-only)
+// ════════════════════════════════════════════════════════════════════════════
+
+#include <atomic>
+#include <cstdint>
+
+#include <debugger/dbg_runtime.h>
+#include <debugger/dbg_stepping.h>
+
+namespace chaos::il2cpp::diagnostics {
+
+// Declarations live in debugger/dbg_runtime.h.  Definitions must match exactly
+// (including the std::atomic<bool> globals and the DbgFrameSnapshot& return of
+// DbgGetFrameSnapshot) or the mangled names differ and every consumer is left
+// with an unresolved external on Linux, where chaos_debugger is not built.
+std::atomic<bool> g_dbg_any_breakpoints {false};
+std::atomic<bool> g_dbg_pause_requested {false};
+
+bool DbgIsStepping() noexcept {
+    return false;
+}
+void DbgClearFrameSnapshot() noexcept {}
+DbgFrameSnapshot& DbgGetFrameSnapshot() noexcept {
+    static DbgFrameSnapshot snapshot;
+    return snapshot;
+}
+// Stub the non-stepping variants — DbgCheckBreakpoint is declared in
+// dbg_breakpoint.h (returns int), DbgNotifyPaused/DbgShouldStopAtCurrentPosition
+// in dbg_runtime.h.
+int DbgCheckBreakpoint(uint32_t, uint32_t) noexcept {
+    return 0;
+}
+void DbgNotifyPaused(uint32_t, uint32_t) noexcept {}
+bool DbgShouldStopAtCurrentPosition(int) noexcept {
+    return false;
+}
+
+} // namespace chaos::il2cpp::diagnostics
+
+#endif // _WIN32

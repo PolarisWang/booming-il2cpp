@@ -1,0 +1,7 @@
+sxe av
+g
+kb 20
+ln
+r
+!vadump
+q

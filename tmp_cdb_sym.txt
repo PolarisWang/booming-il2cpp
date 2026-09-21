@@ -1,0 +1,5 @@
+.logopen /t D:\agent\chaos-il2cpp\tmp_cdb_bp3.log
+sxn av
+bp chaos_entry!ChaosReflectionGetMethod ".printf \"GM-CALL h=%p name=%p pt=%p\n\", @rcx, @rdx, @r8; g"
+g
+q

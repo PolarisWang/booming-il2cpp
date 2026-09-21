@@ -1,0 +1,209 @@
+// dispatch.cpp — Auto-generated
+// Verification dispatch functions for native-AOT test execution.
+
+#include <cstdint>
+#include <chrono>
+#include <chaos/native_types.h>
+#include <runtime_core.h>
+#include <chaos/eh.h>
+#include <chaos/hotpatch_dispatch.h>
+#include <chaos/profile.h>
+
+using chaos::il2cpp::runtime_core::ChaosDispatchMethod;
+using chaos::il2cpp::runtime_core::ChaosDispatchMethodBenchDirect;
+using chaos::il2cpp::runtime_core::chaos_gc_get_allocated_bytes_for_current_thread;
+using chaos::il2cpp::runtime_core::chaos_gc_enter_no_gc_region;
+using chaos::il2cpp::runtime_core::chaos_gc_leave_no_gc_region;
+using chaos::il2cpp::runtime_core::chaos_gc_try_start_no_gc_region;
+using chaos::il2cpp::runtime_core::chaos_gc_end_no_gc_region;
+
+extern "C" const int kAotMethodCount;
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectSlotMap[];
+
+extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
+extern "C" CHAOS_IL2CPP_INT32 GetHotpatchEntryCount() noexcept;
+
+// JIT mode: use kDefaultArgThunks to bypass JIT precode trampoline.
+// AOT mode: nullptr falls through to entry.direct_ptr (hotpatch-aware).
+
+extern "C" void (*kDefaultArgThunks[])() noexcept;
+#define CHAOS_DISPATCH_THUNKS kDefaultArgThunks
+
+
+// ── RunFactAll: dispatch ALL methods across ALL registered modules ────
+extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {
+    chaos_gc_enter_no_gc_region();
+
+    // JIT mode (or Linux AOT): use try/catch for POSIX EH compatibility
+    auto* entries = GetHotpatchEntries();
+    CHAOS_IL2CPP_INT32 failures = 0;
+    for (int32_t si = 0; si < kSubjectEntryCount; si++) {
+        int32_t i = kSubjectSlotMap[si];
+        try {
+            ChaosDispatchMethod(entries, kAotMethodCount, i, CHAOS_DISPATCH_THUNKS);
+        } catch(...) {
+            ++failures;
+        }
+    }
+    chaos_gc_leave_no_gc_region();
+    return failures;
+
+}
+
+// ── RunBenchmark: timing loop via ChaosDispatchMethodBenchDirect ──────
+struct BenchmarkResult {
+    double elapsed_ms;
+    int64_t allocated_bytes;
+    bool caught_exception;
+};
+
+extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
+    if (entry_index < 0 || entry_index >= kAotMethodCount)
+        return {-1.0, 0, false};
+    auto* entries = GetHotpatchEntries();
+    // Warmup: at least 100 calls to prime caches / tier promotion.
+    // Use __try/__except for Windows AOT mode (interpreter dispatch may raise SEH);
+    // try/catch does not catch access violations on Windows.
+    //
+    // Rootcause of "DispatchDirectVoid+benchmark+patch-data crash":
+    // when a slot is HOTPATCH-ACTIVE (post-ApplyPatch), ChaosDispatchMethodBenchDirect
+    // routes through InterpreterEntryDirectFast (not direct_ptr). That interpreter
+    // path performs tier promotion (call_count.fetch_add + TryTierUpgrade, and on
+    // promotion may JIT-compile and overwrite dispatch_entry->direct_ptr) ON EACH call,
+    // and the promoted native step transitions coop→preempt→coop with re-entrant
+    // GC-mode writes that only restore in a destructor. Because the timed loop sits
+    // inside chaos_gc_enter_no_gc_region — which is ONLY a TLS depth counter that
+    // DEFERS (does not disable) foreground/full GC — a full STW GC can fire precisely
+    // during the per-slot timed window, racing the tier/promotion mutation →
+    // sporadic AV/UAF. (cf. gc_bgc.cpp:29-31,71-79 documented benchmark-vs-BGC race.)
+    //
+    // Fix (harness layer, steady-state + GC-quiescence): we must not measure a slot
+    // while it is actively tier-promoting or while a deferred full GC can land inside
+    // the timed section.
+    //   (1) Warm up to terminal tier OUTSIDE the timer: loop until the method is no
+    //       longer first-call-promoting (generous ramp), so the timed loop hits a
+    //       steady direct_ptr with no per-call tier mutation.
+    //   (2) Attempt a BUDGETED no-GC region; if insufficient budget to guarantee no
+    //       full GC can fire, refuse to measure (return caught_exception) instead of
+    //       risking a crash. try_start returns 0 when it cannot reserve enough.
+
+    try {
+
+        // Ramp to terminal tier outside the timer: keep calling until stabilization.
+        // Interpreter tier promotion typically converges within a few hundred calls;
+        // we budget generous headroom. If it ever failed earlier we'd already have
+        // returned. 1000 is a safe upper bound for FirstCall/Iced/Quick/Jit tiers.
+        int warm = 0;
+        for (; warm < 1000; warm++) {
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
+        }
+
+    } catch(...) {
+
+        return {-1.0, 0, true};
+    }
+
+    CHAOS_IL2CPP_PROFILE_RESET();
+    // Budgeted no-GC region: unlike enter_no_gc_region (TLS depth only, defers but
+    // does not prevent a foreground full GC), try_start reserves actual young+old
+    // capacity (2x margin). If it cannot reserve enough it returns 0 — meaning a
+    // full GC is imminent/in-flight — and we must NOT run the timed native loop,
+    // else tier-promotion + that GC race (the crash). We ask for a large budget
+    // relative to a benchmark slot (which should allocate ~nothing once warmed).
+    if (!chaos_gc_try_start_no_gc_region(64 * 1024 * 1024 /*64MB budget*/, 0)) {
+        // A GC is due and we cannot defer it safely → do not measure this slot.
+        return {-1.0, 0, true};
+    }
+    auto alloc_before = chaos_gc_get_allocated_bytes_for_current_thread();
+    auto start = std::chrono::steady_clock::now();
+
+    try {
+
+        for (int i = 0; i < iterations; i++) {
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
+        }
+
+    } catch(...) {
+
+        auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
+        chaos_gc_end_no_gc_region();
+        return {-1.0, alloc_after - alloc_before, true};
+    }
+    auto end = std::chrono::steady_clock::now();
+    auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
+    // Release the no-GC region deterministically AFTER the timer stops, so any
+    // deferred GC runs outside the measured window.
+    chaos_gc_end_no_gc_region();
+    BenchmarkResult result;
+    result.elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
+    result.allocated_bytes = alloc_after - alloc_before;
+    result.caught_exception = false;
+    CHAOS_IL2CPP_PROFILE_DUMP();
+    return result;
+}
+
+// ── RunHotpatchAll: dispatch ALL methods across ALL modules (post-patch) ──
+extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {
+    chaos_gc_enter_no_gc_region();
+
+    auto* entries = GetHotpatchEntries();
+    CHAOS_IL2CPP_INT32 failures = 0;
+    for (int32_t si = 0; si < kSubjectEntryCount; si++) {
+        int32_t i = kSubjectSlotMap[si];
+        try {
+            ChaosDispatchMethod(entries, kAotMethodCount, i, CHAOS_DISPATCH_THUNKS);
+        } catch(...) {
+            ++failures;
+        }
+    }
+    chaos_gc_leave_no_gc_region();
+    return failures;
+
+}
+
+// ── RunHotpatchBenchmark: timing loop (post-patch) ──────────────────
+extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations) {
+    if (entry_index < 0 || entry_index >= kAotMethodCount)
+        return {-1.0, 0, false};
+    auto* entries = GetHotpatchEntries();
+    // Warmup: at least 100 calls to prime caches / tier promotion.
+    // Use __try/__except for Windows AOT mode — see RunBenchmark for rationale.
+
+    try {
+
+        for (int w = 0; w < 100; w++) {
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
+        }
+
+    } catch(...) {
+
+        return {-1.0, 0, true};
+    }
+    CHAOS_IL2CPP_PROFILE_RESET();
+    chaos_gc_enter_no_gc_region();
+    auto alloc_before = chaos_gc_get_allocated_bytes_for_current_thread();
+    auto start = std::chrono::steady_clock::now();
+
+    try {
+
+        for (int i = 0; i < iterations; i++) {
+            ChaosDispatchMethodBenchDirect(entries, kAotMethodCount, entry_index);
+        }
+
+    } catch(...) {
+
+        auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
+        chaos_gc_leave_no_gc_region();
+        return {-1.0, alloc_after - alloc_before, true};
+    }
+    auto end = std::chrono::steady_clock::now();
+    auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
+    chaos_gc_leave_no_gc_region();
+    BenchmarkResult result;
+    result.elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
+    result.allocated_bytes = alloc_after - alloc_before;
+    result.caught_exception = false;
+    CHAOS_IL2CPP_PROFILE_DUMP();
+    return result;
+}

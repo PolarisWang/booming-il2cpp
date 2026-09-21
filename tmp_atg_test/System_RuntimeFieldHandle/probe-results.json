@@ -1,0 +1,28 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.RuntimeFieldHandle::FromIntPtr:System.RuntimeFieldHandle(System.IntPtr)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.RuntimeFieldHandle",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Private.CoreLib/System.RuntimeFieldHandle::ToIntPtr:System.IntPtr(System.RuntimeFieldHandle)",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": null,
+    "returnValueType": "System.IntPtr",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]
