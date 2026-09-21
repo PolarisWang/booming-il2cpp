@@ -13,6 +13,22 @@ static bool ResolveObjectTypeInfo(TypeInfoHandle type_handle,
     // Path 1: Tag-encoded RuntimeInstantiatedType handle
     const auto* desc = TryDecodeReflectionQueryTypeHandle(type_handle);
     if (desc != nullptr) {
+        // The descriptor's type_info_ptr is the MethodTable address emitted by
+        // codegen for exception-type descriptors (BuildExceptionTypeTable).
+        // MethodTable's first 32 bytes are bit-compatible with TypeInfoHot, so
+        // we can use it directly as the object's type_info.
+        if (desc->type_info_ptr != nullptr) {
+            out_type_info = static_cast<const TypeInfoHot*>(desc->type_info_ptr);
+            if (out_type_info->stable_id != 0) {
+                out_vtable = out_type_info->vtable_array;
+                if (out_vtable == nullptr) {
+                    const CHAOS_IL2CPP_UINT64 stable_id = out_type_info->stable_id;
+                    out_vtable = runtime_vtable::FindVTable(stable_id);
+                }
+                return (out_type_info != nullptr);
+            }
+            out_type_info = nullptr;
+        }
         if (desc->subject_id_utf8 != nullptr) {
             const CHAOS_IL2CPP_UINT64 stable_id =
                 chaos_compute_type_stable_id(desc->subject_id_utf8);
