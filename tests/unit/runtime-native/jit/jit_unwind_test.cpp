@@ -16,9 +16,19 @@
 #include "jit_unwind.h"
 
 using chaos::il2cpp::jit::CodeBuffer;
+
+// Win64-only names: jit_unwind.h declares EmitUnwindInfo / AllocRuntimeFunction /
+// RuntimeFunction inside `#if defined(_WIN64)`.  Pulling them in unconditionally
+// makes this file fail to COMPILE on Linux ("has not been declared in
+// 'chaos::il2cpp::jit'"), which is a hard error even though every use below is
+// itself guarded by #if defined(_WIN64).
+#if defined(_WIN64)
 using chaos::il2cpp::jit::EmitUnwindInfo;
 using chaos::il2cpp::jit::AllocRuntimeFunction;
 using chaos::il2cpp::jit::RuntimeFunction;
+#endif
+
+// Declared for all platforms (Linux DWARF .eh_frame emission).
 using chaos::il2cpp::jit::EmitDwarfCie;
 using chaos::il2cpp::jit::EmitDwarfFde;
 

@@ -109,9 +109,21 @@ chaos_native_add_test(test_gc_memory_domain
 # gc_profile_stats_test — per-dispatch profile data collection unit tests
 # Verifies ProfileRecord* / ProfileStore* API in both stub and profile build tiers.
 # Links chaos_runtime_core for the profile_stats.cpp implementation.
+#
+# Use the full CHAOS_GC_LIBS set here, NOT a reduced `chaos_runtime_core
+# chaos_fmt chaos_common` list.  chaos_runtime_core and chaos_interpreter are
+# MUTUALLY dependent (runtime_core links chaos_interpreter PUBLIC on Linux;
+# interpreter objects such as fast_dispatch.cpp.o reference the Dbg* /
+# g_dbg_* / ChaosBCrypt* / method_table symbols that runtime_core defines).
+# The test factory resolves that cycle with -Wl,--start-group/--end-group —
+# but only over the libraries it is given.  A reduced list leaves
+# chaos_interpreter OUTSIDE the group (CMake appends it after the group as a
+# transitive PUBLIC dep), so the single pass consumes runtime_core before
+# interpreter raises its undefined symbols and the link dies with ~40
+# "undefined reference" errors for symbols that DO exist in libchaos_runtime_core.a.
 chaos_native_add_test(test_gc_profile_stats
     gc_profile_stats_test.cpp
-    LIBS chaos_runtime_core chaos_fmt chaos_common
+    LIBS ${CHAOS_GC_LIBS}
     LABELS "unit;gc"
 )
 chaos_native_force_multiple(test_gc_profile_stats)
