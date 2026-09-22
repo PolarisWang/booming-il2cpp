@@ -273,34 +273,34 @@ namespace chaos::il2cpp::runtime_core {
 // These are called from generated kernel stubs (MathKernel template).
 // Each delegates to the corresponding extern "C" chaos_convert_tochar_* function.
 
-CHAOS_IL2CPP_UINT16 ConvertToCharFromByte(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromByte(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_byte(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromInt16(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromInt16(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_int16(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromInt32(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromInt32(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_int32(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromInt64(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromInt64(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_int64(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromSByte(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromSByte(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_sbyte(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromUInt32(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromUInt32(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_uint32(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromUInt64(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromUInt64(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_uint64(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromSingle(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromSingle(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_single(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromDouble(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromDouble(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_double(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromBoolean(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromBoolean(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_boolean(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromDateTime(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromDateTime(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_datetime(value); }
-CHAOS_IL2CPP_UINT16 ConvertToCharFromDecimal(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromDecimal(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
     { return chaos_convert_tochar_decimal(value); }
 
 /// Kernel entry point for ToChar(Object) AOT bridge.
 /// Dispatches on the boxed value's type via TypeInfoHot::stable_id.
-CHAOS_IL2CPP_UINT16 ConvertToCharFromObject(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_UINT16 ConvertToCharFromObject(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     return chaos_convert_tochar_object(value);
 }

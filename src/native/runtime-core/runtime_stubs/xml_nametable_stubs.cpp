@@ -77,7 +77,7 @@ static const CHAOS_IL2CPP_UINT16* resolve_char_array_data(CHAOS_IL2CPP_INTPTR ke
 ///   * real StubStringHeader* → inline bytes via stub_string_data.
 /// Returns true when the argument holds a non-null, resolvable string.
 static bool utf8_view_of_string(
-    CHAOS_IL2CPP_INTPTR str, string_table::StringView& out) noexcept
+    CHAOS_IL2CPP_INTPTR str, string_table::StringView& out) CHAOS_STUB_NOEXCEPT
 {
     if (str == 0)
     {
@@ -106,7 +106,7 @@ static bool utf8_view_of_string(
 extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddString(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     // .NET NameTable.Add on a null receiver throws NullReferenceException.
     if (this_ptr == 0)
@@ -153,7 +153,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddString(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetString(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     // XmlNameTable.Get on a null receiver throws NullReferenceException.
     if (this_ptr == 0)
@@ -201,7 +201,7 @@ extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddChars(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR key,
-    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) noexcept
+    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) CHAOS_STUB_NOEXCEPT
 {
     if (this_ptr == 0) { RaiseNullReferenceException(); return 0; }
     // A null key is NOT an error here: .NET 8's NameTable.Add(null, 0, 0)
@@ -247,7 +247,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddChars(
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetChars(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR key,
-    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) noexcept
+    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     if (this_ptr == 0) { RaiseNullReferenceException(); return 0; }

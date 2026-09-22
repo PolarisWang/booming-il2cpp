@@ -13,19 +13,21 @@
 // reference" guarantee for a given content.
 #pragma once
 
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
+
 extern "C" {
 
 /// NameTable.Add(string name) → string (interned, reference-stable).
 /// Returns a tagged StringId for the interned string, or 0 (null) on OOM/null.
 /// Throws NullReferenceException when `this` is null.
 CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddString(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT;
 
 /// XmlNameTable.Get(string name) → string? (query-only).
 /// Returns the interned tagged StringId if present, 0 (null) if absent.
 /// Throws NullReferenceException when `this` is null.
 CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetString(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept;
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT;
 
 /// NameTable.Add(char[] key, int start, int len) → string (interned).
 /// Same reference-equality contract as the string overload; the char[] window
@@ -35,12 +37,12 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetString(
 /// ArgumentNullException when `key` is null — matching .NET.
 CHAOS_IL2CPP_INTPTR ChaosXmlNameTableAddChars(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR key,
-    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) noexcept;
+    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) CHAOS_STUB_NOEXCEPT;
 
 /// NameTable.Get(char[] key, int start, int len) → string? (query-only).
 /// Mirror of AddChars; never inserts.  Returns 0 (null) when absent.
 CHAOS_IL2CPP_INTPTR ChaosXmlNameTableGetChars(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR key,
-    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) noexcept;
+    CHAOS_IL2CPP_INT32 start, CHAOS_IL2CPP_INT32 len) CHAOS_STUB_NOEXCEPT;
 
 }  // extern "C"

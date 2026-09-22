@@ -49,7 +49,7 @@ namespace chaos::il2cpp::runtime_core {
 namespace {
 
 /// Build a managed byte[] whose first `count` bytes are a copy of `bytes`.
-CHAOS_IL2CPP_INTPTR NewByteArray(const char* bytes, CHAOS_IL2CPP_SIZE count) noexcept
+CHAOS_IL2CPP_INTPTR NewByteArray(const char* bytes, CHAOS_IL2CPP_SIZE count) CHAOS_STUB_NOEXCEPT
 {
     // Stride matched to ChaosArrayNew1D_Inline so the object is byte-for-byte
     // interchangeable with a codegen-produced `new byte[]{...}`.
@@ -75,7 +75,7 @@ CHAOS_IL2CPP_INTPTR NewByteArray(const char* bytes, CHAOS_IL2CPP_SIZE count) noe
 extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosJsonSerializerSerializeToUtf8BytesInt(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR options) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR options) CHAOS_STUB_NOEXCEPT
 {
     // `null` options means "use defaults" in the BCL, and the probe passes
     // null for the default set.  A non-null instance is accepted too: the

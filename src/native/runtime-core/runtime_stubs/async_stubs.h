@@ -4,6 +4,7 @@
 // entry points that reference Task.Yield().
 #pragma once
 
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
 #include <chaos/native_types.h>
 
 // ── Interop valuetype fixes (page8 missing typedefs) ──
@@ -13,14 +14,14 @@ typedef CHAOS_IL2CPP_INT32 chaos_valuetype_System_Private_CoreLib_Interop_Global
 
 extern "C" {
 
-CHAOS_IL2CPP_INTPTR chaos_async_yield_create(void) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
-CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_async_yield_create(void) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_async_yield_get_awaiter(CHAOS_IL2CPP_INTPTR yield_awaiter) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INT32 chaos_async_yield_get_is_completed(CHAOS_IL2CPP_INTPTR yield_awaiter) CHAOS_STUB_NOEXCEPT;
 // INTPTR, not void: the managed YieldAwaiter.GetResult() is void, but the
 // generated shape dispatch forwards every helper through
 // reinterpret_cast<CHAOS_IL2CPP_INTPTR>(...), which is ill-formed over a void
 // expression.  Same ABI constraint as ChaosAsyncTaskAwaiterGetResultVoid below.
-CHAOS_IL2CPP_INTPTR chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_awaiter) CHAOS_STUB_NOEXCEPT;
 
 // ── Hot BCL no-ops ──
 // IDisposable::Dispose() lowered to a native no-op (the GC owns the lifetime,
@@ -29,8 +30,8 @@ CHAOS_IL2CPP_INTPTR chaos_async_yield_get_result(CHAOS_IL2CPP_INTPTR yield_await
 // and unqualified. The definition lives in async_stubs.cpp; without a
 // declaration reachable from the generated TU it fails to compile with
 // C3861: 'chaos_noop_void': identifier not found.
-extern "C" void chaos_noop_void(CHAOS_IL2CPP_INTPTR dispose_target) noexcept;
-extern "C" void chaos_noop_void3(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b, CHAOS_IL2CPP_INTPTR c) noexcept;
+extern "C" void chaos_noop_void(CHAOS_IL2CPP_INTPTR dispose_target) CHAOS_STUB_NOEXCEPT;
+extern "C" void chaos_noop_void3(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b, CHAOS_IL2CPP_INTPTR c) CHAOS_STUB_NOEXCEPT;
 
 // TaskAwaiter stubs (DirectNativeSymbol for async state machine dispatch).
 // Generated code calls these when lowering async Task.GetResult() patterns.
@@ -46,8 +47,8 @@ extern "C" void chaos_noop_void3(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b, C
 // Every other helper in this header already returns INTPTR for this reason.
 // The implementation returns 0; nothing consumes it (fault/cancel propagation
 // happens via RaiseManagedException inside).
-CHAOS_IL2CPP_INTPTR ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosAsyncAwaiterGetResult(CHAOS_IL2CPP_INTPTR awaiter) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR awaiter) CHAOS_STUB_NOEXCEPT;
 
 // ── Task.Delay / TaskAwaiter await path (non-generic Task) ──
 // Without these, Task.Delay / Task.GetAwaiter / TaskAwaiter.get_IsCompleted
@@ -60,18 +61,18 @@ CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR await
 // task's actual completion state and ChaosAsyncTaskAwaiterGetResultValue
 // returns the real result payload — a constant 1/0 here would silently defeat
 // suspension and corrupt every `await Task<T>` result.
-CHAOS_IL2CPP_INTPTR ChaosAsyncTaskDelay(CHAOS_IL2CPP_INT32 millisecondsDelay) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetAwaiter(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
-CHAOS_IL2CPP_INT32 ChaosAsyncTaskAwaiterGetIsCompleted(CHAOS_IL2CPP_INTPTR awaiter_ref) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskDelay(CHAOS_IL2CPP_INT32 millisecondsDelay) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetAwaiter(CHAOS_IL2CPP_INTPTR task_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskAwaiterGetIsCompleted(CHAOS_IL2CPP_INTPTR awaiter_ref) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awaiter) CHAOS_STUB_NOEXCEPT;
 
 // ── Task.Wait / Task<T>.Result (blocking semantics) ──
 // Block the calling thread until the task completes, propagating faults the
 // same way `await` does.  ChaosAsyncTaskWait returns 1 on completion, 0 on
 // timeout (timeout_ms < 0 means wait indefinitely).
-CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsCompleted(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
-CHAOS_IL2CPP_INT32 ChaosAsyncTaskWait(CHAOS_IL2CPP_INTPTR task_handle, CHAOS_IL2CPP_INT32 timeout_ms) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetResultBlocking(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsCompleted(CHAOS_IL2CPP_INTPTR task_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskWait(CHAOS_IL2CPP_INTPTR task_handle, CHAOS_IL2CPP_INT32 timeout_ms) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetResultBlocking(CHAOS_IL2CPP_INTPTR task_handle) CHAOS_STUB_NOEXCEPT;
 
 /// `Task.Wait()` — the parameterless overload, i.e. an INFINITE wait.
 ///
@@ -84,54 +85,54 @@ CHAOS_IL2CPP_INTPTR ChaosAsyncTaskGetResultBlocking(CHAOS_IL2CPP_INTPTR task_han
 ///
 /// Registering the THUNK as the direct symbol keeps the ABI honest: one slot
 /// in, one slot out.
-CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitInfinite(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitInfinite(CHAOS_IL2CPP_INTPTR task_handle) CHAOS_STUB_NOEXCEPT;
 
 // ── Three-state query (resolved / faulted / cancelled) ──
 // These are mutually exclusive for a completed task: exactly one of
 // IsCanceled / IsFaulted is set when IsCompleted is true, and neither is set
 // for a successful completion.  Cancellation is never inferred from a null
 // exception payload — it is tracked as its own flag on AsyncTask.
-CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsFaulted(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
-CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsCanceled(CHAOS_IL2CPP_INTPTR task_handle) noexcept;
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsFaulted(CHAOS_IL2CPP_INTPTR task_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INT32 ChaosAsyncTaskGetIsCanceled(CHAOS_IL2CPP_INTPTR task_handle) CHAOS_STUB_NOEXCEPT;
 
 // ── TaskCompletionSource<T> native helpers (Phase 3 P3-1) ──
 // Each takes a TCS object handle as the first argument.
 // Implemented in async_stubs.cpp via the async.h TaskSource proxy.
-CHAOS_IL2CPP_INTPTR chaos_task_completion_source_create(void) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_tcs_get_task(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
-void chaos_tcs_set_result(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR value) noexcept;
-void chaos_tcs_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR exception) noexcept;
-void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR value) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR exception) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_completion_source_create(void) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_tcs_get_task(CHAOS_IL2CPP_INTPTR tcs_handle) CHAOS_STUB_NOEXCEPT;
+void chaos_tcs_set_result(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT;
+void chaos_tcs_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR exception) CHAOS_STUB_NOEXCEPT;
+void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_exception(CHAOS_IL2CPP_INTPTR tcs_handle, CHAOS_IL2CPP_INTPTR exception) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) CHAOS_STUB_NOEXCEPT;
 
 // Non-generic TaskCompletionSource overloads whose managed signature carries no
 // value argument.  Kept separate from the 2-arg forms above because the ABI slot
 // for `value` is never populated on those call sites.
-void chaos_tcs_set_result_void(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
-void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result_void(CHAOS_IL2CPP_INTPTR tcs_handle) noexcept;
+void chaos_tcs_set_result_void(CHAOS_IL2CPP_INTPTR tcs_handle) CHAOS_STUB_NOEXCEPT;
+void chaos_tcs_set_canceled(CHAOS_IL2CPP_INTPTR tcs_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result_void(CHAOS_IL2CPP_INTPTR tcs_handle) CHAOS_STUB_NOEXCEPT;
 
 // ── Task.Delay native helpers (Phase 3 P3-2) ──
 // TimerQueue-backed delayed task completion (implemented in async_stubs.cpp).
 // Requires TimerQueueInitialize (via ThreadPoolInitialize / gate thread).
-CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_task_delay_timespan_stub(CHAOS_IL2CPP_INT64 ticks) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_task_delay_timespan_stub(CHAOS_IL2CPP_INT64 ticks) CHAOS_STUB_NOEXCEPT;
 
 // ── Task.WhenAll / WhenAny native combinators (Phase 3 P3-3) ──
 // `children` is a contiguous array of CHAOS_IL2CPP_INTPTR Task handles; n = count.
 // Each returns a NEW aggregate AsyncTask handle (0 on invalid args/allocation failure).
-CHAOS_IL2CPP_INTPTR chaos_task_when_all(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_when_all(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_task_when_any(CHAOS_IL2CPP_INTPTR* children, CHAOS_IL2CPP_INT32 n) CHAOS_STUB_NOEXCEPT;
 
 // Managed-array overloads (codegen passes Task[] as an opaque CHAOS_IL2CPP_INTPTR):
-CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_when_all_array(CHAOS_IL2CPP_INTPTR tasks_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_task_when_any_array(CHAOS_IL2CPP_INTPTR tasks_handle) CHAOS_STUB_NOEXCEPT;
 
 /// Task.WhenAny(Task, Task) — two-task specialization; builds a 2-element
 /// stack array and delegates to the shared combinator (no ownership transfer).
-CHAOS_IL2CPP_INTPTR chaos_task_when_any2(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_when_any2(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) CHAOS_STUB_NOEXCEPT;
 
 // ── T3: Task.WaitAll / Task.WaitAny (BLOCKING semantics) ──
 //
@@ -149,8 +150,8 @@ CHAOS_IL2CPP_INTPTR chaos_task_when_any2(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INT
 //   WaitAll → 1 (waited for all; the caller observes child results), 0 = error
 //   WaitAny → 0-based index of the first completed task, -1 = error
 // Both return immediately on a null/invalid array.
-CHAOS_IL2CPP_INT32 chaos_task_wait_all(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
-CHAOS_IL2CPP_INT32 chaos_task_wait_any(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
+CHAOS_IL2CPP_INT32 chaos_task_wait_all(CHAOS_IL2CPP_INTPTR tasks_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INT32 chaos_task_wait_any(CHAOS_IL2CPP_INTPTR tasks_handle) CHAOS_STUB_NOEXCEPT;
 
 // ── Task.WhenEach (Phase 2 / ASYNC-P2-8) ──
 // ORDER-PRESERVING completion stream.  Unlike WhenAll (awaits everything, then
@@ -162,39 +163,39 @@ CHAOS_IL2CPP_INT32 chaos_task_wait_any(CHAOS_IL2CPP_INTPTR tasks_handle) noexcep
 // element is consumed.  Every task in the array is registered with a completion
 // continuation at call time, so no completion can be lost between caller drains.
 // Returns 0 on invalid arguments or allocation failure.
-CHAOS_IL2CPP_INTPTR chaos_task_when_each_array(CHAOS_IL2CPP_INTPTR tasks_handle) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_when_each_array(CHAOS_IL2CPP_INTPTR tasks_handle) CHAOS_STUB_NOEXCEPT;
 
 // Consumer side of the WhenEach stream.  A caller drains it element by element:
 // while when_each_may_have_next() is non-zero, when_each_try_dequeue() returns the
 // next completed task in completion order (0 if the queue is momentarily empty —
 // await, don't conclude the stream ended).  when_each_destroy frees the stream.
-CHAOS_IL2CPP_INT32 chaos_task_when_each_may_have_next(CHAOS_IL2CPP_INTPTR stream) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_task_when_each_try_dequeue(CHAOS_IL2CPP_INTPTR stream) noexcept;
-void chaos_task_when_each_destroy(CHAOS_IL2CPP_INTPTR stream) noexcept;
+CHAOS_IL2CPP_INT32 chaos_task_when_each_may_have_next(CHAOS_IL2CPP_INTPTR stream) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_task_when_each_try_dequeue(CHAOS_IL2CPP_INTPTR stream) CHAOS_STUB_NOEXCEPT;
+void chaos_task_when_each_destroy(CHAOS_IL2CPP_INTPTR stream) CHAOS_STUB_NOEXCEPT;
 
 // ── Phase 4: ValueTask state queries + helpers (ASYNC-P2-8) ──
 // A managed ValueTask crosses the ABI as its backing Task handle.
 // The four predicates must stay distinct: a faulted ValueTask is
 // (completed, !completed_successfully, faulted, !canceled).
-CHAOS_IL2CPP_INT32 chaos_value_task_is_completed(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
-CHAOS_IL2CPP_INT32 chaos_value_task_is_completed_successfully(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
-CHAOS_IL2CPP_INT32 chaos_value_task_is_faulted(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
-CHAOS_IL2CPP_INT32 chaos_value_task_is_canceled(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_value_task_as_task(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
-CHAOS_IL2CPP_INTPTR chaos_value_task_get_awaiter(CHAOS_IL2CPP_INTPTR vt_handle) noexcept;
+CHAOS_IL2CPP_INT32 chaos_value_task_is_completed(CHAOS_IL2CPP_INTPTR vt_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INT32 chaos_value_task_is_completed_successfully(CHAOS_IL2CPP_INTPTR vt_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INT32 chaos_value_task_is_faulted(CHAOS_IL2CPP_INTPTR vt_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INT32 chaos_value_task_is_canceled(CHAOS_IL2CPP_INTPTR vt_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_value_task_as_task(CHAOS_IL2CPP_INTPTR vt_handle) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_value_task_get_awaiter(CHAOS_IL2CPP_INTPTR vt_handle) CHAOS_STUB_NOEXCEPT;
 
 // Phase 6: GC-allocated AsyncTask.  Switches allocation from plain `new`
 // to CHAOS_IL2CPP_NEW_GC so the GC roots the task and a live continuation
 // prevents collection.  Used by concrete paths (async_stubs.cpp, task_runner)
 // that link the GC allocator.  The header-only inline (async.h:189) keeps
 // plain `new` for standalone TU compatibility.
-CHAOS_IL2CPP_INTPTR async_task_create_gc() noexcept;
+CHAOS_IL2CPP_INTPTR async_task_create_gc() CHAOS_STUB_NOEXCEPT;
 
 // TaskExtensions.Unwrap — flatten Task<Task<T>> to Task<T>.  The outer task's
 // result is the inner handle, so this is the identity once the outer completed;
 // the entry point exists so the call does not fall through to a numeric
 // fallback that would replace a real inner task with a null handle.
-CHAOS_IL2CPP_INTPTR chaos_task_unwrap(CHAOS_IL2CPP_INTPTR outer) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_unwrap(CHAOS_IL2CPP_INTPTR outer) CHAOS_STUB_NOEXCEPT;
 
 // ── Phase 6 / E2: Parallel.For range partitioner ──
 // Partitions [from, to) across the ThreadPool and invokes the Action<int>
@@ -207,7 +208,7 @@ CHAOS_IL2CPP_INTPTR chaos_task_unwrap(CHAOS_IL2CPP_INTPTR outer) noexcept;
 // not found.  Same requirement class as chaos_noop_void above.
 CHAOS_IL2CPP_INTPTR chaos_parallel_for_range_int(
     CHAOS_IL2CPP_INT32 from, CHAOS_IL2CPP_INT32 to,
-    CHAOS_IL2CPP_INTPTR action_delegate) noexcept;
+    CHAOS_IL2CPP_INTPTR action_delegate) CHAOS_STUB_NOEXCEPT;
 
 // ── Task.ContinueWith native combinator (Phase 2 P2-2) ──
 // Registers `continuation` (a DelegateObject taking the antecedent task handle
@@ -218,7 +219,7 @@ CHAOS_IL2CPP_INTPTR chaos_parallel_for_range_int(
 // The continuation is unconditional: it runs for a faulted or cancelled
 // antecedent too, so a cleanup/logging continuation is never silently dropped.
 CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
-    CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation) noexcept;
+    CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation) CHAOS_STUB_NOEXCEPT;
 
 // ── TaskFactory.ContinueWhenAll / ContinueWhenAny (Phase 2) ──
 // Compose the existing aggregate combinators with the ContinueWith delivery
@@ -231,9 +232,9 @@ CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
 // Returns a NEW task handle resolving with the continuation's result, or 0 on
 // invalid arguments.
 CHAOS_IL2CPP_INTPTR chaos_task_continue_when_all_array(
-    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INTPTR continuation) noexcept;
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INTPTR continuation) CHAOS_STUB_NOEXCEPT;
 CHAOS_IL2CPP_INTPTR chaos_task_continue_when_any_array(
-    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INTPTR continuation) noexcept;
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INTPTR continuation) CHAOS_STUB_NOEXCEPT;
 
 // ── TaskFactory native surface (Phase 2 P2-5) ──
 // Task.get_Factory.  The runtime has no TaskFactory object model and does not
@@ -241,7 +242,7 @@ CHAOS_IL2CPP_INTPTR chaos_task_continue_when_any_array(
 // which is what chaos_task_factory_start_new does directly.  Returns a non-null
 // opaque token so a caller that stores or passes Task.Factory does not receive
 // a bogus 0 handle; the token is never dereferenced.
-CHAOS_IL2CPP_INTPTR chaos_task_default_factory() noexcept;
+CHAOS_IL2CPP_INTPTR chaos_task_default_factory() CHAOS_STUB_NOEXCEPT;
 
 // TaskFactory::StartNew(Action) — the delegate-only overloads.  Semantically
 // identical to Task.Run(Action) for the default factory, so this queues the
@@ -251,7 +252,7 @@ CHAOS_IL2CPP_INTPTR chaos_task_default_factory() noexcept;
 // The `factory` handle is accepted for arity only and deliberately unused; see
 // the note on chaos_task_default_factory.
 CHAOS_IL2CPP_INTPTR chaos_task_factory_start_new(
-    CHAOS_IL2CPP_INTPTR factory, CHAOS_IL2CPP_INTPTR delegate_fn) noexcept;
+    CHAOS_IL2CPP_INTPTR factory, CHAOS_IL2CPP_INTPTR delegate_fn) CHAOS_STUB_NOEXCEPT;
 
 // ── T2: Task.Run / TaskFactory::StartNew(delegate, CancellationToken) ──
 //
@@ -265,7 +266,7 @@ CHAOS_IL2CPP_INTPTR chaos_task_factory_start_new(
 // them is strictly an improvement — a cancelled token simply does not stop the
 // work, which is a documented limitation rather than a silent regression.
 CHAOS_IL2CPP_INTPTR chaos_task_run(
-    CHAOS_IL2CPP_INTPTR delegate_fn, CHAOS_IL2CPP_INTPTR token) noexcept;
+    CHAOS_IL2CPP_INTPTR delegate_fn, CHAOS_IL2CPP_INTPTR token) CHAOS_STUB_NOEXCEPT;
 
 // ── AsyncIteratorMethodBuilder native surface (ASYNC-P2-8 A2) ──
 // The 5 ops the `async IAsyncEnumerable<T>` / `async IAsyncEnumerator<T>` state
@@ -283,28 +284,28 @@ CHAOS_IL2CPP_INTPTR chaos_task_run(
 //
 // The builder handle is a source-pool pointer; `sm_box` is the iterator state
 // machine box and `move_next` its native MoveNext.
-CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_create(void) noexcept;
+CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_create(void) CHAOS_STUB_NOEXCEPT;
 CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_move_next(
     CHAOS_IL2CPP_INTPTR builder_handle,
     CHAOS_IL2CPP_INTPTR move_next_fn,
-    CHAOS_IL2CPP_INTPTR sm_box) noexcept;
+    CHAOS_IL2CPP_INTPTR sm_box) CHAOS_STUB_NOEXCEPT;
 
 // Acquire a pooled source for one MoveNextAsync; the iteration token is written
 // through out_token (see below for why it is split out rather than a second return).
 // Never returns 0 and never blocks (overflow allocates) — see chaos/async_iterator.h
 // for why both properties are contractual.
 CHAOS_IL2CPP_INTPTR chaos_async_iterator_source_acquire(
-    CHAOS_IL2CPP_INTPTR builder_handle, CHAOS_IL2CPP_INT32* out_token) noexcept;
+    CHAOS_IL2CPP_INTPTR builder_handle, CHAOS_IL2CPP_INT32* out_token) CHAOS_STUB_NOEXCEPT;
 void chaos_async_iterator_source_release(
-    CHAOS_IL2CPP_INTPTR builder_handle, CHAOS_IL2CPP_INTPTR source) noexcept;
+    CHAOS_IL2CPP_INTPTR builder_handle, CHAOS_IL2CPP_INTPTR source) CHAOS_STUB_NOEXCEPT;
 
 // Publish one iteration step's outcome (true = element available, false = done).
-void chaos_async_iterator_source_set_result(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 value) noexcept;
-void chaos_async_iterator_source_set_exception(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR exception) noexcept;
+void chaos_async_iterator_source_set_result(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT;
+void chaos_async_iterator_source_set_exception(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR exception) CHAOS_STUB_NOEXCEPT;
 CHAOS_IL2CPP_INT32 chaos_async_iterator_source_get_status(
-    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 token) noexcept;
+    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 token) CHAOS_STUB_NOEXCEPT;
 CHAOS_IL2CPP_INT32 chaos_async_iterator_source_get_result(
-    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 token) noexcept;
+    CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INT32 token) CHAOS_STUB_NOEXCEPT;
 
 // AwaitOnCompleted / AwaitUnsafeOnCompleted — one native implementation, two
 // entry points (native code does not enforce the unsafe/on-completed split).
@@ -318,19 +319,19 @@ CHAOS_IL2CPP_INT32 chaos_async_iterator_source_get_result(
 CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_await_on_completed(
     CHAOS_IL2CPP_INTPTR awaiter_handle,
     CHAOS_IL2CPP_INTPTR move_next_fn,
-    CHAOS_IL2CPP_INTPTR sm_box) noexcept;
+    CHAOS_IL2CPP_INTPTR sm_box) CHAOS_STUB_NOEXCEPT;
 
 CHAOS_IL2CPP_INTPTR chaos_async_iterator_builder_await_unsafe_on_completed(
     CHAOS_IL2CPP_INTPTR awaiter_handle,
     CHAOS_IL2CPP_INTPTR move_next_fn,
-    CHAOS_IL2CPP_INTPTR sm_box) noexcept;
+    CHAOS_IL2CPP_INTPTR sm_box) CHAOS_STUB_NOEXCEPT;
 
-void chaos_async_iterator_builder_complete(CHAOS_IL2CPP_INTPTR builder_handle) noexcept;
+void chaos_async_iterator_builder_complete(CHAOS_IL2CPP_INTPTR builder_handle) CHAOS_STUB_NOEXCEPT;
 
 // Pairs Create().  Complete() runs at the end of each iteration and deliberately does
 // NOT free the builder — a state machine can be enumerated twice.  Destroy() is the
 // single release point, called when the state machine's own lifetime ends.
-void chaos_async_iterator_builder_destroy(CHAOS_IL2CPP_INTPTR builder_handle) noexcept;
+void chaos_async_iterator_builder_destroy(CHAOS_IL2CPP_INTPTR builder_handle) CHAOS_STUB_NOEXCEPT;
 
 // ══════════════════════════════════════════════════════════════════════
 // T1: Task.Wait(CancellationToken) / ConfigureAwait
@@ -338,59 +339,59 @@ void chaos_async_iterator_builder_destroy(CHAOS_IL2CPP_INTPTR builder_handle) no
 
 /// Task.Wait(CancellationToken) — infinite wait with token.
 CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitToken(CHAOS_IL2CPP_INTPTR task_handle,
-                                            CHAOS_IL2CPP_INTPTR token) noexcept;
+                                            CHAOS_IL2CPP_INTPTR token) CHAOS_STUB_NOEXCEPT;
 
 /// Task.Wait(TimeSpan) / Task.Wait(TimeSpan, CancellationToken) —
 /// blocking wait with TimeSpan timeout.
 CHAOS_IL2CPP_INT32 ChaosAsyncTaskWaitTimeSpan(CHAOS_IL2CPP_INTPTR task_handle,
                                               CHAOS_IL2CPP_INTPTR timeout_span,
-                                              CHAOS_IL2CPP_INTPTR token) noexcept;
+                                              CHAOS_IL2CPP_INTPTR token) CHAOS_STUB_NOEXCEPT;
 
 /// Task.ConfigureAwait(bool) / Task<T>.ConfigureAwait(bool)
 /// Returns the ConfiguredTaskAwaitable as an INTPTR carrier pointer.
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskConfigureAwait(CHAOS_IL2CPP_INTPTR task_handle,
-                                                 CHAOS_IL2CPP_INT32 continue_on_captured_context) noexcept;
+                                                 CHAOS_IL2CPP_INT32 continue_on_captured_context) CHAOS_STUB_NOEXCEPT;
 
 /// Task.ConfigureAwait(ConfigureAwaitOptions) — flags-based overload.
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskConfigureAwaitOptions(
     CHAOS_IL2CPP_INTPTR task_handle,
-    CHAOS_IL2CPP_INT32 options) noexcept;
+    CHAOS_IL2CPP_INT32 options) CHAOS_STUB_NOEXCEPT;
 
 /// ConfiguredTaskAwaitable.GetAwaiter() / ConfiguredTaskAwaitable<T>.GetAwaiter()
 /// Reads the task handle and returns it as the awaiter reference.
 CHAOS_IL2CPP_INTPTR ChaosConfiguredTaskAwaitableGetAwaiter(
-    CHAOS_IL2CPP_INTPTR awaitable_carrier) noexcept;
+    CHAOS_IL2CPP_INTPTR awaitable_carrier) CHAOS_STUB_NOEXCEPT;
 
 /// ConfiguredTaskAwaitable<T>.GetResult() — returns the result value.
 CHAOS_IL2CPP_INTPTR ChaosConfiguredTaskAwaitableGetResult(
-    CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+    CHAOS_IL2CPP_INTPTR awaiter) CHAOS_STUB_NOEXCEPT;
 
 /// Task<T>.ConfigureAwait(bool) / ConfigureAwait(ConfigureAwaitOptions)
 /// Returns the ConfiguredTaskAwaitable<T> carrier pointer.
 CHAOS_IL2CPP_INTPTR ChaosAsyncTaskOfTConfigureAwait(
     CHAOS_IL2CPP_INTPTR task_handle,
-    CHAOS_IL2CPP_INT32 continue_on_captured_context) noexcept;
+    CHAOS_IL2CPP_INT32 continue_on_captured_context) CHAOS_STUB_NOEXCEPT;
 
 /// ValueTask.ConfigureAwait(bool) / ValueTask<T>.ConfigureAwait(bool)
 CHAOS_IL2CPP_INTPTR ChaosValueTaskConfigureAwait(
     CHAOS_IL2CPP_INTPTR value_task_ptr,
-    CHAOS_IL2CPP_INT32 continue_on_captured_context) noexcept;
+    CHAOS_IL2CPP_INT32 continue_on_captured_context) CHAOS_STUB_NOEXCEPT;
 
 /// ConfiguredValueTaskAwaitable.GetAwaiter()
 CHAOS_IL2CPP_INTPTR ChaosConfiguredValueTaskAwaitableGetAwaiter(
-    CHAOS_IL2CPP_INTPTR awaitable_carrier) noexcept;
+    CHAOS_IL2CPP_INTPTR awaitable_carrier) CHAOS_STUB_NOEXCEPT;
 
 /// ConfiguredValueTaskAwaitable.get_IsCompleted()
 CHAOS_IL2CPP_INT32 ChaosConfiguredValueTaskAwaitableGetIsCompleted(
-    CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+    CHAOS_IL2CPP_INTPTR awaiter) CHAOS_STUB_NOEXCEPT;
 
 /// ConfiguredValueTaskAwaitable.GetResult() (void)
 void ChaosConfiguredValueTaskAwaitableGetResultVoid(
-    CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+    CHAOS_IL2CPP_INTPTR awaiter) CHAOS_STUB_NOEXCEPT;
 
 /// ConfiguredValueTaskAwaitable<T>.GetResult() -> T
 CHAOS_IL2CPP_INTPTR ChaosConfiguredValueTaskAwaitableGetResultValue(
-    CHAOS_IL2CPP_INTPTR awaiter) noexcept;
+    CHAOS_IL2CPP_INTPTR awaiter) CHAOS_STUB_NOEXCEPT;
 
 // ══════════════════════════════════════════════════════════════════════
 // Page-file symbol declarations (C3861 guard for multi-TU builds)
@@ -400,24 +401,24 @@ CHAOS_IL2CPP_INTPTR ChaosConfiguredValueTaskAwaitableGetResultValue(
 /// call directly through the external-runtime dispatch table when the
 /// method is split into a separate translation unit.
 extern "C" CHAOS_IL2CPP_INTPTR
-    chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__() noexcept;
+    chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter__GetResult_System_Void__() CHAOS_STUB_NOEXCEPT;
 
 /// Task.GetAwaiter() → TaskAwaiter — page files call this through the
 /// external-runtime symbol when the method is in a different TU.
 extern "C" CHAOS_IL2CPP_INTPTR
-    chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__() noexcept;
+    chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task__GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter__() CHAOS_STUB_NOEXCEPT;
 
 /// Task<T>.GetAwaiter() → TaskAwaiter<T> — generic variant.
 extern "C" CHAOS_IL2CPP_INTPTR
-    chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___() noexcept;
+    chaos_external_runtime_System_Private_CoreLib_System_Threading_Tasks_Task_System_Int32___GetAwaiter_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___() CHAOS_STUB_NOEXCEPT;
 
 /// TaskAwaiter<T>.GetResult() -> T — generic awaiter result.
 extern "C" CHAOS_IL2CPP_INTPTR
-    chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__() noexcept;
+    chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_TaskAwaiter_System_Int32___GetResult_System_Int32__() CHAOS_STUB_NOEXCEPT;
 
 /// ValueTaskAwaiter.GetResult(void) — non-generic void overload called from
 /// page-file external-runtime dispatch.
 extern "C" CHAOS_IL2CPP_INTPTR
-    chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__() noexcept;
+    chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_ValueTaskAwaiter__GetResult_System_Void__() CHAOS_STUB_NOEXCEPT;
 
 }  // extern "C"

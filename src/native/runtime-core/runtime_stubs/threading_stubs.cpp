@@ -38,7 +38,7 @@ extern "C" {
 
 void chaos_thread_ctor(
     CHAOS_IL2CPP_INTPTR thread_obj,
-    CHAOS_IL2CPP_INTPTR thread_start_delegate) noexcept
+    CHAOS_IL2CPP_INTPTR thread_start_delegate) CHAOS_STUB_NOEXCEPT
 {
     fprintf(stderr, "[TRACE] chaos_thread_ctor: thread_obj=0x%llx delegate=0x%llx\n",
             (unsigned long long)thread_obj, (unsigned long long)thread_start_delegate);
@@ -47,7 +47,7 @@ void chaos_thread_ctor(
     entry.managed_thread_id = chaos::il2cpp::common::allocate_managed_thread_id();
 }
 
-void chaos_thread_start(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+void chaos_thread_start(CHAOS_IL2CPP_INTPTR thread_obj) CHAOS_STUB_NOEXCEPT
 {
     fprintf(stderr, "[TRACE] chaos_thread_start: thread_obj=0x%llx\n",
             (unsigned long long)thread_obj);
@@ -100,7 +100,7 @@ void chaos_thread_start(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
     });
 }
 
-void chaos_thread_join(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+void chaos_thread_join(CHAOS_IL2CPP_INTPTR thread_obj) CHAOS_STUB_NOEXCEPT
 {
     auto* entry = chaos::il2cpp::common::try_get_thread_runtime_entry(thread_obj);
     if (entry == nullptr) return;
@@ -109,7 +109,7 @@ void chaos_thread_join(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
     }
 }
 
-void chaos_thread_interrupt(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+void chaos_thread_interrupt(CHAOS_IL2CPP_INTPTR thread_obj) CHAOS_STUB_NOEXCEPT
 {
     using threading::ManagedThread;
 
@@ -128,7 +128,7 @@ void chaos_thread_interrupt(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
     });
 }
 
-void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INTPTR state_obj) noexcept
+void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INTPTR state_obj) CHAOS_STUB_NOEXCEPT
 {
     (void)state_obj; // Accepted for ABI compatibility with Thread.Abort(object state);
                      // the abort signal itself is sufficient for testing purposes.
@@ -149,7 +149,7 @@ void chaos_thread_abort(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INTPTR stat
     });
 }
 
-CHAOS_IL2CPP_INT32 chaos_thread_reset_abort(void) noexcept
+CHAOS_IL2CPP_INT32 chaos_thread_reset_abort(void) CHAOS_STUB_NOEXCEPT
 {
     auto* thread = chaos_get_tls_this_thread();
     if (thread == nullptr) return 0;
@@ -162,7 +162,7 @@ CHAOS_IL2CPP_INT32 chaos_thread_reset_abort(void) noexcept
     return 0;
 }
 
-CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept
+CHAOS_IL2CPP_INT32 chaos_thread_yield(void) CHAOS_STUB_NOEXCEPT
 {
     std::this_thread::yield();
     return 1;
@@ -177,7 +177,7 @@ CHAOS_IL2CPP_INT32 chaos_thread_yield(void) noexcept
 //
 // The .NET Framework semantics (per-domain increasing ids) do not apply here
 // because this runtime does not implement multiple domains.
-CHAOS_IL2CPP_INT32 chaos_thread_get_domain_id(void) noexcept
+CHAOS_IL2CPP_INT32 chaos_thread_get_domain_id(void) CHAOS_STUB_NOEXCEPT
 {
     return 1;
 }
@@ -198,7 +198,7 @@ CHAOS_IL2CPP_INT32 chaos_thread_get_domain_id(void) noexcept
 // (_get_env_sensitive_subject_ids in stages/fact_chunk.py) — the same treatment
 // Thread.Yield already gets.  Returning a real reading here keeps the method
 // implemented and observable rather than silently 0.
-CHAOS_IL2CPP_INT32 chaos_thread_get_current_processor_id(void) noexcept
+CHAOS_IL2CPP_INT32 chaos_thread_get_current_processor_id(void) CHAOS_STUB_NOEXCEPT
 {
 #if defined(_WIN32)
     // Processor-group-local index of the calling thread.  windows.h is already
@@ -216,12 +216,12 @@ CHAOS_IL2CPP_INT32 chaos_thread_get_current_processor_id(void) noexcept
 #endif
 }
 
-void chaos_thread_sleep(CHAOS_IL2CPP_INT32 timeout_ms) noexcept
+void chaos_thread_sleep(CHAOS_IL2CPP_INT32 timeout_ms) CHAOS_STUB_NOEXCEPT
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(timeout_ms));
 }
 
-CHAOS_IL2CPP_INT32 chaos_thread_is_background(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+CHAOS_IL2CPP_INT32 chaos_thread_is_background(CHAOS_IL2CPP_INTPTR thread_obj) CHAOS_STUB_NOEXCEPT
 {
     using threading::ManagedThread;
 
@@ -243,7 +243,7 @@ CHAOS_IL2CPP_INT32 chaos_thread_is_background(CHAOS_IL2CPP_INTPTR thread_obj) no
     return s_result;
 }
 
-void chaos_thread_set_background(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT32 value) noexcept
+void chaos_thread_set_background(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     using threading::ManagedThread;
 
@@ -264,7 +264,7 @@ void chaos_thread_set_background(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_IN
     });
 }
 
-CHAOS_IL2CPP_INT32 chaos_thread_get_state(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+CHAOS_IL2CPP_INT32 chaos_thread_get_state(CHAOS_IL2CPP_INTPTR thread_obj) CHAOS_STUB_NOEXCEPT
 {
     using threading::ManagedThread;
 
@@ -286,7 +286,7 @@ CHAOS_IL2CPP_INT32 chaos_thread_get_state(CHAOS_IL2CPP_INTPTR thread_obj) noexce
     return s_result;
 }
 
-CHAOS_IL2CPP_INT32 chaos_thread_get_priority(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+CHAOS_IL2CPP_INT32 chaos_thread_get_priority(CHAOS_IL2CPP_INTPTR thread_obj) CHAOS_STUB_NOEXCEPT
 {
     using threading::ManagedThread;
     using threading::ManagedThreadPriority;
@@ -309,7 +309,7 @@ CHAOS_IL2CPP_INT32 chaos_thread_get_priority(CHAOS_IL2CPP_INTPTR thread_obj) noe
     return s_result;
 }
 
-void chaos_thread_set_priority(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT32 value) noexcept
+void chaos_thread_set_priority(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     using threading::ManagedThread;
     using threading::ManagedThreadPriority;
@@ -331,7 +331,7 @@ void chaos_thread_set_priority(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT3
     });
 }
 
-CHAOS_IL2CPP_INT32 chaos_thread_is_threadpool(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
+CHAOS_IL2CPP_INT32 chaos_thread_is_threadpool(CHAOS_IL2CPP_INTPTR thread_obj) CHAOS_STUB_NOEXCEPT
 {
     using threading::ManagedThread;
 
@@ -374,7 +374,7 @@ namespace {
 // assertions only require it to become non-null, and one process-wide instance
 // keeps repeated EnsureInitialized calls identity-stable (which .NET also
 // guarantees — the same object is observed across calls).
-CHAOS_IL2CPP_INTPTR LazyInitSyncSentinel() noexcept
+CHAOS_IL2CPP_INTPTR LazyInitSyncSentinel() CHAOS_STUB_NOEXCEPT
 {
     // 16 bytes is enough for an object header on this runtime; the allocation
     // is only ever used as a non-null identity, never dereferenced.
@@ -385,7 +385,7 @@ CHAOS_IL2CPP_INTPTR LazyInitSyncSentinel() noexcept
 }
 
 // Read/write a T of the given width through an untyped by-ref slot.
-CHAOS_IL2CPP_INTPTR LazyInitLoad(CHAOS_IL2CPP_INTPTR slot, CHAOS_IL2CPP_INT32 width) noexcept
+CHAOS_IL2CPP_INTPTR LazyInitLoad(CHAOS_IL2CPP_INTPTR slot, CHAOS_IL2CPP_INT32 width) CHAOS_STUB_NOEXCEPT
 {
     switch (width) {
         case 1: return static_cast<CHAOS_IL2CPP_INTPTR>(*reinterpret_cast<CHAOS_IL2CPP_UINT8*>(slot));
@@ -395,7 +395,7 @@ CHAOS_IL2CPP_INTPTR LazyInitLoad(CHAOS_IL2CPP_INTPTR slot, CHAOS_IL2CPP_INT32 wi
     }
 }
 
-void LazyInitStore(CHAOS_IL2CPP_INTPTR slot, CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 width) noexcept
+void LazyInitStore(CHAOS_IL2CPP_INTPTR slot, CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 width) CHAOS_STUB_NOEXCEPT
 {
     switch (width) {
         case 1: *reinterpret_cast<CHAOS_IL2CPP_UINT8*>(slot) = static_cast<CHAOS_IL2CPP_UINT8>(value); break;
@@ -410,7 +410,7 @@ CHAOS_IL2CPP_INTPTR LazyInitEnsure(
     CHAOS_IL2CPP_INTPTR initialized_ref,
     CHAOS_IL2CPP_INTPTR sync_lock_ref,
     CHAOS_IL2CPP_INTPTR value_factory,
-    CHAOS_IL2CPP_INT32 carrier_width) noexcept
+    CHAOS_IL2CPP_INT32 carrier_width) CHAOS_STUB_NOEXCEPT
 {
     // A null target cannot be written or read — answer with a zero rather than
     // dereferencing it.  The caller supplied no storage to initialise.
@@ -453,7 +453,7 @@ CHAOS_IL2CPP_INTPTR chaos_lazy_initializer_ensure_initialized(
     CHAOS_IL2CPP_INTPTR target_ref,
     CHAOS_IL2CPP_INTPTR initialized_ref,
     CHAOS_IL2CPP_INTPTR sync_lock_ref,
-    CHAOS_IL2CPP_INT32 carrier_width) noexcept
+    CHAOS_IL2CPP_INT32 carrier_width) CHAOS_STUB_NOEXCEPT
 {
     return LazyInitEnsure(target_ref, initialized_ref, sync_lock_ref, 0, carrier_width);
 }
@@ -463,7 +463,7 @@ CHAOS_IL2CPP_INTPTR chaos_lazy_initializer_ensure_initialized_factory(
     CHAOS_IL2CPP_INTPTR initialized_ref,
     CHAOS_IL2CPP_INTPTR sync_lock_ref,
     CHAOS_IL2CPP_INTPTR value_factory,
-    CHAOS_IL2CPP_INT32 carrier_width) noexcept
+    CHAOS_IL2CPP_INT32 carrier_width) CHAOS_STUB_NOEXCEPT
 {
     return LazyInitEnsure(target_ref, initialized_ref, sync_lock_ref, value_factory, carrier_width);
 }
@@ -482,7 +482,7 @@ CHAOS_IL2CPP_INTPTR chaos_lazy_initializer_ensure_initialized_factory(
 // The array body is read through ManagedArrayAccessor rather than a raw offset
 // so the layout stays tied to the one `static_assert`-guarded definition in
 // stub_common.h.  Element storage is contiguous after the 32-byte header.
-CHAOS_IL2CPP_INT32 chaos_wait_handle_validate(CHAOS_IL2CPP_INTPTR wait_handles) noexcept
+CHAOS_IL2CPP_INT32 chaos_wait_handle_validate(CHAOS_IL2CPP_INTPTR wait_handles) CHAOS_STUB_NOEXCEPT
 {
     if (wait_handles == 0)
     {
@@ -525,7 +525,7 @@ CHAOS_IL2CPP_INT32 chaos_wait_handle_validate(CHAOS_IL2CPP_INTPTR wait_handles) 
 
 CHAOS_IL2CPP_INT32 chaos_wait_handle_validate_pair(
     CHAOS_IL2CPP_INTPTR to_signal,
-    CHAOS_IL2CPP_INTPTR to_wait_on) noexcept
+    CHAOS_IL2CPP_INTPTR to_wait_on) CHAOS_STUB_NOEXCEPT
 {
     if (to_signal == 0)
     {

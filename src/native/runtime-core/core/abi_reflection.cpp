@@ -1,9 +1,10 @@
 // Required forward declarations: ChaosRegisterGcLayouts etc.
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
 #include "chaos_runtime_host.h"
 // Forward declarations for standalone compilation (normally from unity build)
 namespace chaos::il2cpp::runtime_core {
 bool IsAttached(RuntimeState*, ThreadState*);
-inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8 flags) noexcept {
+inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8 flags) CHAOS_STUB_NOEXCEPT {
     // FatHeader if bit 0 set, else PureHeader
     return (flags & 1) ? sizeof(void*) * 4 : sizeof(void*) * 2;
 }
@@ -447,13 +448,13 @@ static void CHAOS_RUNTIME_ABI_CALL _abi_raise_exception(void*) { /* noop: except
 static void* CHAOS_RUNTIME_ABI_CALL _abi_get_current_runtime_state() { return reinterpret_cast<void*>(GetCurrentRuntimeState()); }
 static void* CHAOS_RUNTIME_ABI_CALL _abi_get_current_thread_state() { return reinterpret_cast<void*>(GetCurrentThreadState()); }
 
-static const void* CHAOS_RUNTIME_ABI_CALL _abi_object_get_type_info(const void* obj) noexcept {
+static const void* CHAOS_RUNTIME_ABI_CALL _abi_object_get_type_info(const void* obj) CHAOS_STUB_NOEXCEPT {
     // All managed objects store TypeInfoHot* at offset [0] (ThinLockableHeader / PureTypeHeader).
     // Dereference to return the TypeInfo pointer, matching chaos_object_get_type_info().
     return obj ? *static_cast<const void* const*>(obj) : nullptr;
 }
-static bool CHAOS_RUNTIME_ABI_CALL _abi_is_string_id(uintptr_t value) noexcept { return chaos_is_string_id(static_cast<CHAOS_IL2CPP_INTPTR>(value)); }
-static uintptr_t CHAOS_RUNTIME_ABI_CALL _abi_string_materialize(uintptr_t value) noexcept { return value; }
+static bool CHAOS_RUNTIME_ABI_CALL _abi_is_string_id(uintptr_t value) CHAOS_STUB_NOEXCEPT { return chaos_is_string_id(static_cast<CHAOS_IL2CPP_INTPTR>(value)); }
+static uintptr_t CHAOS_RUNTIME_ABI_CALL _abi_string_materialize(uintptr_t value) CHAOS_STUB_NOEXCEPT { return value; }
 const RuntimeAbiV0 kRuntimeAbiV0 = {
     CHAOS_RUNTIME_ABI_V0,
     sizeof(RuntimeAbiV0),

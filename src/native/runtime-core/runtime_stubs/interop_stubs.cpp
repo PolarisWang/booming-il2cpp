@@ -3,6 +3,7 @@
 // interop_stubs.cpp — Simple interop/Marshal stub implementations
 // These stubs are compiled from source (not part of prebuilt lib)
 // to avoid stale-symbol issues with the SDK runtime library.
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
 #include <cstdlib>
 #include <cstring>
 #include <cstdio>
@@ -844,7 +845,7 @@ static bool _TryExecuteViaIlData(const char* subject_id, uint64_t& out_ret) noex
 // block is the only subject-level SIMD semantics provider and is retained.
 // (A former static _TryExecuteViaSimdStub dead-code function was removed.)
 
-CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept
+CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) CHAOS_STUB_NOEXCEPT
 
 {
 
