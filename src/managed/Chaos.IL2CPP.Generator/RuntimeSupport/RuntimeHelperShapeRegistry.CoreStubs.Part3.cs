@@ -32,6 +32,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterTypeGetMethods(registry);
             RegisterTypeGetMethods_1(registry);
             RegisterMemberQueryBindingFlagsOverloads(registry);
+            RegisterEqualityComparerFamily(registry);
             RegisterArrayGetLength(registry);
             RegisterCultureInfogetCompareInfo(registry);
             RegisterHashCodeToHashCode(registry);

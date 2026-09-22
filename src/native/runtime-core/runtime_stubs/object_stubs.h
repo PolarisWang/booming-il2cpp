@@ -8,6 +8,11 @@ CHAOS_IL2CPP_INTPTR ChaosObjectToString(CHAOS_IL2CPP_INTPTR obj) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosObjectGetType(CHAOS_IL2CPP_INTPTR obj) noexcept;
 
 CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersEquals(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right) noexcept;
+
+// B1 — EqualityComparer<T> family (see object_stubs.cpp for the rationale).
+CHAOS_IL2CPP_INTPTR ChaosEqualityComparerGetDefault(void) noexcept;
+CHAOS_IL2CPP_INT32  ChaosEqualityComparerEquals(
+    CHAOS_IL2CPP_INTPTR comparer, CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right) noexcept;
 CHAOS_IL2CPP_INT32  ChaosRuntimeHelpersGetHashCode(CHAOS_IL2CPP_INTPTR value) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersGetObjectValue(CHAOS_IL2CPP_INTPTR value) noexcept;
 

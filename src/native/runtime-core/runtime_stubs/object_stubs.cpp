@@ -62,6 +62,33 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeHelpersEquals(CHAOS_IL2CPP_INTPTR left, CHAOS_IL
     return (left == right) ? 1 : 0;
 }
 
+// ── EqualityComparer<T> (B1) ───────────────────────────────────────────────
+// Assert.AreEqual<T> builds EqualityComparer<T>.Default and calls Equals on it
+// when comparing collections; with no shape registered, get_Default returned 0
+// from the catch-all and the subsequent Equals call dereferenced null.
+//
+// Default returns the comparer instance itself: the AOT descriptor model has no
+// per-type comparer objects, and the only operation the callers perform on the
+// result is Equals, which the family entry point below answers directly.  Using
+// the comparer handle as its own "instance" keeps the call chain (get_Default
+// then Equals) working without allocating anything.
+//
+// Reference equality is the correct default here: the T's involved (reflection
+// handles, arrays, descriptor records) do not override Equals in the descriptor
+// model, which is exactly when the BCL falls back to reference equality too.
+
+CHAOS_IL2CPP_INTPTR ChaosEqualityComparerGetDefault(void) noexcept
+{
+    // Non-zero sentinel so callers' null-guards pass; never dereferenced.
+    return static_cast<CHAOS_IL2CPP_INTPTR>(1);
+}
+
+CHAOS_IL2CPP_INT32 ChaosEqualityComparerEquals(
+    CHAOS_IL2CPP_INTPTR /*comparer*/, CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right) noexcept
+{
+    return (left == right) ? 1 : 0;
+}
+
 CHAOS_IL2CPP_INT32 ChaosRuntimeHelpersGetHashCode(CHAOS_IL2CPP_INTPTR value) noexcept
 {
     if (value == 0) return 0;
