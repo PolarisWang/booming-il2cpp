@@ -10,7 +10,7 @@
 # The release branch (release/X.Y.x) must already exist and be in sync with the tag.
 # See scripts/release.sh for the complete orchestration.
 
-name: Release
+name: Probe E Fixed
 
 on:
   push:
