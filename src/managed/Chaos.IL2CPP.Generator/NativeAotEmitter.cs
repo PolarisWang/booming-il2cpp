@@ -342,8 +342,15 @@ public sealed partial class NativeAotEmitter
         List<string> includes,
         bool includeRegistration,
         string? perPageTypeDeclarations = null,
-        IReadOnlyList<string>? perPageIncludes = null)
+        IReadOnlyList<string>? perPageIncludes = null,
+        bool? includeMethodDeclarations = null)
     {
+        // The extern "C" method declarations are needed by any TU that references
+        // an AOT method — page 0's object model calls them (e.g. a __ctor while
+        // materializing a reflected instance) even when its module-registration
+        // body has moved to its own payload TU. Defaulting to includeRegistration
+        // preserves the historical coupling for every other caller.
+        bool emitMethodDeclarations = includeMethodDeclarations ?? includeRegistration;
         int objectModelLength = templateModel.ObjectModelCodeBuilder?.Length
                              ?? templateModel.ObjectModelCode?.Length
                              ?? 0;
@@ -411,7 +418,11 @@ public sealed partial class NativeAotEmitter
         // Method declarations — included only on page 0 (first page).
         // Including them on every page multiplies memory by the page count,
         // causing OOM when there are 1000+ pages for subject-mode chunks.
-        if (includeRegistration && templateModel.MethodDeclarations is { Count: > 0 })
+        //
+        // Gated separately from `includeRegistration` because page 0 needs them
+        // even when its registration body has moved into its own payload TU:
+        // the object model calls AOT methods directly.
+        if (emitMethodDeclarations && templateModel.MethodDeclarations is { Count: > 0 })
         {
             foreach (var decl in templateModel.MethodDeclarations)
             {
@@ -438,10 +449,11 @@ public sealed partial class NativeAotEmitter
         bool includeRegistration,
         bool includeObjectModel,
         string? perPageTypeDeclarations = null,
-        IReadOnlyList<string>? perPageIncludes = null)
+        IReadOnlyList<string>? perPageIncludes = null,
+        bool? includeMethodDeclarations = null)
     {
         var sb = BuildGeneratedPageSkeleton(templateModel, includes, includeRegistration,
-            perPageTypeDeclarations, perPageIncludes);
+            perPageTypeDeclarations, perPageIncludes, includeMethodDeclarations);
 
         // Object model code — the bulk of page 0 content
         if (includeObjectModel)

@@ -450,13 +450,18 @@ public sealed partial class NativeAotEmitter
                         .Select(BuildMethodSection)
                         .ToArray();
                     var includes = new List<string>(pageIncludes ?? templateModel.Includes);
-                    // Page 0 includes inline TypeInfoV0 → no shared header needed
+                    // Page 0 includes inline TypeInfoV0, so it does not need the
+                    // shared header. Its registration body has moved to its own
+                    // payload TU, but its object model still CALLS AOT methods
+                    // (e.g. a __ctor while materializing a reflected instance), so
+                    // the extern "C" method declarations must be kept here.
                     var pageBuilder = BuildGeneratedPageToBuilder(
                         templateModel, methodSections, includes,
                         includeRegistration: !usePayloadSections,
                         includeObjectModel: true,
                         perPageTypeDeclarations: pageTypeDecl,
-                        perPageIncludes: pageIncludes);
+                        perPageIncludes: pageIncludes,
+                        includeMethodDeclarations: true);
                     // Dedup type_id/mt symbols across all pages (C2374).
                     // Page 0 uses the StringBuilder path, so we must post-process.
                     string pageText = pageBuilder.ToString();

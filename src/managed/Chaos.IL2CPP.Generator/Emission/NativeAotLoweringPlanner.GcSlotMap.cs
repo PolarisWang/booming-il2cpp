@@ -89,7 +89,7 @@ public sealed partial class NativeAotLoweringPlanner
             // leave every reference undefined.
             RegisterCrossSectionSymbol(
                 "kChaosGcSlotMapsSection",
-                "extern const char kChaosGcSlotMapsSection[];",
+                "extern const CHAOS_IL2CPP_UINT8 kChaosGcSlotMapsSection[];",
                 needsExternalLinkage: true);
             RegisterCrossSectionSymbol(
                 "kChaosGcSlotMapsSize",
@@ -215,6 +215,16 @@ public sealed partial class NativeAotLoweringPlanner
             .AppendLine("u;");
 
         // Publish both symbols so every payload translation unit can see them.
+        // The struct's full definition lives only in this section, but consumers
+        // in other TUs only take the object's ADDRESS, for which an incomplete
+        // type suffices — and a forward declaration is legal even alongside the
+        // full definition in the defining TU. (Declaring the object through a
+        // stand-in type instead, e.g. `char[]`, is not: that collides with the
+        // real definition whenever both land in one TU, C2373.)
+        RegisterCrossSectionSymbol(
+            "ChaosGcSlotMapsSectionV0",
+            "struct ChaosGcSlotMapsSectionV0;",
+            needsExternalLinkage: false);
         RegisterCrossSectionSymbol(
             "kChaosGcSlotMapsSection",
             "extern const ChaosGcSlotMapsSectionV0 kChaosGcSlotMapsSection;",
