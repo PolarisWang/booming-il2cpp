@@ -134,6 +134,24 @@ public sealed partial class NativeAotEmitter
         preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_type_value(CHAOS_IL2CPP_INTPTR chaos_type_handle);\n");
         preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_instance(CHAOS_IL2CPP_INTPTR chaos_type_value);\n\n");
 
+        // Symbols one payload section defines and another references (e.g. the
+        // vtable-slot tables the object model owns and CodeRegistration points
+        // at). Collected by the planner at generation time, so the set is
+        // complete — deriving it by scanning emitted text missed whole classes
+        // of symbol. Declarations go in the preamble because a section may take
+        // such a symbol's address inline in a const initializer, where a
+        // later-appearing declaration is a use-before-declaration.
+        if (templateModel.CrossSectionSymbols is { Count: > 0 })
+        {
+            preamble.Append("// Cross-section symbols (defined in a sibling payload section)\n");
+            foreach (var symbol in templateModel.CrossSectionSymbols)
+            {
+                preamble.Append(symbol.Declaration);
+                preamble.Append('\n');
+            }
+            preamble.Append('\n');
+        }
+
         sb.Insert(0, preamble.ToString());
 
         sb.Append("\n}  // namespace chaos::il2cpp::codegen::");

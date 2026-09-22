@@ -33,7 +33,48 @@ public sealed class PayloadSection
     /// in ascending order; ties broken by <see cref="Name"/> for determinism.
     /// </summary>
     public int Order { get; init; }
+
+    /// <summary>
+    /// Symbols this section DEFINES at top level and that other sections may
+    /// reference. Declared here so the emitter can publish them in the contract
+    /// header every payload translation unit includes.
+    ///
+    /// <para>
+    /// Without this, a symbol defined in one section and used in another has no
+    /// declaration anywhere: it used to be satisfied implicitly by both living in
+    /// page 0's single translation unit. Splitting the payload into separate TUs
+    /// breaks that, producing C2065 at every cross-section reference — and, where
+    /// the reference sits in a const initializer, a cascading C2737.
+    /// </para>
+    /// </summary>
+    public IReadOnlyList<CrossSectionSymbol> ExportedSymbols { get; init; }
+        = Array.Empty<CrossSectionSymbol>();
 }
+
+/// <summary>
+/// A symbol defined in one payload section and referenced from another.
+///
+/// <para>
+/// The emitter must ensure every payload translation unit can see a declaration
+/// of it, and — for symbols that cross a TU boundary — that the definition has
+/// external linkage. Internal linkage (<c>static</c>) cannot be referenced across
+/// translation units at all, so <see cref="NeedsExternalLinkage"/> marks the
+/// definitions the planner had to emit as <c>extern</c>.
+/// </para>
+/// </summary>
+/// <param name="Name">The C++ symbol name, e.g. <c>kSlots_Foo</c>.</param>
+/// <param name="Declaration">A complete <c>extern</c> declaration for the
+/// symbol, including its type, ready to emit into the contract header.</param>
+/// <param name="NeedsExternalLinkage">
+/// True when the definition must drop <c>static</c>. Anonymous-struct-typed
+/// symbols are declared through a placeholder type (consumers only take their
+/// address and cast to <c>void*</c>), so they keep external linkage but still
+/// need the declaration.
+/// </param>
+public sealed record CrossSectionSymbol(
+    string Name,
+    string Declaration,
+    bool NeedsExternalLinkage);
 
 /// <summary>
 /// Splits page-0 payload into bounded translation units.

@@ -121,6 +121,21 @@ public sealed record NativeAotTemplateModel
         = Array.Empty<PayloadSection>();
 
     /// <summary>
+    /// Symbols defined in one payload section and referenced from another,
+    /// collected by the planner as it generates those sections.
+    ///
+    /// <para>
+    /// The emitter publishes these as <c>extern</c> declarations in the payload
+    /// contract header, which every payload translation unit includes. Without
+    /// them a cross-section reference has no declaration anywhere — the single
+    /// page-0 TU used to make one unnecessary — and fails with C2065 (plus a
+    /// cascading C2737 where the reference sits in a const initializer).
+    /// </para>
+    /// </summary>
+    public IReadOnlyList<CrossSectionSymbol> CrossSectionSymbols { get; init; }
+        = Array.Empty<CrossSectionSymbol>();
+
+    /// <summary>
     /// C++ code emitted at file scope (outside the codegen namespace)
     /// for global variables shared across translation units. Currently
     /// used for the __chaos_assert_failures counter in verification builds.

@@ -1010,4 +1010,48 @@ public sealed partial class NativeAotLoweringPlanner
             get => _payloadSections;
             private set => _payloadSections = value;
         }
+
+        /// <summary>
+        /// Symbols emitted into the page-0 payload that are referenced from other
+        /// sections of it, collected as those sections are generated.
+        ///
+        /// <para>
+        /// The payload is split across translation units, so a symbol defined in
+        /// one section is not automatically visible to another. Producers register
+        /// here and the emitter publishes the declarations into the contract header
+        /// every payload TU includes. Recording at generation time (rather than
+        /// re-deriving the set by scanning emitted text) is what keeps the set
+        /// complete: the scan-based approach missed whole symbol classes.
+        /// </para>
+        /// </summary>
+        private readonly Dictionary<string, CrossSectionSymbol> _crossSectionSymbols =
+            new(StringComparer.Ordinal);
+
+        /// <summary>
+        /// Records a symbol that other payload sections reference, so its
+        /// <c>extern</c> declaration reaches every payload translation unit.
+        /// Idempotent — a symbol may be produced on more than one code path
+        /// (e.g. the empty and populated GC slot map cases).
+        /// </summary>
+        /// <param name="name">The C++ symbol name.</param>
+        /// <param name="declaration">A complete <c>extern</c> declaration.</param>
+        /// <param name="needsExternalLinkage">
+        /// True when the definition must not be <c>static</c>.
+        /// </param>
+        protected void RegisterCrossSectionSymbol(
+            string name, string declaration, bool needsExternalLinkage)
+        {
+            if (string.IsNullOrEmpty(name)) return;
+            _crossSectionSymbols[name] = new CrossSectionSymbol(
+                name, declaration, needsExternalLinkage);
+        }
+
+        /// <summary>
+        /// The registered cross-section symbols, ordered by name for deterministic
+        /// output.
+        /// </summary>
+        internal IReadOnlyList<CrossSectionSymbol> CrossSectionSymbols =>
+            _crossSectionSymbols.Values
+                .OrderBy(s => s.Name, StringComparer.Ordinal)
+                .ToArray();
 }

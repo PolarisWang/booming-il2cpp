@@ -1145,9 +1145,16 @@ public sealed partial class NativeAotLoweringPlanner
 						slotEntries.Add(new VTableSlotEntry(0, string.Empty));
 					}
 				}
-				// Emit const VTableSlot[] array
+				// Emit const VTableSlot[] array.
+				//
+				// `extern`, not `static`: the CodeRegistration section references
+				// these tables by name, and once the payload is split into separate
+				// translation units the two sides no longer share a TU. A `static`
+				// definition has internal linkage and cannot satisfy a reference
+				// from another unit (C2065). Registered below so the declaration
+				// reaches every payload TU through the contract header.
 				string slotsSym = GetNativeSymbol("kSlots_", typeId);
-				builder.Append("static const ::chaos::il2cpp::vtable_registry::VTableSlot ");
+				builder.Append("extern const ::chaos::il2cpp::vtable_registry::VTableSlot ");
 				builder.Append(slotsSym);
 				builder.AppendLine("[] =");
 				builder.AppendLine("{");
@@ -1168,6 +1175,10 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 				builder.AppendLine("};");
 				builder.AppendLine();
+				RegisterCrossSectionSymbol(
+					slotsSym,
+					"extern const ::chaos::il2cpp::vtable_registry::VTableSlot " + slotsSym + "[];",
+					needsExternalLinkage: true);
 				// Build VTableDescriptorData for later emission
 				ulong stableId = ComputeStableTypeId(typeId);
 				uint typeToken = tokenLookup.TryGetTypeToken(typeId);

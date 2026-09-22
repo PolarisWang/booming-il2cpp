@@ -34,5 +34,8 @@ static constexpr struct {
 {{~ end ~}}
     },
 };
-static const ::ChaosAbiManifestV0* const s_abi_manifest =
+// `extern`, not `static`: the module descriptor in the module-registration
+// section references this symbol, and payload sections are emitted as separate
+// translation units — internal linkage could not satisfy that reference.
+extern const ::ChaosAbiManifestV0* const s_abi_manifest =
     reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);

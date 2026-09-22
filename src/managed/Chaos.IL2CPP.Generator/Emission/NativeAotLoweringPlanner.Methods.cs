@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -1330,7 +1330,28 @@ public sealed partial class NativeAotLoweringPlanner
         }
         if (!string.IsNullOrEmpty(abiManifestCode))
         {
+            // Inserted at the top of the module-registration text (it must precede
+            // the module descriptor that points at it) and recorded as its own
+            // section. Previously this text was inserted into moduleRegSb WITHOUT a
+            // section entry, so it appeared in the final moduleRegistrationCode
+            // string but belonged to no section — and the emitter renders payload
+            // TUs from sections, so the whole ABI manifest (the definition of
+            // s_abi_manifest and its storage) was silently dropped once payload
+            // sectioning engaged, while the module descriptor still referenced it
+            // (`C2065: 's_abi_manifest': undeclared identifier`). Found by diffing
+            // the split output against the pre-split output, where the symbol is
+            // defined six times.
             moduleRegSb.Insert(0, abiManifestCode + Environment.NewLine);
+            AddSection("abimanifest", abiManifestCode);
+
+            // The manifest lands in whichever TU its section is assigned to, but
+            // the module descriptor that references it lives in the
+            // module-registration section — a different TU. Publish a declaration
+            // so the reference resolves either way.
+            RegisterCrossSectionSymbol(
+                "s_abi_manifest",
+                "extern const ::ChaosAbiManifestV0* const s_abi_manifest;",
+                needsExternalLinkage: true);
         }
         if (_methodTableEntries.Count > 0)
         {
@@ -1815,6 +1836,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             EnumMetadataHeaderContent = enumMetaHeader,
             ModuleRegistrationCode = moduleRegistrationCode,
             PayloadSections = _payloadSections,
+            CrossSectionSymbols = CrossSectionSymbols,
             WorkloadAbi = loweringPlan.WorkloadAbi,
             GlobalDeclarations = globalDeclarations,
             EntryFunctionCode = _entryFunctionCode ?? "",

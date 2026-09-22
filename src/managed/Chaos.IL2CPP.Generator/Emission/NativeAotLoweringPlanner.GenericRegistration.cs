@@ -102,6 +102,59 @@ public partial class NativeAotLoweringPlanner
                 NativeAotTemplateCatalog.GetGenericRegistrationTemplate(), model).TrimEnd());
         builder.AppendLine();
 
+        // These tables are emitted `extern` (see NativeAot.GenericRegistration.cpp.scriban)
+        // and consumed by the CodeRegistration section, which lives in a different
+        // payload translation unit once the payload is split. Publish declarations
+        // so that consumer still resolves them.
+        RegisterCrossSectionSymbol(
+            "kGenericTypeArgTokens",
+            "extern const CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[];",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "kGenericTypeArgTokensCount",
+            "extern const CHAOS_IL2CPP_UINT32 kGenericTypeArgTokensCount;",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "kGenericTypeEntries",
+            "extern const GenericTypeRegistrationEntryV0 kGenericTypeEntries[];",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "kGenericTypeEntriesCount",
+            "extern const CHAOS_IL2CPP_UINT32 kGenericTypeEntriesCount;",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "kGenericMethodArgTokens",
+            "extern const CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[];",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "kGenericMethodArgTokensCount",
+            "extern const CHAOS_IL2CPP_UINT32 kGenericMethodArgTokensCount;",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "kGenericMethodEntries",
+            "extern const GenericMethodRegistrationEntryV0 kGenericMethodEntries[];",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "kGenericMethodEntriesCount",
+            "extern const CHAOS_IL2CPP_UINT32 kGenericMethodEntriesCount;",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "s_method_aot_entries",
+            "extern const GenericMethodAotEntryV0 s_method_aot_entries[];",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "s_method_aot_entriesCount",
+            "extern const CHAOS_IL2CPP_UINT32 s_method_aot_entriesCount;",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "s_method_aot_entry_args",
+            "extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[];",
+            needsExternalLinkage: true);
+        RegisterCrossSectionSymbol(
+            "s_method_aot_entry_argsCount",
+            "extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_argsCount;",
+            needsExternalLinkage: true);
+
         // ── AOT registration code (emitted into module registration section) ──
         int methodAotEntryCount = methodAotEntries.Count;
         int methodAotArgTokenCount = methodAotArgTokens.Count;
