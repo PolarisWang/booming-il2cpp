@@ -126,13 +126,17 @@ public sealed partial class NativeAotEmitter
         // ("defined later in the module registration TU … only the declarations
         // are visible here"), so this is the established idiom, not a new one.
         //
-        // Signatures must track ReflectionObjectEmission.cs, which emits the
-        // matching definitions.
+        // NOTE: no `extern "C"`. The definitions in ReflectionObjectEmission.cs are
+        // emitted inside the codegen namespace with C++ linkage, so they get
+        // mangled names. Declaring them `extern "C"` here would make callers
+        // reference the unmangled name, which nothing defines — the link then
+        // fails with LNK2019 on the bare symbol. The declarations must match the
+        // definitions' linkage exactly.
         preamble.Append("// Cross-section reflection helpers (defined in the object-model section)\n");
-        preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_literal(const char* chaos_utf8_data);\n");
-        preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_reference_array(const TypeInfo* chaos_element_type_info, CHAOS_IL2CPP_SIZE chaos_length);\n");
-        preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_type_value(CHAOS_IL2CPP_INTPTR chaos_type_handle);\n");
-        preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_instance(CHAOS_IL2CPP_INTPTR chaos_type_value);\n\n");
+        preamble.Append("CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_literal(const char* chaos_utf8_data);\n");
+        preamble.Append("CHAOS_IL2CPP_INTPTR chaos_reflection_create_reference_array(const TypeInfo* chaos_element_type_info, CHAOS_IL2CPP_SIZE chaos_length);\n");
+        preamble.Append("CHAOS_IL2CPP_INTPTR chaos_reflection_create_type_value(CHAOS_IL2CPP_INTPTR chaos_type_handle);\n");
+        preamble.Append("CHAOS_IL2CPP_INTPTR chaos_reflection_create_instance(CHAOS_IL2CPP_INTPTR chaos_type_value);\n\n");
 
         // Symbols one payload section defines and another references (e.g. the
         // vtable-slot tables the object model owns and CodeRegistration points
