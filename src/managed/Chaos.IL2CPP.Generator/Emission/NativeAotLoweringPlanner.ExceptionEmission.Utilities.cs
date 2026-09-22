@@ -110,7 +110,7 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine($"{indentation}}}");
     }
 
-    private void EmitLinearResolvedInvocation(StringBuilder builder, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation, bool enforceInstanceNullCheck)
+    private void EmitLinearResolvedInvocation(StringBuilder builder, string targetSymbol, IReadOnlyList<AotCoreIrAbiSlotArtifact> parameterAbis, AotCoreIrAbiSlotArtifact returnAbi, IReadOnlySet<int> rawArgumentIndices, string indentation, bool enforceInstanceNullCheck, AotCoreIrInstructionArtifact? instruction = null)
     {
         string a = MapAbiSlotReturnType(returnAbi);
         StringBuilder stringBuilder = builder;
@@ -142,7 +142,8 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         if (enforceInstanceNullCheck && parameterAbis.Count > 0
-            && !IsValueTypeCarrierKind(parameterAbis[0].CarrierKindCode))
+            && !IsValueTypeCarrierKind(parameterAbis[0].CarrierKindCode)
+            && !CalleeIsKnownStatic(instruction))
         {
             builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
             builder.AppendLine(indentation + "    {");
@@ -195,21 +196,75 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     /// <summary>
-    /// Subject-id set of methods known to be STATIC, from two sources: the lowered
-    /// method artifacts (IsStatic) and the B3 reflection metadata collected from the
-    /// closure (kReflectionFlagStatic = 1u &lt;&lt; 1 in mFlags — Methods.ModuleData.cs).
-    /// BCL callees without a lowered body are only findable via the latter.
+    /// Subject-id set of methods known to be STATIC, from three sources:
+    /// <list type="number">
+    /// <item>the lowered AOT method artifacts (<c>_methodsBySubjectId.IsStatic</c>) — covers
+    ///       everything AotCoreIrLowering produced;</item>
+    /// <item>the linked-world managed method model (<c>_allManagedMethods.IsStatic</c>) —
+    ///       this is the one that covers cross-assembly BCL callees, because
+    ///       BuildAllManagedMethods deliberately keeps methods that lowering skipped
+    ///       ("BCL methods, missing-shape methods");</item>
+    /// <item>the B3 reflection metadata flags (kReflectionFlagStatic = 1u &lt;&lt; 1).</item>
+    /// </list>
+    ///
+    /// Why source 2 is load-bearing
+    /// ----------------------------
+    /// Without it, a cross-assembly BCL static such as XmlConvert.ToInt32 is reported
+    /// as not-static, because it has no AOT lowering artifact (it is only referenced,
+    /// never lowered) and is absent from the module reflection metadata. The receiver
+    /// null guard then fires on its FIRST ARGUMENT, which is an ordinary string — not
+    /// a receiver. Measured: the guard raised NullReferenceException before
+    /// ChaosXmlConvertToInt32 ran (instrumented ToCString: entered 0 times), so the
+    /// ATG's `catch (System.ArgumentNullException)` missed and every XmlConvert
+    /// member was recorded realDefect (caught=true / value=0).
     /// </summary>
     private bool IsKnownStaticMethod(string subjectId)
     {
-        if (_methodsBySubjectId.TryGetValue(subjectId, out var method))
-            return method.IsStatic;
+        if (_methodsBySubjectId.TryGetValue(subjectId, out var aotMethod))
+            return aotMethod.IsStatic;
+
+        if (_allManagedMethods != null && _allManagedMethods.TryGetValue(subjectId, out var managedMethod))
+            return managedMethod.IsStatic;
+
         _reflectionStaticMethodIds ??= new HashSet<string>(
             _reflectionMethods
                 .Where(r => (r.Flags & (1u << 1)) != 0)
                 .Select(r => r.MethodSubjectId),
             StringComparer.Ordinal);
         return _reflectionStaticMethodIds.Contains(subjectId);
+    }
+
+    /// <summary>
+    /// True when the call target is a STATIC method, so its first ABI slot is an
+    /// ordinary managed argument rather than a `this` receiver.
+    ///
+    /// Why the distinction matters for the null guard
+    /// ----------------------------------------------
+    /// EmitLinearResolvedInvocation emits `if (chaos_arg_0 == 0) raise_null_reference_exception()`
+    /// to stop the generated C++ from AV'ing when an *instance* method dereferences a
+    /// null receiver.  That guard is correct for a receiver — the CLR raises
+    /// NullReferenceException either way — but WRONG for the first argument of a
+    /// static method: .NET raises ArgumentNullException there, and the callee's own
+    /// guard (or its ArgumentNullException contract) is the thing under test.
+    /// The blanket NRE pre-empts the callee entirely.
+    ///
+    /// Measured on the xml chunk: XmlConvert.ToInt32(null) is specified to throw
+    /// ArgumentNullException, but the emitted guard raised NullReferenceException
+    /// before ChaosXmlConvertToInt32 ran (confirmed by instrumenting ToCString —
+    /// it was entered 0 times).  The ATG subject's `catch (System.ArgumentNullException)`
+    /// therefore missed and every XmlConvert member was recorded realDefect
+    /// (caught=true / value=0).
+    ///
+    /// EmitExternalRuntimeTableDispatch already applies this exact check; this
+    /// helper exists so the linear path cannot drift from it again.
+    /// </summary>
+    private bool CalleeIsKnownStatic(AotCoreIrInstructionArtifact? instruction)
+    {
+        if (instruction == null) return false;
+        var calleeSubjectId = !string.IsNullOrEmpty(instruction.Callee)
+            ? instruction.Callee
+            : instruction.TargetReference?.SubjectId;
+        return !string.IsNullOrEmpty(calleeSubjectId) && IsKnownStaticMethod(calleeSubjectId!);
     }
 
     private HashSet<string>? _reflectionStaticMethodIds;
@@ -316,7 +371,18 @@ public sealed partial class NativeAotLoweringPlanner
                     : instruction?.TargetReference?.SubjectId;
                 bool calleeIsStatic = !string.IsNullOrEmpty(calleeSubjectId) && IsKnownStaticMethod(calleeSubjectId!);
 
-                if (!isSubjectExtRuntime && !calleeIsStatic)
+                // P2 guard discipline (json-xml P2):
+                // The receiver null-check (NRE on chaos_arg_0 == 0) is ONLY valid
+                // for a callvirt — a callvirt's first ABI slot is a `this` receiver
+                // by IL definition, so a null there IS a NullReferenceException.
+                // A plain `call` may target a STATIC method, whose first slot is an
+                // ordinary argument; guarding it pre-empts the callee's own
+                // ArgumentNullException contract with a blanket NRE.  Measured:
+                // XmlConvert.ToInt32(null) is ANE in .NET, the emitted guard raised
+                // NRE first, and the ATG's catch(ANE) missed — every XmlConvert
+                // member was recorded realDefect (caught=true/value=0).
+                bool p2IsCallVirt = string.Equals(instruction?.Op, "callvirt", StringComparison.Ordinal);
+                if (!isSubjectExtRuntime && !calleeIsStatic && p2IsCallVirt)
                 {
                     builder.AppendLine(indentation + "    if (chaos_arg_0 == 0)");
                     builder.AppendLine(indentation + "    {");
