@@ -131,6 +131,14 @@ temp/
 tmp/
 build/temp/
 
+# Ad-hoc agent scratch dirs (dot-prefixed at repo root). These accumulated
+# untracked because they do not match the .tmp* patterns above; they hold
+# throwaway probes (compile harnesses, measurement dumps) that must never
+# be committed.
+.c1002m/
+.c1002measure/
+.p2/
+
 # Root-level temporary/scratch files (shell redirect artifacts)
 *agentbooming-il2cpp_*
 _compile_*.txt

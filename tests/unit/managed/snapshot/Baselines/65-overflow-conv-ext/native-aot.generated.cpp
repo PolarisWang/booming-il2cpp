@@ -136,11 +136,99 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System
 
 
 
+MethodTable chaos_mt_System_Private_CoreLib_System_ArgumentException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 4429271818216920541ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArgumentException = static_cast<CHAOS_IL2CPP_UINT64>(4429271818216920541ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_ArgumentNullException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_ArgumentException), nullptr, 12400915656331929738ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArgumentNullException = static_cast<CHAOS_IL2CPP_UINT64>(12400915656331929738ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_ArgumentException), nullptr, 15763389239383405623ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArgumentOutOfRangeException = static_cast<CHAOS_IL2CPP_UINT64>(15763389239383405623ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_ArithmeticException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 6479818754936000364ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
 
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArithmeticException = static_cast<CHAOS_IL2CPP_UINT64>(6479818754936000364ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_DivideByZeroException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 14499175579798713746ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_DivideByZeroException = static_cast<CHAOS_IL2CPP_UINT64>(14499175579798713746ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_FormatException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 3707929770006501753ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_FormatException = static_cast<CHAOS_IL2CPP_UINT64>(3707929770006501753ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_InvalidCastException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 16198579075556443950ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_InvalidCastException = static_cast<CHAOS_IL2CPP_UINT64>(16198579075556443950ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_InvalidOperationException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 5529823529457257812ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_InvalidOperationException = static_cast<CHAOS_IL2CPP_UINT64>(5529823529457257812ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_NotImplementedException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 16853252435633719857ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_NotImplementedException = static_cast<CHAOS_IL2CPP_UINT64>(16853252435633719857ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_NotSupportedException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 9608462597425565551ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_NotSupportedException = static_cast<CHAOS_IL2CPP_UINT64>(9608462597425565551ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_NullReferenceException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 5314911908653589872ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_NullReferenceException = static_cast<CHAOS_IL2CPP_UINT64>(5314911908653589872ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_ObjectDisposedException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_InvalidOperationException), nullptr, 9595069693833675140ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ObjectDisposedException = static_cast<CHAOS_IL2CPP_UINT64>(9595069693833675140ULL);
 
 
 
@@ -216,11 +304,27 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System
 
 
 
+MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 16861941406858396492ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException = static_cast<CHAOS_IL2CPP_UINT64>(16861941406858396492ULL);
+
+
+
 MethodTable chaos_mt_System_Private_CoreLib_System_Type = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 
 
 
 inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_UINT64>(3222174513575444759ULL);
+
+
+
+MethodTable chaos_mt_System_Private_CoreLib_System_Xml_XmlException = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_SystemException), nullptr, 6019271219718654308ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+
+
+
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Xml_XmlException = static_cast<CHAOS_IL2CPP_UINT64>(6019271219718654308ULL);
 
 
 
@@ -384,7 +488,51 @@ static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLi
 
 
 
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentNullException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentNullException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentNullException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentNullException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException, _stackTrace))};
+
+
+
 static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_ArithmeticException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArithmeticException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArithmeticException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ArithmeticException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_DivideByZeroException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_DivideByZeroException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_DivideByZeroException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_DivideByZeroException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_FormatException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_FormatException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_FormatException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_FormatException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_InvalidCastException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_InvalidCastException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_InvalidCastException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_InvalidCastException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_InvalidOperationException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_InvalidOperationException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_InvalidOperationException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_InvalidOperationException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_NotImplementedException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_NotImplementedException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_NotImplementedException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_NotImplementedException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_NotSupportedException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_NotSupportedException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_NotSupportedException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_NotSupportedException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_NullReferenceException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_NullReferenceException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_NullReferenceException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_NullReferenceException, _stackTrace))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_ObjectDisposedException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ObjectDisposedException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ObjectDisposedException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_ObjectDisposedException, _stackTrace))};
 
 
 
@@ -416,7 +564,15 @@ static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLi
 
 
 
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException, _stackTrace))};
+
+
+
 static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+
+
+
+static constexpr CHAOS_IL2CPP_UINT16 kGcOffsets_chaos_type_System_Private_CoreLib_System_Xml_XmlException[] = {static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Xml_XmlException, _message)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Xml_XmlException, _innerException)), static_cast<CHAOS_IL2CPP_UINT16>(offsetof(chaos_type_System_Private_CoreLib_System_Xml_XmlException, _stackTrace))};
 
 
 
@@ -484,7 +640,51 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(4429271818216920541ULL, sizeof(chaos_type_System_Private_CoreLib_System_ArgumentException), kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentException, 3);
+
+
+
+	registry.Register(12400915656331929738ULL, sizeof(chaos_type_System_Private_CoreLib_System_ArgumentNullException), kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentNullException, 3);
+
+
+
+	registry.Register(15763389239383405623ULL, sizeof(chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException), kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException, 3);
+
+
+
 	registry.Register(6479818754936000364ULL, sizeof(chaos_type_System_Private_CoreLib_System_ArithmeticException), kGcOffsets_chaos_type_System_Private_CoreLib_System_ArithmeticException, 3);
+
+
+
+	registry.Register(14499175579798713746ULL, sizeof(chaos_type_System_Private_CoreLib_System_DivideByZeroException), kGcOffsets_chaos_type_System_Private_CoreLib_System_DivideByZeroException, 3);
+
+
+
+	registry.Register(3707929770006501753ULL, sizeof(chaos_type_System_Private_CoreLib_System_FormatException), kGcOffsets_chaos_type_System_Private_CoreLib_System_FormatException, 3);
+
+
+
+	registry.Register(16198579075556443950ULL, sizeof(chaos_type_System_Private_CoreLib_System_InvalidCastException), kGcOffsets_chaos_type_System_Private_CoreLib_System_InvalidCastException, 3);
+
+
+
+	registry.Register(5529823529457257812ULL, sizeof(chaos_type_System_Private_CoreLib_System_InvalidOperationException), kGcOffsets_chaos_type_System_Private_CoreLib_System_InvalidOperationException, 3);
+
+
+
+	registry.Register(16853252435633719857ULL, sizeof(chaos_type_System_Private_CoreLib_System_NotImplementedException), kGcOffsets_chaos_type_System_Private_CoreLib_System_NotImplementedException, 3);
+
+
+
+	registry.Register(9608462597425565551ULL, sizeof(chaos_type_System_Private_CoreLib_System_NotSupportedException), kGcOffsets_chaos_type_System_Private_CoreLib_System_NotSupportedException, 3);
+
+
+
+	registry.Register(5314911908653589872ULL, sizeof(chaos_type_System_Private_CoreLib_System_NullReferenceException), kGcOffsets_chaos_type_System_Private_CoreLib_System_NullReferenceException, 3);
+
+
+
+	registry.Register(9595069693833675140ULL, sizeof(chaos_type_System_Private_CoreLib_System_ObjectDisposedException), kGcOffsets_chaos_type_System_Private_CoreLib_System_ObjectDisposedException, 3);
 
 
 
@@ -524,7 +724,15 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.Register(16861941406858396492ULL, sizeof(chaos_type_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException), kGcOffsets_chaos_type_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException, 3);
+
+
+
 	registry.Register(3222174513575444759ULL, sizeof(chaos_type_System_Private_CoreLib_System_Type), kGcOffsets_chaos_type_System_Private_CoreLib_System_Type, 2);
+
+
+
+	registry.Register(6019271219718654308ULL, sizeof(chaos_type_System_Private_CoreLib_System_Xml_XmlException), kGcOffsets_chaos_type_System_Private_CoreLib_System_Xml_XmlException, 3);
 
 
 
@@ -564,7 +772,51 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArgumentException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArgumentException) + sizeof(chaos_mt_System_Private_CoreLib_System_ArgumentException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArgumentNullException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArgumentNullException) + sizeof(chaos_mt_System_Private_CoreLib_System_ArgumentNullException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException) + sizeof(chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException));
+
+
+
 	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArithmeticException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ArithmeticException) + sizeof(chaos_mt_System_Private_CoreLib_System_ArithmeticException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_DivideByZeroException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_DivideByZeroException) + sizeof(chaos_mt_System_Private_CoreLib_System_DivideByZeroException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_FormatException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_FormatException) + sizeof(chaos_mt_System_Private_CoreLib_System_FormatException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_InvalidCastException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_InvalidCastException) + sizeof(chaos_mt_System_Private_CoreLib_System_InvalidCastException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_InvalidOperationException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_InvalidOperationException) + sizeof(chaos_mt_System_Private_CoreLib_System_InvalidOperationException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_NotImplementedException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_NotImplementedException) + sizeof(chaos_mt_System_Private_CoreLib_System_NotImplementedException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_NotSupportedException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_NotSupportedException) + sizeof(chaos_mt_System_Private_CoreLib_System_NotSupportedException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_NullReferenceException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_NullReferenceException) + sizeof(chaos_mt_System_Private_CoreLib_System_NullReferenceException));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ObjectDisposedException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_ObjectDisposedException) + sizeof(chaos_mt_System_Private_CoreLib_System_ObjectDisposedException));
 
 
 
@@ -604,7 +856,15 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException) + sizeof(chaos_mt_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException));
+
+
+
 	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Type), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Type) + sizeof(chaos_mt_System_Private_CoreLib_System_Type));
+
+
+
+	registry.RegisterTypeInfoRange(reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Xml_XmlException), reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&chaos_mt_System_Private_CoreLib_System_Xml_XmlException) + sizeof(chaos_mt_System_Private_CoreLib_System_Xml_XmlException));
 
 
 
@@ -3490,6 +3750,54 @@ extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount = 0;
 static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc0 = {
 
 
+	0u, "System.Private.CoreLib/System.ArgumentException", "System.Private.CoreLib/System.ArgumentException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_ArgumentException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc1 = {
+
+
+	0u, "System.Private.CoreLib/System.ArgumentNullException", "System.Private.CoreLib/System.ArgumentNullException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_ArgumentNullException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc2 = {
+
+
+	0u, "System.Private.CoreLib/System.ArgumentOutOfRangeException", "System.Private.CoreLib/System.ArgumentOutOfRangeException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc3 = {
+
+
+	0u, "System.Private.CoreLib/System.DivideByZeroException", "System.Private.CoreLib/System.DivideByZeroException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_DivideByZeroException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc4 = {
+
+
 	0u, "System.Private.CoreLib/System.Exception", "System.Private.CoreLib/System.Exception", nullptr, nullptr, nullptr, nullptr,
 
 
@@ -3499,7 +3807,91 @@ static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDe
 	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_Exception };
 
 
-static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc1 = {
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc5 = {
+
+
+	0u, "System.Private.CoreLib/System.FormatException", "System.Private.CoreLib/System.FormatException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_FormatException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc6 = {
+
+
+	0u, "System.Private.CoreLib/System.InvalidCastException", "System.Private.CoreLib/System.InvalidCastException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_InvalidCastException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc7 = {
+
+
+	0u, "System.Private.CoreLib/System.InvalidOperationException", "System.Private.CoreLib/System.InvalidOperationException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_InvalidOperationException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc8 = {
+
+
+	0u, "System.Private.CoreLib/System.NotImplementedException", "System.Private.CoreLib/System.NotImplementedException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_NotImplementedException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc9 = {
+
+
+	0u, "System.Private.CoreLib/System.NotSupportedException", "System.Private.CoreLib/System.NotSupportedException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_NotSupportedException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc10 = {
+
+
+	0u, "System.Private.CoreLib/System.NullReferenceException", "System.Private.CoreLib/System.NullReferenceException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_NullReferenceException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc11 = {
+
+
+	0u, "System.Private.CoreLib/System.ObjectDisposedException", "System.Private.CoreLib/System.ObjectDisposedException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_ObjectDisposedException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc12 = {
 
 
 	0u, "System.Private.CoreLib/System.OverflowException", "System.Private.CoreLib/System.OverflowException", nullptr, nullptr, nullptr, nullptr,
@@ -3511,19 +3903,82 @@ static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDe
 	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_OverflowException };
 
 
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc13 = {
+
+
+	0u, "System.Private.CoreLib/System.Threading.Tasks.TaskCanceledException", "System.Private.CoreLib/System.Threading.Tasks.TaskCanceledException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException };
+
+
+static const ::chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kExcDesc14 = {
+
+
+	0u, "System.Private.CoreLib/System.Xml.XmlException", "System.Private.CoreLib/System.Xml.XmlException", nullptr, nullptr, nullptr, nullptr,
+
+
+	nullptr, 0u, nullptr, 0u, nullptr, 0u, nullptr, 0u,
+
+
+	nullptr, 0u, 0u, &chaos_mt_System_Private_CoreLib_System_Xml_XmlException };
+
+
 extern "C" const ChaosExceptionTypeEntryV0 kChaosExceptionTypes[] = {
 
 
-	{ "System.Exception", &kExcDesc0 },
+	{ "System.ArgumentException", &kExcDesc0 },
 
 
-	{ "System.OverflowException", &kExcDesc1 },
+	{ "System.ArgumentNullException", &kExcDesc1 },
+
+
+	{ "System.ArgumentOutOfRangeException", &kExcDesc2 },
+
+
+	{ "System.DivideByZeroException", &kExcDesc3 },
+
+
+	{ "System.Exception", &kExcDesc4 },
+
+
+	{ "System.FormatException", &kExcDesc5 },
+
+
+	{ "System.InvalidCastException", &kExcDesc6 },
+
+
+	{ "System.InvalidOperationException", &kExcDesc7 },
+
+
+	{ "System.NotImplementedException", &kExcDesc8 },
+
+
+	{ "System.NotSupportedException", &kExcDesc9 },
+
+
+	{ "System.NullReferenceException", &kExcDesc10 },
+
+
+	{ "System.ObjectDisposedException", &kExcDesc11 },
+
+
+	{ "System.OverflowException", &kExcDesc12 },
+
+
+	{ "System.Threading.Tasks.TaskCanceledException", &kExcDesc13 },
+
+
+	{ "System.Xml.XmlException", &kExcDesc14 },
 
 
 };
 
 
-extern "C" const CHAOS_IL2CPP_INT32 kChaosExceptionTypeCount = 2;
+extern "C" const CHAOS_IL2CPP_INT32 kChaosExceptionTypeCount = 15;
 
 
 

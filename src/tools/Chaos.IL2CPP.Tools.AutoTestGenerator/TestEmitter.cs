@@ -792,6 +792,12 @@ public sealed class TestEmitter
         if (string.IsNullOrEmpty(declaring)) return false;
         var lastDot = declaring.LastIndexOf('.');
         var bareType = lastDot >= 0 ? declaring[(lastDot + 1)..] : declaring;
+        // Whole-type impossibility (Classifier rule 3): types like
+        // ReflectionContext / AssemblyNameProxy are structurally impossible
+        // under AOT — their methods assert the throw instead of emitting the
+        // AOT-STUB-GAP `return 42L` stub body.
+        if (Chaos.IL2CPP.Tools.ApiSurfaceScanner.Classifier.NotSupportedWholeTypes.Contains(bareType))
+            return true;
         return AotNotSupportedMethods.Contains(bareType + "." + method.Name);
     }
 

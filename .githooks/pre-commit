@@ -107,4 +107,31 @@ else
     echo "=== [verification-tree] check_verification_tree_singularity.py not found, skipping ==="
 fi
 
+# ── Snapshot baseline sync ───────────────────────────────────────────────
+# Shape-registry changes without a matching SNAPSHOT_UPDATE=1 leave the
+# baselines silently stale.  That failure mode is hard to attribute later
+# (red test, unrelated cause) and historically went unnoticed for months:
+# runtime_helper_shapes.h sat at 670 shapes while the registry emitted 2554.
+# This is a coarse ratio check, not a regeneration — see the script docstring.
+echo "=== [snapshot-sync] Checking snapshot baseline freshness ==="
+
+SNAP_SCRIPT="tests/e2e/verification/preflight/check_snapshot_baseline_sync.py"
+if [ -f "$SNAP_SCRIPT" ]; then
+    SNAP_OUTPUT=$(python "$SNAP_SCRIPT" 2>&1)
+    SNAP_STATUS=$?
+    echo "$SNAP_OUTPUT"
+    if [ "$SNAP_STATUS" -ne 0 ] || echo "$SNAP_OUTPUT" | grep -q "FAIL"; then
+        echo ""
+        echo "ERROR: snapshot baseline check FAILED — baselines are significantly stale."
+        echo "Regenerate with:"
+        echo "  dotnet build tests/unit/managed/snapshot/FixtureAssembly/"
+        echo "  SNAPSHOT_UPDATE=1 dotnet test tests/unit/managed/snapshot/"
+        echo "Use 'git commit --no-verify' to bypass (not recommended)."
+        exit 1
+    fi
+    echo "=== [snapshot-sync] Baseline freshness confirmed ==="
+else
+    echo "=== [snapshot-sync] check_snapshot_baseline_sync.py not found, skipping ==="
+fi
+
 exit 0

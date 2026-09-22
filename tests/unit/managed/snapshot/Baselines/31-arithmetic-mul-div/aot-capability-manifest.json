@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatedAt": "<normalized>",
-  "totalExactShapes": 1307,
+  "totalExactShapes": 1310,
   "totalGenericPatterns": 256,
   "totalInlinePatterns": 517,
   "entries": [
@@ -6391,6 +6391,33 @@
         "System.Int32"
       ],
       "nativeSymbol": "ChaosArrayCreateInstance",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "System.Collections.IEnumerable",
+      "methodName": "GetEnumerator",
+      "subjectIdPrefix": "System.Private.CoreLib/System.Collections.IEnumerable::GetEnumerator:()",
+      "paramTypes": [],
+      "nativeSymbol": "ChaosArrayGetEnumerator",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "System.Collections.IEnumerator",
+      "methodName": "MoveNext",
+      "subjectIdPrefix": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:()",
+      "paramTypes": [],
+      "nativeSymbol": "ChaosArrayEnumeratorMoveNext",
+      "shapeKind": "SimpleForward"
+    },
+    {
+      "kind": "exact",
+      "typeDisplayName": "System.Collections.IEnumerator",
+      "methodName": "get_Current",
+      "subjectIdPrefix": "System.Private.CoreLib/System.Collections.IEnumerator::get_Current:()",
+      "paramTypes": [],
+      "nativeSymbol": "ChaosArrayEnumeratorGetCurrent",
       "shapeKind": "SimpleForward"
     },
     {
