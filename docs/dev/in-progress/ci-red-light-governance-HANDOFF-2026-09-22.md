@@ -53,6 +53,8 @@ gh api repos/PolarisWang/booming-il2cpp/actions/runs/<RUN_ID>/jobs \
 
 ## 三、🔴 未解决：第 11 条红线
 
+> **2026-09-22 更新（PR #56 后）：** 前三层已修复并合并（见 §3.1）；第 11 条已收敛为 **单个残留 target**，根因悬在「INTERFACE 目标不在 `--start-group` 内」与「疑似自含环」两个候选之间，**未钉死**。接续者从这里开始。
+
 ### 症状
 
 `foundation-dll-regression` → `foundation-dll (ubuntu-latest)` → **`Build Native Libraries`** 失败。
@@ -65,47 +67,49 @@ gh api repos/PolarisWang/booming-il2cpp/actions/runs/<RUN_ID>/jobs \
 ... (40 条)
 ```
 
-- **4 个 target 失败**：`test_gc_bit_utils`、`test_gc_profile_stats`、`test_jit_il_smoke`、`test_jit_native`
-- **28 个 target 成功** —— 所以不是符号全局缺失
+- **原 4 个失败 target**：`test_gc_bit_utils`、`test_gc_profile_stats`、`test_jit_il_smoke`、`test_jit_native` —— **本轮已全绿**（见 §3.1）
+- **当前唯一残留**：`chaos_method_replacement_smoke`（`tests/contracts/native/hot-update/`），同样的 ~40 条 undefined reference
 - 三组符号：`diagnostics::Dbg*`、`method_table::Populate*/Resolve*`、`ChaosBCrypt*`
 
-参考 run：`bba6b6c74`（PR #53 之后、#55 之前的一次 main push）
+**注意**：本表「4 个 target 失败 / 28 个 target 成功」已被推翻 —— 真实情况是**大多数 target 成功、极少数失败**，且失败逐层暴露（先链接、再编译）。测试到 22% 才撞上唯一残留。
 
-### 已排除的假设（**全部证伪，勿重复**）
+### 3.1 本轮已修复并合并（PR #56）
+
+| commit | 修复 | CI 验证 |
+|---|---|---|
+| `d7d7be4eb` | `test_gc_profile_stats` → `LIBS ${CHAOS_GC_LIBS}`（全量，含 interpreter/bootstrap/jit 等） | ✅ `Built target test_gc_profile_stats` |
+| `597242b13` | `foundation-dll-regression.yml` paths 补 `tests/**`/`cmake/**` —— 改测试 CMake 会触发 Linux 验证 | —（基础设施） |
+| `ded6772dd` | `jit_unwind_test.cpp` 的 Win64-only `using` 加 `#if defined(_WIN64)` 守卫 | ✅ `Built target test_jit_unwind` |
+| `39c1c152d` | `jit_seh_handler_internal.cpp` 自旋锁非 MSVC 分支用 `__atomic_exchange_n`（同 test 文件两处） | ✅ `Built target test_jit_seh_handler_internal` |
+| （附带） | workflow 加 `permissions: {issues: write, pull-requests: write}` —— PR 评论不再假失败 | ✅ `Post PR Comment` success |
+
+### 3.2 已证伪/已澄清（勿重复）
 
 | 假设 | 证伪依据 |
 |:-----|:---------|
 | `linux_platform_stubs.cpp` 不在 CMake | 在 `runtime-core/CMakeLists.txt:341` 的 Linux 分支 |
-| 该文件未被编译 | CI 日志确认已编译 |
+| 该文件未被编译 | CI 日志确认已编译（`linux_platform_stubs.cpp.o`） |
 | 符号定义缺失 | 该文件确实定义了 `Dbg*`；`crypto_stubs_posix.cpp:226-347` 定义了 `ChaosBCrypt*` |
 | 命名空间/签名不匹配 | 逐个核对，一致 |
 | `chaos_runtime_core` 未参与链接 | 在链接列表中，且 `libchaos_debugger.a` 也被构建了 |
-| 静态库单遍扫描顺序问题 | 工厂已用 `-Wl,--start-group/--end-group`（`cmake/chaos_native_test.cmake:143-150`） |
-| 平台分支遗漏 | `CMakeLists.txt` 的 `linux-x64-reference` 分支完整（含 `add_subdirectory(src/native/diagnostics)`，第 203 行） |
+| 静态库单遍扫描顺序问题（全 target 通用） | **部分成立但不充分**：`test_gc_profile_stats` 确因残缺 LIBS 失败，但 `chaos_method_replacement_smoke` 用**全量默认** LIBS 仍失败 |
+| 平台分支遗漏 | `CMakeLists.txt` 的 `linux-x64-reference` 分支完整 |
+| `--start-group 内不包含 INTERFACE 展开` | **候选根因但未钉死** —— 能解释 5 个案例中的 5 个，但解释不了对照：`chaos_hotupdate_verification_test` 用**相同**默认 INTERFACE 配置却通过 |
+| 仅 Windows 专属 target 被误注册 | `jit_unwind_test`/`jit_seh_handler_internal` 确实是 Windows 专属代码在 Linux 编译（**本轮修掉**）；但 `method_replacement_smoke` 是平台中立源码 |
 
-**注意**：排查时务必用 **CI 实际跑的那个 commit** 读文件（`git show <sha>:<path>`），
-不要读本地主检出 —— 其它会话会持续推进它，我曾因此得出过错误结论。
+### 3.3 🔑 下一步：一次性取证（强烈建议，替代继续猜）
 
-### 🔑 下一步：一次性取证（强烈建议）
-
-**加一个临时诊断步骤，把"猜"换成"看"：**
-
-```yaml
-# .github/workflows/foundation-dll-regression.yml，在 Build Native Libraries 之后
-      - name: Diagnose missing symbols
-        if: failure()
-        run: |
-          LIB=$(find . -name "libchaos_runtime_core.a" | head -1)
-          echo "=== $LIB ==="
-          nm -C "$LIB" | grep -E "Dbg|PopulateMethodTable|ChaosBCrypt" | head -30 \
-            || echo "NOT FOUND IN LIB"
-```
+**取 `build/native/.../tests/contracts/native/hot-update/CMakeFiles/chaos_method_replacement_smoke.dir/link.txt` 的实际链接命令行**，与 `chaos_hotupdate_verification_test.dir/link.txt`（**通过**的同类 target）对比。两者**唯一有意义差异**应在：
+- `--start-group` 的边界（INTERFACE `chaos_test_libs_v0` 是否被展开进 group）
+- 或 `collect2` 传给 `ld` 的库顺序
 
 **判读**：
-- **符号在库里** → 是链接问题（顺序/可见性/被优化掉），下一步查链接命令行
-- **符号不在库里** → 是编译/CMake 问题，下一步查 `linux_platform_stubs.cpp` 是否真被编进这个 `.a`
+- 失败者 group 内缺 `chaos_interpreter`/`chaos_bootstrap` → 根因= INTERFACE 目标不透传给 start-group，修法=工厂里把 `_libs`（INTERFACE）展开成真实库列表再拼 group（**我一度实现过，但由于解释不了对照案例而回退**）
+- 失败者与通过者 group 边界**一致** → 根因在目标自身的 TU 引用（谁先引用不了解释不了），下一步看 `nm -u` 对比两 target 对象
 
-这一条能省掉后续所有猜测。**建议作为接续的第一步。**
+**此诊断已在 workflow 里存在**：`Diagnose missing symbols` 步骤（`if: failure()`，nm 判读 `libchaos_runtime_core.a` 中三组符号，**已确认全部在库内** —— 见 run `35729846929`）。把 link.txt 的 log 也加进去一行即可复用。
+
+**对比过状态**：该 workflow 历史 `success=0`（id 289258742，300 次运行全 failure），link 失败自 09-10 起每次 main push 都在 —— 属「从未在 Linux 跑通过」而非新回归（下层编译错误一直遮蔽到链接）。
 
 ### 备选：确认这是否是"一直如此"
 
