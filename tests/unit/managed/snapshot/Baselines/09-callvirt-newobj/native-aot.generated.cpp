@@ -360,7 +360,7 @@ inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System
 
 
 
-static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_InstanceHelper[] =
+extern const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_SnapshotTestFixtures_InstanceHelper[] =
 
 
 
@@ -932,7 +932,7 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 
 
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_InstanceHelper___ctor_System_Void_System_Int32_(void) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_InstanceHelper___ctor_System_Void_System_Int32_(void) CHAOS_STUB_NOEXCEPT
 
 
 
@@ -976,7 +976,11 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_Insta
 
 
 
-static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
+extern const CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
+
+
+
+extern const CHAOS_IL2CPP_UINT32 kGenericTypeArgTokensCount = 0u;
 
 
 
@@ -984,7 +988,11 @@ static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
 
 
 
-static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 0, 0, 0 } };
+extern const GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 0, 0, 0 } };
+
+
+
+extern const CHAOS_IL2CPP_UINT32 kGenericTypeEntriesCount = 0u;
 
 
 
@@ -992,7 +1000,11 @@ static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 
 
 
 
-static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[1] = { 0 };
+extern const CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[1] = { 0 };
+
+
+
+extern const CHAOS_IL2CPP_UINT32 kGenericMethodArgTokensCount = 0u;
 
 
 
@@ -1000,7 +1012,11 @@ static constexpr CHAOS_IL2CPP_UINT32 kGenericMethodArgTokens[1] = { 0 };
 
 
 
-static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { { 0, 0, 0, 0 } };
+extern const GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { { 0, 0, 0, 0 } };
+
+
+
+extern const CHAOS_IL2CPP_UINT32 kGenericMethodEntriesCount = 0u;
 
 
 
@@ -1008,11 +1024,19 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 
 
-static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
+extern const GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 
 
 
-static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+extern const CHAOS_IL2CPP_UINT32 s_method_aot_entriesCount = 0u;
+
+
+
+extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+
+extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_argsCount = 0u;
 
 
 
@@ -1126,7 +1150,16 @@ static constexpr struct {
 };
 
 
-static const ::ChaosAbiManifestV0* const s_abi_manifest =
+// `extern`, not `static`: the module descriptor in the module-registration
+
+
+// section references this symbol, and payload sections are emitted as separate
+
+
+// translation units — internal linkage could not satisfy that reference.
+
+
+extern const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 
 	reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);
@@ -4135,13 +4168,13 @@ extern "C" const char* const kSubjectSubjectIds[1] = { "" };
 #if defined(__GNUC__) || defined(__clang__)
 
 
-static const struct __attribute__((packed)) {
+struct __attribute__((packed)) ChaosGcSlotMapsSectionV0 {
 
 
 #else
 
 
-static const struct {
+struct ChaosGcSlotMapsSectionV0 {
 
 
 #endif
@@ -4174,7 +4207,13 @@ static const struct {
 	} entry0;
 
 
-} kChaosGcSlotMapsSection = {
+};
+
+
+
+
+
+extern const ChaosGcSlotMapsSectionV0 kChaosGcSlotMapsSection = {
 
 
 	/* entry0 = SnapshotTestFixtures_CallVirtHelper_CreateAndUse */
@@ -4216,7 +4255,7 @@ static const struct {
 
 
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 32u;
+extern const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 32u;
 
 
 
@@ -4366,37 +4405,37 @@ extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration
 	.generic_types            = kGenericTypeEntries,
 
 
-	.generic_type_count       = sizeof(kGenericTypeEntries) / sizeof(kGenericTypeEntries[0]),
+	.generic_type_count       = kGenericTypeEntriesCount,
 
 
 	.generic_type_args        = kGenericTypeArgTokens,
 
 
-	.generic_type_arg_count   = sizeof(kGenericTypeArgTokens) / sizeof(kGenericTypeArgTokens[0]),
+	.generic_type_arg_count   = kGenericTypeArgTokensCount,
 
 
 	.generic_methods          = kGenericMethodEntries,
 
 
-	.generic_method_count     = sizeof(kGenericMethodEntries) / sizeof(kGenericMethodEntries[0]),
+	.generic_method_count     = kGenericMethodEntriesCount,
 
 
 	.generic_method_args      = kGenericMethodArgTokens,
 
 
-	.generic_method_arg_count = sizeof(kGenericMethodArgTokens) / sizeof(kGenericMethodArgTokens[0]),
+	.generic_method_arg_count = kGenericMethodArgTokensCount,
 
 
 	.method_aot_entries       = s_method_aot_entries,
 
 
-	.method_aot_entry_count  = sizeof(s_method_aot_entries) / sizeof(s_method_aot_entries[0]),
+	.method_aot_entry_count  = s_method_aot_entriesCount,
 
 
 	.method_aot_entry_args    = s_method_aot_entry_args,
 
 
-	.method_aot_entry_arg_count = sizeof(s_method_aot_entry_args) / sizeof(s_method_aot_entry_args[0]),
+	.method_aot_entry_arg_count = s_method_aot_entry_argsCount,
 
 
 	.field_offsets           = nullptr,
@@ -4462,7 +4501,7 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtur
 
 
 
-static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
+extern const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 
 
 	{ 0x00000001u, "SnapshotTestFixtures/CallVirtHelper", "SnapshotTestFixtures/CallVirtHelper", "", "CallVirtHelper", "CallVirtHelper", nullptr, nullptr, 0u, nullptr, 0u,
@@ -4477,7 +4516,7 @@ nullptr, 0u,    kReflMethods_SnapshotTestFixtures_CallVirtHelper, 1u, nullptr, 0
 
 
 
-static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
+extern const ReflectionQueryTypeDescriptor* const kReflTypePtrs[1] = {
 
 
 	&kReflTypes[0],

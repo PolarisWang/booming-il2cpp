@@ -672,11 +672,11 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_managed(CHAOS_IL2
 extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 {
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int32(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int32(void) CHAOS_STUB_NOEXCEPT;
 
 } // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int32(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int32(void) CHAOS_STUB_NOEXCEPT;
 
 void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);
 
