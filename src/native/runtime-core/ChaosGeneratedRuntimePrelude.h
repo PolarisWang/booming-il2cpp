@@ -75,6 +75,26 @@ constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = 0;
 constexpr CHAOS_IL2CPP_INTPTR chaos_managed_pointer_local_slot_tag = 1;
 #endif
 
+// ── Plausible-address floor for the local-slot tag ───────────────────
+//
+// The tag marks a pointer to a *local variable* (see the `&chaos_value |
+// tag` construction in the exception emission path).  Such addresses are
+// always real user-space addresses — on every supported platform they sit
+// well above 1 MiB (Linux stacks live near 0x7fff_xxxxxxxx, heap arenas
+// above the image base).
+//
+// Bit 0 alone is NOT a usable discriminator: ordinary small integers set it
+// too.  `Assert.AreEqual(XmlNodeType.Element, ...)` passes the enum value 1,
+// which is odd, so the old tag check treated it as a slot pointer, masked
+// bit 0 off, and dereferenced nullptr — SIGSEGV mid-fact-loop, truncating the
+// streaming JSON and reporting the whole chunk as "0/0 passed".
+//
+// Requiring the *stripped* value to look like an address keeps the tag honest
+// without changing the encoding: no real tagged slot can fall below the
+// floor, and no plausible small integer can rise above it.
+constexpr CHAOS_IL2CPP_UINTPTR chaos_managed_pointer_address_floor =
+    static_cast<CHAOS_IL2CPP_UINTPTR>(1) << 20;  // 1 MiB
+
 // ── Normalize native int argument ────────────────────────────────────
 inline CHAOS_IL2CPP_INTPTR chaos_normalize_native_int_argument(CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
@@ -83,7 +103,18 @@ inline CHAOS_IL2CPP_INTPTR chaos_normalize_native_int_argument(CHAOS_IL2CPP_INTP
         return chaos_value;
     }
 
-    auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_value & ~chaos_managed_pointer_local_slot_tag));
+    const auto chaos_slot_address =
+        static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_value & ~chaos_managed_pointer_local_slot_tag);
+
+    // Odd value that cannot be a tagged local-slot address → it is a plain
+    // integer (an enum member, a small constant), not a pointer.  Return it
+    // as-is rather than dereferencing it.
+    if (chaos_slot_address < chaos_managed_pointer_address_floor)
+    {
+        return chaos_value;
+    }
+
+    auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_slot_address);
     return *chaos_slot;
 }
 
