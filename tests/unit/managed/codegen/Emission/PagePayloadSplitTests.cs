@@ -260,10 +260,17 @@ public sealed class PagePayloadSplitTests
         Assert.True(files.Length > 0,
             $"no native-aot sources found in '{subjectsDir}'");
 
-        // Qualified types are common (`static const ::ns::T kFoo[] =`), so the
-        // type-name span must not be restricted to a bare identifier.
+        // Top-level definitions only: they start at column 0. A function-local
+        // `static` (e.g. the tab-indented `static auto* chaos_ftn_thunk = ...`
+        // emitted inside a method body) is deliberately duplicated per
+        // translation unit and is NOT a cross-unit reference — matching
+        // indented declarations here would report those as violations.
+        //
+        // The type-name span must still tolerate a qualified type, since
+        // `static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_Foo[]`
+        // is the shape that matters most here.
         var defPattern = new Regex(
-            @"^[ \t]*static\b[^\n=]*?\b(?<sym>k[A-Z]\w*|chaos_\w+|s_[a-z]\w*)\s*(?:\[[^\]]*\])?\s*=",
+            @"^static\b[^\n=]*?\b(?<sym>k[A-Z]\w*|chaos_\w+|s_[a-z]\w*)\s*(?:\[[^\]]*\])?\s*=",
             RegexOptions.Multiline);
 
         // symbol -> file that defines it (static)
