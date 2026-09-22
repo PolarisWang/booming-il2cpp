@@ -691,22 +691,35 @@ public sealed class RuntimeHelperShapeRegistryTests
     }
 
     [Fact]
-    public void TaskRun_CancellationTokenOverload_ResolvesToNull()
+    public void TaskRun_CancellationTokenOverload_WiredToTaskRunShim()
     {
-        // CT overloads deliberately fall through to the interpreter until
-        // Phase 3 (CancellationToken wiring) — their resolver must return null
-        // so codegen does not route them to async_task_run (which ignores the CT).
+        // ASYNC-T2 (524101330) wired this overload to chaos_task_run(delegate, token).
+        // It used to be deliberately rejected here so it would fall through to the
+        // interpreter, because routing it to async_task_run would have silently
+        // dropped the token.  The wiring added a dedicated 2-arg native entry that
+        // *accepts* the token (and does not yet honour it — see the header note in
+        // async_stubs.h), so the overload is now routed and the previous
+        // "must resolve to null" expectation is obsolete.
+        //
+        // The load-bearing property is the ARITY: the shim must forward both
+        // arguments.  A 1-arg form would silently discard the CancellationToken
+        // again, which is exactly the defect the old rejection was guarding against.
+        const string callee =
+            "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)";
         var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
-        Assert.True(registry.TryMatchGenericShape(
-            "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)",
-            out var descriptor, out _));
+        Assert.True(registry.TryMatchGenericShape(callee, out var descriptor, out _));
         Assert.NotNull(descriptor);
 
         var planner = new NativeAotLoweringPlanner();
-        var resolution = descriptor!.Resolver(planner,
-            "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action,System.Threading.CancellationToken)",
-            Array.Empty<string>());
-        Assert.Null(resolution);
+        var resolution = descriptor!.Resolver(planner, callee, Array.Empty<string>());
+        Assert.NotNull(resolution);
+        Assert.Equal("chaos_task_run", resolution!.DirectNativeSymbol);
+        Assert.Contains("chaos_task_run", resolution.CppSource);
+
+        // Both parameters reach the native entry — the token is not dropped.
+        Assert.Equal(2, resolution.ParameterAbis.Count);
+        Assert.Contains("chaos_arg_0", resolution.CppSource);
+        Assert.Contains("chaos_arg_1", resolution.CppSource);
     }
 
     // ── Task.Factory registration (ASYNC-P2-5) ─────────────────────────────
