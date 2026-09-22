@@ -53,6 +53,20 @@
 #include "reflection_query_model.h"
 #include "load_store_chaos_bridge.h"
 
+// ExecutionContext / SynchronizationContext entry points. Generated code
+// forwards to these by name — both from the SimpleForward shape stubs
+// (chaos_external_runtime_* in the codegen TU) and from lowered method bodies
+// that call ExecutionContext.SuppressFlow()/RestoreFlow()/IsFlowSuppressed()
+// directly. Without these declarations those call sites are undeclared
+// identifiers (C3861) and the chunk fails to build; threading was the first
+// chunk to exercise enough of these shapes to hit it.
+//
+// Both headers are self-contained and include-guarded, and they declare the
+// extern "C" bridges at global scope, so pulling them in here is enough for
+// every generated translation unit.
+#include "execution_context.h"
+#include "synchronization_context.h"
+
 // Interpreter dispatch for hotpatch-kept-native & flat-goto fallback
 #include "interpreter_entry.h"
 

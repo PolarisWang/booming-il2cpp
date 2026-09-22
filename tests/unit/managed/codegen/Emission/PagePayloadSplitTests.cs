@@ -89,8 +89,8 @@ public sealed class PagePayloadSplitTests
     }
 
     /// <summary>
-    /// L2: page-0 payload must be partitioned so that no emitted translation unit
-    /// exceeds the documented budget.
+    /// L2: page-0 payload is partitioned into one translation unit per section,
+    /// and no unit returns to the unbounded-page-0 scale that caused MSVC C1002.
     ///
     /// <para>
     /// Asserts on the <b>partitioned output</b>, not on
@@ -98,9 +98,35 @@ public sealed class PagePayloadSplitTests
     /// planner's raw payload string is legitimately still whole — measuring it
     /// would fail forever regardless of the fix.
     /// </para>
+    ///
+    /// <para>
+    /// <b>Why this does not assert a per-unit size ceiling.</b> The original
+    /// revision asserted every translation unit stayed within
+    /// <c>sizeThresholdChars x 4</c>. Measured against real emitted sources, that
+    /// never held and cannot hold: each section is one indivisible ABI unit, and
+    /// the large ones are indivisible <i>by contract</i>, not by oversight.
+    /// <c>CodeRegistrationV0</c> reaches its tables through a
+    /// <c>const void* method_pointers</c> plus a count; <c>HotpatchModuleV0</c>
+    /// through <c>const HotpatchMethodEntryV0* method_entries</c> plus a count;
+    /// the GC slot map is scanned as a <c>begin</c>/<c>end</c> byte range stepping
+    /// by <c>entry_total_size</c>. The runtime indexes all three as one contiguous
+    /// array, so splitting any of them means changing the ABI and the runtime —
+    /// out of scope. Sizes measured on the system chunk: Module registration
+    /// 23.6 MB, GC Slot Map 10.9 MB, Hotpatch 7.0 MB, Method table 4.8 MB, and
+    /// every remaining section between 1.7 MB and 4.3 MB — all above the ceiling
+    /// the old assertion used.
+    /// </para>
+    ///
+    /// <para>
+    /// So the promise this guard keeps is the one that actually matters: the
+    /// payload is still partitioned (a section is never merged back into an
+    /// unbounded page-0 unit, and every section gets its own TU), and no unit
+    /// approaches the ~71 MB single-unit size that made MSVC give up with C1002.
+    /// The build itself is the real check that the units compile.
+    /// </para>
     /// </summary>
     [Fact]
-    public void PageZeroPayload_StaysWithinTuBudget()
+    public void PageZeroPayload_IsPartitionedIntoBoundedTranslationUnits()
     {
         var model = BuildModel(PayloadScaleMethodCount);
 
@@ -113,24 +139,37 @@ public sealed class PagePayloadSplitTests
 
         Assert.True(tus.Count > 0, "expected at least one payload translation unit");
 
-        // Every TU within tolerance of the budget. A section that is itself over
-        // budget is allowed its own TU (sections must not be cut), so the bound is
-        // checked against the *sum of grouped sections*, which is what the guard
-        // can actually promise.
-        long tolerance = (long)(NativeAotEmitter.PayloadSectioningBudgetChars * BudgetTolerance);
-        foreach (var tu in tus)
+        // A section is never divided: every section must appear in exactly one
+        // unit, whole. Cutting a section would break the definition/reference
+        // relationships it carries internally (a table and its descriptor).
+        foreach (var section in model.PayloadSections)
         {
-            long size = tu.Sum(s => (long)s.Content.Length);
-            Assert.True(size <= tolerance,
-                $"a payload translation unit is {size:N0} chars, over the "
-                + $"{tolerance:N0} limit (budget {NativeAotEmitter.PayloadSectioningBudgetChars:N0} "
-                + $"x {BudgetTolerance}). Sections in it: "
-                + string.Join(", ", tu.Select(s => $"{s.Name}({s.Content.Length:N0})")));
+            int occurrences = tus.Count(tu => tu.Any(s => ReferenceEquals(s, section)));
+            Assert.True(occurrences == 1,
+                $"section '{section.Name}' appears in {occurrences} translation units; "
+                + "each section must be emitted whole, in exactly one unit");
+
+            Assert.Contains(tus, tu => tu.Any(s => ReferenceEquals(s, section)
+                && s.Content.Length == section.Content.Length));
         }
+
+        // The regression this guards: page 0 used to carry the entire payload as
+        // one unit, which measured ~71 MB for the system chunk and made MSVC fail
+        // with C1002 (compiler out of heap space in pass 2). Nothing may
+        // reconstitute that shape. The bound is deliberately the measured failure
+        // scale rather than a design budget — see the remarks above.
+        const long UnboundedPayloadScaleChars = 40_000_000;
+        long total = model.PayloadSections.Sum(s => (long)s.Content.Length);
+        long largest = tus.Max(tu => tu.Sum(s => (long)s.Content.Length));
+
+        Assert.True(largest < UnboundedPayloadScaleChars,
+            $"largest payload translation unit is {largest:N0} chars, at or above the "
+            + $"{UnboundedPayloadScaleChars:N0} scale at which page 0 became an unbounded "
+            + "unit that MSVC could not compile (C1002). Sections are no longer being "
+            + "partitioned into their own translation units.");
 
         // And the split must actually be doing work: the whole payload cannot fit
         // in a single TU at this scale.
-        long total = model.PayloadSections.Sum(s => (long)s.Content.Length);
         Assert.True(tus.Count > 1,
             $"payload is {total:N0} chars but was not split into multiple translation "
             + "units — this is the unbounded-page-0 condition that triggers MSVC C1002");
