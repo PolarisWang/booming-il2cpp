@@ -268,6 +268,94 @@ if (waitHandleEntry is not null)
     }
 }
 
+// ── ShapeRegistryIndex (json-xml industrialization P1-01) ──────────────────
+//
+// The ATG decides `return 42L` (stub-gap) vs a real call via
+// TestEmitter.HasKnownNativeImpl().  Before P1-01 that answered solely from
+// Classifier.KnownNativeImpls, a hand-maintained list whose json/xml coverage
+// was measured at ZERO on 2026-09-22 — while the native symbols those methods
+// would call were fully implemented.  The consequence was 185 stubGap subjects
+// on the xml chunk alone whose implementations were present but unreachable.
+//
+// These checks pin the new source of truth (the codegen shape registry) to
+// concrete, independently verifiable facts.  They are written so that a
+// regression to the old behaviour — the index silently returning nothing —
+// turns them red rather than passing vacuously.
+{
+    // The index must be non-trivially populated.  A count of 0 would make every
+    // positive assertion below unreachable while still "compiling".
+    Check(ShapeRegistryIndex.KeyCount > 500,
+        $"ShapeRegistryIndex indexed only {ShapeRegistryIndex.KeyCount} keys; " +
+        "the shape registry registers ~1300 exact shapes, so this indicates Build() failed " +
+        "to enumerate them and every downstream match will silently miss");
+
+    // Positive: types that ARE backed by a registered native shape.  Each pair
+    // was confirmed against the generated aot-capability-manifest.json (308
+    // json/xml entries) rather than taken on faith.
+    var mustHaveShape = new (string Type, string Method)[]
+    {
+        ("System.Text.Json.Utf8JsonWriter", "WriteNumberValue"),
+        ("System.Xml.XmlWriter", "WriteStartElement"),
+        ("System.Xml.XmlConvert", "ToBoolean"),
+        ("System.Xml.NameTable", "Add"),
+    };
+    foreach (var (type, method) in mustHaveShape)
+    {
+        Check(ShapeRegistryIndex.HasShape(type, method),
+            $"ShapeRegistryIndex reports no shape for {type}.{method}, but that method has a " +
+            "registered native shape; the ATG will emit a `return 42L` stub and the real " +
+            "implementation stays unreachable from the fact layer");
+    }
+
+    // Bare-type spelling must resolve too — the ATG sometimes sees the short
+    // name where the registry uses the fully-qualified one.
+    Check(ShapeRegistryIndex.HasShape("NameTable", "Add"),
+        "bare declaring-type name did not match; registrations mix bare and " +
+        "fully-qualified spellings, so one form silently missing defeats the index");
+
+    // Negative control.  This is the load-bearing check: without it, a HasShape
+    // that returned `true` unconditionally would satisfy every assertion above.
+    // The pair is chosen because it CANNOT be in the registry — it is not a real
+    // BCL member.
+    Check(!ShapeRegistryIndex.HasShape("System.Xml.XmlWriter", "ThisMemberDoesNotExist"),
+        "negative control failed: HasShape returned true for a member that is not " +
+        "registered anywhere, so the positive checks above prove nothing");
+    Check(!ShapeRegistryIndex.HasShape("No.Such.Type.Whatsoever", "Nope"),
+        "negative control failed: HasShape returned true for an entirely absent type");
+
+    // ── End-to-end: HasKnownNativeImpl must actually consult the index ──────
+    //
+    // The checks above prove the index is correct; these prove it is WIRED.
+    // A correct index that nobody calls would leave every json/xml subject on
+    // the `return 42L` path, which is exactly the defect P1-01 exists to fix.
+    static MethodSignature Sig(string type, string name) => new(
+        Name: name,
+        DeclaringTypeFullName: type,
+        ReturnTypeName: "System.Void",
+        IsStatic: false, IsVoid: true, HasRefParam: false,
+        Parameters: Array.Empty<MethodParameter>());
+
+    var wired = new (string Type, string Method)[]
+    {
+        ("System.Xml.XmlWriter", "WriteStartElement"),
+        ("System.Text.Json.Utf8JsonWriter", "WriteNumberValue"),
+    };
+    foreach (var (type, method) in wired)
+    {
+        Check(TestEmitter.HasKnownNativeImplForTest(Sig(type, method)),
+            $"HasKnownNativeImpl({type}.{method}) is false even though the shape registry " +
+            "registers a native shape for it — the index is not wired into the decision, " +
+            "so the ATG will still emit the AOT-STUB-GAP `return 42L` body");
+    }
+
+    // Negative control for the wiring itself: a member with no shape and no
+    // whitelist entry must still be false, otherwise the union above would be
+    // a blanket `return true` and every subject would become a false red.
+    Check(!TestEmitter.HasKnownNativeImplForTest(Sig("System.Xml.XmlWriter", "NoSuchMember")),
+        "negative control failed: HasKnownNativeImpl returned true for an unregistered " +
+        "member, so the positive wiring checks above prove nothing");
+}
+
 // ── report ─────────────────────────────────────────────────────────────────
 Console.WriteLine($"[guard] {checks} checks, {failures.Count} failure(s)");
 if (failures.Count > 0)

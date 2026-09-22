@@ -624,6 +624,30 @@ public sealed partial class NativeAotLoweringPlanner
         public IReadOnlyCollection<ShapeEntry> Entries => _entriesByShapeId.Values;
         public int EntryCount => _entriesByShapeId.Count;
 
+        /// <summary>
+        /// (typePrefix, methodName) pairs for the pattern-based registrations, so a
+        /// consumer outside codegen can ask "is there a shape for this type+method?"
+        /// without re-parsing the registration source.  Order is registration order.
+        /// </summary>
+        public IEnumerable<(string TypeDisplayNamePrefix, string MethodName)> GenericPatternKeys
+        {
+            get
+            {
+                foreach (var desc in _genericDescriptors)
+                    yield return (desc.TypeDisplayNamePrefix, desc.MethodName);
+            }
+        }
+
+        /// <inheritdoc cref="GenericPatternKeys"/>
+        public IEnumerable<(string TypeDisplayNamePrefix, string MethodName)> InlinePatternKeys
+        {
+            get
+            {
+                foreach (var desc in _inlineDescriptors)
+                    yield return (desc.TypeDisplayNamePrefix, desc.MethodName);
+            }
+        }
+
         /// <summary>Build the C++ "runtime_helper_shapes.h" header content.</summary>
         public string GenerateCppShapeHeader()
         {
