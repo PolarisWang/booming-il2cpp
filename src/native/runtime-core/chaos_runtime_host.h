@@ -40,6 +40,7 @@
 #include "gc_helpers.h"
 #include "runtime_stubs/misc_stubs.h"
 #include "runtime_stubs/array_stubs.h"
+#include "runtime_stubs/array_enumerator_stubs.h"
 #include "runtime_stubs/string_stubs.h"
 
 // For HotpatchNameRegistry lookup in OverrideUnresolvedExternalRuntimeEntries

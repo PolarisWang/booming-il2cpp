@@ -28,31 +28,37 @@ public sealed partial class NativeAotLoweringPlanner
         /// managed 1-D array.  Implemented in
         /// src/native/runtime-core/runtime_stubs/array_enumerator_stubs.cpp.
         /// </summary>
+        /// <remarks>
+        /// ParameterAbis is deliberately EMPTY for all three entries.  The
+        /// receiver slot is added by CreateDefinitionFromShapeEntry via
+        /// TryGetReceiverSlot (driven by the _ReceiverInjectedTypes allowlist in
+        /// NativeAotLoweringPlanner.ExternalRuntimeHelpers).  Declaring the
+        /// receiver here as well double-injects it: the generated helper then
+        /// takes two INTPTRs while the natives take one, giving C2660
+        /// "function does not take 2 arguments" at the call.
+        /// </remarks>
         private static void RegisterArrayEnumeratorStubs(RuntimeHelperShapeRegistry registry)
         {
             // IEnumerable.GetEnumerator() → IEnumerator
             registry.Register("System.Collections.IEnumerable", "GetEnumerator", [],
                 ShapeKind.SimpleForward, "ChaosArrayGetEnumerator",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot("System.Collections.IEnumerable", AotCoreIrTypeShapeKind.ReferenceType)),
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                new HashSet<int> { 0 });
+                EmptyRawArgumentIndices);
 
             // IEnumerator.MoveNext() → bool
             registry.Register("System.Collections.IEnumerator", "MoveNext", [],
                 ShapeKind.SimpleForward, "ChaosArrayEnumeratorMoveNext",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot("System.Collections.IEnumerator", AotCoreIrTypeShapeKind.ReferenceType)),
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 CreateInt32AbiSlot(),
-                new HashSet<int> { 0 });
+                EmptyRawArgumentIndices);
 
             // IEnumerator.get_Current() → object
             registry.Register("System.Collections.IEnumerator", "get_Current", [],
                 ShapeKind.SimpleForward, "ChaosArrayEnumeratorGetCurrent",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot("System.Collections.IEnumerator", AotCoreIrTypeShapeKind.ReferenceType)),
+                Array.Empty<AotCoreIrAbiSlotArtifact>(),
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                new HashSet<int> { 0 });
+                EmptyRawArgumentIndices);
         }
     }
 }

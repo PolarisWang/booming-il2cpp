@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <cstring>
 
+#include <chaos/native_types.h>
 #include "runtime_stubs/stub_common.h"
 #include "gc_helpers.h"
 
