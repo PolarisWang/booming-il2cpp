@@ -164,4 +164,13 @@ def classify_exit(exit_code: int | None, tail_text: str) -> str:
     #     but harmless; keep for documentation.
     if "error C" in t:
         return "native-linker-error"
+    # 11. assertion-failure: the pipeline ran to completion and exited 1 with no
+    #     compile/link/crash signature anywhere in the tail.  That is the fact
+    #     stage reporting failed subjects — a real, attributable test failure,
+    #     NOT a crash.  Before this rule existed these fell through to "unknown",
+    #     which aggregate.py then bucketed as a code defect and printed under the
+    #     hardcoded label "code/native-crash" — mislabelling ~33 chunks whose
+    #     fact results were actually intact (e.g. NonGeneric 61/62, AOT == JIT).
+    if exit_code == 1:
+        return "assertion-failure"
     return "unknown"

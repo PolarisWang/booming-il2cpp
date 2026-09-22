@@ -26,6 +26,10 @@ _INFRA_FAIL = {
     "env-missing", "oom", "timeout", "hotupdate-patch-arm",
 }
 _CODE_DEFECT = {"native-crash"}
+# A chunk that ran to completion and reported failing subjects.  Attributable
+# and expected output of the fact stage — NOT an infra fault and NOT a crash,
+# so it gets its own bucket rather than being swept into code defects.
+_TEST_FAILURE = {"assertion-failure"}
 _TRANSIENT = {"native-crash", "unknown"}  # possibly retried
 
 
@@ -41,7 +45,9 @@ class ReportSummary:
     # categorized failed keys (for operator triage)
     translation_defect_fail_keys: list[str] = field(default_factory=list)
     infra_fail_keys: list[str] = field(default_factory=list)
+    test_failure_keys: list[str] = field(default_factory=list)
     code_defect_fail_keys: list[str] = field(default_factory=list)
+    unclassified_fail_keys: list[str] = field(default_factory=list)
     retried_to_pass_keys: list[str] = field(default_factory=list)
 
     def summary_text(self) -> str:
@@ -58,9 +64,15 @@ class ReportSummary:
         if self.infra_fail_keys:
             lines.append(f"  ⚠ infra/timeout ({len(self.infra_fail_keys)}): "
                          f"{', '.join(self.infra_fail_keys[:10])}")
+        if self.test_failure_keys:
+            lines.append(f"  ⚠ assertion-failure ({len(self.test_failure_keys)}): "
+                         f"{', '.join(self.test_failure_keys[:10])}")
         if self.code_defect_fail_keys:
             lines.append(f"  ⚠ code/native-crash ({len(self.code_defect_fail_keys)}): "
                          f"{', '.join(self.code_defect_fail_keys[:10])}")
+        if self.unclassified_fail_keys:
+            lines.append(f"  ⚠ unclassified ({len(self.unclassified_fail_keys)}): "
+                         f"{', '.join(self.unclassified_fail_keys[:10])}")
         return "\n".join(lines)
 
 
@@ -92,8 +104,15 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
                 summ.translation_defect_fail_keys.append(key)
             elif err in _INFRA_FAIL:
                 summ.infra_fail_keys.append(key)
-            else:
+            elif err in _TEST_FAILURE:
+                summ.test_failure_keys.append(key)
+            elif err in _CODE_DEFECT:
                 summ.code_defect_fail_keys.append(key)
+            else:
+                # Genuinely unclassified.  Keep it visible and separate rather
+                # than folding it into code defects, which previously made an
+                # unknown exit=1 look like a native crash.
+                summ.unclassified_fail_keys.append(key)
         elif status == "retrying":
             # will surface again as passed/failed in a later result write
             pass
@@ -125,6 +144,8 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
         "translationDefectFails": summ.translation_defect_fail_keys,
         "infraFails": summ.infra_fail_keys,
         "codeDefectFails": summ.code_defect_fail_keys,
+        "testFailureFails": summ.test_failure_keys,
+        "unclassifiedFails": summ.unclassified_fail_keys,
         "timestamp": time.time(),
         "runId": config.run_id,
         "nativeConfig": config.native_config,
