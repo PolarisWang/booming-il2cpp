@@ -77,6 +77,15 @@ thread_local void* g_t4_throw_ret_addr = nullptr;
 thread_local void* g_t4_frame_rsp = nullptr;
 
 // ── Spinlock Helpers ──────────────────────────────────────────────────────────
+//
+// g_t4_code_lock is a raw `long`, so the exchange must go through a platform
+// intrinsic rather than std::atomic.  The non-MSVC branch previously called
+// InterlockedExchange too — an MSVC/Windows intrinsic — so this file could not
+// compile on Linux at all ("'InterlockedExchange' was not declared in this
+// scope"), which in turn broke every target that includes it, including the
+// directly-#included test_jit_seh_handler_internal TU.
+//
+// Mirrors the _MSC_VER / __atomic_* split already used in jit_precode.cpp.
 
 static void AcquireCodeLock() noexcept {
 #if defined(_MSC_VER)
@@ -84,14 +93,18 @@ static void AcquireCodeLock() noexcept {
         _mm_pause();
     }
 #else
-    while (InterlockedExchange(&g_t4_code_lock, 1) != 0) {
+    while (__atomic_exchange_n(&g_t4_code_lock, 1, __ATOMIC_ACQUIRE) != 0) {
         // yield hint
     }
 #endif
 }
 
 static void ReleaseCodeLock() noexcept {
+#if defined(_MSC_VER)
     InterlockedExchange(&g_t4_code_lock, 0);
+#else
+    __atomic_exchange_n(&g_t4_code_lock, 0, __ATOMIC_RELEASE);
+#endif
 }
 
 // ── InvalidateLookupCache ─────────────────────────────────────────────────────

@@ -130,7 +130,13 @@ protected:
         g_t4_exception_obj    = nullptr;
         ResetUnwindState();
         // ── Release spinlock just in case a prior test crashed mid-lock ──
+        // Same _MSC_VER / __atomic_* split as the source under test: this file
+        // is built on Linux too, where InterlockedExchange does not exist.
+#if defined(_MSC_VER)
         InterlockedExchange(&g_t4_code_lock, 0);
+#else
+        __atomic_exchange_n(&g_t4_code_lock, 0, __ATOMIC_RELEASE);
+#endif
     }
 
     void TearDown() override {
@@ -143,7 +149,11 @@ protected:
         g_t4_frame_rsp      = nullptr;
         g_t4_exception_obj  = nullptr;
         ResetUnwindState();
+#if defined(_MSC_VER)
         InterlockedExchange(&g_t4_code_lock, 0);
+#else
+        __atomic_exchange_n(&g_t4_code_lock, 0, __ATOMIC_RELEASE);
+#endif
     }
 
     /// Register a minimal T4 code entry and return the registered code
