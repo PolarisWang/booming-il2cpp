@@ -160,6 +160,33 @@ WriteNumberValue_55_int_0   -> 0 参 catch-all                                �
 
 ### 验证（worktree 内 build+fact 实测，产物时间戳 15:48 与运行同刻）
 
+> ## 🔴 下表已被重测推翻（2026-09-22 加注）
+>
+> **下表每一列都与 2026-09-22 的一手重测对不上，请勿再引用。**
+>
+> 重测方式：在 `worktree-json-writer-review-fixes` 内跑
+> `python -u -m verification.chunk_pipeline --assembly System.Text.Json --chunk text-json --stages build,fact`
+> （产物根 `artifacts/foundation-dll/System.Text.Json/chunks/text-json/results/fact-results.json`，
+> 247 项，AOT 侧 resultKind 分布）：
+>
+> | metric | 2026-09-22 重测 | 下表「修复后」 | 下表「修复前」 |
+> |:-------|:---------------:|:-------------:|:-------------:|
+> | **factoryGap** | **0** | 31 | 62 |
+> | stubGap | **177** | 176 | 176 |
+> | unassertable | **65** | 34 | 3 |
+> | real | **2** | 2 | 2 |
+> | failed | **3** | 3 | 3 |
+>
+> **最致命的矛盾**：下表用**同一组 62/31 数字**同时声称
+> `factoryGap −31` 与 `preAssertionRaise −31 / unassertable +31`。
+> 但 `preAssertionRaise` 转入参 raise 的那批**测不到 catch 类型**，
+> 不可能与 `factoryGap −31` 共用同一个计数。重测里根本不存在的「31」，
+> 说明这两列至少有一列是**把中间态误记成了本 commit 的 delta**。
+>
+> **本表应视为不可复现，不得作为 C 类修复效果的证据。**
+> §6 的结论（异常类型按族区分是真的、`WriteString` 校验顺序已修）
+> 由 `941436a26` 的源码本身与 .NET 实测支撑，**不依赖这张表**，故仍成立。
+
 | metric | 修复前 | 修复后 | delta |
 |:-------|:------:|:------:|:-----:|
 | **passed** | 181 | **212** | **+31** |
@@ -176,5 +203,16 @@ WriteNumberValue_55_int_0   -> 0 参 catch-all                                �
 > ⚠️ 同前：这些是 **void** 方法，`value=42` 是结构性 sentinel，
 > 故落 `unassertable` 而非 `real`。**`caught=False` 是关键证据** ——
 > 说明 typed catch 按序正确吸收了异常，异常语义现在是对的。
+
+> 🔴 **上一句的证据效力已被修正（2026-09-22）**：`caught` 标志在 harness 里
+> **没有写进 schema 的语义定义**，所以"`caught=False` = 被按序正确吸收"
+> 是**一种读法**，不是从字段推出的事实 —— 它与"根本没被捕捉"不可区分。
+> 这与本文 §1 自己总结的教训（`resultKind` 不能反推调用形态）**是同一个错误**：
+> 字段名不可反推语义。
+>
+> `caught=False` 真正能支持的是**弱断言**：异常没有从测试体里逃逸到 harness。
+> 要坐实"类型正确"，需要一个能读到**实际抛出异常类型**的判据
+> （例如 Fixture 侧记录 catch 到的类型），当前计数里没有这一项。
+> 结论仍可能是对的，但**本段的证据链不成立**。
 
 **剩余 31 项** = B 类（shape 未注册该重载），与本次修复无关。

@@ -100,20 +100,33 @@ bool ManagedStringView(CHAOS_IL2CPP_INTPTR str, const char*& out, size_t& out_le
 /// Non-zero means it's a real instance (unlikely from ATG but hit by some
 /// methods that never check this first).
 ///
-/// `bareKind` selects the family distinction above so the receiver check reports
-/// the same exception type .NET does for that family.
+/// `bareKind` names the family the method belongs to, i.e. the exception .NET
+/// reports when the receiver is the ONLY thing wrong with the call.  It picks
+/// which type the receiver check raises here.
+///
+/// It is NOT a claim that the method can only ever raise that one type: a
+/// stricter argument check may still fire AFTER the receiver check and raise
+/// something else.  `ChaosUtf8JsonWriterWriteRawValueStr` is the worked example
+/// — it passes NullReference (the bare-receiver answer for an empty-raw-value
+/// write) yet raises ArgumentException for an empty payload, because .NET
+/// validates emptiness first while still reporting the bare receiver for a
+/// non-empty one.  See its comment for the measured matrix.
 enum class BareWriterKind { Disposed, NullReference, InvalidOperation };
 
 bool CheckThis(CHAOS_IL2CPP_INTPTR this_ptr,
                BareWriterKind bareKind = BareWriterKind::Disposed) {
     if (this_ptr == 0) {
+        // Every arm raises (all three raise helpers are [[noreturn]]), so the
+        // switch is exhaustive on its own — no arm falls out and there is no
+        // trailing `return false;`.  MSVC infers this from the [[noreturn]]
+        // attribute and stays quiet, but clang/gcc's -Wreturn-type is not
+        // required to follow that inference, so spell the third arm out rather
+        // than relying on fallthrough past the switch.
         switch (bareKind) {
             case BareWriterKind::NullReference:    RaiseBareWriterNullReference();
             case BareWriterKind::InvalidOperation: RaiseBareWriterInvalidOperation();
-            case BareWriterKind::Disposed:         break;
+            case BareWriterKind::Disposed:         RaiseDisposedOrInvalid();
         }
-        RaiseDisposedOrInvalid();
-        return false;
     }
     return true;
 }
@@ -263,13 +276,33 @@ void ChaosUtf8JsonWriterWriteStringStr(
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
-    // Ordering matters, and .NET's order is: null argument > receiver state >
-    // empty-string argument.  Measured on a bare instance:
+    // Two managed paths reach this symbol, and they disagree about an empty
+    // property name — the difference is the VALUE, not the name:
+    //
+    //   WriteString(string, string?)  (dotnet/runtime, WriteProperties.String.cs)
+    //     ArgumentNullException.ThrowIfNull(propertyName);
+    //     if (value is null) WriteNull(propertyName.AsSpan());   // <- empty name
+    //     else               WriteString(name, value);           //    never checked here
+    //
+    //   value == null -> WriteNull(string) -> ValidateProperty() validates the
+    //     name, but ValidateWritingProperty() runs FIRST and reports the bare
+    //     receiver -> InvalidOperationException.
+    //   value != null -> WriteString(name, value) -> ValidateProperty() now runs
+    //     before any receiver check -> ArgumentException for an empty name.
+    //
+    // So there is deliberately NO empty-name check in this function: adding one
+    // would regress the value == null case, whose empty name never reaches a
+    // string-level validator at all.  n_len is captured and discarded for that
+    // reason.  Measured on a bare instance:
     //   WriteString(null, null) -> ArgumentNullException
     //   WriteString("",   null) -> InvalidOperationException   (NOT ArgumentException)
+    //   WriteString("",   "v")  -> ArgumentException           (value != null path)
     //   WriteString("p",  null) -> InvalidOperationException
-    // So the empty-name ArgumentException must not be raised while the receiver
-    // is still bare — the bare writer is reported first.
+    //
+    // An earlier version of this comment derived the empty-name rule from the
+    // bare-receiver case alone and concluded InvalidOperationException was
+    // correct for BOTH value forms — the derivation was invalid, not just the
+    // conclusion: the bare writer is reported first only on the value == null path.
     (void)n_len;
     (void)value;
     RaiseBareWriterInvalidOperation();
