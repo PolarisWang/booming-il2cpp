@@ -3,6 +3,8 @@
 
 #include "module_registry.h"
 
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT — for callers that raise from stubs
+
 #include <cstddef>
 #include <cstdint>
 

@@ -89,7 +89,7 @@ extern "C" void ChaosRegisterGcLayouts();
 // JIT precode trampoline → JIT compilation → hang. Use kDefaultArgThunks
 // to call AOT function body directly (verification tests AOT codegen).
 {{ if is_jit }}
-extern "C" void (*kDefaultArgThunks[])() noexcept;
+extern "C" void (*kDefaultArgThunks[])() CHAOS_STUB_NOEXCEPT;
 #define CHAOS_USE_DEFAULT_THUNKS kDefaultArgThunks
 {{ else }}
 #define CHAOS_USE_DEFAULT_THUNKS nullptr

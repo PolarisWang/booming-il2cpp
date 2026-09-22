@@ -445,26 +445,26 @@ inline void chaos_decimal_ctor_int32(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2C
 // AOT TU includes) so page TUs that emit a direct-native call to these (via
 // SimpleForward DirectNativeSymbol) can see the symbol.  Implemented in
 // parse_convert.cpp.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalCopySign(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMaxMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMinMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromOACurrency(CHAOS_IL2CPP_INT64 value) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt32(CHAOS_IL2CPP_INT32 value) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt64(CHAOS_IL2CPP_INT64 value) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromBool(CHAOS_IL2CPP_INT32 value) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalCeiling(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigits(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 mode) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigitsMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits, CHAOS_IL2CPP_INT32 mode) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalCopySign(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMaxMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMinMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromOACurrency(CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt32(CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt64(CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromBool(CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalCeiling(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigits(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 mode) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigitsMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits, CHAOS_IL2CPP_INT32 mode) CHAOS_STUB_NOEXCEPT;
 
 }  // namespace chaos::il2cpp::runtime_core
 

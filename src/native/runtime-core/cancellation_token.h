@@ -1,6 +1,7 @@
 #ifndef CHAOS_IL2CPP_CANCELLATION_TOKEN_H_
 #define CHAOS_IL2CPP_CANCELLATION_TOKEN_H_
 
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
 #include <chaos/native_types.h>
 
 #include <atomic>
@@ -35,38 +36,38 @@ struct CancellationTokenRegistration {
 
 /// Create a new CancellationTokenSource.
 /// @return Source ID (0 on failure).
-uint32_t CancellationTokenSourceCreate() noexcept;
+uint32_t CancellationTokenSourceCreate() CHAOS_STUB_NOEXCEPT;
 
 /// Create a CancellationTokenSource with a timer-based cancellation.
 /// @param due_time_ms  Milliseconds until cancellation is requested.
 /// @return Source ID (0 on failure).
-uint32_t CancellationTokenSourceCreateWithTimer(uint32_t due_time_ms) noexcept;
+uint32_t CancellationTokenSourceCreateWithTimer(uint32_t due_time_ms) CHAOS_STUB_NOEXCEPT;
 
 /// Cancel a CancellationTokenSource (fire all registered callbacks).
 /// @param source_id  ID from CancellationTokenSourceCreate.
 /// @return true if cancellation was requested (first time only).
-bool CancellationTokenSourceCancel(uint32_t source_id) noexcept;
+bool CancellationTokenSourceCancel(uint32_t source_id) CHAOS_STUB_NOEXCEPT;
 
 /// Check if a CancellationTokenSource has been cancelled.
 /// @param source_id  ID from CancellationTokenSourceCreate.
 /// @return true if cancelled.
-bool CancellationTokenSourceIsCancelled(uint32_t source_id) noexcept;
+bool CancellationTokenSourceIsCancelled(uint32_t source_id) CHAOS_STUB_NOEXCEPT;
 
 /// Dispose a CancellationTokenSource (cancel timer, prevent further use).
 /// @param source_id  ID from CancellationTokenSourceCreate.
-void CancellationTokenSourceDispose(uint32_t source_id) noexcept;
+void CancellationTokenSourceDispose(uint32_t source_id) CHAOS_STUB_NOEXCEPT;
 
 /// Register a callback to fire when cancellation is requested.
 /// @param source_id   CancellationTokenSource ID.
 /// @param callback    Function to call on cancellation.
 /// @param state       User context passed to callback.
 /// @return Registration ID (0 on failure).
-uint32_t CancellationTokenRegister(uint32_t source_id, void (*callback)(void*), void* state) noexcept;
+uint32_t CancellationTokenRegister(uint32_t source_id, void (*callback)(void*), void* state) CHAOS_STUB_NOEXCEPT;
 
 /// Unregister a previously registered callback.
 /// @param registration_id  ID from CancellationTokenRegister.
 /// @return true if found and unregistered.
-bool CancellationTokenUnregister(uint32_t registration_id) noexcept;
+bool CancellationTokenUnregister(uint32_t registration_id) CHAOS_STUB_NOEXCEPT;
 
 /// Create a CancellationTokenSource that is cancelled as soon as ANY of the
 /// given sources is cancelled (managed: CreateLinkedTokenSource).
@@ -81,7 +82,7 @@ bool CancellationTokenUnregister(uint32_t registration_id) noexcept;
 /// @param count       Number of entries in source_ids.
 /// @return New source ID (0 on failure).
 uint32_t CancellationTokenSourceCreateLinked(const uint32_t* source_ids,
-                                             uint32_t count) noexcept;
+                                             uint32_t count) CHAOS_STUB_NOEXCEPT;
 
 }  // namespace chaos::il2cpp::runtime_core::threading
 

@@ -1,6 +1,7 @@
 #ifndef CHAOS_IL2CPP_RUNTIME_STUBS_VERSION_STUBS_H_
 #define CHAOS_IL2CPP_RUNTIME_STUBS_VERSION_STUBS_H_
 
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
 #include <chaos/native_types.h>
 
 // System.Version — reference type, 4 Int32 components.
@@ -17,6 +18,6 @@
 // System.Version's own semantics — Build/Revision are -1 only when the Version
 // was constructed from components rather than parsed, and the ATG probes only
 // assert on the round-tripped string.
-CHAOS_IL2CPP_INTPTR ChaosVersionParse(CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosVersionParse(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT;
 
 #endif  // CHAOS_IL2CPP_RUNTIME_STUBS_VERSION_STUBS_H_

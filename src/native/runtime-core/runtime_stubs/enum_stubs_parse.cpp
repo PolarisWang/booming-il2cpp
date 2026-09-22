@@ -13,7 +13,7 @@ extern "C" {
 
 /// Enum.Parse(Type, String) — parses a name to a boxed enum value.
 /// Returns boxed int32/int64 on success, 0 (null) on failure.
-CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name) noexcept
+CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     if (type == 0 || name == 0) return 0;
 
@@ -88,7 +88,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
 }
 
 /// Enum.Parse(Type, String, Boolean) — parses with optional ignoreCase.
-CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 ignoreCase) noexcept
+CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 ignoreCase) CHAOS_STUB_NOEXCEPT
 {
     if (type == 0 || name == 0) return 0;
 
@@ -165,7 +165,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
 
 /// Enum.TryParse(Type, String, out Object) — tries to parse name, writes boxed value to result.
 /// Returns 1 on success, 0 on failure.
-CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR result_out) noexcept
+CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR result_out) CHAOS_STUB_NOEXCEPT
 {
     CHAOS_IL2CPP_PROFILE_SCOPE("ChaosEnumTryParse");
     if (type == 0 || name == 0 || result_out == 0) return 0;
@@ -254,7 +254,7 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
 }
 
 /// Enum.TryParse(Type, String, Boolean, out Object) — tries to parse with ignoreCase.
-CHAOS_IL2CPP_INT32 ChaosEnumTryParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 ignoreCase, CHAOS_IL2CPP_INTPTR result_out) noexcept
+CHAOS_IL2CPP_INT32 ChaosEnumTryParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 ignoreCase, CHAOS_IL2CPP_INTPTR result_out) CHAOS_STUB_NOEXCEPT
 {
     CHAOS_IL2CPP_PROFILE_SCOPE("ChaosEnumTryParseWithIgnoreCase");
     if (type == 0 || name == 0 || result_out == 0) return 0;

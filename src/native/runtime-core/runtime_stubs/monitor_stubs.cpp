@@ -8,6 +8,7 @@
 //
 // This file contains NO extern "C" code, so the inline functions from
 // gc_transition.h are emitted with proper C++ name decoration.
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
 #include <chaos/native_types.h>
 #include "thread_state.h"
 #include "gc_transition.h"
@@ -16,7 +17,7 @@
 
 namespace chaos::il2cpp::runtime_core {
 
-static void MonitorEnterImpl(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR lockTaken) noexcept
+static void MonitorEnterImpl(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR lockTaken) CHAOS_STUB_NOEXCEPT
 {
     if (obj == 0) return;
     void* monitor_target = reinterpret_cast<void*>(obj);
@@ -30,7 +31,7 @@ static void MonitorEnterImpl(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR lockTa
     }
 }
 
-static void MonitorExitImpl(CHAOS_IL2CPP_INTPTR obj) noexcept
+static void MonitorExitImpl(CHAOS_IL2CPP_INTPTR obj) CHAOS_STUB_NOEXCEPT
 {
     if (obj == 0) return;
     void* monitor_target = reinterpret_cast<void*>(obj);
@@ -44,12 +45,12 @@ static void MonitorExitImpl(CHAOS_IL2CPP_INTPTR obj) noexcept
 
 extern "C" {
 
-void chaos_monitor_enter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR lockTaken) noexcept
+void chaos_monitor_enter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR lockTaken) CHAOS_STUB_NOEXCEPT
 {
     chaos::il2cpp::runtime_core::MonitorEnterImpl(obj, lockTaken);
 }
 
-void chaos_monitor_exit(CHAOS_IL2CPP_INTPTR obj) noexcept
+void chaos_monitor_exit(CHAOS_IL2CPP_INTPTR obj) CHAOS_STUB_NOEXCEPT
 {
     chaos::il2cpp::runtime_core::MonitorExitImpl(obj);
 }

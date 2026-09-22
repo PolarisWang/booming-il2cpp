@@ -29,7 +29,7 @@ struct TaskRunContext {
     ExecutionContext* ctx;
 };
 
-static void TaskRunCallback(void* state) noexcept {
+static void TaskRunCallback(void* state) CHAOS_STUB_NOEXCEPT {
     CHAOS_IL2CPP_PROFILE_SCOPE("TaskRunCallback");
     auto* rc = static_cast<TaskRunContext*>(state);
     if (rc == nullptr) return;
@@ -53,7 +53,7 @@ static void TaskRunCallback(void* state) noexcept {
     delete rc;
 }
 
-CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept {
+CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) CHAOS_STUB_NOEXCEPT {
     if (delegate_fn == 0) {
         // .NET contract: Task.Run(null) throws ArgumentNullException.  Returning 0
         // made the probe's awaiter path raise NRE instead — wrong exception type.
@@ -84,7 +84,7 @@ CHAOS_IL2CPP_INTPTR TaskRun(CHAOS_IL2CPP_INTPTR delegate_fn) noexcept {
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(task);
 }
 
-void RegisterAsyncTaskRun() noexcept {
+void RegisterAsyncTaskRun() CHAOS_STUB_NOEXCEPT {
     ::chaos::il2cpp::common::register_async_task_run_fn(TaskRun);
 }
 
@@ -101,7 +101,7 @@ void RegisterAsyncTaskRun() noexcept {
 /// it had when it registered the continuation).
 static void AsyncContinuationDispatch(
     chaos::il2cpp::common::AsyncContinueFn cb, void* ctx,
-    CHAOS_IL2CPP_INTPTR task_handle) noexcept
+    CHAOS_IL2CPP_INTPTR task_handle) CHAOS_STUB_NOEXCEPT
 {
     (void)task_handle;
     struct ContCtx {
@@ -131,7 +131,7 @@ static void AsyncContinuationDispatch(
     }, cc);
 }
 
-void RegisterAsyncContinuationDispatch() noexcept {
+void RegisterAsyncContinuationDispatch() CHAOS_STUB_NOEXCEPT {
     ::chaos::il2cpp::common::register_async_dispatch_continuation_fn(AsyncContinuationDispatch);
 }
 

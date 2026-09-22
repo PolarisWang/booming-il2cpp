@@ -52,13 +52,13 @@ namespace runtime_core {
 // For hotpatch-aware dispatch (flags may contain kHotpatchActive/
 // kHotpatchKeepNative), the caller handles flag checks before calling
 // these leaf helpers, passing entry.flags through if needed.
-inline int64_t DispatchDirectGetValue(void* direct_ptr, uint32_t /*flags*/) noexcept {
+inline int64_t DispatchDirectGetValue(void* direct_ptr, uint32_t /*flags*/) CHAOS_STUB_NOEXCEPT {
     // Uniform cast: all AOT methods use uint64_t(uint64_t,...,uint64_t)
     return static_cast<int64_t>(
         reinterpret_cast<uint64_t(*)(uint64_t,uint64_t,uint64_t,uint64_t)>(
             direct_ptr)(0, 0, 0, 0));
 }
-inline void DispatchDirectVoid(void* direct_ptr, uint32_t /*flags*/) noexcept {
+inline void DispatchDirectVoid(void* direct_ptr, uint32_t /*flags*/) CHAOS_STUB_NOEXCEPT {
     reinterpret_cast<void(*)(uint64_t,uint64_t,uint64_t,uint64_t)>(
         direct_ptr)(0, 0, 0, 0);
 }
@@ -81,7 +81,7 @@ inline int32_t ChaosDispatchMethod(
     const HotpatchEntryV0* entries,
     int32_t count,
     int32_t index,
-    void (* const* thunks)() noexcept = nullptr)
+    void (* const* thunks)() CHAOS_STUB_NOEXCEPT = nullptr)
 {
     if (index < 0 || index >= count) return -1;
     auto& entry = entries[index];
@@ -120,7 +120,7 @@ inline int32_t ChaosDispatchMethod(
 inline int32_t ChaosDispatchMethodAll(
     const HotpatchEntryV0* entries,
     int32_t count,
-    void (* const* thunks)() noexcept = nullptr)
+    void (* const* thunks)() CHAOS_STUB_NOEXCEPT = nullptr)
 {
     int32_t failures = 0;
     for (int32_t i = 0; i < count; i++) {
@@ -139,7 +139,7 @@ inline int32_t ChaosDispatchMethodAll(
 // Each module's entries are dispatched individually; failures are summed.
 // Returns total failures across all modules.
 inline int32_t ChaosDispatchMethodAllModules(
-    void (* const* thunks)() noexcept = nullptr)
+    void (* const* thunks)() CHAOS_STUB_NOEXCEPT = nullptr)
 {
     int32_t failures = 0;
     auto& registry = GetHotpatchNameRegistry();
@@ -168,7 +168,7 @@ inline int32_t ChaosDispatchMethodBench(
     const HotpatchEntryV0* entries,
     int32_t count,
     int32_t index,
-    void (* const* thunks)() noexcept = nullptr)
+    void (* const* thunks)() CHAOS_STUB_NOEXCEPT = nullptr)
 {
     if (index < 0 || index >= count) return -1;
     auto& entry = entries[index];
@@ -247,7 +247,7 @@ inline int64_t ChaosDispatchMethodGetValue(
     const HotpatchEntryV0* entries,
     int32_t count,
     int32_t index,
-    void (* const* thunks)() noexcept = nullptr)
+    void (* const* thunks)() CHAOS_STUB_NOEXCEPT = nullptr)
 {
     if (index < 0 || index >= count) return INT64_MIN;
     auto& entry = entries[index];

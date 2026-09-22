@@ -172,7 +172,7 @@ void CloseStartTag(WriterState* st) {
 extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterCreateStringBuilder(
-    CHAOS_IL2CPP_INTPTR string_builder) noexcept
+    CHAOS_IL2CPP_INTPTR string_builder) CHAOS_STUB_NOEXCEPT
 {
     // A null StringBuilder is what the managed XmlWriter.Create would reject;
     // mirror that rather than silently producing a writer that drops output.
@@ -206,7 +206,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterCreateStringBuilder(
     return static_cast<CHAOS_IL2CPP_INTPTR>(slot);
 }
 
-void ChaosXmlWriterWriteStartDocument(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlWriterWriteStartDocument(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -216,7 +216,7 @@ void ChaosXmlWriterWriteStartDocument(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 }
 
 void ChaosXmlWriterWriteStartElement(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR local_name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR local_name) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -259,7 +259,7 @@ void ChaosXmlWriterWriteStartElement(
 }
 
 void ChaosXmlWriterWriteString(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -304,7 +304,7 @@ void ChaosXmlWriterWriteString(
     }
 }
 
-void ChaosXmlWriterWriteEndElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlWriterWriteEndElement(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -334,7 +334,7 @@ void ChaosXmlWriterWriteEndElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 void ChaosXmlWriterWriteAttributeString(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR local_name,
-    CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -377,7 +377,7 @@ void ChaosXmlWriterWriteAttributeStringFull(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR local_name,
     CHAOS_IL2CPP_INTPTR ns,
-    CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     // Namespace handling is out of scope; the 2-arg form carries the
     // observable behaviour for the subset this stub covers.
@@ -385,7 +385,7 @@ void ChaosXmlWriterWriteAttributeStringFull(
     ChaosXmlWriterWriteAttributeString(this_ptr, local_name, value);
 }
 
-void ChaosXmlWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     // Writes are applied eagerly to the in-memory buffer, so there is nothing
     // buffered to release.  Kept as an explicit entry point because callers
@@ -400,7 +400,7 @@ void ChaosXmlWriterWriteElementString(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
     CHAOS_IL2CPP_INTPTR local_name,
-    CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -422,7 +422,7 @@ void ChaosXmlWriterWriteElementString(
 /// For the stub subset, treat a null argument as empty string text content
 /// (mirroring the managed writer's behaviour of writing "").
 void ChaosXmlWriterWriteValue(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -439,7 +439,7 @@ void ChaosXmlWriterWriteValue(
 void ChaosXmlWriterWriteNode(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR reader,
-    CHAOS_IL2CPP_INT32 defattr) noexcept
+    CHAOS_IL2CPP_INT32 defattr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -455,7 +455,7 @@ void ChaosXmlWriterWriteNode(
 void ChaosXmlWriterWriteAttributes(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR reader,
-    CHAOS_IL2CPP_INT32 defattr) noexcept
+    CHAOS_IL2CPP_INT32 defattr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -475,7 +475,7 @@ void ChaosXmlWriterWriteAttributes(
 
 /// Factory for `new XmlTextWriter(TextWriter)`.  The managed TextWriter
 /// argument supplies identity only — output accumulates in the native buffer.
-CHAOS_IL2CPP_INTPTR ChaosXmlTextWriterCreate(CHAOS_IL2CPP_INTPTR text_writer) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlTextWriterCreate(CHAOS_IL2CPP_INTPTR text_writer) CHAOS_STUB_NOEXCEPT
 {
     if (text_writer == 0) return 0;
 
@@ -509,7 +509,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextWriterCreate(CHAOS_IL2CPP_INTPTR text_writer) no
 
 /// WriteStartDocument(bool standalone)
 void ChaosXmlWriterWriteStartDocumentBool(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR standalone) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR standalone) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -521,7 +521,7 @@ void ChaosXmlWriterWriteStartDocumentBool(
 
 /// WriteWhitespace(string) — emitted verbatim (caller controls formatting).
 void ChaosXmlWriterWriteWhitespace(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ws) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ws) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -533,7 +533,7 @@ void ChaosXmlWriterWriteWhitespace(
 
 /// WriteRaw(string) — verbatim, no entity escaping.
 void ChaosXmlWriterWriteRaw(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -546,7 +546,7 @@ void ChaosXmlWriterWriteRaw(
 
 /// WriteComment(string)
 void ChaosXmlWriterWriteComment(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -561,7 +561,7 @@ void ChaosXmlWriterWriteComment(
 
 /// WriteCData(string)
 void ChaosXmlWriterWriteCData(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -578,7 +578,7 @@ void ChaosXmlWriterWriteCData(
 /// Managed contract: no open element → InvalidOperationException
 /// ("There is no open element").  The ATG subjects call it on an empty
 /// writer expecting exactly that, so the check must not silently no-op.
-void ChaosXmlWriterWriteFullEndElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlWriterWriteFullEndElement(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -601,7 +601,7 @@ void ChaosXmlWriterWriteFullEndElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 /// WriteStartDocument() alone, since the declaration is not a root element.
 /// The probe records exactly System.ArgumentException for this subject, so the
 /// fact harness compares against that.
-void ChaosXmlWriterWriteEndDocument(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlWriterWriteEndDocument(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -627,7 +627,7 @@ void ChaosXmlWriterWriteDocType(
     CHAOS_IL2CPP_INTPTR name,
     CHAOS_IL2CPP_INTPTR pubid,
     CHAOS_IL2CPP_INTPTR sysid,
-    CHAOS_IL2CPP_INTPTR subset) noexcept
+    CHAOS_IL2CPP_INTPTR subset) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -673,7 +673,7 @@ void ChaosXmlWriterWriteDocType(
 void ChaosXmlWriterWriteProcessingInstruction(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR name,
-    CHAOS_IL2CPP_INTPTR text) noexcept
+    CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -698,7 +698,7 @@ void ChaosXmlWriterWriteProcessingInstruction(
 /// reports "no known prefix" (the managed contract allows a null return).
 /// Null/empty ns is rejected the same way the managed writer rejects it.
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterLookupPrefix(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return 0;
@@ -714,7 +714,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterLookupPrefix(
 /// Null name → ArgumentNullException, empty name → ArgumentException
 /// (matches XmlTextWriter.WriteName).
 void ChaosXmlWriterWriteName(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -730,7 +730,7 @@ void ChaosXmlWriterWriteName(
 /// WriteNmToken(name) — same emission shape and validation as WriteName for
 /// this subset; NmToken-specific character validation is not modelled.
 void ChaosXmlWriterWriteNmToken(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     ChaosXmlWriterWriteName(this_ptr, name);
 }
@@ -742,7 +742,7 @@ void ChaosXmlWriterWriteNmToken(
 void ChaosXmlWriterWriteQualifiedName(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR local_name,
-    CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -761,7 +761,7 @@ void ChaosXmlWriterWriteQualifiedName(
 /// WriteEntityRef(name) — emits `&name;`.
 /// Managed contract: null/empty name → exceptions.
 void ChaosXmlWriterWriteEntityRef(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -778,7 +778,7 @@ void ChaosXmlWriterWriteEntityRef(
 
 /// WriteCharEntity(ch) — emits the numeric character reference `&#NN;`.
 void ChaosXmlWriterWriteCharEntity(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 ch) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 ch) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -794,7 +794,7 @@ void ChaosXmlWriterWriteCharEntity(
 void ChaosXmlWriterWriteSurrogateCharEntity(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INT32 low,
-    CHAOS_IL2CPP_INT32 high) noexcept
+    CHAOS_IL2CPP_INT32 high) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -820,7 +820,7 @@ void ChaosXmlWriterWriteChars(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
     CHAOS_IL2CPP_INT32 index,
-    CHAOS_IL2CPP_INT32 count) noexcept
+    CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -844,7 +844,7 @@ void ChaosXmlWriterWriteBase64(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
     CHAOS_IL2CPP_INT32 index,
-    CHAOS_IL2CPP_INT32 count) noexcept
+    CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -882,7 +882,7 @@ void ChaosXmlWriterWriteBinHex(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
     CHAOS_IL2CPP_INT32 index,
-    CHAOS_IL2CPP_INT32 count) noexcept
+    CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -911,7 +911,7 @@ void ChaosXmlWriterWriteStartElement3(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
     CHAOS_IL2CPP_INTPTR local_name,
-    CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -982,7 +982,7 @@ void ChaosXmlWriterWriteStartAttribute(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
     CHAOS_IL2CPP_INTPTR local_name,
-    CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -1019,7 +1019,7 @@ void ChaosXmlWriterWriteStartAttribute(
 }
 
 /// WriteEndAttribute() — closes the pending attribute quote.
-void ChaosXmlWriterWriteEndAttribute(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlWriterWriteEndAttribute(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -1031,7 +1031,7 @@ void ChaosXmlWriterWriteEndAttribute(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     st->in_attribute = false;
 }
 
-void ChaosXmlWriterClose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlWriterClose(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
@@ -1063,7 +1063,7 @@ void ChaosXmlWriterClose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 // InvalidOperationException ("cannot be cloned after use").  This stub has no
 // settings object to clone, so it raises the same exception unconditionally —
 // matching what the subject asserts.
-CHAOS_IL2CPP_INTPTR ChaosXmlWriterSettingsClone(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterSettingsClone(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseManagedException("System.InvalidOperationException",
