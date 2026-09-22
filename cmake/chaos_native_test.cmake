@@ -142,52 +142,10 @@ function(chaos_native_add_test name)
     else()
         # Linux: wrap the static chaos libs in --start-group/--end-group to resolve
         # circular deps; allow duplicate TLS defs like the old add_chaos_test.
-        #
-        # _libs must be a PLAIN LIST before it is placed between the group markers.
-        # The default path sets _libs to the INTERFACE target chaos_test_libs_v0,
-        # and CMake does not textually expand an INTERFACE target in that position:
-        # it emits the group EMPTY and appends the interface's dependencies after
-        # it.  Measured on a minimal repro (CMake 3.25, Ninja):
-        #
-        #   variable list  "a b":
-        #       a.lib b.lib -Wl,--start-group a.lib b.lib -Wl,--end-group
-        #   INTERFACE target:
-        #       -Wl,--start-group -Wl,--end-group a.lib b.lib      <-- empty group!
-        #
-        # With an empty group the single-pass scan cannot resolve the
-        #     chaos_runtime_core <-> chaos_interpreter
-        # cycle: runtime_core is consumed before chaos_interpreter's objects
-        # (fast_dispatch.cpp.o, interpreter_entry.cpp.o, patch_method_lower.cpp.o)
-        # and chaos_bootstrap's (bootstrap.cpp.o) raise their need for the
-        # Dbg* / g_dbg_* / ChaosBCrypt* / method_table symbols that DO exist in
-        # libchaos_runtime_core.a — producing ~40 "undefined reference" errors.
-        #
-        # Targets that pass an explicit list (CHAOS_GC_LIBS, CHAOS_CODEGEN_LIBS)
-        # are already correct; nothing below matches and _group_libs stays _libs.
-        #
-        # _libs may be a MIXED list, not a bare target name: the default path sets
-        #   set(_libs gtest_main chaos_test_libs_v0)
-        # so each element has to be inspected individually.  A bare
-        # `if(TARGET ${_libs})` would expand to two arguments ("TARGET",
-        # "gtest_main", "chaos_test_libs_v0") and abort configure with
-        # "Unknown arguments specified".
-        set(_group_libs "")
-        foreach(_entry IN LISTS _libs)
-            if(TARGET ${_entry})
-                get_target_property(_iface_deps ${_entry} INTERFACE_LINK_LIBRARIES)
-                if(_iface_deps)
-                    list(APPEND _group_libs ${_iface_deps})
-                else()
-                    list(APPEND _group_libs ${_entry})
-                endif()
-            else()
-                list(APPEND _group_libs ${_entry})
-            endif()
-        endforeach()
         target_link_libraries(${name} PRIVATE
-            ${_group_libs}
+            ${_libs}
             -Wl,--start-group
-            ${_group_libs}
+            ${_libs}
             -Wl,--end-group)
         target_link_options(${name} PRIVATE
             -Wl,--allow-multiple-definition
