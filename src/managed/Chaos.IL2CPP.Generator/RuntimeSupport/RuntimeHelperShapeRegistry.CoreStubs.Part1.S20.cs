@@ -524,6 +524,29 @@ public sealed partial class NativeAotLoweringPlanner
                     new[] { docAbi, objAbi }),
                 new HashSet<int> { 0, 1 }, new[] { "System.IO.Stream" });
 
+            // The remaining Save overloads share the same native stub — it only
+            // inspects `this_ptr` (a bare XmlDocument raises NotSupported
+            // regardless of destination) and deliberately ignores the second
+            // argument.  Each overload still needs its OWN registration because
+            // the canonical key embeds the parameter types; without these the
+            // IL calls Save(TextWriter)/Save(string)/Save(XmlWriter) matched no
+            // shape and fell through to the catch-all ExternalRuntimeFallback.
+            RegisterXmlDomVoid(registry, "System.Xml.XmlDocument", "Save",
+                "ChaosXmlDocumentSaveStream",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, objAbi }),
+                new HashSet<int> { 0, 1 }, new[] { "System.IO.TextWriter" });
+            RegisterXmlDomVoid(registry, "System.Xml.XmlDocument", "Save",
+                "ChaosXmlDocumentSaveStream",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, objAbi }),
+                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlWriter" });
+            RegisterXmlDomVoid(registry, "System.Xml.XmlDocument", "Save",
+                "ChaosXmlDocumentSaveStream",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, objAbi }),
+                new HashSet<int> { 0, 1 }, new[] { "System.String" });
+
             // ── XmlCharacterData ──
             registry.Register("System.Xml.XmlCharacterData", "Substring",
                 new[] { "System.Int32", "System.Int32" }, ShapeKind.SimpleForward,
@@ -616,16 +639,24 @@ public sealed partial class NativeAotLoweringPlanner
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                     new[] { attrCollAbi, nodeAbi }),
                 objAbi, new HashSet<int> { 0, 1 });
+            // NOTE: the declared parameter type is the MATCHING KEY, not just
+            // documentation — the canonical key is
+            // `<type>::<method>(<param types>)`, so declaring a base type here
+            // (XmlNode) while the IL signature names the derived one
+            // (XmlAttribute) makes the key differ and the shape silently falls
+            // through to the catch-all ExternalRuntimeFallback, which logs
+            // "no native body" and returns 0.  .NET declares these as
+            // XmlAttributeCollection.Append(XmlAttribute) / Prepend(XmlAttribute).
             RegisterXmlDomVoid(registry, "System.Xml.XmlAttributeCollection", "Append",
                 "ChaosXmlAttributeCollectionAppend",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                     new[] { attrCollAbi, nodeAbi }),
-                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlNode" });
+                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlAttribute" });
             RegisterXmlDomVoid(registry, "System.Xml.XmlAttributeCollection", "Prepend",
                 "ChaosXmlAttributeCollectionPrepend",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                     new[] { attrCollAbi, nodeAbi }),
-                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlNode" });
+                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlAttribute" });
 
             registry.Register("System.Xml.XmlNodeList", "Item",
                 new[] { "System.Int32" }, ShapeKind.SimpleForward,
