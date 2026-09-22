@@ -11,6 +11,22 @@ extern "C" void* kChaosExternalRuntimeFnTable[] = { nullptr };
 extern "C" int kChaosExternalRuntimeCount = 0;
 extern "C" void* chaos_il2cpp_aot_hotpatch_module = nullptr;
 
+// Exception type table — referenced unconditionally by
+// exception_helpers.cpp (ResolveTypeByName) since cb129e362, but only emitted
+// into a generated module.  This target passes WITHOUT_CODEGEN_STUB, which
+// suppresses gc_test_stubs.cpp (the file that otherwise supplies these), so it
+// must define them itself.  The `extern` keyword is load-bearing — see
+// bootstrap_test_stubs.cpp for the full rationale.
+#include <chaos/type_info.h>
+
+extern "C" {
+
+extern const chaos::il2cpp::common::ChaosExceptionTypeEntryV0
+    kChaosExceptionTypes[1] = { { nullptr, nullptr } };
+extern const int32_t kChaosExceptionTypeCount = 0;
+
+}  // extern "C"
+
 using namespace chaos::il2cpp::bootstrap;
 
 // Stress test: call bootstrap APIs concurrently from many threads.
