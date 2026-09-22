@@ -179,6 +179,11 @@ class NightlyResult:
     start_wall: float = field(default_factory=time.time)
     end_wall: float = 0.0
     chunk_results: dict[str, dict] = field(default_factory=dict)
+    # Set when the run was cut short (Ctrl+C on POSIX, STATUS_CONTROL_C_EXIT on
+    # Windows).  The partial results are still aggregated and published, but the
+    # process must exit non-zero: "some chunks passed before we were killed" is
+    # not a successful nightly.
+    interrupted: bool = False
 
     @property
     def passed_count(self) -> int:
