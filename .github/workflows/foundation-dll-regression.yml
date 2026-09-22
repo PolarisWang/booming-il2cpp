@@ -88,6 +88,13 @@ jobs:
         if: runner.os != 'Windows'
         run: echo "::notice::Snapshot tests skipped on Linux. Baselines are regenerated against the Windows generator's shape enumeration, so a Linux host drifts deterministically; the snapshot-unit stage (windows-latest) covers this comparison."
 
+      # Linux native build needs libnuma-dev for NUMA-aware GC code paths
+      # (src/native/runtime-core/gc/gc_numa_linux.cpp includes <numa.h>).
+      # Same step as foundation-dll.yml / hybrid-jit.yml / release.yml.
+      - name: Install Linux system dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt update && sudo apt install -y libnuma-dev
+
       # Native build
       - name: Configure CMake
         shell: bash

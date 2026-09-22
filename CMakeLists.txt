@@ -170,6 +170,14 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
 elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference")
     add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
     include(cmake/config-tier.cmake)
+    # Unified native-test factory — provides chaos_native_add_test() /
+    # chaos_compile_only_smoke() / chaos_native_glob_add_tests(), which the
+    # tests/contracts/native/** CMakeLists added below call.  Must be included
+    # BEFORE those add_subdirectory() calls, or configure fails with
+    # 'Unknown CMake command "chaos_compile_only_smoke"'.
+    # (windows-x64-reference, linux-x64-native and the macOS branch all include
+    # this; linux-x64-reference was the one branch that did not.)
+    include(cmake/chaos_native_test.cmake)
     find_package(Python3 QUIET)
     # chaos_runtime_core compiles gc_suspend_trampoline_x64.S on Linux.
     enable_language(ASM)
