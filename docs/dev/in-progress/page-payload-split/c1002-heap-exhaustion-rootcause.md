@@ -94,6 +94,60 @@ while (methodIdx < totalMethods) {
 
 相关：[[tpg-bundles-stale-generator-dll]]、[[generated-page-files-stale-orphans]]
 
+---
+
+## 补充实测（2026-09-21，Phase 2 输入）
+
+### 跨段 static 引用：**仅 6 个**，非先前估计的 234
+
+单遍扫描真实产物（1,236,193 行 / 71 MB）实测：
+
+| 指标 | 实测值 |
+|---|---|
+| 唯一 `static` 表符号 | **7,716** |
+| 其中**被其它段引用**（须改 `extern`） | **6** |
+
+被引用的 6 个，全部是 `Registration calls` 定义、`VTable descriptors` 引用：
+
+```
+kGenericTypeArgTokens      kGenericTypeEntries
+kGenericMethodArgTokens    kGenericMethodEntries
+s_method_aot_entries       s_method_aot_entry_args
+```
+
+**两个独立方法互相印证**：
+1. 本扫描（按产物段归属）
+2. 守卫测试 `PayloadTables_AreNotStaticWhenReferencedAcrossSections`
+   独立报出 `kGenericTypeArgTokens`
+
+### ⚠️ 修正先前记载
+
+先前写「**234 个顶层 static 表**」——该数字是**定义总数**（正则口径不同），
+不是**需要改链接性的数量**。真正需要跨 TU 的只有 **6 个**。
+→ `pps-2-extern` 工作量由「大规模改造」降为**小范围改造**。
+
+### 链接性技术约束（实测）
+
+| 写法 | 跨 TU 可用性 |
+|---|---|
+| `static constexpr T k[] = {...}` | ❌ 内部链接 |
+| `extern constexpr T k[];`（仅声明） | ❌ **C2737: constexpr object must be initialized** |
+| `extern const T k[];` + 定义处 `extern const T k[] = {...}` | ✅ **编译干净**，且反汇编与 static 版一致 |
+
+→ **必须去掉 `constexpr`**，改为 `extern const`。
+（`constexpr` 要求每个使用点可见初始化器，与跨 TU 声明互斥。）
+
+### 引用形态（P1 证据）
+
+`kGeneric*` 族的引用全部是 `sizeof(kGenericTypeArgTokens)/sizeof(...)`
+与结构体字段赋值 —— **编译期常量折叠**，无运行期间接寻址。
+→ 改 `extern const` 后，若 TPG/构建把泛型注册段与 vtable 段分开编译，
+需确认 `sizeof` 在声明可见处仍可求值（数组维度必须在声明中给出）。
+
+*注：`sizeof` 需要对完整类型求值。声明处若写成 `extern const T k[];`（不完整类型），
+`sizeof` 将编译失败。**实施时须验证**：要么声明带维度，要么该表达式移到定义所在 TU。*
+
+
 ### 🔴 实施阻断与解法（实测，2026-09-21）
 
 **问题**：`kGeneric*` 族的引用形态是

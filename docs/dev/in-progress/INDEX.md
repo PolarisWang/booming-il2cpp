@@ -3,6 +3,9 @@
 当前 active 任务：
 - [reflection-production-readiness](reflection-production-readiness/STATUS.md) — 反射生产机品质补齐（roadmap, 5 阶段串行）
 
+> 相关跟进目录（非独立主线，作为归档/追踪用）：
+> - [`aot-exception-type-resolution/`](aot-exception-type-resolution/STATUS.md) — 文件系统异常类型解析链路（根因链 4 层；层 1 + Path 1 已修；含 2026-09-22 误报复盘）
+
 | task_id | task_type | phase | updated_at | next_step | active |
 | --- | --- | --- | --- | --- | --- |
 | [20260419-01-foundation-dll-translation-audit-roadmap](20260419-01-foundation-dll-translation-audit-roadmap/STATUS.md) | roadmap | roadmap | 2026-04-25 21:58:00 +08:00 | 维护 DLL-first reporting authority，跟踪 phase-2 DLL 推进状态 | false |

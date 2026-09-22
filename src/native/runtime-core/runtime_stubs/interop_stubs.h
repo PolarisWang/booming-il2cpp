@@ -3,6 +3,7 @@
 // prebuilt library linkage. Compiled from source via TPG.
 #pragma once
 
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
 #include <chaos/native_types.h>
 #include <cstdint>
 
@@ -128,7 +129,7 @@ CHAOS_IL2CPP_INTPTR ChaosNativeLibraryGetMainProgramHandle(void) noexcept;
 // dispatch code when kChaosExternalRuntimeFnTable[idx] is null.
 // This prevents CHAOS_IL2CPP_FAIL/crash for methods without
 // DirectNativeSymbol stubs or runtime DLL resolution.
-CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallback(const char* subject_id) CHAOS_STUB_NOEXCEPT;
 // Default-arg bridge for codegen entry stubs with null subjectIds
 CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;
 

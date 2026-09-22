@@ -100,20 +100,33 @@ bool ManagedStringView(CHAOS_IL2CPP_INTPTR str, const char*& out, size_t& out_le
 /// Non-zero means it's a real instance (unlikely from ATG but hit by some
 /// methods that never check this first).
 ///
-/// `bareKind` selects the family distinction above so the receiver check reports
-/// the same exception type .NET does for that family.
+/// `bareKind` names the family the method belongs to, i.e. the exception .NET
+/// reports when the receiver is the ONLY thing wrong with the call.  It picks
+/// which type the receiver check raises here.
+///
+/// It is NOT a claim that the method can only ever raise that one type: a
+/// stricter argument check may still fire AFTER the receiver check and raise
+/// something else.  `ChaosUtf8JsonWriterWriteRawValueStr` is the worked example
+/// — it passes NullReference (the bare-receiver answer for an empty-raw-value
+/// write) yet raises ArgumentException for an empty payload, because .NET
+/// validates emptiness first while still reporting the bare receiver for a
+/// non-empty one.  See its comment for the measured matrix.
 enum class BareWriterKind { Disposed, NullReference, InvalidOperation };
 
 bool CheckThis(CHAOS_IL2CPP_INTPTR this_ptr,
                BareWriterKind bareKind = BareWriterKind::Disposed) {
     if (this_ptr == 0) {
+        // Every arm raises (all three raise helpers are [[noreturn]]), so the
+        // switch is exhaustive on its own — no arm falls out and there is no
+        // trailing `return false;`.  MSVC infers this from the [[noreturn]]
+        // attribute and stays quiet, but clang/gcc's -Wreturn-type is not
+        // required to follow that inference, so spell the third arm out rather
+        // than relying on fallthrough past the switch.
         switch (bareKind) {
             case BareWriterKind::NullReference:    RaiseBareWriterNullReference();
             case BareWriterKind::InvalidOperation: RaiseBareWriterInvalidOperation();
-            case BareWriterKind::Disposed:         break;
+            case BareWriterKind::Disposed:         RaiseDisposedOrInvalid();
         }
-        RaiseDisposedOrInvalid();
-        return false;
     }
     return true;
 }
@@ -126,7 +139,7 @@ extern "C" {
 // Lifecycle
 // ══════════════════════════════════════════════════════════════════
 
-void ChaosUtf8JsonWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosUtf8JsonWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr);
     // A bare writer (GetUninitializedObject) has no output sink; the managed
@@ -136,14 +149,14 @@ void ChaosUtf8JsonWriterFlush(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     RaiseDisposedOrInvalid();
 }
 
-void ChaosUtf8JsonWriterDispose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosUtf8JsonWriterDispose(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     // Dispose on a bare instance is a documented no-op (measured: no exception).
     (void)this_ptr;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosUtf8JsonWriterResetStream(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR stream) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR stream) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr);
     // The receiver check comes FIRST: a bare writer is "disposed" and every
@@ -157,7 +170,7 @@ CHAOS_IL2CPP_INTPTR ChaosUtf8JsonWriterResetStream(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosUtf8JsonWriterResetBufferWriter(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR buffer_writer) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR buffer_writer) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr);
     // Same ordering as ResetStream: receiver validity precedes argument
@@ -171,14 +184,14 @@ CHAOS_IL2CPP_INTPTR ChaosUtf8JsonWriterResetBufferWriter(
 // WriteStartObject / WriteStartArray / WriteEndObject / WriteEndArray
 // ══════════════════════════════════════════════════════════════════
 
-void ChaosUtf8JsonWriterWriteStartObject(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosUtf8JsonWriterWriteStartObject(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr);
     RaiseManagedException("System.InvalidOperationException",
         "Cannot write to a JSON writer that has been disposed.");
 }
 
-void ChaosUtf8JsonWriterWriteStartArray(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosUtf8JsonWriterWriteStartArray(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr);
     RaiseManagedException("System.InvalidOperationException",
@@ -200,7 +213,7 @@ void ChaosUtf8JsonWriterWriteStartArray(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 // the name, the JsonEncodedText form carries its own payload.
 
 void ChaosUtf8JsonWriterWriteStartObjectStr(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -211,7 +224,7 @@ void ChaosUtf8JsonWriterWriteStartObjectStr(
 }
 
 void ChaosUtf8JsonWriterWriteStartObjectEncoded(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     (void)encoded_name;
@@ -219,7 +232,7 @@ void ChaosUtf8JsonWriterWriteStartObjectEncoded(
 }
 
 void ChaosUtf8JsonWriterWriteStartArrayStr(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -230,21 +243,21 @@ void ChaosUtf8JsonWriterWriteStartArrayStr(
 }
 
 void ChaosUtf8JsonWriterWriteStartArrayEncoded(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     (void)encoded_name;
     RaiseBareWriterInvalidOperation();
 }
 
-void ChaosUtf8JsonWriterWriteEndObject(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosUtf8JsonWriterWriteEndObject(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr);
     RaiseManagedException("System.InvalidOperationException",
         "Cannot write to a JSON writer that has been disposed.");
 }
 
-void ChaosUtf8JsonWriterWriteEndArray(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosUtf8JsonWriterWriteEndArray(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr);
     RaiseManagedException("System.InvalidOperationException",
@@ -257,26 +270,46 @@ void ChaosUtf8JsonWriterWriteEndArray(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 
 void ChaosUtf8JsonWriterWriteStringStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
-    CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(property_name, n, n_len))
         RaiseArgumentNullException("propertyName");
-    // Ordering matters, and .NET's order is: null argument > receiver state >
-    // empty-string argument.  Measured on a bare instance:
+    // Two managed paths reach this symbol, and they disagree about an empty
+    // property name — the difference is the VALUE, not the name:
+    //
+    //   WriteString(string, string?)  (dotnet/runtime, WriteProperties.String.cs)
+    //     ArgumentNullException.ThrowIfNull(propertyName);
+    //     if (value is null) WriteNull(propertyName.AsSpan());   // <- empty name
+    //     else               WriteString(name, value);           //    never checked here
+    //
+    //   value == null -> WriteNull(string) -> ValidateProperty() validates the
+    //     name, but ValidateWritingProperty() runs FIRST and reports the bare
+    //     receiver -> InvalidOperationException.
+    //   value != null -> WriteString(name, value) -> ValidateProperty() now runs
+    //     before any receiver check -> ArgumentException for an empty name.
+    //
+    // So there is deliberately NO empty-name check in this function: adding one
+    // would regress the value == null case, whose empty name never reaches a
+    // string-level validator at all.  n_len is captured and discarded for that
+    // reason.  Measured on a bare instance:
     //   WriteString(null, null) -> ArgumentNullException
     //   WriteString("",   null) -> InvalidOperationException   (NOT ArgumentException)
+    //   WriteString("",   "v")  -> ArgumentException           (value != null path)
     //   WriteString("p",  null) -> InvalidOperationException
-    // So the empty-name ArgumentException must not be raised while the receiver
-    // is still bare — the bare writer is reported first.
+    //
+    // An earlier version of this comment derived the empty-name rule from the
+    // bare-receiver case alone and concluded InvalidOperationException was
+    // correct for BOTH value forms — the derivation was invalid, not just the
+    // conclusion: the bare writer is reported first only on the value == null path.
     (void)n_len;
     (void)value;
     RaiseBareWriterInvalidOperation();
 }
 
 void ChaosUtf8JsonWriterWriteStringStrOnly(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     if (value == 0) RaiseArgumentNullException("value");
@@ -286,7 +319,7 @@ void ChaosUtf8JsonWriterWriteStringStrOnly(
 void ChaosUtf8JsonWriterWriteStringEncodedText(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR property_name,
-    CHAOS_IL2CPP_INTPTR encoded_text) noexcept
+    CHAOS_IL2CPP_INTPTR encoded_text) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     if (property_name == 0) RaiseArgumentNullException("propertyName");
@@ -307,7 +340,7 @@ void ChaosUtf8JsonWriterWriteStringEncodedText(
 #define CHAOS_UJW_STRING_VALUE_OVERLOAD(suffix, nameType, valueType)               \
     void ChaosUtf8JsonWriterWriteString##suffix(                                  \
         CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,          \
-        valueType value) noexcept                                                 \
+        valueType value) CHAOS_STUB_NOEXCEPT                                                 \
     {                                                                             \
         CheckThis(this_ptr, BareWriterKind::InvalidOperation);                    \
         const char* n = nullptr; size_t n_len = 0;                                \
@@ -332,7 +365,7 @@ CHAOS_UJW_STRING_VALUE_OVERLOAD(EncodedStr,           JsonEncodedText, CHAOS_IL2
 // WriteString(string propertyName, JsonEncodedText value) — string name form.
 void ChaosUtf8JsonWriterWriteStringStrEncoded(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
-    CHAOS_IL2CPP_INTPTR encoded_value) noexcept
+    CHAOS_IL2CPP_INTPTR encoded_value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -344,7 +377,7 @@ void ChaosUtf8JsonWriterWriteStringStrEncoded(
 
 // ── WriteNull(JsonEncodedText) / WriteBoolean(JsonEncodedText, bool) ──────
 void ChaosUtf8JsonWriterWriteNullEncoded(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     (void)encoded_name;
@@ -353,7 +386,7 @@ void ChaosUtf8JsonWriterWriteNullEncoded(
 
 void ChaosUtf8JsonWriterWriteBooleanEncoded(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded_name,
-    CHAOS_IL2CPP_INT32 value) noexcept
+    CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     (void)encoded_name; (void)value;
@@ -369,7 +402,7 @@ void ChaosUtf8JsonWriterWriteBooleanEncoded(
 //   WriteRawValue("",    false) -> ArgumentException
 void ChaosUtf8JsonWriterWriteRawValueStrBool(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR json,
-    CHAOS_IL2CPP_INT32 skip_input_validation) noexcept
+    CHAOS_IL2CPP_INT32 skip_input_validation) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     const char* j = nullptr; size_t j_len = 0;
@@ -400,7 +433,7 @@ void ChaosUtf8JsonWriterWriteRawValueStrBool(
 /// does.  So test the sequence's own start/end words.
 void ChaosUtf8JsonWriterWriteRawValueSequenceBool(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR json_sequence,
-    CHAOS_IL2CPP_INT32 skip_input_validation) noexcept
+    CHAOS_IL2CPP_INT32 skip_input_validation) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)skip_input_validation;
@@ -434,7 +467,7 @@ void ChaosUtf8JsonWriterWriteRawValueSequenceBool(
 #define CHAOS_UJW_NUMBER_OVERLOAD(suffix, nameAbi, valueAbi)                       \
     void ChaosUtf8JsonWriterWriteNumber##suffix(                                   \
         CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,           \
-        valueAbi value) noexcept                                                   \
+        valueAbi value) CHAOS_STUB_NOEXCEPT                                                   \
     {                                                                              \
         CheckThis(this_ptr, BareWriterKind::InvalidOperation);                     \
         const char* n = nullptr; size_t n_len = 0;                                 \
@@ -464,7 +497,7 @@ CHAOS_UJW_NUMBER_OVERLOAD(EncodedStr,    JsonEncodedText, CHAOS_IL2CPP_INTPTR)
 
 void ChaosUtf8JsonWriterWriteNumberStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
-    CHAOS_IL2CPP_INT64 value) noexcept
+    CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -476,7 +509,7 @@ void ChaosUtf8JsonWriterWriteNumberStr(
 
 void ChaosUtf8JsonWriterWriteNumberStrDouble(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
-    double value) noexcept
+    double value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -488,7 +521,7 @@ void ChaosUtf8JsonWriterWriteNumberStrDouble(
 
 void ChaosUtf8JsonWriterWriteNumberStrFloat(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
-    float value) noexcept
+    float value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -500,7 +533,7 @@ void ChaosUtf8JsonWriterWriteNumberStrFloat(
 
 void ChaosUtf8JsonWriterWriteNumberStrUInt(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
-    CHAOS_IL2CPP_INT64 value) noexcept
+    CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -511,7 +544,7 @@ void ChaosUtf8JsonWriterWriteNumberStrUInt(
 }
 
 void ChaosUtf8JsonWriterWriteNumberInt(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -519,7 +552,7 @@ void ChaosUtf8JsonWriterWriteNumberInt(
 }
 
 void ChaosUtf8JsonWriterWriteNumberDouble(
-    CHAOS_IL2CPP_INTPTR this_ptr, double value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, double value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -527,7 +560,7 @@ void ChaosUtf8JsonWriterWriteNumberDouble(
 }
 
 void ChaosUtf8JsonWriterWriteNumberFloat(
-    CHAOS_IL2CPP_INTPTR this_ptr, float value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, float value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -535,7 +568,7 @@ void ChaosUtf8JsonWriterWriteNumberFloat(
 }
 
 void ChaosUtf8JsonWriterWriteNumberUInt(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -543,7 +576,7 @@ void ChaosUtf8JsonWriterWriteNumberUInt(
 }
 
 void ChaosUtf8JsonWriterWriteNumberUInt64(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -560,7 +593,7 @@ void ChaosUtf8JsonWriterWriteNumberUInt64(
 // ══════════════════════════════════════════════════════════════════
 
 void ChaosUtf8JsonWriterWriteNumberValueInt(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -572,7 +605,7 @@ void ChaosUtf8JsonWriterWriteNumberValueInt(
 // bare writer (measured across every width: byte/sbyte/short/ushort/int/uint/
 // long/ulong/float/double/decimal/char).
 void ChaosUtf8JsonWriterWriteNumberValueInt32(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -580,7 +613,7 @@ void ChaosUtf8JsonWriterWriteNumberValueInt32(
 }
 
 void ChaosUtf8JsonWriterWriteNumberValueUInt32(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_UINT32 value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_UINT32 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -588,7 +621,7 @@ void ChaosUtf8JsonWriterWriteNumberValueUInt32(
 }
 
 void ChaosUtf8JsonWriterWriteNumberValueDouble(
-    CHAOS_IL2CPP_INTPTR this_ptr, double value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, double value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -596,7 +629,7 @@ void ChaosUtf8JsonWriterWriteNumberValueDouble(
 }
 
 void ChaosUtf8JsonWriterWriteNumberValueFloat(
-    CHAOS_IL2CPP_INTPTR this_ptr, float value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, float value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -606,7 +639,7 @@ void ChaosUtf8JsonWriterWriteNumberValueFloat(
 /// WriteNumberValue(decimal) — Decimal arrives as a 16-byte value that does not
 /// fit a scalar ABI slot; it is passed as a pointer to the boxed payload.
 void ChaosUtf8JsonWriterWriteNumberValueDecimal(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -614,7 +647,7 @@ void ChaosUtf8JsonWriterWriteNumberValueDecimal(
 }
 
 void ChaosUtf8JsonWriterWriteNumberValueUInt(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -622,7 +655,7 @@ void ChaosUtf8JsonWriterWriteNumberValueUInt(
 }
 
 void ChaosUtf8JsonWriterWriteStringValueStr(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     // Receiver state outranks argument validation: on a bare writer .NET throws
     // NullReferenceException even for a null value argument (measured —
@@ -637,7 +670,7 @@ void ChaosUtf8JsonWriterWriteStringValueStr(
 /// fit a scalar slot (DateTime/DateTimeOffset are 8-byte structs passed by
 /// pointer; Guid is 16 bytes).  All arrive as an INTPTR to the value payload.
 void ChaosUtf8JsonWriterWriteStringValueStruct(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)value;
@@ -647,7 +680,7 @@ void ChaosUtf8JsonWriterWriteStringValueStruct(
 /// WriteStringValue(JsonEncodedText) — already-encoded text; the bare writer
 /// still fails the receiver check first (NullReferenceException, same family).
 void ChaosUtf8JsonWriterWriteStringValueEncoded(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     (void)encoded;
@@ -660,7 +693,7 @@ void ChaosUtf8JsonWriterWriteStringValueEncoded(
 
 void ChaosUtf8JsonWriterWriteBooleanStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name,
-    CHAOS_IL2CPP_INT32 value) noexcept
+    CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -671,7 +704,7 @@ void ChaosUtf8JsonWriterWriteBooleanStr(
 }
 
 void ChaosUtf8JsonWriterWriteBooleanValue(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 value) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     // Value-only write on a bare writer: .NET raises NullReferenceException
     // (measured), not ObjectDisposedException.
@@ -685,7 +718,7 @@ void ChaosUtf8JsonWriterWriteBooleanValue(
 // ══════════════════════════════════════════════════════════════════
 
 void ChaosUtf8JsonWriterWriteNullStr(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -695,7 +728,7 @@ void ChaosUtf8JsonWriterWriteNullStr(
 }
 
 void ChaosUtf8JsonWriterWriteNullValue(
-    CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     // Value-only write on a bare writer: NullReferenceException (measured).
     CheckThis(this_ptr, BareWriterKind::NullReference);
@@ -707,7 +740,7 @@ void ChaosUtf8JsonWriterWriteNullValue(
 // ══════════════════════════════════════════════════════════════════
 
 void ChaosUtf8JsonWriterWritePropertyNameStr(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR property_name) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     const char* n = nullptr; size_t n_len = 0;
@@ -717,7 +750,7 @@ void ChaosUtf8JsonWriterWritePropertyNameStr(
 }
 
 void ChaosUtf8JsonWriterWritePropertyNameEncoded(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR encoded) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::InvalidOperation);
     if (encoded == 0) RaiseArgumentNullException("encodedText");
@@ -729,7 +762,7 @@ void ChaosUtf8JsonWriterWritePropertyNameEncoded(
 // ══════════════════════════════════════════════════════════════════
 
 void ChaosUtf8JsonWriterWriteRawValueStr(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR json) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR json) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     if (json == 0) RaiseArgumentNullException("json");
@@ -746,7 +779,7 @@ void ChaosUtf8JsonWriterWriteRawValueStr(
 // ══════════════════════════════════════════════════════════════════
 
 void ChaosUtf8JsonWriterWriteCommentValue(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR comment) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR comment) CHAOS_STUB_NOEXCEPT
 {
     CheckThis(this_ptr, BareWriterKind::NullReference);
     if (comment == 0) RaiseArgumentNullException("comment");
@@ -758,7 +791,7 @@ void ChaosUtf8JsonWriterWriteCommentValue(
 /// managed implementation rejects with ArgumentNullException.  Receiver
 /// validity is not checked (the source document is a bare object too).
 void ChaosUtf8JsonWriterWriteTo(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (writer == 0) RaiseArgumentNullException("writer");

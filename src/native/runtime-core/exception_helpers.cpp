@@ -29,6 +29,7 @@
 // For ChaosExceptionTypeEntryV0 (the generated kChaosExceptionTypes element type).
 #include <chaos/type_info.h>
 
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
 

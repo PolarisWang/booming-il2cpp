@@ -730,13 +730,21 @@ public sealed class TestEmitter
             a.StartsWith("default(", StringComparison.Ordinal) && a.TrimEnd().EndsWith("!"));
 
     /// <summary>
-    /// True when the (declaring type, method) has a known native reflection
-    /// implementation (ApiSurfaceScanner Classifier.KnownNativeImpls).  For
-    /// these methods the AOT body calls the real native symbol — the managed
+    /// True when the (declaring type, method) has a native implementation that
+    /// the AOT body will really call.  Consulted as a union of two sources:
+    /// <list type="bullet">
+    /// <item>the codegen shape registry (<see cref="ShapeRegistryIndex"/>) — the
+    /// authoritative set, kept in step with codegen automatically;</item>
+    /// <item><c>ApiSurfaceScanner.Classifier.KnownNativeImpls</c> — the
+    /// hand-maintained reflection list.</item>
+    /// </list>
+    /// For these methods the AOT body calls the real native symbol — the managed
     /// probe's recorded exception is the REAL contract (BCL behavior), so the
     /// generated subject must assert the throw instead of emitting the
     /// AOT-STUB-GAP `return 42L` marker that hides the implementation.
     /// </summary>
+    internal static bool HasKnownNativeImplForTest(MethodSignature method) => HasKnownNativeImpl(method);
+
     private static bool HasKnownNativeImpl(MethodSignature method)
     {
         var declaring = method.DeclaringTypeFullName;
@@ -751,6 +759,27 @@ public sealed class TestEmitter
         // calls the real native symbol — 78 CA + 32 TypeDelegator stubGaps.
         if (Chaos.IL2CPP.Tools.ApiSurfaceScanner.Classifier.WholeTypeRealViaDispatch.Contains(bareType))
             return true;
+
+        // ── Shape registry (json-xml industrialization P1-01) ──────────────
+        //
+        // The codegen shape registry is the authoritative answer to "does the
+        // AOT have a real native body for this method?" — it is what the C++
+        // shape dispatch is generated from.  Consulting it here keeps this
+        // decision in step with codegen automatically.
+        //
+        // Why it is needed *in addition to* KnownNativeImpls below: that list is
+        // hand-maintained and covers the reflection surface only.  Measured
+        // 2026-09-22 it held 358 literal keys and ZERO json/xml entries, while
+        // the registry backed 308 json/xml methods whose native symbols were
+        // fully implemented — so 185 stubGap subjects on the xml chunk alone
+        // were implementations the fact layer could never reach.
+        //
+        // Kept as a union rather than a replacement: KnownNativeImpls still
+        // covers reflection entries that are not shape-registered, and dropping
+        // it would regress those.
+        if (ShapeRegistryIndex.HasShape(declaring, method.Name))
+            return true;
+
         var memberName = method.Name;
         foreach (var key in Chaos.IL2CPP.Tools.ApiSurfaceScanner.Classifier.KnownNativeImpls.Keys)
         {
@@ -792,6 +821,12 @@ public sealed class TestEmitter
         if (string.IsNullOrEmpty(declaring)) return false;
         var lastDot = declaring.LastIndexOf('.');
         var bareType = lastDot >= 0 ? declaring[(lastDot + 1)..] : declaring;
+        // Whole-type impossibility (Classifier rule 3): types like
+        // ReflectionContext / AssemblyNameProxy are structurally impossible
+        // under AOT — their methods assert the throw instead of emitting the
+        // AOT-STUB-GAP `return 42L` stub body.
+        if (Chaos.IL2CPP.Tools.ApiSurfaceScanner.Classifier.NotSupportedWholeTypes.Contains(bareType))
+            return true;
         return AotNotSupportedMethods.Contains(bareType + "." + method.Name);
     }
 

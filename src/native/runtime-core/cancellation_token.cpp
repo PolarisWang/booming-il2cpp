@@ -52,7 +52,7 @@ std::list<CancellationRegistrationEntry> s_registrations;
 uint32_t s_next_source_id = 1;
 uint32_t s_next_reg_id = 1;
 
-CancellationSourceEntry* FindSource(uint32_t id) noexcept {
+CancellationSourceEntry* FindSource(uint32_t id) CHAOS_STUB_NOEXCEPT {
     for (auto& src : s_sources) {
         if (src.id == id && src.active.load(std::memory_order_relaxed)) return &src;
     }
@@ -60,13 +60,13 @@ CancellationSourceEntry* FindSource(uint32_t id) noexcept {
 }
 
 /// Timer callback: cancel the source when the timer fires.
-void TimerCancelCallback(void* state) noexcept {
+void TimerCancelCallback(void* state) CHAOS_STUB_NOEXCEPT {
     uint32_t source_id = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(state));
     CancellationTokenSourceCancel(source_id);
 }
 
 /// Helper: create a source entry, add to list, return pointer.
-CancellationSourceEntry* AddSource(uint32_t id) noexcept {
+CancellationSourceEntry* AddSource(uint32_t id) CHAOS_STUB_NOEXCEPT {
     s_sources.emplace_back();
     auto& entry = s_sources.back();
     entry.id = id;
@@ -78,7 +78,7 @@ CancellationSourceEntry* AddSource(uint32_t id) noexcept {
 
 /// Helper: create a registration entry, add to list, return pointer.
 CancellationRegistrationEntry* AddRegistration(uint32_t id, uint32_t source_id,
-                                                void (*callback)(void*), void* state) noexcept {
+                                                void (*callback)(void*), void* state) CHAOS_STUB_NOEXCEPT {
     s_registrations.emplace_back();
     auto& reg = s_registrations.back();
     reg.id = id;
@@ -93,7 +93,7 @@ CancellationRegistrationEntry* AddRegistration(uint32_t id, uint32_t source_id,
 
 // ── Public API ────────────────────────────────────────────────────────
 
-uint32_t CancellationTokenSourceCreate() noexcept {
+uint32_t CancellationTokenSourceCreate() CHAOS_STUB_NOEXCEPT {
     std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
 
     uint32_t id = s_next_source_id++;
@@ -104,7 +104,7 @@ uint32_t CancellationTokenSourceCreate() noexcept {
     return id;
 }
 
-uint32_t CancellationTokenSourceCreateWithTimer(uint32_t due_time_ms) noexcept {
+uint32_t CancellationTokenSourceCreateWithTimer(uint32_t due_time_ms) CHAOS_STUB_NOEXCEPT {
     uint32_t id = CancellationTokenSourceCreate();
     if (id == 0) return 0;
 
@@ -126,7 +126,7 @@ uint32_t CancellationTokenSourceCreateWithTimer(uint32_t due_time_ms) noexcept {
     return id;
 }
 
-bool CancellationTokenSourceCancel(uint32_t source_id) noexcept {
+bool CancellationTokenSourceCancel(uint32_t source_id) CHAOS_STUB_NOEXCEPT {
     // Collect registrations under lock, fire outside lock.
     struct FireEntry {
         void (*callback)(void*);
@@ -164,14 +164,14 @@ bool CancellationTokenSourceCancel(uint32_t source_id) noexcept {
     return true;
 }
 
-bool CancellationTokenSourceIsCancelled(uint32_t source_id) noexcept {
+bool CancellationTokenSourceIsCancelled(uint32_t source_id) CHAOS_STUB_NOEXCEPT {
     std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
     auto* entry = FindSource(source_id);
     if (entry == nullptr) return false;
     return entry->cancelled.load(std::memory_order_acquire);
 }
 
-void CancellationTokenSourceDispose(uint32_t source_id) noexcept {
+void CancellationTokenSourceDispose(uint32_t source_id) CHAOS_STUB_NOEXCEPT {
     std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
 
     auto* entry = FindSource(source_id);
@@ -186,7 +186,7 @@ void CancellationTokenSourceDispose(uint32_t source_id) noexcept {
     entry->active.store(false, std::memory_order_relaxed);
 }
 
-uint32_t CancellationTokenRegister(uint32_t source_id, void (*callback)(void*), void* state) noexcept {
+uint32_t CancellationTokenRegister(uint32_t source_id, void (*callback)(void*), void* state) CHAOS_STUB_NOEXCEPT {
     if (callback == nullptr) return 0;
 
     std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
@@ -209,7 +209,7 @@ uint32_t CancellationTokenRegister(uint32_t source_id, void (*callback)(void*), 
     return id;
 }
 
-bool CancellationTokenUnregister(uint32_t registration_id) noexcept {
+bool CancellationTokenUnregister(uint32_t registration_id) CHAOS_STUB_NOEXCEPT {
     std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
 
     for (auto& reg : s_registrations) {
@@ -223,13 +223,13 @@ bool CancellationTokenUnregister(uint32_t registration_id) noexcept {
 
 // Callback registered on each input source of a linked CTS.  `state` is the
 // linked source's id (as a uintptr), so cancelling any input cancels the link.
-static void LinkedSourcePropagate(void* state) noexcept {
+static void LinkedSourcePropagate(void* state) CHAOS_STUB_NOEXCEPT {
     const auto linked_id = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(state));
     CancellationTokenSourceCancel(linked_id);
 }
 
 uint32_t CancellationTokenSourceCreateLinked(const uint32_t* source_ids,
-                                             uint32_t count) noexcept {
+                                             uint32_t count) CHAOS_STUB_NOEXCEPT {
     if (source_ids == nullptr || count == 0) return 0;
 
     const uint32_t linked = CancellationTokenSourceCreate();
@@ -268,7 +268,7 @@ uint32_t CancellationTokenSourceCreateLinked(const uint32_t* source_ids,
 // CancellationToken.None (never cancelled, cannot be cancelled).
 
 extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_is_cancellation_requested(
-    CHAOS_IL2CPP_INT32 source_id) noexcept
+    CHAOS_IL2CPP_INT32 source_id) CHAOS_STUB_NOEXCEPT
 {
     if (source_id == 0) return 0;  // CancellationToken.None is never cancelled.
     return chaos::il2cpp::runtime_core::threading::CancellationTokenSourceIsCancelled(
@@ -276,7 +276,7 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_is_cancellation_requested
 }
 
 extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_can_be_canceled(
-    CHAOS_IL2CPP_INT32 source_id) noexcept
+    CHAOS_IL2CPP_INT32 source_id) CHAOS_STUB_NOEXCEPT
 {
     // CancellationToken.None (id 0) is the only token that can never be
     // cancelled.  Any real source can be, even if it has not been yet — the
@@ -286,7 +286,7 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_can_be_canceled(
 }
 
 extern "C" void chaos_cancellation_token_throw_if_cancellation_requested(
-    CHAOS_IL2CPP_INT32 source_id) noexcept
+    CHAOS_IL2CPP_INT32 source_id) CHAOS_STUB_NOEXCEPT
 {
     if (source_id == 0) return;
     if (!chaos::il2cpp::runtime_core::threading::CancellationTokenSourceIsCancelled(
@@ -315,14 +315,14 @@ extern "C" void chaos_cancellation_token_throw_if_cancellation_requested(
 // A managed CancellationTokenSource is identified by its source id; the C++
 // CTS object is a handle into the runtime's table.
 
-extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_source_create(void) noexcept
+extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_source_create(void) CHAOS_STUB_NOEXCEPT
 {
     return static_cast<CHAOS_IL2CPP_INT32>(
         chaos::il2cpp::runtime_core::threading::CancellationTokenSourceCreate());
 }
 
 extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_source_create_with_timer(
-    CHAOS_IL2CPP_INT32 due_time_ms) noexcept
+    CHAOS_IL2CPP_INT32 due_time_ms) CHAOS_STUB_NOEXCEPT
 {
     if (due_time_ms < 0) return 0;
     return static_cast<CHAOS_IL2CPP_INT32>(
@@ -331,7 +331,7 @@ extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_source_create_with_timer(
 }
 
 extern "C" void chaos_cancellation_token_source_cancel(
-    CHAOS_IL2CPP_INT32 source_id) noexcept
+    CHAOS_IL2CPP_INT32 source_id) CHAOS_STUB_NOEXCEPT
 {
     if (source_id == 0) return;
     chaos::il2cpp::runtime_core::threading::CancellationTokenSourceCancel(
@@ -339,7 +339,7 @@ extern "C" void chaos_cancellation_token_source_cancel(
 }
 
 extern "C" void chaos_cancellation_token_source_dispose(
-    CHAOS_IL2CPP_INT32 source_id) noexcept
+    CHAOS_IL2CPP_INT32 source_id) CHAOS_STUB_NOEXCEPT
 {
     if (source_id == 0) return;
     chaos::il2cpp::runtime_core::threading::CancellationTokenSourceDispose(
@@ -347,7 +347,7 @@ extern "C" void chaos_cancellation_token_source_dispose(
 }
 
 extern "C" CHAOS_IL2CPP_INT32 chaos_cancellation_token_source_get_token(
-    CHAOS_IL2CPP_INT32 source_id) noexcept
+    CHAOS_IL2CPP_INT32 source_id) CHAOS_STUB_NOEXCEPT
 {
     // In this runtime a CancellationToken IS its source id (0 = None), so the
     // accessor is the identity.  It exists as a named entry point because

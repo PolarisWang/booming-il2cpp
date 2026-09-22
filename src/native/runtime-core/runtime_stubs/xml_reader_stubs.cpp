@@ -473,7 +473,7 @@ void Advance(ReaderState* st) {
 
 extern "C" {
 
-CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderCreate(CHAOS_IL2CPP_INTPTR input) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderCreate(CHAOS_IL2CPP_INTPTR input) CHAOS_STUB_NOEXCEPT
 {
     if (input == 0) return 0;
 
@@ -505,7 +505,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderCreate(CHAOS_IL2CPP_INTPTR input) noexcept
     return static_cast<CHAOS_IL2CPP_INTPTR>(slot);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderRead(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderRead(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st || st->closed) return 0;
@@ -513,21 +513,21 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderRead(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     return (st->tok != TKN_EOF) ? 1 : 0;
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderNodeType(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderNodeType(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
     return st->node_type;
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderName(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderName(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st || !st->tok_name) return 0;
     return StringOrNull(st->tok_name);
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderLocalName(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderLocalName(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st || !st->tok_name) return 0;
@@ -537,14 +537,14 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderLocalName(CHAOS_IL2CPP_INTPTR this_ptr) no
     return StringOrNull(st->tok_name);
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderNamespaceURI(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderNamespaceURI(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st || !st->tok_ns_uri) return 0;
     return StringOrNull(st->tok_ns_uri);
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderPrefix(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderPrefix(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st || !st->tok_name) return 0;
@@ -561,42 +561,42 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderPrefix(CHAOS_IL2CPP_INTPTR this_ptr) noexc
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderValue(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderValue(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st || !st->tok_val) return 0;
     return StringOrNull(st->tok_val);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderDepth(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderDepth(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
     return static_cast<CHAOS_IL2CPP_INT32>(st->depth);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderIsEmptyElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderIsEmptyElement(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
     return (st->self_closing && st->node_type == 1) ? 1 : 0;
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderHasAttributes(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderHasAttributes(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
     return (st->attr_count > 0) ? 1 : 0;
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderAttributeCount(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderAttributeCount(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
     return static_cast<CHAOS_IL2CPP_INT32>(st->attr_count);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToFirstAttribute(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToFirstAttribute(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st || st->attr_count <= 0) return 0;
@@ -608,7 +608,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToFirstAttribute(CHAOS_IL2CPP_INTPTR th
     return 1;
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToNextAttribute(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToNextAttribute(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st || st->attr_idx >= st->attr_count - 1) return 0;
@@ -617,7 +617,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToNextAttribute(CHAOS_IL2CPP_INTPTR thi
     return 1;
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToElement(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToElement(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
@@ -629,7 +629,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToElement(CHAOS_IL2CPP_INTPTR this_ptr)
 // Argument validation mirrors the managed reader: a null or empty name is an
 // ArgumentOutOfRangeException, not a silent false.
 CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStr(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
@@ -651,7 +651,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStr(
 CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStrNs(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR name,
-    CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)ns;
     return ChaosXmlTextReaderMoveToAttributeStr(this_ptr, name);
@@ -659,7 +659,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStrNs(
 
 // ── GetAttribute(int i) → string ──
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeIndex(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 index) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 index) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
@@ -671,7 +671,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeIndex(
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStrNs(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR name,
-    CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)ns;
     return ChaosXmlTextReaderGetAttributeStr(this_ptr, name);
@@ -685,7 +685,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadContentAsBase64(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
     CHAOS_IL2CPP_INT32 index,
-    CHAOS_IL2CPP_INT32 count) noexcept
+    CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
@@ -699,7 +699,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadContentAsBinHex(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
     CHAOS_IL2CPP_INT32 index,
-    CHAOS_IL2CPP_INT32 count) noexcept
+    CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
     return ChaosXmlTextReaderReadContentAsBase64(this_ptr, buffer, index, count);
 }
@@ -708,7 +708,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadElementContentAsBase64(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
     CHAOS_IL2CPP_INT32 index,
-    CHAOS_IL2CPP_INT32 count) noexcept
+    CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
     return ChaosXmlTextReaderReadContentAsBase64(this_ptr, buffer, index, count);
 }
@@ -717,13 +717,13 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadElementContentAsBinHex(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
     CHAOS_IL2CPP_INT32 index,
-    CHAOS_IL2CPP_INT32 count) noexcept
+    CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
     return ChaosXmlTextReaderReadContentAsBase64(this_ptr, buffer, index, count);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStr(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
@@ -771,7 +771,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStr(
     return 0; // not found
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderReadString(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderReadString(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     // ReadString concatenates text nodes until a non-text node.
     // For the minimal subset, return the current text value, or string.Empty
@@ -784,7 +784,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderReadString(CHAOS_IL2CPP_INTPTR this_ptr) n
     return StringEmpty();
 }
 
-void ChaosXmlTextReaderClose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlTextReaderClose(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return;
@@ -796,7 +796,7 @@ void ChaosXmlTextReaderClose(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
     CHAOS_IL2CPP_FREE(st);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlTextReaderHasLineInfo(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlTextReaderHasLineInfo(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
@@ -804,7 +804,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderHasLineInfo(CHAOS_IL2CPP_INTPTR this_ptr) n
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderLookupNamespace(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
@@ -820,7 +820,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderLookupNamespace(
     return StringOrNull(uri);
 }
 
-void ChaosXmlTextReaderResolveEntity(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlTextReaderResolveEntity(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st)
@@ -834,13 +834,13 @@ void ChaosXmlTextReaderResolveEntity(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
         "ResolveEntity is not valid at the current node.");
 }
 
-void ChaosXmlTextReaderSkip(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlTextReaderSkip(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     // Skip the current node's subtree. Simple: just Read() once more.
     ChaosXmlTextReaderRead(this_ptr);
 }
 
-void ChaosXmlTextReaderResetState(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlTextReaderResetState(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (!st) return;

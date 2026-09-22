@@ -326,3 +326,74 @@ ATG 自身的注释即为 `[UNVERIFIED] ... uninitialized object artifact`。
 - 构建偶被并行线的在制品阻断（如 async 线的 `chaos_continuation` 未声明、此前的 `chaos_tcs_set_canceled` 重复定义）。此时用 worktree 基于自己的父提交验证，并在 commit message 中如实记录。
 
 **建议入口**：新建 roadmap 子任务承接上述遗留，或按用户优先级另立任务。
+
+---
+
+## 2026-09-22 brainstorm 拍板 — EH 模式错配修复（preAssertionRaise 31 → 0）
+
+> **entry_skill**: dev-brainstorm
+> **触发**: main 基线显示 reflection chunk `gate=237/268`、`failed=23`、`preAssertionRaise=31`
+
+### 根因（已坐实，非推断）
+
+原生异常投递与生成代码的捕获机制**分属两套互不兼容的 EH 机制**：
+
+```
+原生 RaiseManagedException → chaos_raise_exception() → RaiseException(0xE0000001)   [SEH]
+                                                              ↕ 不兼容
+生成 TU 的 subject 外层       → catch (const chaos_managed_exception&)             [C++ EH]
+```
+
+证据链：
+1. `entry.exe` 直跑，31 处 `[SEH-FAULT] code=0xe0000001`（`kChaosManagedExceptionCode`），
+   对应 subject 全部 `caught=true` / `assertFailed=false` —— 异常逃逸，非断言失败。
+2. `native-aot.page-0010.cpp` 实测：**79 个 C++ `catch (const chaos_managed_exception&)`，
+   0 个 `__except`** —— 生成 TU 走的是 C++ EH 分支。
+3. `chaos_entry.vcxproj` 的 `PreprocessorDefinitions` 中**没有**
+   `CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS`（只有 `WIN32`/`_WINDOWS`）。
+4. `src/native/common/chaos/config.h:80-93` 的 EH 模式自动检测以
+   `CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS` 为条件 → 未定义 → 落 `#else` →
+   `CHAOS_IL2CPP_EH_CPP_THROW`。而 native 库由 CMake 编译时该宏已定义 → 走 `WIN32_SEH`。
+   **两侧宏不一致 = 机制错配**。
+
+### blocking_questions: []
+### question_clearance: cleared
+### clearance_confirmed_by_user: true
+
+### 边界拍板
+
+**覆盖**：让生成 TU 与 native 库使用同一 EH 模式宏（同走 WIN32_SEH），消除 SEH↔C++ catch 错配。
+
+**不覆盖**：threading 锁句柄族（根因独立）、json/xml 未实现族、ATG 参数生成缺陷（`[UNVERIFIED]` 425 项）。
+
+### authority 决策
+
+- 修复落点定于 **TPG 模板 `TestProject.CMakeLists.txt.scriban`**（方案 A1），
+  不在 `config.h` 收紧自动检测（A2，炸面过大）。
+- 影响面为**所有 chunk** 的生成工程，非仅反射。
+
+### 当前结论
+
+- **方案 A（补平台宏）** 为根因修复，与平台设计意图一致（Windows→SEH 是既定映射）。
+- 落点 **A1**：TPG 的 CMake 模板按平台条件注入 `CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS`，
+  与 native 侧 CMake 写法同构，改动集中且可被 gate 覆盖。
+- 验收口径 **V3**：反射全绿（`preAssertionRaise` 31→0）+ 抽样回归
+  （corelib/text 纯绿基准、threading EH 密集）。
+
+### 风险评估摘要
+
+| 风险 | 触发条件 | 缓解 |
+|---|---|---|
+| 全 chunk EH 模式切换引入回归 | 生成 TU 从 C++ EH 切到 SEH | V3 抽样回归；corelib/text 为最敏感信号 |
+| `__try` 与 C++ 析构/RAII 混用 | SEH 模式下游生成代码含 RAII guard | 生成代码已用 `CHAOS_EH_TRY_FINALLY` 宏适配，非裸 RAII |
+| 与并发会话在制品的叠加 | 多 agent 同仓库并发 | 独立 worktree 隔离；开工前核对 artifact mtime |
+
+### 三优先级权衡结论
+
+- **P1 性能最优**：SEH 模式是 Windows 既定设计（省 C++ EH 表遍历开销），A 方案不劣化。
+- **P2 架构完美**：消除宏不一致，使生成侧与运行侧 EH 语义收敛，架构更自洽。
+- **P3 HotUpdate**：不受影响（EH 模式与热更加载路径正交）。
+
+### 下一步入口
+
+开 worktree → 改 TPG CMake 模板 → 反射全绿 + 抽样回归 → 合回 main → 删 worktree。

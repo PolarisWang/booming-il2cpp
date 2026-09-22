@@ -702,7 +702,7 @@ public sealed partial class NativeAotLoweringPlanner
                     if (__pi > 0) fallbackSb.Append(", ");
                     fallbackSb.Append("CHAOS_IL2CPP_INTPTR");
                 }
-                fallbackSb.AppendLine(") noexcept;");
+                fallbackSb.AppendLine(") CHAOS_STUB_NOEXCEPT;");
                 fallbackCount++;
             }
             if (fallbackCount > 0)
@@ -781,7 +781,7 @@ public sealed partial class NativeAotLoweringPlanner
                 if (typedStubSymbols.Contains(sym)) continue;
                 sb.Append("static inline CHAOS_IL2CPP_INTPTR ");
                 sb.Append(sym);
-                sb.AppendLine("() noexcept { return 0; }");
+                sb.AppendLine("() CHAOS_STUB_NOEXCEPT { return 0; }");
             }
             sb.AppendLine();
         }
@@ -845,7 +845,7 @@ public sealed partial class NativeAotLoweringPlanner
                     sb.Append("CHAOS_IL2CPP_INTPTR chaos_arg_");
                     sb.Append(__pi);
                 }
-                sb.Append(") noexcept");
+                sb.Append(") CHAOS_STUB_NOEXCEPT");
                 if (kvp.Value == AotCoreIrAbiCarrierKind.Void)
                     sb.AppendLine(" {}");
                 else
@@ -927,7 +927,7 @@ public sealed partial class NativeAotLoweringPlanner
                     if (__pi > 0) extHeaderSb.Append(", ");
                     extHeaderSb.Append("CHAOS_IL2CPP_INTPTR");
                 }
-                extHeaderSb.AppendLine(") noexcept;");
+                extHeaderSb.AppendLine(") CHAOS_STUB_NOEXCEPT;");
                 extDeclCount++;
             }
             if (extDeclCount > 0)

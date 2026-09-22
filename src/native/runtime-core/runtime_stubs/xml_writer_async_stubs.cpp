@@ -161,42 +161,42 @@ extern "C" {
 // ── 0-arg ────────────────────────────────────────────────────────────────
 // No argument validation precedes the capability check: with a fresh writer
 // every one of these was measured to raise InvalidOperationException.
-CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStartDocumentAsync(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStartDocumentAsync(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteEndDocumentAsync(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteEndDocumentAsync(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteEndElementAsync(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteEndElementAsync(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteFullEndElementAsync(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteFullEndElementAsync(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlWriterFlushAsync(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterFlushAsync(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlWriterDisposeAsync(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterDisposeAsync(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseNotAsyncCapable();
@@ -205,7 +205,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterDisposeAsync(CHAOS_IL2CPP_INTPTR this_ptr) noe
 
 // ── 1-arg: bool ─────────────────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStartDocumentBoolAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR standalone) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR standalone) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     (void)standalone;
@@ -217,7 +217,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStartDocumentBoolAsync(
 // WriteString(null) and WriteRaw(null) are legal (measured OK on .NET 8), so
 // they reach the capability check only when text is actually present.
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStringAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (!HasText(text)) return 0;  // null / empty writes nothing, and does not throw
@@ -226,7 +226,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStringAsync(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteRawAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR data) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR data) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (!HasText(data)) return 0;
@@ -237,7 +237,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteRawAsync(
 // The remaining string entries validate null before the capability check:
 // measured ArgumentNullException on a non-async writer.
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteWhitespaceAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ws) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ws) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (ws == 0) RaiseArgumentNull("ws");
@@ -246,7 +246,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteWhitespaceAsync(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCommentAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (text == 0) RaiseArgumentNull("text");
@@ -255,7 +255,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCommentAsync(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCDataAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (text == 0) RaiseArgumentNull("text");
@@ -264,7 +264,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCDataAsync(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteNameAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (name == 0) RaiseArgumentNull("name");
@@ -273,7 +273,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteNameAsync(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteNmTokenAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (name == 0) RaiseArgumentNull("name");
@@ -282,7 +282,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteNmTokenAsync(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteEntityRefAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (name == 0) RaiseArgumentNull("name");
@@ -292,7 +292,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteEntityRefAsync(
 
 // ── 1-arg: char ─────────────────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCharEntityAsync(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ch) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ch) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     ValidateCharEntity(ch);
@@ -304,7 +304,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCharEntityAsync(
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteSurrogateCharEntityAsync(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR low,
-    CHAOS_IL2CPP_INTPTR high) noexcept
+    CHAOS_IL2CPP_INTPTR high) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     ValidateSurrogatePair(low, high);
@@ -315,7 +315,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteSurrogateCharEntityAsync(
 // ── array + offset + count ──────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCharsAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR buffer,
-    CHAOS_IL2CPP_INTPTR index, CHAOS_IL2CPP_INTPTR count) noexcept
+    CHAOS_IL2CPP_INTPTR index, CHAOS_IL2CPP_INTPTR count) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     ValidateArrayRange(buffer, index, count, "buffer");
@@ -325,7 +325,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCharsAsync(
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteRawBufferAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR buffer,
-    CHAOS_IL2CPP_INTPTR index, CHAOS_IL2CPP_INTPTR count) noexcept
+    CHAOS_IL2CPP_INTPTR index, CHAOS_IL2CPP_INTPTR count) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     ValidateArrayRange(buffer, index, count, "buffer");
@@ -335,7 +335,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteRawBufferAsync(
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteBase64Async(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR buffer,
-    CHAOS_IL2CPP_INTPTR index, CHAOS_IL2CPP_INTPTR count) noexcept
+    CHAOS_IL2CPP_INTPTR index, CHAOS_IL2CPP_INTPTR count) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     ValidateArrayRange(buffer, index, count, "buffer");
@@ -345,7 +345,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteBase64Async(
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteBinHexAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR buffer,
-    CHAOS_IL2CPP_INTPTR index, CHAOS_IL2CPP_INTPTR count) noexcept
+    CHAOS_IL2CPP_INTPTR index, CHAOS_IL2CPP_INTPTR count) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     ValidateArrayRange(buffer, index, count, "buffer");
@@ -356,7 +356,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteBinHexAsync(
 // ── 2-arg: string, string ───────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteQualifiedNameAsync(
     CHAOS_IL2CPP_INTPTR this_ptr,
-    CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (local_name == 0) RaiseArgumentNull("localName");
@@ -366,7 +366,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteQualifiedNameAsync(
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteProcessingInstructionAsync(
     CHAOS_IL2CPP_INTPTR this_ptr,
-    CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR text) noexcept
+    CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (name == 0) RaiseArgumentNull("name");
@@ -377,7 +377,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteProcessingInstructionAsync(
 // ── 3-arg: prefix, localName, ns ────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStartElementAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix,
-    CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     (void)prefix;
@@ -391,7 +391,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStartElementAsync(
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteDocTypeAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name,
     CHAOS_IL2CPP_INTPTR pubid, CHAOS_IL2CPP_INTPTR sysid,
-    CHAOS_IL2CPP_INTPTR subset) noexcept
+    CHAOS_IL2CPP_INTPTR subset) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     (void)pubid;
@@ -405,7 +405,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteDocTypeAsync(
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteAttributeStringAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix,
     CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns,
-    CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     (void)prefix;
@@ -419,7 +419,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteAttributeStringAsync(
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteElementStringAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix,
     CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns,
-    CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     (void)prefix;
@@ -433,7 +433,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteElementStringAsync(
 // ── node / attributes ───────────────────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteNodeAsync(
     CHAOS_IL2CPP_INTPTR this_ptr,
-    CHAOS_IL2CPP_INTPTR reader, CHAOS_IL2CPP_INTPTR defattr) noexcept
+    CHAOS_IL2CPP_INTPTR reader, CHAOS_IL2CPP_INTPTR defattr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     (void)defattr;
@@ -444,7 +444,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteNodeAsync(
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteNodeNavigatorAsync(
     CHAOS_IL2CPP_INTPTR this_ptr,
-    CHAOS_IL2CPP_INTPTR navigator, CHAOS_IL2CPP_INTPTR defattr) noexcept
+    CHAOS_IL2CPP_INTPTR navigator, CHAOS_IL2CPP_INTPTR defattr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     (void)defattr;
@@ -455,7 +455,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteNodeNavigatorAsync(
 
 CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteAttributesAsync(
     CHAOS_IL2CPP_INTPTR this_ptr,
-    CHAOS_IL2CPP_INTPTR reader, CHAOS_IL2CPP_INTPTR defattr) noexcept
+    CHAOS_IL2CPP_INTPTR reader, CHAOS_IL2CPP_INTPTR defattr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     (void)defattr;

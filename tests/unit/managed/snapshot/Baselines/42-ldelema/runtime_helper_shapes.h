@@ -163,6 +163,9 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_CHAR_LEADINGZEROCOUNT_SYSTEM_CHAR = 0xC73A2107u,
     SHAPE_SYSTEM_CHAR_POPCOUNT_SYSTEM_CHAR = 0x714C60A0u,
     SHAPE_SYSTEM_CHAR_TRAILINGZEROCOUNT_SYSTEM_CHAR = 0x3311DC1Du,
+    SHAPE_SYSTEM_COLLECTIONS_IENUMERABLE_GETENUMERATOR = 0x5E83FCC1u,
+    SHAPE_SYSTEM_COLLECTIONS_IENUMERATOR_GET_CURRENT = 0x14709F6Du,
+    SHAPE_SYSTEM_COLLECTIONS_IENUMERATOR_MOVENEXT = 0xA0F1FA37u,
     SHAPE_SYSTEM_CONSOLE_GET_ERROR = 0x3C7E2237u,
     SHAPE_SYSTEM_CONVERT_TOBOOLEAN_SYSTEM_STRING = 0x6BEB8E13u,
     SHAPE_SYSTEM_CONVERT_TOBYTE_SYSTEM_STRING = 0xC9A1E409u,
@@ -1321,7 +1324,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 1307u,
+    SHAPE_COUNT = 1310u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -1590,6 +1593,14 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_BITCONVERTER_TODOUBLE_SYSTEM_BYTE___SYSTEM_INT32) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosBitConverterToDouble(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_COLLECTIONS_IENUMERABLE_GETENUMERATOR) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosArrayGetEnumerator(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_COLLECTIONS_IENUMERATOR_GET_CURRENT) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosArrayEnumeratorGetCurrent(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_CONSOLE_GET_ERROR) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -4896,6 +4907,10 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosBitOpsTrailingZeroCount16(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_COLLECTIONS_IENUMERATOR_MOVENEXT) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosArrayEnumeratorMoveNext(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_CONVERT_TOINT32_SYSTEM_DOUBLE) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosConvertToInt32FromDouble(args...));
@@ -6335,7 +6350,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 1307u,
+static_assert(SHAPE_COUNT == 1310u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

@@ -8,7 +8,9 @@ Usage:
 
 from __future__ import annotations
 
+import signal
 import sys
+import time
 from pathlib import Path
 
 from .config import NightlyConfig
@@ -17,7 +19,38 @@ from .run import NightlyResult, run_phases, build_resume_worklist
 from .aggregate import aggregate_reports
 
 
+def _install_interrupt_handler() -> None:
+    """Turn an interrupt into an orderly shutdown instead of a hard kill.
+
+    Windows delivers STATUS_CONTROL_C_EXIT (0xC000013A, printed as -1073741510)
+    when Jenkins aborts/times out the build; on POSIX the equivalent is SIGINT.
+    Both killed the process outright, so the results of every chunk that had
+    already finished were lost and the run looked like "produced nothing"
+    (builds #288/#289/#290).
+
+    Raising KeyboardInterrupt instead lets the exception unwind through
+    run_phases(), where each worker subprocess is reaped by its existing
+    finally/cleanup path, and lets main() still reach aggregate_reports() so the
+    partial payload is published.  The Jenkinsfile already treats a publish with
+    few/no passing chunks as a failure, so this loses no signal — it only keeps
+    the data needed to explain the failure.
+    """
+    def _handler(signum, frame):  # noqa: ARG001 — signature fixed by signal API
+        raise KeyboardInterrupt(f"interrupted by signal {signum}")
+
+    for name in ("SIGINT", "SIGTERM", "SIGBREAK"):
+        sig = getattr(signal, name, None)
+        if sig is None:
+            continue
+        try:
+            signal.signal(sig, _handler)
+        except (ValueError, OSError):
+            # Not settable in this context (e.g. non-main thread) — keep going.
+            pass
+
+
 def main() -> int:
+    _install_interrupt_handler()
     import argparse
 
     # ⚡ Fix GBK stdout encoding (UnicodeEncodeError on ⚠ etc.)
@@ -97,7 +130,18 @@ def main() -> int:
         return 0
 
     # Execute
-    result = run_phases(config, work)
+    try:
+        result = run_phases(config, work)
+    except KeyboardInterrupt:
+        # Interrupted (Ctrl+C on POSIX, STATUS_CONTROL_C_EXIT on Windows when
+        # Jenkins aborts).  Do not re-raise: fall through to aggregation so the
+        # chunks that DID finish are still written out and published.  Exiting
+        # 0 here would be wrong — report failure.
+        print("\n=== INTERRUPTED (Ctrl+C / STATUS_CONTROL_C_EXIT) ===", flush=True)
+        print("=== publishing partial results for completed chunks ===", flush=True)
+        result = NightlyResult()
+        result.end_wall = time.time()
+        result.interrupted = True
 
     # Aggregate
     summary = aggregate_reports(config, result)
@@ -106,6 +150,8 @@ def main() -> int:
     print(f"  Duration: {result.end_wall - result.start_wall:.0f}s")
     print(f"{'='*64}\n")
 
+    if result.interrupted:
+        return 1
     return 1 if result.failed_count > 0 else 0
 
 

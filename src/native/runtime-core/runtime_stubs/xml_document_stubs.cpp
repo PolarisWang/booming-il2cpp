@@ -70,7 +70,7 @@ extern "C" {
 // XmlNode surface (base type for XmlElement, XmlAttribute, etc.)
 // ══════════════════════════════════════════════════════════════════
 
-void ChaosXmlNodeAppendChild(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) noexcept
+void ChaosXmlNodeAppendChild(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)new_child;
     RaiseInvalidOp("The operation cannot be performed on a bare XmlNode.");
@@ -79,7 +79,7 @@ void ChaosXmlNodeAppendChild(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR n
 void ChaosXmlNodeInsertBefore(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR new_child,
-    CHAOS_IL2CPP_INTPTR ref_child) noexcept
+    CHAOS_IL2CPP_INTPTR ref_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)new_child; (void)ref_child;
     RaiseInvalidOp("The operation cannot be performed on a bare XmlNode.");
@@ -88,7 +88,7 @@ void ChaosXmlNodeInsertBefore(
 void ChaosXmlNodeInsertAfter(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR new_child,
-    CHAOS_IL2CPP_INTPTR ref_child) noexcept
+    CHAOS_IL2CPP_INTPTR ref_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)new_child; (void)ref_child;
     RaiseInvalidOp("The operation cannot be performed on a bare XmlNode.");
@@ -97,21 +97,21 @@ void ChaosXmlNodeInsertAfter(
 void ChaosXmlNodeReplaceChild(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR new_child,
-    CHAOS_IL2CPP_INTPTR old_child) noexcept
+    CHAOS_IL2CPP_INTPTR old_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)new_child; (void)old_child;
     RaiseInvalidOp("The operation cannot be performed on a bare XmlNode.");
 }
 
 void ChaosXmlNodeRemoveChild(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR old_child) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR old_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)old_child;
     RaiseInvalidOp("The operation cannot be performed on a bare XmlNode.");
 }
 
 void ChaosXmlNodePrependChild(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)new_child;
     RaiseInvalidOp("The operation cannot be performed on a bare XmlNode.");
@@ -120,7 +120,7 @@ void ChaosXmlNodePrependChild(
 CHAOS_IL2CPP_INT32 ChaosXmlNodeSupports(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR feature,
-    CHAOS_IL2CPP_INTPTR version) noexcept
+    CHAOS_IL2CPP_INTPTR version) CHAOS_STUB_NOEXCEPT
 {
     (void)version;
     // A bare XmlNode has no feature support.  Managed side throws
@@ -132,19 +132,19 @@ CHAOS_IL2CPP_INT32 ChaosXmlNodeSupports(
     RaiseInvalidOp("This XmlNode does not support any features.");
 }
 
-void ChaosXmlNodeRemoveAll(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+void ChaosXmlNodeRemoveAll(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseInvalidOp("This bare XmlNode has no children to remove.");
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlNodeGetEnumerator(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlNodeGetEnumerator(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseInvalidOp("This bare XmlNode has no children to enumerate.");
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlNodeClone(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlNodeClone(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseInvalidOp("A bare XmlNode cannot be cloned.");
@@ -160,7 +160,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNodeClone(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
 /// rejected the same way (the bare-object check precedes argument validation in
 /// the reference implementation).
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeSelectNodes(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xpath) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xpath) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* x = nullptr; size_t x_len = 0;
@@ -170,7 +170,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNodeSelectNodes(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeSelectSingleNode(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xpath) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xpath) CHAOS_STUB_NOEXCEPT
 {
     return ChaosXmlNodeSelectNodes(this_ptr, xpath);
 }
@@ -179,21 +179,21 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNodeSelectSingleNode(
 /// document; on a bare/attached-but-untracked node the managed code throws
 /// InvalidOperationException.
 CHAOS_IL2CPP_INTPTR ChaosXmlTextSplitText(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 offset) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 offset) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)offset;
     RaiseInvalidOp("A bare XmlText cannot be split.");
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeCloneNode(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 deep) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 deep) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)deep;
     RaiseInvalidOp("A bare XmlNode cannot be cloned.");
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeGetNamespaceOfPrefix(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR prefix) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* p = nullptr; size_t p_len = 0;
@@ -204,7 +204,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNodeGetNamespaceOfPrefix(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeGetPrefixOfNamespace(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns_uri) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ns_uri) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
@@ -214,21 +214,21 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNodeGetPrefixOfNamespace(
     return 0;
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlNodeCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlNodeCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseNotSupported();
 }
 
 void ChaosXmlNodeWriteTo(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)writer;
     RaiseInvalidOp("A bare XmlNode cannot be written.");
 }
 
 void ChaosXmlNodeWriteContentTo(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)writer;
     RaiseInvalidOp("A bare XmlNode has no content to write.");
@@ -239,7 +239,7 @@ void ChaosXmlNodeWriteContentTo(
 // ══════════════════════════════════════════════════════════════════
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
@@ -257,7 +257,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement3(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
     CHAOS_IL2CPP_INTPTR local_name,
-    CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)prefix; (void)ns;
     const char* n = nullptr; size_t n_len = 0;
@@ -272,13 +272,13 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement3(
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement2(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
-    CHAOS_IL2CPP_INTPTR local_name) noexcept
+    CHAOS_IL2CPP_INTPTR local_name) CHAOS_STUB_NOEXCEPT
 {
     return ChaosXmlDocumentCreateElement3(this_ptr, prefix, local_name, 0);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
@@ -304,7 +304,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute3(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
     CHAOS_IL2CPP_INTPTR local_name,
-    CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)prefix; (void)ns;
     const char* n = nullptr; size_t n_len = 0;
@@ -319,7 +319,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute3(
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute2(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
-    CHAOS_IL2CPP_INTPTR local_name) noexcept
+    CHAOS_IL2CPP_INTPTR local_name) CHAOS_STUB_NOEXCEPT
 {
     return ChaosXmlDocumentCreateAttribute3(this_ptr, prefix, local_name, 0);
 }
@@ -328,7 +328,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNodeStr(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR node_type_str,
     CHAOS_IL2CPP_INTPTR name,
-    CHAOS_IL2CPP_INTPTR ns_uri) noexcept
+    CHAOS_IL2CPP_INTPTR ns_uri) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)node_type_str; (void)name; (void)ns_uri;
     RaiseNotSupported();
@@ -337,7 +337,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNodeStr(
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateProcessingInstruction(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR target,
-    CHAOS_IL2CPP_INTPTR data) noexcept
+    CHAOS_IL2CPP_INTPTR data) CHAOS_STUB_NOEXCEPT
 {
     (void)data;
     const char* t = nullptr; size_t t_len = 0;
@@ -353,7 +353,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateDocumentType(
     CHAOS_IL2CPP_INTPTR name,
     CHAOS_IL2CPP_INTPTR pubid,
     CHAOS_IL2CPP_INTPTR sysid,
-    CHAOS_IL2CPP_INTPTR subset) noexcept
+    CHAOS_IL2CPP_INTPTR subset) CHAOS_STUB_NOEXCEPT
 {
     (void)name; (void)pubid; (void)sysid; (void)subset;
     (void)this_ptr;
@@ -364,7 +364,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateXmlDeclaration(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR version,
     CHAOS_IL2CPP_INTPTR encoding,
-    CHAOS_IL2CPP_INTPTR standalone) noexcept
+    CHAOS_IL2CPP_INTPTR standalone) CHAOS_STUB_NOEXCEPT
 {
     (void)encoding; (void)standalone;
     const char* v = nullptr; size_t v_len = 0;
@@ -377,7 +377,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateXmlDeclaration(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateEntityReference(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
@@ -389,7 +389,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateEntityReference(
 }
 
 void ChaosXmlDocumentLoadXml(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xml) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR xml) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* x = nullptr; size_t x_len = 0;
@@ -401,7 +401,7 @@ void ChaosXmlDocumentLoadXml(
 }
 
 void ChaosXmlDocumentLoadStream(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR stream) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR stream) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (stream == 0)
@@ -410,7 +410,7 @@ void ChaosXmlDocumentLoadStream(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentSaveStream(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR stream) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR stream) CHAOS_STUB_NOEXCEPT
 {
     (void)stream;
     if (this_ptr == 0) return 0;
@@ -419,7 +419,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentSaveStream(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentGetElementsByTagName(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
@@ -430,7 +430,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentGetElementsByTagName(
     RaiseInvalidOp("The operation cannot be performed on a bare XmlDocument.");
 }
 
-CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     RaiseNotSupported();
@@ -442,14 +442,14 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentGetElementsByTagName2(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR local_name,
-    CHAOS_IL2CPP_INTPTR ns) noexcept
+    CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)ns;
     return ChaosXmlDocumentGetElementsByTagName(this_ptr, local_name);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentReadNode(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR reader) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR reader) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (reader == 0)
@@ -458,7 +458,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentReadNode(
 }
 
 void ChaosXmlDocumentValidate(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR validation_event) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR validation_event) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (validation_event == 0)
@@ -469,7 +469,7 @@ void ChaosXmlDocumentValidate(
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentImportNode(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR node,
-    CHAOS_IL2CPP_INT32 deep) noexcept
+    CHAOS_IL2CPP_INT32 deep) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)deep;
     if (node == 0)
@@ -485,7 +485,7 @@ void ChaosXmlCharacterDataReplaceData(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INT32 offset,
     CHAOS_IL2CPP_INT32 count,
-    CHAOS_IL2CPP_INTPTR str) noexcept
+    CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     (void)offset; (void)count;
     if (str == 0) RaiseArgumentNullException("str");
@@ -496,7 +496,7 @@ void ChaosXmlCharacterDataReplaceData(
 CHAOS_IL2CPP_INTPTR ChaosXmlCharacterDataSubstring(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INT32 offset,
-    CHAOS_IL2CPP_INT32 count) noexcept
+    CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
     (void)offset; (void)count; (void)this_ptr;
     RaiseInvalidOp("Cannot operate on a bare XmlCharacterData object.");
@@ -505,7 +505,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlCharacterDataSubstring(
 void ChaosXmlCharacterDataInsertData(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INT32 offset,
-    CHAOS_IL2CPP_INTPTR str) noexcept
+    CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     (void)offset;
     if (str == 0) RaiseArgumentNullException("str");
@@ -516,14 +516,14 @@ void ChaosXmlCharacterDataInsertData(
 void ChaosXmlCharacterDataDeleteData(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INT32 offset,
-    CHAOS_IL2CPP_INT32 count) noexcept
+    CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
     (void)offset; (void)count; (void)this_ptr;
     RaiseInvalidOp("Cannot operate on a bare XmlCharacterData object.");
 }
 
 void ChaosXmlCharacterDataAppendData(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR str) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     if (str == 0) RaiseArgumentNullException("str");
     (void)this_ptr;
@@ -537,7 +537,7 @@ void ChaosXmlCharacterDataAppendData(
 void ChaosXmlElementSetAttribute(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR name,
-    CHAOS_IL2CPP_INTPTR value) noexcept
+    CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
@@ -550,7 +550,7 @@ void ChaosXmlElementSetAttribute(
 }
 
 void ChaosXmlElementSetAttributeNode(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR attr) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR attr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (attr == 0) RaiseArgumentNullException("attr");
@@ -558,7 +558,7 @@ void ChaosXmlElementSetAttributeNode(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlElementGetElementsByTagName(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
@@ -568,14 +568,14 @@ CHAOS_IL2CPP_INTPTR ChaosXmlElementGetElementsByTagName(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlElementCloneNode(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 deep) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 deep) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)deep;
     RaiseInvalidOp("A bare XmlElement cannot be cloned.");
 }
 
 void ChaosXmlElementWriteTo(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) CHAOS_STUB_NOEXCEPT
 {
     (void)writer;
     (void)this_ptr;
@@ -587,14 +587,14 @@ void ChaosXmlElementWriteTo(
 // ══════════════════════════════════════════════════════════════════
 
 void ChaosXmlAttributeAppendChild(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)new_child;
     RaiseInvalidOp("An XmlAttribute cannot have children.");
 }
 
 void ChaosXmlAttributePrependChild(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)new_child;
     RaiseInvalidOp("An XmlAttribute cannot have children.");
@@ -607,7 +607,7 @@ void ChaosXmlAttributePrependChild(
 /// SetNamedItem(XmlNode) — an attribute collection built on a bare object has
 /// no owning element, so the managed code throws ArgumentException.
 CHAOS_IL2CPP_INTPTR ChaosXmlAttributeCollectionSetNamedItem(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (node == 0) RaiseArgumentNullException("node");
@@ -615,7 +615,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlAttributeCollectionSetNamedItem(
 }
 
 void ChaosXmlAttributeCollectionAppend(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (node == 0) RaiseArgumentNullException("node");
@@ -623,7 +623,7 @@ void ChaosXmlAttributeCollectionAppend(
 }
 
 void ChaosXmlAttributeCollectionPrepend(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (node == 0) RaiseArgumentNullException("node");
@@ -632,14 +632,14 @@ void ChaosXmlAttributeCollectionPrepend(
 
 /// XmlNodeList.Item(int) — a bare node list has no backing collection.
 CHAOS_IL2CPP_INTPTR ChaosXmlNodeListItem(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 index) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INT32 index) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)index;
     RaiseInvalidOp("The node list is not initialized.");
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNamedNodeMapGetNamedItem(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
@@ -649,7 +649,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNamedNodeMapGetNamedItem(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNamedNodeMapSetNamedItem(
-    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     if (node == 0) RaiseArgumentNullException("node");
@@ -665,7 +665,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNamedNodeMapSetNamedItem(
 void ChaosXmlNamespaceManagerAddNamespace(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
-    CHAOS_IL2CPP_INTPTR uri) noexcept
+    CHAOS_IL2CPP_INTPTR uri) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* p = nullptr; size_t p_len = 0;
@@ -687,7 +687,7 @@ void ChaosXmlNamespaceManagerAddNamespace(
 
 void ChaosXmlNamespaceManagerRemoveNamespace(
     CHAOS_IL2CPP_INTPTR this_ptr,
-    CHAOS_IL2CPP_INTPTR prefix) noexcept
+    CHAOS_IL2CPP_INTPTR prefix) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* p = nullptr; size_t p_len = 0;
@@ -704,7 +704,7 @@ void ChaosXmlNamespaceManagerRemoveNamespace(
 void ChaosXmlNamespaceManagerRemoveNamespace2(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
-    CHAOS_IL2CPP_INTPTR uri) noexcept
+    CHAOS_IL2CPP_INTPTR uri) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     const char* p = nullptr; size_t p_len = 0;
@@ -717,7 +717,7 @@ void ChaosXmlNamespaceManagerRemoveNamespace2(
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlNamespaceManagerGetEnumerator(
-    CHAOS_IL2CPP_INTPTR this_ptr) noexcept
+    CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
     // No namespace scope is tracked, so there is nothing to enumerate.

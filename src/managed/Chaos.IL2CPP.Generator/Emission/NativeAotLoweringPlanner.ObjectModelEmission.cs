@@ -700,6 +700,27 @@ public sealed partial class NativeAotLoweringPlanner
 					TrackReferenceType(declType, null);
 				}
 			}
+			// Track the exception RAISE set so their MethodTables get emitted here.
+			// Types thrown by hand-written native stubs (RaiseManagedException in
+			// chaos_runtime_core) never appear in any managed signature or catch
+			// clause, so without this they get no MethodTable, BuildExceptionTypeTable
+			// drops them ("no MethodTable in this TU"), ResolveTypeByName returns 0,
+			// and every native raise carries a NULL exception object that no catch
+			// can match.  Measured on the reflection chunk: 15 SEH-FAULTs per run,
+			// all obj=0x0 from the "System.NullReferenceException" lookup.
+			// MUST precede sortedReferenceTypes (line above/below); NOTE also that
+			// TrackReferenceType is used directly — the _trackTypeRef wrapper would
+			// run the IsStructuredValueTypeSubjectId heuristic, which misclassifies
+			// these non-primitive CoreLib types as value types and emits no
+			// MethodTable (same trap as ReadOnlyCollection above).  Base chains
+			// resolve via ResolveReferenceTypeBaseSubjectId inside the call.
+			foreach (var raised in FileOnlyExceptionTypeNames)
+			{
+				if (string.IsNullOrEmpty(raised)) continue;
+				var raisedSubjectId = NormalizeExceptionTypeSubjectId(raised);
+				if (string.IsNullOrEmpty(raisedSubjectId)) continue;
+				TrackReferenceType(raisedSubjectId, GetSyntheticReferenceTypeBaseSubjectId(raisedSubjectId));
+			}
 			// Ensure hashSet3 value types are in valueTypeSubjectIds before sortedReferenceTypes
 			// filter (must precede the filter to prevent C2374 redefinition from dual emission).
 			foreach (string vtId in hashSet3)
@@ -1721,6 +1742,9 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 					    !catchType.StartsWith("CombinedSubjects/", StringComparison.Ordinal))
 						_trackTypeRef(catchType);
 		}
+		// (Exception raise-set tracking moved above sortedReferenceTypes — the
+		// late position here produced table references without MT definitions,
+		// i.e. LNK2001 on chaos_mt_<Exception>.)
 
 		_emittedValueTypeSubjectIds = new HashSet<string>(valueTypeSubjectIds, StringComparer.Ordinal);
 		// Merge with value type symbols discovered by BuildGeneratedModuleModel's

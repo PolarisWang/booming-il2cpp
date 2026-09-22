@@ -61,7 +61,7 @@ const char* NullTerminate(const char* data, CHAOS_IL2CPP_INT32 len)
 // Returns -1 if |a| < |b|, 0 if equal, 1 if |a| > |b|.
 static int CompareAbsoluteDecimal(
     const chaos::il2cpp::runtime_core::DecimalCarrier* a,
-    const chaos::il2cpp::runtime_core::DecimalCarrier* b) noexcept
+    const chaos::il2cpp::runtime_core::DecimalCarrier* b) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
 
@@ -92,7 +92,7 @@ static int CompareAbsoluteDecimal(
 // Convert::ToBoolean(String)
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToBoolean(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToBoolean(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -112,7 +112,7 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToBoolean(CHAOS_IL2CPP_INTPTR value) n
 // Convert::ToXxx(String) — string→numeric
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_UINT8 ChaosConvertToByte(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_UINT8 ChaosConvertToByte(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -132,7 +132,7 @@ extern "C" CHAOS_IL2CPP_UINT8 ChaosConvertToByte(CHAOS_IL2CPP_INTPTR value) noex
     return static_cast<CHAOS_IL2CPP_UINT8>(result);
 }
 
-extern "C" CHAOS_IL2CPP_INT16 ChaosConvertToInt16(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_INT16 ChaosConvertToInt16(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -154,7 +154,7 @@ extern "C" CHAOS_IL2CPP_INT16 ChaosConvertToInt16(CHAOS_IL2CPP_INTPTR value) noe
     return static_cast<CHAOS_IL2CPP_INT16>(result);
 }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -180,7 +180,7 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosConvertToInt32(CHAOS_IL2CPP_INTPTR value) noe
     return static_cast<CHAOS_IL2CPP_INT32>(result);
 }
 
-extern "C" CHAOS_IL2CPP_INT64 ChaosConvertToInt64(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_INT64 ChaosConvertToInt64(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -200,7 +200,7 @@ extern "C" CHAOS_IL2CPP_INT64 ChaosConvertToInt64(CHAOS_IL2CPP_INTPTR value) noe
     return static_cast<CHAOS_IL2CPP_INT64>(result);
 }
 
-extern "C" CHAOS_IL2CPP_FLOAT32 ChaosConvertToSingle(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_FLOAT32 ChaosConvertToSingle(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -220,7 +220,7 @@ extern "C" CHAOS_IL2CPP_FLOAT32 ChaosConvertToSingle(CHAOS_IL2CPP_INTPTR value) 
     return static_cast<CHAOS_IL2CPP_FLOAT32>(result);
 }
 
-extern "C" CHAOS_IL2CPP_FLOAT64 ChaosConvertToDouble(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_FLOAT64 ChaosConvertToDouble(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;
@@ -243,7 +243,7 @@ extern "C" CHAOS_IL2CPP_FLOAT64 ChaosConvertToDouble(CHAOS_IL2CPP_INTPTR value) 
 // Convert::ToDecimal(String) — string→DecimalCarrier
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertToDecimal(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertToDecimal(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     double d = ChaosConvertToDouble(value);
     return ChaosDecimalFromDouble(d);
@@ -253,7 +253,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertToDecimal(CHAOS_IL2CPP_INTPTR value) 
 // Convert::ToString(Int32) / ToString(Double)
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatInt32(CHAOS_IL2CPP_INT32 value) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatInt32(CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     // Fast itoa: fill from right-to-left, no snprintf format-string parsing.
     char buf[16];
@@ -276,7 +276,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatInt32(CHAOS_IL2CPP_INT32 value) noexce
     return chaos_make_string_id_value(id);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatDouble(CHAOS_IL2CPP_FLOAT64 value) CHAOS_STUB_NOEXCEPT
 {
     // Dragonbox via fmt (shortest-round-trip, no heap alloc)
     char buf[64];
@@ -290,7 +290,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosFormatDouble(CHAOS_IL2CPP_FLOAT64 value) noe
 // Int32::Parse / Int64::Parse / Double::Parse
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     return ChaosConvertToInt32(value);
 }
@@ -304,14 +304,14 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32(CHAOS_IL2CPP_INTPTR value) noexcep
 // numeric result for the literals the probes feed, so they are accepted and
 // discarded.
 extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32Styles(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) CHAOS_STUB_NOEXCEPT
 {
     (void)number_styles;
     return ChaosParseInt32(value);
 }
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32Provider(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) CHAOS_STUB_NOEXCEPT
 {
     (void)format_provider;
     return ChaosParseInt32(value);
@@ -319,28 +319,28 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32Provider(
 
 extern "C" CHAOS_IL2CPP_INT32 ChaosParseInt32StylesProvider(
     CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles,
-    CHAOS_IL2CPP_INTPTR format_provider) noexcept
+    CHAOS_IL2CPP_INTPTR format_provider) CHAOS_STUB_NOEXCEPT
 {
     (void)number_styles;
     (void)format_provider;
     return ChaosParseInt32(value);
 }
 
-extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     return ChaosConvertToInt64(value);
 }
 
 // Int64::Parse multi-arg overloads — same shape as the Int32 family above.
 extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64Styles(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) CHAOS_STUB_NOEXCEPT
 {
     (void)number_styles;
     return ChaosParseInt64(value);
 }
 
 extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64Provider(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) CHAOS_STUB_NOEXCEPT
 {
     (void)format_provider;
     return ChaosParseInt64(value);
@@ -348,19 +348,19 @@ extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64Provider(
 
 extern "C" CHAOS_IL2CPP_INT64 ChaosParseInt64StylesProvider(
     CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles,
-    CHAOS_IL2CPP_INTPTR format_provider) noexcept
+    CHAOS_IL2CPP_INTPTR format_provider) CHAOS_STUB_NOEXCEPT
 {
     (void)number_styles;
     (void)format_provider;
     return ChaosParseInt64(value);
 }
 
-extern "C" CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_FLOAT64 ChaosParseDouble(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     return ChaosConvertToDouble(value);
 }
 
-extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     // Parse as unsigned directly.  The old implementation routed through the
     // signed Int32 path (ChaosConvertToInt32), which rejects any literal above
@@ -396,28 +396,28 @@ extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32(CHAOS_IL2CPP_INTPTR value) noexc
 // Registering a multi-arg overload against a 1-arg native made the generated
 // page TUs call a 1-arg function with 2-3 args → C3861.
 extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32Styles(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) CHAOS_STUB_NOEXCEPT
 {
     (void)number_styles;
     return ChaosParseUInt32(value);
 }
 
 extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32Provider(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) CHAOS_STUB_NOEXCEPT
 {
     (void)format_provider;
     return ChaosParseUInt32(value);
 }
 
 extern "C" CHAOS_IL2CPP_UINT32 ChaosParseUInt32StylesProvider(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) CHAOS_STUB_NOEXCEPT
 {
     (void)number_styles;
     (void)format_provider;
     return ChaosParseUInt32(value);
 }
 
-extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64(CHAOS_IL2CPP_INTPTR value) noexcept
+extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     // Same fix as ChaosParseUInt32: parse as unsigned so literals above
     // Int64::MaxValue are not spuriously rejected.
@@ -440,21 +440,21 @@ extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64(CHAOS_IL2CPP_INTPTR value) noexc
 }
 
 extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64Styles(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles) CHAOS_STUB_NOEXCEPT
 {
     (void)number_styles;
     return ChaosParseUInt64(value);
 }
 
 extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64Provider(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR format_provider) CHAOS_STUB_NOEXCEPT
 {
     (void)format_provider;
     return ChaosParseUInt64(value);
 }
 
 extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64StylesProvider(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) noexcept
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INT32 number_styles, CHAOS_IL2CPP_INTPTR format_provider) CHAOS_STUB_NOEXCEPT
 {
     (void)number_styles;
     (void)format_provider;
@@ -465,7 +465,7 @@ extern "C" CHAOS_IL2CPP_UINT64 ChaosParseUInt64StylesProvider(
 // Decimal arithmetic
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* carrier = reinterpret_cast<const DecimalCarrier*>(carrier_ptr);
@@ -491,7 +491,7 @@ static CHAOS_IL2CPP_INTPTR DecimalFromDoubleResult(double result)
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(out);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     if (left_ptr == 0 || right_ptr == 0)
@@ -505,7 +505,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalAdd(CHAOS_IL2CPP_INTPTR left_ptr, CHA
     return DecimalFromDoubleResult(ld + rd);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
@@ -517,7 +517,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalSubtract(CHAOS_IL2CPP_INTPTR left_ptr
     return DecimalFromDoubleResult(ld - rd);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
@@ -529,7 +529,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMultiply(CHAOS_IL2CPP_INTPTR left_ptr
     return DecimalFromDoubleResult(ld * rd);
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* l = reinterpret_cast<const DecimalCarrier*>(left_ptr);
@@ -547,7 +547,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalDivide(CHAOS_IL2CPP_INTPTR left_ptr, 
 }
 
 // Decimal remainder (a % b) and unary negate, matching the double-approx model.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     if (left_ptr == 0 || right_ptr == 0)
@@ -566,7 +566,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRemainder(CHAOS_IL2CPP_INTPTR left_pt
     return DecimalFromDoubleResult(std::fmod(ld, rd));
 }
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     if (carrier_ptr == 0)
@@ -588,7 +588,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalNegate(CHAOS_IL2CPP_INTPTR carrier_pt
 
 // CopySign(a, b): return the magnitude of `a` carrying the sign of `b`
 // (Decimal sign lives in flags bit 31).
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalCopySign(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalCopySign(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     if (left_ptr == 0 || right_ptr == 0)
@@ -604,7 +604,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalCopySign(CHAOS_IL2CPP_INTPTR left_ptr
 }
 
 // MaxMagnitude(a, b): return the operand with the larger absolute value; tie → a.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMaxMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMaxMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     if (left_ptr == 0) return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new DecimalCarrier{});
@@ -623,7 +623,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMaxMagnitude(CHAOS_IL2CPP_INTPTR left
 }
 
 // MinMagnitude(a, b): return the operand with the smaller absolute value; tie → a.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMinMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMinMagnitude(CHAOS_IL2CPP_INTPTR left_ptr, CHAOS_IL2CPP_INTPTR right_ptr) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     if (left_ptr == 0) return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(new DecimalCarrier{});
@@ -644,14 +644,14 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalMinMagnitude(CHAOS_IL2CPP_INTPTR left
 // Decimal.FromOACurrency(long) — OLE Automation currency is a 64-bit integer
 // scaled by 10^4 (value/10000). Convert via the double-approx model; for the
 // ATG-probed 0m input it returns 0m.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromOACurrency(CHAOS_IL2CPP_INT64 value) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromOACurrency(CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT
 {
     return DecimalFromDoubleResult(static_cast<double>(value) / 10000.0);
 }
 
 // Decimal.CreateChecked<Saturating/Truncating>(int) — build a DecimalCarrier*
 // from a 32-bit signed integer (the ATG-probed inputs are int 0 → 0m).
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt32(CHAOS_IL2CPP_INT32 value) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt32(CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     return DecimalFromDoubleResult(static_cast<double>(value));
 }
@@ -661,14 +661,14 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt32(CHAOS_IL2CPP_INT32 value) n
 // carrier instead of being truncated to 32 bits.  The simplified Decimal model
 // stores the mantissa as lo64/hi32, so a value beyond the int64-magnitude range
 // still round-trips through the double approximation used by the rest of this file.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt64(CHAOS_IL2CPP_INT64 value) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromInt64(CHAOS_IL2CPP_INT64 value) CHAOS_STUB_NOEXCEPT
 {
     return DecimalFromDoubleResult(static_cast<double>(value));
 }
 
 // Convert.ToDecimal(bool) — 0m / 1m.  Must NOT be a static_cast of the carrier to
 // a DecimalCarrier* (that would reinterpret the raw 0/1 carrier as a pointer).
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromBool(CHAOS_IL2CPP_INT32 value) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromBool(CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     return DecimalFromDoubleResult(value != 0 ? 1.0 : 0.0);
 }
@@ -678,15 +678,15 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromBool(CHAOS_IL2CPP_INT32 value) no
 // integer-rounding ops are value-preserving. Return the input carrier pointer
 // (identity) so a zero/Decimal.Zero arg round-trips to the SAME carrier address —
 // codegen's `Assert.AreEqual(Decimal, Decimal)` lowers to a pointer compare.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalCeiling(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalCeiling(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT
 {
     return carrier_ptr;
 }
-extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalFloor(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT
 {
     return carrier_ptr;
 }
-extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT
 {
     return carrier_ptr;
 }
@@ -698,7 +698,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalRound(CHAOS_IL2CPP_INTPTR carrier
 static CHAOS_IL2CPP_UINT64 RoundIntegerMagnitude(
     CHAOS_IL2CPP_UINT64 magnitude,
     int32_t places,
-    CHAOS_IL2CPP_INT32 mode) noexcept
+    CHAOS_IL2CPP_INT32 mode) CHAOS_STUB_NOEXCEPT
 {
     if (places >= 0)
         return magnitude;  // rounding to >=0 decimal places preserves an integer
@@ -750,17 +750,17 @@ static CHAOS_IL2CPP_UINT64 RoundIntegerMagnitude(
 // and non-default MidpointRounding modes are implemented for correctness. Results
 // always come back in a fresh carrier (never the input pointer) so the Decimal
 // round-trips to a non-null address.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigits(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigits(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     return ChaosDecimalRoundDigitsMode(carrier_ptr, digits, 0);  // default MidpointRounding.ToEven
 }
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 mode) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 mode) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     return ChaosDecimalRoundDigitsMode(carrier_ptr, 0, mode);
 }
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigitsMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits, CHAOS_IL2CPP_INT32 mode) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigitsMode(CHAOS_IL2CPP_INTPTR carrier_ptr, CHAOS_IL2CPP_INT32 digits, CHAOS_IL2CPP_INT32 mode) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     if (carrier_ptr == 0 || digits == 0)
@@ -804,7 +804,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalRoundDigitsMode(CHAOS_IL2CPP_INTPTR c
     out->flags = static_cast<CHAOS_IL2CPP_UINT32>(sign < 0 ? 0x80000000u : 0u);
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(out);
 }
-extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carrier_ptr) CHAOS_STUB_NOEXCEPT
 {
     return carrier_ptr;
 }
@@ -813,7 +813,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosMathDecimalTruncate(CHAOS_IL2CPP_INTPTR carr
 // Convert::ToDecimal(Double) — double→DecimalCarrier
 // ═══════════════════════════════════════════════════════════════════
 
-extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     // TLS buffer avoids heap alloc per call (Convert::ToDecimal(Double) benchmark)
@@ -840,7 +840,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value
 // Allocate a boxed int32 object. Canonical layout (chaos_boxed_type_*):
 // PureTypeHeader 8B + CHAOS_IL2CPP_INTPTR payload at offset 8.  The previous
 // 16-byte-header layout was not bit-compatible with codegen boxes.
-static CHAOS_IL2CPP_INTPTR box_int32(CHAOS_IL2CPP_INT32 value) noexcept
+static CHAOS_IL2CPP_INTPTR box_int32(CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(16));
@@ -852,7 +852,7 @@ static CHAOS_IL2CPP_INTPTR box_int32(CHAOS_IL2CPP_INT32 value) noexcept
 }
 
 // Allocate a boxed boolean object. Canonical layout, payload at offset 8.
-static CHAOS_IL2CPP_INTPTR box_bool(CHAOS_IL2CPP_INT32 value) noexcept
+static CHAOS_IL2CPP_INTPTR box_bool(CHAOS_IL2CPP_INT32 value) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::runtime_core;
     unsigned char* storage = static_cast<unsigned char*>(GcAllocateAtomic(16));
@@ -867,7 +867,7 @@ static CHAOS_IL2CPP_INTPTR box_bool(CHAOS_IL2CPP_INT32 value) noexcept
 // TypeCode values: Boolean=3, Char=4, SByte=5, Byte=6, Int16=7, UInt16=8,
 // Int32=9, UInt32=10, Int64=11, UInt64=12, Single=13, Double=14, Decimal=15,
 // DateTime=16, String=18.
-extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertChangeType(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 typeCode) noexcept
+extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertChangeType(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 typeCode) CHAOS_STUB_NOEXCEPT
 {
     if (obj == 0) return 0;
     switch (typeCode)
@@ -925,7 +925,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertChangeType(CHAOS_IL2CPP_INTPTR obj, C
 // Convert.ChangeType(object, TypeCode, IFormatProvider) -> object
 // IFormatProvider is ignored for the simple conversions that ATG probes.
 extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertChangeTypeWithProvider(
-    CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 typeCode, CHAOS_IL2CPP_INTPTR provider) noexcept
+    CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INT32 typeCode, CHAOS_IL2CPP_INTPTR provider) CHAOS_STUB_NOEXCEPT
 {
     (void)provider;
     return ChaosConvertChangeType(obj, typeCode);
@@ -947,7 +947,7 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosConvertChangeTypeWithProvider(
 namespace {
 
 template <typename T>
-bool TryParseUnsignedCore(const char* s, T* out) noexcept
+bool TryParseUnsignedCore(const char* s, T* out) CHAOS_STUB_NOEXCEPT
 {
     if (s == nullptr || *s == '\0') return false;
     char* end = nullptr;
@@ -960,7 +960,7 @@ bool TryParseUnsignedCore(const char* s, T* out) noexcept
 }
 
 template <typename T>
-bool TryParseSignedCore(const char* s, T* out) noexcept
+bool TryParseSignedCore(const char* s, T* out) CHAOS_STUB_NOEXCEPT
 {
     if (s == nullptr || *s == '\0') return false;
     char* end = nullptr;
@@ -973,7 +973,7 @@ bool TryParseSignedCore(const char* s, T* out) noexcept
     return true;
 }
 
-bool TryParseF64Core(const char* s, CHAOS_IL2CPP_FLOAT64* out) noexcept
+bool TryParseF64Core(const char* s, CHAOS_IL2CPP_FLOAT64* out) CHAOS_STUB_NOEXCEPT
 {
     if (s == nullptr || *s == '\0') return false;
     char* end = nullptr;
@@ -988,7 +988,7 @@ bool TryParseF64Core(const char* s, CHAOS_IL2CPP_FLOAT64* out) noexcept
 
 #define CHAOS_TRY_PARSE_SCAFFOLD(NAME, CTYPE, CORE)                                \
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParse##NAME(                                 \
-    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) noexcept                     \
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT                     \
 {                                                                                  \
     if (str == 0 || out == 0) return 0;                                            \
     const char* data = nullptr; CHAOS_IL2CPP_INT32 len = 0;                        \
@@ -1014,7 +1014,7 @@ CHAOS_TRY_PARSE_SCAFFOLD(Double,  CHAOS_IL2CPP_FLOAT64, TryParseF64Core)
 // Single needs an explicit body: the shared scaffold would store a FLOAT64
 // (8 bytes) through the out pointer, overflowing the 4-byte float slot.
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingle(
-    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) noexcept
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 {
     if (str == 0 || out == 0) return 0;
     const char* data = nullptr; CHAOS_IL2CPP_INT32 len = 0;
@@ -1028,7 +1028,7 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingle(
 
 // Boolean is not numeric — comparison against the two literal spellings.
 extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBoolean(
-    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) noexcept
+    CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 {
     if (str == 0 || out == 0) return 0;
     const char* data = nullptr; CHAOS_IL2CPP_INT32 len = 0;
@@ -1059,7 +1059,7 @@ extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBoolean(
 // to the base parse (not probed today).
 
 // True when the decoded string consists solely of [0-9] (non-empty).
-static bool StringIsDigitsOnly(CHAOS_IL2CPP_INTPTR str) noexcept
+static bool StringIsDigitsOnly(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     if (str == 0) return false;
     const char* data = nullptr; CHAOS_IL2CPP_INT32 len = 0;
@@ -1073,80 +1073,80 @@ static bool StringIsDigitsOnly(CHAOS_IL2CPP_INTPTR str) noexcept
     return true;
 }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseInt32(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseInt32(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseInt32(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseUInt32(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseUInt32(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt32StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseUInt32(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseInt64(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseInt64(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseInt64(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseUInt64(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseUInt64(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt64StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseUInt64(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseInt16(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseInt16(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseInt16(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Styles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseUInt16(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16Provider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseUInt16(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseUInt16StylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseUInt16(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseByte(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseByte(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseByte(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseSByte(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseSByte(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSByteStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseSByte(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseBoolean(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseBoolean(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseBooleanStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseBoolean(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseSingle(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseSingle(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseSingleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseSingle(str, out); }
 
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStyles(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; return ChaosTryParseDouble(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { (void)prov; return ChaosTryParseDouble(str, out); }
-extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) noexcept
+extern "C" CHAOS_IL2CPP_INT32 ChaosTryParseDoubleStylesProvider(CHAOS_IL2CPP_INTPTR str, CHAOS_IL2CPP_INT32 styles, CHAOS_IL2CPP_INTPTR prov, CHAOS_IL2CPP_INTPTR out) CHAOS_STUB_NOEXCEPT
 { if (styles == 0 && !StringIsDigitsOnly(str)) return 0; (void)prov; return ChaosTryParseDouble(str, out); }
 

@@ -35,6 +35,27 @@
 // chaos::il2cpp::runtime_core::g_chaos_exception_obj,
 // push/pop_exception_jmp_buf, chaos_raise_exception, etc.)
 
+// ── Stub exception-boundary annotation ────────────────────────────
+//
+// Hand-written native stubs and the dispatch layer raise managed exceptions
+// via RaiseManagedException -> chaos_raise_exception.  Under CPP_THROW that is
+// a real C++ `throw`, and a throw crossing a `noexcept` frame invokes
+// std::terminate -- which is why Linux/macOS hotupdate died with "terminate
+// called recursively" while Windows passed.  Windows delivers via
+// RaiseException (an OS mechanism) and SETJMP via longjmp; neither is governed
+// by the C++ noexcept contract, so there the annotation keeps its literal
+// meaning ("this does not leak C++ throws") and must stay.
+//
+// Use CHAOS_STUB_NOEXCEPT on any function that can reach RaiseManagedException.
+// Declarations and definitions of the same function must move together -- they
+// live in mutually-including header clusters, and mismatched exception
+// specifications are a hard compile error.
+#if defined(CHAOS_IL2CPP_EH_CPP_THROW)
+#  define CHAOS_STUB_NOEXCEPT
+#else
+#  define CHAOS_STUB_NOEXCEPT noexcept
+#endif
+
 // ── Try/Catch ─────────────────────────────────────────────────────
 
 #if !defined(CHAOS_IL2CPP_EH_SETJMP) && !defined(CHAOS_IL2CPP_EH_WIN32_SEH)

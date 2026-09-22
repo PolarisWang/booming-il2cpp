@@ -164,7 +164,7 @@ bool IsValidName(const char* s, size_t len, bool allowColon) {
 
 extern "C" {
 
-void ChaosXmlConvertVerifyName(CHAOS_IL2CPP_INTPTR name) noexcept
+void ChaosXmlConvertVerifyName(CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(name, data, len) || !IsValidName(data, len, true))
@@ -172,7 +172,7 @@ void ChaosXmlConvertVerifyName(CHAOS_IL2CPP_INTPTR name) noexcept
             "The name is not valid XML.");
 }
 
-void ChaosXmlConvertVerifyNCName(CHAOS_IL2CPP_INTPTR name) noexcept
+void ChaosXmlConvertVerifyNCName(CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(name, data, len) || !IsValidName(data, len, false))
@@ -180,7 +180,7 @@ void ChaosXmlConvertVerifyNCName(CHAOS_IL2CPP_INTPTR name) noexcept
             "The name is not a valid NCName.");
 }
 
-void ChaosXmlConvertVerifyNMTOKEN(CHAOS_IL2CPP_INTPTR name) noexcept
+void ChaosXmlConvertVerifyNMTOKEN(CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(name, data, len) || len == 0)
@@ -193,7 +193,7 @@ void ChaosXmlConvertVerifyNMTOKEN(CHAOS_IL2CPP_INTPTR name) noexcept
     }
 }
 
-void ChaosXmlConvertVerifyPublicId(CHAOS_IL2CPP_INTPTR id) noexcept
+void ChaosXmlConvertVerifyPublicId(CHAOS_IL2CPP_INTPTR id) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(id, data, len)) return;
@@ -210,7 +210,7 @@ void ChaosXmlConvertVerifyPublicId(CHAOS_IL2CPP_INTPTR id) noexcept
     }
 }
 
-void ChaosXmlConvertVerifyWhitespace(CHAOS_IL2CPP_INTPTR text) noexcept
+void ChaosXmlConvertVerifyWhitespace(CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(text, data, len)) return;
@@ -221,7 +221,7 @@ void ChaosXmlConvertVerifyWhitespace(CHAOS_IL2CPP_INTPTR text) noexcept
     }
 }
 
-void ChaosXmlConvertVerifyXmlChars(CHAOS_IL2CPP_INTPTR text) noexcept
+void ChaosXmlConvertVerifyXmlChars(CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(text, data, len)) return;
@@ -240,7 +240,7 @@ void ChaosXmlConvertVerifyXmlChars(CHAOS_IL2CPP_INTPTR text) noexcept
 // Scalar conversions
 // ══════════════════════════════════════════════════════════════════
 
-CHAOS_IL2CPP_INT32 ChaosXmlConvertToBoolean(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlConvertToBoolean(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -250,7 +250,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlConvertToBoolean(CHAOS_IL2CPP_INTPTR str) noexcept
     RaiseFormatError();
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlConvertToInt32(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlConvertToInt32(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -261,7 +261,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlConvertToInt32(CHAOS_IL2CPP_INTPTR str) noexcept
     return static_cast<CHAOS_IL2CPP_INT32>(v);
 }
 
-CHAOS_IL2CPP_INT64 ChaosXmlConvertToInt64(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT64 ChaosXmlConvertToInt64(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -270,7 +270,7 @@ CHAOS_IL2CPP_INT64 ChaosXmlConvertToInt64(CHAOS_IL2CPP_INTPTR str) noexcept
     return static_cast<CHAOS_IL2CPP_INT64>(v);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlConvertToInt16(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlConvertToInt16(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -281,7 +281,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlConvertToInt16(CHAOS_IL2CPP_INTPTR str) noexcept
     return static_cast<CHAOS_IL2CPP_INT32>(v);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlConvertToSByte(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlConvertToSByte(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -292,7 +292,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlConvertToSByte(CHAOS_IL2CPP_INTPTR str) noexcept
     return static_cast<CHAOS_IL2CPP_INT32>(v);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlConvertToByte(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlConvertToByte(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -303,7 +303,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlConvertToByte(CHAOS_IL2CPP_INTPTR str) noexcept
     return static_cast<CHAOS_IL2CPP_INT32>(v);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlConvertToUInt16(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlConvertToUInt16(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -314,7 +314,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlConvertToUInt16(CHAOS_IL2CPP_INTPTR str) noexcept
     return static_cast<CHAOS_IL2CPP_INT32>(v);
 }
 
-CHAOS_IL2CPP_INT32 ChaosXmlConvertToUInt32(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlConvertToUInt32(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -325,7 +325,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlConvertToUInt32(CHAOS_IL2CPP_INTPTR str) noexcept
     return static_cast<CHAOS_IL2CPP_INT32>(static_cast<uint32_t>(v));
 }
 
-CHAOS_IL2CPP_INT64 ChaosXmlConvertToUInt64(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT64 ChaosXmlConvertToUInt64(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -334,7 +334,7 @@ CHAOS_IL2CPP_INT64 ChaosXmlConvertToUInt64(CHAOS_IL2CPP_INTPTR str) noexcept
     return static_cast<CHAOS_IL2CPP_INT64>(v);
 }
 
-double ChaosXmlConvertToDouble(CHAOS_IL2CPP_INTPTR str) noexcept
+double ChaosXmlConvertToDouble(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0.0;
@@ -349,7 +349,7 @@ double ChaosXmlConvertToDouble(CHAOS_IL2CPP_INTPTR str) noexcept
     return v;
 }
 
-float ChaosXmlConvertToSingle(CHAOS_IL2CPP_INTPTR str) noexcept
+float ChaosXmlConvertToSingle(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0.0f;
@@ -367,7 +367,7 @@ float ChaosXmlConvertToSingle(CHAOS_IL2CPP_INTPTR str) noexcept
 /// 16-byte value type that does not fit the scalar return slots.  The ATG
 /// subjects compare the box or its ToString, so a decimal-shaped box is built
 /// from the parsed double's scaled integer form.
-CHAOS_IL2CPP_INTPTR ChaosXmlConvertToDecimal(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlConvertToDecimal(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -384,7 +384,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlConvertToDecimal(CHAOS_IL2CPP_INTPTR str) noexcept
 
 /// XmlConvert.ToChar — a single XML character.  Surrogate pairs are rejected by
 /// the managed API, so only a one-character input is accepted.
-CHAOS_IL2CPP_INT32 ChaosXmlConvertToChar(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT32 ChaosXmlConvertToChar(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -397,7 +397,7 @@ CHAOS_IL2CPP_INT32 ChaosXmlConvertToChar(CHAOS_IL2CPP_INTPTR str) noexcept
 /// packed into the 128-bit return slot as two 64-bit halves via an out-param
 /// convention is not available here, so the value is packed into a boxed
 /// 16-byte array handle.
-CHAOS_IL2CPP_INTPTR ChaosXmlConvertToGuid(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INTPTR ChaosXmlConvertToGuid(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -413,7 +413,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlConvertToGuid(CHAOS_IL2CPP_INTPTR str) noexcept
 /// XmlConvert.ToTimeSpan — parses the XSD duration lexical form
 /// (PnYnMnDTnHnMnS).  Only the day/time components are honoured; year and
 /// month are not convertible to a fixed TimeSpan and are rejected.
-CHAOS_IL2CPP_INT64 ChaosXmlConvertToTimeSpan(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT64 ChaosXmlConvertToTimeSpan(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -455,7 +455,7 @@ CHAOS_IL2CPP_INT64 ChaosXmlConvertToTimeSpan(CHAOS_IL2CPP_INTPTR str) noexcept
 /// form.  'T' is the XSD date/time separator and is normalised to a space;
 /// a trailing 'Z' (UTC) is stripped since this stub returns a Kind-agnostic
 /// tick count.
-CHAOS_IL2CPP_INT64 ChaosXmlConvertToDateTime(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT64 ChaosXmlConvertToDateTime(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
@@ -482,7 +482,7 @@ CHAOS_IL2CPP_INT64 ChaosXmlConvertToDateTime(CHAOS_IL2CPP_INTPTR str) noexcept
 /// XmlConvert.ToDateTimeOffset — same lexical form as ToDateTime; the offset
 /// component is parsed and folded into the returned tick count (which therefore
 /// represents the UTC instant).
-CHAOS_IL2CPP_INT64 ChaosXmlConvertToDateTimeOffset(CHAOS_IL2CPP_INTPTR str) noexcept
+CHAOS_IL2CPP_INT64 ChaosXmlConvertToDateTimeOffset(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;

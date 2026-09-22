@@ -22,5 +22,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chaos.IL2CPP.Tools.ApiSurfaceScanner\Chaos.IL2CPP.Tools.ApiSurfaceScanner.csproj" />
+    <ProjectReference Include="..\..\managed\Chaos.IL2CPP.Generator\Chaos.IL2CPP.Generator.csproj" />
   </ItemGroup>
 </Project>

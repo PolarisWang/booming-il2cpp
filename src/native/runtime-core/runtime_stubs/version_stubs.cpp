@@ -23,7 +23,7 @@ extern "C" {
 // ── Decode a string subject value to a const char* ───────────────────
 // Reused from parse_convert.cpp (same pattern).
 static bool DecodeVersionString(CHAOS_IL2CPP_INTPTR value, const char*& out_data,
-                                CHAOS_IL2CPP_INT32& out_len) noexcept
+                                CHAOS_IL2CPP_INT32& out_len) CHAOS_STUB_NOEXCEPT
 {
     out_data = nullptr;
     out_len = 0;
@@ -45,7 +45,7 @@ static bool DecodeVersionString(CHAOS_IL2CPP_INTPTR value, const char*& out_data
 }
 
 
-CHAOS_IL2CPP_INTPTR ChaosVersionParse(CHAOS_IL2CPP_INTPTR value) noexcept
+CHAOS_IL2CPP_INTPTR ChaosVersionParse(CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
     const char* data = nullptr;
     CHAOS_IL2CPP_INT32 len = 0;

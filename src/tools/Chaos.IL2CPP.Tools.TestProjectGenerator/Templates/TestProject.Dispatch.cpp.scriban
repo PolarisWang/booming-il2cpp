@@ -27,7 +27,7 @@ extern "C" CHAOS_IL2CPP_INT32 GetHotpatchEntryCount() noexcept;
 // JIT mode: use kDefaultArgThunks to bypass JIT precode trampoline.
 // AOT mode: nullptr falls through to entry.direct_ptr (hotpatch-aware).
 {{ if is_jit }}
-extern "C" void (*kDefaultArgThunks[])() noexcept;
+extern "C" void (*kDefaultArgThunks[])() CHAOS_STUB_NOEXCEPT;
 #define CHAOS_DISPATCH_THUNKS kDefaultArgThunks
 {{ else }}
 #define CHAOS_DISPATCH_THUNKS nullptr

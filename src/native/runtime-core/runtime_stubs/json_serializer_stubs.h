@@ -19,12 +19,13 @@
 // docs/dev/in-progress/json-xml-production-readiness/STATUS.md).
 #pragma once
 
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
 #include <chaos/native_types.h>
 
 extern "C" {
 
 /// JsonSerializer.SerializeToUtf8Bytes<int>(int, JsonSerializerOptions) -> byte[]
 CHAOS_IL2CPP_INTPTR ChaosJsonSerializerSerializeToUtf8BytesInt(
-    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR options) noexcept;
+    CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR options) CHAOS_STUB_NOEXCEPT;
 
 }  // extern "C"

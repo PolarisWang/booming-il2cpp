@@ -15,6 +15,7 @@
 // ═══════════════════════════════════════════════════════════════════════
 
 #include <chaos/common.h>
+#include <chaos/eh.h>  // CHAOS_STUB_NOEXCEPT
 #include <chaos/type_info.h>
 #include "generated_code_compat.h"
 

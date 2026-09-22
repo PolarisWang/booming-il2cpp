@@ -75,6 +75,248 @@ struct chaos_type_System_Private_CoreLib_System_MulticastDelegate : public chaos
 
 
 
+struct chaos_type_System_Private_CoreLib_System_Exception
+
+{
+
+    ThinLockableHeader header{};
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_SystemException : public chaos_type_System_Private_CoreLib_System_Exception
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_ArgumentException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_ArgumentNullException : public chaos_type_System_Private_CoreLib_System_ArgumentException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException : public chaos_type_System_Private_CoreLib_System_ArgumentException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_ArithmeticException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_DivideByZeroException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_FormatException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_InvalidCastException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_InvalidOperationException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_NotImplementedException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_NotSupportedException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_NullReferenceException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_ObjectDisposedException : public chaos_type_System_Private_CoreLib_System_InvalidOperationException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_OverflowException : public chaos_type_System_Private_CoreLib_System_ArithmeticException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
 
 {
@@ -189,6 +431,22 @@ struct chaos_type_System_Private_CoreLib_System_String
 
 
 
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
+
+};
+
+
+
 struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_Private_CoreLib_System_Object
 
 {
@@ -198,6 +456,22 @@ struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_
     CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 
     CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+
+};
+
+
+
+struct chaos_type_System_Private_CoreLib_System_Xml_XmlException : public chaos_type_System_Private_CoreLib_System_SystemException
+
+{
+
+    CHAOS_IL2CPP_INTPTR _message = 0;
+
+    CHAOS_IL2CPP_INTPTR _innerException = 0;
+
+    CHAOS_IL2CPP_INTPTR _stackTrace = 0;
+
+    CHAOS_IL2CPP_INT32 _HResult = 0;
 
 };
 
@@ -232,12 +506,40 @@ struct chaos_type_System_Private_CoreLib_System_Action {
     CHAOS_IL2CPP_UINT32 _pad = 0;
 };
 struct chaos_boxed_type_System_Private_CoreLib_System_Action;
+struct chaos_type_System_Private_CoreLib_System_ArgumentException;
+struct chaos_boxed_type_System_Private_CoreLib_System_ArgumentException;
+struct chaos_type_System_Private_CoreLib_System_ArgumentNullException;
+struct chaos_boxed_type_System_Private_CoreLib_System_ArgumentNullException;
+struct chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException;
+struct chaos_boxed_type_System_Private_CoreLib_System_ArgumentOutOfRangeException;
+struct chaos_type_System_Private_CoreLib_System_ArithmeticException;
+struct chaos_boxed_type_System_Private_CoreLib_System_ArithmeticException;
 struct chaos_type_System_Private_CoreLib_System_Delegate;
 struct chaos_boxed_type_System_Private_CoreLib_System_Delegate;
+struct chaos_type_System_Private_CoreLib_System_DivideByZeroException;
+struct chaos_boxed_type_System_Private_CoreLib_System_DivideByZeroException;
+struct chaos_type_System_Private_CoreLib_System_Exception;
+struct chaos_boxed_type_System_Private_CoreLib_System_Exception;
+struct chaos_type_System_Private_CoreLib_System_FormatException;
+struct chaos_boxed_type_System_Private_CoreLib_System_FormatException;
+struct chaos_type_System_Private_CoreLib_System_InvalidCastException;
+struct chaos_boxed_type_System_Private_CoreLib_System_InvalidCastException;
+struct chaos_type_System_Private_CoreLib_System_InvalidOperationException;
+struct chaos_boxed_type_System_Private_CoreLib_System_InvalidOperationException;
 struct chaos_type_System_Private_CoreLib_System_MulticastDelegate;
 struct chaos_boxed_type_System_Private_CoreLib_System_MulticastDelegate;
+struct chaos_type_System_Private_CoreLib_System_NotImplementedException;
+struct chaos_boxed_type_System_Private_CoreLib_System_NotImplementedException;
+struct chaos_type_System_Private_CoreLib_System_NotSupportedException;
+struct chaos_boxed_type_System_Private_CoreLib_System_NotSupportedException;
+struct chaos_type_System_Private_CoreLib_System_NullReferenceException;
+struct chaos_boxed_type_System_Private_CoreLib_System_NullReferenceException;
 struct chaos_type_System_Private_CoreLib_System_Object;
 struct chaos_boxed_type_System_Private_CoreLib_System_Object;
+struct chaos_type_System_Private_CoreLib_System_ObjectDisposedException;
+struct chaos_boxed_type_System_Private_CoreLib_System_ObjectDisposedException;
+struct chaos_type_System_Private_CoreLib_System_OverflowException;
+struct chaos_boxed_type_System_Private_CoreLib_System_OverflowException;
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_Assembly;
 struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName;
@@ -254,8 +556,14 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_ParameterInfo;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_ParameterInfo;
 struct chaos_type_System_Private_CoreLib_System_String;
 struct chaos_boxed_type_System_Private_CoreLib_System_String;
+struct chaos_type_System_Private_CoreLib_System_SystemException;
+struct chaos_boxed_type_System_Private_CoreLib_System_SystemException;
+struct chaos_type_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException;
+struct chaos_boxed_type_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException;
 struct chaos_type_System_Private_CoreLib_System_Type;
 struct chaos_boxed_type_System_Private_CoreLib_System_Type;
+struct chaos_type_System_Private_CoreLib_System_Xml_XmlException;
+struct chaos_boxed_type_System_Private_CoreLib_System_Xml_XmlException;
 
 struct HotpatchEntryV0;
 extern "C" HotpatchEntryV0 s_hotpatch_entries[];
@@ -269,9 +577,23 @@ extern MethodTable chaos_mt_SomeOtherAssembly_IComExternal;
 extern MethodTable chaos_mt_SomeOtherAssembly_IComExternal__Compute_System_Int32_System_Int32_;
 extern MethodTable chaos_mt_System_Int32;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Action;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_ArgumentException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_ArgumentNullException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_ArithmeticException;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Delegate;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_DivideByZeroException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Exception;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_FormatException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_InvalidCastException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_InvalidOperationException;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_MulticastDelegate;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_NotImplementedException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_NotSupportedException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_NullReferenceException;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Object;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_ObjectDisposedException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_OverflowException;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo;
@@ -280,7 +602,10 @@ extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ParameterInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_String;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_SystemException;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Type;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Xml_XmlException;
 
 
 extern CHAOS_IL2CPP_INTPTR chaos_static_SnapshotTestFixtures_IComInternal__Compute_System_Int32_System_Int32_;
@@ -294,9 +619,23 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_SnapshotTestFixtures_IComInternal
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_SomeOtherAssembly_IComExternal__Compute_System_Int32_System_Int32_;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Int32;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Action;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArgumentException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArgumentNullException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArgumentOutOfRangeException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ArithmeticException;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Delegate;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_DivideByZeroException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Exception;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_FormatException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_InvalidCastException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_InvalidOperationException;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_MulticastDelegate;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_NotImplementedException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_NotSupportedException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_NullReferenceException;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_ObjectDisposedException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_OverflowException;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo;
@@ -305,7 +644,10 @@ extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Ref
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_ParameterInfo;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_SystemException;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException;
 extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type;
+extern const CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Xml_XmlException;
 
 extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_CrossAssemblyComCaller(void);
 extern "C" void chaos_ensure_type_initialized_System_Int32(void);
@@ -324,6 +666,23 @@ extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Refl
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_FieldInfo(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_Assembly(void);
 extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Reflection_AssemblyName(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_ArgumentException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_SystemException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Exception(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_ArgumentNullException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_ArgumentOutOfRangeException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_DivideByZeroException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_FormatException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_InvalidCastException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_InvalidOperationException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_NotImplementedException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_NotSupportedException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_NullReferenceException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_ObjectDisposedException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_OverflowException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_ArithmeticException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Threading_Tasks_TaskCanceledException(void);
+extern "C" void chaos_ensure_type_initialized_System_Private_CoreLib_System_Xml_XmlException(void);
 extern "C" void chaos_ensure_type_initialized_SnapshotTestFixtures_IComInternal__Compute_System_Int32_System_Int32_(void);
 extern "C" void chaos_ensure_type_initialized_SomeOtherAssembly_IComExternal__Compute_System_Int32_System_Int32_(void);
 
@@ -347,15 +706,15 @@ extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 {
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_IComInternal() noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SomeOtherAssembly_IComExternal() noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SomeOtherAssembly_IComExternal__Compute_System_Int32_System_Int32_() noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_IComInternal(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SomeOtherAssembly_IComExternal(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SomeOtherAssembly_IComExternal__Compute_System_Int32_System_Int32_(void) noexcept;
 
 } // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_IComInternal() noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SomeOtherAssembly_IComExternal() noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SomeOtherAssembly_IComExternal__Compute_System_Int32_System_Int32_() noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_IComInternal(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SomeOtherAssembly_IComExternal(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SomeOtherAssembly_IComExternal__Compute_System_Int32_System_Int32_(void) noexcept;
 
 extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_IComInternal__Compute_System_Int32_System_Int32_(CHAOS_IL2CPP_INTPTR) noexcept;
 

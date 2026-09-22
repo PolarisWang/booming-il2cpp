@@ -1136,6 +1136,28 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
             target_dll = c
             break
 
+    # Some assemblies ship a type-forwarding shim in the shared runtime
+    # directory: System.Xml.ReaderWriter.dll there is ~21 KB (every public type
+    # it names is forwarded to System.Private.Xml), so the AutoTestGenerator
+    # scans 0 types and the chunk silently produces no subjects — which is what
+    # left the `xml` chunk with "489 methods dropped (100%)" and never produced
+    # chunks/xml/.  The .Ref pack carries the real facade (116 KB, 77 types).
+    #
+    # Prefer the first candidate that is not an implausibly small shim, keeping
+    # the original ordering as the fallback so nothing else changes.
+    if target_dll is not None:
+        _SHIM_BYTES = 40_000
+        if target_dll.stat().st_size < _SHIM_BYTES:
+            for c in dll_candidates:
+                try:
+                    if c.exists() and c.stat().st_size >= _SHIM_BYTES:
+                        print(f"  [build] Preferred non-shim DLL over {target_dll.name} "
+                              f"({target_dll.stat().st_size} bytes, type-forwarding shim)")
+                        target_dll = c
+                        break
+                except OSError:
+                    continue
+
     if target_dll is None:
         # Debug output so the controller can diagnose "DLL not found"
         _dbg = "; ".join(f"{c} exists={c.exists()}" for c in dll_candidates[:6])
