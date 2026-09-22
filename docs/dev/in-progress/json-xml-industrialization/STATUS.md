@@ -29,6 +29,18 @@ merge_granularity: 阶段边界
 recommended_next_child: P1-01
 ```
 
+## P1 阶段进展（2026-09-22）
+
+**P1-01 ✅ 已完成**（提交 `99a16cfcf`）：ATG 消费 codegen shape registry，
+取代手工白名单。效果：text-json 的 `AOT-STUB-GAP` 标记数 **211 → 146**，
+守卫测试 470 checks + 两次负控验证。
+
+**P1-02 ⏳ 已识别未解决**（详见 `p1-02-create-generic-canonical-body.md`）：
+`SubjectInstanceFactory.Create<T>()` 被标记 `has-canonical-body` + `generated-direct-call`，
+绑到 `InterpreterEntryDirect`，绕过 shape 决策链 → **factoryGap 22 条**（全在 `Utf8JsonWriterTests`）。
+给 `Create` 注册泛型 shape **已实测无效**。AOT `real` 未提升由此导致，非 P1-01 缺陷。
+**建议后续 Phase 3 处理**（该类型补真实 AOT body 时一并解决）。
+
 ## Phase 0 完成结论（2026-09-20）
 
 **提交**：`0262d6873`
