@@ -684,7 +684,7 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_managed(CHAOS_IL2
 extern "C" void* kChaosExternalRuntimeFnTable[];
 
 extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_Helper__ConsumeString_System_Void_System_String_(CHAOS_IL2CPP_INTPTR) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_Helper__ConsumeString_System_Void_System_String_(CHAOS_IL2CPP_INTPTR) CHAOS_STUB_NOEXCEPT;
 
 void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);
 

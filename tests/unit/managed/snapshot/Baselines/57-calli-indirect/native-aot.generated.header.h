@@ -673,13 +673,13 @@ extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 {
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_CalliHelper__run_calli_target(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_CalliHelper__run_calli_target(void) CHAOS_STUB_NOEXCEPT;
 
 } // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_CalliHelper__run_calli_target(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_CalliHelper__run_calli_target(void) CHAOS_STUB_NOEXCEPT;
 
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_Helper__GetValue_System_Int32__(CHAOS_IL2CPP_INTPTR) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_SnapshotTestFixtures_Helper__GetValue_System_Int32__(CHAOS_IL2CPP_INTPTR) CHAOS_STUB_NOEXCEPT;
 
 void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);
 

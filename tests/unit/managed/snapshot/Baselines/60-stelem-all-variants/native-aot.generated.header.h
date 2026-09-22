@@ -686,19 +686,19 @@ extern "C" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_managed(CHAOS_IL2
 extern "C" CHAOS_IL2CPP_INT32 kChaosExternalRuntimeCount;
 namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 {
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Double(void) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int16(void) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int64(void) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int8(void) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Single(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Double(void) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int16(void) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int64(void) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int8(void) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Single(void) CHAOS_STUB_NOEXCEPT;
 
 } // namespace chaos::il2cpp::codegen::SnapshotTestFixtures
 
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Double(void) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int16(void) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int64(void) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int8(void) noexcept;
-extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Single(void) noexcept;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Double(void) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int16(void) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int64(void) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int8(void) CHAOS_STUB_NOEXCEPT;
+extern "C" CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Single(void) CHAOS_STUB_NOEXCEPT;
 
 void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);
 
