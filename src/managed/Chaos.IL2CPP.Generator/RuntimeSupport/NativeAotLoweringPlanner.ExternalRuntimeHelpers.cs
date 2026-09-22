@@ -688,8 +688,31 @@ public sealed partial class NativeAotLoweringPlanner
 			: CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ValueType);
 		var failSymbol = GetExternalRuntimeHelperSymbol(callee);
 		string escapedCallee = callee.Replace("\\", "\\\\").Replace("\"", "\\\"");
-		// All catch-all fallback functions use () regardless of actual method params
-		// because call sites pass 0 args and the body uses hardcoded subject ID.
+		// ── Instance method receiver injection (Phase A, catch-all path) ──────
+		//
+		// The call site for an instance callee pops the receiver off the eval
+		// stack exactly like any other argument, so the emitted helper MUST
+		// accept it.  Previously every catch-all helper was emitted as `()`
+		// regardless of the callee's shape, on the reasoning that "call sites
+		// pass 0 args".  That holds for *static* BCL methods but not for
+		// instance ones: for those the receiver was loaded into a temp and then
+		// silently dropped (`_s7 = chaos_locals[0];` followed by a call with no
+		// arguments).  Measured consequence: Assert.AreEqual<T> on arrays
+		// reaches IEnumerable.GetEnumerator / IEnumerator.MoveNext /
+		// get_Current through this path, each returned 0 with the receiver
+		// discarded, so the enumeration loop terminated immediately and every
+		// collection comparison reported a mismatch.
+		//
+		// Static methods keep the zero-arg form — their call sites genuinely
+		// push no receiver.
+		var catchAllReceiverSlot = TryGetReceiverSlot(callee);
+		var catchAllAbis = catchAllReceiverSlot == null
+			? Array.Empty<AotCoreIrAbiSlotArtifact>()
+			: new AotCoreIrAbiSlotArtifact[] { catchAllReceiverSlot };
+		var catchAllSignature = FormatAbiSlotParameterSignature(catchAllAbis);
+		var catchAllRawArgs = catchAllReceiverSlot == null
+			? EmptyRawArgumentIndices
+			: (IReadOnlySet<int>)new HashSet<int> { 0 };
 		//
 		// P0-A (json-xml-production-readiness): the generated helper emits a
 		// one-time WARN before delegating.  ChaosExternalRuntimeFallback's Phase 3
@@ -740,10 +763,10 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			bodyLines.Add("    return ChaosExternalRuntimeFallback(\"" + escapedCallee + "\");");
 		}
-		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, "",
+		var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", failSymbol, catchAllSignature,
 			bodyLines.ToArray());
 		helperDefinition = new ExternalRuntimeHelperDefinition(callee, failSymbol, src,
-			Array.Empty<AotCoreIrAbiSlotArtifact>(), failReturnAbi, EmptyRawArgumentIndices);
+			catchAllAbis, failReturnAbi, catchAllRawArgs);
 		_externalRuntimeHelperCache[callee] = helperDefinition;
 		return true;
 
@@ -993,10 +1016,26 @@ public sealed partial class NativeAotLoweringPlanner
 		// A denylist would be fragile here (any unknown type would silently get
 		// a receiver and break its shim), so this is an explicit allowlist:
 		// every entry has a ShapeRegistry registration that expects a receiver.
-		if (!HasMethodParameters(callee))
+		//
+		// T6: the zero-param short-circuit below is NOT sound for the
+		// enumeration interface pair.  Its rationale — "the sole slot IS the
+		// receiver" — describes the SimpleForward shape path, where the entry
+		// itself declares a receiver slot.  A zero-param instance method that
+		// reaches the *catch-all* gets no slot at all (the helper was emitted
+		// `(void)`), so the receiver was discarded and IEnumerable.GetEnumerator
+		// / IEnumerator.MoveNext / get_Current all returned 0 — making every
+		// collection comparison in Assert.AreEqual<T> report a mismatch.
+		// Enumerate those types past the guard.
+		var typeName = ExtractDeclaringTypeName(callee);
+		var isEnumerableInterface =
+			typeName != null &&
+			(string.Equals(typeName, "System.Collections.IEnumerable", StringComparison.Ordinal) ||
+			 string.Equals(typeName, "System.Collections.IEnumerator", StringComparison.Ordinal) ||
+			 string.Equals(typeName, "IEnumerable", StringComparison.Ordinal) ||
+			 string.Equals(typeName, "IEnumerator", StringComparison.Ordinal));
+		if (!HasMethodParameters(callee) && !isEnumerableInterface)
 			return false;   // zero-param already works — the sole slot IS the receiver
 
-		var typeName = ExtractDeclaringTypeName(callee);
 		if (typeName == null) return false;
 
 		// ── Static methods on otherwise-instance types ──
@@ -1034,6 +1073,23 @@ public sealed partial class NativeAotLoweringPlanner
 		"System.Threading.Tasks.Task`1",
 		"System.Threading.Tasks.ValueTask",
 		"System.Threading.Tasks.ValueTask`1",
+		// T6 — collection enumeration interface pair.
+		//
+		// Assert.AreEqual<T> compares IEnumerable operands by walking
+		// GetEnumerator()/MoveNext()/get_Current().  Those three are *zero-param
+		// instance* methods, so they previously fell through
+		// _injectReceiverForParameterisedMissingEntry's
+		// `if (!HasMethodParameters(callee)) return false;` guard, were emitted
+		// with `(void)`, and handed the receiver nowhere — the enumeration loop
+		// then terminated immediately and every collection comparison reported a
+		// mismatch.  Listed here so the receiver slot is injected and the call
+		// sites pass it.  Canonical (read-only) and fully-qualified spellings are
+		// both included: ExtractDeclaringTypeName yields the dotted form for BCL
+		// types but the bare form for short system names.
+		"System.Collections.IEnumerable",
+		"System.Collections.IEnumerator",
+		"IEnumerable",
+		"IEnumerator",
 	};
 
 	/// <summary>

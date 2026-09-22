@@ -48,6 +48,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterMathTruncate(registry);
             RegisterRandomNextDouble(registry);
             RegisterArrayCreateInstance(registry);
+            RegisterArrayEnumeratorStubs(registry);
             RegisterAssemblyGetCallingAssembly(registry);
             RegisterMethodInfoGetBaseDefinition(registry);
             RegisterModulegetName(registry);

@@ -13,10 +13,16 @@ static bool ResolveObjectTypeInfo(TypeInfoHandle type_handle,
     // Path 1: Tag-encoded RuntimeInstantiatedType handle
     const auto* desc = TryDecodeReflectionQueryTypeHandle(type_handle);
     if (desc != nullptr) {
-        // The descriptor's type_info_ptr is the MethodTable address emitted by
-        // codegen for exception-type descriptors (BuildExceptionTypeTable).
-        // MethodTable's first 32 bytes are bit-compatible with TypeInfoHot, so
-        // we can use it directly as the object's type_info.
+        // The descriptor's type_info_ptr is the *static* MethodTable address
+        // (codegen emits `&chaos_mt_*` for each type into BuildExceptionTypeTable /
+        // ChaosRegisterReflectionMembers).  The first 32 bytes of a MethodTable
+        // are bit-compatible with TypeInfoHot (offsetof assertions in type_info.h),
+        // so the same pointer can serve directly as the object's type_info.
+        //
+        // NOTE — do NOT confuse this with RuntimeInstantiatedType::descriptor
+        // (resolve_instantiate.cpp): that heap record's type_info_ptr field is
+        // never populated and the record is freed by UnregisterModuleGenerics.
+        // Pointers reached here are static, never freed, so no lifetime issue.
         if (desc->type_info_ptr != nullptr) {
             out_type_info = static_cast<const TypeInfoHot*>(desc->type_info_ptr);
             if (out_type_info->stable_id != 0) {
@@ -25,9 +31,21 @@ static bool ResolveObjectTypeInfo(TypeInfoHandle type_handle,
                     const CHAOS_IL2CPP_UINT64 stable_id = out_type_info->stable_id;
                     out_vtable = runtime_vtable::FindVTable(stable_id);
                 }
-                return (out_type_info != nullptr);
+                // Unlike Path 2 we do NOT require a resolved vtable to succeed:
+                // the object's dispatch goes through type_info->vtable_array at
+                // the emitting call site, and BuildRuntimeVTable (BuildClosedDescriptor)
+                // guarantees a vtable for closed generic types.  FindVTable here is
+                // only a best-effort backup, not a validity gate.
+                return true;
             }
+            CHAOS_IL2CPP_LOG_WARN_M("ObjectNew",
+                "tag-encoded type descriptor stable_id==0, type_info_ptr={0}, falling back to subject_id",
+                static_cast<const void*>(desc->type_info_ptr));
             out_type_info = nullptr;
+        } else {
+            CHAOS_IL2CPP_LOG_WARN_M("ObjectNew",
+                "tag-encoded type descriptor has null type_info_ptr (subject_id={0}), falling back to subject_id path",
+                desc->subject_id_utf8 != nullptr ? desc->subject_id_utf8 : "(null)");
         }
         if (desc->subject_id_utf8 != nullptr) {
             const CHAOS_IL2CPP_UINT64 stable_id =

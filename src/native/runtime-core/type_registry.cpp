@@ -188,10 +188,18 @@ const TypeInfoHot* TryResolveTypeInfo(TypeInfoHandle handle) noexcept
 {
     if (handle == 0u || handle == TypeInfoHandle{}) return nullptr;
 
-    // ── Path 1: Tag-encoded handles are RuntimeInstantiatedType pointers ──
-    // These carry a ReflectionQueryTypeDescriptor, not a TypeInfo*, so we
-    // cannot resolve to TypeInfo* from this path. The caller should compute
-    // stable_id from the descriptor's subject_id_utf8 and use FindVTable().
+    // ── Path 1: Tag-encoded handles carry a ReflectionQueryTypeDescriptor ──
+    // This path still cannot produce a TypeInfo*: the handle points at a
+    // descriptor, not at the descriptor's resolved type.  Kept returning nullptr.
+    //
+    // Callers that need a TypeInfo* from such a handle must instead read
+    // desc->type_info_ptr — that field holds the *static* MethodTable address
+    // (`&chaos_mt_*`) emitted by codegen, which is bit-compatible with
+    // TypeInfoHot.  See ResolveObjectTypeInfo Path 1 in core/object_creation.cpp
+    // for the one caller that does so.
+    //
+    // Callers that only need a vtable should keep computing stable_id from
+    // subject_id_utf8 and calling FindVTable().
     const auto* desc = TryDecodeReflectionQueryTypeHandle(handle);
     if (desc != nullptr) {
         return nullptr;
