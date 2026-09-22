@@ -43,6 +43,112 @@ public sealed partial class NativeAotEmitter
     internal const int PayloadSectioningBudgetChars = 350_000;
 
     /// <summary>
+    /// Wraps an already-rendered payload section in the standard translation-unit
+    /// preamble: includes, shared header, dispatch forward declaration, warning
+    /// pragmas, and the codegen namespace — closing the namespace afterwards.
+    ///
+    /// <para>
+    /// The section content is produced by the planner inside the codegen
+    /// namespace (it is a slice of the page-0 text), so it is emitted verbatim
+    /// between the namespace open and close rather than being re-indented.
+    /// </para>
+    /// </summary>
+    private static void WrapPayloadSectionInTranslationUnit(
+        StringBuilder sb,
+        NativeAotTemplateModel templateModel,
+        List<string> includes,
+        bool includeExternalRuntimeDefault)
+    {
+        var preamble = new StringBuilder();
+
+        foreach (var include in includes)
+        {
+            preamble.Append("#include ");
+            preamble.Append(include);
+            preamble.Append('\n');
+        }
+
+        preamble.Append("#pragma warning(disable: 2362)\n");
+        preamble.Append("#include \"native-aot.generated.header.h\"\n");
+
+        if (includeExternalRuntimeDefault)
+        {
+            preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR ChaosExternalRuntimeFallbackDefault() noexcept;\n");
+        }
+
+        preamble.Append("\n// Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)\n");
+        preamble.Append("extern \"C\" void InterpreterEntryDirect(\n");
+        preamble.Append("    CHAOS_IL2CPP_UINTPTR method_key,\n");
+        preamble.Append("    void*     args_buf,\n");
+        preamble.Append("    void*     ret_buf) noexcept;\n");
+
+        preamble.Append("\n#pragma warning(push)\n");
+        preamble.Append("#pragma warning(disable: 4065 4244)\n");
+        preamble.Append("#ifdef __GNUC__\n");
+        preamble.Append("#pragma GCC diagnostic push\n");
+        preamble.Append("#pragma GCC diagnostic ignored \"-Wunused-variable\"\n");
+        preamble.Append("#endif\n");
+
+        preamble.Append("\nnamespace chaos::il2cpp::codegen::");
+        preamble.Append(templateModel.CodegenNamespace);
+        preamble.Append(" {\n\n");
+        preamble.Append("// Bring runtime_core and jit declarations into scope for unqualified lookup\n");
+        preamble.Append("using namespace chaos::il2cpp::runtime_core;\n");
+        preamble.Append("using namespace chaos::il2cpp::jit;\n\n");
+
+        // extern "C" AOT method declarations. Payload sections such as the GC
+        // slot map take the ADDRESS of these functions
+        // (`&Chaos_..._generic`) and the method table references them too. They
+        // used to share a translation unit with the emitter that declared them
+        // locally (chaos_generated_module.cpp); once the section moves to its own
+        // TU those declarations are no longer in scope and every reference fails
+        // with C2065 — the roadmap's R1 (`漏改的 static 会在 Phase 2 编译期暴露`).
+        //
+        // These must go in the preamble, before the section text: the slot map
+        // takes the functions' addresses inline, so a declaration appended after
+        // the content is a use-before-declaration (C2065) just the same.
+        if (templateModel.MethodDeclarations is { Count: > 0 })
+        {
+            foreach (var decl in templateModel.MethodDeclarations)
+            {
+                preamble.Append(decl);
+                preamble.Append('\n');
+            }
+            preamble.Append('\n');
+        }
+
+        // Reflection object-model helpers. These are DEFINED in the object-model
+        // section (page 0, "Virtual method table arrays") but CALLED from the
+        // module-registration section, which now lands in its own payload TU.
+        // They have external linkage and no header declaration — the declaration
+        // was never needed while both sections shared a translation unit. The
+        // codebase already uses exactly this pattern for the B3 resolvers
+        // ("defined later in the module registration TU … only the declarations
+        // are visible here"), so this is the established idiom, not a new one.
+        //
+        // Signatures must track ReflectionObjectEmission.cs, which emits the
+        // matching definitions.
+        preamble.Append("// Cross-section reflection helpers (defined in the object-model section)\n");
+        preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_literal(const char* chaos_utf8_data);\n");
+        preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_reference_array(const TypeInfo* chaos_element_type_info, CHAOS_IL2CPP_SIZE chaos_length);\n");
+        preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_type_value(CHAOS_IL2CPP_INTPTR chaos_type_handle);\n");
+        preamble.Append("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_create_instance(CHAOS_IL2CPP_INTPTR chaos_type_value);\n\n");
+
+        sb.Insert(0, preamble.ToString());
+
+        sb.Append("\n}  // namespace chaos::il2cpp::codegen::");
+        sb.Append(templateModel.CodegenNamespace);
+        sb.Append('\n');
+        sb.Append("#ifdef __GNUC__\n");
+        sb.Append("#pragma GCC diagnostic pop\n");
+        sb.Append("#endif\n");
+        sb.Append("#pragma warning(pop)\n\n");
+
+        AddExternalRuntimeStubs(sb);
+        FixFallbackZeroArgCalls(sb);
+    }
+
+    /// <summary>
     /// Builds the shared header content emitted as native-aot.generated.header.h.
     /// Contains extern TypeInfoV0 declarations so every translation unit page has
     /// access to all type symbols without ODR violations from duplicate inline defs.
@@ -86,13 +192,26 @@ public sealed partial class NativeAotEmitter
             var payloadTus = PayloadSectionPartitioner
                 .Partition(templateModel.PayloadSections, PayloadSectioningBudgetChars);
 
+            // A payload TU is a translation unit in its own right, so it needs the
+            // same preamble the method pages get: the project PCH, the shared
+            // header (extern TypeInfoV0 / chaos_mt_* declarations), the dispatch
+            // forward declaration, and the codegen namespace. Emitting the raw
+            // section text alone leaves every type and macro it mentions
+            // undeclared — MSVC then reports the first one as a syntax error
+            // (C2146/C2059) thousands of lines in, which reads like a codegen
+            // defect rather than a missing include.
+            var payloadIncludes = new List<string>(templateModel.Includes);
             for (int i = 0; i < payloadTus.Count; i++)
             {
-                string content = PayloadSectionPartitioner.Render(payloadTus[i]);
+                var payloadBuilder = new StringBuilder();
+                PayloadSectionPartitioner.RenderTo(payloadBuilder, payloadTus[i]);
+                WrapPayloadSectionInTranslationUnit(
+                    payloadBuilder, templateModel, payloadIncludes,
+                    includeExternalRuntimeDefault: true);
                 sources.Add(new NativeAotGeneratedSource
                 {
                     RelativePath = PayloadSectionPartitioner.TranslationUnitFileName("payload", i),
-                    Contents = content,
+                    Contents = payloadBuilder.ToString(),
                 });
                 artifacts.Add(new NativeAotGeneratedArtifactRef
                 {

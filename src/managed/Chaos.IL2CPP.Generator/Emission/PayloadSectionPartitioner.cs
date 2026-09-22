@@ -127,11 +127,24 @@ public static class PayloadSectionPartitioner
     {
         ArgumentNullException.ThrowIfNull(group);
         var sb = new StringBuilder();
+        RenderTo(sb, group);
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Appends a group's sections to an existing builder (the sections in order,
+    /// each followed by a newline). Kept separate from <see cref="Render"/> so
+    /// the emitter can wrap the payload text in a translation-unit preamble
+    /// without an intermediate full-string copy.
+    /// </summary>
+    public static void RenderTo(StringBuilder sb, IReadOnlyList<PayloadSection> group)
+    {
+        ArgumentNullException.ThrowIfNull(sb);
+        ArgumentNullException.ThrowIfNull(group);
         foreach (var section in group)
         {
             sb.Append(section.Content);
             sb.Append('\n');
         }
-        return sb.ToString();
     }
 }
