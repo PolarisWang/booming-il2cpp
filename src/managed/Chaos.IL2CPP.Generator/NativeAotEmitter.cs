@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -343,7 +343,8 @@ public sealed partial class NativeAotEmitter
         bool includeRegistration,
         string? perPageTypeDeclarations = null,
         IReadOnlyList<string>? perPageIncludes = null,
-        bool? includeMethodDeclarations = null)
+        bool? includeMethodDeclarations = null,
+        bool? includeEntryFileScopeCode = null)
     {
         // The extern "C" method declarations are needed by any TU that references
         // an AOT method — page 0's object model calls them (e.g. a __ctor while
@@ -351,6 +352,14 @@ public sealed partial class NativeAotEmitter
         // body has moved to its own payload TU. Defaulting to includeRegistration
         // preserves the historical coupling for every other caller.
         bool emitMethodDeclarations = includeMethodDeclarations ?? includeRegistration;
+
+        // File-scope definitions that belong to the entry-owning page regardless of
+        // where the registration body ends up: kAotMethodCount, ChaosJitRegisterAll
+        // and the entry function itself are linked against by runtime-entry.cpp and
+        // verification_dispatch. Same reasoning as emitMethodDeclarations — this is
+        // the third concern `includeRegistration` used to conflate.
+        bool emitEntryOwnedFileScopeCode =
+            includeEntryFileScopeCode ?? includeRegistration;
         int objectModelLength = templateModel.ObjectModelCodeBuilder?.Length
                              ?? templateModel.ObjectModelCode?.Length
                              ?? 0;
@@ -450,10 +459,16 @@ public sealed partial class NativeAotEmitter
         bool includeObjectModel,
         string? perPageTypeDeclarations = null,
         IReadOnlyList<string>? perPageIncludes = null,
-        bool? includeMethodDeclarations = null)
+        bool? includeMethodDeclarations = null,
+        bool? includeEntryFileScopeCode = null)
     {
         var sb = BuildGeneratedPageSkeleton(templateModel, includes, includeRegistration,
-            perPageTypeDeclarations, perPageIncludes, includeMethodDeclarations);
+            perPageTypeDeclarations, perPageIncludes, includeMethodDeclarations,
+            includeEntryFileScopeCode);
+
+        // See BuildGeneratedPageSkeleton: this file-scope block is keyed to the
+        // entry-owning page, not to the registration body's location.
+        bool emitEntryOwnedFileScopeCode = includeEntryFileScopeCode ?? includeRegistration;
 
         // Object model code — the bulk of page 0 content
         if (includeObjectModel)
@@ -504,7 +519,14 @@ public sealed partial class NativeAotEmitter
 
         // Global declarations + entry function code (outside namespace)
         // Emitted only on the first page to avoid multiple-definition linker errors.
-        if (includeRegistration)
+        //
+        // Gated on the entry-owning page rather than on `includeRegistration`: this
+        // block carries file-scope definitions other TUs link against
+        // (kAotMethodCount, ChaosJitRegisterAll, the entry function). When page 0's
+        // registration body moves into its own payload TU, those definitions must
+        // stay with page 0 — otherwise runtime-entry.cpp and verification_dispatch
+        // fail to link (LNK2019/LNK2001).
+        if (emitEntryOwnedFileScopeCode)
         {
             sb.Append(templateModel.GlobalDeclarations);
             sb.Append(templateModel.EntryFunctionCode);

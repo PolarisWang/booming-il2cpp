@@ -461,7 +461,8 @@ public sealed partial class NativeAotEmitter
                         includeObjectModel: true,
                         perPageTypeDeclarations: pageTypeDecl,
                         perPageIncludes: pageIncludes,
-                        includeMethodDeclarations: true);
+                        includeMethodDeclarations: true,
+                        includeEntryFileScopeCode: true);
                     // Dedup type_id/mt symbols across all pages (C2374).
                     // Page 0 uses the StringBuilder path, so we must post-process.
                     string pageText = pageBuilder.ToString();
