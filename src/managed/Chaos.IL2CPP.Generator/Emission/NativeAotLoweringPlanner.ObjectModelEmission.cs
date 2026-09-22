@@ -784,6 +784,7 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (string item3 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
 		{
 			ulong stableId = ComputeStableTypeId(item3);
+			MethodTableDefinitionEmittedTypeSubjectIds.Add(item3);
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
@@ -876,6 +877,7 @@ public sealed partial class NativeAotLoweringPlanner
 		foreach (string item in sortedReferenceTypes)
 		{
 			ulong stableId = ComputeStableTypeId(item);
+			MethodTableDefinitionEmittedTypeSubjectIds.Add(item);
 			string parentExpr = "nullptr";
 			if (referenceTypeBaseSubjectIds.TryGetValue(item, out string? baseTypeId) && !string.IsNullOrEmpty(baseTypeId))
 			{

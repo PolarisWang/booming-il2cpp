@@ -835,21 +835,26 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             // A type can only be referenced here if its MethodTable has a
-            // DEFINITION in this TU; referencing a declaration-only symbol would
-            // produce LNK2001 (see the note in ChaosRegisterReflectionMembers).
+            // DEFINITION — referencing a declaration-only symbol would produce
+            // LNK2001 (see the note in ChaosRegisterReflectionMembers).
             //
-            // The gate is _allEmittedTypeSubjectIds — the set of types whose
-            // chaos_mt_* definition is actually emitted.  Gating on
-            // _referenceTypeBaseSubjectIds instead is WRONG here: that map is built
-            // from the lowering closure, so it holds only a handful of exception
-            // types and silently drops the rest.  Measured on text-json: 13 raised
-            // types, 10 rejected as "undefined" even though their MethodTables are
-            // defined in the very same TU (verified by grep on the generated .cpp).
+            // The correct gate is MethodTableDefinitionEmittedTypeSubjectIds,
+            // recorded as the object model emits each MethodTable definition.
+            // The historical gate here, _allEmittedTypeSubjectIds, is a SUPERSET:
+            // it also holds types the planner knows about but never emits a
+            // definition for. On the system chunk that lets
+            // System.ArgumentOutOfRangeException and System.ObjectDisposedException
+            // through — both in the raise set, both declared (extern MethodTable)
+            // in the shared header, neither actually defined — and the exception
+            // table takes their addresses, failing at link time with LNK2001.
             //
             // Raise-set names arrive as plain reflection names ("System.Exception");
             // catch-set names as subject ids ("System.Private.CoreLib/System.Exception").
             // Normalise both onto the subject-id form before the lookup.
-            var definedTypeIds = _allEmittedTypeSubjectIds ?? new HashSet<string>(StringComparer.Ordinal);
+            var emittedMtTypeIds = MethodTableDefinitionEmittedTypeSubjectIds;
+            var definedTypeIds = emittedMtTypeIds.Count > 0
+                ? emittedMtTypeIds
+                : (_allEmittedTypeSubjectIds ?? new HashSet<string>(StringComparer.Ordinal));
             var emitTypes = typeIds
                 .Select(NormalizeExceptionTypeSubjectId)
                 .Where(id => !string.IsNullOrEmpty(id) && definedTypeIds.Contains(id!))
@@ -1025,6 +1030,30 @@ public sealed partial class NativeAotLoweringPlanner
         /// </para>
         /// </summary>
         private readonly Dictionary<string, CrossSectionSymbol> _crossSectionSymbols =
+            new(StringComparer.Ordinal);
+
+        /// <summary>
+        /// Subject ids whose <c>chaos_mt_*</c> MethodTable receives a DEFINITION in
+        /// the object-model section, recorded as those definitions are emitted.
+        ///
+        /// <para>
+        /// Distinct from <c>_allEmittedTypeSubjectIds</c>, which records types the
+        /// planner knows about and will declare — a superset. The exception table
+        /// takes the ADDRESS of a MethodTable, so it must only reference types in
+        /// <i>this</i> set: referencing a declared-but-never-defined symbol links
+        /// cleanly in no configuration and fails with LNK2001.
+        /// </para>
+        ///
+        /// <para>
+        /// Measured on the system chunk: <c>System.ArgumentOutOfRangeException</c>
+        /// and <c>System.ObjectDisposedException</c> are in the raise set and in
+        /// <c>_allEmittedTypeSubjectIds</c>, but no MethodTable definition is
+        /// emitted for either — only <c>extern</c> declarations in the shared
+        /// header. Gating on the superset admitted them and produced two
+        /// unresolved externals.
+        /// </para>
+        /// </summary>
+        internal HashSet<string> MethodTableDefinitionEmittedTypeSubjectIds { get; } =
             new(StringComparer.Ordinal);
 
         /// <summary>
