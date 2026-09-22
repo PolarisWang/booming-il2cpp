@@ -211,48 +211,108 @@ public sealed class PagePayloadSplitTests
     }
 
     /// <summary>
-    /// L3: no symbol defined in one TU may be referenced as <c>static</c> from
-    /// another. <c>static</c> is internal linkage, so any cross-section reference
-    /// to a static table is an eventual C2065 / LNK2019 once the sections become
-    /// separate TUs.
+    /// L3: no symbol defined in one emitted translation unit may be referenced
+    /// from another while still declared <c>static</c>. <c>static</c> is internal
+    /// linkage, so once page 0's payload is split into separate TUs every such
+    /// reference fails to compile (C2065) and could never link.
     ///
     /// <para>
-    /// Deliberately anchored to a concrete symbol pair rather than a global
-    /// count: a count-based assertion would be satisfied by any other matching
-    /// text in the payload and would pass on the unfixed code.
+    /// <b>This guard reads real emitted sources, not the template model.</b> An
+    /// earlier revision asserted over a model built by <see cref="BuildModel"/>,
+    /// which synthesises only <c>TestModule.TestClass::M{i}</c> methods — no
+    /// types, hence no object model and no vtable-slot tables at all. The symbol
+    /// class this guard exists to protect against <i>cannot be constructed</i> in
+    /// that fixture, so the assertion was unreachable and stayed green while the
+    /// emitted sources carried 96 cross-unit <c>static</c> references. A guard
+    /// that cannot fail is worse than no guard: it reads as coverage.
+    /// </para>
+    ///
+    /// <para>
+    /// The revision before that had a second, independent blind spot — it
+    /// concatenated only the object-model and module-registration text, while the
+    /// offending references live in the CodeRegistration section. Scanning the
+    /// whole emitted file set closes both gaps.
+    /// </para>
+    ///
+    /// <para>
+    /// Fails (rather than skipping) when the artifacts are absent: this guard is
+    /// the only automated check for the cross-unit linkage contract, so a silent
+    /// skip would let the defect through unnoticed — which is precisely how the
+    /// previous revision of this guard failed. Generate the inputs with:
+    /// <c>python -m verification.chunk_pipeline --chunk system --stages build</c>
     /// </para>
     /// </summary>
     [Fact]
-    public void PayloadTables_AreNotStaticWhenReferencedAcrossSections()
+    public void NoCrossUnitReferencesToStaticTables()
     {
-        var model = BuildModel(PayloadScaleMethodCount);
+        string subjectsDir = Path.Combine(
+            RepoRootLocator.FindFromBaseDirectory(),
+            "artifacts", "foundation-dll", "System.Private.CoreLib",
+            "chunks", "system", "native", "subjects");
 
-        string payload =
-              (model.ObjectModelCodeBuilder?.ToString() ?? model.ObjectModelCode ?? "")
-            + (model.ModuleRegistrationCode ?? "");
+        Assert.True(Directory.Exists(subjectsDir),
+            $"no emitted sources at '{subjectsDir}'. This guard asserts the cross-unit "
+            + "linkage contract on real codegen output and must not be skipped silently — "
+            + "run the system chunk build first: "
+            + "python -m verification.chunk_pipeline --chunk system --stages build");
 
-        // Top-level `static` table definitions in the payload.
-        var staticTableDefs = Regex.Matches(
-                payload,
-                @"^[ \t]*static\s+[^\n;=]*?\b(k[A-Z]\w*|chaos_\w+)\s*(\[[^\]]*\])?\s*=",
-                RegexOptions.Multiline)
-            .Select(m => m.Groups[1].Value)
-            .Distinct(StringComparer.Ordinal)
-            .ToList();
+        var files = Directory.GetFiles(subjectsDir, "native-aot.*.cpp");
+        Assert.True(files.Length > 0,
+            $"no native-aot sources found in '{subjectsDir}'");
 
-        foreach (string table in staticTableDefs)
+        // Qualified types are common (`static const ::ns::T kFoo[] =`), so the
+        // type-name span must not be restricted to a bare identifier.
+        var defPattern = new Regex(
+            @"^[ \t]*static\b[^\n=]*?\b(?<sym>k[A-Z]\w*|chaos_\w+|s_[a-z]\w*)\s*(?:\[[^\]]*\])?\s*=",
+            RegexOptions.Multiline);
+
+        // symbol -> file that defines it (static)
+        var staticDefs = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (string file in files)
         {
-            // Count references that are NOT the definition itself.
-            var refPattern = new Regex(@"\b" + Regex.Escape(table) + @"\s*\[");
-            int refs = refPattern.Matches(payload).Count;
-
-            Assert.True(refs <= 1,
-                $"payload table '{table}' is declared `static` (internal linkage) but is "
-                + $"referenced {refs} times in the payload. Once this payload is split "
-                + "across translation units those references cross a TU boundary and fail "
-                + "to link (C2065/LNK2019). Tables that must cross a TU boundary have to be "
-                + "declared `extern`.");
+            string text = File.ReadAllText(file);
+            foreach (Match m in defPattern.Matches(text))
+                staticDefs.TryAdd(m.Groups["sym"].Value, Path.GetFileName(file));
         }
+
+        Assert.True(staticDefs.Count > 0,
+            $"found no `static` table definitions across {files.Length} emitted sources — "
+            + "the definition pattern has gone stale, so this guard would pass vacuously");
+
+        // One token scan per file, intersected against the defining-unit map.
+        // A per-symbol regex per file would be O(files x symbols) — measured at
+        // ~72s over 84 files and 9.2k definitions, which is too slow for a guard
+        // that is meant to run on every change.
+        var tokenPattern = new Regex(@"[A-Za-z_]\w*");
+
+        // (symbol, referencing file) pairs, deduplicated.
+        var seen = new HashSet<(string Symbol, string File)>();
+        var violations = new List<string>();
+
+        foreach (string file in files)
+        {
+            string name = Path.GetFileName(file);
+            string text = File.ReadAllText(file);
+
+            foreach (Match m in tokenPattern.Matches(text))
+            {
+                if (!staticDefs.TryGetValue(m.Value, out string? definedIn)) continue;
+                if (definedIn == name) continue;              // its own definition
+                if (!seen.Add((m.Value, name))) continue;      // already recorded
+
+                violations.Add($"'{m.Value}' (static in {definedIn}) referenced from {name}");
+            }
+        }
+        violations.Sort(StringComparer.Ordinal);
+
+        Assert.True(violations.Count == 0,
+            $"found {violations.Count} cross-translation-unit reference(s) to `static` symbols. "
+            + "These files are compiled as separate TUs, where a `static` definition has "
+            + "internal linkage and every cross-unit reference fails to compile (C2065). "
+            + "Such symbols must be declared `extern` and published in the shared contract "
+            + "header. Violations:\n  "
+            + string.Join("\n  ", violations.Take(15))
+            + (violations.Count > 15 ? $"\n  … and {violations.Count - 15} more" : ""));
     }
 
     // ── Count-scalar contract ───────────────────────────────────────────────

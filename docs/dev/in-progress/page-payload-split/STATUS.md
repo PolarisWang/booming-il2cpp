@@ -8,8 +8,11 @@
 
 ## 关键文档
 
-- `roadmap-v1-01.md` — **当前权威：阶段与子任务结构**
-- `design-a-payload-split.md` — 设计（brainstorm 已拍板）
+- `roadmap-v2-01.md` — **当前权威：段间依赖显式化（取代 v1-01）**
+- `design-v1-01.md` — **当前权威设计**（brainstorm 已拍板，问题已清零）
+- `roadmap-v1-01.md` — 前序 roadmap（pps-1..3c 已交付，pps-3 未收口）
+- `design-a-payload-split.md` — A 方向原始设计（brainstorm 已拍板）
+- `design-b-hotpatch-chunk-wiring.md` — hotpatch ABI 约束分析（**另案，非本 roadmap 范围**）
 - `c1002-heap-exhaustion-rootcause.md` — 根因（实测）
 - `a-direction-input.md` — 调研输入（段构成 / 链接性 / 跨 TU 证据）
 
@@ -18,18 +21,44 @@
 ```
 task_type: roadmap
 phase: roadmap
-roadmap_or_plan: roadmap-v1-01.md
+roadmap_or_plan: roadmap-v2-01.md
 dispatch_model: sequential
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
-recommended_next_child: pps-1-tests
-最近摘要: brainstorm 完成，A 方向设计拍板（拆大载荷段 + 段内再分页；
-          链接性用 extern 非 extern "C" —— 实测三情形指令序列字节级相同）。
-          roadmap 已拆 4 个子任务，串行推进。
-latest_stop_point: roadmap 产出，未开始实施
-下一步: 启动 pps-1-tests（TDD 先写失败测试）
+recommended_next_child: pps2-1-guard
+最近摘要: pps-3b 段拆分已消除 C1002（71MB→24MB），但构建因段间依赖断裂
+          连续 4 轮失败。brainstorm 定位根因=「巨型 TU 还是隐式依赖满足机制」，
+          并发现 pps-1 的 L3 守卫是假绿（正则检出率恒 0，从未红过）。
+          设计定案 A″：Planner 登记符号表 + 契约头。
+          新 roadmap v2-01 拆 5 个子任务，串行推进。
+latest_stop_point: roadmap v2-01 产出，待启动 pps2-1-guard
+下一步: 启动 pps2-1-guard（重写 L3 守卫 + 真实产物负控）
 ```
+
+## 设计摘要（本任务权威输入）
+
+**边界拍板**：
+- 方向 A″ —— Planner 登记跨段符号表 + 发射 payload 契约头（D1）
+- 96 个 `kSlots_*` 改 `extern` + 契约头声明（D2）
+- **不变更段划分依据**（D3，段边界稳定）
+
+**架构结论**：
+- 一组 TU 可安全拆分 ⟺ 所有跨 TU 引用都指向共享契约头中已声明的符号
+- 原巨型 TU 是「隐式依赖满足机制」，非纯性能缺陷
+
+**当前结论**：
+- C1002 已根治（page 0 71MB → 24MB，不再堆耗尽）
+- 阻断 = 段间依赖断裂（4 类符号，~105 个）
+- **pps-1 的 L3 守卫假绿**（正则匹配率 0）
+
+**下一步入口**：`roadmap-v2-01.md` → `pps2-1-guard`
+
+**风险评估摘要**：R3（守卫再次假绿）为最高风险，缓解=负控必须用真实产物；
+R6（隐藏依赖类别）已实测坐实，缓解=Phase 1 先出完整清单。
+
+**三优先级权衡结论**：P1 中性偏正 / P2 强正向 / P3 中性，**无冲突**。
+
 
 ## 一、问题陈述
 
