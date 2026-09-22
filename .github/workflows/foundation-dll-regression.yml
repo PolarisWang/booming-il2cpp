@@ -112,6 +112,32 @@ jobs:
       - name: Build Native Libraries
         run: cmake --build build/native --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
 
+      # Diagnostic: if the native build failed, dump whether the symbols that
+      # the linker reported as undefined actually live inside the archives.
+      # Distinguishes "definition missing / not compiled" from "definition is
+      # present but the archive member was never extracted" (the latter is a
+      # link-line / --start-group geometry problem, not a compile problem).
+      - name: Diagnose missing symbols
+        if: failure()
+        shell: bash
+        run: |
+          set +e
+          echo "=== libchaos_runtime_core.a ==="
+          LIB=$(find build/native -name "libchaos_runtime_core.a" | head -1)
+          echo "archive: $LIB"
+          if [ -n "$LIB" ]; then
+            echo "--- defined (T/W/B/D) symbols of interest ---"
+            nm -C "$LIB" 2>/dev/null | grep -E " [TtWwBbDd] .*(DbgShouldStopAtCurrentPosition|DbgClearFrameSnapshot|DbgGetFrameSnapshot|DbgIsStepping|DbgNotifyPaused|DbgCheckBreakpoint|g_dbg_any_breakpoints|g_dbg_pause_requested|PopulateMethodTableFromHotpatch|ResolveMethodTableByModuleSlot|ChaosBCryptOpenAlgorithmProvider)" | sort -u | head -40
+            echo "--- members containing those symbols ---"
+            nm -C "$LIB" 2>/dev/null | grep -B40 -E "ChaosBCryptOpenAlgorithmProvider" | grep -E "\.o:|\.cpp\.o" | tail -5
+          else
+            echo "NOT FOUND: libchaos_runtime_core.a"
+          fi
+          echo
+          echo "=== all chaos archives present ==="
+          find build/native -name "libchaos_*.a" -printf "%p\n" 2>/dev/null | sort
+          exit 0
+
       - name: Configure Native Tests
         shell: bash
         run: |
