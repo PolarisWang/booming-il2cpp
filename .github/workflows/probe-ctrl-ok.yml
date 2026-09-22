@@ -1,0 +1,8 @@
+name: Probe Control OK
+on:
+  workflow_dispatch:
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ok
