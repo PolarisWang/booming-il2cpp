@@ -449,4 +449,84 @@ public sealed class PagePayloadSplitTests
                 + "sizeof fails with C2070. Use the companion `" + table + "Count` scalar.");
         }
     }
+
+    /// <summary>
+    /// L2: the per-type vtable data — the <c>chaos_vtable_*[]</c> array and its
+    /// matching <c>kSlots_*[]</c> VTableSlot table — is emitted from the object
+    /// model but MUST NOT stay in page 0. It is 95% of that file's bulk, and
+    /// leaving it inline is what made page 0 a 31 MB translation unit.
+    ///
+    /// <para>
+    /// Asserted on real emitted sources rather than the model: the failure mode
+    /// this guards is a mis-routed write in the emitter, which leaves the text
+    /// in page 0 while a copy also reaches the payload sections. Nothing about
+    /// the template model would reveal that.
+    /// </para>
+    ///
+    /// <para>
+    /// Counts DEFINITIONS only (<c>[] = ...</c>), not the <c>extern</c>
+    /// declarations the payload preamble repeats into every translation unit —
+    /// counting those would pass regardless of where the definitions went, and
+    /// would report ~9,400 instead of 127.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void VTableData_IsEmittedOutsidePageZero()
+    {
+        string subjectsDir = Path.Combine(
+            RepoRootLocator.FindFromBaseDirectory(),
+            "artifacts", "foundation-dll", "System.Private.CoreLib",
+            "chunks", "system", "native", "subjects");
+
+        Assert.True(Directory.Exists(subjectsDir),
+            $"no emitted sources at '{subjectsDir}'. This guard asserts where the vtable "
+            + "data lands in real codegen output and must not be skipped silently — run the "
+            + "system chunk build first: "
+            + "python -m verification.chunk_pipeline --chunk system --stages build");
+
+        string pageZeroPath = Path.Combine(subjectsDir, "native-aot.generated.cpp");
+        Assert.True(File.Exists(pageZeroPath), $"missing page 0 at '{pageZeroPath}'");
+
+        // Definitions only — `[...] =` — so the preamble's repeated extern
+        // declarations (which are legitimately emitted into every payload TU)
+        // do not inflate the count.
+        var vtableArrayDef = new Regex(
+            @"^const void\* chaos_vtable_\w+\[\]\s*=", RegexOptions.Multiline);
+        var slotTableDef = new Regex(
+            @"^extern const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_\w+\[\]\s*=",
+            RegexOptions.Multiline);
+
+        string pageZero = File.ReadAllText(pageZeroPath);
+        int vtableInPageZero = vtableArrayDef.Matches(pageZero).Count;
+        int slotsInPageZero = slotTableDef.Matches(pageZero).Count;
+
+        var payloadFiles = Directory.GetFiles(subjectsDir, "native-aot.payload.*.cpp");
+        Assert.True(payloadFiles.Length > 0,
+            $"no payload translation units in '{subjectsDir}' — the split is not running");
+
+        int vtableInPayload = payloadFiles.Sum(f => vtableArrayDef.Matches(File.ReadAllText(f)).Count);
+        int slotsInPayload = payloadFiles.Sum(f => slotTableDef.Matches(File.ReadAllText(f)).Count);
+
+        Assert.True(vtableInPageZero == 0,
+            $"page 0 still defines {vtableInPageZero} chaos_vtable_* array(s). These are the "
+            + "bulk of the object model and must be partitioned into their own translation "
+            + "units; leaving them inline is the unbounded-page-0 condition that produced a "
+            + "31 MB translation unit.");
+
+        Assert.True(slotsInPageZero == 0,
+            $"page 0 still defines {slotsInPageZero} kSlots_* VTableSlot table(s). They travel "
+            + "with their chaos_vtable_* array and must leave page 0 with it.");
+
+        // And they must actually have arrived somewhere — a write that is dropped
+        // entirely would satisfy the two assertions above while losing the data.
+        Assert.True(vtableInPayload > 0 && slotsInPayload > 0,
+            "no vtable arrays or slot tables found in any payload translation unit — the "
+            + $"object model's vtable data was dropped, not relocated "
+            + $"(vtable={vtableInPayload}, slots={slotsInPayload})");
+
+        Assert.True(vtableInPayload == slotsInPayload,
+            $"{vtableInPayload} chaos_vtable_* array(s) but {slotsInPayload} kSlots_* table(s) "
+            + "in the payload TUs — every reference type emits exactly one of each, so a "
+            + "mismatch means one of the two loops stopped emitting.");
+    }
 }

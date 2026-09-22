@@ -466,6 +466,82 @@ public sealed class NativeAotEmitterTests
         Assert.Contains(sources, s => s.RelativePath.Contains("native-aot.methods.json"));
     }
 
+    // ── VTableDataCode is stripped from page 0 ─────────────────────────
+
+    /// <summary>
+    /// The object model carries the per-type vtable data as a trailing block
+    /// (<c>VTableDataCode</c>) so the model stays complete for consumers that read
+    /// it whole. Page 0 must NOT render that block: it is emitted as its own
+    /// payload sections, so rendering it twice defines every <c>chaos_vtable_*</c>
+    /// array and <c>kSlots_*</c> table twice (C2086).
+    ///
+    /// <para>
+    /// This is the negative control for the artifact-scanning guard
+    /// <c>PagePayloadSplitTests.VTableData_IsEmittedOutsidePageZero</c>: that guard
+    /// reads real system-chunk output, so it can only be run after a build, and it
+    /// cannot distinguish "the strip works" from "the strip was never exercised".
+    /// This test drives the strip directly with a known model.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void PageZero_ExcludesTheTrailingVTableDataBlock()
+    {
+        const string prefix = "// OBJECT MODEL PREFIX\ninline constexpr CHAOS_IL2CPP_INTPTR chaos_mt_Foo = 1;\n";
+        const string vtable = "const void* chaos_vtable_Foo[] = { nullptr };\n"
+                            + "extern const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_Foo[] = {};\n";
+
+        var model = MakeMinimalTemplateModel(
+            objectModelCode: prefix + vtable,
+            vtableDataCode: vtable,
+            entrySubjectId: "Test::Foo()",
+            entrySymbol: "Test_Foo",
+            entryNativeSymbol: "Chaos_Test_Foo",
+            workloadAbi: "void()");
+
+        var pageZero = InvokeBuildGeneratedPage(model);
+
+        Assert.Contains("OBJECT MODEL PREFIX", pageZero);
+        Assert.DoesNotContain("chaos_vtable_Foo", pageZero);
+        Assert.DoesNotContain("kSlots_Foo", pageZero);
+    }
+
+    /// <summary>
+    /// The complement of the test above: with no vtable data the object model is
+    /// rendered whole. Without this, a bug that stripped a fixed amount (or
+    /// stripped unconditionally) would still satisfy the exclusion test while
+    /// silently truncating every small model.
+    /// </summary>
+    [Fact]
+    public void PageZero_RendersTheWholeObjectModelWhenThereIsNoVTableData()
+    {
+        const string objectModel = "// OBJECT MODEL\ninline constexpr CHAOS_IL2CPP_INTPTR chaos_mt_Foo = 1;\n";
+
+        var model = MakeMinimalTemplateModel(
+            objectModelCode: objectModel,
+            vtableDataCode: "",
+            entrySubjectId: "Test::Foo()",
+            entrySymbol: "Test_Foo",
+            entryNativeSymbol: "Chaos_Test_Foo",
+            workloadAbi: "void()");
+
+        var pageZero = InvokeBuildGeneratedPage(model);
+
+        Assert.Contains("OBJECT MODEL", pageZero);
+        Assert.Contains("chaos_mt_Foo", pageZero);
+    }
+
+    private static string InvokeBuildGeneratedPage(NativeAotTemplateModel model)
+    {
+        var method = s_t.GetMethod("BuildGeneratedPage", s_flags)!;
+        return (string)method.Invoke(null, new object[]
+        {
+            model,
+            model.Methods,
+            /* includeRegistration: */ false,
+            /* includeObjectModel: */ true,
+        })!;
+    }
+
     // ── Helpers ─────────────────────────────────────────────────────────
 
     private static NativeAotTemplateModel MakeMinimalTemplateModel(
@@ -488,11 +564,13 @@ public sealed class NativeAotEmitterTests
         string enumMetadataHeaderContent = "",
         IReadOnlyList<string>? includes = null,
         IReadOnlyList<string>? methodDeclarations = null,
-        IReadOnlyList<NativeAotMethodTemplateModel>? methods = null) =>
+        IReadOnlyList<NativeAotMethodTemplateModel>? methods = null,
+        string vtableDataCode = "") =>
         new()
         {
             Includes = includes ?? Array.Empty<string>(),
             ObjectModelCode = objectModelCode,
+            VTableDataCode = vtableDataCode,
             MethodDeclarations = methodDeclarations ?? Array.Empty<string>(),
             Methods = methods ?? Array.Empty<NativeAotMethodTemplateModel>(),
             EntrySubjectId = entrySubjectId,

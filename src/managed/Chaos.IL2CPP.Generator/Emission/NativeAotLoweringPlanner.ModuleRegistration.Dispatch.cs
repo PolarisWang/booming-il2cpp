@@ -1059,6 +1059,30 @@ public sealed partial class NativeAotLoweringPlanner
             new(StringComparer.Ordinal);
 
         /// <summary>
+        /// Per-type vtable groups captured while the object model is emitted, as
+        /// (typeSubjectId, C++ text). Each group is self-contained — the
+        /// <c>extern "C"</c> method declarations for the types it references plus
+        /// the <c>chaos_vtable_*[]</c> array itself — so any subset can be emitted
+        /// into its own translation unit.
+        ///
+        /// <para>
+        /// This is the bulk of page 0 (measured 927,748 of 972,873 lines on the
+        /// system chunk). Partitioning on these boundaries is what keeps page 0
+        /// from becoming a single 31 MB translation unit.
+        /// </para>
+        /// </summary>
+        internal List<(string TypeSubjectId, string Text)> VTableArrayGroups { get; } = new();
+
+        /// <summary>
+        /// Per-type VTableSlot table text (<c>kSlots_*[]</c>), keyed by type subject
+        /// id. The vtable-array emitter collects the array itself into
+        /// <see cref="VTableArrayGroups"/>; this carries the matching slot table,
+        /// and the two are concatenated per type before partitioning so a type's
+        /// vtable data never straddles two translation units.
+        /// </summary>
+        internal Dictionary<string, string> SlotTableGroups { get; } = new(StringComparer.Ordinal);
+
+        /// <summary>
         /// Records a symbol that other payload sections reference, so its
         /// <c>extern</c> declaration reaches every payload translation unit.
         /// Idempotent — a symbol may be produced on more than one code path

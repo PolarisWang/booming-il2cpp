@@ -35,6 +35,27 @@ public sealed record NativeAotTemplateModel
     /// </summary>
     public StringBuilder? ObjectModelCodeBuilder { get; init; }
 
+    /// <summary>
+    /// The per-type vtable data — <c>chaos_vtable_*[]</c> arrays and their
+    /// <c>kSlots_*[]</c> tables — split out of the object model.
+    ///
+    /// <para>
+    /// This data is ~95% of page 0's bulk; emitting it inline produced a 31 MB
+    /// translation unit. It is emitted as its own payload sections instead, so
+    /// page 0 renders the object model <i>without</i> it.
+    /// </para>
+    ///
+    /// <para>
+    /// It is still part of the object model conceptually, so
+    /// <see cref="ObjectModelCode"/> and <see cref="ObjectModelCodeBuilder"/>
+    /// include it — consumers such as the async-iterator member-surface tests and
+    /// <c>BuildGeneratedModuleHeader</c> read those expecting the whole model.
+    /// Page-0 rendering is the only place that excludes it, and it does so by not
+    /// appending this text (see <c>NativeAotEmitter</c>).
+    /// </para>
+    /// </summary>
+    public string VTableDataCode { get; init; } = "";
+
     public required IReadOnlyList<string> MethodDeclarations { get; init; }
 
     public required IReadOnlyList<NativeAotMethodTemplateModel> Methods { get; init; }

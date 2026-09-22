@@ -473,14 +473,34 @@ public sealed partial class NativeAotEmitter
         // Object model code — the bulk of page 0 content
         if (includeObjectModel)
         {
+            // The object model carries the per-type vtable data as a trailing block
+            // (see VTableDataCode).  That data is emitted as its own payload
+            // sections, so page 0 must render only the prefix — emitting the whole
+            // thing would define every `chaos_vtable_*` and `kSlots_*` array twice
+            // (C2086 redefinition against the payload TU).
+            //
+            // The block is cut by LENGTH rather than by search: the data is always
+            // the model's tail, so no scan of a multi-MB buffer is needed.
+            int vtableTailLength = templateModel.VTableDataCode.Length;
+
             if (templateModel.ObjectModelCodeBuilder is { } omBuilder)
             {
+                int keep = omBuilder.Length - vtableTailLength;
+                int written = 0;
                 foreach (var chunk in omBuilder.GetChunks())
-                    sb.Append(chunk.Span);
+                {
+                    if (written >= keep) break;
+                    int take = Math.Min(chunk.Length, keep - written);
+                    sb.Append(chunk.Span.Slice(0, take));
+                    written += take;
+                }
             }
             else
             {
-                sb.Append(templateModel.ObjectModelCode);
+                string om = templateModel.ObjectModelCode;
+                sb.Append(vtableTailLength > 0 && vtableTailLength <= om.Length
+                    ? om.AsSpan(0, om.Length - vtableTailLength)
+                    : om.AsSpan());
             }
             sb.Append('\n');
         }

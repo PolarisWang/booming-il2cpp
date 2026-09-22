@@ -830,6 +830,15 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		// ── VTable arrays (uses pre-computed _vtableSlotMap, _vtableLengths) ──
+		//
+		// Emitted into per-type buffers rather than straight onto the object-model
+		// builder, so the caller can partition them into their own translation
+		// units. This block is the bulk of page 0: measured on the system chunk it
+		// is 927,748 of 972,873 lines (95.4%), which made page 0 a 31 MB
+		// translation unit. The arrays are the natural split boundary — every type
+		// emits a self-contained (declarations + array) group, and the shared
+		// header already publishes `extern const void* chaos_vtable_X[];` for each
+		// of them, so groups are independently referenceable across TUs.
 		if (referenceTypeSubjectIds.Count > 0)
 		{
 				builder.AppendLine("// ── Virtual method table arrays ──");
@@ -837,6 +846,7 @@ public sealed partial class NativeAotLoweringPlanner
 			foreach (string typeId in sortedReferenceTypes)
 			{
 				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
+				var typeBuffer = new StringBuilder();
 				var entries = new AotCoreIrMethodArtifact?[vtLen];
 				// Walk hierarchy to fill entries (most derived first)
 				string? current = typeId;
@@ -862,36 +872,37 @@ public sealed partial class NativeAotLoweringPlanner
 				foreach (var entry in entries)
 				{
 					if (entry is null || !externDeclared.Add(entry.NativeSymbol)) continue;
-					builder.AppendLine(FormatMethodDeclaration(entry, _sharedContextSymbols));
+					typeBuffer.AppendLine(FormatMethodDeclaration(entry, _sharedContextSymbols));
 					var stub = TryGetInstantiationStubSymbol(entry);
 					if (stub != null && externDeclared.Add(stub))
 					{
 						bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
-						builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
+						typeBuffer.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
 					}
 				}
 				// Emit vtable array
-				StringBuilder stringBuilder = builder;
+				StringBuilder stringBuilder = typeBuffer;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(24, 1, stringBuilder);
 				handler.AppendLiteral("const void* ");
 				handler.AppendFormatted(GetNativeVTableSymbol(typeId));
 				handler.AppendLiteral("[] =");
 				stringBuilder.AppendLine(ref handler);
-				builder.AppendLine("{");
+				typeBuffer.AppendLine("{");
 				foreach (var entry in entries)
 				{
 					if (entry != null)
 					{
-						builder.Append("    reinterpret_cast<void*>(");
-						builder.Append(TryGetInstantiationStubSymbol(entry) ?? entry.NativeSymbol);
-						builder.AppendLine("),");
+						typeBuffer.Append("    reinterpret_cast<void*>(");
+						typeBuffer.Append(TryGetInstantiationStubSymbol(entry) ?? entry.NativeSymbol);
+						typeBuffer.AppendLine("),");
 					}
 					else
 					{
-						builder.AppendLine("    nullptr,");
+						typeBuffer.AppendLine("    nullptr,");
 					}
 				}
-				builder.AppendLine("};");
+				typeBuffer.AppendLine("};");
+				VTableArrayGroups.Add((typeId, typeBuffer.ToString()));
 
 			}
 		}			// ── TypeInfo instances (replace integer type_id system) ──
@@ -1128,6 +1139,11 @@ public sealed partial class NativeAotLoweringPlanner
 			foreach (string typeId in sortedReferenceTypes)
 			{
 				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
+				// This type's slice of the VTableSlot tables. Collected per type and
+				// appended to the type's own group below, so the vtable array and the
+				// slot table it is described by travel together into one TU — they
+				// reference each other's symbols (kSlots_* and chaos_vtable_*).
+				var slotsBuffer = new StringBuilder();
 				var entries = new AotCoreIrMethodArtifact?[vtLen];
 				string? current = typeId;
 				while (current != null && referenceTypeSubjectIds.Contains(current))
@@ -1177,27 +1193,27 @@ public sealed partial class NativeAotLoweringPlanner
 				// from another unit (C2065). Registered below so the declaration
 				// reaches every payload TU through the contract header.
 				string slotsSym = GetNativeSymbol("kSlots_", typeId);
-				builder.Append("extern const ::chaos::il2cpp::vtable_registry::VTableSlot ");
-				builder.Append(slotsSym);
-				builder.AppendLine("[] =");
-				builder.AppendLine("{");
+				slotsBuffer.Append("extern const ::chaos::il2cpp::vtable_registry::VTableSlot ");
+				slotsBuffer.Append(slotsSym);
+				slotsBuffer.AppendLine("[] =");
+				slotsBuffer.AppendLine("{");
 				foreach (var se in slotEntries)
 				{
 					if (se.MethodToken != 0)
 					{
-						builder.Append("    { 0x");
-						builder.Append(se.MethodToken.ToString("X8"));
-						builder.Append("u, reinterpret_cast<void*>(&");
-						builder.Append(se.NativeSymbol);
-						builder.AppendLine(") },");
+						slotsBuffer.Append("    { 0x");
+						slotsBuffer.Append(se.MethodToken.ToString("X8"));
+						slotsBuffer.Append("u, reinterpret_cast<void*>(&");
+						slotsBuffer.Append(se.NativeSymbol);
+						slotsBuffer.AppendLine(") },");
 					}
 					else
 					{
-						builder.AppendLine("    { 0u, nullptr },");
+						slotsBuffer.AppendLine("    { 0u, nullptr },");
 					}
 				}
-				builder.AppendLine("};");
-				builder.AppendLine();
+				slotsBuffer.AppendLine("};");
+				slotsBuffer.AppendLine();
 				RegisterCrossSectionSymbol(
 					slotsSym,
 					"extern const ::chaos::il2cpp::vtable_registry::VTableSlot " + slotsSym + "[];",
@@ -1231,6 +1247,11 @@ public sealed partial class NativeAotLoweringPlanner
 					vtLen, typeShape,
 					ifaceMapSym, ifaceCount,
 					SanitizeSubjectId(typeId)));
+
+				// Hand this type's slot table to the group the vtable array loop
+				// already created for it, so both halves of the type's vtable data
+				// are emitted into the same translation unit.
+				SlotTableGroups[typeId] = slotsBuffer.ToString();
 			}
 			_vtableDescriptors = vtableDescriptors;
 			

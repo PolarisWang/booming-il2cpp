@@ -13,9 +13,26 @@ public sealed partial class NativeAotEmitter
 
     private static string BuildObjectModelSection(NativeAotTemplateModel templateModel)
     {
+        // This is the small-model counterpart of the strip in
+        // BuildGeneratedPageToBuilder.  Both must drop the trailing vtable block:
+        // it is emitted as its own payload sections, so rendering it here too
+        // would define every `chaos_vtable_*` array and `kSlots_*` table twice
+        // (C2086 redefinition against the payload TU).
+        //
+        // A model only takes this path when it is under the 200K threshold, and
+        // such a model has no paged payload — but the payload splitter engages by
+        // method count, not by model size, so a small object model can still sit
+        // alongside sectioned vtable data.  See PagePayloadSplitTests.
+        string objectModelCode = templateModel.ObjectModelCode;
+        int vtableTailLength = templateModel.VTableDataCode.Length;
+        if (vtableTailLength > 0 && vtableTailLength <= objectModelCode.Length)
+        {
+            objectModelCode = objectModelCode[..^vtableTailLength];
+        }
+
         var model = new ScriptObject
         {
-            ["object_model_code"] = ScribanTemplateRenderer.NormalizeIndentation(templateModel.ObjectModelCode),
+            ["object_model_code"] = ScribanTemplateRenderer.NormalizeIndentation(objectModelCode),
         };
         return ScribanTemplateRenderer.RenderTemplate(NativeAotTemplateCatalog.GetObjectModelTemplate(), model);
     }

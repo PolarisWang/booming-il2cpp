@@ -1448,6 +1448,54 @@ public sealed partial class NativeAotLoweringPlanner
             AddSection("reflection", emptyReflImage);
         }
 
+        // ── Per-type vtable data (the bulk of page 0) ─────────────────────────
+        // The object model records each reference type's vtable array and its
+        // matching VTableSlot table as a self-contained group. At system-chunk
+        // scale that data is ~95% of page 0, and emitting it inline made page 0 a
+        // 31 MB translation unit that MSVC could not compile. Bucket the groups
+        // into budget-sized sections and register each as its own payload TU.
+        //
+        // The group text is also carried in templateModel.VTableDataCode so the
+        // model stays complete for consumers that expect the whole object model;
+        // page 0 excludes it by not appending that field.
+        if (VTableArrayGroups.Count > 0)
+        {
+            var vtableSb = new StringBuilder();
+            long vtableChars = 0;
+            int vtableBucket = 0;
+            void FlushVTableBucket()
+            {
+                if (vtableSb.Length == 0) return;
+                AddSection($"vtable{vtableBucket++}", vtableSb.ToString());
+                vtableSb.Clear();
+                vtableChars = 0;
+            }
+
+            foreach (var (typeId, text) in VTableArrayGroups)
+            {
+                // A type's vtable array and its VTableSlot table are emitted by two
+                // separate loops; concatenate them here so one type's vtable data
+                // always lands in a single translation unit (they reference each
+                // other's symbols).
+                string groupText = SlotTableGroups.TryGetValue(typeId, out var slotsText)
+                    ? text + slotsText
+                    : text;
+
+                // Flush before exceeding the budget so a bucket never overshoots.
+                // A single group over budget still gets its own section — it cannot
+                // be divided (one C++ array plus its declarations).
+                if (vtableChars > 0
+                    && vtableChars + groupText.Length > PayloadSectionPartitioner.DefaultBudgetChars)
+                {
+                    FlushVTableBucket();
+                }
+
+                vtableSb.Append(groupText);
+                vtableChars += groupText.Length;
+            }
+            FlushVTableBucket();
+        }
+
         // Build extern "C" kAotMethodCount at file scope for Python-generated runtime-entry.cpp link-time visibility.
         var globalDeclarations = methodCount > 0
             ? $"// extern \"C\" definition for link-time visibility from runtime-entry.cpp\nextern \"C\" const int kAotMethodCount = {methodCount};\n"
@@ -1754,9 +1802,41 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 Console.Error.WriteLine($"  {kv.Value,5}x {kv.Key}");
         }
 
-        // Store the ObjectModelCode as either a string (for Scriban path) or as
+        // Append the per-type vtable data back onto the object model so the model
+        // stays COMPLETE.  Consumers (async-iterator member-surface tests,
+        // BuildGeneratedModuleHeader/Source, the single-TU path) read the object
+        // model expecting every type's vtable array and kSlots table to be present.
+        //
+        // Page-0 rendering is the one consumer that must NOT see it: the data is
+        // emitted as its own payload sections, so page 0 including it too would
+        // duplicate every vtable array and kSlots table (C2086 redefinition).
+        // The emitter strips it back out by length -- see the VTableDataCode
+        // handling in NativeAotEmitter.BuildGeneratedPageToBuilder.
+        //
+        // This must happen BEFORE the string/Builder decision below (the small path
+        // clears objectModelBuilder) and BEFORE the dedup pass (the vtable arrays
+        // reference `chaos_mt_*` symbols the object model declares, so a dedup that
+        // missed them would leave duplicates reachable from the vtable arrays).
+        string vtableDataCode = string.Empty;
+        if (VTableArrayGroups.Count > 0)
+        {
+            var vtableDataSb = new StringBuilder();
+            foreach (var (typeId, text) in VTableArrayGroups)
+            {
+                // A type's vtable array and its VTableSlot table are emitted by two
+                // separate loops; concatenate them so the model presents one type's
+                // vtable data as a unit, matching the section grouping.
+                vtableDataSb.Append(text);
+                if (SlotTableGroups.TryGetValue(typeId, out var slotsText))
+                    vtableDataSb.Append(slotsText);
+            }
+            vtableDataCode = vtableDataSb.ToString();
+            objectModelBuilder.Append(vtableDataCode);
+        }
+
+        // Store the ObjectModelCode as either a string (for the Scriban path) or as
         // a StringBuilder reference (for the direct builder path, avoiding a 3+ GB
-        // ToString() allocation that causes OutOfMemoryException on Large Object Heap).
+        // ToString() allocation that causes OutOfMemoryException on the Large Object Heap).
         const int ObjectModelCodeLargeThreshold = 200_000;
         bool isObjectModelLarge = objectModelBuilder.Length > ObjectModelCodeLargeThreshold;
 
@@ -1777,7 +1857,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         }
         else
         {
-            // TrimEnd is safe here — the string is under the threshold.
+            // TrimEnd is safe here -- the string is under the threshold.
             objectModelCode = objectModelBuilder.ToString().TrimEnd();
             objectModelCodeBuilder = null;
             objectModelBuilder.Length = 0;
@@ -1787,6 +1867,11 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // When methods from multiple assemblies are merged into one translation unit,
         // the same type/MT symbol can be emitted multiple times with identical value,
         // causing C2374/C2086 errors.  Remove all but the first occurrence.
+        //
+        // This runs on the COMPLETE object model -- the vtable data appended above
+        // included -- because the vtable arrays reference `chaos_mt_*` symbols that
+        // the object model declares.
+
         if (objectModelCode is { Length: > 0 })
         {
             var _dedup = new System.Collections.Generic.HashSet<string>(StringComparer.Ordinal);
@@ -1822,6 +1907,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             Includes = includes_,
             ObjectModelCode = objectModelCode,
             ObjectModelCodeBuilder = objectModelCodeBuilder,
+            VTableDataCode = vtableDataCode,
             TypeDeclarationsCode = BuildTypeDeclarationsCode(SanitizeCppIdentifier(loweringPlan.AssemblyName), extraValuetypes),
             GenericRegistrationCode = genericRegistrationHelperCode,
             MethodDeclarations = methodDeclarations,
