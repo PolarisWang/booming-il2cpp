@@ -98,6 +98,7 @@ jobs:
               -DROADMAP0_PRESET_TARGET=windows-x64-reference
           else
             cmake -S . -B build/native -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+              -DROADMAP0_PRESET_TARGET=linux-x64-native \
               -DCHAOS_IL2CPP_CONFIG_TIER=debug
           fi
 
