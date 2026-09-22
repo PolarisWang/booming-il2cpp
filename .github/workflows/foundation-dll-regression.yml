@@ -18,6 +18,11 @@ on:
       - 'testing/foundation-dll/**'
       - 'testing/snapshots/**'
       - 'contracts/native/v0/**'
+      # Native test build lives under tests/**; without this, CMake changes to
+      # a native test target (e.g. its LIBS list) never run this workflow and a
+      # broken link line can only be discovered after merging to main.
+      - 'tests/**'
+      - 'cmake/**'
   push:
     branches: [main]
     paths:
@@ -27,6 +32,8 @@ on:
       - 'testing/foundation-dll/**'
       - 'testing/snapshots/**'
       - 'contracts/native/v0/**'
+      - 'tests/**'
+      - 'cmake/**'
   workflow_dispatch:
     inputs:
       mode:
