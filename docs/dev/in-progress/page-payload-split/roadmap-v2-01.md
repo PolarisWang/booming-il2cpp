@@ -89,11 +89,11 @@
 
 | task_id | phase | status | owner | purpose | depends_on | batch_id | requirements | deliverables | exit_criteria | conflict_scope | estimated_effort |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| `pps2-1-guard` | 1 | ready | main | 重写 L3 守卫 + 真实产物负控 | — | b1 | 守卫能在真实产物上红 | `PagePayloadSplitTests.cs` | 负控红（记录条数）+ 恢复后绿 | `tests/unit/managed/codegen/**` | M |
-| `pps2-2-symbols` | 1 | planned | main | 登记器产出完整跨 TU 符号清单 | pps2-1 | b1 | 清单完备（含全部类别） | 登记器代码 + 清单产物 | 清单覆盖产物中所有跨 TU 引用 | `src/managed/Chaos.IL2CPP.Generator/**` | M |
-| `pps2-3-extern` | 2 | planned | main | 96 个 `kSlots_*` 改 extern + 契约头 | pps2-2 | b2 | 产物符号 external | `NativeAotEmitter.Shared.cs` 等 | 产物验证符号外部可见 | 同上 | L |
-| `pps2-4-contract` | 2 | planned | main | 契约头发射 + 全 TU include | pps2-3 | b2 | 契约头含完整类型 | `NativeAotEmitter.Shared.cs` | 各 payload TU 可编译 | 同上 | M |
-| `pps2-5-verify` | 3 | planned | main | system/reflection/threading 验证 | pps2-4 | b3 | 三 chunk 构建 + fact | STATUS.md | system 通过且无劣化 | `docs/dev/in-progress/page-payload-split/**` | M |
+| `pps2-1-guard` | 1 | **completed** | main | 重写 L3 守卫 + 真实产物负控 | — | b1 | 守卫能在真实产物上红 | `PagePayloadSplitTests.cs` | 负控红（记录条数）+ 恢复后绿 | `tests/unit/managed/codegen/**` | M |
+| `pps2-2-symbols` | 1 | **completed** | main | 登记器产出完整跨 TU 符号清单 | pps2-1 | b1 | 清单完备（含全部类别） | 登记器代码 + 清单产物 | 清单覆盖产物中所有跨 TU 引用 | `src/managed/Chaos.IL2CPP.Generator/**` | M |
+| `pps2-3-extern` | 2 | **completed** | main | 96 个 `kSlots_*` 改 extern + 契约头 | pps2-2 | b2 | 产物符号 external | `NativeAotEmitter.Shared.cs` 等 | 产物验证符号外部可见 | 同上 | L |
+| `pps2-4-contract` | 2 | **completed** | main | 契约头发射 + 全 TU include | pps2-3 | b2 | 契约头含完整类型 | `NativeAotEmitter.Shared.cs` | 各 payload TU 可编译 | 同上 | M |
+| `pps2-5-verify` | 3 | **completed** | main | system/reflection/threading 验证 | pps2-4 | b3 | 三 chunk 构建 + fact | STATUS.md | system 通过且无劣化 | `docs/dev/in-progress/page-payload-split/**` | M |
 
 ## 六、每阶段完成定义
 
@@ -137,7 +137,7 @@ dispatch_model: sequential
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
-recommended_next_child: pps2-1-guard
+recommended_next_child: (none — all children completed)
 ```
 
 ## 十二、三优先级权衡
