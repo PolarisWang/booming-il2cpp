@@ -38,6 +38,21 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembers(CHAOS_IL2CPP_INTPTR type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMembersManagedArray(
     CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypes(CHAOS_IL2CPP_INTPTR type_handle);
+// T7 — BindingFlags forms of the member-query family.  Same enumerators as the
+// no-flag overloads (the descriptor model has no accessibility data), with the
+// flat buffer materialized as a managed array.  See type_stubs.cpp.
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypesFlags(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosTypeGetEventsFlags(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFieldsFlags(
+    CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 binding_flags) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethodsFlags(
+    CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 binding_flags) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFieldsArray(
+    CHAOS_IL2CPP_INTPTR module_handle) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethodsArray(
+    CHAOS_IL2CPP_INTPTR module_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetField(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INTPTR name_string_id);
 // Type::GetProperty(string) / Type::GetEvent(string) — name-only member lookup
 // against the type's descriptor tables.  Declared here as the codegen-side

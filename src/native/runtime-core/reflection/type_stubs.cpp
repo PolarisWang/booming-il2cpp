@@ -630,5 +630,82 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeReflectionGetRuntimeInterfaceMap(
     return interface_handle;
 }
 
+// ── BindingFlags member-query overloads (T7) ───────────────────────────────
+// The AOT descriptor for a type/Module lists exactly its own members, so a
+// query with BindingFlags is answered by the same enumerator that answers the
+// no-flag query — the descriptor model carries no accessibility data, so the
+// honest answer is the unfiltered superset rather than a silently-wrong
+// filtered subset (same rationale as ChaosReflectionGetMembersManagedArray).
+//
+// The enumerators hand back a *flat* buffer [count, (kind, handle) x count],
+// but the managed subjects assert against a real array, so each entry point
+// materializes a managed array of the handle slots — mirroring
+// ChaosReflectionGetMembersManagedArray in members.cpp.
+//
+// Registered from RuntimeHelperShapeRegistry.CoreStubs.Part3.S28.
+
+namespace {
+
+/// Wrap a flat [count, (kind, handle) x count] buffer as a managed array of
+/// the handle slots.  Returns 0 for an empty/malformed buffer, matching the
+/// ["no members"] case the callers already handle.
+CHAOS_IL2CPP_INTPTR WrapFlatAsManagedArray(CHAOS_IL2CPP_INTPTR flat) noexcept {
+    if (flat == 0) return 0;
+    const auto* buf = reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(flat);
+    const auto total = static_cast<CHAOS_IL2CPP_INT32>(buf[0]);
+    if (total < 0 || total > 128) return 0;
+
+    // Elements are encoded reflection-query handles (tagged integers), NOT
+    // heap references — allocate with a non-reference element shape so the GC
+    // never scans them.
+    auto* arr = reinterpret_cast<chaos::il2cpp::jit::chaos_managed_array*>(
+        ChaosArrayNew1D(
+            &chaos::il2cpp::jit::chaos_type_info_managed_array.hot,
+            &chaos::il2cpp::jit::chaos_type_info_managed_array.hot,
+            chaos::il2cpp::jit::chaos_type_shape_value,
+            static_cast<CHAOS_IL2CPP_INTPTR>(total)));
+    if (arr == nullptr) return 0;
+
+    auto* elements = chaos::il2cpp::jit::chaos_array_get_elements(arr);
+    for (CHAOS_IL2CPP_INT32 i = 0; i < total; i++) {
+        elements[i] = buf[2 + static_cast<CHAOS_IL2CPP_INTPTR>(2 * i)];
+    }
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
+}
+
+}  // namespace
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetNestedTypesFlags(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 /*binding_flags*/) noexcept {
+    return WrapFlatAsManagedArray(ChaosReflectionGetNestedTypes(type_handle));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosTypeGetEventsFlags(
+    CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 /*binding_flags*/) noexcept {
+    return WrapFlatAsManagedArray(ChaosTypeGetEvents(type_handle));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFieldsFlags(
+    CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 /*binding_flags*/) noexcept {
+    return WrapFlatAsManagedArray(ChaosReflectionModuleGetFields(module_handle));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethodsFlags(
+    CHAOS_IL2CPP_INTPTR module_handle, CHAOS_IL2CPP_INT32 /*binding_flags*/) noexcept {
+    return WrapFlatAsManagedArray(ChaosReflectionModuleGetMethods(module_handle));
+}
+
+// No-flag Module queries: the subjects assert against a real array, so these
+// carry the same managed-array materialization as the flags forms above.
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetFieldsArray(
+    CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    return WrapFlatAsManagedArray(ChaosReflectionModuleGetFields(module_handle));
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionModuleGetMethodsArray(
+    CHAOS_IL2CPP_INTPTR module_handle) noexcept {
+    return WrapFlatAsManagedArray(ChaosReflectionModuleGetMethods(module_handle));
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"

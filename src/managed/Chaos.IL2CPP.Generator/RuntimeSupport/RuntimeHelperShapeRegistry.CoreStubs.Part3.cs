@@ -31,6 +31,7 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterDateTimeAddMinutes(registry);
             RegisterTypeGetMethods(registry);
             RegisterTypeGetMethods_1(registry);
+            RegisterMemberQueryBindingFlagsOverloads(registry);
             RegisterArrayGetLength(registry);
             RegisterCultureInfogetCompareInfo(registry);
             RegisterHashCodeToHashCode(registry);
