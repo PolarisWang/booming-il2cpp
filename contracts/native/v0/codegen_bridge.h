@@ -45,6 +45,30 @@ typedef struct VTableDescriptorV0 {
     const void*          iface_map;        /* -> const InterfaceMapEntry[]   */
     uint32_t iface_count;
 } VTableDescriptorV0;
+/* ── One contiguous slice of a logically single array ─────────────-─────
+ *
+ * A large registration array may be emitted across several translation units,
+ * so a consumer can no longer assume it is one contiguous block.  A chunk
+ * names the slice (`base`), its element count, and the element size — the size
+ * is carried so a consumer can compute an offset into the *logical* array
+ * without knowing the element type, which is what keeps chunk lookup O(1)
+ * instead of a per-array special case.
+ *
+ * `count` counts ELEMENTS, not bytes.
+ *
+ * Indices that were global before chunking stay global: a consumer converts a
+ * global index to (chunk, offset) via the prefix sum of `count` across the
+ * chunk list.  Chunking must therefore never renumber the logical array.
+ *
+ * DECLARED BEFORE ITS FIRST USE: CodeRegistrationV0 below embeds a pointer to
+ * this type, so this definition must precede it.
+ */
+typedef struct ChaosAbiChunkV0 {
+    const void* base;
+    uint32_t    count;
+    uint32_t    element_size;
+} ChaosAbiChunkV0;
+
 
 typedef struct CodeRegistrationV0 {
     uint32_t struct_size;
@@ -66,6 +90,19 @@ typedef struct CodeRegistrationV0 {
     /// Null if the module has no AOT-compiled methods with GC refs.
     const void* slot_map_section_begin;
     const void* slot_map_section_end;
+
+    /// Chunked form of `method_pointers` / `method_pointer_count`.
+    /// Non-null means the logical method-pointer array is the concatenation of
+    /// these chunks in order; `method_pointer_count` remains the TOTAL across
+    /// all chunks, so count-based logic is unaffected.
+    /// Null preserves the flat single-block layout (older codegen, or a module
+    /// small enough not to need partitioning).  See ChaosAbiChunkV0.
+    ///
+    /// Note this is appended, not inserted: existing generated initializers are
+    /// designated, so a new trailing field defaults to zero — flat behaviour —
+    /// without touching them.
+    const ChaosAbiChunkV0* method_pointer_chunks;
+    uint32_t               method_pointer_chunk_count;
 } CodeRegistrationV0;
 
 /*
@@ -302,8 +339,23 @@ typedef struct HotpatchSlotEntryV0 {
 /* ── Per-module hotpatch registration bundle ────────────────────-─────
  *
  * Codegen emits one of these per AOT module.  Bootstrap passes it to
- * HotpatchNameRegistry::RegisterModule().  All arrays point into .rodata.     */
+ * HotpatchNameRegistry::RegisterModule().  All arrays point into .rodata.
+ *
+ * ── Chunked layout ──
+ * When a `*_chunks` list is non-null it REPLACES the corresponding flat
+ * array: the logical array is the concatenation of the chunks in order.  A
+ * consumer reads the flat field only when the chunk list is null — that is
+ * how a runtime built against an older header (which cannot see these fields)
+ * keeps working, and how a runtime built against this header stays correct
+ * when codegen emitted a single block.
+ *
+ * `type_entry_count` / `method_entry_count` always describe the WHOLE logical
+ * array (the sum of the chunk counts), so count-based logic stays valid; only
+ * element addressing changes.  Indices into these arrays are GLOBAL and must
+ * stay global — see ChaosAbiChunkV0.
+ */
 typedef struct HotpatchModuleV0 {
+    uint32_t                    struct_size;          /* must stay FIRST */
     const char*                 module_name;          /* diagnostic only   */
     const HotpatchTypeEntryV0*  type_entries;
     uint32_t                    type_entry_count;
@@ -313,6 +365,10 @@ typedef struct HotpatchModuleV0 {
     uint32_t                    token_slot_entry_count;
     HotpatchEntryV0*            entry_table;       /* pointer to table  */
     uint32_t                    entry_table_size;
+    const ChaosAbiChunkV0*      type_chunks;        /* null = flat layout */
+    uint32_t                    type_chunk_count;
+    const ChaosAbiChunkV0*      method_chunks;      /* null = flat layout */
+    uint32_t                    method_chunk_count;
 } HotpatchModuleV0;
 
 typedef struct CodegenRegistrationOptionsV0 {

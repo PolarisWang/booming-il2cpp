@@ -44,16 +44,28 @@ extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpa
 extern "C" CHAOS_IL2CPP_INT32 GetHotpatchEntryCount() noexcept { return {{ total_method_count }}; }
 
 // Module hotpatch bundle (extern linkage — referenced across page files)
+//
+// DESIGNATED initializers, not positional.  `struct_size` is the first member
+// (it must be, so a runtime can read the version before trusting any later
+// field), and adding it to a positional list would silently rebind every
+// following value — `module_name` would receive the size, and so on.  Naming
+// each field makes the layout change a compile error at worst, never a silent
+// misinterpretation.
+//
+// The `*_chunks` fields are left implicit (zero): codegen still emits one flat
+// block, and a null chunk list is what tells the runtime to use the flat
+// fields.  Populating them is C3-3.
 extern constexpr HotpatchModuleV0 s_hotpatch_module = {
-    "{{ assembly_name_literal }}",
-    s_hotpatch_types,
-    {{ type_group_count }}u,
-    s_hotpatch_methods,
-    {{ total_method_count }}u,
-    s_hotpatch_slots,
-    {{ slot_count }}u,
-    s_hotpatch_entries,
-    {{ total_method_count }}u,
+    .struct_size            = sizeof(HotpatchModuleV0),
+    .module_name            = "{{ assembly_name_literal }}",
+    .type_entries           = s_hotpatch_types,
+    .type_entry_count       = {{ type_group_count }}u,
+    .method_entries         = s_hotpatch_methods,
+    .method_entry_count     = {{ total_method_count }}u,
+    .token_slot_entries     = s_hotpatch_slots,
+    .token_slot_entry_count = {{ slot_count }}u,
+    .entry_table            = s_hotpatch_entries,
+    .entry_table_size       = {{ total_method_count }}u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
