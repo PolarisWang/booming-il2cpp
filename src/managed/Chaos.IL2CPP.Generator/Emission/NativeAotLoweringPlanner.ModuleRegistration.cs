@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -894,56 +895,156 @@ public sealed partial class NativeAotLoweringPlanner
         var paramsByMethod = _reflectionMethodParams.GroupBy(p => p.MethodSubjectId)
             .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
 
+        // ── Reflection member tables: one payload section per declaring type ──
+        //
+        // These arrays are 7 MB on the system chunk (methods 4.06 MB + params
+        // 2.87 MB) and were emitted inline into the `modulereg` section, which the
+        // partitioner never divides — so they pinned page-0001 above the size
+        // target no matter how the methods were paged.
+        //
+        // Three couplings tie a group together and forbid splitting them apart
+        // (each would fail with C2065 if separated):
+        //
+        //   ChaosRegisterReflectionMembers()  takes &kRefl_desc_T
+        //     └─ kRefl_desc_T                references kRefl_{methods,props,fields,events}_T
+        //          └─ kRefl_methods_T        references kRefl_params_M
+        //
+        // So the group unit is the DECLARING TYPE, and it closes over every
+        // `params` symbol its methods reference. Grouping by any finer unit
+        // (e.g. per-array) would strand a reference across translation units.
+        //
+        // Array contents and their relative order are untouched: only the TU that
+        // carries them changes. The runtime indexes these by position, so
+        // reordering would silently mis-resolve members.
+        //
+        // `filterType` selects the subset a given group owns; a null filter means
+        // "everything" (used for the small arrays that stay on the modulereg
+        // section, whose combined size is negligible).
+        var memberGroupByType = new Dictionary<string, StringBuilder>(StringComparer.Ordinal);
+
+        StringBuilder GroupFor(string typeId)
+        {
+            if (!memberGroupByType.TryGetValue(typeId, out var groupSb))
+                memberGroupByType[typeId] = groupSb = new StringBuilder();
+            return groupSb;
+        }
+
+        // A comment naming the declaring type, emitted at the head of each group.
+        // It makes the emitted section self-describing (which type's tables a
+        // payload TU carries) and gives the guard a stable anchor for attributing
+        // each group to a type without parsing C++.
+        static string GroupTypeMarker(string typeId)
+            => $"// reflection member tables for type: {typeId}\n";
+
+        // Which params each method subject id contributes, and which types each
+        // method belongs to — used to pull a type's params into its own group.
+        var paramOwnersByType = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+        foreach (var g in methodsByType)
+        {
+            var owners = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var m in g)
+            {
+                if (paramsByMethod.Any(pg => pg.Key == m.MethodSubjectId))
+                    owners.Add(m.MethodSubjectId);
+            }
+            paramOwnersByType[g.Key] = owners;
+        }
+
+        void EmitArray(StringBuilder target, string declaration, IEnumerable<string> lines)
+        {
+            target.Append(ind).AppendLine(declaration);
+            foreach (var line in lines)
+                target.Append(tab).AppendLine(line);
+            target.Append(ind).AppendLine("};");
+        }
+
         // ── Per-method parameter arrays ──
+        // Routed to the group of the type whose method owns them, so a params
+        // array always shares a translation unit with the kRefl_methods_* that
+        // names it.
+        var paramTypeOwner = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var kv in paramOwnersByType)
+            foreach (var methodId in kv.Value)
+                paramTypeOwner[methodId] = kv.Key;
+
         foreach (var g in paramsByMethod)
         {
+            // A method with no owning type (possible when reflection metadata is
+            // collected for a method whose declaring type never entered the member
+            // tables) has no natural group; it stays on the modulereg section,
+            // where every group can still reference it only if it is declared.
+            // Keeping it inline preserves the original single-TU behaviour for it.
+            var target = paramTypeOwner.TryGetValue(g.Key, out var ownerType)
+                ? GroupFor(ownerType)
+                : sb;
             string sym = ReflectionMemberSymbol("params", g.Key);
-            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor {sym}[] = {{");
-            foreach (var m in g.OrderBy(x => x.ParamIndex))
-                sb.AppendLine($"{tab}{{ \"{EscapeCppStringLiteral(m.ParamSubjectId)}\", \"{EscapeCppStringLiteral(m.ParamName)}\", {m.ParamIndex}u, \"{EscapeCppStringLiteral(m.ParamTypeName)}\", 0, 0u }},");
-            sb.AppendLine($"{ind}}};");
+            bool external = !ReferenceEquals(target, sb);
+            EmitArray(target,
+                $"{(external ? "extern " : "static ")}const chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor {sym}[] = {{",
+                g.OrderBy(x => x.ParamIndex)
+                 .Select(m => $"{{ \"{EscapeCppStringLiteral(m.ParamSubjectId)}\", \"{EscapeCppStringLiteral(m.ParamName)}\", {m.ParamIndex}u, \"{EscapeCppStringLiteral(m.ParamTypeName)}\", 0, 0u }},"));
+            if (external)
+            {
+                RegisterCrossSectionSymbol(sym,
+                    $"extern const chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor {sym}[];",
+                    needsExternalLinkage: true);
+            }
         }
 
         // ── Per-type method arrays ──
         foreach (var g in methodsByType)
         {
             string sym = ReflectionMemberSymbol("methods", g.Key);
-            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor {sym}[] = {{");
-            foreach (var m in g.OrderBy(x => x.Token))
-            {
-                var paramSym = paramsByMethod.Any(pg => pg.Key == m.MethodSubjectId)
-                    ? ReflectionMemberSymbol("params", m.MethodSubjectId)
-                    : "nullptr";
-                var paramCount = paramsByMethod.FirstOrDefault(pg => pg.Key == m.MethodSubjectId)?.Count() ?? 0;
-                sb.AppendLine($"{tab}{{ {m.Token}u, \"{EscapeCppStringLiteral(m.MethodSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.ReturnTypeName)}\", {m.ParamCount}, {paramSym}, {paramCount}u, nullptr, {m.Flags}u }},");
-            }
-            sb.AppendLine($"{ind}}};");
+            var target = GroupFor(g.Key);
+            EmitArray(target,
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor {sym}[] = {{",
+                g.OrderBy(x => x.Token).Select(m =>
+                {
+                    var paramSym = paramsByMethod.Any(pg => pg.Key == m.MethodSubjectId)
+                        ? ReflectionMemberSymbol("params", m.MethodSubjectId)
+                        : "nullptr";
+                    var paramCount = paramsByMethod.FirstOrDefault(pg => pg.Key == m.MethodSubjectId)?.Count() ?? 0;
+                    return $"{{ {m.Token}u, \"{EscapeCppStringLiteral(m.MethodSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.ReturnTypeName)}\", {m.ParamCount}, {paramSym}, {paramCount}u, nullptr, {m.Flags}u }},";
+                }));
+            RegisterCrossSectionSymbol(sym,
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor {sym}[];",
+                needsExternalLinkage: true);
         }
 
         // ── Per-type member arrays ──
         foreach (var g in propsByType)
         {
             string sym = ReflectionMemberSymbol("props", g.Key);
-            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryPropertyDescriptor {sym}[] = {{");
-            foreach (var m in g.OrderBy(x => x.Name, StringComparer.Ordinal))
-                sb.AppendLine($"{tab}{{ \"{EscapeCppStringLiteral(m.TypeSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.MemberType)}\", {m.Flags}u }},");
-            sb.AppendLine($"{ind}}};");
+            var target = GroupFor(g.Key);
+            EmitArray(target,
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryPropertyDescriptor {sym}[] = {{",
+                g.OrderBy(x => x.Name, StringComparer.Ordinal)
+                 .Select(m => $"{{ \"{EscapeCppStringLiteral(m.TypeSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.MemberType)}\", {m.Flags}u }},"));
+            RegisterCrossSectionSymbol(sym,
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryPropertyDescriptor {sym}[];",
+                needsExternalLinkage: true);
         }
         foreach (var g in fieldsByType)
         {
             string sym = ReflectionMemberSymbol("fields", g.Key);
-            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryFieldDescriptor {sym}[] = {{");
-            foreach (var m in g.OrderBy(x => x.Name, StringComparer.Ordinal))
-                sb.AppendLine($"{tab}{{ 0u, \"{EscapeCppStringLiteral(m.TypeSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.MemberType)}\", {m.ConstantValue}LL, {m.Flags}u }},");
-            sb.AppendLine($"{ind}}};");
+            EmitArray(GroupFor(g.Key),
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryFieldDescriptor {sym}[] = {{",
+                g.OrderBy(x => x.Name, StringComparer.Ordinal)
+                 .Select(m => $"{{ 0u, \"{EscapeCppStringLiteral(m.TypeSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.MemberType)}\", {m.ConstantValue}LL, {m.Flags}u }},"));
+            RegisterCrossSectionSymbol(sym,
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryFieldDescriptor {sym}[];",
+                needsExternalLinkage: true);
         }
         foreach (var g in eventsByType)
         {
             string sym = ReflectionMemberSymbol("events", g.Key);
-            sb.AppendLine($"{ind}static const chaos::il2cpp::runtime_core::ReflectionQueryEventDescriptor {sym}[] = {{");
-            foreach (var m in g.OrderBy(x => x.Name, StringComparer.Ordinal))
-                sb.AppendLine($"{tab}{{ \"{EscapeCppStringLiteral(m.TypeSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.MemberType)}\", {m.Flags}u }},");
-            sb.AppendLine($"{ind}}};");
+            EmitArray(GroupFor(g.Key),
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryEventDescriptor {sym}[] = {{",
+                g.OrderBy(x => x.Name, StringComparer.Ordinal)
+                 .Select(m => $"{{ \"{EscapeCppStringLiteral(m.TypeSubjectId)}\", \"{EscapeCppStringLiteral(m.Name)}\", \"{EscapeCppStringLiteral(m.MemberType)}\", {m.Flags}u }},"));
+            RegisterCrossSectionSymbol(sym,
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryEventDescriptor {sym}[];",
+                needsExternalLinkage: true);
         }
 
         // ── Per-type descriptors + registration ──
@@ -990,22 +1091,46 @@ public sealed partial class NativeAotLoweringPlanner
             string typeInfoExpr = hasMethodTable
                 ? GetNativeTypeInfoSymbol(typeId)
                 : "nullptr";
-            sb.AppendLine($"{tab}static const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor {descSym} = {{");
-            sb.AppendLine($"{tab}    0u, \"{EscapeCppStringLiteral(typeId)}\", \"{EscapeCppStringLiteral(typeId)}\", nullptr, nullptr, nullptr,");
-            sb.AppendLine($"{tab}    nullptr,");
-            sb.AppendLine($"{tab}    {(f is null ? "nullptr" : ReflectionMemberSymbol("fields", typeId))}, {(f is null ? 0 : f.Count())}u,");
-            sb.AppendLine($"{tab}    {(p is null ? "nullptr" : ReflectionMemberSymbol("props", typeId))}, {(p is null ? 0 : p.Count())}u,");
-            sb.AppendLine($"{tab}    {(e is null ? "nullptr" : ReflectionMemberSymbol("events", typeId))}, {(e is null ? 0 : e.Count())}u,");
-            sb.AppendLine($"{tab}    {(m is null ? "nullptr" : ReflectionMemberSymbol("methods", typeId))}, {(m is null ? 0 : m.Count())}u,");
-            sb.AppendLine($"{tab}    nullptr, 0u,");                  // generic_parameters, generic_param_count
-            sb.AppendLine($"{tab}    0u, {typeInfoExpr},");           // reserved_flags, type_info_ptr
-            sb.AppendLine($"{tab}}};");
+            // The descriptor names its type's member arrays, so it belongs to the
+            // same group — and since it carries the group's type subject id it is
+            // also what the guard uses to attribute each group.
+            var descTarget = GroupFor(typeId);
+            descTarget.Append(GroupTypeMarker(typeId));
+            descTarget.Append("    extern const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor ").Append(descSym).AppendLine(" = {");
+            descTarget.Append("        0u, \"").Append(EscapeCppStringLiteral(typeId)).Append("\", \"").Append(EscapeCppStringLiteral(typeId)).AppendLine("\", nullptr, nullptr, nullptr,");
+            descTarget.AppendLine("        nullptr,");
+            descTarget.Append("        ").Append(f is null ? "nullptr" : ReflectionMemberSymbol("fields", typeId)).Append(", ").Append(f is null ? "0" : f.Count().ToString(CultureInfo.InvariantCulture)).AppendLine("u,");
+            descTarget.Append("        ").Append(p is null ? "nullptr" : ReflectionMemberSymbol("props", typeId)).Append(", ").Append(p is null ? "0" : p.Count().ToString(CultureInfo.InvariantCulture)).AppendLine("u,");
+            descTarget.Append("        ").Append(e is null ? "nullptr" : ReflectionMemberSymbol("events", typeId)).Append(", ").Append(e is null ? "0" : e.Count().ToString(CultureInfo.InvariantCulture)).AppendLine("u,");
+            descTarget.Append("        ").Append(m is null ? "nullptr" : ReflectionMemberSymbol("methods", typeId)).Append(", ").Append(m is null ? "0" : m.Count().ToString(CultureInfo.InvariantCulture)).AppendLine("u,");
+            descTarget.AppendLine("        nullptr, 0u,");
+            descTarget.Append("        0u, ").Append(typeInfoExpr).AppendLine(",");
+            descTarget.AppendLine("    };");
+            RegisterCrossSectionSymbol(descSym,
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor {descSym};",
+                needsExternalLinkage: true);
+
+            // The registration call stays in the modulereg section (it is the
+            // section's entry point) and names the descriptor by symbol.
             sb.AppendLine($"{tab}ChaosRegisterExternalType({ReflectionMemberFnv24(typeId)}u, &{descSym});");
         }
         sb.AppendLine($"{ind}}}");
         // Self-registering static initializer: the table must be live before any
         // subject runs, and this TU is linked into every entry.exe.
         sb.AppendLine($"{ind}namespace {{ const bool s_reflection_members_registered = (ChaosRegisterReflectionMembers(), true); }}");
+
+        // Flush each declaring type's tables as its own payload section. Order is
+        // taken from `allTypes` (already deterministic) so section order matches
+        // the original emission order — the runtime indexes these by position.
+        foreach (var typeId in allTypes)
+        {
+            if (memberGroupByType.TryGetValue(typeId, out var groupSb) && groupSb.Length > 0)
+            {
+                AddDeferredPayloadSection(
+                    $"reflmembers_{SanitizeCppIdentifier(typeId)}",
+                    groupSb.ToString());
+            }
+        }
 
         // ── B3 fallback resolvers for the managed reflection object model ──
         //

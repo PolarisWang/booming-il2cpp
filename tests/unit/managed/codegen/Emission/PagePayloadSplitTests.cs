@@ -678,4 +678,132 @@ public sealed class PagePayloadSplitTests
                 + $"only {breakCount} case-terminating break(s) — a case block was divided");
         }
     }
+
+    /// <summary>
+    /// The reflection member tables must be split into per-declaring-type payload
+    /// sections, with every <c>kRefl_params_*</c> array sharing a translation unit
+    /// with the <c>kRefl_methods_*</c> array that names it.
+    ///
+    /// <para>
+    /// These arrays are 7 MB on the system chunk and were emitted inline into the
+    /// <c>modulereg</c> section, which the pager never divides — so they pinned
+    /// page-0001 above the size target. Splitting them is only safe if the
+    /// reference stays intra-TU: a <c>kRefl_methods_*</c> initializer names its
+    /// <c>kRefl_params_*</c>, so separating them fails with C2065.
+    /// </para>
+    ///
+    /// <para>
+    /// The assertion is on real emitted output because the grouping happens in the
+    /// planner: a unit test driving a synthetic model never produces these tables,
+    /// so it would pass vacuously.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void ReflectionMemberTables_KeepParamsWithTheirReferencingMethods()
+    {
+        string subjectsDir = Path.Combine(
+            RepoRootLocator.FindFromBaseDirectory(),
+            "artifacts", "foundation-dll", "System.Private.CoreLib",
+            "chunks", "system", "native", "subjects");
+
+        Assert.True(Directory.Exists(subjectsDir),
+            $"no emitted sources at '{subjectsDir}'. Run the system chunk build first: "
+            + "python -m verification.chunk_pipeline --assembly System.Private.CoreLib "
+            + "--chunk system --stages build");
+
+        var tuFiles = Directory.GetFiles(subjectsDir, "native-aot.payload.*.cpp")
+            .Append(Path.Combine(subjectsDir, "native-aot.generated.cpp"))
+            .Where(File.Exists)
+            .ToArray();
+        Assert.True(tuFiles.Length > 0, "no translation units found");
+
+        // Which TU defines each params array, and which params each methods array
+        // references. Built from emitted text, so it reflects what the compiler
+        // sees rather than what the planner intended.
+        var paramsHome = new Dictionary<string, string>(StringComparer.Ordinal);
+        var methodsRefs = new List<(string File, string MethodsSym, List<string> Params)>();
+
+        var paramsDef = new Regex(
+            @"ReflectionQueryParameterDescriptor\s+(kRefl_params_\w+)\[\]\s*=");
+        var methodsDef = new Regex(
+            @"ReflectionQueryMethodDescriptor\s+(kRefl_methods_\w+)\[\]\s*=\s*\{(.*?)\n\s*\};",
+            RegexOptions.Singleline);
+        var paramsRef = new Regex(@"(kRefl_params_\w+)");
+
+        foreach (string file in tuFiles)
+        {
+            string text = File.ReadAllText(file);
+            string name = Path.GetFileName(file);
+
+            foreach (Match m in paramsDef.Matches(text))
+                paramsHome[m.Groups[1].Value] = name;
+
+            foreach (Match m in methodsDef.Matches(text))
+            {
+                var referenced = paramsRef.Matches(m.Groups[2].Value)
+                    .Select(r => r.Groups[1].Value)
+                    .Distinct(StringComparer.Ordinal)
+                    .ToList();
+                methodsRefs.Add((name, m.Groups[1].Value, referenced));
+            }
+        }
+
+        Assert.True(paramsHome.Count > 0, "no kRefl_params_* arrays found in the emitted TUs");
+        Assert.True(methodsRefs.Count > 0, "no kRefl_methods_* arrays found in the emitted TUs");
+
+        int violations = 0;
+        foreach (var (file, methodsSym, referenced) in methodsRefs)
+        {
+            foreach (string param in referenced)
+            {
+                if (!paramsHome.TryGetValue(param, out string? home))
+                {
+                    violations++;
+                    Assert.Fail($"{methodsSym} ({file}) references {param}, which is defined "
+                        + "nowhere in the emitted translation units");
+                }
+                if (!string.Equals(home, file, StringComparison.Ordinal))
+                {
+                    violations++;
+                    if (violations <= 5)
+                    {
+                        Assert.Fail($"{methodsSym} in {file} references {param}, which is defined "
+                            + $"in {home}. They must share a translation unit: the methods "
+                            + "initializer names the params array, so separating them fails "
+                            + "with C2065.");
+                    }
+                }
+            }
+        }
+
+        Assert.True(violations == 0, $"{violations} params/methods reference(s) cross a translation unit");
+
+        // And the data must actually be RELOCATED, not merely re-declared. The
+        // regression this guards against is reverting the per-type split and
+        // putting every array back inside the one `modulereg` section (which the
+        // pager never divides) — that is the condition that pinned page-0001 at
+        // 8.9 MB. A single-TU layout passes the cross-TU check vacuously, so the
+        // guard has to assert the tables are spread across more than one TU.
+        var tusWithTables = paramsHome.Values
+            .Concat(methodsRefs.Select(r => r.File))
+            .Distinct(StringComparer.Ordinal)
+            .Count();
+        Assert.True(tusWithTables > 1,
+            $"all reflection member tables collapsed into a single translation unit "
+            + $"({tusWithTables}); they must be split by declaring type, each type's "
+            + "params+methods+desc going to its own payload section");
+
+        // The per-type grouping anchor: these marker comments are emitted once per
+        // declaring type, and must not all live in one TU either.
+        var tuMarkers = new Dictionary<string, int>(StringComparer.Ordinal);
+        foreach (string file in tuFiles)
+        {
+            string text = File.ReadAllText(file);
+            int n = Regex.Matches(text, @"reflection member tables for type: ").Count;
+            if (n > 0) tuMarkers[Path.GetFileName(file)] = n;
+        }
+        Assert.True(tuMarkers.Count > 1,
+            $"the per-type reflection tables did not spread across translation units "
+            + $"({tuMarkers.Count} TU(s) carry them)");
+    }
 }
