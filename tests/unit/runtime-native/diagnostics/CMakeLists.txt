@@ -63,8 +63,11 @@ chaos_native_add_test(test_dbg_integration
 )
 
 # ── SOS extension unit tests ─────────────────────────────────────────
-# Unity-build: sos_test.cpp includes gc_sos.cpp directly.
-# CHAOS_SOS_UNIT_TEST is defined to exclude DbgEng-dependent code.
+# The test includes src/native/diagnostics/sos/sos_pods.h — the platform-neutral
+# POD mirrors of the GC structs.  It does NOT unity-build gc_sos.cpp: that pulled
+# the WinDbg/DbgEng implementation (and <windows.h>) into Linux builds, which do
+# not have those headers.  The layouts it verifies are worth checking on every
+# platform the runtime is built for, so this target stays platform-independent.
 set(SOS_DIR "${CHAOS_CMAKE_ROOT}/src/native/diagnostics/sos")
 chaos_native_add_test(test_sos
     sos_test.cpp

@@ -4,11 +4,13 @@
 // the actual GC runtime structs (gc_stats.h).  Also tests constants
 // and bucket names.
 //
-// Unity-build: includes gc_sos.cpp directly so the struct definitions
-// and file-scope constants are visible to the test code.
+// These PODs are the SOS extension's contract with the runtime, and they live
+// in sos_pods.h precisely so this test does NOT have to unity-build gc_sos.cpp.
+// Including that .cpp pulled the WinDbg/DbgEng implementation (and <windows.h>)
+// into Linux builds, which do not have those headers.  The test only ever
+// needed the layouts, so it includes just the header.
 
-// Include gc_sos.cpp in global namespace (its types are at global scope).
-#include "gc_sos.cpp"
+#include "sos_pods.h"
 
 #include <gtest/gtest.h>
 #include <cstdint>
