@@ -167,6 +167,57 @@ void CloseStartTag(WriterState* st) {
     st->in_start_tag = false;
 }
 
+// ══════════════════════════════════════════════════════════════════
+// Argument / state validation for the XmlWellFormedWriter contract
+// ══════════════════════════════════════════════════════════════════
+//
+// XmlWriter.Create(StringBuilder) returns an XmlWellFormedWriter, and the
+// validation rules below model THAT type.  The ATG subjects call
+// `XmlWriter.Create(new StringBuilder())` and their expected exception per
+// value set is recorded in the merged subject bodies; it matches
+// .autogen/System_Xml_XmlWriter/probe-results.json.
+//
+// The three families are DISTINCT:
+//   null reference argument      -> System.ArgumentNullException
+//   malformed (empty) name       -> System.ArgumentException
+//   no element open (state)      -> System.InvalidOperationException
+
+/// Reject a null argument the managed contract requires to be non-null.
+void RequireNonNullArg(CHAOS_IL2CPP_INTPTR arg, const char* param_name) {
+    if (arg == 0) RaiseArgumentNullException(param_name);
+}
+
+/// Reject an empty (non-null) name.  XmlWellFormedWriter treats an empty name
+/// as malformed and raises ArgumentException; a null name must already have
+/// been rejected by RequireNonNullArg.
+void RequireNonEmptyName(const char* name, size_t len) {
+    if (len == 0) RaiseArgumentException("The name is not valid XML.");
+}
+
+/// Reject content writes when no element is open.  XmlWellFormedWriter
+/// requires an open element for character data / markup content; writing to a
+/// bare writer raises InvalidOperationException.
+///
+/// This is the check the previous XmlTextWriter-modelled implementation was
+/// missing entirely: those methods wrote into a depth-0 writer and returned
+/// normally, so the subject's `catch (InvalidOperationException)` never fired
+/// and the body fell through to `throw new Exception("AOT stub did not throw")`.
+void RequireOpenElement(WriterState* st) {
+    if (st == nullptr || st->depth == 0 || st->in_attribute) {
+        RaiseManagedException("System.InvalidOperationException",
+            "The writer is in an invalid state. Token Text, WriteState = Content");
+    }
+}
+
+/// A pending attribute name was never given a value before the next write.
+/// XmlWellFormedWriter raises the same InvalidOperationException family.
+void RequireNoPendingAttribute(WriterState* st) {
+    if (st != nullptr && st->in_attribute) {
+        RaiseManagedException("System.InvalidOperationException",
+            "The writer is in an invalid state. Token StartAttribute");
+    }
+}
+
 }  // namespace
 
 extern "C" {
@@ -221,6 +272,12 @@ void ChaosXmlWriterWriteStartElement(
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
 
+    {
+        RequireNonNullArg(local_name, "localName");
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!ManagedStringView(local_name, _n, _nl)) RaiseArgumentNullException("localName");
+        RequireNonEmptyName(_n, _nl);
+    }
     // Null is NOT an error here — XmlTextWriter degrades a null name to an
     // empty one, consistently across every name parameter (measured .NET 8):
     //   WriteStartElement(null)              -> "<"
@@ -338,6 +395,13 @@ void ChaosXmlWriterWriteAttributeString(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    {
+        // Probe records ArgumentException for every value set, including null.
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!ManagedStringView(local_name, _n, _nl) || _nl == 0) {
+            RaiseArgumentException("The name is not valid XML.");
+        }
+    }
     if (st->depth == 0 || !st->in_start_tag) {
         RaiseManagedException("System.InvalidOperationException",
                               "Cannot write an attribute outside a start tag.");
@@ -404,6 +468,12 @@ void ChaosXmlWriterWriteElementString(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    {
+        RequireNonNullArg(local_name, "localName");
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!ManagedStringView(local_name, _n, _nl)) RaiseArgumentNullException("localName");
+        RequireNonEmptyName(_n, _nl);
+    }
     const char* pfx = nullptr; size_t pfx_len = 0;
     (void)ManagedStringView(prefix, pfx, pfx_len);
     const char* name = nullptr; size_t name_len = 0;
@@ -426,6 +496,7 @@ void ChaosXmlWriterWriteValue(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    RequireOpenElement(st);
     if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
     CloseStartTag(st);
     const char* data = nullptr; size_t len = 0;
@@ -525,6 +596,8 @@ void ChaosXmlWriterWriteWhitespace(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    // A null text is a legal no-op here: the ATG subject for the null value
+    // set has no try/catch and returns 42L, i.e. the call must not throw.
     CloseStartTag(st);
     const char* data = nullptr;
     size_t len = 0;
@@ -550,6 +623,8 @@ void ChaosXmlWriterWriteComment(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    // A null text is a legal no-op here: the ATG subject for the null value
+    // set has no try/catch and returns 42L, i.e. the call must not throw.
     if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
     CloseStartTag(st);
     AppendStr(st, "<!--");
@@ -565,6 +640,7 @@ void ChaosXmlWriterWriteCData(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    RequireOpenElement(st);
     if (st->depth > 0) st->frames[st->depth - 1].has_children = true;
     CloseStartTag(st);
     AppendStr(st, "<![CDATA[");
@@ -782,6 +858,7 @@ void ChaosXmlWriterWriteCharEntity(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    RequireOpenElement(st);
     OpenForContent(st);
     char tmp[16];
     const int n = std::snprintf(tmp, sizeof(tmp), "&#%d;", static_cast<int>(ch));
@@ -798,6 +875,7 @@ void ChaosXmlWriterWriteSurrogateCharEntity(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    RequireOpenElement(st);
     // Managed side throws ArgumentException if low isn't a low surrogate
     // (0xDC00-0xDFFF) or high isn't a high surrogate (0xD800-0xDBFF).
     // Default(char) = 0, and 0 fails both checks → ArgumentException.
@@ -824,6 +902,12 @@ void ChaosXmlWriterWriteChars(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    {
+        const char* _b = nullptr; size_t _bl = 0;
+        RequireNonNullArg(buffer, "buffer");
+        if (!ManagedStringView(buffer, _b, _bl)) RaiseArgumentNullException("buffer");
+    }
+    RequireOpenElement(st);
     if (buffer == 0)
         RaiseArgumentNullException("buffer");
     const char* data = nullptr; size_t len = 0;
@@ -848,6 +932,12 @@ void ChaosXmlWriterWriteBase64(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    {
+        const char* _b = nullptr; size_t _bl = 0;
+        RequireNonNullArg(buffer, "buffer");
+        if (!ManagedStringView(buffer, _b, _bl)) RaiseArgumentNullException("buffer");
+    }
+    RequireOpenElement(st);
     if (buffer == 0)
         RaiseArgumentNullException("buffer");
     const char* data = nullptr; size_t len = 0;
@@ -886,6 +976,7 @@ void ChaosXmlWriterWriteBinHex(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
+    RequireOpenElement(st);
     if (buffer == 0)
         RaiseArgumentNullException("buffer");
     const char* data = nullptr; size_t len = 0;
@@ -916,20 +1007,27 @@ void ChaosXmlWriterWriteStartElement3(
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
 
-    // A null localName is NOT an error in the managed writer: the qualified
-    // name simply degrades to the (possibly empty) prefix, and a null prefix
-    // with a null localName yields an element with an empty name.
-    // Measured on .NET 8:
-    //   WriteStartElement(null, "l",    null) -> "<l"
-    //   WriteStartElement(null, null,   null) -> "<"
-    //   WriteStartElement(null, "l",    null) + WriteEndElement() -> "<l />"
-    // Raising ArgumentException here (the previous behaviour) made every
-    // 3-arg subject that passes null record caught=True / realDefect once the
-    // ctor-handle fix let those subjects actually execute.
+    // XmlWellFormedWriter validates the 3-arg overload eagerly.  ATG value sets
+    // and their expected exceptions (matching probe-results.json):
+    //   set0 (null, null, null) -> ArgumentNullException
+    //   set1 ("",   null, null) -> ArgumentNullException
+    //   set2 (null, "",   null) -> ArgumentException
+    //   set3 (null, null, ""  ) -> ArgumentNullException
+    //   set4 ("",   "",   ""  ) -> ArgumentException
+    // i.e. localName alone decides: null -> ANE, empty (non-null) -> ArgumentException.
+    // prefix and ns never change the exception type, and may legitimately be null.
+    //
+    // The previous implementation modelled XmlTextWriter, which degrades a null
+    // name to an empty one, and so accepted all five — every 3-arg subject that
+    // passes null was recorded caught=true/realDefect.
+    RequireNonNullArg(local_name, "localName");
+
     const char* name = nullptr;
     size_t name_len = 0;
-    ManagedStringView(local_name, name, name_len);
-    if (name == nullptr) { name = ""; name_len = 0; }
+    if (!ManagedStringView(local_name, name, name_len)) {
+        RaiseArgumentNullException("localName");
+    }
+    RequireNonEmptyName(name, name_len);
 
     const char* pfx = nullptr;
     size_t pfx_len = 0;
@@ -987,6 +1085,12 @@ void ChaosXmlWriterWriteStartAttribute(
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
 
+    {
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!ManagedStringView(local_name, _n, _nl) || _nl == 0) {
+            RaiseArgumentException("The name is not valid XML.");
+        }
+    }
     // XmlTextWriter.WriteStartAttribute does NOT require an open start tag.
     // Measured .NET 8 (a fresh writer, nothing written yet):
     //   WriteStartAttribute(null, null, null)  -> '="'

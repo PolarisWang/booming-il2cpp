@@ -220,7 +220,11 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStringAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
-    if (!HasText(text)) return 0;  // null / empty writes nothing, and does not throw
+    // A null string is a legal no-op on this path: the ATG subject for the
+    // null value set has NO try/catch and returns 42L directly, i.e. it expects
+    // the call to complete without throwing (measured OK on .NET 8).  Only a
+    // non-empty argument reaches the async-capability refusal.
+    if (!HasText(text)) return 0;
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -240,7 +244,10 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteWhitespaceAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR ws) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
-    if (ws == 0) RaiseArgumentNull("ws");
+    (void)ws;
+    // Probe records InvalidOperationException for the null value set too, i.e.
+    // the async-capability check runs BEFORE argument validation here (unlike
+    // WriteName/WriteNmToken/WriteEntityRef, which do raise ANE first).
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -249,7 +256,9 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCommentAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
-    if (text == 0) RaiseArgumentNull("text");
+    (void)text;
+    // Probe records InvalidOperationException even for the null value set:
+    // the async-capability check precedes argument validation on this entry.
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -258,7 +267,9 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteCDataAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
-    if (text == 0) RaiseArgumentNull("text");
+    (void)text;
+    // Probe records InvalidOperationException even for the null value set:
+    // the async-capability check precedes argument validation on this entry.
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -359,7 +370,14 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteQualifiedNameAsync(
     CHAOS_IL2CPP_INTPTR local_name, CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
-    if (local_name == 0) RaiseArgumentNull("localName");
+    // An EMPTY (non-null) name is ArgumentException, a null one is
+    // ArgumentNullException — probe records ArgumentException for the
+    // all-empty value set of every multi-arg async entry.
+    {
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!StringView(local_name, _n, _nl)) RaiseArgumentNull("localName");
+        if (_nl == 0) RaiseArgumentException("The name is not valid XML.");
+    }
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -382,7 +400,14 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStartElementAsync(
     (void)this_ptr;
     (void)prefix;
     (void)ns;
-    if (local_name == 0) RaiseArgumentNull("localName");
+    // An EMPTY (non-null) name is ArgumentException, a null one is
+    // ArgumentNullException — probe records ArgumentException for the
+    // all-empty value set of every multi-arg async entry.
+    {
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!StringView(local_name, _n, _nl)) RaiseArgumentNull("localName");
+        if (_nl == 0) RaiseArgumentException("The name is not valid XML.");
+    }
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -411,7 +436,14 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteAttributeStringAsync(
     (void)prefix;
     (void)ns;
     (void)value;
-    if (local_name == 0) RaiseArgumentNull("localName");
+    // An EMPTY (non-null) name is ArgumentException, a null one is
+    // ArgumentNullException — probe records ArgumentException for the
+    // all-empty value set of every multi-arg async entry.
+    {
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!StringView(local_name, _n, _nl)) RaiseArgumentNull("localName");
+        if (_nl == 0) RaiseArgumentException("The name is not valid XML.");
+    }
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -425,7 +457,14 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteElementStringAsync(
     (void)prefix;
     (void)ns;
     (void)value;
-    if (local_name == 0) RaiseArgumentNull("localName");
+    // An EMPTY (non-null) name is ArgumentException, a null one is
+    // ArgumentNullException — probe records ArgumentException for the
+    // all-empty value set of every multi-arg async entry.
+    {
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!StringView(local_name, _n, _nl)) RaiseArgumentNull("localName");
+        if (_nl == 0) RaiseArgumentException("The name is not valid XML.");
+    }
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
