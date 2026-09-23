@@ -875,13 +875,17 @@ void ChaosXmlWriterWriteSurrogateCharEntity(
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
-    RequireOpenElement(st);
+    // Argument validation runs BEFORE the open-element check on this entry:
+    // the ATG subject passes default(char),default(char) on a bare writer and
+    // expects ArgumentException — not the InvalidOperationException that
+    // RequireOpenElement would raise first.
     // Managed side throws ArgumentException if low isn't a low surrogate
     // (0xDC00-0xDFFF) or high isn't a high surrogate (0xD800-0xDBFF).
     // Default(char) = 0, and 0 fails both checks → ArgumentException.
     if (static_cast<uint32_t>(high) < 0xD800u || static_cast<uint32_t>(high) > 0xDBFFu ||
         static_cast<uint32_t>(low) < 0xDC00u || static_cast<uint32_t>(low) > 0xDFFFu)
         RaiseArgumentException("Invalid surrogate pair.");
+    RequireOpenElement(st);
     OpenForContent(st);
     const int32_t cp = 0x10000
         + (static_cast<int32_t>(high) - 0xD800) * 0x400

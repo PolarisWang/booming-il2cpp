@@ -359,7 +359,12 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteBinHexAsync(
     CHAOS_IL2CPP_INTPTR index, CHAOS_IL2CPP_INTPTR count) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
-    ValidateArrayRange(buffer, index, count, "buffer");
+    (void)buffer;
+    (void)index;
+    (void)count;
+    // Null buffer is NOT validated first on this entry: the ATG subject for the
+    // null value set expects InvalidOperationException, i.e. the async-capability
+    // refusal wins.  (WriteBase64Async differs — it does raise ANE first.)
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -387,7 +392,11 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteProcessingInstructionAsync(
     CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
-    if (name == 0) RaiseArgumentNull("name");
+    {
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!StringView(name, _n, _nl)) RaiseArgumentNull("name");
+        if (_nl == 0) RaiseArgumentException("The name is not valid XML.");
+    }
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -422,7 +431,11 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteDocTypeAsync(
     (void)pubid;
     (void)sysid;
     (void)subset;
-    if (name == 0) RaiseArgumentNull("name");
+    {
+        const char* _n = nullptr; size_t _nl = 0;
+        if (!StringView(name, _n, _nl)) RaiseArgumentNull("name");
+        if (_nl == 0) RaiseArgumentException("The name is not valid XML.");
+    }
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
