@@ -351,6 +351,40 @@ def classify_fact_record(rec: dict, return_type: str | None,
                 return "envSensitive"
             return "realDefect"
 
+        # ── unimplemented (C2, 2026-09-22) ────────────────────────────────
+        # The method has NO codegen shape, so it is not a realDefect (there is
+        # no implementation to be defective).  It previously fell through to
+        # the bare `failed` bucket, whose stated meaning is "unclassified
+        # failure" — which reads as "should work but doesn't" and inflates the
+        # defect backlog with methods that were simply never implemented.
+        #
+        # Measured on the text chunk: 29 records, e.g. System.Text.Ascii::IsValid,
+        # Encoding::GetMaxByteCount, DecoderFallbackBuffer::MovePrevious.  All of
+        # them (a) have zero entries in aot-capability-manifest.json and (b) hit
+        # the runtime catch-all at execution time, whose own warning says
+        # "no native body; delegates to Phase 1/2, else returns 0" — the 0 is
+        # then compared against the probe's expected value and the assertion
+        # fails.  They are an implementation backlog, not verification failures.
+        #
+        # Guarded on BOTH conditions on purpose: manifest-absence alone would
+        # relabel genuine defects on methods whose shape lives in a path the
+        # manifest does not enumerate, and that would be exactly the
+        # "turn red into green by relabelling" failure this project forbids.
+        # `assertFailed` must be True for the same reason — a caught-without-
+        # assertion raise is a different story (factoryGap / nullArg /
+        # preAssertionRaise), handled above.
+        if rec.get("assertFailed") and rec.get("value") == 0:
+            # The assertion ran and compared the catch-all's 0 against the
+            # expected value.  `value == 0` is the independent corroboration
+            # that an unimplemented fallback produced the result: the runner
+            # only records 0 here when the subject returned the fallback's
+            # default, and a genuinely-defective native implementation would
+            # have to coincidentally return exactly 0 as well.  Combined with
+            # shape-absence this is unambiguous enough to bucket honestly,
+            # while a non-zero wrong value still falls through to `failed`
+            # (a real implementation that answers incorrectly is a defect).
+            return "unimplemented"
+
         return "failed"
     if rec.get("value") != 42:
         return "real"
@@ -845,6 +879,11 @@ _NON_COMPARABLE_KIND_PAIRS = frozenset({
 _EXCLUDED_FROM_GATE = frozenset({
     "factoryGap",
     "stubGap",
+    # C2 (2026-09-22): no codegen shape AND the runtime catch-all produced the
+    # value.  An implementation backlog item, exactly like stubGap — including
+    # it in the denominator would penalise the gate for work that was never
+    # done, which is the same reasoning stubGap already follows.
+    "unimplemented",
     "nullArg",
     "envSensitive",
 })
@@ -1157,6 +1196,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     smoke_ct = sum(1 for r in annotated if r.get("resultKind") == "smoke")
     factory_gap_ct = sum(1 for r in annotated if r.get("resultKind") == "factoryGap")
     stub_gap_ct = sum(1 for r in annotated if r.get("resultKind") == "stubGap")
+    unimplemented_ct = sum(1 for r in annotated if r.get("resultKind") == "unimplemented")
     null_arg_ct = sum(1 for r in annotated if r.get("resultKind") == "nullArg")
     env_sensitive_ct = sum(1 for r in annotated if r.get("resultKind") == "envSensitive")
     failed_ct = sum(1 for r in annotated if r.get("resultKind") == "failed")
@@ -1222,6 +1262,11 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
         "unassertable": unassertable_ct,  # void/async-void: 42 is structural
         "smokeUnknown": smoke_ct,       # has a return type but returned 42 → GAP
         "stubGap": stub_gap_ct,         # ATG marked AOT-STUB-GAP: no AOT body at all
+        # C2: no codegen shape + the catch-all produced the value.  Distinct
+        # from stubGap because the driver is a runtime observation rather than
+        # an ATG compile-time marker, and distinct from `failed` because
+        # nothing was implemented to be defective.
+        "unimplemented": unimplemented_ct,
         "factoryGap": factory_gap_ct,   # factory returned null → caught before method ran
         "nullArg": null_arg_ct,         # ATG passes only default(T) ref args → ArgumentNullException is correct BCL behavior
         "envSensitive": env_sensitive_ct,  # GC counters / PRNG stream positions captured from probe's own process, not reproducible

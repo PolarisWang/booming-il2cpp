@@ -30,16 +30,43 @@ public sealed partial class LoaderStage
             return dict;
         }
 
+        // Build a SubjectId->method map with LAST-WINS dedup.
+        //
+        // ToDictionary would throw "An item with the same key has already been
+        // added."  The outer BuildAssemblyDict already dedups duplicate
+        // *assemblies* for exactly this reason, but that does not cover a
+        // duplicate SubjectId *within* one assembly's Methods list — which is
+        // reachable when the same definition is contributed by two loading
+        // paths (assembly-dir scan + closure analysis both discovering it).
+        // Measured: the `global-ns` chunk (System.Text.Json, 21 methods) failed
+        // its whole build on
+        //   Chaos.TestFramework.Sdk/.../AssertionException::.ctor:System.Void(System.String)
+        // before any code generation ran, so every subject in the chunk was lost.
+        //
+        // Last-wins is the right resolution here, not an error: two entries with
+        // the same SubjectId denote the same method, so either instance is
+        // equivalent and the choice cannot change codegen output.
+        static Dictionary<string, ManagedMethodModel> BuildMethodDict(
+            IReadOnlyList<ManagedMethodModel> methods)
+        {
+            var dict = new Dictionary<string, ManagedMethodModel>(methods.Count, StringComparer.Ordinal);
+            foreach (var m in methods)
+            {
+                if (string.IsNullOrEmpty(m.SubjectId)) continue;
+                dict[m.SubjectId] = m;  // Last wins — same SubjectId ⇒ same method
+            }
+            return dict;
+        }
+
         var genericInstantiationDemandEntriesByAssembly = BuildAssemblyDict(
             loadedAssemblies,
             _ => new Dictionary<string, GenericInstantiationDemandModel>(StringComparer.Ordinal));
         var definitionMethodsByAssembly = BuildAssemblyDict(
             loadedAssemblies,
-            assembly => (IReadOnlyDictionary<string, ManagedMethodModel>)assembly.Methods
-                .ToDictionary(method => method.SubjectId, StringComparer.Ordinal));
+            assembly => (IReadOnlyDictionary<string, ManagedMethodModel>)BuildMethodDict(assembly.Methods));
         var projectedMethodsByAssembly = BuildAssemblyDict(
             loadedAssemblies,
-            assembly => assembly.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal));
+            assembly => BuildMethodDict(assembly.Methods));
         var valueTypeSubjectIdsByAssembly = BuildAssemblyDict(
             loadedAssemblies,
             assembly => (IReadOnlySet<string>)assembly.Types

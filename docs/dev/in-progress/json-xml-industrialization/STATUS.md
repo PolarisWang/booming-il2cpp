@@ -10,7 +10,7 @@ current_dir: docs/dev/in-progress/json-xml-industrialization
 entry_skill: dev-il2cpp → dev-brainstorm → dev-roadmap
 parent_task_id: null
 
-roadmap_or_plan: roadmap-v2-01.md
+roadmap_or_plan: roadmap-v4-01.md
 上游基线: docs/dev/review/json-xml-industrialization-gap-2026-09-20.md（本日实测）
 前身: docs/dev/in-progress/json-xml-production-readiness/roadmap-v1-01.md
 关键文档:
@@ -26,7 +26,7 @@ child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
 merge_granularity: 阶段边界
-recommended_next_child: P1-01
+recommended_next_child: P2-00
 ```
 
 ## P1 阶段进展（2026-09-22）
@@ -40,6 +40,34 @@ recommended_next_child: P1-01
 绑到 `InterpreterEntryDirect`，绕过 shape 决策链 → **factoryGap 22 条**（全在 `Utf8JsonWriterTests`）。
 给 `Create` 注册泛型 shape **已实测无效**。AOT `real` 未提升由此导致，非 P1-01 缺陷。
 **建议后续 Phase 3 处理**（该类型补真实 AOT body 时一并解决）。
+
+## roadmap-v4（2026-09-22）
+
+**两处前提修正**（推翻 v3）：
+
+1. **worktree 可用于并行开发** —— v2/v3 假设「单终端」，实测已是多终端环境
+   （3 个活跃 worktree + 20 个近期提交），且 `artifacts/` gitignored、
+   **每个 worktree 独立副本** ⇒ v2 §5.1 担心的 artifacts 互覆盖在隔离下不成立。
+   前提：`CHAOS_FOUNDATION_DLL=<自己的>/testing/foundation-dll`。
+
+2. **「4 个未跑 chunk」澄清** —— 无一是废弃空壳。`ReaderWriter/xml` **能跑**
+   （实测 136/185/107/746），且与 `PrivateXml/xml` **数值完全相同**（转发到同一实现）
+   ⇒ **Q4 净增工作量 ≈ 0**。
+
+**Phase 2 分族**（用户拍板 Q1b/Q9/Q10a）：
+
+| worktree | 条数 | 独占 native 文件 |
+|:---------|:----:|:-----------------|
+| W1 wt-xml-writer | 96 | xml_writer_stubs.cpp |
+| W2 wt-xml-convert | 23 | xml_convert_stubs.cpp |
+| W3 wt-xml-document | 25 | xml_document_stubs.cpp |
+| W4 wt-xml-reader | 15 | xml_reader_stubs.cpp |
+| W5 wt-global-ns-fix | 0（解 build 阻断） | LoaderStage.CrossAssemblyInstantiation.cs |
+
+批次：**3 路并行 × 2 批**（B1=W1+W2+W5，B2=W3+W4）。
+Workflow 只用于**调查**（只读 fan-out），实现按 worktree 串行。
+
+**下一步**：P2-00（建 worktree + Workflow 并行调查各族失败模式）。
 
 ## Phase 0 完成结论（2026-09-20）
 
