@@ -26,7 +26,16 @@
 #include <fstream>
 #include <algorithm>
 
+// <io.h> (and the underscore-prefixed _dup/_fileno aliases) are MSVC-only; the
+// POSIX equivalents come from <unistd.h>.  Without this guard the TU fails to
+// compile on Linux: "io.h: No such file or directory".  Same shape as the
+// sibling copy of this test (tests/contracts/native/common/log_system_test.cpp),
+// which was already guarded.
+#if defined(_WIN32) || defined(_WIN64)
 #include <io.h>
+#else
+#include <unistd.h>
+#endif
 
 // ════════════════════════════════════════════════════════════════════════════
 // Stdout capture helper (redirects stdout to temp file, then restores)
@@ -39,7 +48,11 @@ struct StdoutCapture {
 
     bool Begin() {
         fflush(stdout);
+#if defined(_WIN32) || defined(_WIN64)
         saved_fd = _dup(_fileno(stdout));
+#else
+        saved_fd = dup(fileno(stdout));
+#endif
         if (saved_fd < 0) return false;
         FILE* f = freopen(kCapturePath, "w", stdout);
         return f != nullptr;
@@ -48,8 +61,13 @@ struct StdoutCapture {
     std::string End() {
         fflush(stdout);
         if (saved_fd >= 0) {
+#if defined(_WIN32) || defined(_WIN64)
             _dup2(saved_fd, _fileno(stdout));
             _close(saved_fd);
+#else
+            dup2(saved_fd, fileno(stdout));
+            close(saved_fd);
+#endif
             saved_fd = -1;
         }
         std::string content;

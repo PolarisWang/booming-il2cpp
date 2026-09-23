@@ -20,7 +20,13 @@
 #include <cstring>
 #include <cstdint>
 #include <cstdarg>
+
+// <windows.h> is needed for the SEH machinery used by the exception-propagation
+// test below.  It is MSVC-only, and so is that machinery, so the include is
+// guarded and the test that needs it is compiled out on other platforms.
+#if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
+#endif
 
 #include "exception_jmp.h"
 
@@ -167,6 +173,12 @@ TEST(Interpreter_Bridge, SignatureAwareArg) {
 
 // SEH helper: extracted to avoid C2712 (cannot use __try in functions
 // requiring C++ object unwinding — gtest's TEST() macro generates such code).
+//
+// Windows-only by nature: __try/__except and GetExceptionCode() are MSVC SEH.
+// There is no portable equivalent that observes the same thing (a structured
+// exception escaping the bridge), so the test is compiled out elsewhere rather
+// than being rewritten to assert something weaker.
+#if defined(_WIN32) || defined(_WIN64)
 static bool TryInterpretMethodCallExpectSEH(const RuntimeInstantiationBridgeV0* bridge,
                                             MethodInfoHandle method_handle) {
     __try {
@@ -214,3 +226,4 @@ TEST(Interpreter_Bridge, ExceptionPropagation) {
     bool threw = TryInterpretMethodCallExpectSEH(bridge, method_handle);
     EXPECT_TRUE(threw) << "bridge should have thrown";
 }
+#endif  // _WIN32 || _WIN64 — SEH-based exception-propagation test
