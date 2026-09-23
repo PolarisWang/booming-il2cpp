@@ -142,10 +142,65 @@ function(chaos_native_add_test name)
     else()
         # Linux: wrap the static chaos libs in --start-group/--end-group to resolve
         # circular deps; allow duplicate TLS defs like the old add_chaos_test.
+        #
+        # The group must contain the libs as a PLAIN LIST.  When _libs is the
+        # INTERFACE target chaos_test_libs_v0 (the default, used by every target
+        # that passes no LIBS), CMake does not expand it where it is written: it
+        # emits the group EMPTY and appends the interface's dependencies after it.
+        # Measured on a minimal repro (CMake 3.25, Ninja):
+        #
+        #   variable list "a b" : a.lib b.lib -Wl,--start-group a.lib b.lib -Wl,--end-group
+        #   INTERFACE target    : -Wl,--start-group -Wl,--end-group a.lib b.lib   <-- empty!
+        #
+        # An empty group cannot resolve the
+        #     chaos_runtime_core <-> chaos_interpreter
+        # cycle: runtime_core is consumed before chaos_interpreter's objects
+        # (fast_dispatch.cpp.o, interpreter_entry.cpp.o, patch_method_lower.cpp.o)
+        # and chaos_bootstrap's (bootstrap.cpp.o) raise their need for the
+        # Dbg* / g_dbg_* / ChaosBCrypt* / method_table symbols that DO exist in
+        # libchaos_runtime_core.a — ~40 "undefined reference" errors.
+        #
+        # So expand the interface into the group -- but keep namespaced entries
+        # (Threads::Threads and friends) OUT of it.  Those are imported targets
+        # that only resolve where find_package() ran; putting them between the
+        # group markers makes configure fail with "target was not found" (that
+        # is exactly how an earlier unfiltered version of this fix broke every
+        # native test target).  They do not need to be in the group anyway: the
+        # cycle is entirely among the plain chaos_* archives, and the namespaced
+        # deps still arrive through ${_libs} on the line before the group.
+        #
+        # Verified against a repro whose interface carries Threads::Threads:
+        #   -Wl,--start-group a.lib b.lib -Wl,--end-group
+        #
+        # Targets that pass an explicit list (CHAOS_GC_LIBS, CHAOS_CODEGEN_LIBS)
+        # keep their _libs unchanged: no element is a TARGET, so the loop below
+        # just copies the list through.
+        #
+        # _libs may be a MIXED list, not a bare target name: the default path
+        # sets `set(_libs gtest_main chaos_test_libs_v0)`, so each element must
+        # be inspected individually -- a bare `if(TARGET ${_libs})` would expand
+        # to three arguments and abort configure with "Unknown arguments".
+        set(_group_libs "")
+        foreach(_entry IN LISTS _libs)
+            if(TARGET ${_entry})
+                get_target_property(_iface_deps ${_entry} INTERFACE_LINK_LIBRARIES)
+                if(_iface_deps)
+                    foreach(_dep IN LISTS _iface_deps)
+                        if(NOT _dep MATCHES "::")
+                            list(APPEND _group_libs ${_dep})
+                        endif()
+                    endforeach()
+                else()
+                    list(APPEND _group_libs ${_entry})
+                endif()
+            else()
+                list(APPEND _group_libs ${_entry})
+            endif()
+        endforeach()
         target_link_libraries(${name} PRIVATE
             ${_libs}
             -Wl,--start-group
-            ${_libs}
+            ${_group_libs}
             -Wl,--end-group)
         target_link_options(${name} PRIVATE
             -Wl,--allow-multiple-definition
