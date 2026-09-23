@@ -1298,6 +1298,15 @@ public sealed partial class NativeAotLoweringPlanner
         // has to be recorded first to keep section order aligned with text order.
         AddSection("modulereg", moduleRegistrationCode);
 
+        // Sections deposited during object-model emission (the split reflection
+        // dispatchers). Drained immediately after the registration block so their
+        // position in the section list matches where their text would have been,
+        // and so each becomes its own translation unit rather than page-0 bulk.
+        foreach (var deferred in _deferredPayloadSections)
+        {
+            AddSection(deferred.Name, deferred.Content);
+        }
+        _deferredPayloadSections.Clear();
         if (!string.IsNullOrEmpty(nameIndexCode))
         {
             moduleRegSb.Append(Environment.NewLine);

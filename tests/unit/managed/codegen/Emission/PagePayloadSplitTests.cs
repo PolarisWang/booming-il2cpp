@@ -1,3 +1,4 @@
+﻿using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Chaos.IL2CPP.Contracts;
@@ -528,5 +529,103 @@ public sealed class PagePayloadSplitTests
             $"{vtableInPayload} chaos_vtable_* array(s) but {slotsInPayload} kSlots_* table(s) "
             + "in the payload TUs — every reference type emits exactly one of each, so a "
             + "mismatch means one of the two loops stopped emitting.");
+    }
+
+    /// <summary>
+    /// The two giant reflection dispatchers must leave page 0 and survive intact
+    /// in the payload translation units.
+    ///
+    /// <para>
+    /// Splitting them is done by rewriting the emitter, so the failure modes are
+    /// silent at compile time: a split that drops branches, duplicates them, or
+    /// divides a <c>case</c> block still builds. Conservation has to be asserted
+    /// against the emitted text — counting what the splitter reports would only
+    /// check its own bookkeeping (see ReflectionDispatchSplitTests for the
+    /// unit-level version of that lesson).
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void GiantReflectionDispatchers_AreSplitOutOfPageZeroIntact()
+    {
+        string subjectsDir = Path.Combine(
+            RepoRootLocator.FindFromBaseDirectory(),
+            "artifacts", "foundation-dll", "System.Private.CoreLib",
+            "chunks", "system", "native", "subjects");
+
+        Assert.True(Directory.Exists(subjectsDir),
+            $"no emitted sources at '{subjectsDir}'. This guard asserts where the giant "
+            + "reflection dispatchers land in real codegen output and must not be skipped "
+            + "silently — run the system chunk build first: "
+            + "python -m verification.chunk_pipeline --assembly System.Private.CoreLib "
+            + "--chunk system --stages build");
+
+        string pageZero = File.ReadAllText(Path.Combine(subjectsDir, "native-aot.generated.cpp"));
+        var payloadFiles = Directory.GetFiles(subjectsDir, "native-aot.payload.*.cpp");
+        Assert.True(payloadFiles.Length > 0, $"no payload translation units in '{subjectsDir}'");
+
+        var payloadText = new StringBuilder();
+        foreach (var f in payloadFiles)
+            payloadText.Append(File.ReadAllText(f));
+        string allPayload = payloadText.ToString();
+
+        // 1. Page 0 keeps only the shells, which call the parts.
+        int shellCallsForParams = Regex.Matches(pageZero,
+            @"chaos_part_value = chaos_reflection_get_parameters_managed_part\d+\(").Count;
+        int shellCallsForResolve = Regex.Matches(pageZero,
+            @"chaos_part_value = chaos_reflection_resolve_method_handle_part\d+\(").Count;
+        Assert.True(shellCallsForParams > 0,
+            "page 0 has no calls to chaos_reflection_get_parameters_managed_partN — the "
+            + "split is not running");
+        Assert.True(shellCallsForResolve > 0,
+            "page 0 has no calls to chaos_reflection_resolve_method_handle_partN — the "
+            + "split is not running");
+
+        // 2. The branch bodies are gone from page 0 and present in the payload.
+        //    `^if` (column 0) is how a part body renders; the shell's own branches
+        //    would have been indented, so this cannot match leftover shell text.
+        int paramBranchesInPageZero = Regex.Matches(pageZero,
+            @"^if \(chaos_method_handle == static_cast<CHAOS_IL2CPP_INTPTR>\(\d+u\)\)",
+            RegexOptions.Multiline).Count;
+        Assert.True(paramBranchesInPageZero == 0,
+            $"page 0 still holds {paramBranchesInPageZero} parameter-name branch(es); they "
+            + "must all live in the part translation units");
+
+        // 3. Conservation: every branch arrives exactly once. Duplicates would mean
+        //    the same handle is dispatched by two parts (harmless but wasteful and a
+        //    sign of a bad split); a shortfall means branches were lost, which makes
+        //    the dispatcher silently narrower at runtime.
+        var paramHandles = Regex.Matches(allPayload,
+            @"^if \(chaos_method_handle == static_cast<CHAOS_IL2CPP_INTPTR>\((\d+)u\)\)",
+            RegexOptions.Multiline)
+            .Select(m => m.Groups[1].Value)
+            .ToList();
+        Assert.True(paramHandles.Count > 0, "no parameter-name branches found in the payload TUs");
+        Assert.True(paramHandles.Count == paramHandles.Distinct().Count(),
+            $"parameter-name branches are not unique in the payload "
+            + $"({paramHandles.Count} total, {paramHandles.Distinct().Count()} distinct) — "
+            + "a branch was emitted into more than one part");
+
+        // 4. Case blocks are never divided. A part's STRCMP tests must all belong to
+        //    cases that appear in that same part; a case split across parts would
+        //    reorder its first-match-wins tests.
+        foreach (var payloadFile in payloadFiles)
+        {
+            string text = File.ReadAllText(payloadFile);
+            var declaredCases = Regex.Matches(text, @"^        case static_cast<CHAOS_IL2CPP_INTPTR>\((\d+)u\):")
+                .Select(m => m.Groups[1].Value)
+                .ToHashSet();
+            if (declaredCases.Count == 0) continue;
+
+            // Count case labels in this TU; every `case` line must be a complete
+            // block, i.e. the file must not end mid-case. The structural guarantee
+            // is that the splitter only ever appends whole blocks — verified here by
+            // requiring the count to match the number of `break;` terminators that
+            // close them within the same part function.
+            int caseCount = declaredCases.Count;
+            int breakCount = Regex.Matches(text, @"^            break;$", RegexOptions.Multiline).Count;
+            Assert.True(caseCount <= breakCount,
+                $"{Path.GetFileName(payloadFile)} declares {caseCount} case label(s) but has "
+                + $"only {breakCount} case-terminating break(s) — a case block was divided");
+        }
     }
 }

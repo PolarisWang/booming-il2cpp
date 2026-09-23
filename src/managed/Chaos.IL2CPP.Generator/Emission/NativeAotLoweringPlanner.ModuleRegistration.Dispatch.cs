@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -1018,6 +1018,42 @@ public sealed partial class NativeAotLoweringPlanner
             private set => _payloadSections = value;
         }
 
+        /// <summary>
+        /// Payload sections produced while the object model is being emitted.
+        ///
+        /// <para>
+        /// The object model is written into one StringBuilder that later becomes
+        /// page 0's text, but some of what it contains is better emitted as its own
+        /// budget-sized translation unit. The giant reflection dispatchers are the
+        /// motivating case: together they are 6.3 MB of unpartitionable code, and
+        /// leaving them inline pins page 0 above the 8 MB target no matter how the
+        /// rest is partitioned.
+        /// </para>
+        ///
+        /// <para>
+        /// Object-model emission cannot call the section list directly — the
+        /// <c>AddSection</c> local in <c>EmitPayloadSections</c> is out of scope
+        /// there. Producers deposit sections here and <c>EmitPayloadSections</c>
+        /// drains this list into the real one, preserving deposit order so section
+        /// order still matches text order (required by the paging invariant).
+        /// </para>
+        /// </summary>
+        private readonly List<PayloadSection> _deferredPayloadSections = new();
+
+        /// <summary>
+        /// Queues a payload section to be drained by <c>EmitPayloadSections</c>.
+        /// No-op for empty content so callers need not guard.
+        /// </summary>
+        protected void AddDeferredPayloadSection(string name, string content)
+        {
+            if (string.IsNullOrEmpty(content)) return;
+            _deferredPayloadSections.Add(new PayloadSection
+            {
+                Name = name,
+                Content = content,
+                Order = 0, // assigned when drained, so order follows drain order
+            });
+        }
         /// <summary>
         /// Symbols emitted into the page-0 payload that are referenced from other
         /// sections of it, collected as those sections are generated.

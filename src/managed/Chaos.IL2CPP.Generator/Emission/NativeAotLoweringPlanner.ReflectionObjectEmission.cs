@@ -1167,85 +1167,12 @@ public sealed partial class NativeAotLoweringPlanner
 				// call bound to the runtime version, which decodes a managed MethodInfo
 				// OBJECT pointer as a method handle, returns 0, and the caller's [0]
 				// null check FAIL_FASTs (B7 C-group tail abort).
-				builder.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_managed(CHAOS_IL2CPP_INTPTR chaos_method_value) noexcept");
-				builder.AppendLine("{");
-				builder.AppendLine("    if (chaos_method_value == 0)");
-				builder.AppendLine("    {");
-				builder.AppendLine("        return chaos_reflection_create_reference_array(");
-				stringBuilder = builder;
-				StringBuilder stringBuilder74 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(13, 1, stringBuilder);
-				handler.AppendLiteral("            ");
-				handler.AppendFormatted(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"));
-				handler.AppendLiteral(",");
-				stringBuilder74.AppendLine(ref handler);
-				builder.AppendLine("            static_cast<CHAOS_IL2CPP_SIZE>(0));");
-				builder.AppendLine("    }");
-				builder.AppendLine();
-				builder.AppendLine("    auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_method_value);");
-				builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_method_handle = 0;");
-				stringBuilder = builder;
-				StringBuilder stringBuilder75 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(34, 1, stringBuilder);
-				handler.AppendLiteral("    if (chaos_object_get_type_info(chaos_header) == ");
-				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
-				handler.AppendLiteral("\n        || chaos_object_get_type_info(chaos_header)->stable_id == (");
-				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
-				handler.AppendLiteral(")->stable_id)");
-				stringBuilder75.AppendLine(ref handler);
-				builder.AppendLine("    {");
-				stringBuilder = builder;
-				StringBuilder stringBuilder76 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(69, 1, stringBuilder);
-				handler.AppendLiteral("        auto* chaos_method = reinterpret_cast<");
-				handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"));
-				handler.AppendLiteral("*>(chaos_method_value);");
-				stringBuilder76.AppendLine(ref handler);
-				builder.AppendLine("        chaos_method_handle = chaos_method->generic_definition_method_handle != 0");
-				builder.AppendLine("            ? chaos_method->generic_definition_method_handle");
-				builder.AppendLine("            : chaos_method->runtime_method_handle;");
-				builder.AppendLine("    }");
-				stringBuilder = builder;
-				StringBuilder stringBuilder77 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(39, 1, stringBuilder);
-				handler.AppendLiteral("    else if (chaos_object_get_type_info(chaos_header) == ");
-				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
-				handler.AppendLiteral("\n        || chaos_object_get_type_info(chaos_header)->stable_id == (");
-				handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
-				handler.AppendLiteral(")->stable_id)");
-				stringBuilder77.AppendLine(ref handler);
-				builder.AppendLine("    {");
-				stringBuilder = builder;
-				StringBuilder stringBuilder78 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(69, 1, stringBuilder);
-				handler.AppendLiteral("        auto* chaos_method = reinterpret_cast<");
-				handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
-				handler.AppendLiteral("*>(chaos_method_value);");
-				stringBuilder78.AppendLine(ref handler);
-				builder.AppendLine("        chaos_method_handle = chaos_method->runtime_method_handle;");
-				builder.AppendLine("    }");
-				builder.AppendLine();
-				builder.AppendLine();
-				// Independent "if (match) { body; return result; }" — avoids MSVC C1061
-				var methodEntries = _reflectionMemberSupport.MethodEntries
-					.OrderBy(entry => entry.MethodSubjectId, StringComparer.Ordinal)
-					.ToList();
-				foreach (var entry in methodEntries)
-				{
-					EmitMethodParameterNameCase(builder, entry, "    if");
-				}
-				builder.AppendLine("    {");
-				builder.AppendLine("        const auto chaos_b3_params = chaos_reflection_get_parameters_b3(chaos_method_handle);");
-				builder.AppendLine("        if (chaos_b3_params != 0)");
-				builder.AppendLine("        {");
-				builder.AppendLine("            return chaos_b3_params;");
-				builder.AppendLine("        }");
-				builder.AppendLine("    }");
-				builder.AppendLine("    return chaos_reflection_create_reference_array(");
-				EmitParameterInfoTypeInfo(builder);
-				builder.AppendLine("        static_cast<CHAOS_IL2CPP_SIZE>(0));");
-				builder.AppendLine("}");
-				builder.AppendLine();
+				//
+				// ⚠️ 分隔线：下方 `builder.AppendLine("extern \"C\" ...")` 到本函数结束的
+				// 整段（旧 1170-1247）已被 `SplitGetParametersManaged` 取代 —— 那一段把
+				// 10,258 条分支内联写进 page 0，是 page 0 的 31%（4.35 MB）。现在改为
+				// 由 ReflectionDispatchPartitioner 切成 `_partN` 并登记为 payload 段。
+				EmitSplitGetParametersManaged(builder);
 			}
 		}
 		if (flag3)
@@ -1587,61 +1514,16 @@ public sealed partial class NativeAotLoweringPlanner
 					NativeAotTemplateCatalog.GetReflectionCreateInstanceTemplate(),
 					createInstanceModel).TrimEnd());
 			builder.AppendLine();
-			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR chaos_type_handle, const char* chaos_method_name) noexcept");
-			builder.AppendLine("{");
-			builder.AppendLine("    if (chaos_method_name == nullptr)");
-			builder.AppendLine("    {");
-			builder.AppendLine("        return 0;");
-			builder.AppendLine("    }");
-			builder.AppendLine();
-			builder.AppendLine("    switch (chaos_type_handle)");
-			builder.AppendLine("    {");
-			foreach (var item11 in _methodsGroupedByDeclaringType)
-			{
-				if (string.Equals(item11.Key, "System.Private.CoreLib/System.Type", StringComparison.Ordinal) ||
-					string.Equals(item11.Key, "System.Private.CoreLib/System.Reflection.MethodInfo", StringComparison.Ordinal))
-				{
-					continue;
-				}
-				if (item11.All(m => IsSpecialMethodName(GetMethodName(m.SubjectId))))
-				{
-					continue;
-				}
-				stringBuilder = builder;
-				StringBuilder stringBuilder101 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(14, 1, stringBuilder);
-				handler.AppendLiteral("        case ");
-				handler.AppendFormatted(GetTypeHandleLiteral(item11.Key));
-				handler.AppendLiteral(":");
-				stringBuilder101.AppendLine(ref handler);
-				foreach (AotCoreIrMethodArtifact item12 in item11)
-				{
-					stringBuilder = builder;
-					StringBuilder stringBuilder102 = stringBuilder;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(54, 1, stringBuilder);
-					handler.AppendLiteral("            if (CHAOS_IL2CPP_STRCMP(chaos_method_name, ");
-					handler.AppendFormatted(ToCppStringLiteral(GetMethodName(item12.SubjectId)));
-					handler.AppendLiteral(") == 0)");
-					stringBuilder102.AppendLine(ref handler);
-					builder.AppendLine("            {");
-					stringBuilder = builder;
-					StringBuilder stringBuilder103 = stringBuilder;
-					handler = new StringBuilder.AppendInterpolatedStringHandler(24, 1, stringBuilder);
-					handler.AppendLiteral("                return ");
-					handler.AppendFormatted(GetMethodHandleLiteral(item12.SubjectId));
-					handler.AppendLiteral(";");
-					stringBuilder103.AppendLine(ref handler);
-					builder.AppendLine("            }");
-					builder.AppendLine();
-				}
-				builder.AppendLine("            break;");
-			}
-			builder.AppendLine("        default:");
-			builder.AppendLine("            break;");
-			builder.AppendLine("    }");
-			builder.AppendLine();
-			builder.AppendLine("    return 0;");
-			builder.AppendLine("}");
+			// The inline form of this function is 1.97 MB / 9,438 STRCMPs across 89
+			// cases and is not partitionable by the method pager. Split it into
+			// `_partN` functions, each covering whole `case` blocks only.
+			//
+			// 🔴 A `case` block is the atomic unit: within one case there are up to
+			// 16 `STRCMP(name, "AreEqual")` tests returning DIFFERENT tokens, and the
+			// semantics are "first match wins". Cutting a case in half, sorting, or
+			// de-duplicating those tests changes the returned token silently —
+			// no compile error, no exception, just a wrong handle.
+			EmitSplitResolveMethodHandle(builder);
 			builder.AppendLine();
 			builder.AppendLine("CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(CHAOS_IL2CPP_INTPTR chaos_type_value, CHAOS_IL2CPP_INTPTR chaos_name_value, CHAOS_IL2CPP_INT32 chaos_binding_flags = CHAOS_IL2CPP_INT32(0))");
 			builder.AppendLine("{");
@@ -1955,6 +1837,22 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private void EmitMethodParameterNameCase(StringBuilder builder, ReflectionMemberMethodEntry entry, string condition)
 	{
+		AppendMethodParameterNameCase(builder, entry, condition);
+	}
+
+	/// <summary>
+	/// Emits one <c>if (chaos_method_handle == LITERAL) { ...build ParameterInfo[]...; return ...; }</c>
+	/// branch of <c>chaos_reflection_get_parameters_managed</c>.
+	///
+	/// <para>
+	/// <paramref name="condition"/> is the caller's control-flow prefix: the inline
+	/// form passes <c>"    if"</c> (MSVC C1061 rules out a single giant
+	/// <c>else if</c> chain), while the split form passes <c>"if"</c> because each
+	/// part is a standalone function.
+	/// </para>
+	/// </summary>
+	private void AppendMethodParameterNameCase(StringBuilder builder, ReflectionMemberMethodEntry entry, string condition)
+	{
 		builder.Append(condition)
 			.Append(" (chaos_method_handle == ")
 			.Append(GetMethodHandleLiteral(entry.MethodSubjectId))
@@ -1987,6 +1885,261 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		builder.AppendLine("        return chaos_array_value;");
 		builder.AppendLine("    }");
+	}
+
+	/// <summary>
+	/// Emits <c>chaos_reflection_get_parameters_managed</c> split across bounded
+	/// <c>_partN</c> functions, each registered as its own payload section.
+	///
+	/// <para>
+	/// The inline form of this function is 4.35 MB — 31% of page 0 — and is not
+	/// partitionable by the method pager, so it pins page 0 above the size target
+	/// on its own. The shell keeps the prologue (null check, handle resolution) and
+	/// the epilogue (b3 fallback, empty-array result); each part holds a contiguous
+	/// slice of the branch chain, in the original emission order.
+	/// </para>
+	///
+	/// <para>
+	/// The shared middle block — the one that builds the b3 fallback result and its
+	/// return — is deliberately NOT a branch. The original relies on it running
+	/// only after every branch test fails, inside the same <c>if</c> chain, so it
+	/// stays in the epilogue and the parts only cover the named branches.
+	/// </para>
+	/// </summary>
+	private void EmitSplitGetParametersManaged(StringBuilder builder)
+	{
+		const string FunctionName = "chaos_reflection_get_parameters_managed";
+		const string ReturnType = "CHAOS_IL2CPP_INTPTR";
+		const string Parameters = "CHAOS_IL2CPP_INTPTR chaos_method_value";
+
+		// Branch bodies, in emission order. Order is load-bearing (see class doc on
+		// ReflectionDispatchPartitioner) and must not be sorted or de-duplicated.
+		var branches = new List<string>();
+		var methodEntries = _reflectionMemberSupport.MethodEntries
+			.OrderBy(entry => entry.MethodSubjectId, StringComparer.Ordinal)
+			.ToList();
+		foreach (var entry in methodEntries)
+		{
+			// "if" (not "    if"): each branch is emitted into a fresh part function,
+			// so it starts at column 0 there.
+			var branchBuilder = new StringBuilder();
+			AppendMethodParameterNameCase(branchBuilder, entry, "if");
+			branches.Add(branchBuilder.ToString());
+		}
+
+		if (branches.Count == 0)
+		{
+			// No named-parameter methods in this closure: keep the original shape
+			// (prologue + fallback) rather than emitting a shell with no parts.
+			builder.Append("extern \"C\" ").Append(ReturnType).Append(' ')
+				.Append(FunctionName).Append('(').Append(Parameters).AppendLine(") noexcept");
+			builder.AppendLine("{");
+			AppendGetParametersManagedPrologue(builder);
+			AppendGetParametersManagedEpilogue(builder);
+			builder.AppendLine("}");
+			builder.AppendLine();
+			return;
+		}
+
+		var parts = ReflectionDispatchPartitioner.SplitFlatChain(
+			FunctionName, ReturnType, Parameters, branches,
+			// The branch bodies test `chaos_method_handle`, which the shell computes
+			// from the raw managed value. Parts therefore take the resolved handle,
+			// not the public `chaos_method_value` parameter.
+			partParameters: "CHAOS_IL2CPP_INTPTR chaos_method_handle");
+
+		var prologueBuilder = new StringBuilder();
+		AppendGetParametersManagedPrologue(prologueBuilder);
+
+		var epilogueBuilder = new StringBuilder();
+		AppendGetParametersManagedEpilogue(epilogueBuilder);
+
+		builder.Append(ReflectionDispatchPartitioner.BuildFlatChainShell(
+			FunctionName, ReturnType, Parameters,
+			prologueBuilder.ToString(),
+			parts,
+			argumentList: "chaos_method_handle",
+			epilogueBuilder.ToString()));
+		builder.AppendLine();
+
+		// Each part becomes its own translation unit. `extern "C"` gives them the
+		// external linkage the payload TUs need; they are declared in the shared
+		// header (below) so the shell's call site resolves.
+		foreach (var part in parts)
+		{
+			AddDeferredPayloadSection($"{FunctionName}_{part.NameSuffix}", part.Text);
+			// Declared in the payload contract header so the shell's call site
+			// resolves across translation units. The part takes the resolved
+			// handle, not the public parameter — see the SplitFlatChain call above.
+			RegisterCrossSectionSymbol(
+				$"{FunctionName}_{part.NameSuffix}",
+				$"extern \"C\" {ReturnType} {FunctionName}_{part.NameSuffix}(CHAOS_IL2CPP_INTPTR chaos_method_handle) noexcept;",
+				needsExternalLinkage: true);
+		}
+	}
+
+	/// <summary>
+	/// Emits <c>chaos_reflection_resolve_method_handle</c> split across bounded
+	/// <c>_partN</c> functions, each registered as its own payload section.
+	///
+	/// <para>
+	/// 🔴 <b>A <c>case</c> block is never divided.</b> Case blocks are accumulated
+	/// into a part until it reaches the branch budget, then a new part starts. A
+	/// block larger than the budget still gets its own part rather than being cut,
+	/// because cutting it can reorder its <c>STRCMP</c> tests relative to each
+	/// other — and within a single case those tests are first-match-wins with
+	/// duplicate names mapping to different tokens.
+	/// </para>
+	///
+	/// <para>
+	/// The prologue (null-name guard) stays in the shell. Each part's
+	/// <c>default: break;</c> plus trailing <c>return 0;</c> preserves the original
+	/// "no case matched → return 0" fallthrough, so the shell can simply try parts
+	/// in order and return the first non-zero result.
+	/// </para>
+	/// </summary>
+	private void EmitSplitResolveMethodHandle(StringBuilder builder)
+	{
+		const string FunctionName = "chaos_reflection_resolve_method_handle";
+		const string ReturnType = "CHAOS_IL2CPP_INTPTR";
+		const string Parameters = "CHAOS_IL2CPP_INTPTR chaos_type_handle, const char* chaos_method_name";
+
+		// Whole case blocks, in emission order. Each entry is one `case ... break;`
+		// group; they are never split or reordered.
+		var caseBlocks = new List<(string CaseText, int BranchCount)>();
+		foreach (var item11 in _methodsGroupedByDeclaringType)
+		{
+			if (string.Equals(item11.Key, "System.Private.CoreLib/System.Type", StringComparison.Ordinal) ||
+				string.Equals(item11.Key, "System.Private.CoreLib/System.Reflection.MethodInfo", StringComparison.Ordinal))
+			{
+				continue;
+			}
+			if (item11.All(m => IsSpecialMethodName(GetMethodName(m.SubjectId))))
+			{
+				continue;
+			}
+
+			var caseSb = new StringBuilder();
+			caseSb.Append("        case ").Append(GetTypeHandleLiteral(item11.Key)).AppendLine(":");
+			foreach (AotCoreIrMethodArtifact item12 in item11)
+			{
+				caseSb.Append("            if (CHAOS_IL2CPP_STRCMP(chaos_method_name, ")
+					.Append(ToCppStringLiteral(GetMethodName(item12.SubjectId)))
+					.AppendLine(") == 0)");
+				caseSb.AppendLine("            {");
+				caseSb.Append("                return ")
+					.Append(GetMethodHandleLiteral(item12.SubjectId))
+					.AppendLine(";");
+				caseSb.AppendLine("            }");
+				caseSb.AppendLine();
+			}
+			caseSb.AppendLine("            break;");
+
+			caseBlocks.Add((caseSb.ToString(), item11.Count()));
+		}
+
+		if (caseBlocks.Count == 0)
+		{
+			builder.Append("CHAOS_IL2CPP_INTPTR ").Append(FunctionName)
+				.Append('(').Append(Parameters).AppendLine(") noexcept");
+			builder.AppendLine("{");
+			builder.AppendLine("    (void)chaos_type_handle;");
+			builder.AppendLine("    (void)chaos_method_name;");
+			builder.AppendLine("    return 0;");
+			builder.AppendLine("}");
+			return;
+		}
+
+		var parts = ReflectionDispatchPartitioner.SplitCaseBlocks(
+			FunctionName, ReturnType, Parameters, caseBlocks);
+
+		const string Prologue =
+			"    if (chaos_method_name == nullptr)\n" +
+			"    {\n" +
+			"        return 0;\n" +
+			"    }\n\n";
+
+		builder.Append(ReflectionDispatchPartitioner.BuildFlatChainShell(
+			FunctionName, ReturnType, Parameters,
+			Prologue,
+			parts,
+			argumentList: "chaos_type_handle, chaos_method_name",
+			epilogue: "    return 0;\n"));
+
+		foreach (var part in parts)
+		{
+			AddDeferredPayloadSection($"{FunctionName}_{part.NameSuffix}", part.Text);
+			RegisterCrossSectionSymbol(
+				$"{FunctionName}_{part.NameSuffix}",
+				$"extern \"C\" {ReturnType} {FunctionName}_{part.NameSuffix}({Parameters}) noexcept;",
+				needsExternalLinkage: true);
+		}
+	}
+
+	/// <summary>
+	/// The shared prefix of <c>chaos_reflection_get_parameters_managed</c>: the
+	/// null-value guard and the resolution of <c>chaos_method_handle</c> from a
+	/// managed MethodInfo/ConstructorInfo object.
+	/// </summary>
+	private void AppendGetParametersManagedPrologue(StringBuilder builder)
+	{
+		builder.AppendLine("    if (chaos_method_value == 0)");
+		builder.AppendLine("    {");
+		builder.AppendLine("        return chaos_reflection_create_reference_array(");
+		builder.Append("            ")
+			.Append(GetRuntimeTypeInfoExpression("System.Private.CoreLib/System.Reflection.ParameterInfo"))
+			.AppendLine(",");
+		builder.AppendLine("            static_cast<CHAOS_IL2CPP_SIZE>(0));");
+		builder.AppendLine("    }");
+		builder.AppendLine();
+		builder.AppendLine("    auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_method_value);");
+		builder.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_method_handle = 0;");
+		builder.Append("    if (chaos_object_get_type_info(chaos_header) == ")
+			.Append(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"))
+			.AppendLine();
+		builder.Append("        || chaos_object_get_type_info(chaos_header)->stable_id == (")
+			.Append(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"))
+			.AppendLine(")->stable_id)");
+		builder.AppendLine("    {");
+		builder.Append("        auto* chaos_method = reinterpret_cast<")
+			.Append(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.MethodInfo"))
+			.AppendLine("*>(chaos_method_value);");
+		builder.AppendLine("        chaos_method_handle = chaos_method->generic_definition_method_handle != 0");
+		builder.AppendLine("            ? chaos_method->generic_definition_method_handle");
+		builder.AppendLine("            : chaos_method->runtime_method_handle;");
+		builder.AppendLine("    }");
+		builder.Append("    else if (chaos_object_get_type_info(chaos_header) == ")
+			.Append(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"))
+			.AppendLine();
+		builder.Append("        || chaos_object_get_type_info(chaos_header)->stable_id == (")
+			.Append(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"))
+			.AppendLine(")->stable_id)");
+		builder.AppendLine("    {");
+		builder.Append("        auto* chaos_method = reinterpret_cast<")
+			.Append(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"))
+			.AppendLine("*>(chaos_method_value);");
+		builder.AppendLine("        chaos_method_handle = chaos_method->runtime_method_handle;");
+		builder.AppendLine("    }");
+		builder.AppendLine();
+	}
+
+	/// <summary>
+	/// The shared tail of <c>chaos_reflection_get_parameters_managed</c>: the
+	/// b3-backed fallback, then the empty result. Runs exactly once — only the
+	/// shell emits it, never a part.
+	/// </summary>
+	private void AppendGetParametersManagedEpilogue(StringBuilder builder)
+	{
+		builder.AppendLine("    {");
+		builder.AppendLine("        const auto chaos_b3_params = chaos_reflection_get_parameters_b3(chaos_method_handle);");
+		builder.AppendLine("        if (chaos_b3_params != 0)");
+		builder.AppendLine("        {");
+		builder.AppendLine("            return chaos_b3_params;");
+		builder.AppendLine("        }");
+		builder.AppendLine("    }");
+		builder.AppendLine("    return chaos_reflection_create_reference_array(");
+		EmitParameterInfoTypeInfo(builder);
+		builder.AppendLine("        static_cast<CHAOS_IL2CPP_SIZE>(0));");
 	}
 
 	private void EmitParameterInfoTypeInfo(StringBuilder builder)
