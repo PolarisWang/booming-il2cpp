@@ -454,6 +454,36 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterXmlWriterVoid(registry, "WriteAttributes",
                 "ChaosXmlWriterWriteAttributes", node2, node2R,
                 new[] { "System.Xml.XmlReader", "System.Boolean" });
+
+            // ── Static factory: XmlWriter.Create(StringBuilder) ──
+            //
+            // Every XmlWriter subject builds its receiver as
+            //   XmlWriter.Create(new StringBuilder())
+            // so this call gates all of them.  Without a shape it fell to the
+            // catch-all helper, which returns ChaosExternalRuntimeFallback(...)
+            // == 0; the writer handle was then null, the generated
+            // `if (chaos_arg_0 == 0) raise_null_reference_exception()` fired on
+            // the first write, and no ChaosXmlWriter* function ever ran.  That
+            // is why all 96 XmlWriter realDefect subjects failed identically
+            // regardless of what the native write bodies did — the native side
+            // was unreachable.  Same failure shape as XmlConvert before
+            // a682b9a0d (where the null guard pre-empted the callee).
+            //
+            // ReturnAbi is the writer handle (NativeInt), NOT Void: unlike a
+            // .ctor this is an ordinary static call whose result the subject
+            // pushes on the eval stack, and EmitLinearResolvedInvocation emits
+            // `const auto chaos_result = <call>(...);` unconditionally — a Void
+            // slot would make that a C3313.  ChaosXmlWriterCreateStringBuilder
+            // returns the 1-based handle into g_writers.
+            registry.Register("System.Xml.XmlWriter", "Create",
+                new[] { "System.Text.StringBuilder" },
+                ShapeKind.SimpleForward, "ChaosXmlWriterCreateStringBuilder",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(
+                        "System.Private.CoreLib/System.Text.StringBuilder",
+                        AotCoreIrTypeShapeKind.ReferenceType)),
+                wAbi,
+                new HashSet<int> { 0 });
         }
 
         /// <summary>

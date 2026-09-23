@@ -17,6 +17,16 @@ extern "C" {
 /// sink identity only — output is accumulated in the native side buffer.
 CHAOS_IL2CPP_INTPTR ChaosXmlTextWriterCreate(CHAOS_IL2CPP_INTPTR text_writer) CHAOS_STUB_NOEXCEPT;
 
+/// XmlWriter.Create(StringBuilder) → opaque handle, or 0 on OOM.
+///
+/// Distinct from ChaosXmlTextWriterCreate above: XmlWriter.Create is the
+/// factory the ATG subjects actually call (`XmlWriter.Create(new StringBuilder())`),
+/// and it returns an XmlWellFormedWriter, not an XmlTextWriter.  Both entry
+/// points hand back the same kind of handle into the writer table, so the
+/// write surface below is shared.
+CHAOS_IL2CPP_INTPTR ChaosXmlWriterCreateStringBuilder(
+    CHAOS_IL2CPP_INTPTR string_builder) CHAOS_STUB_NOEXCEPT;
+
 /// XmlTextWriter.WriteStartDocument() → void
 void ChaosXmlWriterWriteStartDocument(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT;
 
