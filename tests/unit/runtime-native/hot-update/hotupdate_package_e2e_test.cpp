@@ -60,13 +60,19 @@ public:
         path_ = dir_name + "\\";
         if (_mkdir(path_.c_str()) != 0) throw std::runtime_error("Failed to create dir: " + path_);
 #else
+        // mkdtemp() rather than tmpnam_s(): tmpnam_s is the MSVC/Annex-K
+        // function and does not exist on glibc, so this branch previously
+        // failed to compile on Linux ('errno_t' / 'L_tmpnam' not declared).
+        // mkdtemp also creates the directory atomically, closing the
+        // name-then-create race that tmpnam_s leaves open.
         const char* tmp_base = std::getenv("TMPDIR");
         if (!tmp_base) tmp_base = "/tmp";
-        char unique[L_tmpnam];
-        errno_t err = tmpnam_s(unique, L_tmpnam);
-        if (err != 0) throw std::runtime_error("tmpnam_s failed");
-        path_ = std::string(tmp_base) + "/" + unique + "/";
-        if (mkdir(path_.c_str(), 0700) != 0) throw std::runtime_error("Failed to create dir: " + path_);
+        std::string tmpl = std::string(tmp_base) + "/hupXXXXXX";
+        std::vector<char> buf(tmpl.begin(), tmpl.end());
+        buf.push_back('\0');
+        if (mkdtemp(buf.data()) == nullptr)
+            throw std::runtime_error("mkdtemp failed");
+        path_ = std::string(buf.data()) + "/";
 #endif
     }
 
