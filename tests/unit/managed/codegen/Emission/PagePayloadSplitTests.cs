@@ -590,20 +590,70 @@ public sealed class PagePayloadSplitTests
             $"page 0 still holds {paramBranchesInPageZero} parameter-name branch(es); they "
             + "must all live in the part translation units");
 
-        // 3. Conservation: every branch arrives exactly once. Duplicates would mean
-        //    the same handle is dispatched by two parts (harmless but wasteful and a
-        //    sign of a bad split); a shortfall means branches were lost, which makes
-        //    the dispatcher silently narrower at runtime.
-        var paramHandles = Regex.Matches(allPayload,
-            @"^if \(chaos_method_handle == static_cast<CHAOS_IL2CPP_INTPTR>\((\d+)u\)\)",
-            RegexOptions.Multiline)
-            .Select(m => m.Groups[1].Value)
-            .ToList();
-        Assert.True(paramHandles.Count > 0, "no parameter-name branches found in the payload TUs");
-        Assert.True(paramHandles.Count == paramHandles.Distinct().Count(),
-            $"parameter-name branches are not unique in the payload "
-            + $"({paramHandles.Count} total, {paramHandles.Distinct().Count()} distinct) — "
-            + "a branch was emitted into more than one part");
+        // 3. Conservation: no branch is emitted twice WITHIN one dispatcher. The
+        //    splitter must never duplicate a branch, which would make one handle
+        //    reachable through two parts (wasteful, and a sign of a bad split).
+        //
+        //    Uniqueness is per-FUNCTION, not global: `get_parameters_managed` and
+        //    `get_parameters_b3` are separate dispatchers that legitimately cover
+        //    overlapping handles (10,258 + 15,982 = 26,240 branches but only 16,888
+        //    distinct handles). Asserting global uniqueness fails on that legitimate
+        //    overlap rather than on a defect. So group by the enclosing part
+        //    function first, then require uniqueness inside each group.
+        var partFunction = new Regex(
+            @"^extern ""C"" [A-Z_0-9]+ (\w+_part\d+)\(",
+            RegexOptions.Multiline);
+        var branchesByFunction = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+        string? currentFunction = null;
+        foreach (string line in allPayload.Split('\n'))
+        {
+            var fnMatch = partFunction.Match(line);
+            if (fnMatch.Success)
+            {
+                currentFunction = fnMatch.Groups[1].Value;
+                continue;
+            }
+            if (currentFunction is null) continue;
+            var brMatch = Regex.Match(line,
+                @"^if \(chaos_method_handle == static_cast<CHAOS_IL2CPP_INTPTR>\((\d+)u\)\)");
+            if (brMatch.Success)
+            {
+                if (!branchesByFunction.TryGetValue(currentFunction, out var list))
+                    branchesByFunction[currentFunction] = list = new List<string>();
+                list.Add(brMatch.Groups[1].Value);
+            }
+        }
+
+        int totalBranches = branchesByFunction.Values.Sum(v => v.Count);
+        Assert.True(totalBranches > 0, "no parameter-name branches found in the payload TUs");
+
+        // Group parts by the dispatcher they belong to (`<name>_partN` -> `<name>`)
+        // so the per-dispatcher total is compared against that dispatcher alone.
+        foreach (var group in branchesByFunction
+            .GroupBy(kv => kv.Key[..kv.Key.LastIndexOf("_part", StringComparison.Ordinal)]))
+        {
+            var handles = group.SelectMany(kv => kv.Value).ToList();
+            int distinct = handles.Distinct().Count();
+            // A handle may appear in several parts only when those parts belong to
+            // DIFFERENT dispatchers; within one dispatcher each handle is placed once.
+            var perPart = group.Select(kv => (kv.Key, Set: kv.Value.ToHashSet())).ToList();
+            for (int i = 0; i < perPart.Count; i++)
+            {
+                for (int j = i + 1; j < perPart.Count; j++)
+                {
+                    var overlap = perPart[i].Set.Intersect(perPart[j].Set).ToList();
+                    // Guard the message: the interpolated string is built even when
+                    // the assertion passes, so a bare overlap[0] would throw on the
+                    // empty (i.e. correct) case.
+                    Assert.True(overlap.Count == 0,
+                        $"{perPart[i].Key} and {perPart[j].Key} (both parts of '{group.Key}') "
+                        + $"share {overlap.Count} branch handle(s)"
+                        + (overlap.Count > 0 ? $", e.g. {overlap[0]}" : "")
+                        + " — a branch was emitted into more than one part of the same dispatcher");
+                }
+            }
+            Assert.True(distinct > 0, $"dispatcher '{group.Key}' emitted no branches");
+        }
 
         // 4. Case blocks are never divided. A part's STRCMP tests must all belong to
         //    cases that appear in that same part; a case split across parts would

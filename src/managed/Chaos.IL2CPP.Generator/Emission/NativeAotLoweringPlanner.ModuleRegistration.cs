@@ -1043,37 +1043,65 @@ public sealed partial class NativeAotLoweringPlanner
                 .ToList();
 
             // Method-handle resolver: one case per declaring type.
-            sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle_b3(CHAOS_IL2CPP_INTPTR chaos_type_handle, const char* chaos_method_name) noexcept");
-            sb.AppendLine("{");
-            sb.AppendLine("    if (chaos_method_name == nullptr) return 0;");
-            sb.AppendLine("    switch (chaos_type_handle)");
-            sb.AppendLine("    {");
-            foreach (var b3Group in b3Entries
-                .GroupBy(e => e.DeclaringTypeSubjectId, StringComparer.Ordinal)
-                .OrderBy(g => g.Key, (IComparer<string>)StringComparer.Ordinal))
+            //
+            // This is 3.09 MB / 15,756 STRCMPs across 190 cases on the system
+            // chunk, and it is unpartitionable by the method pager — it is not a
+            // method in that sense, so it stays whole inside the `modulereg`
+            // section no matter how methods are paged, pinning page-0001 above
+            // the size target. Split into `_partN` functions, each its own payload
+            // section. Case blocks are the atomic unit (first-match-wins STRCMP
+            // chains; see ReflectionDispatchPartitioner).
             {
-                if (string.Equals(b3Group.Key, "System.Private.CoreLib/System.Type", StringComparison.Ordinal) ||
-                    string.Equals(b3Group.Key, "System.Private.CoreLib/System.Reflection.MethodInfo", StringComparison.Ordinal))
+                var caseBlocks = new List<(string CaseText, int BranchCount)>();
+                foreach (var b3Group in b3Entries
+                    .GroupBy(e => e.DeclaringTypeSubjectId, StringComparer.Ordinal)
+                    .OrderBy(g => g.Key, (IComparer<string>)StringComparer.Ordinal))
                 {
-                    continue;
+                    if (string.Equals(b3Group.Key, "System.Private.CoreLib/System.Type", StringComparison.Ordinal) ||
+                        string.Equals(b3Group.Key, "System.Private.CoreLib/System.Reflection.MethodInfo", StringComparison.Ordinal))
+                    {
+                        continue;
+                    }
+                    var caseSb = new StringBuilder();
+                    caseSb.AppendLine($"        case {GetTypeHandleLiteral(b3Group.Key)}:");
+                    foreach (var b3Method in b3Group.OrderBy(e => e.MethodSubjectId, StringComparer.Ordinal))
+                    {
+                        caseSb.AppendLine($"            if (CHAOS_IL2CPP_STRCMP(chaos_method_name, {ToCppStringLiteral(b3Method.MethodName)}) == 0)");
+                        caseSb.AppendLine("            {");
+                        caseSb.AppendLine($"                return {GetMethodHandleLiteral(b3Method.MethodSubjectId)};");
+                        caseSb.AppendLine("            }");
+                        caseSb.AppendLine();
+                    }
+                    caseSb.AppendLine("            break;");
+                    caseBlocks.Add((caseSb.ToString(), b3Group.Count()));
                 }
-                sb.AppendLine($"        case {GetTypeHandleLiteral(b3Group.Key)}:");
-                foreach (var b3Method in b3Group.OrderBy(e => e.MethodSubjectId, StringComparer.Ordinal))
+
+                const string B3ResolveName = "chaos_reflection_resolve_method_handle_b3";
+                const string B3ResolveParams = "CHAOS_IL2CPP_INTPTR chaos_type_handle, const char* chaos_method_name";
+
+                var resolveParts = ReflectionDispatchPartitioner.SplitCaseBlocks(
+                    B3ResolveName, "CHAOS_IL2CPP_INTPTR", B3ResolveParams, caseBlocks);
+
+                sb.Append(ReflectionDispatchPartitioner.BuildFlatChainShell(
+                    B3ResolveName, "CHAOS_IL2CPP_INTPTR", B3ResolveParams,
+                    prologue: "    if (chaos_method_name == nullptr) return 0;\n",
+                    resolveParts,
+                    argumentList: "chaos_type_handle, chaos_method_name",
+                    epilogue: "    return 0;\n"));
+                sb.AppendLine();
+
+                // Each part is declared in the shared header (page 0's object-model
+                // shell calls the non-_b3 variant, but the module-registration TU
+                // and any other caller reference these) — see BuildSharedHeader.
+                foreach (var part in resolveParts)
                 {
-                    sb.AppendLine($"            if (CHAOS_IL2CPP_STRCMP(chaos_method_name, {ToCppStringLiteral(b3Method.MethodName)}) == 0)");
-                    sb.AppendLine("            {");
-                    sb.AppendLine($"                return {GetMethodHandleLiteral(b3Method.MethodSubjectId)};");
-                    sb.AppendLine("            }");
-                    sb.AppendLine();
+                    AddDeferredPayloadSection($"{B3ResolveName}_{part.NameSuffix}", part.Text);
+                    RegisterCrossSectionSymbol(
+                        $"{B3ResolveName}_{part.NameSuffix}",
+                        $"extern \"C\" CHAOS_IL2CPP_INTPTR {B3ResolveName}_{part.NameSuffix}({B3ResolveParams}) noexcept;",
+                        needsExternalLinkage: true);
                 }
-                sb.AppendLine("            break;");
             }
-            sb.AppendLine("        default:");
-            sb.AppendLine("            break;");
-            sb.AppendLine("    }");
-            sb.AppendLine("    return 0;");
-            sb.AppendLine("}");
-            sb.AppendLine();
 
             // Parameter array builder: if-chain over per-method parameter names,
             // mirroring EmitMethodParameterNameCase in the object model TU.
@@ -1085,23 +1113,53 @@ public sealed partial class NativeAotLoweringPlanner
             // the emission set — without the registration below every chunk whose
             // B3 table contains a parameterised method fails to compile with
             // C2065 'chaos_mt_..._ParameterInfo': undeclared identifier.
+            //
+            // At 10.98 MB / 15,982 branches this is the single largest function in
+            // the chunk, and unlike the _b3 resolver it has no prologue or epilogue
+            // — just the if-chain and a trailing `return 0;`. The parts therefore
+            // carry the whole body and each returns 0 on a miss.
             RegisterExtraMethodTableSymbol(ParameterInfoSubjectId);
 
-            sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR chaos_reflection_get_parameters_b3(CHAOS_IL2CPP_INTPTR chaos_method_handle) noexcept");
-            sb.AppendLine("{");
-            var emittedParamHandles = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var b3Method in b3Entries.OrderBy(e => e.MethodSubjectId, StringComparer.Ordinal))
             {
-                var handleKey = GetMethodHandleLiteral(b3Method.MethodSubjectId);
-                if (!emittedParamHandles.Add(handleKey))
+                const string B3ParamsName = "chaos_reflection_get_parameters_b3";
+                const string B3ParamsParams = "CHAOS_IL2CPP_INTPTR chaos_method_handle";
+
+                var branches = new List<string>();
+                var emittedParamHandles = new HashSet<string>(StringComparer.Ordinal);
+                foreach (var b3Method in b3Entries.OrderBy(e => e.MethodSubjectId, StringComparer.Ordinal))
                 {
-                    continue;
+                    var handleKey = GetMethodHandleLiteral(b3Method.MethodSubjectId);
+                    if (!emittedParamHandles.Add(handleKey))
+                    {
+                        continue;
+                    }
+                    var branchSb = new StringBuilder();
+                    // Column 0: this branch is emitted into a standalone part
+                    // function, not into the switch body of the unsplit original.
+                    EmitMethodParameterNameCase(branchSb, b3Method, "if");
+                    branches.Add(branchSb.ToString());
                 }
-                EmitMethodParameterNameCase(sb, b3Method, "    if");
+
+                var paramParts = ReflectionDispatchPartitioner.SplitFlatChain(
+                    B3ParamsName, "CHAOS_IL2CPP_INTPTR", B3ParamsParams, branches);
+
+                sb.Append(ReflectionDispatchPartitioner.BuildFlatChainShell(
+                    B3ParamsName, "CHAOS_IL2CPP_INTPTR", B3ParamsParams,
+                    prologue: string.Empty,
+                    paramParts,
+                    argumentList: "chaos_method_handle",
+                    epilogue: "    return 0;\n"));
+                sb.AppendLine();
+
+                foreach (var part in paramParts)
+                {
+                    AddDeferredPayloadSection($"{B3ParamsName}_{part.NameSuffix}", part.Text);
+                    RegisterCrossSectionSymbol(
+                        $"{B3ParamsName}_{part.NameSuffix}",
+                        $"extern \"C\" CHAOS_IL2CPP_INTPTR {B3ParamsName}_{part.NameSuffix}({B3ParamsParams}) noexcept;",
+                        needsExternalLinkage: true);
+                }
             }
-            sb.AppendLine("    return 0;");
-            sb.AppendLine("}");
-            sb.AppendLine();
         }
 
         return sb.ToString();
