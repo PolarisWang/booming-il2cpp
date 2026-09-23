@@ -272,6 +272,11 @@ TEST_F(ReplacementBenchmarkTest, RegisterRevertCycleStress)
 
 // ── Multi-threaded stress tests ─────────────────────────────────────────────
 
+// The CRT assertion hook below is a Windows-only debugging aid (it turns a CRT
+// assert into a captured stack trace).  <windows.h>/<dbghelp.h> are MSVC-only,
+// so both the include and the two call sites are guarded and the test still
+// runs — hook-free — on other platforms.
+#if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
 #include <dbghelp.h>
 #pragma comment(lib, "dbghelp.lib")
@@ -288,6 +293,7 @@ static int __cdecl StackTraceReportHook(int reportType, char* message, int* retu
     }
     return 0; // Allow default processing (abort/retry/ignore dialog)
 }
+#endif
 
 TEST_F(ReplacementBenchmarkTest, ConcurrentRegisterDifferentTokens)
 {
@@ -360,8 +366,11 @@ TEST_F(ReplacementBenchmarkTest, ConcurrentRegisterSameToken)
     RegisterBenchVTable(vt);
 
     // Install CRT assertion hook to capture stack trace on vector(54) crash.
+    // Windows-only debugging aid — see the guard on StackTraceReportHook.
+#if defined(_WIN32) || defined(_WIN64)
     _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_DEBUG);
     _CrtSetReportHook2(_CRT_RPTHOOK_INSTALL, StackTraceReportHook);
+#endif
 
     auto worker = [&](int id) {
         (void)id;
