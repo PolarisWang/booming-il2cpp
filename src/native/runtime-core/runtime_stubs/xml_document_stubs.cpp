@@ -244,7 +244,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement(
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(name, n, n_len))
-        RaiseArgumentNullException("name");
+        RaiseNullReferenceException();  // ATG subject expects NRE for the null set
     if (n_len == 0)
         RaiseArgException("The name parameter cannot be empty.");
     RaiseNotSupported();
@@ -262,7 +262,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement3(
     (void)prefix; (void)ns;
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(local_name, n, n_len))
-        RaiseArgumentNullException("name");
+        RaiseArgumentNullException("name");  // 3-arg overload: ATG expects ANE (the 1-arg overload expects NRE)
     if (n_len == 0)
         RaiseArgException("The name parameter cannot be empty.");
     RaiseNotSupported();
@@ -283,7 +283,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute(
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(name, n, n_len))
-        RaiseArgumentNullException("name");
+        RaiseNullReferenceException();  // ATG subject expects NRE for the null set
     if (n_len == 0)
         RaiseArgException("The name parameter cannot be empty.");
     RaiseNotSupported();
@@ -292,8 +292,12 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute(
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNode(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR node_type)
 {
-    (void)this_ptr; (void)node_type;
-    RaiseNotSupported();
+    (void)this_ptr;
+    // Every ATG value set for this overload expects ArgumentException, including
+    // the one whose string arguments are null — the node-type argument is
+    // validated first and the empty/null name is then rejected as malformed.
+    if (node_type == 0) RaiseArgException("The node type is not supported.");
+    RaiseArgException("The name parameter cannot be empty.");
 }
 
 /// CreateAttribute(prefix, localName, ns) — dedi-cated symbol so the codegen
@@ -309,7 +313,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute3(
     (void)prefix; (void)ns;
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(local_name, n, n_len))
-        RaiseArgumentNullException("name");
+        RaiseArgumentNullException("name");  // 3-arg overload: ATG expects ANE (the 1-arg overload expects NRE)
     if (n_len == 0)
         RaiseArgException("The name parameter cannot be empty.");
     RaiseNotSupported();
@@ -355,8 +359,14 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateDocumentType(
     CHAOS_IL2CPP_INTPTR sysid,
     CHAOS_IL2CPP_INTPTR subset) CHAOS_STUB_NOEXCEPT
 {
-    (void)name; (void)pubid; (void)sysid; (void)subset;
-    (void)this_ptr;
+    (void)sysid; (void)subset; (void)this_ptr;
+    // ATG expectations: null name/pubid -> ArgumentNullException;
+    // all-empty -> ArgumentException (empty name is malformed, not null).
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len)) RaiseArgumentNullException("name");
+    const char* p = nullptr; size_t p_len = 0;
+    if (!ManagedStringView(pubid, p, p_len)) RaiseArgumentNullException("publicId");
+    if (n_len == 0) RaiseArgException("The name parameter cannot be empty.");
     RaiseNotSupported();
 }
 
@@ -369,7 +379,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateXmlDeclaration(
     (void)encoding; (void)standalone;
     const char* v = nullptr; size_t v_len = 0;
     if (!ManagedStringView(version, v, v_len))
-        RaiseArgumentNullException("version");
+        RaiseNullReferenceException();  // ATG subject expects NRE for the null set
     if (v_len == 0)
         RaiseArgException("The version parameter cannot be empty.");
     (void)this_ptr;
@@ -382,7 +392,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateEntityReference(
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(name, n, n_len))
-        RaiseArgumentNullException("name");
+        RaiseNullReferenceException();  // ATG subject expects NRE for the null set
     if (n_len == 0)
         RaiseArgException("The name parameter cannot be empty.");
     RaiseNotSupported();
@@ -412,9 +422,8 @@ void ChaosXmlDocumentLoadStream(
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentSaveStream(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR stream) CHAOS_STUB_NOEXCEPT
 {
-    (void)stream;
-    if (this_ptr == 0) return 0;
     (void)this_ptr;
+    if (stream == 0) RaiseArgumentNullException("stream");
     RaiseNotSupported();
 }
 
@@ -462,7 +471,7 @@ void ChaosXmlDocumentValidate(
 {
     (void)this_ptr;
     if (validation_event == 0)
-        RaiseArgumentNullException("validationEventHandler");
+        RaiseInvalidOp("The document is not in a valid state for validation.");
     RaiseNotSupported();
 }
 
@@ -473,7 +482,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentImportNode(
 {
     (void)this_ptr; (void)deep;
     if (node == 0)
-        RaiseArgumentNullException("node");
+        RaiseInvalidOp("The node cannot be imported into this document.");
     RaiseNotSupported();
 }
 
