@@ -44,8 +44,15 @@ target_compile_definitions(datetime_guid_math_test PRIVATE
     NOMINMAX WIN32_LEAN_AND_MEAN
 )
 target_compile_options(datetime_guid_math_test PRIVATE
-    /FI"${CMAKE_CURRENT_SOURCE_DIR}/datetime_guid_test_pch.h"
+    $<$<CXX_COMPILER_ID:MSVC>:/FI"${CMAKE_CURRENT_SOURCE_DIR}/datetime_guid_test_pch.h">
 )
+# datetime_guid_test_pch.h is an MSVC-only forced include: its whole purpose is
+# to rename GetCurrentThreadId/GetCurrentThread before <Windows.h> to dodge an
+# extern "C" collision with thread_state.h — a Windows-SDK/MSVC-specific issue.
+# It ends with #include <Windows.h>, so GCC must never be handed it; and the raw
+# /FI flag is meaningless to GCC anyway (it treats /FI"path" as an input file
+# and dies with "linker input file not found").  The generator expression above
+# scopes the flag to the MSVC compiler.
 # T0-2: collection_stubs unit tests (all 14 public API functions)
 # NOTE: collection_stubs.cpp is compiled directly (same GNU ar issue as
 # string_stubs).  GC stubs from gc_stubs_for_string_tests.cpp are reused
@@ -89,8 +96,9 @@ target_compile_definitions(runtime_stubs_benchmark PRIVATE
     NOMINMAX WIN32_LEAN_AND_MEAN
 )
 target_compile_options(runtime_stubs_benchmark PRIVATE
-    /FI"${CMAKE_CURRENT_SOURCE_DIR}/datetime_guid_test_pch.h"
+    $<$<CXX_COMPILER_ID:MSVC>:/FI"${CMAKE_CURRENT_SOURCE_DIR}/datetime_guid_test_pch.h">
 )
+# MSVC-only forced include — see the note on datetime_guid_math_test above.
 
 # T1a-2b: Half conversion IEEE 754 round-to-nearest-even unit tests
 # Includes convert_stubs.h directly (ChaosConvertToInt16FromDouble is FORCEINLINE).
