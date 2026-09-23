@@ -68,7 +68,13 @@ TEST_F(ComBenchmarkTest, RcwFindOrCreate) {
 
     auto start = std::chrono::high_resolution_clock::now();
     for (uint64_t i = 0; i < kBenchIters; ++i) {
-        volatile auto* r = FindOrCreateRcw(
+        // NOT `volatile auto*`: that makes r a volatile-qualified pointer, and
+        // passing it to ReleaseRcw(ComRcwNative*) — which takes a plain pointer —
+        // is a discarded-qualifier error on GCC/Clang (MSVC only warns).  The
+        // qualifier was never needed here: r is read by the `if`, so the call
+        // cannot be optimised away, which is the only thing volatile would have
+        // bought.
+        auto* r = FindOrCreateRcw(
             reinterpret_cast<void*>(static_cast<uintptr_t>(0xBEEF + i)));
         if (r) { ReleaseRcw(r); }
     }
