@@ -16,6 +16,11 @@
 #if defined(_MSC_VER)
 #include <intrin.h>
 #include <windows.h>
+#else
+// clock_gettime(CLOCK_MONOTONIC) for the non-Windows tick calibration in
+// RdtscToNs().  Declared in <time.h>; the <ctime> wrapper is not guaranteed to
+// re-export the POSIX clock_gettime symbol.
+#include <time.h>
 #endif
 
 namespace chaos::il2cpp::runtime_core {
@@ -210,7 +215,17 @@ void GcStressTestBase::VerifyNoCorruption(const StressConfig& cfg) {
 uint64_t GcUnitTestBase::RdtscToNs(uint64_t ticks) {
     static double s_ns_per_tick = 0.0;
     if (s_ns_per_tick == 0.0) {
-        // Calibrate using QPC.
+        // Calibrate ticks -> ns against a monotonic wall clock.  Which clock
+        // that is depends on the host: QPC on Windows, clock_gettime on Linux.
+        // Both branches busy-wait ~1 ms and divide elapsed-ns by elapsed-ticks.
+        //
+        // The Windows-only QPC calls used to sit outside any #if guard, so this
+        // TU failed to COMPILE on Linux ('LARGE_INTEGER' / 'QueryPerformanceCounter'
+        // not declared) even though Rdtsc() right above it was already guarded.
+        // Note the guard is on the *clock source*, not on Rdtsc(): Rdtsc()
+        // itself falls back to 0 on non-x86, and the 0-tick divide below is
+        // guarded separately.
+#if defined(_WIN32)
         LARGE_INTEGER freq, start_tsc, end_tsc, start_qpc, end_qpc;
         QueryPerformanceFrequency(&freq);
         QueryPerformanceCounter(&start_qpc);
@@ -226,7 +241,35 @@ uint64_t GcUnitTestBase::RdtscToNs(uint64_t ticks) {
         double elapsed_s = static_cast<double>(
             end_qpc.QuadPart - start_qpc.QuadPart) /
             static_cast<double>(freq.QuadPart);
-        s_ns_per_tick = (elapsed_s * 1e9) / static_cast<double>(elapsed_tsc);
+
+        // Guard the divide: on a platform where Rdtsc() returns a constant 0
+        // (the #else arm in the header) elapsed_ticks is 0 and this would be a
+        // 0/0 NaN that silently poisons every caller's measurement.
+        s_ns_per_tick = elapsed_tsc > 0
+                            ? (elapsed_s * 1e9) / static_cast<double>(elapsed_tsc)
+                            : 1.0;
+#else
+        // CLOCK_MONOTONIC is the port of QPC's contract here: monotonic, not
+        // affected by wall-clock steps, which is what a tick calibration needs.
+        timespec start_qpc{}, end_qpc{};
+        clock_gettime(CLOCK_MONOTONIC, &start_qpc);
+        const uint64_t start_tsc = Rdtsc();
+        // Busy-wait ~1 ms.
+        do {
+            clock_gettime(CLOCK_MONOTONIC, &end_qpc);
+        } while (static_cast<double>(end_qpc.tv_sec - start_qpc.tv_sec) +
+                     static_cast<double>(end_qpc.tv_nsec - start_qpc.tv_nsec) / 1e9 <
+                 0.001);
+        const uint64_t end_tsc = Rdtsc();
+        const uint64_t elapsed_tsc = end_tsc - start_tsc;
+        const double elapsed_s =
+            static_cast<double>(end_qpc.tv_sec - start_qpc.tv_sec) +
+            static_cast<double>(end_qpc.tv_nsec - start_qpc.tv_nsec) / 1e9;
+
+        s_ns_per_tick = elapsed_tsc > 0
+                            ? (elapsed_s * 1e9) / static_cast<double>(elapsed_tsc)
+                            : 1.0;
+#endif
     }
     return static_cast<uint64_t>(static_cast<double>(ticks) * s_ns_per_tick);
 }
