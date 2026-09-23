@@ -19,11 +19,24 @@
 #include <cstdio>
 #include <cstring>
 
-#ifdef _WIN32
+// ── Windows-only test file ──────────────────────────────────────────────────
+//
+// The DapIntegrationTest fixture captures DAP wire output by redirecting stdout
+// into an anonymous pipe and draining it with PeekNamedPipe/ReadFile.  Those are
+// Win32 APIs (as are the _pipe/_dup/_dup2/_open_osfhandle helpers and the HANDLE
+// type the whole fixture is written around), so this file cannot be made to
+// compile — let alone assert the same thing — on other platforms.  There is no
+// portable equivalent that observes the same captured bytes, so the file is
+// compiled out rather than rewritten to assert something weaker.
+//
+// The sibling dbg_server_test.cpp covers the same server from the other side
+// (internal state, no capture) and IS portable, so Linux still exercises the
+// DAP dispatch path — just not the wire formatting.
+#if defined(_WIN32) || defined(_WIN64)
+
 #include <io.h>
 #include <fcntl.h>
 #include <windows.h>
-#endif
 
 namespace chaos::il2cpp::diagnostics {
 namespace {
@@ -594,3 +607,5 @@ TEST_F(DapIntegrationTest, MultipleContinueCalls) {
 
 }  // namespace
 }  // namespace chaos::il2cpp::diagnostics
+
+#endif  // _WIN32 || _WIN64 — pipe-capture DAP integration tests

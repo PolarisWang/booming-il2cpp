@@ -17,13 +17,19 @@
 #include <algorithm>
 #include <atomic>
 #include <chrono>
-#include <crtdbg.h>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
 #include <thread>
 #include <vector>
+
+// <crtdbg.h> is MSVC-only (it is what declares _CrtSetReportMode and friends,
+// used by the CRT-assert stack-trace hook further down).  Guarding the include
+// is required on Linux: "crtdbg.h: No such file or directory".
+#if defined(_WIN32) || defined(_WIN64)
+#include <crtdbg.h>
+#endif
 
 namespace mr = chaos::il2cpp::method_replacement;
 namespace vr = chaos::il2cpp::vtable_registry;
