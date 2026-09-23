@@ -145,6 +145,22 @@ jobs:
             echo "NOT FOUND: libchaos_runtime_core.a"
           fi
           echo
+          echo "=== link.txt of the failing target (deterministic, not guess) ==="
+          FAIL_DIR=$(find build/native -path "*CMakeFiles/chaos_method_replacement_smoke.dir" -type d | head -1)
+          if [ -n "$FAIL_DIR" ]; then
+            echo "--- $FAIL_DIR/link.txt ---"
+            cat "$FAIL_DIR/link.txt" 2>/dev/null | tr ' ' '\n' | grep -vE "^-" | head -60
+          else
+            echo "no CMakeFiles/chaos_method_replacement_smoke.dir found"
+          fi
+          PASS_DIR=$(find build/native -path "*CMakeFiles/chaos_hotupdate_verification_test.dir" -type d | head -1)
+          if [ -n "$PASS_DIR" ]; then
+            echo "--- $PASS_DIR/link.txt (PASSING sibling) ---"
+            cat "$PASS_DIR/link.txt" 2>/dev/null | tr ' ' '\n' | grep -vE "^-" | head -60
+          else
+            echo "no CMakeFiles/chaos_hotupdate_verification_test.dir found"
+          fi
+          echo
           echo "=== all chaos archives present ==="
           find build/native -name "libchaos_*.a" -printf "%p\n" 2>/dev/null | sort
           exit 0
