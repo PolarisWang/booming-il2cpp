@@ -282,6 +282,11 @@ void ChaosXmlConvertVerifyXmlChars(CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 
 CHAOS_IL2CPP_INT32 ChaosXmlConvertToBoolean(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
+    // Unlike the rest of the XmlConvert surface (which raises
+    // ArgumentNullException for a null argument), the ATG subjects for this
+    // member expect FormatException on the null value set — matching the BCL,
+    // where the boolean/timespan parsers report a malformed lexical form.
+    if (str == 0) RaiseFormatError();
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
     // XSD boolean lexical space: true/false/1/0 only.
@@ -455,6 +460,11 @@ CHAOS_IL2CPP_INTPTR ChaosXmlConvertToGuid(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NO
 /// month are not convertible to a fixed TimeSpan and are rejected.
 CHAOS_IL2CPP_INT64 ChaosXmlConvertToTimeSpan(CHAOS_IL2CPP_INTPTR str) CHAOS_STUB_NOEXCEPT
 {
+    // Unlike the rest of the XmlConvert surface (which raises
+    // ArgumentNullException for a null argument), the ATG subjects for this
+    // member expect FormatException on the null value set — matching the BCL,
+    // where the boolean/timespan parsers report a malformed lexical form.
+    if (str == 0) RaiseFormatError();
     char buf[128]; size_t len = 0;
     if (!ToCString(str, buf, sizeof(buf), len)) return 0;
     if (len == 0 || buf[0] != 'P') RaiseFormatError();
