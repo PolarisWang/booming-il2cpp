@@ -28,60 +28,10 @@
 
 #include "sos_common.h"
 
-// ══════════════════════════════════════════════════════════════════════════
-// POD mirror of GcStats (gc_stats.h)
-//
-// std::atomic<uint64_t> in MSVC is layout-compatible with uint64_t.
-// This struct mirrors the field order and sizes of GcStats so we can
-// read raw target memory directly.
-// ══════════════════════════════════════════════════════════════════════════
-
-#pragma pack(push, 8)
-struct GcStatsPod {
-    uint64_t young_collections;
-    uint64_t young_objects_promoted;
-    uint64_t young_bytes_promoted;
-    uint64_t young_bytes_reclaimed;
-    uint64_t young_cards_scanned;
-    uint64_t young_pause_ns;
-    uint64_t full_collections;
-    uint64_t full_pages_collected;
-    uint64_t full_objects_marked;
-    uint64_t full_bytes_reclaimed;
-    uint64_t full_finalizers_run;
-    uint64_t finalization_pending_count;
-    uint64_t full_pause_ns;
-    uint64_t gen1_collections;
-    uint64_t gen1_objects_promoted;
-    uint64_t gen1_bytes_promoted;
-    uint64_t gen1_bytes_reclaimed;
-    uint64_t gen1_pause_ns;
-    int32_t last_compacted;
-    int32_t last_concurrent;
-    int32_t last_gc_generation;
-    uint32_t _padding0;
-    uint64_t gc_index;
-    uint64_t alloc_total;
-    uint64_t alloc_bytes;
-    uint64_t alloc_oversized;
-};
-#pragma pack(pop)
-
-// GcEventEntry — ring buffer entry layout (mirrors gc_stats.h).
-struct GcEventEntryPod {
-    uint8_t  is_full_gc;   // bool (1 byte) + 7 padding
-    uint8_t  _pad[7];
-    uint64_t pause_ns;
-    uint64_t objects_processed;
-    uint64_t bytes_reclaimed;
-};
-
-// ══════════════════════════════════════════════════════════════════════════
-// Constants matching GC runtime
-// ══════════════════════════════════════════════════════════════════════════
-
-static constexpr int kGcRingSize     = 64;
-static constexpr int kGcBucketCount  = 6;
+// The POD mirrors of the GC structs (GcStatsPod / GcEventEntryPod), the ring /
+// bucket constants and kBucketNames live in sos_pods.h — see that header for
+// why the contract is kept separate from this WinDbg implementation.
+#include "sos_pods.h"
 
 // ══════════════════════════════════════════════════════════════════════════
 // DbgEng interface pointers
@@ -402,10 +352,8 @@ events(PDEBUG_CLIENT, PCSTR) {
 // Command: !gc.histogram — Pause time distribution
 // ══════════════════════════════════════════════════════════════════════════
 
-static const char* kBucketNames[] = {
-    "0-1 ms", "1-5 ms", "5-10 ms", "10-50 ms",
-    "50-100 ms", "100+ ms"
-};
+// kBucketNames is declared in sos_pods.h (it is part of the contract the
+// layout test verifies), not redefined here.
 
 extern "C" HRESULT CALLBACK
 histogram(PDEBUG_CLIENT, PCSTR) {
