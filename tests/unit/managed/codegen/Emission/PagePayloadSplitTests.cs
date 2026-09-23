@@ -283,7 +283,7 @@ public sealed class PagePayloadSplitTests
     /// <c>python -m verification.chunk_pipeline --chunk system --stages build</c>
     /// </para>
     /// </summary>
-    [Fact]
+    [RequiresEmittedCodegenFact]
     public void NoCrossUnitReferencesToStaticTables()
     {
         string subjectsDir = Path.Combine(
@@ -472,7 +472,7 @@ public sealed class PagePayloadSplitTests
     /// would report ~9,400 instead of 127.
     /// </para>
     /// </summary>
-    [Fact]
+    [RequiresEmittedCodegenFact]
     public void VTableData_IsEmittedOutsidePageZero()
     {
         string subjectsDir = Path.Combine(
@@ -545,7 +545,7 @@ public sealed class PagePayloadSplitTests
     /// unit-level version of that lesson).
     /// </para>
     /// </summary>
-    [Fact]
+    [RequiresEmittedCodegenFact]
     public void GiantReflectionDispatchers_AreSplitOutOfPageZeroIntact()
     {
         string subjectsDir = Path.Combine(
@@ -699,7 +699,7 @@ public sealed class PagePayloadSplitTests
     /// so it would pass vacuously.
     /// </para>
     /// </summary>
-    [Fact]
+    [RequiresEmittedCodegenFact]
     public void ReflectionMemberTables_KeepParamsWithTheirReferencingMethods()
     {
         string subjectsDir = Path.Combine(
@@ -829,7 +829,7 @@ public sealed class PagePayloadSplitTests
     /// mis-registers every following entry.
     /// </para>
     /// </summary>
-    [Fact]
+    [RequiresEmittedCodegenFact]
     public void GcSlotMapSection_StaysContiguousAndSizedWithinBudget()
     {
         string subjectsDir = Path.Combine(
