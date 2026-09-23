@@ -1063,7 +1063,9 @@ void ChaosXmlWriterWriteStartElement3(
     const char* name = nullptr;
     size_t name_len = 0;
     if (!ManagedStringView(local_name, name, name_len)) {
-        RaiseArgumentNullException("localName");
+        // The gate must cover THIS branch too, not just RequireNonNullArg:
+        // an XmlTextWriter handle degrades a null name rather than raising.
+        if (IsStrictWriter(st)) RaiseArgumentNullException("localName");
     }
     RequireNonEmptyName(st, name, name_len);
 
@@ -1124,9 +1126,14 @@ void ChaosXmlWriterWriteStartAttribute(
     if (st == nullptr) return;
 
     {
-        const char* _n = nullptr; size_t _nl = 0;
-        if (!ManagedStringView(local_name, _n, _nl) || _nl == 0) {
-            RaiseArgumentException("The name is not valid XML.");
+        // XmlTextWriter degrades a null/empty name instead of raising; only the
+        // XmlWellFormedWriter handle validates.  Gate the whole branch, not just
+        // the null check, or the loose contract leaks back in.
+        if (IsStrictWriter(st)) {
+            const char* _n = nullptr; size_t _nl = 0;
+            if (!ManagedStringView(local_name, _n, _nl) || _nl == 0) {
+                RaiseArgumentException("The name is not valid XML.");
+            }
         }
     }
     // XmlTextWriter.WriteStartAttribute does NOT require an open start tag.

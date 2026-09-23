@@ -548,14 +548,11 @@ void ChaosXmlElementSetAttribute(
     CHAOS_IL2CPP_INTPTR name,
     CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
-    (void)this_ptr;
-    const char* n = nullptr; size_t n_len = 0;
-    if (!ManagedStringView(name, n, n_len))
-        RaiseArgumentNullException("name");
-    if (n_len == 0)
-        RaiseArgException("The name parameter cannot be empty.");
-    (void)value;
-    RaiseInvalidOp("Cannot set attributes on a bare XmlElement.");
+    (void)this_ptr; (void)value;
+    // ATG expects NullReferenceException for the bare-element case: the managed
+    // SetAttribute dereferences the missing owner document first, so the name
+    // validation below is never reached.
+    RaiseNullReferenceException();
 }
 
 void ChaosXmlElementSetAttributeNode(
@@ -599,14 +596,18 @@ void ChaosXmlAttributeAppendChild(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)new_child;
-    RaiseInvalidOp("An XmlAttribute cannot have children.");
+    // ATG expects NullReferenceException: on a bare XmlAttribute the managed
+    // code dereferences its (absent) owner document before any validation.
+    RaiseNullReferenceException();
 }
 
 void ChaosXmlAttributePrependChild(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)new_child;
-    RaiseInvalidOp("An XmlAttribute cannot have children.");
+    // ATG expects NullReferenceException: on a bare XmlAttribute the managed
+    // code dereferences its (absent) owner document before any validation.
+    RaiseNullReferenceException();
 }
 
 // ══════════════════════════════════════════════════════════════════
