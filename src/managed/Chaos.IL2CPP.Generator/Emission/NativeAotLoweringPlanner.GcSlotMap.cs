@@ -126,6 +126,14 @@ public sealed partial class NativeAotLoweringPlanner
         sb.AppendLine("#endif");
 
         // Emit a nested struct for each entry.
+        //
+        // NOTE: the per-entry `/* ── Entry N: <native symbol> ── */` comment is
+        // deliberately NOT emitted. The native symbol is often 150+ characters,
+        // and at 10,251 entries those comments alone were 6.03 MB of the section's
+        // 8.69 MB — 69% of the text for a section whose actual data is 0.45 MB.
+        // The entry ordinal is still emitted (see the initializer below) so a
+        // runtime log line can be matched back to a method, and the symbol name
+        // remains recoverable from the `code_address` initializer.
         int totalBytes = 0;
         for (int ei = 0; ei < entries.Count; ei++)
         {
@@ -134,7 +142,6 @@ public sealed partial class NativeAotLoweringPlanner
             int entryBytes = 4 + PtrSize + 4 + 4 + numSlots * 4;
 
             sb.AppendLine("");
-            sb.AppendLine("    /* ── Entry " + ei + ": " + nativeSymbol + " ── */");
             sb.AppendLine("    struct {");
             sb.AppendLine("        CHAOS_IL2CPP_UINT32 entry_total_size;");
             sb.AppendLine("        const void*         code_address;");
@@ -162,43 +169,32 @@ public sealed partial class NativeAotLoweringPlanner
             int numSlots = slotOffsets.Length;
             int entryBytes = 4 + PtrSize + 4 + 4 + numSlots * 4;
 
-            if (ei > 0)
-                sb.AppendLine(",");
+            // Ordinal only — the native symbol is dropped for the same reason as
+            // the declaration-site comment above. This line is what lets a runtime
+            // log ("entry N") be traced back to an index in the emitted table.
+            sb.AppendLine("    /* entry" + ei + " */");
 
-            sb.AppendLine("    /* entry" + ei + " = " + nativeSymbol + " */");
-            sb.AppendLine("    .entry" + ei + " = {");
-
-            // entry_total_size
-            sb.Append("        /* entry_total_size = " + entryBytes + " */ ");
-            sb.Append(entryBytes).Append("u,");
-            sb.AppendLine();
-
-            // code_address
-            sb.Append("        /* code_address */ ");
-            sb.Append("reinterpret_cast<const void*>(&").Append(nativeSymbol).Append("),");
-            sb.AppendLine();
-
-            // frame_size
-            sb.Append("        /* frame_size = " + frameSize + " */ ");
-            sb.Append(frameSize).Append("u,");
-            sb.AppendLine();
-
-            // num_gc_slots
-            sb.Append("        /* num_gc_slots = " + numSlots + " */ ");
-            sb.Append(numSlots).Append("u,");
-            sb.AppendLine();
-
-            // slots[]
-            sb.Append("        /* slots */ { ");
+            // One positional initializer, matching the nested struct's member order
+            // (entry_total_size, code_address, frame_size, num_gc_slots, slots[]).
+            //
+            // The per-field `/* field_name = value */` comments this used to carry
+            // were 1.7 MB on their own — they restate the field names the struct
+            // definition two lines up already gives, once per entry. The field
+            // ORDER is the contract (the runtime reads the packed layout by
+            // offset), so it is kept positional and the member names are declared
+            // exactly once, in the struct.
+            sb.Append("    { ")
+              .Append(entryBytes).Append("u, ")
+              .Append("reinterpret_cast<const void*>(&").Append(nativeSymbol).Append("), ")
+              .Append(frameSize).Append("u, ")
+              .Append(numSlots).Append("u, ")
+              .Append("{ ");
             for (int si = 0; si < slotOffsets.Length; si++)
             {
                 if (si > 0) sb.Append(", ");
                 sb.Append(slotOffsets[si]).Append("u");
             }
-            sb.Append(" }");
-
-            sb.AppendLine();
-            sb.Append("    }");
+            sb.AppendLine(" } },");
         }
 
         sb.AppendLine();

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Chaos.IL2CPP.Contracts;
@@ -805,5 +806,103 @@ public sealed class PagePayloadSplitTests
         Assert.True(tuMarkers.Count > 1,
             $"the per-type reflection tables did not spread across translation units "
             + $"({tuMarkers.Count} TU(s) carry them)");
+    }
+
+    /// <summary>
+    /// The GC slot map must stay one contiguous object of bounded size, with its
+    /// entry count and declared byte total unchanged.
+    ///
+    /// <para>
+    /// This section cannot be split across translation units the way the other
+    /// payload sections are: the runtime scans it as a single byte range
+    /// (<c>GcRegisterSlotMapsFromSection(begin, end)</c>, advancing by each
+    /// entry's <c>entry_total_size</c>). Splitting the object would change the ABI
+    /// and the runtime, which is out of scope — so the fix is to shrink the TEXT,
+    /// not the object.
+    /// </para>
+    ///
+    /// <para>
+    /// The text was dominated by per-entry comments carrying the full native
+    /// symbol name (~150 chars each). Those are gone; what must NOT change is the
+    /// data: the entry count and the sum of <c>entry_total_size</c> describe the
+    /// exact byte layout the scanner walks, so a drift there silently
+    /// mis-registers every following entry.
+    /// </para>
+    /// </summary>
+    [Fact]
+    public void GcSlotMapSection_StaysContiguousAndSizedWithinBudget()
+    {
+        string subjectsDir = Path.Combine(
+            RepoRootLocator.FindFromBaseDirectory(),
+            "artifacts", "foundation-dll", "System.Private.CoreLib",
+            "chunks", "system", "native", "subjects");
+
+        Assert.True(Directory.Exists(subjectsDir),
+            $"no emitted sources at '{subjectsDir}'. Run the system chunk build first: "
+            + "python -m verification.chunk_pipeline --assembly System.Private.CoreLib "
+            + "--chunk system --stages build");
+
+        // The section may land in any payload TU after partitioning; find the one
+        // that defines it rather than assuming a file name.
+        string? definingTu = Directory.GetFiles(subjectsDir, "native-aot.payload.*.cpp")
+            .Append(Path.Combine(subjectsDir, "native-aot.generated.cpp"))
+            .FirstOrDefault(f => File.Exists(f)
+                && File.ReadAllText(f).Contains("kChaosGcSlotMapsSection = {", StringComparison.Ordinal));
+
+        Assert.True(definingTu is not null,
+            "no translation unit defines kChaosGcSlotMapsSection");
+
+        string text = File.ReadAllText(definingTu!);
+        string fileName = Path.GetFileName(definingTu!);
+
+        // 1. Exactly one definition — the object is contiguous by contract.
+        int defs = Regex.Matches(text, @"kChaosGcSlotMapsSection = \{").Count;
+        Assert.True(defs == 1,
+            $"{fileName} defines kChaosGcSlotMapsSection {defs} time(s); the runtime scans it "
+            + "as one contiguous range, so there must be exactly one object");
+
+        // 2. Every entry keeps its declared size, and the size the initializer
+        //    writes is the one the scanner will advance by. The values are
+        //    positional (`{ <entry_total_size>u, reinterpret_cast<...>(&sym), ...`),
+        //    so the assertion reads them by position rather than by comment.
+        var entryInitializers = Regex.Matches(text,
+            @"\{\s*(\d+)u,\s*\n?\s*reinterpret_cast<const void\*>\(&(\w+)\)");
+        Assert.True(entryInitializers.Count > 0,
+            $"{fileName} contains no slot-map entry initializers — the data is missing");
+
+        // Each declared size must match the struct member's declared `slots[N]`,
+        // since entry_total_size is what the runtime advances by: a drift between
+        // the struct's slot count and the entry size silently mis-registers every
+        // following entry.
+        var declaredSlotCounts = Regex.Matches(text, @"CHAOS_IL2CPP_UINT32 slots\[(\d+)\];")
+            .Select(m => int.Parse(m.Groups[1].Value, CultureInfo.InvariantCulture))
+            .ToList();
+        Assert.True(declaredSlotCounts.Count == entryInitializers.Count,
+            $"{fileName} declares {declaredSlotCounts.Count} entry struct(s) but has "
+            + $"{entryInitializers.Count} initializer(s) — they must correspond 1:1");
+
+        for (int i = 0; i < entryInitializers.Count; i++)
+        {
+            int declaredSize = int.Parse(entryInitializers[i].Groups[1].Value, CultureInfo.InvariantCulture);
+            // packed layout: entry_total_size(4) + code_address(8) + frame_size(4)
+            //              + num_gc_slots(4) + slots[N]*4
+            int expected = 4 + 8 + 4 + 4 + declaredSlotCounts[i] * 4;
+            Assert.True(declaredSize == expected,
+                $"entry {i} in {fileName} declares entry_total_size={declaredSize} but its "
+                + $"struct has slots[{declaredSlotCounts[i]}], implying {expected}. The runtime "
+                + "advances by entry_total_size, so a mismatch desynchronises every later entry.");
+        }
+
+        // 3. The section must stay within the per-TU budget that motivates this
+        //    task. It is NOT split, so its text size is what has to come down.
+        long sectionStart = text.IndexOf("// ── GC Slot Map Section", StringComparison.Ordinal);
+        Assert.True(sectionStart >= 0, $"no GC Slot Map Section marker in {fileName}");
+        int sectionEnd = text.IndexOf("#pragma pack(pop)", (int)sectionStart, StringComparison.Ordinal);
+        long sectionBytes = (sectionEnd > 0 ? sectionEnd : text.Length) - sectionStart;
+
+        Assert.True(sectionBytes < 8L * 1024 * 1024,
+            $"the GC slot map section is {sectionBytes / 1048576.0:F2} MB in {fileName}. It cannot "
+            + "be split across translation units (the runtime scans one contiguous range), so "
+            + "its TEXT must fit the budget — the per-entry native-symbol comments are the bulk.");
     }
 }
