@@ -57,3 +57,12 @@ chaos_native_add_test(test_hotpatch_api_version_roundtrip
     LABELS "unit;hotupdate"
 )
 
+# hotpatch_chunk_contract_test — chunked type/method arrays resolve to the same
+# logical elements as the flat layout (C3). The invariant is that indices do
+# not change when an array is split, so a boundary bug returns a different
+# well-formed entry instead of crashing.
+chaos_native_add_test(test_hotpatch_chunk_contract
+    hotpatch_chunk_contract_test.cpp
+    LABELS "unit;hotupdate"
+)
+
