@@ -9,6 +9,7 @@ Risk mitigations baked in:
 from __future__ import annotations
 
 import json
+import os
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -74,6 +75,50 @@ class ReportSummary:
             lines.append(f"  ⚠ unclassified ({len(self.unclassified_fail_keys)}): "
                          f"{', '.join(self.unclassified_fail_keys[:10])}")
         return "\n".join(lines)
+
+
+def collect_chunk_fact_metrics(config, results) -> dict[str, dict]:
+    """Per-chunk fact metrics, keyed by chunk key, for cross-platform comparison.
+
+    The summary above is chunk-granular (passed/failed), which cannot answer the
+    question a platform diff actually asks: "how many real assertions ran here?"
+    A chunk can report `passed` while executing almost no assertions (all smoke
+    subjects), and the two platforms can disagree wildly on that ratio while
+    agreeing on pass/fail.  `realPassed`/`realTotal` is the sensitive metric.
+
+    It lives in each chunk's `results/fact.json` under the foundation dir, which
+    the nightly CLI writes but never folds into the published summary — so read
+    it directly here rather than adding a second aggregation path.
+
+    Returns {} entries omitted when a chunk produced no fact.json (build failed);
+    consumers must treat a missing key as "no data", not as zero.
+    """
+    out: dict[str, dict] = {}
+    foundation = Path(getattr(config, "foundation_dir", "") or "")
+    if not foundation.is_dir():
+        return out
+
+    for key in results.chunk_results:
+        if "__" not in key:
+            continue
+        asm, slug = key.split("__", 1)
+        fact_path = foundation / asm / "chunks" / slug / "results" / "fact.json"
+        if not fact_path.is_file():
+            continue
+        try:
+            d = json.loads(fact_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        out[key] = {
+            "realPassed": d.get("realPassed"),
+            "realTotal": d.get("realTotal"),
+            "gatePassed": d.get("gatePassed"),
+            "gateTotal": d.get("gateTotal"),
+            "stubGap": d.get("stubGap"),
+            "factoryGap": d.get("factoryGap"),
+            "total": d.get("total"),
+        }
+    return out
 
 
 def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResult
@@ -149,6 +194,17 @@ def aggregate_reports(config, results) -> ReportSummary:  # results: NightlyResu
         "timestamp": time.time(),
         "runId": config.run_id,
         "nativeConfig": config.native_config,
+        # Engine revision this run was produced from, injected by CI
+        # (CHAOS_ENGINE_SHA).  Two platforms' reports are only comparable when
+        # this matches: a cross-platform diff against reports built from
+        # different commits measures whatever code landed between them, not a
+        # platform difference.  Empty when not run under CI — consumers must
+        # treat "" as "unknown", never as "equal to another empty".
+        "engineSha": os.environ.get("CHAOS_ENGINE_SHA", ""),
+        # Per-chunk real-assertion metrics.  Carried in the payload so a
+        # cross-platform diff has the sensitive denominator available on both
+        # sides without re-reading the artifacts tree on the other agent.
+        "chunkMetrics": collect_chunk_fact_metrics(config, results),
     }
     blob = json.dumps(payload, indent=2)
     for name in ("nightly-result.json", f"run-{config.run_id}.json"):
