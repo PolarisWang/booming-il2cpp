@@ -262,3 +262,75 @@ TEST(HotpatchChunks, PresenceCheck_EmptyModuleIsAbsent) {
     EXPECT_FALSE(HotpatchModuleHasMethodEntries(&m));
     EXPECT_FALSE(HotpatchModuleHasTypeEntries(nullptr));
 }
+
+// ── End-to-end: registration + name lookup over a chunked module ─────────
+//
+// The accessors above are only mechanism. What actually has to hold is that
+// the REGISTRY answers identically for a chunked module and a flat one — that
+// is the contract callers (bootstrap, patch resolution) depend on, and the one
+// a boundary bug would break silently by returning a different method's token.
+
+TEST(HotpatchChunks, RegistryLookup_ChunkedMatchesFlat) {
+    TableData d;
+
+    // Flat reference registry.
+    chaos::il2cpp::runtime_core::HotpatchNameRegistry flatReg;
+    const auto flatMod = MakeFlat(d);
+    flatReg.RegisterModule(&flatMod);
+
+    // Chunked registry: methods cut 2|3, so a lookup for the second type's
+    // first method crosses the boundary.
+    ChaosAbiChunkV0 tc[1] = {ChaosAbiChunkV0{&d.types[0], kTypeCount, sizeof(HotpatchTypeEntryV0)}};
+    ChaosAbiChunkV0 mc[2] = {
+        ChaosAbiChunkV0{&d.methods[0], 2u, sizeof(HotpatchMethodEntryV0)},
+        ChaosAbiChunkV0{&d.methods[2], 3u, sizeof(HotpatchMethodEntryV0)},
+    };
+    const uint32_t c[1] = {kTypeCount};
+    const uint32_t mcc[2] = {2u, 3u};
+    auto chunkedMod = MakeChunked(d, c, 1, mcc, 2, tc, mc);
+
+    chaos::il2cpp::runtime_core::HotpatchNameRegistry chunkedReg;
+    chunkedReg.RegisterModule(&chunkedMod);
+
+    ASSERT_EQ(flatReg.ModuleCount(), 1u);
+    ASSERT_EQ(chunkedReg.ModuleCount(), 1u)
+        << "a chunked module must still register — the old `type_entries == nullptr` "
+           "guard would have skipped it entirely";
+
+    // Every (type, method) pair must resolve to the same composite key.
+    for (uint32_t ti = 0; ti < kTypeCount; ++ti) {
+        for (uint32_t mi = 0; mi < d.types[ti].method_count; ++mi) {
+            const auto* me = &d.methods[d.types[ti].first_method_index + mi];
+            uint64_t flatKey = flatReg.LookupMethod(
+                d.types[ti].namespace_name, d.types[ti].type_name, me->method_name);
+            uint64_t chunkedKey = chunkedReg.LookupMethod(
+                d.types[ti].namespace_name, d.types[ti].type_name, me->method_name);
+
+            EXPECT_NE(flatKey, 0ull) << "flat lookup failed for " << me->method_name;
+            EXPECT_EQ(chunkedKey, flatKey)
+                << "chunked lookup disagreed for " << d.types[ti].type_name
+                << "::" << me->method_name;
+        }
+    }
+}
+
+// An unknown name must miss in both layouts — a chunk walk that ran off the end
+// would otherwise match whatever entry it landed on.
+TEST(HotpatchChunks, RegistryLookup_UnknownNameMissesInBothLayouts) {
+    TableData d;
+    chaos::il2cpp::runtime_core::HotpatchNameRegistry flatReg;
+    const auto flatMod = MakeFlat(d);
+    flatReg.RegisterModule(&flatMod);
+
+    ChaosAbiChunkV0 tc[1] = {ChaosAbiChunkV0{&d.types[0], kTypeCount, sizeof(HotpatchTypeEntryV0)}};
+    ChaosAbiChunkV0 mc[1] = {ChaosAbiChunkV0{&d.methods[0], kMethodCount, sizeof(HotpatchMethodEntryV0)}};
+    const uint32_t c[1] = {kTypeCount};
+    const uint32_t mcc[1] = {kMethodCount};
+    auto chunkedMod = MakeChunked(d, c, 1, mcc, 1, tc, mc);
+    chaos::il2cpp::runtime_core::HotpatchNameRegistry chunkedReg;
+    chunkedReg.RegisterModule(&chunkedMod);
+
+    EXPECT_EQ(flatReg.LookupMethod("NS", "Alpha", "nope"), 0ull);
+    EXPECT_EQ(chunkedReg.LookupMethod("NS", "Alpha", "nope"), 0ull);
+    EXPECT_EQ(chunkedReg.LookupMethod("NS", "NoSuchType", "a0"), 0ull);
+}
