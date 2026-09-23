@@ -123,7 +123,10 @@ chaos_native_add_test(half_conversion_test
     half_conversion_test.cpp
     LABELS "unit;core"
 )
-target_compile_options(half_conversion_test PRIVATE /utf-8)
+target_compile_options(half_conversion_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+# /utf-8 is an MSVC flag.  GCC does NOT ignore it: it treats the bare token as an
+# input file and fails with "c++: error: /utf-8: linker input file not found".
+# (Its absence can't be worked around by the source file — hence the gen-expr.)
 
 # T1a-2: exception_jmp depth-boundary tests (SETJMP EH mode)
 # Uses the same convert_stubs_test.cpp but compiled with CHAOS_IL2CPP_EH_SETJMP
@@ -137,7 +140,8 @@ chaos_native_add_test(convert_stubs_eh_test
 target_compile_definitions(convert_stubs_eh_test PRIVATE
     CHAOS_IL2CPP_EH_SETJMP
 )
-target_compile_options(convert_stubs_eh_test PRIVATE /utf-8)
+target_compile_options(convert_stubs_eh_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+# MSVC-only flag — see the note on half_conversion_test above.
 
 # P0-A (json-xml-production-readiness): XmlNameTable Add/Get interned-string
 # semantics.  Compiles xml_nametable_stubs.cpp + string_table.cpp directly
