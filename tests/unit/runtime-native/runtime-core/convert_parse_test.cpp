@@ -15,6 +15,8 @@
 
 // Must precede Windows headers to avoid extern "C" collision between
 // thread_state.h::GetCurrentThreadId and processthreadsapi.h.
+// (Defined unconditionally: harmless on other platforms, and the Windows
+// headers it guards against are only reached on Windows.)
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX
 
@@ -37,7 +39,9 @@
 
 #include <csetjmp>
 #include <cstring>
-#include <excpt.h>
+#if defined(_WIN32) || defined(_WIN64)
+#include <excpt.h>   // EXCEPTION_EXECUTE_HANDLER etc. — MSVC-only, used by the SEH arm
+#endif
 
 // ── Stubs for codegen-generated symbols ───────────────────────────────
 // chaos_bootstrap.lib and chaos_interpreter.lib reference these symbols
@@ -196,12 +200,26 @@ TEST_F(ConvertOverflowTest, ToChar_UInt64_TooLarge_Throws) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// convert.cpp — paths that always throw (chaos_raise_exception → SEH)
+// convert.cpp — paths that always throw (chaos_raise_exception)
 //
-// Prebuilt chaos_runtime_core.lib on Windows uses CHAOS_IL2CPP_EH_WIN32_SEH,
-// so chaos_raise_exception(0) becomes RaiseException(0xE0000001) (SEH),
-// NOT a C++ exception. Use __try/__except instead of EXPECT_THROW.
+// The delivery mechanism differs by platform (see exception_jmp.h), so the
+// helper is split rather than the ~14 call sites being gated individually:
+//
+//   WIN32_SEH  — chaos_raise_exception() raises RaiseException(0xE0000001),
+//                which only __try/__except can observe.  <excpt.h> is MSVC-only.
+//   CPP_THROW  — Linux/macOS: chaos_raise_exception() throws
+//                chaos_managed_exception, so a plain catch works.
+//
+// Both arms keep the same name, signature and semantics (true == "it threw"),
+// so every test below is compiled and asserted on every platform instead of
+// being dropped on Linux.  Note this is still a DIFFERENT path from the
+// ConvertOverflowTest cases above: those go through RaiseManagedException ->
+// SetExceptionFallback (portable setjmp/longjmp).
 // ═══════════════════════════════════════════════════════════════════════════
+
+using SehVoidFn = void (*)();
+
+#if defined(_WIN32) || defined(_WIN64)
 
 static constexpr unsigned int kChaosSEHCode = 0xE0000001;
 
@@ -211,7 +229,6 @@ static int FilterChaosSEH(unsigned long code) {
 
 // C-style SEH wrapper: __try/__except in MSVC cannot coexist with C++ local
 // objects (C2712) or template + lambda captures. Use a plain function pointer.
-using SehVoidFn = void (*)();
 static bool ExpectSehThrows(SehVoidFn fn) {
     __try { fn(); }
     __except(FilterChaosSEH(GetExceptionCode())) {
@@ -219,6 +236,19 @@ static bool ExpectSehThrows(SehVoidFn fn) {
     }
     return false;
 }
+
+#else
+
+static bool ExpectSehThrows(SehVoidFn fn) {
+    try {
+        fn();
+    } catch (...) {
+        return true;
+    }
+    return false;
+}
+
+#endif
 
 static void Throw_ToCharBoolean0() { chaos_convert_tochar_boolean(0); }
 static void Throw_ToCharBoolean1() { chaos_convert_tochar_boolean(1); }
