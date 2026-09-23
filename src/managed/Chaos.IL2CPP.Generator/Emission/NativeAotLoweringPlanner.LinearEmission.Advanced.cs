@@ -358,7 +358,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
         else if (TryResolveModuleLocalCall(instruction, invocationTarget, out string localSymbol))
         {
-            EmitLinearResolvedInvocation(builder, localSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck);
+            EmitLinearResolvedInvocation(builder, localSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck, instruction);
         }
         else if (invocationTarget.ExternalRuntimeTableIndex >= 0 || invocationTarget.DirectNativeSymbol != null
                  || (invocationTarget.TargetSymbol?.StartsWith("chaos_external_runtime_", StringComparison.Ordinal) ?? false))
@@ -367,7 +367,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
         else
         {
-            EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol!, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck);
+            EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol!, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck, instruction);
         }
     }
 

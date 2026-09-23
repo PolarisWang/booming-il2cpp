@@ -70,6 +70,30 @@ bool ManagedStringView(CHAOS_IL2CPP_INTPTR str, const char*& out, size_t& out_le
 /// XmlConvert inputs are short scalars; 128 bytes covers the longest DateTime
 /// form with room to spare, and anything longer is a malformed input anyway.
 bool ToCString(CHAOS_IL2CPP_INTPTR str, char* buf, size_t cap, size_t& out_len) {
+    // A null reference is ArgumentNullException, NOT FormatException.
+    //
+    // ManagedStringView() returns false for two different situations — a null
+    // handle and a malformed/unreadable string — and the guard below used to map
+    // both onto FormatException.  .NET splits them:
+    //   XmlConvert.ToInt32(null)       -> System.ArgumentNullException
+    //   XmlConvert.ToInt32("not a num") -> System.FormatException (from the parser)
+    // Every XmlConvert member's null value-set is asserted against
+    // ArgumentNullException by the ATG subject:
+    //   try { XmlConvert.ToInt32(default(string)!); ... }
+    //   catch (System.ArgumentNullException) { } catch { throw "wrong type"; }
+    // so a FormatException fell to the last catch and was recorded as
+    // caught=true / value=0.
+    //
+    // Ordering note: this guard only became reachable once codegen stopped
+    // emitting its blanket receiver null-guard for `call` sites (the guard fired
+    // on the first ARGUMENT of a static call and raised NRE first — see
+    // NativeAotLoweringPlanner.ExceptionEmission.Utilities, P2 guard discipline).
+    // Before that fix, ToCString was entered 0 times on the null value set.
+    if (str == 0) {
+        RaiseManagedException("System.ArgumentNullException",
+            "Value cannot be null.");
+        return false;
+    }
     const char* data = nullptr;
     size_t len = 0;
     if (!ManagedStringView(str, data, len)) {
@@ -162,10 +186,21 @@ bool IsValidName(const char* s, size_t len, bool allowColon) {
 
 }  // namespace
 
+// XmlConvert.Verify* all take a non-nullable string parameter and .NET raises
+// ArgumentNullException for null before any validation runs.  The bodies below
+// previously folded a null handle into their own failure path (XmlException, or
+// a silent return for the predicates), which the ATG subject's
+// `catch (System.ArgumentNullException)` did not match.
+static void RequireNonNullXmlConvertArg(CHAOS_IL2CPP_INTPTR arg) {
+    if (arg == 0)
+        RaiseManagedException("System.ArgumentNullException", "Value cannot be null.");
+}
+
 extern "C" {
 
 void ChaosXmlConvertVerifyName(CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
+    RequireNonNullXmlConvertArg(name);
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(name, data, len) || !IsValidName(data, len, true))
         RaiseManagedException("System.Xml.XmlException",
@@ -174,6 +209,7 @@ void ChaosXmlConvertVerifyName(CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 
 void ChaosXmlConvertVerifyNCName(CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
+    RequireNonNullXmlConvertArg(name);
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(name, data, len) || !IsValidName(data, len, false))
         RaiseManagedException("System.Xml.XmlException",
@@ -182,6 +218,7 @@ void ChaosXmlConvertVerifyNCName(CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 
 void ChaosXmlConvertVerifyNMTOKEN(CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
+    RequireNonNullXmlConvertArg(name);
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(name, data, len) || len == 0)
         RaiseManagedException("System.Xml.XmlException",
@@ -195,6 +232,7 @@ void ChaosXmlConvertVerifyNMTOKEN(CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 
 void ChaosXmlConvertVerifyPublicId(CHAOS_IL2CPP_INTPTR id) CHAOS_STUB_NOEXCEPT
 {
+    RequireNonNullXmlConvertArg(id);
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(id, data, len)) return;
     for (size_t i = 0; i < len; ++i) {
@@ -212,6 +250,7 @@ void ChaosXmlConvertVerifyPublicId(CHAOS_IL2CPP_INTPTR id) CHAOS_STUB_NOEXCEPT
 
 void ChaosXmlConvertVerifyWhitespace(CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
+    RequireNonNullXmlConvertArg(text);
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(text, data, len)) return;
     for (size_t i = 0; i < len; ++i) {
@@ -223,6 +262,7 @@ void ChaosXmlConvertVerifyWhitespace(CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCE
 
 void ChaosXmlConvertVerifyXmlChars(CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
 {
+    RequireNonNullXmlConvertArg(text);
     const char* data = nullptr; size_t len = 0;
     if (!ManagedStringView(text, data, len)) return;
     for (size_t i = 0; i < len; ++i) {
