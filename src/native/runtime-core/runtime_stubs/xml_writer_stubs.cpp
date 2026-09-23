@@ -63,6 +63,26 @@ struct WriterState {
     bool    start_doc_written;
     bool    in_start_tag;  // between WriteStartElement and its `>`
     bool    in_attribute;  // between WriteStartAttribute and WriteEndAttribute
+
+    /// Which managed writer this handle stands for.  The two entry points into
+    /// this table have DIFFERENT contracts for the same method:
+    ///
+    ///   XmlTextWriter          — the pre-2.0 writer with the loosest rules.
+    ///                            A null name degrades to an empty one and
+    ///                            content may be written with no element open;
+    ///                            neither raises.  Its ATG subjects have no
+    ///                            try/catch and expect the call to complete.
+    ///   XmlWellFormedWriter    — what `XmlWriter.Create(StringBuilder)`
+    ///                            returns.  It validates eagerly: null name ->
+    ///                            ArgumentNullException, empty name ->
+    ///                            ArgumentException, content with no open
+    ///                            element -> InvalidOperationException.
+    ///
+    /// Both share this implementation, so the validation layer must dispatch on
+    /// this flag rather than assuming one contract.  Applying the strict rules
+    /// to XmlTextWriter subjects turned 16 of them into realDefect/failed.
+    enum class Kind : uint8_t { WellFormed, TextWriter };
+    Kind kind;
 };
 
 constexpr size_t kInitialCap = 256;
@@ -182,15 +202,25 @@ void CloseStartTag(WriterState* st) {
 //   malformed (empty) name       -> System.ArgumentException
 //   no element open (state)      -> System.InvalidOperationException
 
+/// True when this handle must follow the strict XmlWellFormedWriter rules.
+/// XmlTextWriter (Kind::TextWriter) is the loose pre-2.0 writer: its subjects
+/// expect null names to degrade and out-of-state writes to succeed.
+inline bool IsStrictWriter(const WriterState* st) {
+    return st != nullptr && st->kind == WriterState::Kind::WellFormed;
+}
+
 /// Reject a null argument the managed contract requires to be non-null.
-void RequireNonNullArg(CHAOS_IL2CPP_INTPTR arg, const char* param_name) {
+/// No-op on an XmlTextWriter handle, whose contract degrades instead.
+void RequireNonNullArg(WriterState* st, CHAOS_IL2CPP_INTPTR arg, const char* param_name) {
+    if (!IsStrictWriter(st)) return;
     if (arg == 0) RaiseArgumentNullException(param_name);
 }
 
 /// Reject an empty (non-null) name.  XmlWellFormedWriter treats an empty name
 /// as malformed and raises ArgumentException; a null name must already have
 /// been rejected by RequireNonNullArg.
-void RequireNonEmptyName(const char* name, size_t len) {
+void RequireNonEmptyName(WriterState* st, const char* name, size_t len) {
+    if (!IsStrictWriter(st)) return;
     if (len == 0) RaiseArgumentException("The name is not valid XML.");
 }
 
@@ -203,6 +233,7 @@ void RequireNonEmptyName(const char* name, size_t len) {
 /// normally, so the subject's `catch (InvalidOperationException)` never fired
 /// and the body fell through to `throw new Exception("AOT stub did not throw")`.
 void RequireOpenElement(WriterState* st) {
+    if (!IsStrictWriter(st)) return;
     if (st == nullptr || st->depth == 0 || st->in_attribute) {
         RaiseManagedException("System.InvalidOperationException",
             "The writer is in an invalid state. Token Text, WriteState = Content");
@@ -247,6 +278,8 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterCreateStringBuilder(
     }
     st->frame_cap = kMaxDepth;
 
+    st->kind = WriterState::Kind::WellFormed;
+
     const size_t slot = AllocSlot(st);
     if (slot == 0) {
         CHAOS_IL2CPP_FREE(st->frames);
@@ -273,10 +306,10 @@ void ChaosXmlWriterWriteStartElement(
     if (st == nullptr) return;
 
     {
-        RequireNonNullArg(local_name, "localName");
+        RequireNonNullArg(st, local_name, "localName");
         const char* _n = nullptr; size_t _nl = 0;
         if (!ManagedStringView(local_name, _n, _nl)) RaiseArgumentNullException("localName");
-        RequireNonEmptyName(_n, _nl);
+        RequireNonEmptyName(st, _n, _nl);
     }
     // Null is NOT an error here — XmlTextWriter degrades a null name to an
     // empty one, consistently across every name parameter (measured .NET 8):
@@ -469,10 +502,10 @@ void ChaosXmlWriterWriteElementString(
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
     {
-        RequireNonNullArg(local_name, "localName");
+        RequireNonNullArg(st, local_name, "localName");
         const char* _n = nullptr; size_t _nl = 0;
         if (!ManagedStringView(local_name, _n, _nl)) RaiseArgumentNullException("localName");
-        RequireNonEmptyName(_n, _nl);
+        RequireNonEmptyName(st, _n, _nl);
     }
     const char* pfx = nullptr; size_t pfx_len = 0;
     (void)ManagedStringView(prefix, pfx, pfx_len);
@@ -568,6 +601,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextWriterCreate(CHAOS_IL2CPP_INTPTR text_writer) CH
     }
     st->frame_cap = kMaxDepth;
 
+    st->kind = WriterState::Kind::TextWriter;
     const size_t slot = AllocSlot(st);
     if (slot == 0) {
         CHAOS_IL2CPP_FREE(st->frames);
@@ -908,7 +942,7 @@ void ChaosXmlWriterWriteChars(
     if (st == nullptr) return;
     {
         const char* _b = nullptr; size_t _bl = 0;
-        RequireNonNullArg(buffer, "buffer");
+        RequireNonNullArg(st, buffer, "buffer");
         if (!ManagedStringView(buffer, _b, _bl)) RaiseArgumentNullException("buffer");
     }
     RequireOpenElement(st);
@@ -938,7 +972,7 @@ void ChaosXmlWriterWriteBase64(
     if (st == nullptr) return;
     {
         const char* _b = nullptr; size_t _bl = 0;
-        RequireNonNullArg(buffer, "buffer");
+        RequireNonNullArg(st, buffer, "buffer");
         if (!ManagedStringView(buffer, _b, _bl)) RaiseArgumentNullException("buffer");
     }
     RequireOpenElement(st);
@@ -1024,14 +1058,14 @@ void ChaosXmlWriterWriteStartElement3(
     // The previous implementation modelled XmlTextWriter, which degrades a null
     // name to an empty one, and so accepted all five — every 3-arg subject that
     // passes null was recorded caught=true/realDefect.
-    RequireNonNullArg(local_name, "localName");
+    RequireNonNullArg(st, local_name, "localName");
 
     const char* name = nullptr;
     size_t name_len = 0;
     if (!ManagedStringView(local_name, name, name_len)) {
         RaiseArgumentNullException("localName");
     }
-    RequireNonEmptyName(name, name_len);
+    RequireNonEmptyName(st, name, name_len);
 
     const char* pfx = nullptr;
     size_t pfx_len = 0;
