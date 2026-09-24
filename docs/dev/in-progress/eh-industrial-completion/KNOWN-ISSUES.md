@@ -530,6 +530,76 @@ E14 的正确判据**：
 > （`SplitReportBuilder.cs` / `TuPacker.cs`）与该文本组装路径高度相关，
 > 可能是同一处代码的后续演进。
 
+### 第七轮（2026-09-24）—— 借鉴 dotnet/runtime，**排除发射器本身**
+
+**方法来源**：对照 `D:\OpenSource\dotnet\runtime` 的 ILCompiler（NativeAOT）发射架构后，
+采用其 `OutputInfoBuilder`（产物自检表）思路做**逐条核对**，而非继续猜测执行路径。
+
+**dotnet 的关键对照（`src/coreclr/tools/Common/Compiler/`）**
+
+| 机制 | dotnet 的做法 | 我们的现状 |
+|---|---|---|
+| 名字表示 | `Utf8String` = `readonly struct` 包**不可变** `byte[]`，`Length => _value.Length` | `string` + `StringBuilder` 拼接 |
+| 名字缓存 | `ObjectWriter.GetMangledName`：同符号**全产物只计算一次**并冻结 | 无；同名符号可被多次发射 |
+| 截断 | **唯一**截断在 `NativeAotNameMangler.SanitizeNameWithHash`，且**截断必配 SHA256 哈希**、有注释 | 发射路径遍布 `[..^1]` / `Substring` / `Regex.Replace` 等**隐式**截断 |
+| 发射结构 | **节点树**（`ObjectNode` → 不可变 `ObjectData`）先建好，再由 `ObjectWriter` 统一序列化 | `StringBuilder` 边拼边写 |
+| 并发 | `EmitObject()` **单线程**；并行只在**编译阶段**，靠 `CompilerComparer` 全序保证确定性 | `EmitOneMethod` 走 `Parallel.For` |
+| 诊断 | `SectionWriter` 是携带 section/offset 的 struct；`IObjectDumper` 可挂载 dump 节点 | 裸 `StringBuilder` |
+
+> dotnet 注释（`Common/Compiler/NameMangler.cs:12`）明确写：
+> *"The key invariant is that the mangled names are independent on the compilation order."*
+
+**E24 核心实验：发射清单逐条核对（借鉴 `OutputInfoBuilder`）**
+
+在 `FormatMethodDeclaration` 出口记录**每一次**发射的完整文本（**append-only**，
+不用字典按键覆盖 —— 按键覆盖会漏掉「后写的好文本盖掉先写的坏文本」这一假绿），
+再在生成后逐条断言该文本**完整出现**于产物中：
+
+```
+[EMIT-VERIFY] checked=3  missing=0
+```
+
+**三次发射全部完整，且全部存在于产物中。**
+
+**E25 全符号出现点枚举（纯文本核对，不依赖任何路径假设）**
+
+```
+off=  6146  line ~112    FULL              ← extern "C" 声明（声明区）
+off=144052  line ~6418   *** TRUNCATED *** ← 残片（模块注册段）
+off=543017  line ~26506  FULL              ← extern "C" 声明（第二处）
+...（另有 34 处引用/注册/调用点，全部完整）
+```
+
+**同一个符号共 3 处 `extern "C"` 声明：第一、第三处完整，中间那处被截断。**
+
+**E26 本轮结论（重要，缩小假设空间）**
+
+**发射器本身已被排除** —— 它产出的 3 条声明全部完整，且都能在产物中找到。
+残片是**第三条声明**，而它**不是** `FormatMethodDeclaration` 产出的
+（三次发射都在清单里且都完整）。
+
+**因此**：残片是**在发射器之外被构造的** —— 某段代码**自己拼了一条
+`extern "C" void <符号>` 文本**，而非调用 `FormatMethodDeclaration`。
+
+> **这解释了此前所有的「探针不打印」**：那条路径根本不经过我插桩的那些函数。
+
+**E27 下一步（已收敛为一次定向搜索）**
+
+全局搜索**自己拼接 `extern "C"` 文本**、而非调用 `FormatMethodDeclaration` 的代码：
+
+```bash
+grep -rn 'extern \\"C\\" ' src/managed/Chaos.IL2CPP.Generator/ --include=*.cs
+```
+
+此前已列出 30 处候选。其中**同时满足**下列三点的即为答案：
+① 自己拼 `extern "C" `；② 产出位置在模块注册段（`argsCount` 之后、
+`namespacePreamble` 之前）；③ 可能只写出符号名的一部分。
+
+**特别提示**：E21 记录的第一版守卫判据缺陷（只查括号不平衡，而真实残片
+**不含括号**）值得后续所有检测借鉴 —— **截断的特征是「缺少」，不是「不平衡」**。
+
+
+
 ---
 
 ## KNOWN-ISSUE-2（设计层面）: L3 异常翻译正确性尚未系统化
