@@ -262,6 +262,95 @@ E7/E8 把搜索范围**缩小到「ObjectModel 独有的、不走 `BuildMethodSe
 
 ---
 
+### 追加证据（2026-09-24 第四轮，二分到「9777 字符 → hotpatch section」之间）
+
+**E10. 残片确定存在于 `moduleRegSb`，且 `hotpatch` 是首个能观察到它的 section**
+
+在 `AddSection(...)` 序列的每个调用点后插入片段检测探针，实测输出：
+
+```
+[MRB] frag appeared at/after section: hotpatch    (len=43979)
+[MRB] frag appeared at/after section: extruntime  (len=69181)
+...
+[MRB] FINAL hasFrag=True mrbLen=219969
+```
+
+`hotpatch` 是**第一个**被探测到的 section，说明残片在它**之前或之内**就已存在。
+
+**E11. `BuildModuleRegistration()` 的返回值是干净的（关键分界点）**
+
+在 `NativeAotLoweringPlanner.Methods.cs:1271` 入参处插桩：
+
+```
+[INIT] BMR len=9777  hasFrag=False
+```
+
+**`BuildModuleRegistration()` 返回 9777 字符、不含残片。**
+
+于是范围被二分到：
+
+```
+BuildModuleRegistration()  → 9777, 干净
+        ↓  ← 残片在此区间被引入
+hotpatch section           → 43979, 已含残片
+```
+
+中间只有两个操作：
+1. `var moduleRegSb = new StringBuilder(moduleRegistrationCode, 65536);`
+2. `AddSection("modulereg", moduleRegistrationCode);`
+3. `foreach (var deferred in _deferredPayloadSections) AddSection(...)`
+
+**第 3 项是当前最重要的嫌疑** —— `_deferredPayloadSections` 由
+`AddDeferredPayloadSection(name, content)` 填充，调用点在：
+
+| 位置 | 产出的 section 名 |
+|---|---|
+| `ModuleRegistration.cs:1183` | `reflmembers_{typeId}` |
+| `ModuleRegistration.cs:1277` | `{B3ResolveName}_{part.NameSuffix}` |
+| `ModuleRegistration.cs:1335` | `{B3ParamsName}_{part.NameSuffix}` |
+| `ReflectionObjectEmission.cs:1970` | `{FunctionName}_{part.NameSuffix}` |
+| `ReflectionObjectEmission.cs:2071` | `{FunctionName}_{part.NameSuffix}` |
+
+其中后四者走**函数拆分（拆壳+分包）**机制 —— 项目记忆
+`split-function-shell-must-pass-internal-vars-and-declare-cross-tu` 记录过该机制的
+两类坑。**下一轮应从这里入手**：打印每个 deferred section 的 name/length，
+找出哪一个的内容以残片开头。
+
+**E12. 两次「陈旧 DLL 假阴性」（方法论提醒）**
+
+本轮出现两次探针未打印、看似「路径未执行」的情况，实际都是
+**TPG 内嵌的 `Chaos.IL2CPP.Generator.dll` 未同步**（时间戳落后于
+`src/managed/.../bin/Debug`）。判据：
+
+```bash
+stat -c '%y' src/managed/Chaos.IL2CPP.Generator/bin/Debug/net8.0/Chaos.IL2CPP.Generator.dll \
+             src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/bin/Debug/net8.0/Chaos.IL2CPP.Generator.dll
+```
+
+**两者时间戳必须相同**，否则探针结论不可信。这已第二次误导判断。
+
+**E13. `BuildModuleRegistration` 有多个 `return sb.ToString()`**
+
+`ModuleRegistration.cs` 的 714 / 1348 / 1380 行各有一个。插探针时会插错方法体
+（714 行的 `return` 属于另一个方法）。定位 return 点必须连同所在方法一起核对。
+
+---
+
+### 建议的下一步（第四次修订）
+
+范围已收敛到**约 34 KB 的单一区间**（9777 → 43979）与**两条语句**。下一步：
+
+1. 在 `_deferredPayloadSections` 的 **drain 循环**里逐个打印
+   `deferred.Name` 与 `deferred.Content.Length`，并检测残片 ——
+   这能一次性锁定是哪个 deferred section 带进来的；
+2. 若无 —— 则只剩 `new StringBuilder(...)` 与 `AddSection("modulereg", ...)`，
+   需检查 `BuildModuleRegistration()` 内部**是否存在第二个 return 路径**
+   （E13）实际被执行，那样 `INIT` 探针观测到的就不是真正返回的字符串。
+
+> **方法论要求**：每轮插桩前先核对 E12 的时间戳，避免第三次假阴性。
+
+---
+
 ## KNOWN-ISSUE-2（设计层面）: L3 异常翻译正确性尚未系统化
 
 见 `roadmap-v1-01.md` P2。当前 P2-0（duplicate key）已修复并验证；
