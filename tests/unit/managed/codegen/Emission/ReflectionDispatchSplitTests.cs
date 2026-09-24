@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Chaos.IL2CPP.Generator;
 using Xunit;
 
@@ -267,5 +267,134 @@ public sealed class ReflectionDispatchSplitTests
         {
             Assert.DoesNotContain("chaos_reflection_get_parameters_b3", part.Text);
         }
+    }
+
+    // ── Character budget (the cap that actually bounds part size) ────────
+
+    /// <summary>
+    /// 🔴 The regression this cap exists for. Branch COUNT alone does not bound a
+    /// part's SIZE: measured on the system chunk, one dispatcher's branches were
+    /// 495 chars each and another's 1143 — a 2.3x spread. With a count-only cap
+    /// the larger family's parts came out at 4.9x the downstream per-TU budget,
+    /// so splitting had produced parts that were each still oversized.
+    /// </summary>
+    [Fact]
+    public void SplitFlatChain_HonoursCharacterBudget_NotJustBranchCount()
+    {
+        // 300 branches of ~1000 chars each = ~300,000 chars total.
+        var pad = new string(' ', 1000);
+        var branches = Enumerable.Range(0, 300)
+            .Select(i => "if (x == " + i + ") { return " + i + "; }" + pad + "\n")
+            .ToArray();
+
+        // The count cap would allow all 300 in one part; the char cap must not.
+        var parts = ReflectionDispatchPartitioner.SplitFlatChain(
+            "f", "int", "int x", branches,
+            branchesPerPart: 1500, charsPerPart: 50_000);
+
+        Assert.True(parts.Count > 1, "the character budget must split this chain");
+        Assert.Equal(300, parts.Sum(p => p.BranchCount));
+        foreach (var part in parts)
+        {
+            Assert.True(part.Text.Length <= 50_000 + 1100,
+                "part '" + part.NameSuffix + "' is " + part.Text.Length
+                + " chars, over the 50,000 budget");
+        }
+    }
+
+    /// <summary>
+    /// The count cap still binds independently — it bounds compile time for a
+    /// chain of thousands of tiny branches, which the char cap would let through.
+    /// </summary>
+    [Fact]
+    public void SplitFlatChain_CountCapStillBindsForTinyBranches()
+    {
+        var branches = Enumerable.Range(0, 100)
+            .Select(i => "if (x == " + i + ") { return " + i + "; }\n")
+            .ToArray();
+
+        var parts = ReflectionDispatchPartitioner.SplitFlatChain(
+            "f", "int", "int x", branches,
+            branchesPerPart: 10, charsPerPart: 10_000_000);
+
+        Assert.Equal(10, parts.Count);
+        Assert.All(parts, p => Assert.True(p.BranchCount <= 10));
+    }
+
+    /// <summary>
+    /// A single branch larger than the budget cannot be divided — it is one
+    /// statement. It must still be emitted (dropping it would silently remove a
+    /// dispatch case), so the part overshoots rather than losing it.
+    /// </summary>
+    [Fact]
+    public void SplitFlatChain_OversizedSingleBranch_IsKeptNotDropped()
+    {
+        var branches = new[]
+        {
+            "if (x == 1) { return 1; }\n",
+            "if (x == 2) { return 2; }" + new string(' ', 5000) + "\n",
+            "if (x == 3) { return 3; }\n",
+        };
+
+        var parts = ReflectionDispatchPartitioner.SplitFlatChain(
+            "f", "int", "int x", branches,
+            branchesPerPart: 1500, charsPerPart: 100);
+
+        string all = string.Concat(parts.Select(p => p.Text));
+        Assert.Contains("return 1;", all, System.StringComparison.Ordinal);
+        Assert.Contains("return 2;", all, System.StringComparison.Ordinal);
+        Assert.Contains("return 3;", all, System.StringComparison.Ordinal);
+        Assert.Equal(3, parts.Sum(p => p.BranchCount));
+    }
+
+    /// <summary>
+    /// Case blocks are the atomic unit, so a case larger than the character
+    /// budget gets its own part rather than being cut — its STRCMP chain is
+    /// first-match-wins and cutting it could reorder the tests.
+    /// </summary>
+    [Fact]
+    public void SplitCaseBlocks_CharacterBudget_KeepsOversizedCaseWhole()
+    {
+        const int Big = 500;
+        var bigCase = "        case 2:\n" + string.Concat(Enumerable.Repeat(
+            "            if (STRCMP(n, \"AreEqual\") == 0) { return 1; }\n", Big));
+        var blocks = new (string, int)[]
+        {
+            ("        case 1:\n            break;\n", 1),
+            (bigCase, Big),
+            ("        case 3:\n            break;\n", 1),
+        };
+
+        var parts = ReflectionDispatchPartitioner.SplitCaseBlocks(
+            "f", "int", "int t, const char* n", blocks,
+            branchesPerPart: 1500, charsPerPart: 1000);
+
+        var owner = parts.Where(p => p.Text.Contains("case 2:", System.StringComparison.Ordinal)).ToList();
+        Assert.Single(owner);
+        int markers = owner[0].Text.Split('\n')
+            .Count(l => l.Contains("AreEqual", System.StringComparison.Ordinal));
+        Assert.Equal(Big, markers);
+    }
+
+    /// <summary>
+    /// Conservation holds under the new cap: no branch lost, none duplicated.
+    /// Counted in the emitted text, not from the splitter's own tally.
+    /// </summary>
+    [Fact]
+    public void SplitFlatChain_ConservesBranchesUnderCharacterBudget()
+    {
+        var branches = Enumerable.Range(0, 500)
+            .Select(i => "if (x == " + i + ") { return " + i + "; }"
+                       + new string(' ', i % 50) + "\n")
+            .ToArray();
+
+        var parts = ReflectionDispatchPartitioner.SplitFlatChain(
+            "f", "int", "int x", branches,
+            branchesPerPart: 1500, charsPerPart: 20_000);
+
+        Assert.Equal(500, parts.Sum(p => p.BranchCount));
+        string all = string.Concat(parts.Select(p => p.Text));
+        int emitted = System.Text.RegularExpressions.Regex.Matches(all, @"if \(x == ").Count;
+        Assert.Equal(500, emitted);
     }
 }

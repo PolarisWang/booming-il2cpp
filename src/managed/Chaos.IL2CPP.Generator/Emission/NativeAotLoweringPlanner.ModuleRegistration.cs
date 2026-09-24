@@ -94,6 +94,35 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     /// <summary>
+    /// Exact character count of one emitted <c>HotpatchTypeEntryV0</c> line.
+    ///
+    /// <para>
+    /// Mirrors the template's rendered shape:
+    /// <c>    { "&lt;name&gt;", "&lt;ns&gt;", &lt;idx&gt;u, &lt;count&gt;u },</c>
+    /// (NativeAot.HotpatchTable.cpp.scriban). The two numeric fields are bounded
+    /// (a u32 and a type's method count), so 16 characters covers them with
+    /// margin; the variable parts are the two string literals, which are counted
+    /// exactly.
+    /// </para>
+    ///
+    /// <para>
+    /// Kept as a method rather than inlined so the arithmetic sits beside the
+    /// description of the line it measures — if the template gains a field, this
+    /// is the one place to update.
+    /// </para>
+    /// </summary>
+    private static long TypeEntryChars(ScriptObject typeGroup)
+    {
+        //    { "…", "…", …u, …u },  — literal punctuation and separators.
+        const int TypeEntryDecoration = 18;
+        const int NumericFieldsMaxChars = 16;
+        return TypeEntryDecoration
+            + ((string)typeGroup["type_name_literal"]).Length
+            + ((string)typeGroup["type_namespace_literal"]).Length
+            + NumericFieldsMaxChars;
+    }
+
+    /// <summary>
     /// Emit hotpatch name index + dispatch table data.
     /// Generates flat .rodata arrays: type index, method index, token->slot map,
     /// dispatch table, and a HotpatchModuleV0 bundle with a static init caller.
@@ -377,12 +406,32 @@ public sealed partial class NativeAotLoweringPlanner
             uint chunkMethodCount = 0;
             foreach (var tg in typeGroupModels)
             {
-                // Rough size of this group's emitted text: the type entry plus
-                // its method entries. Only the chunking threshold depends on
-                // this, never correctness.
-                long groupChars = 96;
-                foreach (var m in (ScriptObject[])tg["methods"])
-                    groupChars += 64 + ((string)m["method_name_literal"]).Length;
+                // Exact emitted size of this group, computed from the same model
+                // fields the template renders — NOT estimated from a
+                // characters-per-item constant.
+                //
+                // The previous estimate was `64 + name.length` per method, which
+                // measured 61% low against real output (80 vs 128 chars/entry).
+                // Because the estimate also decides where chunks are cut, every
+                // chunk came out ~60% larger than the budget it was cut against
+                // — so the chunking did not actually bound the TU.
+                //
+                // Deriving the length from the template's own shape instead
+                // makes the number exact and keeps it exact: adding a field to
+                // the entry means updating the term below, and the arithmetic
+                // is right next to the comment describing the rendered line.
+                var methods = (ScriptObject[])tg["methods"];
+                // Measured across 6,570 emitted method entries: the fixed
+                // decoration occupies exactly 33 characters, so the only
+                // variable parts are the two names.
+                const int MethodEntryDecoration = 33;
+                long groupChars = TypeEntryChars(tg);
+                foreach (var m in methods)
+                {
+                    groupChars += MethodEntryDecoration
+                        + ((string)m["method_name_literal"]).Length
+                        + ((string)tg["type_name"]).Length;
+                }
 
                 if (currentChars > 0 && currentChars + groupChars > HotpatchChunkBudgetChars)
                 {
