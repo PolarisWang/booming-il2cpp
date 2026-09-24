@@ -177,6 +177,26 @@ jobs:
           cd testing
           cmake -S src/native -B artifacts/run/native-test-build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
+      # Diagnostic: the native-test tree imports the archives produced by
+      # "Build Native Libraries" via a path relative to testing/.  When that
+      # lookup fails ("No rule to make target .../chaos_runtime_core.a") the
+      # useful question is where the archives actually are — print both sides.
+      - name: Diagnose native-test lib paths
+        if: failure() || always()
+        shell: bash
+        continue-on-error: true
+        run: |
+          set +e
+          echo "=== repo root ==="; pwd; ls -d build testing/../build 2>&1
+          echo "=== archives under build/ ==="
+          find build -name "libchaos_*.a" -printf "%p\n" 2>/dev/null | sort | head -30
+          echo "=== what testing/.. resolves to ==="
+          (cd testing && cd .. && pwd)
+          echo "=== does the imported path exist? ==="
+          ls -l "testing/../build/native/src/native/runtime-core/chaos_runtime_core.a" 2>&1
+          ls -l "testing/../build/native/src/native/runtime-core/" 2>&1 | head
+          exit 0
+
       - name: Build Native Tests
         run: cmake --build testing/artifacts/run/native-test-build --config RelWithDebInfo -j$(nproc 2>/dev/null || echo 4)
 
