@@ -151,3 +151,28 @@ A: 编译日志的文件名 → split-report 对应 TU 的成分 → 定位单�
 blocking_questions: []
 question_clearance: cleared
 ```
+
+---
+
+## 九、进度追踪
+
+| Step | worktree | 状态 | commit |
+|---|---|---|---|
+| **1** | `tp-debug` | 🔄 进行中 | — |
+| 2 | `tp-semantics` | 待做 | — |
+| 3 | `tp-packer` | 待做 | — |
+| 4 | `tp-cost` | 待做 | — |
+| 5 | `tp-build-feedback` | 待做 | — |
+| 6 | `tp-finalize` | 待做 | — |
+
+### Step 1 交付
+- `SplitReportBuilder`（新）：产出 `native-aot.split-report.{json,log}`
+- `NativeAotEmitter.Shared`：在 payload TU 发射后收集 TU→sections 映射并落盘
+- `SplitReportTests`（5 个，含负控核对）
+- **零行为改动** —— 不改分页、不改预算、不改生成文本
+
+### Step 1 厘清的两处事实（供 Step3/4 用）
+1. 预算常量 `350_000` 散落 **4 处**
+2. hotpatch 字符估算公式**偏低 61%**（80 vs 实测 128 字符/条）
+3. 现无任何测试驱动 `BuildGeneratedSources` 的分段路径
+   （要求 `templateModel.Methods.Count >= 500`，合成 fixture 造不出）
