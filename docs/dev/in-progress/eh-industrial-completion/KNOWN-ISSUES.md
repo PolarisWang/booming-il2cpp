@@ -351,6 +351,102 @@ stat -c '%y' src/managed/Chaos.IL2CPP.Generator/bin/Debug/net8.0/Chaos.IL2CPP.Ge
 
 ---
 
+### ⚠️ 追加证据（2026-09-24 第五轮）—— 本文件此前第四轮结论被推翻
+
+**E14（最重要）此前所有基于 `IndexOf` 的「残片检测」都是假阳性**
+
+残片字符串 `Chaos_..._AssertionException__ctor_System_S`（77 字符）**本身就是
+完整符号 `..._ctor_System_String` 的前缀**。用 `IndexOf(前缀) >= 0` 检测，
+在完整符号处同样命中。在真实产物上实测：
+
+```
+prefix occurrences (frag):                      38   ← 完整符号，不是残片
+TRUE truncations (frag not followed by tring):   1   ← 唯一的真残片
+```
+
+**38 : 1。** 因此 E10/E11 中「`[MRB] hasFrag=True`」「`[INIT] hasFrag=...`」
+**全部无意义**，第四轮据此得出的「残片在 moduleRegSb / 由 deferred section
+引入」推理链**作废**。
+
+> 讽刺的是，本文件的 **E9 已记录过这个陷阱**，随后仍再次踩入。任何后续
+> 检测必须使用否定前瞻：`Index(prefix) 后检查 substring(77,5) != "tring"`。
+
+**E15 用正确判据重测的可靠结论（这些才是可依赖的）**
+
+在 `AddSection("modulereg", ...)` 之后、`_deferredPayloadSections` drain 之后、
+`BuildModuleRegistration()` 调用处、`aotreg` append 处，各用**否定前瞻**检测：
+
+```
+[CHK1] after AddSection(modulereg): mrcLen=9777 mrcHasFrag=False sbLen=9777 sbHasFrag=False
+[CHK3] after drain:                sbLen=9777 sbHasFrag=False
+[BMR-CORRECT] BuildModuleRegistration(): len=9777  trueTrunc=0
+[AOTREG] aotRegistrationCode:            len=42    truncCount=0
+```
+
+**结论（推翻第四轮）**：残片**不在** `modulereg`、**不在** deferred sections、
+**不在** `BuildModuleRegistration()`、**不在** `aotreg`。
+
+**E16 残片所在位置的最新定位**
+
+全文件唯一的真截断在偏移 **146104**，其前 300 字节为：
+
+```
+extern const CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
+extern const CHAOS_IL2CPP_UINT32 kGenericTypeArgTokensCount = 0u;
+extern const GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 0, 0, 0 } };
+...
+extern const GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
+extern const CHAOS_IL2CPP_UINT32 s_method_aot_entriesCount = 0u;
+extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+extern const CHAOS_IL2CPP_UINT32 s_method_aot_entry_argsCount = 0u;   ← 这 5 行后紧跟残片
+
+extern "C" void Chaos_..._AssertionException__ctor_System_S          ← 残片
+```
+
+这一整块（`kGenericTypeArgTokens` … `s_method_aot_entry_argsCount`）由
+`Templates/NativeAot.GenericRegistration.cpp.scriban` 产出，**不是** `aotreg`
+（`aotreg` 是 `NativeAot.GenericAotRegistration.cpp.scriban`，本 chunk 只 42 字符
+的注释）。因此残片出现在 **`crypto` 或 `abimanifest`** 这两个 append 之一之后 ——
+这是排除法后仅剩的候选。
+
+**E17 TPG 内嵌 DLL 同步失败（本轮出现 4 次）**
+
+`dotnet build src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/` 的增量拷贝
+**不可靠**：多次出现 `src/tools/.../bin/Debug/net8.0/Chaos.IL2CPP.Generator.dll`
+时间戳落后于 `src/managed/.../bin/Debug/net8.0/` 的情况，表现为**探针不打印**，
+极易被误读为「该代码路径未执行」（本轮因此产生两次错误推断）。
+
+**可靠做法**（本轮最终采用）：
+
+```bash
+dotnet build src/managed/Chaos.IL2CPP.Generator/Chaos.IL2CPP.Generator.csproj -c Debug
+cp src/managed/Chaos.IL2CPP.Generator/bin/Debug/net8.0/Chaos.IL2CPP.Generator.dll \
+   src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/bin/Debug/net8.0/Chaos.IL2CPP.Generator.dll
+# 核对两者时间戳一致后再跑
+```
+
+---
+
+### 收口说明（2026-09-24）
+
+本缺陷历经 **5 轮追查（约 10 个 agent + 30 轮手动）**，仍未定位到 `file:line`。
+本轮起停止手动迭代。移交时请以下列**已确证**事实为起点，并**务必使用
+E14 的正确判据**：
+
+| 已确证 | 内容 |
+|---|---|
+| 缺陷形态 | 单行、内容 93 字符、符号名在 77 字符处截断（缺 78 字节） |
+| 位置 | 产物偏移 ~146104，紧跟在 `s_method_aot_entry_argsCount = 0u;` 之后 |
+| 已排除 | `modulereg` / deferred sections / `BuildModuleRegistration()` / `aotreg`（均有正确判据的探针证据） |
+| 剩余候选 | `crypto` 或 `abimanifest` 的 append（排除法，仅剩这两个） |
+| 影响面 | `System.ObjectModel` / `System.Collections.NonGeneric`；`System.Linq` / `System.Text.Json` 不受影响 |
+| 与 EH 的关系 | **无** —— 属 codegen 组装链缺陷，是 EH 工作期间撞上的 |
+
+**建议的下一步（收敛到单次动作）**：在 `cryptoAotIrCode` 与 `abiManifestCode`
+两处 append 之前/之后，用 E14 的否定前瞻判据各检测一次。两者之一必然命中。
+
+---
+
 ## KNOWN-ISSUE-2（设计层面）: L3 异常翻译正确性尚未系统化
 
 见 `roadmap-v1-01.md` P2。当前 P2-0（duplicate key）已修复并验证；
