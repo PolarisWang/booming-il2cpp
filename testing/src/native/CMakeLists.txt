@@ -49,15 +49,38 @@ set(CHAOS_INCLUDE_DIRS
 )
 
 # Import chaos prebuilt libraries as static imported targets
+#
+# The per-config subdirectory ("Debug/" / "RelWithDebInfo/") only exists for
+# MULTI-CONFIG generators (Visual Studio, Xcode, Ninja Multi-Config) — those
+# place each configuration's artefacts in its own subdir.  Single-config
+# generators (Unix Makefiles, plain Ninja, i.e. the Linux CI lane) write the
+# archive directly into the target dir with no config segment:
+#
+#   MSVC   : build/native/src/native/runtime-core/RelWithDebInfo/chaos_runtime_core.lib
+#   Linux  : build/native/src/native/runtime-core/chaos_runtime_core.a
+#
+# Resolve the prefix once from CMAKE_CONFIGURATION_TYPES so both layouts work;
+# hardcoding the MSVC layout made every imported target unresolvable on Linux
+# ("No rule to make target '.../RelWithDebInfo/chaos_runtime_core.a'").
+if(CMAKE_CONFIGURATION_TYPES)
+    set(CHAOS_LIB_CONFIG_DIR "RelWithDebInfo")
+else()
+    set(CHAOS_LIB_CONFIG_DIR "")
+endif()
+
 macro(add_chaos_imported_lib name subdir)
     if(NOT TARGET ${name})
         add_library(${name} STATIC IMPORTED GLOBAL)
+        set(_chaos_lib_dir "${CHAOS_NATIVE_DIR}/${subdir}")
+        if(CHAOS_LIB_CONFIG_DIR)
+            set(_chaos_lib_dir "${_chaos_lib_dir}/${CHAOS_LIB_CONFIG_DIR}")
+        endif()
         set_target_properties(${name} PROPERTIES
             IMPORTED_LOCATION_DEBUG          "${CHAOS_NATIVE_DIR}/${subdir}/Debug/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
-            IMPORTED_LOCATION_RELEASE        "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
-            IMPORTED_LOCATION_RELWITHDEBINFO "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
-            IMPORTED_LOCATION_MINSIZEREL     "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
-            IMPORTED_LOCATION                "${CHAOS_NATIVE_DIR}/${subdir}/RelWithDebInfo/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
+            IMPORTED_LOCATION_RELEASE        "${_chaos_lib_dir}/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
+            IMPORTED_LOCATION_RELWITHDEBINFO "${_chaos_lib_dir}/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
+            IMPORTED_LOCATION_MINSIZEREL     "${_chaos_lib_dir}/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
+            IMPORTED_LOCATION                "${_chaos_lib_dir}/${name}${CMAKE_STATIC_LIBRARY_SUFFIX}"
         )
     endif()
 endmacro()
@@ -73,16 +96,25 @@ add_chaos_imported_lib(chaos_engine_bridge  engine-bridge)
 add_chaos_imported_lib(chaos_debugger diagnostics/debugger)
 add_chaos_imported_lib(chaos_pal pal)
 
-# chaos_fmt is built as a standalone project outside the src/native tree
+# chaos_fmt is built as a standalone project outside the src/native tree.
+# Same two-layout caveat as add_chaos_imported_lib above: MSVC puts the archive
+# in a per-config subdir and names it .lib, single-config generators drop it in
+# fmt_build/ directly as libchaos_fmt.a.  Both the subdir and the suffix have to
+# follow the generator, not be hardcoded.
 if(NOT TARGET chaos_fmt)
     add_library(chaos_fmt STATIC IMPORTED GLOBAL)
     set(CHAOS_FMT_DIR "${CHAOS_PROJECT_ROOT}/../build/native/fmt_build")
+    if(CHAOS_LIB_CONFIG_DIR)
+        set(_chaos_fmt_loc "${CHAOS_FMT_DIR}/${CHAOS_LIB_CONFIG_DIR}/chaos_fmt.lib")
+    else()
+        set(_chaos_fmt_loc "${CHAOS_FMT_DIR}/chaos_fmt${CMAKE_STATIC_LIBRARY_SUFFIX}")
+    endif()
     set_target_properties(chaos_fmt PROPERTIES
         IMPORTED_LOCATION_DEBUG          "${CHAOS_FMT_DIR}/Debug/chaos_fmt.lib"
-        IMPORTED_LOCATION_RELEASE        "${CHAOS_FMT_DIR}/RelWithDebInfo/chaos_fmt.lib"
-        IMPORTED_LOCATION_RELWITHDEBINFO "${CHAOS_FMT_DIR}/RelWithDebInfo/chaos_fmt.lib"
-        IMPORTED_LOCATION_MINSIZEREL     "${CHAOS_FMT_DIR}/RelWithDebInfo/chaos_fmt.lib"
-        IMPORTED_LOCATION                "${CHAOS_FMT_DIR}/RelWithDebInfo/chaos_fmt.lib"
+        IMPORTED_LOCATION_RELEASE        "${_chaos_fmt_loc}"
+        IMPORTED_LOCATION_RELWITHDEBINFO "${_chaos_fmt_loc}"
+        IMPORTED_LOCATION_MINSIZEREL     "${_chaos_fmt_loc}"
+        IMPORTED_LOCATION                "${_chaos_fmt_loc}"
     )
 endif()
 
