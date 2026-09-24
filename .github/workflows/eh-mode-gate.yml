@@ -44,7 +44,30 @@ on:
       os:
         required: false
         type: string
-        default: windows-latest
+        default: ubuntu-latest
+      # Which CMake preset/toolchain to build with.  Derived from `os` when
+      # omitted; spelled out as an input so a caller can pin an unusual target.
+      #
+      # Why this matters for EH specifically: the three delivery modes are
+      # selected by chaos/config.h from the *host platform* when no
+      # CHAOS_IL2CPP_EH_* macro is given.  Windows → WIN32_SEH, Linux/macOS →
+      # CPP_THROW.  So:
+      #   windows-x64-reference  exercises WIN32_SEH + SETJMP + CPP_THROW (all
+      #                          three targets compile: __try needs MSVC, but
+      #                          the SEH target is the only MSVC-gated one)
+      #   linux-x64-native       exercises CPP_THROW + SETJMP (the WIN32_SEH
+      #                          target is not registered — MISVC-only guard
+      #                          in the CMakeLists)
+      # Running BOTH is what makes the three-mode claim cross-platform rather
+      # than Windows-only.
+      preset:
+        required: false
+        type: string
+        default: ''
+      toolchain:
+        required: false
+        type: string
+        default: ''
       config:
         required: false
         type: string
@@ -78,9 +101,39 @@ jobs:
       - name: Configure
         shell: bash
         run: |
-          cmake -S . -B artifacts/presets/windows-x64-reference \
-            --toolchain build/toolchains/windows-x64-reference.cmake \
-            -DROADMAP0_PRESET_TARGET=windows-x64-reference
+          # `os` defaults to ubuntu-latest (Linux → CPP_THROW + SETJMP);
+          # callers pass windows-latest to also cover WIN32_SEH.  preset/toolchain
+          # default to the matching linux/windows pair; explicit inputs win.
+          echo "::group::configure"
+          if [ -n "${{ inputs.preset }}" ] && [ "${{ inputs.preset }}" != "''" ]; then
+            PRESET="${{ inputs.preset }}"
+          else
+            case "${{ inputs.os || 'ubuntu-latest' }}" in
+              *windows*) PRESET="windows-x64-reference" ;;
+              *ubuntu*|*linux*) PRESET="linux-x64-native" ;;
+              *macos*) PRESET="macos-reference" ;;
+              *) PRESET="linux-x64-native" ;;
+            esac
+          fi
+          TOOLCHAIN="${{ inputs.toolchain }}"
+          if [ -z "$TOOLCHAIN" ] || [ "$TOOLCHAIN" = "''" ]; then
+            case "$PRESET" in
+              *windows-x64-reference*) TOOLCHAIN="build/toolchains/windows-x64-reference.cmake" ;;
+              *linux-x64-native*)      TOOLCHAIN="build/toolchains/linux-x64-native.cmake" ;;
+              *linux-x64*)             TOOLCHAIN="build/toolchains/linux-x64.cmake" ;;
+              *macos-reference*)       TOOLCHAIN="build/toolchains/macos-reference.cmake" ;;
+              *) TOOLCHAIN="" ;;
+            esac
+          fi
+          if [ -n "$TOOLCHAIN" ]; then
+            cmake -S . -B "artifacts/presets/$PRESET" \
+              --toolchain "$TOOLCHAIN" \
+              -DROADMAP0_PRESET_TARGET="$PRESET"
+          else
+            cmake --preset "$PRESET"
+          fi
+          echo "PRESET=$PRESET" >> "$GITHUB_ENV"
+          echo "::endgroup::"
 
       - name: Build EH test targets (both suites, three modes each)
         shell: bash
@@ -88,14 +141,22 @@ jobs:
         # TU per mode, no codegen dependency).  Building the world here would
         # make the gate slow enough that people route around it.
         run: |
-          cmake --build artifacts/presets/windows-x64-reference \
+          cmake --build "artifacts/presets/$PRESET" \
             --config ${{ inputs.config }} \
             --target eh_mode_equivalence_cpp_throw \
-                     eh_mode_equivalence_win32_seh \
                      eh_mode_equivalence_setjmp \
                      eh_type_matching_cpp_throw \
-                     eh_type_matching_win32_seh \
                      eh_type_matching_setjmp
+          # The WIN32_SEH targets are MSVC-only (the CMakeLists guards them on
+          # the compiler), so they exist only on the Windows runner.  Building
+          # them by name here on Linux would fail the whole step, so build the
+          # portable four first, then conditionally the SEH two.
+          case "$PRESET" in
+            *windows*) cmake --build "artifacts/presets/$PRESET" \
+                        --config ${{ inputs.config }} \
+                        --target eh_mode_equivalence_win32_seh \
+                                 eh_type_matching_win32_seh ;;
+          esac
 
       - name: Assert ctest discovers all EH targets (both suites, three modes each)
         shell: bash
@@ -103,12 +164,20 @@ jobs:
         # being included, or a target gets renamed, ctest exits 0 having run
         # nothing and the gate reports success while testing nothing.
         run: |
-          COUNT=$(ctest --test-dir artifacts/presets/windows-x64-reference \
+          # Expected count is platform-dependent: the WIN32_SEH targets are
+          # MSVC-gated, so Linux registers 4 (cpp_throw + setjmp, two suites)
+          # and Windows registers 6.  Asserting a single number would either
+          # false-fail Linux or silently pass a Linux run that discovered none.
+          case "$PRESET" in
+            *windows*) EXPECTED=6 ;;
+            *)         EXPECTED=4 ;;
+          esac
+          COUNT=$(ctest --test-dir "artifacts/presets/$PRESET" \
             -N -R "eh_mode_equivalence|eh_type_matching|chaos_eh_" 2>/dev/null \
             | grep -cE "Test +#")
-          echo "discovered $COUNT EH mode target(s)"
-          if [ "$COUNT" -lt 6 ]; then
-            echo "::error::expected 6 EH targets (3 mode-equivalence + 3 type-matching, one per delivery mode), discovered $COUNT. Either tests/unit/runtime-native/runtime-core/eh/CMakeLists.txt stopped being included, or a target was renamed. Zero/partial discovery is a FAILURE, not a pass."
+          echo "discovered $COUNT EH target(s) on $PRESET (expected $EXPECTED)"
+          if [ "$COUNT" -lt "$EXPECTED" ]; then
+            echo "::error::expected $EXPECTED EH targets on $PRESET, discovered $COUNT. Either tests/unit/runtime-native/runtime-core/eh/CMakeLists.txt stopped being included, or a target was renamed. Zero/partial discovery is a FAILURE, not a pass."
             exit 1
           fi
 
@@ -117,7 +186,7 @@ jobs:
         shell: bash
         run: |
           set +e
-          ctest --test-dir artifacts/presets/windows-x64-reference \
+          ctest --test-dir "artifacts/presets/$PRESET" \
             -C ${{ inputs.config }} \
             -R "eh_mode_equivalence|eh_type_matching|chaos_eh_" \
             --timeout ${{ inputs.timeout }} \
