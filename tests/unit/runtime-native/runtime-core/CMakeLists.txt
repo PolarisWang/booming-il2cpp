@@ -11,6 +11,9 @@ add_subdirectory(interpreter)
 add_subdirectory(threading)
 add_subdirectory(metadata)
 add_subdirectory(runtime_stubs)
+# EH three-mode equivalence suite — one target per delivery mechanism.
+# This is the CI gate behind iron rule 10 (see dev-il2cpp-eh-expert).
+add_subdirectory(eh)
 
 # Smoke test for build verification
 chaos_native_add_test(smoke_test smoke_test.cpp
