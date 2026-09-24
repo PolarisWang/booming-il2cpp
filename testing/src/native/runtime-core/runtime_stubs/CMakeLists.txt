@@ -77,12 +77,19 @@ add_chaos_test(convert_stubs_test
 # registered and silently lowered to the zero-argument external-runtime
 # catch-all (returning 0).  That is a wrong-value failure, not a link error, so
 # it is only observable by executing the helpers.
-add_chaos_test(interlocked_arithmetic_test
-    interlocked_arithmetic_test.cpp
-    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/interlocked_stubs.cpp"
-    LIBS ${CHAOS_COMMON_TEST_LIBS}
-    LABELS "unit;core"
-)
+#
+# Guarded like the sibling copy in tests/contracts/native/runtime-core
+# (CMakeLists.txt:128): that tree owns this source file and uses if(EXISTS ...);
+# this tree currently does NOT carry interlocked_arithmetic_test.cpp, and without
+# the same guard configure dies with "Cannot find source file" on Linux.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/interlocked_arithmetic_test.cpp")
+    add_chaos_test(interlocked_arithmetic_test
+        interlocked_arithmetic_test.cpp
+        "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/interlocked_stubs.cpp"
+        LIBS ${CHAOS_COMMON_TEST_LIBS}
+        LABELS "unit;core"
+    )
+endif()
 
 # T4-1: Runtime Stubs performance benchmarks
 # Compiles stub .cpp directly (same GNU ar compat pattern as unit tests).
