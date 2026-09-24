@@ -23,6 +23,11 @@ on:
       # broken link line can only be discovered after merging to main.
       - 'tests/**'
       - 'cmake/**'
+      # The second native-test tree.  Its CMakeLists defines the imported
+      # prebuilt libs and is configured by the "Configure Native Tests" step —
+      # a change there (e.g. an artefact path) is exactly what this workflow
+      # exists to catch, so it must trigger here too.
+      - 'testing/src/**'
   push:
     branches: [main]
     paths:
@@ -34,6 +39,7 @@ on:
       - 'contracts/native/v0/**'
       - 'tests/**'
       - 'cmake/**'
+      - 'testing/src/**'
   workflow_dispatch:
     inputs:
       mode:
