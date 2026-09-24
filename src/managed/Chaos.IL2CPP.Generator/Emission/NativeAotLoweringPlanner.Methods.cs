@@ -1294,6 +1294,31 @@ public sealed partial class NativeAotLoweringPlanner
             });
         }
 
+        // Divisible section: the producer states the allowed cut points instead
+        // of the pager inferring them from size. The caller is responsible for
+        // the reassembly contract (concatenating units in order reproduces
+        // `content` exactly); it is asserted at emission rather than trusted,
+        // because a unit list that does not reassemble means text was lost.
+        void AddDivisibleSection(string name, string content, IReadOnlyList<SectionUnit> units)
+        {
+            if (string.IsNullOrEmpty(content))
+            {
+                // A ByUnits section with no text is meaningless: there would be
+                // nothing to partition and no units to place.
+                return;
+            }
+            payloadSections.Add(new PayloadSection
+            {
+                Name = name,
+                Content = content,
+                Order = sectionOrder++,
+                Semantics = units.Count > 1
+                    ? SectionSemantics.ByUnits
+                    : SectionSemantics.Atomic,
+                Units = units,
+            });
+        }
+
         // The module-registration block is the base of the StringBuilder, so it
         // has to be recorded first to keep section order aligned with text order.
         AddSection("modulereg", moduleRegistrationCode);

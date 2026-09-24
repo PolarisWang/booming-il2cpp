@@ -284,6 +284,61 @@ public sealed partial class NativeAotEmitter
                     Path = PayloadSectionPartitioner.TranslationUnitFileName("payload", i),
                 });
             }
+
+            // ── Step 1: record how the payload was divided ────────────────
+            // Observation only: no influence on the division itself. Produces a
+            // report a reviewer can open to see every TU and what is inside it,
+            // so a later MSVC capacity failure can be mapped to a unit.
+            {
+                var tuRecords = new List<SplitReportBuilder.TuRecord>(payloadTus.Count);
+                var unitSizes = new Dictionary<string, long>(StringComparer.Ordinal);
+                for (int i = 0; i < payloadTus.Count; i++)
+                {
+                    var tu = payloadTus[i];
+                    long total = 0;
+                    var units = new List<SplitReportBuilder.UnitRecord>(tu.Count);
+                    foreach (var section in tu)
+                    {
+                        long size = section.Content?.Length ?? 0L;
+                        total += size;
+                        unitSizes[section.Name] = size;
+                        units.Add(new SplitReportBuilder.UnitRecord("section", section.Name, size));
+                    }
+                    tuRecords.Add(new SplitReportBuilder.TuRecord(
+                        $"payload.{i}",
+                        PayloadSectionPartitioner.TranslationUnitFileName("payload", i),
+                        total,
+                        tu.Count,
+                        // Step 1: reconstruction is sentinel because it is not
+                        // known where the partitioner chose to cut. Step 3 adds
+                        // the real flush reason.
+                        "observed-only",
+                        units));
+                }
+
+                var (reportJson, reportLog) = SplitReportBuilder.Build(
+                    tuRecords, PayloadSectioningBudgetChars, unitSizes);
+                sources.Add(new NativeAotGeneratedSource
+                {
+                    RelativePath = SplitReportBuilder.ReportRelativePath,
+                    Contents = reportJson,
+                });
+                artifacts.Add(new NativeAotGeneratedArtifactRef
+                {
+                    Kind = "splitReport",
+                    Path = SplitReportBuilder.ReportRelativePath,
+                });
+                sources.Add(new NativeAotGeneratedSource
+                {
+                    RelativePath = SplitReportBuilder.LogRelativePath,
+                    Contents = reportLog,
+                });
+                artifacts.Add(new NativeAotGeneratedArtifactRef
+                {
+                    Kind = "splitReportLog",
+                    Path = SplitReportBuilder.LogRelativePath,
+                });
+            }
         }
 
         // Always include the shape dispatch header
