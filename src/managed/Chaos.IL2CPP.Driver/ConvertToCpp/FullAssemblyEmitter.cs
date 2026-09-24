@@ -36,13 +36,32 @@ internal sealed class FullAssemblyEmitter
             Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
             if (source.ContentsBuilder is { } builder)
             {
+                // Strip every CR before it reaches disk.
+                //
+                // The builder's content is assembled with AppendLine-style calls
+                // whose separator is Environment.NewLine — CRLF on Windows, LF on
+                // Linux — and rendered template fragments embedded in it carry
+                // their own newlines on top.  On Windows the layers compound to
+                // \r\r\r\n per line (~3 CR/line measured; Linux emits pure LF).
+                // MSVC reads each stray CR as a token break and rejects the file:
+                //   native-aot.generated.cpp: error C2182 / C2365 / C2065 / C2143
+                //
+                // Normalizing here makes the emitted bytes platform-independent.
+                // CR removal is exact because C++ source never legitimately
+                // contains a bare CR.  Applied per chunk to keep allocations
+                // bounded for the 200+ MB translation units.
                 using var writer = new StreamWriter(targetPath, append: false, Encoding.UTF8);
                 foreach (var chunk in builder.GetChunks())
-                    writer.Write(chunk.Span);
+                {
+                    var text = chunk.ToString();
+                    if (text.Contains('\r'))
+                        text = text.Replace("\r", "");
+                    writer.Write(text);
+                }
             }
             else
             {
-                File.WriteAllText(targetPath, source.Contents, Encoding.UTF8);
+                File.WriteAllText(targetPath, source.Contents.Replace("\r", ""), Encoding.UTF8);
             }
         }
 
@@ -50,7 +69,7 @@ internal sealed class FullAssemblyEmitter
         if (!string.IsNullOrEmpty(closureResult.CrossAssemblyExportHeader))
         {
             var exportHeaderPath = Path.Combine(outputRoot, "chaos_assembly_exports.h");
-            File.WriteAllText(exportHeaderPath, closureResult.CrossAssemblyExportHeader, Encoding.UTF8);
+            File.WriteAllText(exportHeaderPath, closureResult.CrossAssemblyExportHeader.Replace("\r", ""), Encoding.UTF8);
             Console.WriteLine($"    emitted cross-assembly export header -> {exportHeaderPath}");
         }
 
