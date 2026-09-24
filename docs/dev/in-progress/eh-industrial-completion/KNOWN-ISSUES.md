@@ -191,6 +191,77 @@ E2 把问题从「某行被删字节」重新定义为「**一整块输出被替
 
 ---
 
+### 追加证据（2026-09-24 第三轮，定位到「哪条路径」）
+
+**E6. 损坏在 `DeduplicateTypeIdMtSymbols` 之前就已存在**
+
+在 `BuildGeneratedSources` 的返回值处（`NativeAotEmitter.cs` 的
+`_pageText` / `_finalText`）双向探针，实测：
+
+```
+[FINAL-PRE-DEDUP ] afterArgs = ...argsCount = 0u;\r\r\n\r\r\n extern "C" void ..._System_S\n\n\r\n // Forward declaration ...
+[FINAL-POST-DEDUP] afterArgs = ...argsCount = 0u;\r\r\r\n\r\r\r\n extern "C" void ..._System_S\r\n\r\n\r\n // Forward declaration ...
+```
+
+PRE-DEDUP 时残片**已经存在** → `DeduplicateTypeIdMtSymbols` **不是**成因（此前
+Workflow 调查也得出同一结论，此处独立复现）。
+
+**E7. `BuildMethodSection` 在 ObjectModel 上未被调用 —— 本轮最有价值的线索**
+
+在 `NativeAotEmitter.Shared.cs:871` 的 `BuildMethodSection` 入口插桩（条件：
+`SubjectId` 含 `AssertionException`），**探针一次都没有打印**。
+
+结合 E2（ObjectModel 在 `argsCount` 之后**缺失 `// Managed method:` 注释**），
+结论一致且更强：
+
+> **ObjectModel 的方法体区根本没有经由 `BuildMethodSection` 这条正常路径生成。**
+
+因此这条残片并非「某处把一行写坏了」，而是**另一条（未走 `BuildMethodSection`
+的）路径产出的文本**，它恰好占据了本该属于方法体区的位置。
+
+**E8. `chaos_generated_module.cpp` 中同一符号是完整的**
+
+同一 chunk 的 `chaos_generated_module.cpp:143` 里：
+
+```cpp
+extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_AssertionException__ctor_System_String(
+            CHAOS_IL2CPP_INTPTR,
+            CHAOS_IL2CPP_INTPTR
+);
+```
+
+**完整、格式正确**。两个文件用的是同一份用例数据，因此**数据源是好的** ——
+损坏发生在 `native-aot.generated.cpp` 独有的某条生成路径上。
+
+**E9. 数值指纹复查（`IndexOf` 语义提醒）**
+
+`fragShort`（`..._ctor_System_S`）与 `fragFull`（`..._ctor_System_String`）的
+`IndexOf` 结果**相同（都是 6205）** —— 因为前者本就是后者的前缀。
+**判断残片时必须用 `(?!tring)` 之类的否定前瞻**，否则会把完整声明误当残片，
+这一点此前让我多绕了两轮。
+
+---
+
+### 建议的下一步（第三次修订）
+
+E7/E8 把搜索范围**缩小到「ObjectModel 独有的、不走 `BuildMethodSection` 的生成路径」**。
+下一轮应：
+
+1. 枚举 `BuildMethodSection` 的**所有调用点**，找出在什么条件下会被绕过；
+2. 对照 `System.Linq`（走正常路径）与 `System.ObjectModel`（绕过）在
+   `pageMethods` / `TemplateModel` 构造上的差异 —— 特别关注 E2 提到的
+   subject 数差异（10 vs 386）；
+3. 检查 `BuildGeneratedPageDirect` 的触发阈值
+   （`NativeAotEmitter.cs:291`：`objectModelLength > 200_000`）——
+   System.Linq 的产物 809 KB、ObjectModel 638 KB，**两者都可能触发**，
+   需实测确认各自走哪条分支。
+
+> 前三轮共投入约 10 个 agent + 20 余轮手动追查仍未定位到 `file:line`。
+> 若下一轮仍无收敛，建议改由「用最小可复现 assembly 二分缩小输入」的方式
+> 替代「读代码找路径」。
+
+---
+
 ## KNOWN-ISSUE-2（设计层面）: L3 异常翻译正确性尚未系统化
 
 见 `roadmap-v1-01.md` P2。当前 P2-0（duplicate key）已修复并验证；
