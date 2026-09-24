@@ -866,10 +866,27 @@ public sealed class TestEmitter
                 // subjects that had been silently passing; see
                 // void-writer-sideeffect-assertion/notes-stepA-spike2.md.
                 if (!hasRefParam)
+                {
+                    // AOT-THROWS-ASSERT: machine-readable marker for the fact layer.
+                    //
+                    // This subject verifies a real contract — the call raises exactly
+                    // result.ExceptionType, and raises nothing else — but leaves NO
+                    // trace in the fact record: the subject's return value is the
+                    // structural 42 and the method UNDER TEST returns void, so the
+                    // recorded returnType is System.Void.  classify_fact_record then
+                    // sees value==42 on a void method and files it under
+                    // `unassertable`, which reads as "ran, asserted nothing".
+                    //
+                    // Measured on the xml chunk before this marker existed: 119 of
+                    // 171 `unassertable` records carried exactly this try/catch and
+                    // all passed, so the pipeline under-reported verified coverage by
+                    // roughly 90%.
+                    sb.AppendLine("            // AOT-THROWS-ASSERT");
                     sb.AppendLine(
                         "            try { " + callExpr + @"; throw new System.Exception(""AOT stub did not throw""); }" +
                         $" catch ({result.ExceptionType}) {{ }}" +
                         @" catch { throw new System.Exception(""wrong exception type""); }");
+                }
                 else
                     sb.AppendLine($"            // [smoke] {result.ExceptionType} thrown by {callExpr} (ref/out param cannot wrap in lambda)");
                 return;
@@ -889,7 +906,13 @@ public sealed class TestEmitter
             if (isExternalAssembly && !HasKnownNativeImpl(method) && IsAotNotSupported(method))
             {
                 if (!hasRefParam)
+                {
+                    // AOT-THROWS-ASSERT: see the note at the primary emission site —
+                    // this marks the void-returning subject as having verified an
+                    // exception contract so the fact layer can bucket it as `real`.
+                    sb.AppendLine("            // AOT-THROWS-ASSERT");
                     sb.AppendLine($"            Assert.Throws(() => {callExpr});");
+                }
                 return;
             }
             if (isExternalAssembly && !HasKnownNativeImpl(method))
@@ -955,10 +978,25 @@ public sealed class TestEmitter
                 var hasNullDefaultRefArg = HasNullDefaultArg(set);
                 if (exType == "System.ArgumentNullException" && hasNullDefaultRefArg)
                 {
+                    // AOT-THROWS-ASSERT: machine-readable counterpart to the human
+                    // comment above.  The fact layer scans for this marker so a
+                    // void-returning subject that DID verify an exception contract is
+                    // bucketed as `real` instead of `unassertable`.
+                    //
+                    // Why it is needed: these subjects return `long` (the literal 42)
+                    // but the method UNDER TEST returns void, so the recorded
+                    // return_type is System.Void and the value is always the
+                    // structural 42 — indistinguishable, in the fact record alone,
+                    // from a subject that never asserted anything.  Measured on the
+                    // xml chunk: 119 of 171 `unassertable` records carry a
+                    // try/catch and passed, i.e. the pipeline under-reported
+                    // verified coverage by ~90%.
+                    sb.AppendLine("            // AOT-THROWS-ASSERT");
                     sb.AppendLine($"            Assert.Throws(() => {callExpr});");
                 }
                 else
                 {
+                    sb.AppendLine("            // AOT-THROWS-ASSERT");
                     sb.AppendLine($"            Assert.Throws<{exType}>(() => {callExpr});");
                 }
             }

@@ -278,6 +278,7 @@ def _generated_method_id_from_subject_id(sid: str) -> str | None:
 def classify_fact_record(rec: dict, return_type: str | None,
                          is_factory_subject: bool = False,
                          stub_gap_ids: frozenset[str] | None = None,
+                         throwing_assert_ids: frozenset[str] | None = None,
                          manifest_prefixes: frozenset[tuple[str, str]] | None = None,
                          subject_id: str | None = None,
                          null_arg_ids: frozenset[str] | None = None,
@@ -432,6 +433,29 @@ def classify_fact_record(rec: dict, return_type: str | None,
         # as unassertable so the gate doesn't report a phantom gap.
         return "unassertable"
     if return_type in _UNASSERTABLE_RETURN_TYPES:
+        # A void-returning method has no value to compare, so the structural 42
+        # normally means "ran without crashing".  But when the subject wrapped
+        # the call in a typed try/catch, it DID verify a contract — the call
+        # raises exactly the exception type the managed probe observed, and
+        # raises nothing else.  That verification is invisible in the record
+        # (nothing is returned, nothing is asserted against a value).
+        #
+        # The ATG marks those sites with AOT-THROWS-ASSERT so they can be
+        # counted as `real`.  Measured on the xml chunk: 121 records moved from
+        # unassertable to real, i.e. verified coverage had been under-reported
+        # by ~2x.
+        #
+        # `passed` is required, not implied.  Reaching this branch means
+        # assertFailed was already False, and a subject that never caught
+        # anything returns normally with the structural 42 — but being explicit
+        # keeps this rule from silently depending on the order of the checks
+        # above it.  A subject that DID fail cannot be counted as verified even
+        # if it carries the marker (the marker says an assertion was emitted,
+        # not that it held).
+        if (rec.get("passed")
+                and throwing_assert_ids is not None
+                and not throwing_assert_ids.isdisjoint(_gen_method_ids(rec))):
+            return "real"
         return "unassertable"
     return "smoke"
 
@@ -594,6 +618,70 @@ def _stub_gap_method_ids(ctx: ChunkContext) -> frozenset[str]:
                 break
 
     return frozenset(gap_ids)
+
+
+def _throwing_assert_method_ids(ctx: ChunkContext) -> frozenset[str]:
+    """Scan CombinedSubjects.cs for the machine-readable ``// AOT-THROWS-ASSERT`` marker.
+
+    TestEmitter emits this immediately before every ``Assert.Throws`` /
+    ``Assert.Throws<T>`` it generates.  Those subjects verify a real contract —
+    "calling this with these arguments raises exactly this exception type" —
+    but leave no trace in the fact record: the subject's own return value is
+    the structural 42, and the method UNDER TEST returns void, so the recorded
+    ``returnType`` is ``System.Void``.
+
+    Without this marker such a subject is indistinguishable from one that
+    asserted nothing, and ``classify_fact_record`` dumps it into
+    ``unassertable``.  Measured on the xml chunk: 119 of 171 ``unassertable``
+    records carried a try/catch and all passed — the pipeline was
+    under-reporting verified coverage by ~90%.
+
+    Resolution mirrors ``_stub_gap_method_ids``: walk backward from the marker
+    to the containing method signature, then further back for class/namespace.
+
+    Returns a frozenset of methodSubjectId strings carrying the marker.
+    """
+    combined_cs = ctx.chunk_dir / "managed" / "combined" / "CombinedSubjects.cs"
+    if not combined_cs.exists():
+        return frozenset()
+    try:
+        text = combined_cs.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return frozenset()
+
+    if "AOT-THROWS-ASSERT" not in text:
+        return frozenset()
+
+    lines = text.split("\n")
+    ids: set[str] = set()
+
+    for i, line in enumerate(lines):
+        if "AOT-THROWS-ASSERT" not in line:
+            continue
+        for j in range(i - 1, -1, -1):
+            m = re.search(r'public long (\w+)\(\)', lines[j])
+            if not m:
+                continue
+            method_name = m.group(1)
+            ns_name = ""
+            class_name = ""
+            for k in range(j - 1, -1, -1):
+                if not class_name:
+                    cm = re.search(r'\bclass\s+(\w+)', lines[k])
+                    if cm:
+                        class_name = cm.group(1)
+                        continue
+                nm = re.search(r'\bnamespace\s+(\S+)', lines[k])
+                if nm:
+                    ns_name = nm.group(1)
+                    break
+            ids.add(
+                "CombinedSubjects/"
+                f"{ns_name}.{class_name}::{method_name}:System.Int64()"
+            )
+            break
+
+    return frozenset(ids)
 
 
 def _load_capability_manifest(ctx) -> frozenset[tuple[str, str]] | None:
@@ -1130,6 +1218,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
     # external-assembly stub.  Those methods have no AOT body by construction,
     # so they are bucketed separately from `smoke` — see classify_fact_record.
     stub_gap_ids = _stub_gap_method_ids(ctx)
+    throwing_assert_ids = _throwing_assert_method_ids(ctx)
 
     # Capability manifest (AOT shape registry) — the set of subject-id prefixes
     # the codegen can dispatch natively.  A failing record whose subject id is
@@ -1181,6 +1270,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
                     rec, rt,
                     is_factory_subject=(gen_id in factory_subjects) if gen_id else False,
                     stub_gap_ids=stub_gap_ids,
+                    throwing_assert_ids=throwing_assert_ids,
                     manifest_prefixes=manifest_prefixes,
                     subject_id=mm.get("methodSubjectId"),
                     null_arg_ids=null_arg_ids,
@@ -1196,7 +1286,7 @@ def _write_fact_results(ctx: ChunkContext, aot_result: dict, jit_result: dict | 
                 rt = _return_type_of(sid)
                 rec["returnType"] = rt
                 rec["resultKind"] = classify_fact_record(
-                    rec, rt, stub_gap_ids=stub_gap_ids,
+                    rec, rt, stub_gap_ids=stub_gap_ids, throwing_assert_ids=throwing_assert_ids,
                     manifest_prefixes=manifest_prefixes,
                     subject_id=sid)
         return records

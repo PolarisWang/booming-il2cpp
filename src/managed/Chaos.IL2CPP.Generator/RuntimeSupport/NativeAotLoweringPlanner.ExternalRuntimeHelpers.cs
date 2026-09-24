@@ -1034,7 +1034,16 @@ public sealed partial class NativeAotLoweringPlanner
 			 string.Equals(typeName, "System.Collections.IEnumerator", StringComparison.Ordinal) ||
 			 string.Equals(typeName, "IEnumerable", StringComparison.Ordinal) ||
 			 string.Equals(typeName, "IEnumerator", StringComparison.Ordinal));
-		if (!HasMethodParameters(callee) && !isEnumerableInterface)
+		// Same soundness gap as T6, for the reader interface: XmlReader has ZERO-PARAM
+		// instance methods (ResolveEntity) whose SimpleForward registration declares no
+		// receiver slot, so the zero-param short-circuit would discard the receiver and
+		// the native entry would be called with no arguments at all (C2660).  Enumerate
+		// those past the guard as well.
+		var isZeroParamReceiverInjected =
+			typeName != null &&
+			(string.Equals(typeName, "System.Xml.XmlReader", StringComparison.Ordinal) ||
+			 string.Equals(typeName, "XmlReader", StringComparison.Ordinal));
+		if (!HasMethodParameters(callee) && !isEnumerableInterface && !isZeroParamReceiverInjected)
 			return false;   // zero-param already works — the sole slot IS the receiver
 
 		if (typeName == null) return false;
@@ -1069,6 +1078,12 @@ public sealed partial class NativeAotLoweringPlanner
 		"ReaderWriterLockSlim",
 		"ManualResetEventSlim",
 		"SpinLock",
+		// XmlReader family — reader instance methods bind to the abstract BASE at
+		// AOT call sites (Roslyn encodes an inherited call by the compiler-known
+		// static type), so the receiver must be injected for that spelling.
+		// Its methods take managed arguments, so the zero-param short-circuit in
+		// _injectReceiverForParameterisedMissingEntry does not drop them.
+		"System.Xml.XmlReader",
 		// T1 — Task / ValueTask family
 		"System.Threading.Tasks.Task",
 		"System.Threading.Tasks.Task`1",

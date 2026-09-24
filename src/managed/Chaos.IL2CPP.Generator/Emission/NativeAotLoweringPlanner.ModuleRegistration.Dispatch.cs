@@ -855,10 +855,39 @@ public sealed partial class NativeAotLoweringPlanner
             var definedTypeIds = emittedMtTypeIds.Count > 0
                 ? emittedMtTypeIds
                 : (_allEmittedTypeSubjectIds ?? new HashSet<string>(StringComparer.Ordinal));
+
+            // Deduplicate by DISPLAY NAME, not by subject id.
+            //
+            // kChaosExceptionTypes[] keys on the bare display name ("System.Exception",
+            // i.e. the part after the last '/'), and ResolveTypeByName() scans it
+            // linearly, returning the FIRST match.  Two modules can each define a type
+            // with the same display name — e.g. Chaos.TestFramework.Sdk defines its own
+            // System.InvalidOperationException placeholder (parent = nullptr, a
+            // value-shaped stub) alongside the real System.Private.CoreLib one that
+            // carries the SystemException base chain.
+            //
+            // Distinct() on the subject id kept BOTH, because
+            // "Chaos.TestFramework.Sdk/System.InvalidOperationException" and
+            // "System.Private.CoreLib/System.InvalidOperationException" are different
+            // strings — yet both emit the SAME table key.  Sorting by subject id then
+            // put "Chaos.*" first ('C' < 'S'), so the unresolvable stub won every
+            // lookup: RaiseManagedException("System.InvalidOperationException") built an
+            // object whose MethodTable has no parent chain, chaos_eh_match_type could
+            // never match, every typed catch fell through to CHAOS_EH_RETHROW, and the
+            // throw escaped to the harness's outer __except as a SEH-FAULT
+            // (0xe0000001) — recorded as caught=true / value=0, indistinguishable from
+            // "raised the wrong exception type".
+            //
+            // Preference order puts the BCL implementation first because a same-named
+            // type in a test-harness or subject assembly is a compile-time placeholder,
+            // not a runtime identity.
             var emitTypes = typeIds
                 .Select(NormalizeExceptionTypeSubjectId)
                 .Where(id => !string.IsNullOrEmpty(id) && definedTypeIds.Contains(id!))
+                .Select(id => id!)
                 .Distinct(StringComparer.Ordinal)
+                .GroupBy(DisplayNameOfExceptionTypeSubjectId, StringComparer.Ordinal)
+                .Select(g => g.OrderBy(ExceptionTypeSubjectIdPreference).First())
                 .OrderBy(id => id, StringComparer.Ordinal)
                 .ToList();
 
@@ -996,6 +1025,37 @@ public sealed partial class NativeAotLoweringPlanner
                 : ns.Split('.')[0];
 
             return $"{assembly}/{typeId}";
+        }
+
+        /// <summary>
+        /// The bare type name a subject id keys on in kChaosExceptionTypes[] —
+        /// the part after the last '/'.  "System.Private.CoreLib/System.Exception"
+        /// and "Chaos.TestFramework.Sdk/System.Exception" both yield
+        /// "System.Exception", which is exactly why two different subject ids can
+        /// collide on one runtime lookup key.
+        /// </summary>
+        private static string DisplayNameOfExceptionTypeSubjectId(string subjectId)
+        {
+            var slash = subjectId.LastIndexOf('/');
+            return slash >= 0 && slash + 1 < subjectId.Length
+                ? subjectId.Substring(slash + 1)
+                : subjectId;
+        }
+
+        /// <summary>
+        /// Ordering used to pick the winner when several modules define the same
+        /// exception display name.  BCL (System.Private.CoreLib) wins: it is the
+        /// implementation whose MethodTable carries the real base chain, so it is
+        /// the only one chaos_eh_match_type can actually match.  Other modules'
+        /// same-named types (test-harness placeholders) lose regardless of the
+        /// ordinal order their subject ids would otherwise sort into.
+        /// </summary>
+        private static int ExceptionTypeSubjectIdPreference(string subjectId)
+        {
+            const string coreLib = "System.Private.CoreLib/";
+            if (subjectId.StartsWith(coreLib, StringComparison.Ordinal)) return 0;
+            if (subjectId.StartsWith("System.", StringComparison.Ordinal)) return 1;
+            return 2;
         }
 
         /// <summary>
