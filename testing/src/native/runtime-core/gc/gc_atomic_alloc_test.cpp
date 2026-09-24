@@ -105,7 +105,14 @@ void TestOversizedAtomicAlloc() {
 
     // Allocate objects larger than kMaxTlabAlloc (32KB).
     // These should route to NurseryAllocateAtomicSlow → old-gen.
-    constexpr size_t kOversizedSize = kMaxTlabAlloc + 128;  // 32896 bytes
+    //
+    // NOT constexpr: kMaxTlabAlloc is deliberately a mutable global (written at
+    // runtime by GcConfig() in gc_region.cpp, and asserted as a latched config
+    // value in gc_config_test.cpp) — an `inline` variable, not a constant.  GCC
+    // rejects using it in a constant expression ("not usable in a constant
+    // expression"); MSVC accepts it as a non-standard extension.  The value is
+    // runtime-dependent by design, so `const` is the correct spelling.
+    const size_t kOversizedSize = kMaxTlabAlloc + 128;  // 32896 bytes
 
     void* p1 = NurseryAllocateAtomic(kOversizedSize);
     CHECK(p1 != nullptr, "oversized atomic alloc returned non-null");
