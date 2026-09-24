@@ -49,6 +49,87 @@ public sealed class PayloadSection
     /// </summary>
     public IReadOnlyList<CrossSectionSymbol> ExportedSymbols { get; init; }
         = Array.Empty<CrossSectionSymbol>();
+
+    /// <summary>
+    /// Whether this section may be divided across translation units, and if so
+    /// along which boundaries.
+    ///
+    /// <para>
+    /// <b>Why the producer decides, not the pager.</b> Whether a piece of
+    /// generated text can be cut is a property of what it <i>means</i>, not of
+    /// how long it is: a vtable array and the VTableSlot table that indexes it
+    /// must stay together, a dispatch chain's branches are independently
+    /// reachable, and the GC slot map is scanned by the runtime as one
+    /// contiguous byte range and cannot be cut at all. That knowledge lives
+    /// with whoever emitted the text. Expressing it here turns a per-section
+    /// special case in the pager into data the producer supplies.
+    /// </para>
+    ///
+    /// <para>
+    /// Default is <see cref="SectionSemantics.Atomic"/> — the conservative
+    /// choice, and the behaviour every existing section already has. A section
+    /// that can be cut must say so explicitly, using
+    /// <see cref="Units"/> to give the allowed boundaries.
+    /// </para>
+    /// </summary>
+    public SectionSemantics Semantics { get; init; } = SectionSemantics.Atomic;
+
+    /// <summary>
+    /// The allowed cut points, in emission order, when <see cref="Semantics"/>
+    /// is <see cref="SectionSemantics.ByUnits"/>.
+    ///
+    /// <para>
+    /// Each unit is a self-contained fragment: the concatenation of all units,
+    /// in order, must equal <see cref="Content"/> exactly. That equality is the
+    /// contract — a unit list that does not reassemble into the section is a
+    /// producer bug, and the pager asserts it rather than emitting text that
+    /// silently lost a fragment.
+    /// </para>
+    ///
+    /// <para>
+    /// The units are what makes a large section partitionable without
+    /// estimating its size: the pager accumulates real unit lengths instead of
+    /// guessing from a character-per-item formula (measured: the hotpatch
+    /// estimate ran 61% low).
+    /// </para>
+    /// </summary>
+    public IReadOnlyList<SectionUnit> Units { get; init; }
+        = Array.Empty<SectionUnit>();
+}
+
+/// <summary>
+/// One allowed cut point within a <see cref="PayloadSection"/>.
+///
+/// <para>
+/// A unit carries its own name so the emitted TU and the split report can say
+/// which fragment landed where — "payload.7 carries vtable.3" is actionable in
+/// a way "payload.7 is 400 KB" is not.
+/// </para>
+/// </summary>
+/// <param name="Name">Fragment identifier, unique within its section.</param>
+/// <param name="Content">The fragment's C++ text.</param>
+public sealed record SectionUnit(string Name, string Content);
+
+/// <summary>
+/// How a <see cref="PayloadSection"/> may be divided across TUs.
+/// </summary>
+public enum SectionSemantics
+{
+    /// <summary>
+    /// Never divided. Correct whenever the text carries internal
+    /// definition/reference relationships that a cut would break, and required
+    /// whenever the runtime consumes it as one contiguous range (the GC slot
+    /// map is scanned by advancing <c>entry_total_size</c>). A section larger
+    /// than the budget under this semantic produces an oversized TU — which is
+    /// why the split report calls those out rather than letting MSVC find them.
+    /// </summary>
+    Atomic = 0,
+
+    /// <summary>
+    /// Divisible, but only at the boundaries listed in <see cref="PayloadSection.Units"/>.
+    /// Units are never merged across a boundary the producer did not offer.
+    /// </summary>
+    ByUnits = 1,
 }
 
 /// <summary>
@@ -126,15 +207,48 @@ public static class PayloadSectionPartitioner
             return byOrder != 0 ? byOrder : string.CompareOrdinal(a.Name, b.Name);
         });
 
+        // Expand the ordered sections into the finest pieces the producer
+        // allowed: an Atomic section stays whole, a ByUnits section becomes one
+        // piece per declared unit. Everything downstream then packs uniform
+        // pieces, and the "a section is never divided" rule becomes "a PIECE is
+        // never divided" — which the producer has already guaranteed is safe.
+        var pieces = new List<PayloadSection>();
+        foreach (var section in ordered)
+        {
+            if (section.Semantics == SectionSemantics.ByUnits && section.Units.Count > 0)
+            {
+                VerifyUnitsReassemble(section);
+                for (int i = 0; i < section.Units.Count; i++)
+                {
+                    var unit = section.Units[i];
+                    pieces.Add(new PayloadSection
+                    {
+                        Name = $"{section.Name}.{i}",
+                        Content = unit.Content,
+                        Order = section.Order,
+                        ExportedSymbols = section.ExportedSymbols,
+                        // The piece inherits the parent's atomicity: its units
+                        // were the finest boundaries the producer offered, so
+                        // nothing below this is safe to cut.
+                        Semantics = SectionSemantics.Atomic,
+                    });
+                }
+            }
+            else
+            {
+                pieces.Add(section);
+            }
+        }
+
         var current = new List<PayloadSection>();
         long currentSize = 0;
 
-        foreach (var section in ordered)
+        foreach (var piece in pieces)
         {
-            long size = section.Content?.Length ?? 0;
+            long size = piece.Content?.Length ?? 0;
 
-            // Start a new TU when adding this section would exceed the budget,
-            // but never emit an empty TU: an oversized section simply gets its
+            // Start a new TU when adding this piece would exceed the budget,
+            // but never emit an empty TU: an oversized piece simply gets its
             // own group (the `current.Count > 0` guard).
             if (current.Count > 0 && currentSize + size > budgetChars)
             {
@@ -143,7 +257,7 @@ public static class PayloadSectionPartitioner
                 currentSize = 0;
             }
 
-            current.Add(section);
+            current.Add(piece);
             currentSize += size;
         }
 
@@ -151,6 +265,51 @@ public static class PayloadSectionPartitioner
             groups.Add(current);
 
         return groups;
+    }
+
+    /// <summary>
+    /// Asserts the <see cref="SectionSemantics.ByUnits"/> contract: the units,
+    /// concatenated in order, reproduce the section's content exactly.
+    ///
+    /// <para>
+    /// Partitioning replaces the section's text with its units, so a unit list
+    /// that does not reassemble would silently DROP or DUPLICATE generated
+    /// code — the failure would surface far away, as a missing symbol or a
+    /// duplicate definition, with nothing pointing back here. Failing loudly at
+    /// the producer's own section is the only place the cause is still visible.
+    /// </para>
+    ///
+    /// <para>
+    /// Throws rather than returning a status: this is a codegen bug, not a
+    /// runtime condition, and a partially-correct payload is worse than a
+    /// failed build.
+    /// </para>
+    /// </summary>
+    private static void VerifyUnitsReassemble(PayloadSection section)
+    {
+        long expected = 0;
+        for (int i = 0; i < section.Units.Count; i++)
+            expected += section.Units[i].Content?.Length ?? 0;
+
+        long actual = section.Content?.Length ?? 0;
+        // Length is the cheap check and catches the common cases (a fragment
+        // dropped, given twice, or truncated). The exact comparison below is
+        // what catches a fragment that changed without changing the total.
+        if (expected == actual)
+        {
+            var sb = new StringBuilder((int)Math.Min(expected, int.MaxValue));
+            foreach (var unit in section.Units)
+                sb.Append(unit.Content);
+            if (string.Equals(sb.ToString(), section.Content, StringComparison.Ordinal))
+                return;
+        }
+
+        throw new InvalidOperationException(
+            $"Section '{section.Name}' declares {section.Units.Count} unit(s) whose "
+            + $"contents do not reassemble into its Content "
+            + $"(units total {expected} chars, section is {actual}). "
+            + "Partitioning would replace the section text with these units, so the "
+            + "mismatch means generated code would be dropped or duplicated.");
     }
 
     /// <summary>
