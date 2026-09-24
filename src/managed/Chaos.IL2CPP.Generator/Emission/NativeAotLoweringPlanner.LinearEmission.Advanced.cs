@@ -501,24 +501,28 @@ public sealed partial class NativeAotLoweringPlanner
             // argument. Extract it from the Action delegate and pass it through.
             var actionNativeType = GetNativeTypeSymbol("System.Private.CoreLib/System.Action");
             builder.AppendLine($"{indent}{{");
-            builder.AppendLine($"{indent}    try {{");
+            builder.AppendLine($"{indent}    CHAOS_EH_TRY");
             builder.AppendLine($"{indent}        auto* chaos_action = reinterpret_cast<{actionNativeType}*>({actionExpr});");
             builder.AppendLine($"{indent}        {targetSymbol}(chaos_action->chaos_delegate_target);");
-            builder.AppendLine($"{indent}        throw chaos_managed_exception{{}};  // no exception — fail");
-            builder.AppendLine($"{indent}    }} catch (chaos_managed_exception&) {{");
+            builder.AppendLine($"{indent}        // EH-RULE-1/RULE-6: report 'no exception' through the mode-agnostic");
+            builder.AppendLine($"{indent}        // macro.  A bare `throw chaos_managed_exception{{}}` only works in");
+            builder.AppendLine($"{indent}        // CPP_THROW mode; under SEH/SETJMP it would not be catchable and the");
+            builder.AppendLine($"{indent}        // Assert.Throws would report a spurious pass-by-escape.");
+            builder.AppendLine($"{indent}        CHAOS_EH_THROW(0);  // no exception — fail");
+            builder.AppendLine($"{indent}    CHAOS_EH_CATCH_BEGIN");
             builder.AppendLine($"{indent}        // expected exception was thrown — pass");
-            builder.AppendLine($"{indent}    }}");
+            builder.AppendLine($"{indent}    CHAOS_EH_END");
             builder.AppendLine($"{indent}}}");
             return;
         }
 
         builder.AppendLine($"{indent}{{");
-        builder.AppendLine($"{indent}    try {{");
+        builder.AppendLine($"{indent}    CHAOS_EH_TRY");
         builder.AppendLine($"{indent}        {targetSymbol}();");
-        builder.AppendLine($"{indent}        throw chaos_managed_exception{{}};  // no exception — fail");
-        builder.AppendLine($"{indent}    }} catch (chaos_managed_exception&) {{");
+        builder.AppendLine($"{indent}        CHAOS_EH_THROW(0);  // no exception — fail");
+        builder.AppendLine($"{indent}    CHAOS_EH_CATCH_BEGIN");
         builder.AppendLine($"{indent}        // expected exception was thrown — pass");
-        builder.AppendLine($"{indent}    }}");
+        builder.AppendLine($"{indent}    CHAOS_EH_END");
         builder.AppendLine($"{indent}}}");
     }
 

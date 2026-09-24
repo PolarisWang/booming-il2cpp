@@ -470,8 +470,17 @@ public sealed partial class NativeAotLoweringPlanner
             (method.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) ||
              method.SubjectId.StartsWith("Chaos.TestFramework.Sdk/", StringComparison.Ordinal));
         bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0 && (method.Instructions?.Any(i => i.Callee != null) == true);
+        // EH-RULE-1: go through the CHAOS_EH_* abstraction, never a bare C++
+        // try/catch.  chaos/eh.h selects for the active mode:
+        //   default  → try { } catch (const chaos_managed_exception&)
+        //   WIN32_SEH→ __try { } __except (CHAOS_SEH_FILTER_ALL())
+        //   SETJMP   → setjmp slot push / longjmp landing
+        // A hardcoded C++ catch only fires in the default mode; under SEH
+        // (Windows) and SETJMP (iOS/Android) the managed exception is delivered
+        // by RaiseException/longjmp and sails straight past it.  That was the
+        // mechanism behind ~566 preAssertionRaise records across 9 chunks.
         if (_wrapInTryCatch)
-            builder.AppendLine("	try {");
+            builder.AppendLine("	CHAOS_EH_TRY");
         // Strip inline decls from bodyBuilder — now unnecessary since
         // EmitViaStructuredIR no longer calls EmitStructuredSlotDeclarations.
         // The safety net (emitted above) handles all slot declarations.
@@ -496,7 +505,10 @@ public sealed partial class NativeAotLoweringPlanner
         }
         if (_wrapInTryCatch)
         {
-            builder.AppendLine("} catch (const chaos_managed_exception&) {");
+            // CHAOS_EH_CATCH_BEGIN already carries the closing brace for the
+            // try block (its expansion starts with `} catch (...)`), so this
+            // line must NOT emit one of its own.
+            builder.AppendLine("CHAOS_EH_CATCH_BEGIN");
             // C# semantics: an uncaught managed exception propagates out of the method.
             // This catch previously swallowed it and returned a default value, which
             // made every assertion failure invisible to the runner (converted into
@@ -517,8 +529,8 @@ public sealed partial class NativeAotLoweringPlanner
             var subjId = method.SubjectId;
             if (!string.IsNullOrEmpty(subjId))
                 builder.AppendLine($"    fprintf(stderr, \"[DIAG] caught managed exception in: {subjId}\\n\");");
-            builder.AppendLine("    throw;  // RethrowManagedExceptions: C# semantics — propagate");
-            builder.AppendLine("}");
+            builder.AppendLine("    CHAOS_EH_RETHROW;  // RethrowManagedExceptions: C# semantics — propagate");
+            builder.AppendLine("CHAOS_EH_END");
         }
         builder.AppendLine("}");
     }

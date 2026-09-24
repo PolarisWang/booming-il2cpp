@@ -757,7 +757,8 @@ public sealed partial class NativeAotLoweringPlanner
 			// and bucket it as stubGap.  Throwing chaos_managed_exception makes
 			// AOT and managed agree so the fact layer sees a consistent result.
 			bodyLines.Add("    // Managed body throws NotSupportedException for all inputs.");
-			bodyLines.Add("    throw chaos_managed_exception{};");
+			bodyLines.Add("    // EH-RULE-1: mode-agnostic raise (CPP_THROW throws, SEH/SETJMP longjmp/RaiseException).");
+			bodyLines.Add("    CHAOS_EH_THROW(0);");
 		}
 		else
 		{
