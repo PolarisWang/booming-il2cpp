@@ -600,6 +600,105 @@ grep -rn 'extern \\"C\\" ' src/managed/Chaos.IL2CPP.Generator/ --include=*.cs
 
 
 
+
+### 第七轮补充（2026-09-24）—— 远端 CR 修复使对照样本变干净；发射器排除得到双重印证
+
+**E28 远端 `b0011cbdd` 修复了 CR 问题，但残片仍在（证明是独立缺陷）**
+
+远端提交 `b0011cbdd fix(driver): FullAssemblyEmitter 写盘归一化 LF` 已在
+`FullAssemblyEmitter` 的写盘点加 `text.Replace("\r", "")`。实测效果：
+
+| | 修复前 | 修复后 |
+|---|---|---|
+| CR 计数 | 大量（`\r\r\r\n` 混合 2/3/4-CR）| **0** |
+| 文件大小 | 640,834 | **607,454**（−33,380，即被移除的 CR）|
+| 行尾 | 混合 | **纯 LF** |
+
+**但残片依然存在**（offset 146104 → 139687），且形态变得**完全干净**：
+
+```
+...s_method_aot_entry_argsCount = 0u;\n\n
+extern "C" void Chaos_..._AssertionException__ctor_System_S\n\n\n
+// Forward declaration for module.image (defined in Step 3 below)\n
+```
+
+→ **KNOWN-ISSUE-1 与 CR/行尾问题无关**，是独立缺陷。**这是目前最干净的对照样本。**
+
+**E29 在真实写盘点复核 `FullAssemblyEmitter` —— 探针仍未打印**
+
+在该文件的写盘分支插入 `EHVerifyWritten`（比对内存文本与磁盘文本、并检测
+已知符号截断），实测**无输出**。
+
+结合 E24（发射器清单 `checked=3 missing=0`）与 E26，**双重印证**：
+
+> **该 chunk 的 `native-aot.generated.cpp` 不经 `FullAssemblyEmitter` 落盘。**
+> TPG 内部持有自己的 Driver/Generator 副本并直接生成 chunk（这也解释了
+> 为什么此前多次 `cp` 因 `Device or resource busy` 失败）。
+
+**E30 本轮确立的完整排除清单（七轮累计）**
+
+| # | 候选 | 排除依据 |
+|---|---|---|
+| 1 | `modulereg` / deferred sections | E15：9777 字符，trueTrunc=0 |
+| 2 | `BuildModuleRegistration()` | E15：9777 字符，trueTrunc=0 |
+| 3 | `aotreg` | E15：42 字符（仅注释）|
+| 4 | `cryptoAotIrCode` | E18：len=0 |
+| 5 | `abiManifestCode` | E18：ABI 段在残片**之后** |
+| 6 | 并发（`EmitOneMethod` 的 `Parallel.For`）| E20：强制串行后仍在 |
+| 7 | `Methods.Remaining.cs:423` 分次 Append | E22：产出的是 `chaos_ensure_type_initialized_*` |
+| 8 | `DeduplicateTypeIdMtSymbols` | E6：PRE-DEDUP 时已在 |
+| 9 | Scriban 模板 CRLF | E3：强制 LF 后形态不变 |
+| 10 | `PayloadSectionPartitioner` | 死代码，单 TU 不经 section |
+| 11 | **`FormatMethodDeclaration`（发射器本身）** | **E24：checked=3 missing=0** |
+| 12 | **`FullAssemblyEmitter`（Driver 侧落盘）** | **E29：探针不打印** |
+| 13 | CR / 行尾 | **E28：远端修复后残片仍在** |
+
+**E31 收敛后的最终判断**
+
+残片是**第三条 `extern "C"` 声明**（同符号共 3 处：两处完整、中间一处被截断），
+而它**不是 `FormatMethodDeclaration` 产出的**。因此：**某段代码自己拼了一条
+`extern "C" void <符号>` 文本**，只写出了符号名的一部分。
+
+**下一步（定向搜索，一次即可缩小到个位数候选）**：
+
+```bash
+# 自己拼接 extern "C" 文本（而非调用 FormatMethodDeclaration）的所有位置
+grep -rn 'extern \\"C\\" ' src/managed/Chaos.IL2CPP.Generator/ --include=*.cs
+```
+
+取同时满足以下三点者：
+① 自己拼 `extern "C" ` 前缀与符号名（分次 `Append` 或插值）；
+② 产出位置落在**模块注册段**（`s_method_aot_entry_argsCount` 之后、
+   `// Forward declaration for module.image` 之前）；
+③ 其输入可能不完整（例如按索引/长度切片、或依赖某个可能为空的集合）。
+
+**E32 给后续实施者的三条方法论（本轮血泪教训）**
+
+1. **截断的特征是「缺少」，不是「不平衡」** —— 首版守卫只查括号不平衡，
+   而真实残片**根本不含括号**（参数列表整段丢失）→ `balance == 0` → 漏检。
+   任何检测都应检查「缺少了本该有的终止符」。
+2. **检测串必须用否定前瞻** —— `..._ctor_System_S` 是完整符号
+   `..._ctor_System_String` 的**前缀**，用 `IndexOf(前缀) >= 0` 会把 38 处
+   完整符号误报为残片。用 `(?!tring)` 或检查后续 5 字符。
+3. **核对两边时间戳再跑探针** —— `dotnet build` 对 TPG 内嵌
+   `Chaos.IL2CPP.Generator.dll` 的增量拷贝**不可靠**（本轮遇到 4 次），
+   表现为探针不打印、极易被误读为「该路径未执行」。判据：
+   ```bash
+   stat -c '%y' src/managed/Chaos.IL2CPP.Generator/bin/Debug/net8.0/Chaos.IL2CPP.Generator.dll \
+                src/tools/Chaos.IL2CPP.Tools.TestProjectGenerator/bin/Debug/net8.0/Chaos.IL2CPP.Generator.dll
+   # 两者必须相同；不同则手动 cp 后再跑
+   ```
+
+**E33 转手建议**
+
+七轮累计约 13 个 agent + 50 轮手动追查。本缺陷：
+- **不属于 EH 域** —— 是 codegen 文本组装链问题，在 EH 工作期间撞上；
+- 与远端正推进的 `TuPacker.cs` / `SplitReportBuilder.cs`（TP-Step1/2/3a
+  分段协议）**高度相关**，很可能是同一处代码的后续演进；
+- 证据已完整固化（含 13 项排除、3 条反面教材、可复现探针）。
+
+**建议转由熟悉 TU 拆分/分段协议的作者处理**，以 E31 的定向搜索为起点。
+
 ---
 
 ## KNOWN-ISSUE-2（设计层面）: L3 异常翻译正确性尚未系统化
