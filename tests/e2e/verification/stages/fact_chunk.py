@@ -211,9 +211,32 @@ _UNASSERTABLE_RETURN_TYPES = frozenset({
 # Matched against the generated method id, which is "<MethodName>_<index>_..._<set>"
 # (e.g. "ILogB_38_double_0", "BitDecrement_20_float_0"); a leading "_" anchors the
 # name so a hypothetical "XILogB" would not match.
+# Callees whose contract LEGITIMATELY produces a negative return value, so a
+# negative reading is not a data anomaly.
+#
+#   Math/MathF.ILogB    — ECMA-335 specifies FP_ILOGB0 == FP_ILOGBNAN ==
+#                         int.MinValue for zero/NaN input.
+#   Math/MathF.BitDecrement
+#                       — returns the largest value BELOW its input, so any
+#                         input <= 0 yields a negative (negative subnormal).
+#   *::Parse            — a parse's SIGN comes from its INPUT, so any numeric
+#                         Parse can legitimately return a negative. Measured:
+#                         SByteTests::Parse("-100") -> -100.
+#
+# Keyed on the callee rather than the value: the probe supplies input-dependent
+# results (ILogB(1.0) is 0, ILogB(0.5) is -1; Parse("10") is +10), so what is
+# anomalous depends on WHICH function ran, not on what it returned. A blanket
+# "ignore negatives" would also swallow the real defect this check was written
+# for — the tagged pointer that leaks through an INT64 return slot as a large
+# negative (see the reflection line's 0x80007ff68290f0f0 case).
+#
+# "Parse_" is matched as a generated-method-id PREFIX, so it covers the
+# arity/overload suffixes (e.g. "Parse_4_string_System_IFormatProvider_3")
+# without matching a hypothetical "Reparse_x" — the leading "_" anchors it.
 _NEGATIVE_RETURN_METHOD_PREFIXES = (
     "ILogB_",
     "BitDecrement_",
+    "Parse_",
 )
 
 
