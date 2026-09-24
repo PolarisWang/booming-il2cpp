@@ -412,3 +412,91 @@ TEST(HotpatchChunks, UnstampedSize_TreatedAsFlat) {
     EXPECT_EQ(HotpatchTypeEntryAt(&m, 0), &d.types[0]);
     EXPECT_TRUE(HotpatchModuleHasTypeEntries(&m));
 }
+
+// ── Negative control, automated ──────────────────────────────────────────
+//
+// The equivalence tests above (ChunkedLayout_ResolvesEveryIndexIdentically,
+// RegistryLookup_ChunkedMatchesFlat) only mean something if a WRONG chunk
+// layout would actually make them fail. That was verified by hand during
+// development; this test makes it permanent, so a future change that
+// accidentally weakens the chunk walk is caught rather than quietly accepted.
+//
+// 🔴 The failure mode being guarded is SILENT: a mis-resolved chunk boundary
+// returns a DIFFERENT but well-formed entry, so the caller gets the wrong
+// method's token — no crash, no diagnostic. That is why the assertion below
+// is "these two layouts DISAGREE", not "this lookup returns null".
+
+TEST(HotpatchChunks, NegativeControl_CorruptedChunkListDivergesFromFlat) {
+    TableData d;
+
+    // Correct chunking: methods cut 2|3.
+    ChaosAbiChunkV0 good_mc[2] = {
+        ChaosAbiChunkV0{&d.methods[0], 2u, sizeof(HotpatchMethodEntryV0)},
+        ChaosAbiChunkV0{&d.methods[2], 3u, sizeof(HotpatchMethodEntryV0)},
+    };
+    // Corrupted: the second chunk claims to start one element early, so every
+    // index landing in it resolves one element too far back.
+    ChaosAbiChunkV0 bad_mc[2] = {
+        ChaosAbiChunkV0{&d.methods[0], 2u, sizeof(HotpatchMethodEntryV0)},
+        ChaosAbiChunkV0{&d.methods[1], 3u, sizeof(HotpatchMethodEntryV0)},
+    };
+    ChaosAbiChunkV0 tc[1] = {ChaosAbiChunkV0{&d.types[0], kTypeCount, sizeof(HotpatchTypeEntryV0)}};
+    const uint32_t c[1] = {kTypeCount};
+    const uint32_t good_counts[2] = {2u, 3u};
+    const uint32_t bad_counts[2] = {2u, 3u};
+
+    auto goodMod = MakeChunked(d, c, 1, good_counts, 2, tc, good_mc);
+    auto badMod = MakeChunked(d, c, 1, bad_counts, 2, tc, bad_mc);
+
+    const auto flat = MakeFlat(d);
+
+    // Sanity: the CORRECT chunking agrees with flat at every index. Without
+    // this the test could pass by both being wrong.
+    for (uint32_t i = 0; i < kMethodCount; ++i) {
+        ASSERT_EQ(HotpatchMethodEntryAt(&goodMod, i), HotpatchMethodEntryAt(&flat, i))
+            << "precondition: correct chunking must match flat at index " << i;
+    }
+
+    // The corrupted list must DISAGREE somewhere — proving the comparison in
+    // the equivalence tests is capable of detecting a bad boundary.
+    int disagreements = 0;
+    for (uint32_t i = 0; i < kMethodCount; ++i) {
+        if (HotpatchMethodEntryAt(&badMod, i) != HotpatchMethodEntryAt(&flat, i))
+            ++disagreements;
+    }
+    EXPECT_GT(disagreements, 0)
+        << "a corrupted chunk list resolved identically to the flat layout at every "
+           "index — the chunk walk is not being exercised, so the equivalence tests "
+           "would pass even with a broken boundary";
+}
+
+// Same idea at the registry level: a corrupted chunk list must produce a
+// different answer than the flat layout, or the lookup equivalence test is
+// vacuous.
+TEST(HotpatchChunks, NegativeControl_CorruptedChunkListChangesLookup) {
+    TableData d;
+    ChaosAbiChunkV0 tc[1] = {ChaosAbiChunkV0{&d.types[0], kTypeCount, sizeof(HotpatchTypeEntryV0)}};
+    ChaosAbiChunkV0 bad_mc[1] = {
+        ChaosAbiChunkV0{&d.methods[1], 4u, sizeof(HotpatchMethodEntryV0)},
+    };
+    const uint32_t c[1] = {kTypeCount};
+    const uint32_t bad_counts[1] = {4u};
+    auto badMod = MakeChunked(d, c, 1, bad_counts, 1, tc, bad_mc);
+
+    chaos::il2cpp::runtime_core::HotpatchNameRegistry badReg;
+    badReg.RegisterModule(&badMod);
+
+    chaos::il2cpp::runtime_core::HotpatchNameRegistry flatReg;
+    const auto flatMod = MakeFlat(d);
+    flatReg.RegisterModule(&flatMod);
+
+    // Look up the first type's first method: the flat layout finds it, and the
+    // corrupted chunk list (which starts at methods[1]) finds a DIFFERENT
+    // method for the same name — so the keys must differ.
+    uint64_t flatKey = flatReg.LookupMethod("NS", "Alpha", "a0");
+    uint64_t badKey  = badReg.LookupMethod("NS", "Alpha", "a0");
+    EXPECT_NE(flatKey, 0ull) << "precondition: flat layout must resolve a0";
+    EXPECT_NE(badKey, flatKey)
+        << "a corrupted chunk list produced the SAME lookup result as the flat "
+           "layout — the chunk walk is not being exercised";
+}
