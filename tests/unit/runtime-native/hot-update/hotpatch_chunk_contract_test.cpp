@@ -18,6 +18,7 @@
 
 #include <cstdint>
 #include <cstring>
+#include <cstddef>
 #include <vector>
 
 // The `*V0` descriptors are C structs from codegen_bridge.h at global scope
@@ -333,4 +334,81 @@ TEST(HotpatchChunks, RegistryLookup_UnknownNameMissesInBothLayouts) {
     EXPECT_EQ(flatReg.LookupMethod("NS", "Alpha", "nope"), 0ull);
     EXPECT_EQ(chunkedReg.LookupMethod("NS", "Alpha", "nope"), 0ull);
     EXPECT_EQ(chunkedReg.LookupMethod("NS", "NoSuchType", "a0"), 0ull);
+}
+
+// ── ABI compatibility: a module from an OLDER codegen ────────────────────
+//
+// The chunk fields sit at the END of HotpatchModuleV0, after `struct_size`.
+// A module emitted before chunking is physically SHORTER, so reading
+// `.type_chunks` off it would read past its end — undefined behaviour that a
+// release build would happily perform.
+//
+// `struct_size` is what makes the read legal, and it must be consulted BEFORE
+// any chunk field is touched. These tests build such a module by reporting a
+// size that predates the chunk fields, which is exactly what an older codegen
+// stamps.
+
+namespace {
+
+// The size a pre-chunking codegen stamped: everything up to (and including)
+// entry_table_size, without the four chunk fields. Derived from the real
+// layout rather than hard-coded, so adding a field to the struct does not
+// silently invalidate the test.
+constexpr uint32_t kPreChunkStructSize =
+    static_cast<uint32_t>(offsetof(HotpatchModuleV0, type_chunks));
+
+}  // namespace
+
+TEST(HotpatchChunks, OldCodegenModule_UsesFlatLayoutAndRegisters) {
+    TableData d;
+    auto m = MakeFlat(d);
+    m.struct_size = kPreChunkStructSize;  // an older codegen's stamp
+
+    // The flat fields are authoritative for this module.
+    EXPECT_EQ(HotpatchTypeEntryAt(&m, 0), &d.types[0]);
+    EXPECT_EQ(HotpatchMethodEntryAt(&m, 4), &d.methods[4]);
+    EXPECT_TRUE(HotpatchModuleHasTypeEntries(&m));
+    EXPECT_TRUE(HotpatchModuleHasMethodEntries(&m));
+
+    // And it must actually register — a module that silently fails to
+    // register loses every name in it.
+    chaos::il2cpp::runtime_core::HotpatchNameRegistry reg;
+    reg.RegisterModule(&m);
+    EXPECT_EQ(reg.ModuleCount(), 1u);
+    EXPECT_NE(reg.LookupMethod("NS", "Alpha", "a0"), 0ull);
+}
+
+// The dangerous case: an old module whose chunk fields LOOK populated, because
+// the memory past its end happens to contain something non-null. The size gate
+// must ignore them entirely — falling back to the flat fields, which the old
+// module does have.
+TEST(HotpatchChunks, OldCodegenModule_IgnoresChunkFieldsEvenWhenPopulated) {
+    TableData d;
+    auto m = MakeFlat(d);
+    // Simulate "memory past the struct end looks like a chunk list": populate
+    // the fields and then declare the module old. A size-blind implementation
+    // would take the chunked path and resolve every index wrongly.
+    ChaosAbiChunkV0 bogus_tc[1] = {ChaosAbiChunkV0{&d.types[0], 1u, sizeof(HotpatchTypeEntryV0)}};
+    ChaosAbiChunkV0 bogus_mc[1] = {ChaosAbiChunkV0{&d.methods[3], 2u, sizeof(HotpatchMethodEntryV0)}};
+    m.type_chunks = bogus_tc;
+    m.type_chunk_count = 1u;
+    m.method_chunks = bogus_mc;
+    m.method_chunk_count = 1u;
+    m.struct_size = kPreChunkStructSize;  // ...but the module is OLD
+
+    // Must resolve via the flat arrays, NOT the (bogus) chunk list.
+    EXPECT_EQ(HotpatchMethodEntryAt(&m, 0), &d.methods[0])
+        << "an old module must not be addressed through chunk fields it does not have";
+    EXPECT_EQ(HotpatchMethodEntryAt(&m, 4), &d.methods[4]);
+    EXPECT_EQ(HotpatchTypeEntryAt(&m, 1), &d.types[1]);
+}
+
+// A producer that stamps no size at all is treated as pre-chunking: the flat
+// fields exist in every layout, so they are the safe interpretation.
+TEST(HotpatchChunks, UnstampedSize_TreatedAsFlat) {
+    TableData d;
+    auto m = MakeFlat(d);
+    m.struct_size = 0u;
+    EXPECT_EQ(HotpatchTypeEntryAt(&m, 0), &d.types[0]);
+    EXPECT_TRUE(HotpatchModuleHasTypeEntries(&m));
 }

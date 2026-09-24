@@ -69,23 +69,39 @@ int HotpatchNameRegistry::CompareTokenSlot(const void* key, const void* elem) no
 
 namespace {
 
+// Whether this module was built against a header that HAS the chunk fields.
+//
+// The chunk fields live at the END of HotpatchModuleV0, after `struct_size`
+// (which is first). A module produced by an older codegen is physically
+// shorter, so reading `.type_chunks` off it would read past its end — the
+// `struct_size` check is what makes that read legal.
+//
+// This is the same versioning idiom bootstrap.cpp already uses for
+// CodeRegistrationV0 / MetadataRegistrationV0 (`struct_size >= sizeof(...)`),
+// applied per-module because modules can be registered dynamically at
+// runtime, not only at bootstrap.
+bool ModuleHasChunkFields(const HotpatchModuleV0* mod) noexcept {
+    // `struct_size == 0` means the producer did not stamp a size. Treat that
+    // as pre-chunking (the safe reading: fall back to the flat fields, which
+    // are present in every layout).
+    if (mod->struct_size == 0u) return false;
+    return mod->struct_size >= sizeof(HotpatchModuleV0);
+}
+
 // Locates the chunk containing `index` within a chunk list, or nullptr when
 // the list is empty or the index is out of range.
 //
-// `counts` are summed on the fly rather than precomputed: the binary search
-// needs the prefix sum at each probe, and materialising it would require an
-// allocation at registration time on a path that must not allocate.
+// The prefix sum is computed on the fly rather than cached: the binary search
+// needs it at each probe, and materialising it would require an allocation on
+// a registration path that must not allocate.
 const ChaosAbiChunkV0* FindChunk(const ChaosAbiChunkV0* chunks, uint32_t chunk_count,
                                  uint32_t index, uint32_t* out_offset) noexcept {
     if (chunks == nullptr || chunk_count == 0) return nullptr;
 
     uint32_t lo = 0;
     uint32_t hi = chunk_count;  // exclusive
-    uint32_t base = 0;          // global index where chunk `lo` starts
     while (lo < hi) {
         uint32_t mid = lo + (hi - lo) / 2;
-        // Prefix sum over [0, mid) — small chunk counts make this cheaper than
-        // caching, and it keeps the function allocation-free.
         uint32_t mid_base = 0;
         for (uint32_t k = 0; k < mid; ++k) mid_base += chunks[k].count;
 
@@ -93,13 +109,11 @@ const ChaosAbiChunkV0* FindChunk(const ChaosAbiChunkV0* chunks, uint32_t chunk_c
             hi = mid;
         } else if (index >= mid_base + chunks[mid].count) {
             lo = mid + 1;
-            base = mid_base + chunks[mid].count;
         } else {
             *out_offset = index - mid_base;
             return &chunks[mid];
         }
     }
-    (void)base;
     return nullptr;
 }
 
@@ -110,7 +124,7 @@ const HotpatchTypeEntryV0* HotpatchTypeEntryAt(const HotpatchModuleV0* mod, uint
 
     // Flat layout — the pre-chunking path, kept free of chunk arithmetic so it
     // is bit-for-bit identical to the original indexing.
-    if (mod->type_chunks == nullptr || mod->type_chunk_count == 0) {
+    if (!ModuleHasChunkFields(mod) || mod->type_chunks == nullptr || mod->type_chunk_count == 0) {
         if (index >= mod->type_entry_count) return nullptr;
         return &mod->type_entries[index];
     }
@@ -127,7 +141,7 @@ const HotpatchTypeEntryV0* HotpatchTypeEntryAt(const HotpatchModuleV0* mod, uint
 const HotpatchMethodEntryV0* HotpatchMethodEntryAt(const HotpatchModuleV0* mod, uint32_t index) noexcept {
     if (mod == nullptr) return nullptr;
 
-    if (mod->method_chunks == nullptr || mod->method_chunk_count == 0) {
+    if (!ModuleHasChunkFields(mod) || mod->method_chunks == nullptr || mod->method_chunk_count == 0) {
         if (index >= mod->method_entry_count) return nullptr;
         return &mod->method_entries[index];
     }
@@ -143,14 +157,22 @@ const HotpatchMethodEntryV0* HotpatchMethodEntryAt(const HotpatchModuleV0* mod, 
 // `type_entries == nullptr` guard, which is wrong under chunking (a chunked
 // module legitimately has a null flat pointer) and would silently skip
 // registration.
+//
+// NOTE the `ModuleHasChunkFields` conjunct: a module from an older codegen has
+// a shorter struct, so `type_chunks` must not be read at all — the flat
+// pointer is authoritative for it, exactly as before chunking existed.
 bool HotpatchModuleHasTypeEntries(const HotpatchModuleV0* mod) noexcept {
     if (mod == nullptr || mod->type_entry_count == 0) return false;
-    return (mod->type_chunks != nullptr && mod->type_chunk_count > 0) || mod->type_entries != nullptr;
+    bool chunked = ModuleHasChunkFields(mod)
+        && mod->type_chunks != nullptr && mod->type_chunk_count > 0;
+    return chunked || mod->type_entries != nullptr;
 }
 
 bool HotpatchModuleHasMethodEntries(const HotpatchModuleV0* mod) noexcept {
     if (mod == nullptr || mod->method_entry_count == 0) return false;
-    return (mod->method_chunks != nullptr && mod->method_chunk_count > 0) || mod->method_entries != nullptr;
+    bool chunked = ModuleHasChunkFields(mod)
+        && mod->method_chunks != nullptr && mod->method_chunk_count > 0;
+    return chunked || mod->method_entries != nullptr;
 }
 
 // ── Registration ──────────────────────────────────────────────────────
