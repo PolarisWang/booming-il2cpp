@@ -53,6 +53,23 @@ target_compile_options(datetime_guid_math_test PRIVATE
 # /FI flag is meaningless to GCC anyway (it treats /FI"path" as an input file
 # and dies with "linker input file not found").  The generator expression above
 # scopes the flag to the MSVC compiler.
+
+# guid_stubs.cpp uses SSE4.1 intrinsics (_mm_blendv_epi8).  In the production
+# library (src/native/runtime-core/CMakeLists.txt) the file's own COMPILE_OPTIONS
+# carries -msse4.1, but building the same .cpp inside this test target does NOT
+# inherit per-file properties — the target here compiles the whole TU under a
+# non-SSE4.1 arch, and GCC refuses to inline the always_inline intrinsics
+# ("target specific option mismatch").  Mirror the production per-file flag so
+# the direct-compiled copies behave identically on non-ARM (ARM64 uses NEON).
+if(NOT CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64|arm64")
+  set_source_files_properties(
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    PROPERTIES COMPILE_OPTIONS "-msse4.1")
+  set_source_files_properties(
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/runtime_stubs/math_stubs.cpp"
+    PROPERTIES COMPILE_OPTIONS "-msse4.2")
+endif()
+
 # T0-2: collection_stubs unit tests (all 14 public API functions)
 # NOTE: collection_stubs.cpp is compiled directly (same GNU ar issue as
 # string_stubs).  GC stubs from gc_stubs_for_string_tests.cpp are reused
@@ -106,7 +123,10 @@ chaos_native_add_test(half_conversion_test
     half_conversion_test.cpp
     LABELS "unit;core"
 )
-target_compile_options(half_conversion_test PRIVATE /utf-8)
+target_compile_options(half_conversion_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+# /utf-8 is an MSVC flag.  GCC does NOT ignore it: it treats the bare token as an
+# input file and fails with "c++: error: /utf-8: linker input file not found".
+# (Its absence can't be worked around by the source file — hence the gen-expr.)
 
 # T1a-2: exception_jmp depth-boundary tests (SETJMP EH mode)
 # Uses the same convert_stubs_test.cpp but compiled with CHAOS_IL2CPP_EH_SETJMP
@@ -120,7 +140,8 @@ chaos_native_add_test(convert_stubs_eh_test
 target_compile_definitions(convert_stubs_eh_test PRIVATE
     CHAOS_IL2CPP_EH_SETJMP
 )
-target_compile_options(convert_stubs_eh_test PRIVATE /utf-8)
+target_compile_options(convert_stubs_eh_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+# MSVC-only flag — see the note on half_conversion_test above.
 
 # P0-A (json-xml-production-readiness): XmlNameTable Add/Get interned-string
 # semantics.  Compiles xml_nametable_stubs.cpp + string_table.cpp directly
