@@ -134,4 +134,27 @@ else
     echo "=== [snapshot-sync] check_snapshot_baseline_sync.py not found, skipping ==="
 fi
 
+# ── EH iron rules (rule 1: no hardcoded EH mechanism in emitters) ──────────
+# The L2 wrapper defect that started the EH roadmap was a hardcoded C++
+# `try/catch` in the emitter: it compiled, passed every existing test, and was
+# wrong on two of the three delivery modes.  Evidence for it exists only in
+# generated output, which is not reviewed — so this checks the source instead.
+# See .ai/skills/library/skills/dev-il2cpp-eh-expert/SKILL.md.
+echo "=== [eh-rules] Checking EH iron rules in staged emitters ==="
+EH_SCRIPT="build/check_eh_iron_rules.py"
+if [ -f "$EH_SCRIPT" ]; then
+    EH_OUTPUT=$(python "$EH_SCRIPT" 2>&1)
+    EH_STATUS=$?
+    echo "$EH_OUTPUT"
+    if [ "$EH_STATUS" -ne 0 ]; then
+        echo ""
+        echo "ERROR: EH iron-rule violation (see above)."
+        echo "Use 'git commit --no-verify' to bypass (not recommended)."
+        exit 1
+    fi
+    echo "=== [eh-rules] No violations ==="
+else
+    echo "=== [eh-rules] check_eh_iron_rules.py not found, skipping ==="
+fi
+
 exit 0
