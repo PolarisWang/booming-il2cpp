@@ -158,6 +158,14 @@ public sealed partial class CodeGenStage
         }
         catch (Exception ex)
         {
+            // Emit the stack to stderr.  The message alone ("An item with the
+            // same key has already been added. Key: <subjectId>") names the
+            // *what* but not the *where*, and every caller in the chain
+            // re-wraps it into a result object that drops the exception.  That
+            // is how a single-line defect at AotCoreIrLowering.cs:50 stayed
+            // unattributed while it blocked whole assemblies from compiling.
+            Console.Error.WriteLine($"[codegen] {ex.GetType().Name}: {ex.Message}");
+            Console.Error.WriteLine(ex.StackTrace);
             return PipelineResult<ManagedClosureResult>.Fail("CODEGEN_GENERATE_FAILED",
                 $"Code generation failed: {ex.Message}", ex);
         }

@@ -47,8 +47,28 @@ public sealed partial class AotCoreIrLowering
         ArgumentNullException.ThrowIfNull(typedIl);
         ArgumentNullException.ThrowIfNull(codeRegistration);
 
-        var typedMethods = typedIl.Methods.ToDictionary(method => method.SubjectId, StringComparer.Ordinal);
         // Last-wins dedup: duplicate SubjectIds from cross-assembly loading (--assembly-dir)
+        // applied to the methods map too — see the note below.
+        //
+        // This was `typedIl.Methods.ToDictionary(...)`, which THROWS on a duplicate
+        // key.  Cross-assembly loading legitimately produces duplicate SubjectIds
+        // (the sibling dictionaries on the next four lines exist precisely to
+        // last-wins-dedup that same input), so the ToDictionary variant was the
+        // one inconsistent implementation in this block: every other collection
+        // here tolerates the duplicate, this one aborted codegen.
+        //
+        // Impact when it threw: the whole assembly failed with
+        //   "An item with the same key has already been added.
+        //    Key: Chaos.TestFramework.Sdk/.../AssertionException::.ctor:..."
+        // which blocked every chunk that references a Chaos.TestFramework.Sdk
+        // type (System.Linq / System.ObjectModel / System.Collections.NonGeneric
+        // measured).  The message names a *method* SubjectId, so it read like an
+        // EH/exception-type problem rather than a dictionary-policy one.
+        var typedMethods = new Dictionary<string, TypedIlMethodArtifact>(StringComparer.Ordinal);
+        foreach (var method in typedIl.Methods)
+        {
+            if (!string.IsNullOrEmpty(method.SubjectId)) typedMethods[method.SubjectId] = method;
+        }
         var managedTypes = new Dictionary<string, ManagedTypeModel>(StringComparer.Ordinal);
         foreach (var t in linkedWorld.Types) { if (!string.IsNullOrEmpty(t.SubjectId)) managedTypes[t.SubjectId] = t; }
         var managedFields = new Dictionary<string, ManagedFieldModel>(StringComparer.Ordinal);
