@@ -58,3 +58,38 @@ chaos_native_add_test(eh_mode_equivalence_setjmp
     "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/exception_helpers.cpp"
     DEFINITIONS CHAOS_IL2CPP_EH_SETJMP
 )
+
+# ── EH L3 type-matching suite ────────────────────────────────────────────
+# Second subject: not "did the exception reach a handler" (covered above) but
+# "did the CORRECT handler run".  A mismatched catch silently taking an
+# exception is the failure mode that makes wrong assertions look green.
+#
+# Same three-mode treatment as the mode-equivalence suite, same rationale for
+# explicit DEFINITIONS (chaos/config.h otherwise picks a mode from the host
+# platform, so a target named cpp_throw would silently run the SEH expansion —
+# observed happening for real).
+set(_eh_l3_suite "${CMAKE_CURRENT_SOURCE_DIR}/eh_type_matching_test.cpp")
+
+chaos_native_add_test(eh_type_matching_cpp_throw
+    ${_eh_l3_suite}
+    LABELS "unit;core;eh"
+    WITHOUT_GTEST
+    DEFINITIONS CHAOS_IL2CPP_EH_CPP_THROW
+)
+
+if(MSVC)
+    chaos_native_add_test(eh_type_matching_win32_seh
+        ${_eh_l3_suite}
+        LABELS "unit;core;eh"
+        WITHOUT_GTEST
+        DEFINITIONS CHAOS_IL2CPP_EH_WIN32_SEH
+    )
+endif()
+
+chaos_native_add_test(eh_type_matching_setjmp
+    ${_eh_l3_suite}
+    "${CHAOS_CMAKE_ROOT}/src/native/runtime-core/exception_helpers.cpp"
+    LABELS "unit;core;eh"
+    WITHOUT_GTEST
+    DEFINITIONS CHAOS_IL2CPP_EH_SETJMP
+)

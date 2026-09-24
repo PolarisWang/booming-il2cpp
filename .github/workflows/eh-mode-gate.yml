@@ -82,7 +82,7 @@ jobs:
             --toolchain build/toolchains/windows-x64-reference.cmake \
             -DROADMAP0_PRESET_TARGET=windows-x64-reference
 
-      - name: Build EH mode-equivalence targets (all three modes)
+      - name: Build EH test targets (both suites, three modes each)
         shell: bash
         # Only the three EH targets — this gate must stay cheap (it is one small
         # TU per mode, no codegen dependency).  Building the world here would
@@ -92,33 +92,36 @@ jobs:
             --config ${{ inputs.config }} \
             --target eh_mode_equivalence_cpp_throw \
                      eh_mode_equivalence_win32_seh \
-                     eh_mode_equivalence_setjmp
+                     eh_mode_equivalence_setjmp \
+                     eh_type_matching_cpp_throw \
+                     eh_type_matching_win32_seh \
+                     eh_type_matching_setjmp
 
-      - name: Assert ctest discovers all three EH mode targets
+      - name: Assert ctest discovers all EH targets (both suites, three modes each)
         shell: bash
         # Guard against the silent-green failure mode: if the CMakeLists stops
         # being included, or a target gets renamed, ctest exits 0 having run
         # nothing and the gate reports success while testing nothing.
         run: |
           COUNT=$(ctest --test-dir artifacts/presets/windows-x64-reference \
-            -N -R "eh_mode_equivalence|chaos_eh_mode" 2>/dev/null \
+            -N -R "eh_mode_equivalence|eh_type_matching|chaos_eh_" 2>/dev/null \
             | grep -cE "Test +#")
           echo "discovered $COUNT EH mode target(s)"
-          if [ "$COUNT" -lt 3 ]; then
-            echo "::error::expected 3 EH mode targets (cpp_throw / win32_seh / setjmp), discovered $COUNT. Either tests/unit/runtime-native/runtime-core/eh/CMakeLists.txt stopped being included, or a target was renamed. Zero/partial discovery is a FAILURE, not a pass."
+          if [ "$COUNT" -lt 6 ]; then
+            echo "::error::expected 6 EH targets (3 mode-equivalence + 3 type-matching, one per delivery mode), discovered $COUNT. Either tests/unit/runtime-native/runtime-core/eh/CMakeLists.txt stopped being included, or a target was renamed. Zero/partial discovery is a FAILURE, not a pass."
             exit 1
           fi
 
-      - name: Run EH mode-equivalence suite (all three modes)
+      - name: Run EH suites (mode-equivalence + L3 type-matching, three modes each)
         id: tests
         shell: bash
         run: |
           set +e
           ctest --test-dir artifacts/presets/windows-x64-reference \
             -C ${{ inputs.config }} \
-            -R "eh_mode_equivalence|chaos_eh_mode" \
+            -R "eh_mode_equivalence|eh_type_matching|chaos_eh_" \
             --timeout ${{ inputs.timeout }} \
-            --output-on-failure -j 3 2>&1 | tee eh-mode-gate-output.txt
+            --output-on-failure -j 6 2>&1 | tee eh-mode-gate-output.txt
           echo "ctest_exit=$?" >> "$GITHUB_OUTPUT"
           # Surface which mode failed — a single-mode failure is the signature of
           # a one-expansion regression, which is exactly what this gate is for.
