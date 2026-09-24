@@ -21,6 +21,8 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
+
+from .._pipeline.tool_helpers import resolve_built_dll
 from typing import Any
 
 from verification.orchestration.context import ChunkContext, StageResult
@@ -54,7 +56,9 @@ def _ensure_runner_built() -> bool:
 
     with _tool_build_lock("Chaos.TestFramework.Runtime"):
         for tfm in ("net8.0", "net10.0"):
-            dll = _RUNTIME_PROJECT / "bin" / "Debug" / tfm / "Chaos.TestFramework.Runtime.dll"
+            # Platform-dependent bin layout (Windows: bin/x64/Debug, Linux:
+            # bin/Debug) — see resolve_built_dll.
+            dll = resolve_built_dll(_RUNTIME_PROJECT, "Chaos.TestFramework.Runtime.dll", tfm)
             if dll.exists():
                 continue
             print(f"  [managed-benchmark] Building runner ({tfm})...")
@@ -70,7 +74,8 @@ def _ensure_runner_built() -> bool:
 
 
 def _runner_dll(tfm: str) -> Path:
-    return _RUNTIME_PROJECT / "bin" / "Debug" / tfm / "Chaos.TestFramework.Runtime.dll"
+    # Platform-dependent bin layout — see resolve_built_dll.
+    return resolve_built_dll(_RUNTIME_PROJECT, "Chaos.TestFramework.Runtime.dll", tfm)
 
 
 def _ensure_multitarget_csproj(combined_csproj: Path) -> str | None:
