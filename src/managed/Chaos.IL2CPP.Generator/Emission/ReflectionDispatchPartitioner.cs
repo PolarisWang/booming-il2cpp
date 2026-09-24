@@ -44,6 +44,27 @@ public static class ReflectionDispatchPartitioner
     public const int DefaultBranchesPerPart = 1500;
 
     /// <summary>
+    /// Character budget per part, checked alongside <see cref="DefaultBranchesPerPart"/>.
+    ///
+    /// <para>
+    /// <b>Why a branch COUNT alone is not enough.</b> A branch's emitted size
+    /// varies by more than 2× between the two dispatchers this splitter serves
+    /// (measured on the system chunk: 495 chars/branch for
+    /// <c>get_parameters_managed</c>, 1143 for the B3 variants). Counting
+    /// branches therefore produces parts whose SIZE differs by the same factor —
+    /// and the larger family landed at 4.9× the downstream per-TU budget, so
+    /// every one of its parts was still oversized after splitting.
+    /// </para>
+    ///
+    /// <para>
+    /// The count cap is kept because it bounds a different thing — a part with
+    /// thousands of tiny branches is slow to compile even when it is small. The
+    /// two caps are independent: whichever binds first ends the part.
+    /// </para>
+    /// </summary>
+    public const int DefaultCharsPerPart = 350_000;
+
+    /// <summary>
     /// One split-out <c>_partN</c> function: its suffix, full text, and branch count.
     /// </summary>
     public sealed record Part(string NameSuffix, string Text, int BranchCount);
@@ -70,10 +91,13 @@ public static class ReflectionDispatchPartitioner
         string parameters,
         IReadOnlyList<string> branches,
         int branchesPerPart = DefaultBranchesPerPart,
-        string? partParameters = null)
+        string? partParameters = null,
+        int charsPerPart = DefaultCharsPerPart)
     {
         if (branchesPerPart <= 0)
             throw new ArgumentOutOfRangeException(nameof(branchesPerPart), branchesPerPart, "must be positive");
+        if (charsPerPart <= 0)
+            throw new ArgumentOutOfRangeException(nameof(charsPerPart), charsPerPart, "must be positive");
 
         // Parts receive the value(s) the branches would have read in the shell.
         // The shell names its parameters from the public signature, but the branch
@@ -83,12 +107,26 @@ public static class ReflectionDispatchPartitioner
 
         var parts = new List<Part>();
         int partIndex = 0;
+        int start = 0;
 
-        for (int start = 0; start < branches.Count; start += branchesPerPart)
+        while (start < branches.Count)
         {
-            int count = Math.Min(branchesPerPart, branches.Count - start);
-            var sb = new StringBuilder();
+            // Take branches until either cap would be exceeded. The character cap
+            // is what actually keeps a part within the downstream per-TU budget;
+            // the count cap bounds compile time for many-tiny-branch chains.
+            // At least one branch is always taken, since a single branch larger
+            // than the cap cannot be divided (it is one statement).
+            long partChars = 0;
+            int count = 0;
+            while (start + count < branches.Count && count < branchesPerPart)
+            {
+                int branchChars = branches[start + count]?.Length ?? 0;
+                if (count > 0 && partChars + branchChars > charsPerPart) break;
+                partChars += branchChars;
+                count++;
+            }
 
+            var sb = new StringBuilder();
             sb.Append("extern \"C\" ").Append(returnType).Append(' ')
               .Append(functionName).Append("_part").Append(partIndex)
               .Append('(').Append(partParameters).Append(") noexcept").Append('\n');
@@ -103,6 +141,7 @@ public static class ReflectionDispatchPartitioner
             // the emitted text by the guard tests.
             parts.Add(new Part($"part{partIndex}", sb.ToString(), count));
             partIndex++;
+            start += count;
         }
 
         return parts;
@@ -177,14 +216,18 @@ public static class ReflectionDispatchPartitioner
         string returnType,
         string parameters,
         IReadOnlyList<(string CaseText, int BranchCount)> caseBlocks,
-        int branchesPerPart = DefaultBranchesPerPart)
+        int branchesPerPart = DefaultBranchesPerPart,
+        int charsPerPart = DefaultCharsPerPart)
     {
         if (branchesPerPart <= 0)
             throw new ArgumentOutOfRangeException(nameof(branchesPerPart), branchesPerPart, "must be positive");
+        if (charsPerPart <= 0)
+            throw new ArgumentOutOfRangeException(nameof(charsPerPart), charsPerPart, "must be positive");
 
         var parts = new List<Part>();
         var current = new StringBuilder();
         int currentBranches = 0;
+        long currentChars = 0;
         int partIndex = 0;
 
         void FlushPart()
@@ -210,15 +253,26 @@ public static class ReflectionDispatchPartitioner
             partIndex++;
             current.Clear();
             currentBranches = 0;
+            currentChars = 0;
         }
 
         foreach (var (caseText, branchCount) in caseBlocks)
         {
-            if (currentBranches > 0 && currentBranches + branchCount > branchesPerPart)
+            // Either cap ends the part. A case block is never divided — it is the
+            // finest boundary these dispatchers offer (its STRCMP chain is
+            // first-match-wins), so a block larger than the cap gets a part of its
+            // own rather than being cut.
+            long caseChars = caseText?.Length ?? 0;
+            if (current.Length > 0
+                && (currentBranches + branchCount > branchesPerPart
+                    || currentChars + caseChars > charsPerPart))
+            {
                 FlushPart();
+            }
 
             current.Append(caseText);
             currentBranches += branchCount;
+            currentChars += caseChars;
         }
         FlushPart();
 
