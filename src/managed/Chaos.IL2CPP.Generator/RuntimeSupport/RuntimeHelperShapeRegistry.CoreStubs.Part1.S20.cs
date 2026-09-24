@@ -194,6 +194,31 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterReaderVariant(registry, "System.Xml.XmlNodeReader",
                 thisStr, thisStrR, thisStrStr, thisStrStrR, intRetAbi);
 
+            // ── System.Xml.XmlReader (abstract BASE) — receiver-injected path ──
+            //
+            // The AOT call sites for reader instance methods bind the callee to
+            // the BASE type name (Roslyn encodes an inherited virtual call by the
+            // compiler-known static type): aot-core-ir records
+            //   System.Xml.ReaderWriter/System.Xml.XmlReader::GetAttribute:System.String(System.String)
+            // even when the subject constructed an XmlTextReader.  With only
+            // concrete-type registrations the shape lookup misses and the call
+            // falls to a zero-parameter catch-all extern (receiver + args
+            // dropped, fallback returns 0 → caught=true/value=0).
+            //
+            // Pattern note: ParameterAbis and RawArgumentIndices are EMPTY for
+            // every registration here.  The receiver slot is added by
+            // CreateDefinitionFromShapeEntry via TryGetReceiverSlot, driven by
+            // the "System.Xml.XmlReader" entry in _ReceiverInjectedTypes
+            // (NativeAotLoweringPlanner.ExternalRuntimeHelpers).  Declaring the
+            // receiver here as well would double-inject it and give C2660
+            // "function does not take 3 arguments" — the exact failure of an
+            // earlier attempt.  Where the native symbol needs no explicit
+            // parameter slots (it takes the injected receiver + call-site args
+            // forwarded positionally), the shape must stay empty like
+            // RegisterArrayEnumeratorStubs (S24.cs).
+            RegisterReaderVariantBase(registry, "System.Xml.XmlReader",
+                strAbi, intRetAbi);
+
             // NOTE: ResolveEntity() is already registered by M5 in S19 — its shape
             // key is unchanged, so re-registering here would raise
             // "Shape already registered" at planner construction (HANDOFF §4.2).
@@ -220,6 +245,40 @@ public sealed partial class NativeAotLoweringPlanner
         /// symbols are shared with XmlTextReader — the reader variants raise the
         /// same argument-validation exceptions on a bare object.
         /// </summary>
+
+        private static void RegisterReaderVariantBase(
+            RuntimeHelperShapeRegistry registry,
+            string typeName,
+            AotCoreIrAbiSlotArtifact strAbi,
+            AotCoreIrAbiSlotArtifact intRetAbi)
+        {
+            // ParameterAbis lists ONLY the explicit managed parameters — the
+            // receiver is prepended by CreateDefinitionFromShapeEntry via
+            // _ReceiverInjectedTypes.  Listing it here too double-injects it.
+            var oneStr = new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(strAbi);
+            var twoStr = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new[] { strAbi, strAbi });
+
+            // MoveToAttribute(name)/(name,ns) → bool
+            registry.Register(typeName, "MoveToAttribute",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderMoveToAttributeStr", oneStr, intRetAbi);
+            registry.Register(typeName, "MoveToAttribute",
+                new[] { "System.String", "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderMoveToAttributeStrNs", twoStr, intRetAbi);
+            // GetAttribute(name)/(name,ns) → string
+            registry.Register(typeName, "GetAttribute",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderGetAttributeStr", oneStr, strAbi);
+            registry.Register(typeName, "GetAttribute",
+                new[] { "System.String", "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderGetAttributeStrNs", twoStr, strAbi);
+            // ResolveEntity() → void — zero explicit params, receiver only.
+            registry.Register(typeName, "ResolveEntity",
+                Array.Empty<string>(), ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderResolveEntity",
+                Array.Empty<AotCoreIrAbiSlotArtifact>(), CreateVoidAbiSlot());
+        }
+
         private static void RegisterReaderVariant(
             RuntimeHelperShapeRegistry registry,
             string typeName,
@@ -524,29 +583,6 @@ public sealed partial class NativeAotLoweringPlanner
                     new[] { docAbi, objAbi }),
                 new HashSet<int> { 0, 1 }, new[] { "System.IO.Stream" });
 
-            // The remaining Save overloads share the same native stub — it only
-            // inspects `this_ptr` (a bare XmlDocument raises NotSupported
-            // regardless of destination) and deliberately ignores the second
-            // argument.  Each overload still needs its OWN registration because
-            // the canonical key embeds the parameter types; without these the
-            // IL calls Save(TextWriter)/Save(string)/Save(XmlWriter) matched no
-            // shape and fell through to the catch-all ExternalRuntimeFallback.
-            RegisterXmlDomVoid(registry, "System.Xml.XmlDocument", "Save",
-                "ChaosXmlDocumentSaveStream",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
-                    new[] { docAbi, objAbi }),
-                new HashSet<int> { 0, 1 }, new[] { "System.IO.TextWriter" });
-            RegisterXmlDomVoid(registry, "System.Xml.XmlDocument", "Save",
-                "ChaosXmlDocumentSaveStream",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
-                    new[] { docAbi, objAbi }),
-                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlWriter" });
-            RegisterXmlDomVoid(registry, "System.Xml.XmlDocument", "Save",
-                "ChaosXmlDocumentSaveStream",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
-                    new[] { docAbi, objAbi }),
-                new HashSet<int> { 0, 1 }, new[] { "System.String" });
-
             // ── XmlCharacterData ──
             registry.Register("System.Xml.XmlCharacterData", "Substring",
                 new[] { "System.Int32", "System.Int32" }, ShapeKind.SimpleForward,
@@ -639,24 +675,16 @@ public sealed partial class NativeAotLoweringPlanner
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                     new[] { attrCollAbi, nodeAbi }),
                 objAbi, new HashSet<int> { 0, 1 });
-            // NOTE: the declared parameter type is the MATCHING KEY, not just
-            // documentation — the canonical key is
-            // `<type>::<method>(<param types>)`, so declaring a base type here
-            // (XmlNode) while the IL signature names the derived one
-            // (XmlAttribute) makes the key differ and the shape silently falls
-            // through to the catch-all ExternalRuntimeFallback, which logs
-            // "no native body" and returns 0.  .NET declares these as
-            // XmlAttributeCollection.Append(XmlAttribute) / Prepend(XmlAttribute).
             RegisterXmlDomVoid(registry, "System.Xml.XmlAttributeCollection", "Append",
                 "ChaosXmlAttributeCollectionAppend",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                     new[] { attrCollAbi, nodeAbi }),
-                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlAttribute" });
+                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlNode" });
             RegisterXmlDomVoid(registry, "System.Xml.XmlAttributeCollection", "Prepend",
                 "ChaosXmlAttributeCollectionPrepend",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
                     new[] { attrCollAbi, nodeAbi }),
-                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlAttribute" });
+                new HashSet<int> { 0, 1 }, new[] { "System.Xml.XmlNode" });
 
             registry.Register("System.Xml.XmlNodeList", "Item",
                 new[] { "System.Int32" }, ShapeKind.SimpleForward,
