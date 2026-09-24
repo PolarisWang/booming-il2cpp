@@ -1,0 +1,140 @@
+# .github/workflows/eh-mode-gate.yml
+#
+# Stage: EH three-mode equivalence gate
+#
+# WHY THIS WORKFLOW EXISTS
+# ------------------------
+# Managed exception delivery has three mutually exclusive implementations
+# selected by chaos/config.h:
+#
+#   CPP_THROW  (macOS/Linux) — C++ throw/catch
+#   WIN32_SEH  (Windows)     — __try/__except + RaiseException
+#   SETJMP     (iOS/Android) — setjmp/longjmp
+#
+# Everything that raises or catches a managed exception is supposed to go
+# through the CHAOS_EH_* macros in src/native/common/chaos/eh.h, and the three
+# expansions must be behaviourally equivalent.  Nothing enforced that.  The
+# codegen subject wrapper hardcoded `try { } catch (const chaos_managed_exception&)`,
+# which only fires under CPP_THROW; on Windows and mobile the exception sailed
+# straight past the wrapper.  Measured consequence: ~566 preAssertionRaise
+# records across 9 chunks, undetected for a long time.
+#
+# This gate is the enforcement for iron rule 10 ("改动 EH 必跑三模式用例").
+# It runs the same test source compiled once per mode.  A regression in any one
+# expansion turns exactly one target red.
+#
+# DESIGN NOTES
+#   * DELIBERATELY STANDALONE — same reasoning as threading-native-tests.yml.
+#     EH sits under every other domain; a stage-graph skip must not be able to
+#     mask an EH regression.
+#   * The "zero discovered" assertion is load-bearing.  ctest exits 0 having run
+#     nothing, which reads as green — that failure mode is how the threading
+#     suite stayed unexercised for so long.  Zero matches is treated as FAILURE.
+#   * `enforce_gate` defaults to false so a real baseline is collected before a
+#     blocking gate is armed.  A gate armed on an unknown-red suite gets
+#     disabled by the first person it blocks, which is worse than no gate.
+#     The three targets are green as of P3 (12/12 in every mode), so flipping
+#     this to true is a one-line change once CI confirms it on a real runner.
+
+name: eh-mode-gate
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: false
+        type: string
+        default: windows-latest
+      config:
+        required: false
+        type: string
+        default: Debug
+      timeout:
+        required: false
+        type: number
+        default: 2400
+      # false (default): report results, never fail the run — baseline collection.
+      # true: an EH mode-equivalence failure fails the run (armed gate).
+      enforce_gate:
+        required: false
+        type: boolean
+        default: false
+  workflow_dispatch:
+    inputs:
+      enforce_gate:
+        description: 'Fail the run when EH mode-equivalence tests fail (armed gate)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  eh-mode-gate:
+    runs-on: ${{ inputs.os || 'windows-latest' }}
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure
+        shell: bash
+        run: |
+          cmake -S . -B artifacts/presets/windows-x64-reference \
+            --toolchain build/toolchains/windows-x64-reference.cmake \
+            -DROADMAP0_PRESET_TARGET=windows-x64-reference
+
+      - name: Build EH mode-equivalence targets (all three modes)
+        shell: bash
+        # Only the three EH targets — this gate must stay cheap (it is one small
+        # TU per mode, no codegen dependency).  Building the world here would
+        # make the gate slow enough that people route around it.
+        run: |
+          cmake --build artifacts/presets/windows-x64-reference \
+            --config ${{ inputs.config }} \
+            --target eh_mode_equivalence_cpp_throw \
+                     eh_mode_equivalence_win32_seh \
+                     eh_mode_equivalence_setjmp
+
+      - name: Assert ctest discovers all three EH mode targets
+        shell: bash
+        # Guard against the silent-green failure mode: if the CMakeLists stops
+        # being included, or a target gets renamed, ctest exits 0 having run
+        # nothing and the gate reports success while testing nothing.
+        run: |
+          COUNT=$(ctest --test-dir artifacts/presets/windows-x64-reference \
+            -N -R "eh_mode_equivalence|chaos_eh_mode" 2>/dev/null \
+            | grep -cE "Test +#")
+          echo "discovered $COUNT EH mode target(s)"
+          if [ "$COUNT" -lt 3 ]; then
+            echo "::error::expected 3 EH mode targets (cpp_throw / win32_seh / setjmp), discovered $COUNT. Either tests/unit/runtime-native/runtime-core/eh/CMakeLists.txt stopped being included, or a target was renamed. Zero/partial discovery is a FAILURE, not a pass."
+            exit 1
+          fi
+
+      - name: Run EH mode-equivalence suite (all three modes)
+        id: tests
+        shell: bash
+        run: |
+          set +e
+          ctest --test-dir artifacts/presets/windows-x64-reference \
+            -C ${{ inputs.config }} \
+            -R "eh_mode_equivalence|chaos_eh_mode" \
+            --timeout ${{ inputs.timeout }} \
+            --output-on-failure -j 3 2>&1 | tee eh-mode-gate-output.txt
+          echo "ctest_exit=$?" >> "$GITHUB_OUTPUT"
+          # Surface which mode failed — a single-mode failure is the signature of
+          # a one-expansion regression, which is exactly what this gate is for.
+          grep -E "\(mode=(CPP_THROW|WIN32_SEH|SETJMP)\)" eh-mode-gate-output.txt || true
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eh-mode-gate-output
+          path: eh-mode-gate-output.txt
+          if-no-files-found: warn
+
+      - name: Enforce gate
+        if: ${{ inputs.enforce_gate && steps.tests.outputs.ctest_exit != '0' }}
+        shell: bash
+        run: |
+          echo "::error::EH mode-equivalence failed (ctest exit ${{ steps.tests.outputs.ctest_exit }}) with enforce_gate=true. A managed-exception regression in one delivery mode — see eh-mode-gate-output.txt."
+          exit 1
