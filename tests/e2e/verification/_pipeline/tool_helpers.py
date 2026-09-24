@@ -144,10 +144,68 @@ def _tool_dir(tool_name: str) -> Path:
     return _repo_root() / "src" / "tools" / tool_name
 
 
+def resolve_built_dll(project_dir: Path, dll_name: str, tfm: str | None = None) -> Path:
+    """Locate a built project's DLL across the platform-dependent bin layouts.
+
+    MSBuild writes `bin/<Platform>/<Configuration>/<TFM>/` when a platform is
+    active and `bin/<Configuration>/<TFM>/` when it is not.  Nothing in this repo
+    declares <Platforms>, so the shape follows the host/SDK default: Linux
+    produces the flat form, the Windows agent the `x64` one.
+
+    Any caller that hardcodes a single layout is therefore correct on one
+    platform only — and on the other it silently looks at a path nothing writes.
+    That is exactly how the Windows nightly lost every chunk (see tool_dll).
+
+    `tfm` narrows the search when the caller cares about a specific target
+    framework (multi-targeted projects).  Returns the flat Debug path when
+    nothing exists, so error messages still name the conventional location.
+    """
+    tfms = (tfm,) if tfm else ("net8.0", "net10.0")
+    candidates: list[Path] = []
+    for t in tfms:
+        for platform in ("", "x64", "AnyCPU"):
+            for config in ("Debug", "Release"):
+                parts = [project_dir, "bin"]
+                if platform:
+                    parts.append(platform)
+                parts += [config, t, dll_name]
+                candidates.append(Path(*parts))
+    return _first_existing(candidates) or candidates[0]
+
+
+def _first_existing(paths) -> Path | None:
+    """First path in `paths` that exists on disk, or None.
+
+    Used where the platform decides the directory shape and a wrong guess should
+    fall through to the next layout instead of comparing against a path that was
+    never written.
+    """
+    for p in paths:
+        try:
+            if p.exists():
+                return p
+        except OSError:
+            continue
+    return None
+
+
 def tool_dll(tool_name: str) -> Path:
-    """Get path to a tool's compiled DLL."""
-    return (_repo_root() / "src" / "tools" / tool_name
-            / "bin" / "Debug" / "net8.0" / f"{tool_name}.dll")
+    """Get path to a tool's compiled DLL.
+
+    Probes every layout MSBuild can produce rather than assuming one — see
+    resolve_built_dll for why the shape is platform-dependent.
+
+    This used to be a single hardcoded `bin/Debug` path, which was only ever
+    right on Linux.  On Windows it worked by accident: the nightly built in a
+    long-lived shared tree that happened to carry a `bin/Debug` left over from
+    some earlier AnyCPU build, so the path existed even though nothing in the
+    current build wrote it.  Switching that branch to a freshly-cloned
+    per-executor tree removed the leftover and every chunk died with
+
+      The application to execute does not exist: .../bin/Debug/net8.0/....dll
+    """
+    return resolve_built_dll(_repo_root() / "src" / "tools" / tool_name,
+                             f"{tool_name}.dll")
 
 
 def _referenced_projects(proj: Path, _seen: set | None = None) -> set[Path]:
@@ -233,9 +291,18 @@ def _ensure_tool_built_locked(tool_name: str) -> bool:
         bundle_ok = True
         for up in _referenced_projects(proj):
             up_name = up.name.removesuffix(".csproj")
-            up_dll = up / "bin" / "Debug" / "net8.0" / f"{up_name}.dll"
-            bundled = proj.parent / "bin" / "Debug" / "net8.0" / f"{up_name}.dll"
-            if up_dll.exists() and bundled.exists() and bundled.stat().st_mtime < up_dll.stat().st_mtime:
+            # Project outputs follow the same platform-dependent layout as the
+            # tools themselves (bin[/x64]/Debug/<tfm>), so both sides of this
+            # comparison have to be probed rather than assumed flat.
+            up_dll = _first_existing(
+                up / "bin" / p / c / t / f"{up_name}.dll"
+                for p in ("", "x64", "AnyCPU") for c in ("Debug", "Release")
+                for t in ("net8.0", "net10.0"))
+            bundled = _first_existing(
+                proj.parent / "bin" / p / c / t / f"{up_name}.dll"
+                for p in ("", "x64", "AnyCPU") for c in ("Debug", "Release")
+                for t in ("net8.0", "net10.0"))
+            if up_dll and bundled and bundled.stat().st_mtime < up_dll.stat().st_mtime:
                 bundle_ok = False
                 break
 

@@ -15,6 +15,8 @@ from collections import OrderedDict
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .._pipeline.tool_helpers import resolve_built_dll
+
 
 # ── Paths ──
 _SCRIPT_DIR = Path(__file__).resolve().parent
@@ -31,7 +33,11 @@ from _path import foundation_root
 _FOUNDATION_DLL = foundation_root()  # testing/foundation-dll/
 _TOOLS_DIR = Path(__file__).resolve().parents[4] / "src" / "tools"
 _TOOL_PROJECT = _TOOLS_DIR / "Chaos.IL2CPP.Tools.DllManifest" / "Chaos.IL2CPP.Tools.DllManifest.csproj"
-_TOOL_DLL = _TOOLS_DIR / "Chaos.IL2CPP.Tools.DllManifest" / "bin" / "Debug" / "net8.0" / "Chaos.IL2CPP.Tools.DllManifest.dll"
+
+# Resolved rather than spelled out: the bin layout is platform-dependent
+# (Windows writes bin/x64/Debug, Linux bin/Debug), so a literal path is correct
+# on only one of them.
+_TOOL_DLL = resolve_built_dll(_TOOL_PROJECT.parent, "Chaos.IL2CPP.Tools.DllManifest.dll")
 
 # Default namespace → chunk slug mapping for well-known .NET namespaces.
 # Used for deterministic, human-readable chunk names.

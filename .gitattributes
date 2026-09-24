@@ -10,6 +10,22 @@
 # SIMD stubs must stay LF (MSVC C2733 sensitivity to CRLF in extern "C" noexcept blocks)
 src/native/runtime-core/runtime_stubs/simd_stubs.cpp text eol=lf
 src/native/runtime-core/runtime_stubs/simd_stubs.h text eol=lf
+
+# Scriban templates must stay LF.  Scriban splits the source on \n, so a CRLF
+# checkout leaves a trailing \r on the content of every line; that \r is then
+# carried into the rendered C++ and, once concatenated with the writers'
+# newlines, accumulates into \r\r\r\n.  MSVC treats the stray \r as a token
+# break and rejects the translation unit outright:
+#
+#   native-aot.generated.cpp(2078,86): error C2143: syntax error:
+#     missing ')' before ';'
+#
+# Linux never sees this because its checkout is already LF — which is why the
+# defect only appears on the Windows agent, and only once the nightly stopped
+# building in a long-lived tree whose templates had been normalised years ago.
+# Same class of problem as the simd_stubs rule above; that one was fixed for a
+# single file, this covers the whole template set (160 files).
+*.scriban text eol=lf
 *.cs text diff=csharp
 *.py text diff=python
 *.xml text

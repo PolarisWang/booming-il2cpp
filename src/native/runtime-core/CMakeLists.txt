@@ -54,6 +54,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/math_stubs.cpp
     runtime_stubs/array_stubs.cpp
     runtime_stubs/array_enumerator_stubs.cpp
+    runtime_stubs/text_stubs.cpp
     runtime_stubs/datetime_stubs.cpp
     runtime_stubs/char_stubs.cpp
     runtime_stubs/guid_stubs.cpp
