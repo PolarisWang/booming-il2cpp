@@ -5,6 +5,21 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
     = nullptr;
 {{~ else ~}}
 // Method name index entries
+{{~ if chunked ~}}
+// Emitted as {{ chunk_count }} chunks on type boundaries; the runtime walks the
+// chunk list (ChaosAbiChunkV0) to resolve a GLOBAL method index. `first_method_index`
+// in the type entries is unchanged — it still names the position in the logical
+// array — so the chunks only change addressing, never the index domain.
+{{~ for chunk in chunks ~}}
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods_{{ chunk.index }}[{{ chunk.method_count }}] = {
+{{~ for type_group in chunk.type_groups ~}}
+{{~ for entry in type_group.methods ~}}
+    { "{{ entry.method_name_literal }}", 0x{{ entry.token_hex }}u, {{ entry.param_count }}u },  // {{ type_group.type_name }}
+{{~ end ~}}
+{{~ end ~}}
+};
+{{~ end ~}}
+{{~ else ~}}
 static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[{{ total_method_count }}] = {
 {{~ for type_group in type_groups ~}}
 {{~ for entry in type_group.methods ~}}
@@ -12,13 +27,24 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[{{ total_method_count 
 {{~ end ~}}
 {{~ end ~}}
 };
+{{~ end ~}}
 
 // Type name index entries (namespace, short_name)
+{{~ if chunked ~}}
+{{~ for chunk in chunks ~}}
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types_{{ chunk.index }}[{{ chunk.type_count }}] = {
+{{~ for type_group in chunk.type_groups ~}}
+    { "{{ type_group.type_name_literal }}", "{{ type_group.type_namespace_literal }}", {{ type_group.first_method_index }}u, {{ type_group.method_count }}u },
+{{~ end ~}}
+};
+{{~ end ~}}
+{{~ else ~}}
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[{{ type_group_count }}] = {
 {{~ for type_group in type_groups ~}}
     { "{{ type_group.type_name_literal }}", "{{ type_group.type_namespace_literal }}", {{ type_group.first_method_index }}u, {{ type_group.method_count }}u },
 {{~ end ~}}
 };
+{{~ end ~}}
 
 // Token→Slot mapping (sorted by token for binary search)
 static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[{{ slot_count }}] = {
@@ -43,18 +69,64 @@ extern "C" HotpatchEntryV0 s_hotpatch_entries[{{ total_method_count }}] = {
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpatch_entries; }
 extern "C" CHAOS_IL2CPP_INT32 GetHotpatchEntryCount() noexcept { return {{ total_method_count }}; }
 
-// Module hotpatch bundle (extern linkage — referenced across page files)
-extern constexpr HotpatchModuleV0 s_hotpatch_module = {
-    "{{ assembly_name_literal }}",
-    s_hotpatch_types,
-    {{ type_group_count }}u,
-    s_hotpatch_methods,
-    {{ total_method_count }}u,
-    s_hotpatch_slots,
-    {{ slot_count }}u,
-    s_hotpatch_entries,
-    {{ total_method_count }}u,
+// Chunk descriptors. Emitted only when the arrays were split; a null chunk
+// list is what tells the runtime to use the flat fields instead, so a
+// single-chunk module needs none of this and keeps the original layout.
+{{~ if chunked ~}}
+static constexpr ChaosAbiChunkV0 s_hotpatch_type_chunks[{{ chunk_count }}] = {
+{{~ for chunk in chunks ~}}
+    { s_hotpatch_types_{{ chunk.index }}, {{ chunk.type_count }}u, sizeof(HotpatchTypeEntryV0) },
+{{~ end ~}}
 };
+static constexpr ChaosAbiChunkV0 s_hotpatch_method_chunks[{{ chunk_count }}] = {
+{{~ for chunk in chunks ~}}
+    { s_hotpatch_methods_{{ chunk.index }}, {{ chunk.method_count }}u, sizeof(HotpatchMethodEntryV0) },
+{{~ end ~}}
+};
+{{~ end ~}}
+
+// Module hotpatch bundle (extern linkage — referenced across page files)
+//
+// DESIGNATED initializers, not positional.  `struct_size` is the first member
+// (it must be, so a runtime can read the version before trusting any later
+// field), and adding it to a positional list would silently rebind every
+// following value — `module_name` would receive the size, and so on.  Naming
+// each field makes the layout change a compile error at worst, never a silent
+// misinterpretation.
+{{~ if chunked ~}}
+// The flat pointers are kept null on purpose: the runtime prefers the chunk
+// list when it is non-null, and leaving both populated would invite a caller
+// to reach the half of the table that is only contiguous within one chunk.
+extern constexpr HotpatchModuleV0 s_hotpatch_module = {
+    .struct_size            = sizeof(HotpatchModuleV0),
+    .module_name            = "{{ assembly_name_literal }}",
+    .type_entries           = nullptr,
+    .type_entry_count       = {{ type_group_count }}u,
+    .method_entries         = nullptr,
+    .method_entry_count     = {{ total_method_count }}u,
+    .token_slot_entries     = s_hotpatch_slots,
+    .token_slot_entry_count = {{ slot_count }}u,
+    .entry_table            = s_hotpatch_entries,
+    .entry_table_size       = {{ total_method_count }}u,
+    .type_chunks            = s_hotpatch_type_chunks,
+    .type_chunk_count       = {{ chunk_count }}u,
+    .method_chunks          = s_hotpatch_method_chunks,
+    .method_chunk_count     = {{ chunk_count }}u,
+};
+{{~ else ~}}
+extern constexpr HotpatchModuleV0 s_hotpatch_module = {
+    .struct_size            = sizeof(HotpatchModuleV0),
+    .module_name            = "{{ assembly_name_literal }}",
+    .type_entries           = s_hotpatch_types,
+    .type_entry_count       = {{ type_group_count }}u,
+    .method_entries         = s_hotpatch_methods,
+    .method_entry_count     = {{ total_method_count }}u,
+    .token_slot_entries     = s_hotpatch_slots,
+    .token_slot_entry_count = {{ slot_count }}u,
+    .entry_table            = s_hotpatch_entries,
+    .entry_table_size       = {{ total_method_count }}u,
+};
+{{~ end ~}}
 
 // Expose hotpatch module to BootstrapRuntime
 extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module

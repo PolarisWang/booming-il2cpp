@@ -1,113 +1,207 @@
-using Chaos.IL2CPP.Generator;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Chaos.IL2CPP.Contracts;
+using Chaos.IL2CPP.Generator.Tests.Infra;
 using Xunit;
 
 namespace Chaos.IL2CPP.Generator.Tests.Emission;
 
 /// <summary>
-/// Tests for the hotpatch method-index chunk plan.
+/// Guards for chunking the hotpatch type/method index arrays.
 ///
 /// <para>
-/// The hotpatch block is a single coherent unit whose three index arrays are
-/// coupled: <c>s_hotpatch_types[i].first_method_index</c> indexes into
-/// <c>s_hotpatch_methods</c> globally. Chunking therefore has to preserve the
-/// global index space exactly — a chunk that re-indexes from zero would make
-/// name lookup silently resolve to the wrong method.
+/// The hotpatch arrays are index-coupled: <c>s_hotpatch_types[i].
+/// first_method_index</c> is a <b>global</b> index into <c>s_hotpatch_methods</c>.
+/// Chunking may therefore only change how an index is ADDRESSED, never what it
+/// MEANS — a chunk that re-numbered from zero, or a cut placed inside a type's
+/// method run, would make name lookup resolve to the wrong method with no
+/// diagnostic at all.
+/// </para>
+///
+/// <para>
+/// These tests assert on the <b>emitted text</b> rather than on the planner's
+/// own bookkeeping. That distinction is the point: an earlier revision of this
+/// file tested a helper (<c>PlanHotpatchMethodChunks</c>) that was never called
+/// from the emission path, so it passed while governing nothing. The
+/// assertions below parse what codegen actually produced.
 /// </para>
 /// </summary>
 public sealed class HotpatchChunkPlanTests
 {
-    private const int Budget = 350_000;
+    private readonly PlannerFixture _fixture = new();
 
-    [Fact]
-    public void SmallBlock_IsNotChunked()
+    /// <summary>
+    /// Builds a model with enough hotpatchable methods to force chunking, then
+    /// returns the emitted <c>hotpatch</c> payload section.
+    /// </summary>
+    private string EmitHotpatchTable(int methodCount)
     {
-        // 100 methods x ~100 chars = 10K chars, far under budget.
-        var plan = NativeAotLoweringPlanner.PlanHotpatchMethodChunks(
-            totalMethodCount: 100, estimatedCharsPerMethod: 100, budgetChars: Budget);
+        var methods = new List<AotCoreIrMethodArtifact>(methodCount);
+        for (int i = 0; i < methodCount; i++)
+        {
+            // Distinct declaring types so the chunker has type boundaries to cut
+            // on — the split points are types, not methods.
+            methods.Add(ModelFactory.CreateMethod(
+                $"TestModule.Type{i / 8}::M{i}:System.Int32()",
+                returnType: "System.Int32",
+                returnAbi: ModelFactory.Int32Abi,
+                instructions: new[]
+                {
+                    ModelFactory.Instruction("ldc.i4", ilOffset: 0, intOperand: i),
+                    ModelFactory.Instruction("ret", ilOffset: 1),
+                }));
+        }
 
-        Assert.Null(plan);
+        var artifact = ModelFactory.CreateArtifact(methods.ToArray());
+        var loweringPlan = ModelFactory.CreateDefaultPlan(methods[0].SubjectId);
+        var manifest = ModelFactory.CreateDefaultManifest(
+            inputAssemblyPath: PlannerFixture.StubAssemblyPath);
+
+        var model = _fixture.RunPlanner(artifact, loweringPlan, manifest);
+        var section = model.PayloadSections?.FirstOrDefault(s => s.Name == "hotpatch");
+        Assert.True(section is not null,
+            "the planner must expose a 'hotpatch' payload section; without it these "
+            + "guards would assert on nothing");
+        return section!.Content;
     }
+
+    // ── Small modules keep the flat layout ──────────────────────────────
+
+    /// <summary>
+    /// Under budget the module must emit the ORIGINAL flat shape and leave the
+    /// chunk fields implicit (null). That null-chunk path is what every
+    /// pre-C3 module takes, so keeping it exercised matters.
+    /// </summary>
+    [Fact]
+    public void SmallBlock_EmitsFlatLayoutWithoutChunks()
+    {
+        string text = EmitHotpatchTable(methodCount: 40);
+
+        Assert.Contains("s_hotpatch_methods[", text);
+        Assert.DoesNotContain("s_hotpatch_methods_0[", text);
+        Assert.DoesNotContain("s_hotpatch_type_chunks", text);
+
+        Assert.Contains(".type_entries           = s_hotpatch_types,", text);
+        Assert.Contains(".method_entries         = s_hotpatch_methods,", text);
+    }
+
+    // ── Large modules chunk ─────────────────────────────────────────────
 
     [Fact]
     public void LargeBlock_IsChunked()
     {
-        // 9000 x 256 = 2.3M chars, the measured shape that motivated this.
-        var plan = NativeAotLoweringPlanner.PlanHotpatchMethodChunks(
-            totalMethodCount: 9_000, estimatedCharsPerMethod: 256, budgetChars: Budget);
+        string text = EmitHotpatchTable(methodCount: 12_000);
 
-        Assert.NotNull(plan);
-        Assert.True(plan!.Value.ChunkNames.Count > 1,
-            "a block far over budget must be split into multiple chunks");
+        Assert.Contains("s_hotpatch_methods_0[", text);
+        Assert.Contains("s_hotpatch_type_chunks", text);
+        Assert.Contains("s_hotpatch_method_chunks", text);
+
+        // Chunked modules must NOT also publish the flat pointers: the runtime
+        // prefers the chunk list, and a populated flat pointer would invite a
+        // caller to walk the array as if it were contiguous.
+        Assert.Contains(".type_entries           = nullptr,", text);
+        Assert.Contains(".method_entries         = nullptr,", text);
     }
 
     /// <summary>
-    /// The invariant that makes chunking safe: every method index 0..N-1 is
-    /// covered exactly once, and the chunks tile the global index space
-    /// contiguously starting at 0.
+    /// 🔴 Chunk counts must sum to the declared totals, and the module's counts
+    /// must describe the WHOLE logical array.
+    ///
+    /// If a chunk count were short, the tail of the method array becomes
+    /// unreachable — lookups near the end resolve to nullptr and the method
+    /// silently reports "not found" rather than failing loudly.
     /// </summary>
     [Fact]
-    public void Chunks_TileTheGlobalIndexSpaceExactly()
+    public void ChunkCounts_SumToDeclaredTotals()
     {
-        const int total = 9_000;
-        var plan = NativeAotLoweringPlanner.PlanHotpatchMethodChunks(
-            totalMethodCount: total, estimatedCharsPerMethod: 256, budgetChars: Budget);
-        Assert.NotNull(plan);
+        string text = EmitHotpatchTable(methodCount: 12_000);
 
-        var (_, offsets, counts) = plan!.Value;
-        Assert.Equal(offsets.Count, counts.Count);
+        var typeChunkCounts = Regex.Matches(text, @"s_hotpatch_types_\d+\[(\d+)\]")
+            .Select(m => int.Parse(m.Groups[1].Value)).ToList();
+        var methodChunkCounts = Regex.Matches(text, @"s_hotpatch_methods_\d+\[(\d+)\]")
+            .Select(m => int.Parse(m.Groups[1].Value)).ToList();
 
-        // Contiguous from 0, no gaps, no overlaps, ends exactly at total.
-        int cursor = 0;
-        for (int i = 0; i < offsets.Count; i++)
+        Assert.True(typeChunkCounts.Count > 1, "expected multiple type chunks");
+        Assert.True(methodChunkCounts.Count > 1, "expected multiple method chunks");
+        Assert.Equal(typeChunkCounts.Count, methodChunkCounts.Count);
+
+        int declaredTypes = int.Parse(Regex.Match(text,
+            @"\.type_entry_count\s+=\s+(\d+)u").Groups[1].Value);
+        int declaredMethods = int.Parse(Regex.Match(text,
+            @"\.method_entry_count\s+=\s+(\d+)u").Groups[1].Value);
+
+        Assert.Equal(declaredTypes, typeChunkCounts.Sum());
+        Assert.Equal(declaredMethods, methodChunkCounts.Sum());
+    }
+
+    /// <summary>
+    /// 🔴 A chunk must never cut through a type's method run. Every type's
+    /// <c>(first_method_index, method_count)</c> range has to sit wholly inside
+    /// one chunk, or the runtime's global-index arithmetic resolves into the
+    /// wrong chunk.
+    ///
+    /// Asserted structurally: each chunk's method count must equal the sum of
+    /// the <c>method_count</c> values declared by the type entries in that same
+    /// chunk.
+    /// </summary>
+    [Fact]
+    public void Chunks_BreakOnlyOnTypeBoundaries()
+    {
+        string text = EmitHotpatchTable(methodCount: 12_000);
+
+        var typeChunks = Regex.Matches(text,
+            @"s_hotpatch_types_(\d+)\[(\d+)\] = \{(.*?)\n\};", RegexOptions.Singleline);
+        var methodChunks = Regex.Matches(text,
+            @"s_hotpatch_methods_(\d+)\[(\d+)\] = \{(.*?)\n\};", RegexOptions.Singleline);
+        Assert.True(typeChunks.Count > 1, "expected multiple type chunks");
+
+        foreach (Match tc in typeChunks)
         {
-            Assert.Equal(cursor, offsets[i]);
-            Assert.True(counts[i] > 0, $"chunk {i} is empty");
-            cursor += counts[i];
+            int index = int.Parse(tc.Groups[1].Value);
+            var mc = methodChunks.Cast<Match>()
+                .FirstOrDefault(m => m.Groups[1].Value == tc.Groups[1].Value);
+            Assert.True(mc is not null, $"no method chunk paired with type chunk {index}");
+
+            // The type entries end with `, <method_count>u },` — sum those.
+            long declaredInChunk = Regex.Matches(tc.Groups[3].Value, @",\s*(\d+)u\s*\}")
+                .Select(m => long.Parse(m.Groups[1].Value))
+                .Sum();
+
+            int methodChunkSize = int.Parse(mc!.Groups[2].Value);
+            Assert.Equal(methodChunkSize, declaredInChunk);
         }
-        Assert.Equal(total, cursor);
     }
 
     /// <summary>
-    /// Each chunk must individually fit the budget, or chunking has not solved
-    /// the problem it exists for.
+    /// Chunk arrays must have distinct symbol names, or the generated TU has
+    /// duplicate definitions and fails to compile.
     /// </summary>
     [Fact]
-    public void EachChunk_FitsBudget()
+    public void ChunkSymbolNames_AreDistinct()
     {
-        var plan = NativeAotLoweringPlanner.PlanHotpatchMethodChunks(
-            totalMethodCount: 9_000, estimatedCharsPerMethod: 256, budgetChars: Budget);
-        Assert.NotNull(plan);
+        string text = EmitHotpatchTable(methodCount: 12_000);
 
-        var (_, _, counts) = plan!.Value;
-        foreach (int count in counts)
+        foreach (var prefix in new[] { "s_hotpatch_types_", "s_hotpatch_methods_" })
         {
-            Assert.True((long)count * 256 <= Budget,
-                $"a chunk of {count} methods (~{count * 256:N0} chars) exceeds the {Budget:N0} budget");
+            var names = Regex.Matches(text, Regex.Escape(prefix) + @"(\d+)\[")
+                .Select(m => m.Groups[1].Value).ToList();
+            Assert.Equal(names.Count, names.Distinct(StringComparer.Ordinal).Count());
         }
     }
 
     /// <summary>
-    /// Chunk names must be distinct, or the emitted arrays collide
-    /// (duplicate definition).
+    /// Each chunk descriptor must carry the element size the runtime uses to
+    /// compute offsets; a wrong size silently mis-addresses every entry after
+    /// the first.
     /// </summary>
     [Fact]
-    public void ChunkNames_AreDistinct()
+    public void ChunkDescriptors_CarryElementSizes()
     {
-        var plan = NativeAotLoweringPlanner.PlanHotpatchMethodChunks(
-            totalMethodCount: 50_000, estimatedCharsPerMethod: 256, budgetChars: Budget);
-        Assert.NotNull(plan);
+        string text = EmitHotpatchTable(methodCount: 12_000);
 
-        var names = plan!.Value.ChunkNames;
-        Assert.Equal(names.Count, names.Distinct(StringComparer.Ordinal).Count());
-    }
-
-    [Theory]
-    [InlineData(0, 256)]
-    [InlineData(100, 0)]
-    [InlineData(-1, 256)]
-    public void DegenerateInputs_ReturnNull(int total, int perMethod)
-    {
-        Assert.Null(NativeAotLoweringPlanner.PlanHotpatchMethodChunks(
-            total, perMethod, Budget));
+        Assert.Contains("sizeof(HotpatchTypeEntryV0)", text);
+        Assert.Contains("sizeof(HotpatchMethodEntryV0)", text);
     }
 }

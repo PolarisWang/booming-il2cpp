@@ -128,6 +128,27 @@ HotpatchNameRegistry& GetHotpatchNameRegistry() noexcept;
 // ── Registration entry point (extern "C") ────────────────────────────
 void RegisterHotpatchModule(const HotpatchModuleV0* module) noexcept;
 
+// ── Chunk-aware element access ───────────────────────────────────────
+//
+// A module's type/method arrays may be emitted across several translation
+// units, in which case it carries a chunk list (see ChaosAbiChunkV0) instead
+// of one flat block. Indices remain positions in the LOGICAL array — the
+// concatenation of the chunks in order — so `first_method_index` and every
+// count keep their existing meaning.
+//
+// Returns nullptr when the module is null or the index is out of range.
+// With a flat module (chunk list null) this is exactly `&arr[index]`, so
+// pre-chunking modules behave identically.
+const HotpatchTypeEntryV0* HotpatchTypeEntryAt(const HotpatchModuleV0* mod, uint32_t index) noexcept;
+const HotpatchMethodEntryV0* HotpatchMethodEntryAt(const HotpatchModuleV0* mod, uint32_t index) noexcept;
+
+// Whether the module actually exposes an element array. This is NOT
+// `type_entries != nullptr`: a chunked module has a null flat pointer and a
+// non-null chunk list, so testing the flat pointer alone would skip
+// registration entirely and silently lose every name.
+bool HotpatchModuleHasTypeEntries(const HotpatchModuleV0* mod) noexcept;
+bool HotpatchModuleHasMethodEntries(const HotpatchModuleV0* mod) noexcept;
+
 // ── Module registration callback ─────────────────────────────────────
 // Called after each module registration. Used by PatchLoader to retry
 // deferred patches whose dependencies may now be satisfied.

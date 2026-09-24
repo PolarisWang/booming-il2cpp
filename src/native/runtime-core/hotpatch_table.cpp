@@ -47,13 +47,122 @@ int HotpatchNameRegistry::CompareTokenSlot(const void* key, const void* elem) no
     return (token > entry->token) - (token < entry->token);
 }
 
+// ── Chunk-aware element access ────────────────────────────────────────
+//
+// A registration array may be emitted across several translation units, in
+// which case the module carries a chunk list instead of one flat block. The
+// LOGICAL array — and therefore every index into it — is unchanged: an index
+// is still a position in the concatenation of the chunks in order. Only the
+// way an index is resolved to an address differs, and that is confined to
+// these two functions.
+//
+// When the chunk list is null the module uses the flat layout, which is what
+// every module emitted before chunking does. That path returns the flat
+// element directly, so existing behaviour is bit-for-bit preserved and no
+// chunk arithmetic runs at all.
+//
+// Chunk resolution is a binary search over the running prefix sum of the
+// chunk counts. The chunk count is small (bounded by the number of declaring
+// types) and constant with respect to array length, so lookups stay O(1) in
+// the sense that matters for the hot path. If profiling ever shows this
+// mattering, the prefix sum can be hoisted into a precomputed array.
+
+namespace {
+
+// Locates the chunk containing `index` within a chunk list, or nullptr when
+// the list is empty or the index is out of range.
+//
+// `counts` are summed on the fly rather than precomputed: the binary search
+// needs the prefix sum at each probe, and materialising it would require an
+// allocation at registration time on a path that must not allocate.
+const ChaosAbiChunkV0* FindChunk(const ChaosAbiChunkV0* chunks, uint32_t chunk_count,
+                                 uint32_t index, uint32_t* out_offset) noexcept {
+    if (chunks == nullptr || chunk_count == 0) return nullptr;
+
+    uint32_t lo = 0;
+    uint32_t hi = chunk_count;  // exclusive
+    uint32_t base = 0;          // global index where chunk `lo` starts
+    while (lo < hi) {
+        uint32_t mid = lo + (hi - lo) / 2;
+        // Prefix sum over [0, mid) — small chunk counts make this cheaper than
+        // caching, and it keeps the function allocation-free.
+        uint32_t mid_base = 0;
+        for (uint32_t k = 0; k < mid; ++k) mid_base += chunks[k].count;
+
+        if (index < mid_base) {
+            hi = mid;
+        } else if (index >= mid_base + chunks[mid].count) {
+            lo = mid + 1;
+            base = mid_base + chunks[mid].count;
+        } else {
+            *out_offset = index - mid_base;
+            return &chunks[mid];
+        }
+    }
+    (void)base;
+    return nullptr;
+}
+
+}  // namespace
+
+const HotpatchTypeEntryV0* HotpatchTypeEntryAt(const HotpatchModuleV0* mod, uint32_t index) noexcept {
+    if (mod == nullptr) return nullptr;
+
+    // Flat layout — the pre-chunking path, kept free of chunk arithmetic so it
+    // is bit-for-bit identical to the original indexing.
+    if (mod->type_chunks == nullptr || mod->type_chunk_count == 0) {
+        if (index >= mod->type_entry_count) return nullptr;
+        return &mod->type_entries[index];
+    }
+
+    uint32_t offset = 0;
+    const ChaosAbiChunkV0* chunk = FindChunk(mod->type_chunks, mod->type_chunk_count, index, &offset);
+    if (chunk == nullptr || chunk->base == nullptr || offset >= chunk->count) return nullptr;
+    // element_size is carried in the descriptor so this does not hard-code the
+    // element type; assert it matches to catch a descriptor/codegen mismatch.
+    if (chunk->element_size != sizeof(HotpatchTypeEntryV0)) return nullptr;
+    return static_cast<const HotpatchTypeEntryV0*>(chunk->base) + offset;
+}
+
+const HotpatchMethodEntryV0* HotpatchMethodEntryAt(const HotpatchModuleV0* mod, uint32_t index) noexcept {
+    if (mod == nullptr) return nullptr;
+
+    if (mod->method_chunks == nullptr || mod->method_chunk_count == 0) {
+        if (index >= mod->method_entry_count) return nullptr;
+        return &mod->method_entries[index];
+    }
+
+    uint32_t offset = 0;
+    const ChaosAbiChunkV0* chunk = FindChunk(mod->method_chunks, mod->method_chunk_count, index, &offset);
+    if (chunk == nullptr || chunk->base == nullptr || offset >= chunk->count) return nullptr;
+    if (chunk->element_size != sizeof(HotpatchMethodEntryV0)) return nullptr;
+    return static_cast<const HotpatchMethodEntryV0*>(chunk->base) + offset;
+}
+
+// True when the module exposes a type array at all. Replaces the old
+// `type_entries == nullptr` guard, which is wrong under chunking (a chunked
+// module legitimately has a null flat pointer) and would silently skip
+// registration.
+bool HotpatchModuleHasTypeEntries(const HotpatchModuleV0* mod) noexcept {
+    if (mod == nullptr || mod->type_entry_count == 0) return false;
+    return (mod->type_chunks != nullptr && mod->type_chunk_count > 0) || mod->type_entries != nullptr;
+}
+
+bool HotpatchModuleHasMethodEntries(const HotpatchModuleV0* mod) noexcept {
+    if (mod == nullptr || mod->method_entry_count == 0) return false;
+    return (mod->method_chunks != nullptr && mod->method_chunk_count > 0) || mod->method_entries != nullptr;
+}
+
 // ── Registration ──────────────────────────────────────────────────────
 
 void HotpatchNameRegistry::RegisterModule(const HotpatchModuleV0* module) noexcept {
     if (module == nullptr) return;
 
-    if (module->type_entries == nullptr && module->type_entry_count > 0) return;
-    if (module->method_entries == nullptr && module->method_entry_count > 0) return;
+    // Presence is "flat pointer OR chunk list", not the flat pointer alone: a
+    // chunked module has a null flat pointer, and testing only that would
+    // return early and silently drop the whole module's names.
+    if (!HotpatchModuleHasTypeEntries(module) && module->type_entry_count > 0) return;
+    if (!HotpatchModuleHasMethodEntries(module) && module->method_entry_count > 0) return;
     if (module->token_slot_entries == nullptr && module->token_slot_entry_count > 0) return;
 
     modules_.push_back(module);
@@ -70,28 +179,34 @@ void HotpatchNameRegistry::RegisterAllModules(const HotpatchModuleV0* const* mod
 void HotpatchNameRegistry::BuildLookupCacheForModule(const HotpatchModuleV0* mod, size_t module_index) noexcept {
     // Build "ns\0type\0method" → (module_index<<32 | token) cache entries.
     for (uint32_t ti = 0; ti < mod->type_entry_count; ++ti) {
-        const auto& type_entry = mod->type_entries[ti];
-        if (type_entry.method_count == 0) continue;
+        const auto* type_entry = HotpatchTypeEntryAt(mod, ti);
+        if (type_entry == nullptr) continue;
+        if (type_entry->method_count == 0) continue;
 
         // Use namespace from the type entry (never null — codegen emits "" for global ns).
-        const char* ns = type_entry.namespace_name;
+        const char* ns = type_entry->namespace_name;
         if (ns == nullptr) ns = "";
 
-        for (uint16_t mi = 0; mi < type_entry.method_count; ++mi) {
-            const auto& method_entry = mod->method_entries[type_entry.first_method_index + mi];
+        for (uint16_t mi = 0; mi < type_entry->method_count; ++mi) {
+            // `first_method_index` is a GLOBAL index into the logical method
+            // array; resolving it goes through the same accessor so a type's
+            // methods may span chunk boundaries.
+            const auto* method_entry =
+                HotpatchMethodEntryAt(mod, type_entry->first_method_index + mi);
+            if (method_entry == nullptr) continue;
 
             // Build key: "namespace\0typename\0methodname"
             std::string key;
             key.reserve(std::strlen(ns) + 1 +
-                        std::strlen(type_entry.type_name) + 1 +
-                        std::strlen(method_entry.method_name) + 1);
+                        std::strlen(type_entry->type_name) + 1 +
+                        std::strlen(method_entry->method_name) + 1);
             key.append(ns);
             key.push_back('\0');
-            key.append(type_entry.type_name);
+            key.append(type_entry->type_name);
             key.push_back('\0');
-            key.append(method_entry.method_name);
+            key.append(method_entry->method_name);
 
-            uint64_t value = (static_cast<uint64_t>(module_index) << 32) | method_entry.method_token;
+            uint64_t value = (static_cast<uint64_t>(module_index) << 32) | method_entry->method_token;
             lookup_cache_.emplace(std::move(key), value);
         }
     }
@@ -118,28 +233,43 @@ uint64_t HotpatchNameRegistry::LookupMethod(const char* ns,
         return it->second;
     }
 
-    // Fallback: linear scan with bsearch per module (for modules registered
-    // before cache was added, or dynamic registration at runtime).
+    // Fallback: per-module binary search (for modules registered before the
+    // cache was built, or dynamic registration at runtime).
+    //
+    // This was `std::bsearch` over `mod->type_entries`, which requires ONE
+    // contiguous block. A chunked module has no such block, so the search is
+    // written out over the accessor instead: the algorithm, the comparison and
+    // the ordering requirement are unchanged, only element addressing is.
+    // (`bsearch` is also removed rather than kept alongside, so there is no
+    // second, chunk-unaware path to drift out of sync.)
     TypeNameLookupKey lk{ns, type_name};
     for (size_t mi = 0; mi < modules_.size(); ++mi) {
         const auto* mod = modules_[mi];
         if (mod == nullptr) continue;
 
-        const auto* type_entry = static_cast<const HotpatchTypeEntryV0*>(
-            std::bsearch(&lk,
-                         mod->type_entries,
-                         mod->type_entry_count,
-                         sizeof(HotpatchTypeEntryV0),
-                         CompareTypeName));
+        const HotpatchTypeEntryV0* type_entry = nullptr;
+        {
+            uint32_t lo = 0;
+            uint32_t hi = mod->type_entry_count;  // exclusive
+            while (lo < hi) {
+                uint32_t mid = lo + (hi - lo) / 2;
+                const auto* probe = HotpatchTypeEntryAt(mod, mid);
+                if (probe == nullptr) break;  // out-of-range => treat as not found
+
+                int cmp = CompareTypeName(&lk, probe);
+                if (cmp == 0) { type_entry = probe; break; }
+                if (cmp < 0) hi = mid; else lo = mid + 1;
+            }
+        }
         if (type_entry == nullptr) continue;
         if (type_entry->method_count == 0) continue;
 
-        const HotpatchMethodEntryV0* method_base =
-            mod->method_entries + type_entry->first_method_index;
-
         for (uint16_t i = 0; i < type_entry->method_count; ++i) {
-            if (std::strcmp(method_base[i].method_name, method_name) == 0) {
-                return (static_cast<uint64_t>(mi) << 32) | method_base[i].method_token;
+            const auto* method_entry =
+                HotpatchMethodEntryAt(mod, type_entry->first_method_index + i);
+            if (method_entry == nullptr) continue;
+            if (std::strcmp(method_entry->method_name, method_name) == 0) {
+                return (static_cast<uint64_t>(mi) << 32) | method_entry->method_token;
             }
         }
     }
@@ -206,10 +336,12 @@ uint32_t SlotToToken(uint32_t module_id, uint32_t slot) noexcept {
 const char* HotpatchNameRegistry::GetMethodName(uint32_t module_id, uint32_t method_token) const noexcept {
     if (method_token == 0 || module_id >= modules_.size()) return nullptr;
     const auto* mod = modules_[module_id];
-    if (mod == nullptr || mod->method_entries == nullptr) return nullptr;
+    if (!HotpatchModuleHasMethodEntries(mod)) return nullptr;
     for (uint32_t i = 0; i < mod->method_entry_count; ++i) {
-        if (mod->method_entries[i].method_token == method_token) {
-            return mod->method_entries[i].method_name;
+        const auto* method_entry = HotpatchMethodEntryAt(mod, i);
+        if (method_entry == nullptr) continue;
+        if (method_entry->method_token == method_token) {
+            return method_entry->method_name;
         }
     }
     return nullptr;

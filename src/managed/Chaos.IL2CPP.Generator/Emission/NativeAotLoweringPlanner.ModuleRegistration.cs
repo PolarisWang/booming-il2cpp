@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -14,6 +14,16 @@ namespace Chaos.IL2CPP.Generator;
 
 public sealed partial class NativeAotLoweringPlanner
 {
+    /// <summary>
+    /// Rough per-chunk emitted-text budget for the hotpatch type/method arrays
+    /// (ppS3-C3). The arrays are cut on TYPE BOUNDARIES only, so a chunk is
+    /// never split in the middle of a type's methods; a single type larger than
+    /// the budget gets a chunk of its own. The value mirrors
+    /// <c>PayloadSectioningBudgetChars</c>: it targets the same per-TU size, not
+    /// a different compaction rule.
+    /// </summary>
+    internal const long HotpatchChunkBudgetChars = 350_000;
+
     internal string BuildModuleRegistration()
     {
         var assemblyName = _assemblyName;
@@ -319,6 +329,78 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // --- C3-3: partition the type/method arrays into chunks ---
+        //
+        // The arrays are emitted as several translation units when they are
+        // large enough to matter, so the runtime addresses them through the
+        // chunk list (see ChaosAbiChunkV0 / HotpatchModuleV0.type_chunks).
+        //
+        // Split points are TYPE BOUNDARIES only. A type owns a contiguous run
+        // of the method array (`first_method_index`, `method_count`), and the
+        // runtime resolves a global method index by walking the chunk prefix
+        // sum — so a chunk may never begin in the middle of a type's methods.
+        // Grouping by whole types is what keeps `first_method_index` a valid
+        // global index with no renumbering.
+        //
+        // Below the budget the module emits ONE chunk, which is still the
+        // chunked layout (so the runtime path is exercised uniformly) but
+        // costs nothing extra. Above it, chunks are cut on type boundaries
+        // until each is under budget; a single type larger than the budget
+        // gets a chunk of its own rather than being divided.
+        var chunkModels = new List<ScriptObject>();
+        {
+            var currentGroups = new List<ScriptObject>();
+            long currentChars = 0;
+            // Logical position of the NEXT group. Recorded directly rather than
+            // re-derived from earlier chunks, so a chunk's start index is exact
+            // by construction and cannot drift if the grouping logic changes.
+            int nextTypeIndex = 0;
+            uint nextMethodIndex = 0;
+
+            void FlushChunk(int typeCount, uint methodCount)
+            {
+                if (currentGroups.Count == 0) return;
+                chunkModels.Add(new ScriptObject
+                {
+                    ["index"] = chunkModels.Count,
+                    ["first_type_index"] = nextTypeIndex - typeCount,
+                    ["type_count"] = typeCount,
+                    ["first_method_index"] = nextMethodIndex - methodCount,
+                    ["method_count"] = methodCount,
+                    ["type_groups"] = currentGroups.ToArray(),
+                });
+                currentGroups = new List<ScriptObject>();
+                currentChars = 0;
+            }
+
+            int chunkTypeCount = 0;
+            uint chunkMethodCount = 0;
+            foreach (var tg in typeGroupModels)
+            {
+                // Rough size of this group's emitted text: the type entry plus
+                // its method entries. Only the chunking threshold depends on
+                // this, never correctness.
+                long groupChars = 96;
+                foreach (var m in (ScriptObject[])tg["methods"])
+                    groupChars += 64 + ((string)m["method_name_literal"]).Length;
+
+                if (currentChars > 0 && currentChars + groupChars > HotpatchChunkBudgetChars)
+                {
+                    FlushChunk(chunkTypeCount, chunkMethodCount);
+                    chunkTypeCount = 0;
+                    chunkMethodCount = 0;
+                }
+
+                currentGroups.Add(tg);
+                currentChars += groupChars;
+                chunkTypeCount++;
+                chunkMethodCount += (uint)(int)tg["method_count"];
+                nextTypeIndex++;
+                nextMethodIndex += (uint)(int)tg["method_count"];
+            }
+            FlushChunk(chunkTypeCount, chunkMethodCount);
+        }
+
         var model = new ScriptObject
         {
             ["is_empty"] = false,
@@ -326,6 +408,9 @@ public sealed partial class NativeAotLoweringPlanner
             ["total_method_count"] = entries.Count,
             ["type_groups"] = typeGroupModels,
             ["type_group_count"] = grouped.Count,
+            ["chunks"] = chunkModels.ToArray(),
+            ["chunk_count"] = chunkModels.Count,
+            ["chunked"] = chunkModels.Count > 1,
             ["entries"] = entryModels,
             ["token_slots"] = tokenSlotModels,
             ["slot_count"] = tokenSlotList.Count,
@@ -357,37 +442,6 @@ public sealed partial class NativeAotLoweringPlanner
     /// <para>
     /// Returns <c>null</c> when the block is small enough to emit whole, so the
     /// common case keeps its existing single-file shape.
-    /// </para>
-    /// </summary>
-    internal static (IReadOnlyList<string> ChunkNames, IReadOnlyList<int> ChunkOffsets, IReadOnlyList<int> ChunkCounts)?
-        PlanHotpatchMethodChunks(int totalMethodCount, int estimatedCharsPerMethod, int budgetChars)
-    {
-        if (totalMethodCount <= 0 || estimatedCharsPerMethod <= 0 || budgetChars <= 0)
-            return null;
-
-        int totalChars = totalMethodCount * estimatedCharsPerMethod;
-        if (totalChars <= budgetChars)
-            return null;   // fits in one TU — nothing to do
-
-        int perChunk = Math.Max(1, budgetChars / estimatedCharsPerMethod);
-        int chunkCount = (totalMethodCount + perChunk - 1) / perChunk;
-
-        var names = new List<string>(chunkCount);
-        var offsets = new List<int>(chunkCount);
-        var counts = new List<int>(chunkCount);
-
-        for (int i = 0; i < chunkCount; i++)
-        {
-            int offset = i * perChunk;
-            int count = Math.Min(perChunk, totalMethodCount - offset);
-            names.Add($"s_hotpatch_methods_{i}");
-            offsets.Add(offset);
-            counts.Add(count);
-        }
-
-        return (names, offsets, counts);
-    }
-
     // --- CustomAttribute blob data emission ---
     // Builds the binary blob, offset array, and materializer switch for
     // per-module CustomAttribute query support. Supports 5 entity kinds:
