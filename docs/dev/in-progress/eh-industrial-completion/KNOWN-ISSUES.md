@@ -447,6 +447,91 @@ E14 的正确判据**：
 
 ---
 
+### 第六轮（2026-09-24）—— 假设检验与守卫尝试，均未命中
+
+**E18 已执行 E16 建议的检测，两个候选均被排除**
+
+用 E14 的正确判据（否定前瞻）实测：
+
+```
+[CAND-ABI]    len=16420  trueTrunc=2     ← 但见 E19
+[CAND-CRYPTO] len=0      trueTrunc=0     ← 空，直接排除
+```
+
+`cryptoAotIrCode` 为空。`abiManifestCode` 虽有匹配，但**产物中 ABI 段在偏移
+148079，位于残片（146104）之后** —— 因此 `abiManifestCode` 的内容不可能
+插入到残片所在位置。**E16 的两个候选全部排除。**
+
+**E19 `abiManifest` 的"截断"实为探针误读**
+
+`BuildAbiManifest` 把 `native_symbol` 输出为 **C++ 注释**：
+
+```csharp
+["native_symbol"] = method.NativeSymbol,   // ModuleRegistration.Dispatch.cs:162
+```
+```scriban
+{ {{ method.return_carrier }}u, {{ method.param_count }}u },  // {{ method.native_symbol }}
+```
+
+因此 `abiManifestCode` 内的形态是 `{ 0u, 1u },  // Chaos_..._ctor_System_String`。
+`trueTrunc=2` 是**另一个符号**（`Assert_Throws_System_Action` 后被换行截断的
+探针显示）造成的计数，与该断言无关。**该候选的有效性已被 E18 的位置论证独立排除。**
+
+**E20 并发假设已排除**
+
+新增 `CHAOS_FORCE_SERIAL_EMIT=1` 环境开关强制串行发射（`emitMethods.Count=66`，
+正常走 `Parallel.For`），**残片依然存在**。→ 不是 `EmitOneMethod` 的并发写入问题。
+
+**E21 第二次守卫尝试失败，且失败原因有诊断价值**
+
+在 `NativeAotEmitter` 的三处返回点加 `GuardAgainstTruncatedDeclarations`，
+对 System.ObjectModel 实测**守卫一次都未触发**（错误仍是 MSVC 的 C2144/C2182）。
+两种可能：
+
+1. 该守卫所在的 `NativeAotEmitter` 函数**不是**产出该文件的那条路径
+   （与本文件 E7/E11 的多条"探针未打印"证据一致）；
+2. 判据仍有缺陷。
+
+**第一版判据的缺陷已确认并值得记录**：首版只检查「`extern "C"` 行括号不平衡」，
+而**真实残片根本不含括号**（参数列表整段丢失）→ `balance == 0` → 被当作合法跳过。
+改为「既无 `;` 也无 `{` 也无 `(` 也无 `,`」后仍未触发，倾向于可能 1。
+
+**守卫已回退**：未生效的守卫等于**恒真的假检查**，留在代码里比没有更糟
+（会给后续读者"已有防护"的错觉）。
+
+**E22 本轮净结论**
+
+| 假设 | 状态 |
+|---|---|
+| `cryptoAotIrCode` | ❌ 排除（len=0） |
+| `abiManifestCode` | ❌ 排除（段落在残片之后） |
+| `EmitOneMethod` 并发 | ❌ 排除（强制串行后仍在） |
+| `Methods.Remaining.cs:423` 分次 Append | ❌ 排除（产出的是 `chaos_ensure_type_initialized_*`，非该符号） |
+| `modulereg` / deferred / `BuildModuleRegistration` / `aotreg` | ❌ 排除（E15） |
+
+**排除法已经把候选耗尽** —— 这意味着问题可能不在"哪个 append 写坏了"，
+而在更上游：**该残片所在的整段文本，可能根本不是这些 append 中的任何一个产出的**
+（呼应 E7：ObjectModel 方法体区不经 `BuildMethodSection`）。
+
+**E23 建议的下一步（与前六轮不同的方向）**
+
+不再"逐个排除 append"，改为**从产物反向工程**：
+
+1. 取产物中残片所在位置的**前后完整上下文**（已有：前是 `s_method_aot_entry_argsCount`、
+   后是 `// Forward declaration for module.image`），确定它落在**哪个逻辑段**；
+2. 用 `git log -S` 追溯「`// Forward declaration for module.image`」这行的引入与
+   其拼接代码的历史，看是否曾有过该段的**第二版实现**；
+3. 在**产物落盘的最后一步**（`NativeAotGeneratedSource.Contents` 被写入文件之前）
+   加一次性 dump，与 `BuildGeneratedSources` 的返回值 md5 比对 ——
+   确认损坏是发生在生成期还是**落盘期**。
+
+> 六轮累计约 12 个 agent + 40 轮手动。**建议此缺陷转由熟悉 TuPacker / TP-Step1-3
+> 拆分机制的作者处理** —— 远端同期正在推进的 `TuPacker` / 分段协议
+> （`SplitReportBuilder.cs` / `TuPacker.cs`）与该文本组装路径高度相关，
+> 可能是同一处代码的后续演进。
+
+---
+
 ## KNOWN-ISSUE-2（设计层面）: L3 异常翻译正确性尚未系统化
 
 见 `roadmap-v1-01.md` P2。当前 P2-0（duplicate key）已修复并验证；
