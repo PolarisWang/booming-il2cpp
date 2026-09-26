@@ -162,8 +162,22 @@ void FreeSlot(ReaderState* st) {
 constexpr char kXmlNodeReaderSubjectId[] =
     "System.Xml.ReaderWriter/System.Xml.XmlNodeReader";
 
+// Handles reach this file in TWO shapes, and only one of them is dereferenceable:
+//
+//   * XmlTextReader's ctor returns a 1-based ReaderState SLOT INDEX (a small
+//     integer, 1..kReaderCap).  Reading `*(TypeInfo**)1` would fault — and the
+//     SEH handler would surface it as "wrong exception type", masking the real
+//     contract check with a bogus defect.
+//   * Reader VARIANTS (XmlNodeReader/XmlValidatingReader) are constructed by a
+//     codegen shape stub as plain GC objects, so the handle is a heap POINTER
+//     with a TypeInfo at offset 0.
+//
+// The two are trivially separable: a slot index is <= kReaderCap, while an
+// allocated GC object is far above any low address.  Guarding the dereference
+// is what makes the discrimination safe, not just correct.
 bool ReceiverIsXmlNodeReader(CHAOS_IL2CPP_INTPTR this_ptr) {
-    if (this_ptr == 0) return false;
+    // Slot handles (and null) are never GC objects — no type_info to read.
+    if (this_ptr <= static_cast<CHAOS_IL2CPP_INTPTR>(kReaderCap)) return false;
     const auto* ti = chaos_object_get_type_info(
         reinterpret_cast<const void*>(this_ptr));
     return ti != nullptr &&
