@@ -2,7 +2,9 @@
 
 > **task_id**: eh-industrial-completion
 > **记录日期**: 2026-09-24
-> **状态**: 未解决（已排除大量候选，根因未定位到单一 `file:line`）
+> **状态**: ✅ **已修复**（2026-09-26，commit `7c2fa7f5f`）
+> 三层根因：① 长度盲切切断声明；② deferred section 在小模型下不渲染；
+> ③ 跨 section 符号声明与定义命名空间错配。详见文末「修复记录」。
 
 ---
 
@@ -700,6 +702,127 @@ grep -rn 'extern \\"C\\" ' src/managed/Chaos.IL2CPP.Generator/ --include=*.cs
 **建议转由熟悉 TU 拆分/分段协议的作者处理**，以 E31 的定向搜索为起点。
 
 ---
+
+
+---
+
+## 修复记录（2026-09-26，commit `7c2fa7f5f`）
+
+**根因是三层复合缺陷**，环环相扣 —— 上层挡住下层，修好一层才暴露下一层。
+
+### 第 1 层：长度盲切切断声明（本条 KNOWN-ISSUE-1 的直接成因）
+
+`NativeAotEmitter.Shared.cs` 的 `BuildObjectModelSection`：
+
+```csharp
+int vtableTailLength = templateModel.VTableDataCode.Length;
+objectModelCode = objectModelCode[..^vtableTailLength];   // 盲按长度切
+```
+
+**隐含假设**：vtable 数据是对象模型的后缀。
+**实际**：对象模型中，vtable 数组之前还夹着完整的
+`extern "C" void <ctor>(...)` 声明 —— 盲切 7428 字节恰好从该声明
+**第 93 字符**处切断，产出的正是追查九轮的那条
+`extern "C" void ..._ctor_System_S`。
+
+**修复**：改用 `LastIndexOf` 定位 vtable 块的**实际位置**，并仅在确为后缀时切除。
+
+### 第 2 层：deferred section 在小模型下不渲染（kRefl_desc 定义丢失）
+
+deferred `reflmembers_*` section（含全部 `kRefl_desc_*` 与成员表**定义**）
+只进 `payloadSections`，而 payload TU 的渲染有门槛：
+
+```csharp
+bool usePayloadSections = ... && templateModel.Methods.Count >= PayloadSectioningThresholdMethods;  // 500
+```
+
+**ObjectModel 只有 66 个方法 < 500** → payload TU 不生成 → 这些定义**从未落盘**。
+而引用侧（`ChaosRegisterExternalType`）留在 `modulereg` section → **有引用无定义**。
+
+**修复**：drain 时若 `allMethods.Length < PayloadSectioningThresholdMethods`，
+把内容直接 append 进 `moduleRegSb`，避免定义静默丢失。
+
+> **对照证据**：`System.Linq`（386 方法，同样 < 500）之所以"通过"，
+> 只是因为它**根本不引用** `kRefl_desc`（引用数 0）；ObjectModel 有 50 处引用
+> 却无定义，于是 LNK2001 × 57。
+
+### 第 3 层：跨 section 符号的声明/定义命名空间错配（LNK2001 的真因）
+
+`.header.h` 里 cross-section 符号的 `extern` 声明位于**全局作用域**，
+而定义在 `namespace chaos::il2cpp::codegen::<Ns> { ... }` 内：
+
+| | 作用域 | mangled 前缀 |
+|---|---|---|
+| 声明（header） | 深度 0（全局）| `?kRefl_desc_X@@...` |
+| 定义（cpp） | 深度 1（codegen）| `?kRefl_desc_X@codegen@il2cpp@chaos@@...` |
+
+**两者不是同一个实体** → 链接失败。
+
+**修复**：`BuildSharedHeader` 里把 cross-section 声明也包进同一个
+`namespace chaos::il2cpp::codegen::<Ns> { ... }`，使声明与定义的符号身份一致。
+
+### 回归验证（全量重跑）
+
+```
+System.ObjectModel              10/10 passed    ← 此前 C2182 / C2144 / LNK1120×57 全清
+System.Linq                    386/386 passed
+System.Collections.NonGeneric   70/70 passed
+```
+
+### 方法论教训（本轮新增两条）
+
+1. **`IndexOf(前缀)` 判残片是错的** —— `..._ctor_System_S` 是完整符号
+   `..._ctor_System_String` 的**前缀**，38 处完整符号被误报为残片。
+   必须用否定前瞻 `(?!tring)` 或检查后续 5 字符。
+2. **调试探针前必须核对 TPG 内嵌 DLL 的时间戳** —— `dotnet build` 的增量拷贝
+   不可靠（本轮遇 4 次），表现为"探针不打印"，极易误读为"该代码路径未执行"。
+
+### 遗留
+
+第 3 层是**系统性风险**：全仓有 **30 处** `RegisterCrossSectionSymbol` 调用，
+若还有其他符号的声明/定义分处不同命名空间，会遇到同样的 LNK2001。
+见下方 KNOWN-ISSUE-3。
+
+
+
+---
+
+## KNOWN-ISSUE-3（已排查，**未发现系统性扩散**）
+
+**背景**：第 3 层修复（跨 section 符号声明/定义命名空间错配）触及
+`BuildSharedHeader` 里 **全部** `CrossSectionSymbols` 声明的包裹位置。
+由于该块是共用的，一处改动会影响所有 cross-section 符号 —— 需要确认
+「有没有符号本来就定义在全局作用域，被这次包裹改坏」。
+
+**排查方法**：扫描全部已生成产物的 `native-aot.generated.header.h`，
+对含 cross-section 块的 header 检查该块是否处于
+`namespace chaos::il2cpp::codegen::<Ns>` 内。
+
+**结果**（31 个 header）：
+
+| 分类 | 数量 |
+|---|---|
+| 已正确包裹（本次修复后的新产物）| **8** |
+| 未包裹（**均为 09-23 陈旧产物**，早于修复）| 3 |
+| 无 cross-section 块 | 20 |
+
+**结论**：修复后的产物**全部正确包裹，无遗漏、无误伤**。
+`WrapPayloadSectionInTranslationUnit` 路径本就已把 cross-section 声明放在
+codegen namespace 内（整个 preamble 包在 `<ns> { ... }` 中），因此
+命名空间错配**只影响 `BuildSharedHeader`（页 0 头文件路径，即小模型）**，
+现已修复。
+
+**回归验证**（修复后全量重跑）：
+
+```
+System.Linq                    Pipeline complete: passed
+System.ObjectModel             Pipeline complete: passed   ← 修复前 C2182/C2144/LNK1120×57
+System.Collections.NonGeneric  Pipeline complete: passed   ← 修复前被阻断
+System.Text.Json               3/3 chunks passed          ← 大模型路径（≥500 方法，走 payload TU）
+```
+
+`System.Text.Json` 的 `text-json` chunk 有 **517 个方法（≥500）**，
+走的是 payload TU 路径 —— 这验证了修复**没有破坏大模型路径**。
 
 ## KNOWN-ISSUE-2（设计层面）: L3 异常翻译正确性尚未系统化
 
