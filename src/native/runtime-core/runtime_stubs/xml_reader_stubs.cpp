@@ -626,8 +626,10 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToElement(CHAOS_IL2CPP_INTPTR this_ptr)
 }
 
 // ── MoveToAttribute(string name) → bool ──
-// Argument validation mirrors the managed reader: a null or empty name is an
-// ArgumentOutOfRangeException, not a silent false.
+// Argument validation follows .NET 8: a null name surfaces as
+// NullReferenceException and an empty name is a non-throwing failed lookup
+// (returns false).  Both differ from what this stub used to raise
+// (ArgumentOutOfRangeException in each case).
 CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
@@ -635,25 +637,39 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStr(
     if (!st) return 0;
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(name, n, n_len))
-        RaiseManagedException("System.ArgumentOutOfRangeException",
-            "Value cannot be null. (Parameter 'name')");
+        // .NET XmlReader.MoveToAttribute(name): a null name dereferences the
+        // reader's xmlNameTable before any validation, so it surfaces as
+        // NullReferenceException (not ArgumentOutOfRangeException).  Verified
+        // against .NET 8: MoveToAttribute((string)null) -> NRE.
+        RaiseNullReferenceException();
     if (n_len == 0)
-        RaiseManagedException("System.ArgumentOutOfRangeException",
-            "The empty string is not a valid name.");
+        // .NET XmlReader.MoveToAttribute("") does NOT throw — it attempts a
+        // (failed) lookup and returns false.  Verified against .NET 8.
+        return 0;
     st->node_type = 2;  // Attribute
     st->attr_idx = 0;
     return 1;
 }
 
 // ── MoveToAttribute(string name, string ns) → bool ──
-// Namespace-qualified form; prefix resolution is not modelled by this tokenizer,
-// so it delegates to the name-only overload.
+// The 2-arg overload has a DIFFERENT contract from the 1-arg form: .NET 8
+// validates `name` up front and raises ArgumentNullException for null, whereas
+// the 1-arg overload surfaces a NullReferenceException.  Verified against
+// .NET 8: MoveToAttribute(null) -> NRE, MoveToAttribute(null, null) -> ANE.
+// It therefore cannot delegate blindly to the 1-arg body.
 CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStrNs(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR name,
     CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)ns;
+    auto* st = Resolve(this_ptr);
+    if (!st) return 0;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len))
+        RaiseArgumentNullException("name");
+    if (n_len == 0)
+        return 0;  // .NET does not throw for the empty name — returns false
     return ChaosXmlTextReaderMoveToAttributeStr(this_ptr, name);
 }
 
@@ -668,12 +684,24 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeIndex(
 }
 
 // ── GetAttribute(string name, string ns) → string ──
+// The 2-arg overload has a DIFFERENT contract from the 1-arg form: .NET 8
+// validates `name` up front and raises ArgumentNullException for null, whereas
+// the 1-arg overload surfaces a NullReferenceException.  Verified against
+// .NET 8: GetAttribute(null) -> NRE, GetAttribute(null, null) -> ANE.
+// It therefore cannot delegate blindly to the 1-arg body.
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStrNs(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR name,
     CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)ns;
+    auto* st = Resolve(this_ptr);
+    if (!st) return 0;
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len))
+        RaiseArgumentNullException("name");
+    if (n_len == 0)
+        return 0;  // .NET does not throw for the empty name — returns null
     return ChaosXmlTextReaderGetAttributeStr(this_ptr, name);
 }
 
@@ -732,11 +760,15 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStr(
     // Search for `name="..."` in the element tag.
     const char* aname = nullptr; size_t an_len = 0;
     if (!ManagedStringView(name, aname, an_len))
-        RaiseManagedException("System.ArgumentOutOfRangeException",
-            "Value cannot be null. (Parameter 'name')");
+        // .NET XmlReader.GetAttribute(name): a null name dereferences the
+        // reader's xmlNameTable before any validation, so it surfaces as
+        // NullReferenceException (not ArgumentOutOfRangeException).  Verified
+        // against .NET 8: GetAttribute((string)null) -> NRE.
+        RaiseNullReferenceException();
     if (an_len == 0)
-        RaiseManagedException("System.ArgumentOutOfRangeException",
-            "The empty string is not a valid name.");
+        // .NET XmlReader.GetAttribute("") does NOT throw — it attempts a
+        // (failed) lookup and returns null.  Verified against .NET 8.
+        return 0;
 
     // Scan backwards from current pos to find the element start
     size_t scan = (st->pos > 5) ? st->pos - 5 : 0;

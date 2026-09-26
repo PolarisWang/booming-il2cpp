@@ -334,8 +334,14 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNodeStr(
     CHAOS_IL2CPP_INTPTR name,
     CHAOS_IL2CPP_INTPTR ns_uri) CHAOS_STUB_NOEXCEPT
 {
-    (void)this_ptr; (void)node_type_str; (void)name; (void)ns_uri;
-    RaiseNotSupported();
+    (void)this_ptr; (void)node_type_str;
+    // .NET XmlDocument.CreateNode(string nodeTypeString, name, ns) parses the
+    // node-type string FIRST — before ANY other validation — and throws
+    // ArgumentException for null / empty / unknown node-type strings.
+    // Verified against .NET 8: CreateNode(null,..), CreateNode("","",""),
+    // CreateNode("bogus",..) all raise ArgumentException.
+    (void)name; (void)ns_uri;
+    RaiseArgException("The node type string is not valid.");
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateProcessingInstruction(
