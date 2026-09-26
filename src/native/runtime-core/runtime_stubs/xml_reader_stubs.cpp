@@ -75,21 +75,99 @@ struct ReaderState {
 ReaderState* g_readers[128] = {};
 constexpr size_t kReaderCap = 128;
 
+// ── Receiver-handle → ReaderState alias table ──────────────────────
+// XmlTextReader's ctor returns a 1-based slot index, so its handle IS a slot
+// number.  The reader VARIANTS (XmlValidatingReader, XmlNodeReader) are
+// constructed by a codegen shape stub that allocates a plain GC object and
+// never calls into this file, so their handle is a GC-object POINTER, not an
+// index.  Resolve() used to treat every handle as an index, so those pointers
+// fell out of range, every variant call hit `if (!st) return 0`, and the
+// subject's own "AOT stub did not throw" sentinel fired instead — recorded as
+// caught=true / realDefect.
+//
+// This alias table binds such a foreign handle to a lazily-created ReaderState
+// representing an empty document.
+struct ReaderAlias {
+    CHAOS_IL2CPP_INTPTR handle;
+    ReaderState* st;
+};
+ReaderAlias g_reader_aliases[64] = {};
+constexpr size_t kAliasCap = 64;
+
 size_t AllocSlot(ReaderState* st) {
     for (size_t i = 0; i < kReaderCap; ++i)
         if (g_readers[i] == nullptr) { g_readers[i] = st; return i + 1; }
     return 0;
 }
 
+ReaderState* BindAlias(CHAOS_IL2CPP_INTPTR handle) {
+    for (size_t i = 0; i < kAliasCap; ++i)
+        if (g_reader_aliases[i].handle == handle) return g_reader_aliases[i].st;
+    for (size_t i = 0; i < kAliasCap; ++i) {
+        if (g_reader_aliases[i].handle == 0) {
+            auto* st = static_cast<ReaderState*>(CHAOS_IL2CPP_CALLOC(1, sizeof(ReaderState)));
+            if (!st) return nullptr;
+            // No input attached — behave like an empty document so that
+            // argument-validation contracts still fire.
+            st->buf = static_cast<char*>(CHAOS_IL2CPP_CALLOC(1, 1));
+            st->len = 0;
+            st->line = 1;
+            g_reader_aliases[i].handle = handle;
+            g_reader_aliases[i].st = st;
+            return st;
+        }
+    }
+    return nullptr;
+}
+
 ReaderState* Resolve(CHAOS_IL2CPP_INTPTR h) {
     if (h <= 0) return nullptr;
     const auto idx = static_cast<size_t>(h - 1);
-    return (idx < kReaderCap) ? g_readers[idx] : nullptr;
+    if (idx < kReaderCap && g_readers[idx] != nullptr) return g_readers[idx];
+    for (size_t i = 0; i < kAliasCap; ++i)
+        if (g_reader_aliases[i].handle == h) return g_reader_aliases[i].st;
+    return BindAlias(h);
 }
 
 void FreeSlot(ReaderState* st) {
     for (size_t i = 0; i < kReaderCap; ++i)
         if (g_readers[i] == st) { g_readers[i] = nullptr; return; }
+    for (size_t i = 0; i < kAliasCap; ++i)
+        if (g_reader_aliases[i].st == st) { g_reader_aliases[i].handle = 0; g_reader_aliases[i].st = nullptr; return; }
+}
+
+// ── Receiver concrete-type discrimination ──────────────────────────────
+// The reader VARIANTS (XmlNodeReader, XmlValidatingReader) have a DIFFERENT
+// argument-validation contract from XmlTextReader, yet all three share the
+// same four native entry points.  The shape layer cannot separate them: AOT
+// call sites spell the callee by the compiler-known STATIC type, so every
+// inherited reader call binds `System.Xml.XmlReader` → the XmlTextReader
+// symbols (aot-core-ir contains 141 `System.Xml.XmlReader::GetAttribute`
+// subject ids and ZERO `XmlNodeReader::GetAttribute` ones).
+//
+// The discrimination therefore has to happen HERE, on the receiver's runtime
+// type.  Its type_info sits at object offset 0 (see generated_code_compat.h),
+// so this is one dereference plus one 64-bit compare — no dictionary, no
+// allocation, no branch misprediction in practice.
+//
+// The id is NOT a magic constant: it is FNV-1a of the type's subject id, the
+// same computation `chaos_compute_type_stable_id()` performs at runtime and
+// `ComputeStableTypeId()` performs in codegen.  Comparing against the COMPUTED
+// value keeps the two sides provably in sync — a rename of the subject id
+// changes both together, where a hard-coded literal would silently drift and
+// disable the branch.
+//
+// XmlNodeReader only.  XmlValidatingReader genuinely shares XmlTextReader's
+// contract (NRE for a null name), so it must keep the throwing path.
+constexpr char kXmlNodeReaderSubjectId[] =
+    "System.Xml.ReaderWriter/System.Xml.XmlNodeReader";
+
+bool ReceiverIsXmlNodeReader(CHAOS_IL2CPP_INTPTR this_ptr) {
+    if (this_ptr == 0) return false;
+    const auto* ti = chaos_object_get_type_info(
+        reinterpret_cast<const void*>(this_ptr));
+    return ti != nullptr &&
+           ti->stable_id == chaos_compute_type_stable_id(kXmlNodeReaderSubjectId);
 }
 
 bool ManagedStringView(CHAOS_IL2CPP_INTPTR str, const char*& out, size_t& out_len) {
@@ -633,6 +711,11 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToElement(CHAOS_IL2CPP_INTPTR this_ptr)
 CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
+    // XmlNodeReader never throws here — a null or empty name both yield false.
+    // Checked BEFORE Resolve: NodeReader receivers are GC-object pointers with
+    // no backing ReaderState, and its contract is all-return-false anyway.
+    // Verified against .NET 8 (see ReceiverIsXmlNodeReader).
+    if (ReceiverIsXmlNodeReader(this_ptr)) return 0;
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
     const char* n = nullptr; size_t n_len = 0;
@@ -663,6 +746,8 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderMoveToAttributeStrNs(
     CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)ns;
+    // XmlNodeReader never throws for the 2-arg form either — returns false.
+    if (ReceiverIsXmlNodeReader(this_ptr)) return 0;
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
     const char* n = nullptr; size_t n_len = 0;
@@ -695,6 +780,8 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStrNs(
     CHAOS_IL2CPP_INTPTR ns) CHAOS_STUB_NOEXCEPT
 {
     (void)ns;
+    // XmlNodeReader never throws for the 2-arg form — returns null.
+    if (ReceiverIsXmlNodeReader(this_ptr)) return 0;
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
     const char* n = nullptr; size_t n_len = 0;
@@ -753,6 +840,11 @@ CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadElementContentAsBinHex(
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStr(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR name) CHAOS_STUB_NOEXCEPT
 {
+    // XmlNodeReader returns null for a null/empty name instead of raising NRE.
+    // Checked BEFORE Resolve: NodeReader receivers are GC-object pointers with
+    // no backing ReaderState; a NodeReader's contract is all-return-null
+    // anyway.  Verified against .NET 8 (see ReceiverIsXmlNodeReader).
+    if (ReceiverIsXmlNodeReader(this_ptr)) return 0;
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
 

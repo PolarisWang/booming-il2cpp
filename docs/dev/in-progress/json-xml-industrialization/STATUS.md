@@ -3,20 +3,19 @@
 ```yaml
 task_id: json-xml-industrialization
 task_type: roadmap
-phase: "Phase 0 完成 → Phase 1"
+phase: "Phase 2 — realDefect 35 条根因裁定与修复（P2-01 进行中）"
 lifecycle_status: in-progress
 current_dir: docs/dev/in-progress/json-xml-industrialization
 创建日期: 2026-09-20
 entry_skill: dev-il2cpp → dev-brainstorm → dev-roadmap
 parent_task_id: null
 
-roadmap_or_plan: roadmap-v4-01.md
-上游基线: docs/dev/review/json-xml-industrialization-gap-2026-09-20.md（本日实测）
-前身: docs/dev/in-progress/json-xml-production-readiness/roadmap-v1-01.md
+roadmap_or_plan: roadmap-v5-01.md
+前身: roadmap-v4-01.md
 关键文档:
-  - phase0-findings.md      # Phase 0 的 7 项发现（含 2 处自我纠错）
-  - phase0-report.md        # Phase 0 交付报告
-  - api-coverage-matrix-v2.json  # 覆盖矩阵产物
+  - p2-survey/synthesis.md   # 159 条时代的跨族根因分析（P2-00 调查产物）
+  - roadmap-v5-01.md         # 控制实验后的重划（realDefect 159→35）
+  - p2-baseline/             # 一手基线：fact-results-59454792b.json + provenance
 
 blocking_questions: []
 question_clearance: cleared
@@ -26,7 +25,7 @@ child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
 merge_granularity: 阶段边界
-recommended_next_child: P2-00
+recommended_next_child: P2-02
 ```
 
 ## P1 阶段进展（2026-09-22）
@@ -68,6 +67,51 @@ recommended_next_child: P2-00
 Workflow 只用于**调查**（只读 fan-out），实现按 worktree 串行。
 
 **下一步**：P2-00（建 worktree + Workflow 并行调查各族失败模式）。
+
+## roadmap-v5 + P2 控制实验（2026-09-24）
+
+### 🔴 控制实验：realDefect 159 → 35
+
+p2-survey 的 P0-a 要求的控制实验**已执行**。产物：
+`p2-baseline/fact-results-59454792b.json`（`provenance.gitCommit` 已比对 = main HEAD ✅）。
+
+| resultKind | 修复前 `5fa746b86` | **当前 main `59454792b`** | 变化 |
+|:-----------|:------------------:|:-------------------------:|:----:|
+| **realDefect** | **159** | **35** | **−124 (−78%)** |
+| real | 136 | **253** | +117 |
+| stubGap | 185 | 174 | −11 |
+| unassertable | 74 | 50 | −24 |
+| smoke | 37 | 75 | +38 |
+
+**根因**：`BuildExceptionTypeTable()` 去重键（subject id）≠ 消费键（display name）
+→ 同名孪生占位版恒赢首匹配 → 抛 null 对象（= p2-survey 的 **RC-1**）。
+修复 `87a01ecdd` 正是闸 1。
+
+⇒ **p2-survey 规划的 W1+W2+W3+W4 = 96+23+25+15 = 159 条，与旧基线精确吻合；
+那 124 条全部由 RC-1 造成，不是 native 类名写错。** v4 分族**大部分失效**。
+
+### v4 的两处前提被推翻/修正
+
+1. **分族基数失效** —— W1(96→3) / W2(23→0) / W3(25→14) / W4(15→18)。
+   详见 `roadmap-v5-01.md` §2.1。
+2. **§5.3 的 artifacts 隔离前提不完整** —— 隔离的是目录，不是时效性。
+   实例：某 worktree `hotupdate.json` 记 135，同目录 `entry.exe` 重跑恒为 0；
+   时间戳看似配套但实际不是同一次构建。
+   **判据升级**：新增「`provenance.json` 的 `gitCommit` 必须等于当前 HEAD」。
+
+### 第三处发现：`testing/` 下的 subject 源是陈旧副本
+
+`testing/.../managed/combined/CombinedSubjects.cs` 是 **Sep-10** 的旧文件；
+pipeline 每次构建重新生成到 `artifacts/.../managed/combined/CombinedSubjects.cs`。
+**读 ATG 源码判断 subject 形态时必须读 `artifacts/` 那份**，否则判断会基于过时代码。
+
+### 35 条的形态与未决问题
+
+- **TYPED-CATCH 28 / AREQUAL 5 / BARE 2**（全部 `caught=true, assertFailed=false`）
+- **两个方向相反的责任假设未裁定**（native 异常类名错 vs ATG probe 语境错），
+  **裁定前不得改代码**。P2-01 的 workflow 正在做对抗性证伪。
+
+**下一步**：P2-01 出裁定 → **P2-02** 按责任层修复。
 
 ## Phase 0 完成结论（2026-09-20）
 

@@ -1,0 +1,19 @@
+{
+  "slug": "xml",
+  "assembly": "System.Private.Xml",
+  "runId": "fdn-20260924-001",
+  "platform": "windows-x64",
+  "deviceId": "HAOCHUANWANG-PC",
+  "gitCommit": "59454792b8f1f7ceeae08b2bc6b8f29175f8132e",
+  "gitBranch": "main",
+  "nativeConfig": "check",
+  "mode": "standard",
+  "stagesRun": null,
+  "build": {
+    "status": "passed",
+    "fastpath": false,
+    "cacheProvenance": "miss",
+    "cacheKey": "System.Private.Xml/xml/win32/793eea0a468d173a",
+    "cachedAt": "2026-09-24T08:55:39Z"
+  }
+}
