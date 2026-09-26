@@ -1327,9 +1327,25 @@ public sealed partial class NativeAotLoweringPlanner
         // dispatchers). Drained immediately after the registration block so their
         // position in the section list matches where their text would have been,
         // and so each becomes its own translation unit rather than page-0 bulk.
+        // Whether the emitter will actually render these sections as payload TUs.
+        // The gate lives in NativeAotEmitter (PayloadSectioningThresholdMethods):
+        // below it, payload sections are NOT emitted at all, so any section that
+        // only lives in the section list would silently vanish from the output.
+        bool _payloadTusWillBeRendered = allMethods.Length >= NativeAotEmitter.PayloadSectioningThresholdMethods;
         foreach (var deferred in _deferredPayloadSections)
         {
             AddSection(deferred.Name, deferred.Content);
+            if (!_payloadTusWillBeRendered)
+            {
+                // Small-model path: the emitter appends moduleRegSb verbatim and
+                // never renders payload sections. Append the content here so it is
+                // not lost. (Missing this is why `kRefl_desc_*` definitions — which
+                // live in the deferred `reflmembers_*` sections — were referenced by
+                // ChaosRegisterReflectionMembers() but never defined, producing
+                // LNK2001 x N on any chunk with reflection members and < 500 methods.)
+                moduleRegSb.Append(Environment.NewLine);
+                moduleRegSb.Append(deferred.Content);
+            }
         }
         _deferredPayloadSections.Clear();
         if (!string.IsNullOrEmpty(nameIndexCode))

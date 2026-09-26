@@ -19,15 +19,43 @@ public sealed partial class NativeAotEmitter
         // would define every `chaos_vtable_*` array and `kSlots_*` table twice
         // (C2086 redefinition against the payload TU).
         //
-        // A model only takes this path when it is under the 200K threshold, and
-        // such a model has no paged payload — but the payload splitter engages by
-        // method count, not by model size, so a small object model can still sit
-        // alongside sectioned vtable data.  See PagePayloadSplitTests.
+        // KNOWN-ISSUE-1 ROOT CAUSE (fixed 2026-09-24):
+        // This used to strip the vtable block by LENGTH: .
+        // The implicit assumption was that VTableDataCode is always a suffix of
+        // ObjectModelCode.  It is not: a complete 
+        // declaration for the FIRST vtabled type sits between the generic-registration
+        // block and that type's vtable array (objectModelBuilder receives
+        // EmitGenericRegistration, then stringIdCode/g_enumBake, then vtableDataCode;
+        // VTableDataCode is built from slot-grouped table text only, so it is NOT the
+        // whole tail).  Blind-cutting 7428 bytes from a 140590-char model therefore
+        // sliced through that declaration exactly at its 93rd character, leaving
+        //
+        //     extern "C" void Chaos_..._AssertionException__ctor_System_S
+        //
+        // in the emitted file (C2182/C2144, pointing at the NEXT declaration, which
+        // is how it stayed hidden).  The correct behavior in this branch is NOT to
+        // strip at all: when the vtable block is sectioned out, it is sectioned out
+        // of the FULL object model, not out of a suffix.  See the same reasoning in
+        // ObjectModelCode finalization (Methods.cs:1874-1896), whose AppendPath appends
+        // vtableDataCode to the END of objectModelBuilder so the small-string branch
+        // above must strip it back — but only when it actually IS the suffix.
         string objectModelCode = templateModel.ObjectModelCode;
-        int vtableTailLength = templateModel.VTableDataCode.Length;
-        if (vtableTailLength > 0 && vtableTailLength <= objectModelCode.Length)
+        string vtableDataCode = templateModel.VTableDataCode ?? string.Empty;
+        int vtableTailLength = vtableDataCode.Length;
+        // vtable 数据是 objectModelBuilder 的最后一个 Append（Methods.cs:1874），
+        // 但 ObjectModelCode 在 1895 行经 TrimEnd()，尾部空白被打掉，固定长度
+        // 切片会切进 vtable 前的完整声明（KNOWN-ISSUE-1 根因）。用实际位置。
+        int vtableStart = objectModelCode.LastIndexOf(vtableDataCode, StringComparison.Ordinal);
+        if (vtableStart > 0 && vtableStart + vtableTailLength == objectModelCode.Length)
         {
-            objectModelCode = objectModelCode[..^vtableTailLength];
+            objectModelCode = objectModelCode[..vtableStart];
+        }
+        else if (vtableTailLength > 0 && vtableTailLength <= objectModelCode.Length
+            && objectModelCode.EndsWith(vtableDataCode.TrimEnd(), StringComparison.Ordinal))
+        {
+            // TrimEnd 吃掉尾部空白后的兜底：vtable(trim) 是后缀
+            int cut = objectModelCode.Length - vtableDataCode.TrimEnd().Length;
+            objectModelCode = objectModelCode[..cut];
         }
 
         var model = new ScriptObject
@@ -218,13 +246,28 @@ public sealed partial class NativeAotEmitter
         // both sides.
         if (templateModel.CrossSectionSymbols is { Count: > 0 })
         {
+            // MUST be wrapped in the SAME namespace the definitions live in.
+            //
+            // The definitions are emitted inside
+            // `namespace chaos::il2cpp::codegen::<CodegenNamespace> { ... }`
+            // (see the module-registration / payload sections), so their symbols
+            // are mangled as `...@codegen@il2cpp@chaos@@`. Declaring them at
+            // global scope here produced a DIFFERENT mangled name, and every
+            // consumer (e.g. ChaosRegisterExternalType taking &kRefl_desc_*) then
+            // failed at link time with LNK2001 on a symbol that is in fact
+            // defined — the definition and the declaration were never the same
+            // entity. Wrapping in the codegen namespace makes the two match.
             sb.Append('\n');
             sb.Append("// Cross-section symbols (defined in a sibling payload section)\n");
+            sb.Append("namespace chaos::il2cpp::codegen::");
+            sb.Append(templateModel.CodegenNamespace);
+            sb.Append(" {\n");
             foreach (var symbol in templateModel.CrossSectionSymbols)
             {
                 sb.Append(symbol.Declaration);
                 sb.Append('\n');
             }
+            sb.Append("}\n");
         }
 
         return sb.ToString();
