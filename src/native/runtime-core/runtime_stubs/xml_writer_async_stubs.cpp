@@ -45,6 +45,7 @@
 // indistinguishable from a live one here, which is faithful — the BCL checks
 // async capability on the instance before it inspects any writer state either.
 #include <chaos/native_types.h>
+#include <chaos/async.h>
 #include <cstring>
 #include <string>
 
@@ -56,6 +57,27 @@
 namespace chaos::il2cpp::runtime_core {
 
 namespace {
+
+/// A Task that has already run to completion with no result and no fault.
+///
+/// The *Async surface returns Task, and the ATG template chains
+/// `.GetAwaiter().GetResult()` on it.  That chain null-checks the handle
+/// BEFORE it reaches the awaiter, so returning 0 for a call that must not
+/// throw makes the generated call site raise NullReferenceException from its
+/// own guard — not from the stub.  Measured against .NET 8,
+/// `WriteStringAsync(null).GetAwaiter().GetResult()` completes WITHOUT throwing
+/// (the returned task is RanToCompletion), so the legal no-op path has to hand
+/// back a live, completed task.
+CHAOS_IL2CPP_INTPTR CreateCompletedTask() CHAOS_STUB_NOEXCEPT
+{
+    const auto handle = chaos::il2cpp::common::async_task_create();
+    auto* task = reinterpret_cast<chaos::il2cpp::common::AsyncTask*>(handle);
+    task->result = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    task->exception = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+    task->faulted.store(false, std::memory_order_relaxed);
+    task->completed.store(true, std::memory_order_release);
+    return handle;
+}
 
 /// The single failure mode of every well-formed call on a non-async writer.
 [[noreturn]] void RaiseNotAsyncCapable()
@@ -221,10 +243,13 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteStringAsync(
 {
     (void)this_ptr;
     // A null string is a legal no-op on this path: the ATG subject for the
-    // null value set has NO try/catch and returns 42L directly, i.e. it expects
-    // the call to complete without throwing (measured OK on .NET 8).  Only a
-    // non-empty argument reaches the async-capability refusal.
-    if (!HasText(text)) return 0;
+    // null value set has NO try/catch and calls
+    // `.WriteStringAsync(null).GetAwaiter().GetResult()`, which completes
+    // WITHOUT throwing (measured .NET 8 — the returned task is
+    // RanToCompletion).  Hand back a completed task so the derived awaiter
+    // chain in the generated call site does not NRE on a 0 handle.
+    if (!HasText(text))
+        return CreateCompletedTask();
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
@@ -233,7 +258,8 @@ CHAOS_IL2CPP_INTPTR ChaosXmlWriterWriteRawAsync(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR data) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
-    if (!HasText(data)) return 0;
+    if (!HasText(data))
+        return CreateCompletedTask();
     RaiseNotAsyncCapable();
     return 0;  // unreachable: RaiseNotAsyncCapable is [[noreturn]]
 }
