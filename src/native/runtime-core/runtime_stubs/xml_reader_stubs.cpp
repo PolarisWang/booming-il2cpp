@@ -161,6 +161,8 @@ void FreeSlot(ReaderState* st) {
 // contract (NRE for a null name), so it must keep the throwing path.
 constexpr char kXmlNodeReaderSubjectId[] =
     "System.Xml.ReaderWriter/System.Xml.XmlNodeReader";
+constexpr char kXmlValidatingReaderSubjectId[] =
+    "System.Xml.ReaderWriter/System.Xml.XmlValidatingReader";
 
 // Handles reach this file in TWO shapes, and only one of them is dereferenceable:
 //
@@ -175,14 +177,24 @@ constexpr char kXmlNodeReaderSubjectId[] =
 // The two are trivially separable: a slot index is <= kReaderCap, while an
 // allocated GC object is far above any low address.  Guarding the dereference
 // is what makes the discrimination safe, not just correct.
-bool ReceiverIsXmlNodeReader(CHAOS_IL2CPP_INTPTR this_ptr) {
+bool ReceiverHasStableId(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_UINT64 id) {
     // Slot handles (and null) are never GC objects — no type_info to read.
     if (this_ptr <= static_cast<CHAOS_IL2CPP_INTPTR>(kReaderCap)) return false;
     const auto* ti = chaos_object_get_type_info(
         reinterpret_cast<const void*>(this_ptr));
-    return ti != nullptr &&
-           ti->stable_id == chaos_compute_type_stable_id(kXmlNodeReaderSubjectId);
+    return ti != nullptr && ti->stable_id == id;
 }
+
+bool ReceiverIsXmlNodeReader(CHAOS_IL2CPP_INTPTR this_ptr) {
+    return ReceiverHasStableId(this_ptr,
+        chaos_compute_type_stable_id(kXmlNodeReaderSubjectId));
+}
+
+bool ReceiverIsXmlValidatingReader(CHAOS_IL2CPP_INTPTR this_ptr) {
+    return ReceiverHasStableId(this_ptr,
+        chaos_compute_type_stable_id(kXmlValidatingReaderSubjectId));
+}
+
 
 bool ManagedStringView(CHAOS_IL2CPP_INTPTR str, const char*& out, size_t& out_len) {
     if (str == 0) return false;
@@ -825,12 +837,22 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderGetAttributeStrNs(
 // The stub tokenizer never positions on base64/binhex content, so a valid
 // buffer yields 0 bytes read; a null buffer is the ArgumentNullException the
 // managed reader raises.
+//
+// Variant contract (verified against .NET 8, same asymmetry as GetAttribute):
+//   XmlTextReader         → null buffer throws ArgumentNullException
+//   XmlNodeReader         → null buffer returns 0, never throws
+//   XmlValidatingReader   → null buffer returns 0, never throws
+// The base-type registration routes all three here, so the variants are
+// short-circuited before the null check.
 CHAOS_IL2CPP_INT32 ChaosXmlTextReaderReadContentAsBase64(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR buffer,
     CHAOS_IL2CPP_INT32 index,
     CHAOS_IL2CPP_INT32 count) CHAOS_STUB_NOEXCEPT
 {
+    if (ReceiverIsXmlNodeReader(this_ptr) ||
+        ReceiverIsXmlValidatingReader(this_ptr))
+        return 0;  // variant contract: never throws on a null buffer
     auto* st = Resolve(this_ptr);
     if (!st) return 0;
     if (buffer == 0)

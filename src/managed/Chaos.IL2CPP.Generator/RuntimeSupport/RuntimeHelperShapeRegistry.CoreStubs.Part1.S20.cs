@@ -246,6 +246,34 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterReaderVariantBase(registry, "System.Xml.XmlReader",
                 strAbi, intRetAbi);
 
+            // ── ReadContentAs*/ReadElementContentAs* (base64/binhex) ──
+            // The XmlReader BASE surface also declares the byte[]-buffer content
+            // readers.  XmlTextReader overrides them, but AOT call sites spell
+            // inherited calls by the STATIC type, so XmlTextReaderTests executes
+            // them through the System.Xml.XmlReader::ReadContentAsBase64 subject.
+            // Registered here as receiver-injected (empty, base path); the native
+            // symbol raises ArgumentNullException for a null buffer, which the
+            // _0 subjects assert.  Without it those calls fell to the catch-all
+            // extern, which returns 0 instead of throwing — recorded realDefect.
+            var baseBuf3 = new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                new[] { bufAbi, intRetAbi, intRetAbi });
+            registry.Register("System.Xml.XmlReader", "ReadContentAsBase64",
+                new[] { "System.Byte[]", "System.Int32", "System.Int32" },
+                ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderReadContentAsBase64", baseBuf3, intRetAbi);
+            registry.Register("System.Xml.XmlReader", "ReadElementContentAsBase64",
+                new[] { "System.Byte[]", "System.Int32", "System.Int32" },
+                ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderReadElementContentAsBase64", baseBuf3, intRetAbi);
+            registry.Register("System.Xml.XmlReader", "ReadContentAsBinHex",
+                new[] { "System.Byte[]", "System.Int32", "System.Int32" },
+                ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderReadContentAsBinHex", baseBuf3, intRetAbi);
+            registry.Register("System.Xml.XmlReader", "ReadElementContentAsBinHex",
+                new[] { "System.Byte[]", "System.Int32", "System.Int32" },
+                ShapeKind.SimpleForward,
+                "ChaosXmlTextReaderReadElementContentAsBinHex", baseBuf3, intRetAbi);
+
             // NOTE: ResolveEntity() is already registered by M5 in S19 — its shape
             // key is unchanged, so re-registering here would raise
             // "Shape already registered" at planner construction (HANDOFF §4.2).
