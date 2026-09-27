@@ -705,18 +705,26 @@ void ChaosXmlWriterWriteFullEndElement(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_
 }
 
 /// WriteEndDocument() — closes every open element.
-/// Managed contract (measured on .NET 8): writing a document that never got a
-/// root ELEMENT throws ArgumentException("Document does not have a root
-/// element.") — not InvalidOperationException, and still so after
-/// WriteStartDocument() alone, since the declaration is not a root element.
-/// The probe records exactly System.ArgumentException for this subject, so the
-/// fact harness compares against that.
+///
+/// Exception type depends on the CONCRETE writer, and the two entry points
+/// already track that distinction through WriterState.kind:
+///   XmlWriter.Create(new StringBuilder()) -> Kind::WellFormed
+///     .WriteEndDocument() on a doc with no open element -> InvalidOperationException
+///   new XmlTextWriter(StringWriter)        -> Kind::TextWriter
+///     .WriteEndDocument() on a doc with no open element -> ArgumentException
+/// Both measured on .NET 8.
 void ChaosXmlWriterWriteEndDocument(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);
     if (st == nullptr) return;
     if (st->depth == 0)
-        RaiseArgumentException("Document does not have a root element.");
+    {
+        if (IsStrictWriter(st))
+            RaiseManagedException("System.InvalidOperationException",
+                "Document does not have a root element.");
+        RaiseManagedException("System.ArgumentException",
+            "Document does not have a root element.");
+    }
     while (st->depth > 0) ChaosXmlWriterWriteEndElement(this_ptr);
 }
 
