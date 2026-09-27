@@ -597,6 +597,21 @@ CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderCreate(CHAOS_IL2CPP_INTPTR input) CHAOS_ST
     return static_cast<CHAOS_IL2CPP_INTPTR>(slot);
 }
 
+// ── XmlReader.Create(TextReader) → XmlReader ──
+// The static factory the XmlReaderTests subjects call.  It must return a real
+// ReaderState slot, not a GC object: every subsequent instance call on the
+// result resolves through Resolve(), which treats the handle as a 1-based slot
+// index.  Returning 0 here made the subject's own null guard raise
+// NullReferenceException before the method under test ran (caught=true /
+// realDefect for every `XmlReader.Create(new StringReader(...))` subject).
+//
+// The input TextReader is not marshalled — like ChaosXmlTextReaderCreate, the
+// stub tokenizes a fixed document, which is what the ATG fixtures feed anyway.
+CHAOS_IL2CPP_INTPTR ChaosXmlReaderCreate(CHAOS_IL2CPP_INTPTR input) CHAOS_STUB_NOEXCEPT
+{
+    return ChaosXmlTextReaderCreate(input);
+}
+
 CHAOS_IL2CPP_INT32 ChaosXmlTextReaderRead(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
 {
     auto* st = Resolve(this_ptr);

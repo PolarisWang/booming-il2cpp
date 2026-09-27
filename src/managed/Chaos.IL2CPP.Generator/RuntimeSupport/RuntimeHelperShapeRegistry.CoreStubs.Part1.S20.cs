@@ -194,6 +194,33 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterReaderVariant(registry, "System.Xml.XmlNodeReader",
                 thisStr, thisStrR, thisStrStr, thisStrStrR, intRetAbi);
 
+            // ── XmlReader.Create(TextReader) → XmlReader (static FACTORY) ──
+            //
+            // Static factory: no receiver, one TextReader argument, XmlReader
+            // result.  Without this registration the call fell to the
+            // zero-parameter catch-all extern, which returns 0 — and the
+            // subject's own null guard then raised NullReferenceException
+            // before the reader method under test ever ran.  Every XmlReader
+            // subject built as `XmlReader.Create(new StringReader(...))` was
+            // recorded caught=true / realDefect.
+            //
+            // Contrast with the receiver-injected instance registrations
+            // above: those stay empty (receiver injected by
+            // _ReceiverInjectedTypes).  This factory is STATIC and unlisted,
+            // so its one explicit slot is the real managed TextReader
+            // argument.  The native factory returns a 1-based ReaderState
+            // slot handle, exactly like XmlTextReader's ctor, so the
+            // subsequent instance calls resolve through the same table.
+            var textReaderAbi = CreateNativeIntAbiSlot(
+                "System.Private.CoreLib/System.IO.TextReader",
+                AotCoreIrTypeShapeKind.ReferenceType);
+            registry.Register("System.Xml.XmlReader", "Create",
+                new[] { "System.IO.TextReader" }, ShapeKind.SimpleForward,
+                "ChaosXmlReaderCreate",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { textReaderAbi }),
+                strAbi, new HashSet<int> { 0 });
+
             // ── System.Xml.XmlReader (abstract BASE) — receiver-injected path ──
             //
             // The AOT call sites for reader instance methods bind the callee to

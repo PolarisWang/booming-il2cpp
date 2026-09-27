@@ -51,6 +51,20 @@ public sealed partial class NativeAotLoweringPlanner
         if (methodName != null && _StaticTaskMethodNames.Contains(methodName))
             return false;
 
+        // XmlReader is receiver-injected for its instance surface (GetAttribute,
+        // MoveToAttribute, ResolveEntity, … — the AOT call sites spell those by
+        // the compiler-known static base type).  It ALSO carries static
+        // factories — Create — which must NOT gain a receiver slot: injecting
+        // one made the generated call site pass the argument twice,
+        // `ChaosXmlReaderCreate(_s0, _s0)`, against a 1-argument shape (C2660).
+        //
+        // Keyed by (type, method) rather than by method name alone: "Create" is
+        // far too common to blacklist globally the way the Task names are.
+        if (methodName != null
+            && string.Equals(typeName, "System.Xml.XmlReader", StringComparison.Ordinal)
+            && _StaticXmlReaderMethodNames.Contains(methodName))
+            return false;
+
         foreach (var t in _ReceiverInjectedTypes)
         {
             if (string.Equals(typeName, t, StringComparison.Ordinal))
@@ -70,6 +84,14 @@ public sealed partial class NativeAotLoweringPlanner
         "Yield", "WaitAll", "WaitAny",
         "ContinueWhenAll", "ContinueWhenAny",
     };
+
+    /// <summary>
+    /// Static factories on System.Xml.XmlReader, which is otherwise an
+    /// instance-method receiver-injected type.  Scoped to that type — the names
+    /// ("Create") are too generic to blacklist globally.
+    /// </summary>
+    private static readonly HashSet<string> _StaticXmlReaderMethodNames =
+        new(StringComparer.Ordinal) { "Create" };
 
     /// <summary>Method name from a subject id, or null if malformed.</summary>
     private static string? ExtractMethodNameFromSubjectId(string subjectId)

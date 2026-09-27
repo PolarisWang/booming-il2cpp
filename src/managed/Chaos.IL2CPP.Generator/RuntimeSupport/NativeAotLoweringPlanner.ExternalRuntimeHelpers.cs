@@ -1059,6 +1059,15 @@ public sealed partial class NativeAotLoweringPlanner
 		if (methodName != null && _StaticTaskMethodNames.Contains(methodName))
 			return false;
 
+		// XmlReader static factories — same reasoning as the Task guard above.
+		// XmlReader is receiver-injected for its instance surface, so its static
+		// Create would otherwise get a receiver slot and the call site would pass
+		// the argument twice (C2660 against the 1-argument shape).
+		if (methodName != null
+			&& string.Equals(typeName, "System.Xml.XmlReader", StringComparison.Ordinal)
+			&& _StaticXmlReaderMethodNames.Contains(methodName))
+			return false;
+
 		foreach (var t in _ReceiverInjectedTypes)
 		{
 			if (string.Equals(typeName, t, StringComparison.Ordinal))

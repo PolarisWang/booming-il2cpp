@@ -12,6 +12,12 @@ extern "C" {
 CHAOS_IL2CPP_INTPTR ChaosXmlTextReaderCreate(
     CHAOS_IL2CPP_INTPTR input) CHAOS_STUB_NOEXCEPT;
 
+/// XmlReader.Create(TextReader) → opaque handle.  Static factory returning the
+/// same ReaderState slot representation as XmlTextReader's ctor, so instance
+/// calls on the result resolve through the shared handle table.
+CHAOS_IL2CPP_INTPTR ChaosXmlReaderCreate(
+    CHAOS_IL2CPP_INTPTR input) CHAOS_STUB_NOEXCEPT;
+
 /// XmlTextReader.Read() → bool (advance to next node)
 CHAOS_IL2CPP_INT32 ChaosXmlTextReaderRead(
     CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT;
