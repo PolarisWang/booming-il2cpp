@@ -550,6 +550,19 @@ public sealed partial class NativeAotLoweringPlanner
                 ShapeKind.SimpleForward,
                 "ChaosXmlDocumentCreateAttribute3", docStr3Slots, attrAbi, docStr3R);
 
+            // CreateTextNode(string) → XmlText
+            // Reachable as `new XmlDocument().CreateTextNode("text").SplitText(0)`.
+            // Without this shape the call fell to the catch-all extern (which the
+            // emitted shim declares with NO parameters), the receiver became 0,
+            // and the subject's null guard raised NRE instead of the
+            // InvalidOperationException SplitText actually throws.
+            registry.Register("System.Xml.XmlDocument", "CreateTextNode",
+                new[] { "System.String" }, ShapeKind.SimpleForward,
+                "ChaosXmlDocumentCreateTextNode",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(
+                    new[] { docAbi, strAbi }),
+                nodeAbi, new HashSet<int> { 0, 1 });
+
             // GetElementsByTagName(string localName, string ns)
             registry.Register("System.Xml.XmlDocument", "GetElementsByTagName",
                 new[] { "System.String", "System.String" }, ShapeKind.SimpleForward,

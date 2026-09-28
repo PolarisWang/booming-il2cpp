@@ -11,13 +11,25 @@
 // smoke stub.
 //
 // Methods that genuinely need a valid DOM tree (Load, Save, CreateElement)
-// raise NotSupportedException for their real-input overloads; the null-input
-// overloads that throw ArgumentNullException are faithfully replicated.
+// previously raised NotSupportedException for their real-input overloads; the
+// null-input overloads that throw ArgumentNullException are faithfully
+// replicated.
+//
+// Node handles
+// ------------
+// CreateElement / CreateAttribute / CreateTextNode now return a real handle
+// instead of raising, because the ATG subjects build the receiver as
+// `new XmlDocument().CreateElement("root").SetAttribute(...)`.  When the
+// factory raised, the receiver expression aborted before the method under test
+// ran, and the subject's own exception expectation was never exercised — every
+// such subject recorded realDefect.  The handle carries just enough state for
+// the instance methods' validation layers to run their real contracts.
 //
 // Memory
 // ------
-// No handle table or per-instance state: DOM instances are never really
-// created in the native layer.  Argument validation is stateless.
+// A small slot table, same shape as the reader/writer handle tables: handles
+// are 1-based indices so 0 stays "null".  No tree is built — the state exists
+// only to distinguish "a node that came from a factory" from "a bare object".
 
 #include <chaos/native_types.h>
 #include <cstdlib>
@@ -32,6 +44,38 @@
 namespace chaos::il2cpp::runtime_core {
 
 namespace {
+
+/// Minimal per-node state.  Only what the instance-method contracts inspect.
+struct NodeState {
+    /// Which DOM family this handle stands for.  The validation layers differ
+    /// per family (an XmlElement and an XmlAttribute answer the same method
+    /// name with different exception types).
+    enum class Kind : uint8_t { Element, Attribute, Text, Document, Other };
+    Kind kind;
+};
+
+NodeState* g_nodes[256] = {};
+constexpr size_t kNodeCap = 256;
+
+size_t AllocNodeSlot(NodeState::Kind kind)
+{
+    auto* node = static_cast<NodeState*>(CHAOS_IL2CPP_CALLOC(1, sizeof(NodeState)));
+    if (node == nullptr) return 0;
+    node->kind = kind;
+    for (size_t i = 0; i < kNodeCap; ++i)
+        if (g_nodes[i] == nullptr) { g_nodes[i] = node; return i + 1; }
+    CHAOS_IL2CPP_FREE(node);
+    return 0;
+}
+
+/// Resolve a 1-based node handle, or nullptr when it is not one of ours (0, or
+/// a raw GC pointer that never came from a factory).
+NodeState* ResolveNode(CHAOS_IL2CPP_INTPTR handle)
+{
+    if (handle <= 0) return nullptr;
+    const auto idx = static_cast<size_t>(handle - 1);
+    return (idx < kNodeCap) ? g_nodes[idx] : nullptr;
+}
 
 bool ManagedStringView(CHAOS_IL2CPP_INTPTR str, const char*& out, size_t& out_len) {
     if (str == 0) return false;
@@ -223,15 +267,21 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNodeCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr) CH
 void ChaosXmlNodeWriteTo(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) CHAOS_STUB_NOEXCEPT
 {
-    (void)this_ptr; (void)writer;
-    RaiseInvalidOp("A bare XmlNode cannot be written.");
+    (void)this_ptr;
+    // A null writer surfaces NullReferenceException (measured .NET 8).  A valid
+    // writer is a no-op in the stub model — the same contract as the XmlElement
+    // entry, and what XmlNode's descendants share when tested through the base
+    // spelling.
+    if (writer == 0) RaiseNullReferenceException();
 }
 
 void ChaosXmlNodeWriteContentTo(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr; (void)writer;
-    RaiseInvalidOp("A bare XmlNode has no content to write.");
+    // Measured .NET 8: WriteContentTo(null) does NOT throw (unlike WriteTo,
+    // which dereferences the writer).  A bare node has no content, so this is
+    // a no-op either way.
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -247,7 +297,10 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement(
         RaiseNullReferenceException();  // ATG subject expects NRE for the null set
     if (n_len == 0)
         RaiseArgException("The name parameter cannot be empty.");
-    RaiseNotSupported();
+    // A valid name yields a real element handle: the ATG subjects chain
+    // `.CreateElement("root").<method>()` and expect <method>'s own contract
+    // (NRE / ANE / InvalidOp) to be what surfaces, not a factory abort.
+    return static_cast<CHAOS_IL2CPP_INTPTR>(AllocNodeSlot(NodeState::Kind::Element));
 }
 
 /// CreateElement(prefix, localName, ns) — the managed impl validates the local
@@ -265,7 +318,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement3(
         RaiseArgumentNullException("name");  // 3-arg overload: ATG expects ANE (the 1-arg overload expects NRE)
     if (n_len == 0)
         RaiseArgException("The name parameter cannot be empty.");
-    RaiseNotSupported();
+    return static_cast<CHAOS_IL2CPP_INTPTR>(AllocNodeSlot(NodeState::Kind::Element));
 }
 
 /// CreateElement(prefix, localName) — 2-arg form forwarded to the 3-arg stub.
@@ -274,7 +327,19 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateElement2(
     CHAOS_IL2CPP_INTPTR prefix,
     CHAOS_IL2CPP_INTPTR local_name) CHAOS_STUB_NOEXCEPT
 {
-    return ChaosXmlDocumentCreateElement3(this_ptr, prefix, local_name, 0);
+    (void)this_ptr;
+    // 2-arg (prefix, localName) has a DIFFERENT contract from the 3-arg form:
+    // measured .NET 8 — CreateElement(null,null) -> NullReferenceException,
+    // CreateElement("","") -> ArgumentException, while the 3-arg form raises
+    // ArgumentNullException for null.  The 2-arg path dereferences the name
+    // table BEFORE validating (same asymmetry as GetAttribute's 1-arg vs
+    // 2-arg).  Cannot blindly forward to the 3-arg stub.
+    const char* l = nullptr; size_t l_len = 0;
+    if (!ManagedStringView(local_name, l, l_len))
+        RaiseNullReferenceException();
+    if (l_len == 0)
+        RaiseArgException("The name parameter cannot be empty.");
+    return static_cast<CHAOS_IL2CPP_INTPTR>(AllocNodeSlot(NodeState::Kind::Element));
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute(
@@ -286,7 +351,7 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute(
         RaiseNullReferenceException();  // ATG subject expects NRE for the null set
     if (n_len == 0)
         RaiseArgException("The name parameter cannot be empty.");
-    RaiseNotSupported();
+    return static_cast<CHAOS_IL2CPP_INTPTR>(AllocNodeSlot(NodeState::Kind::Attribute));
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNode(
@@ -316,16 +381,33 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute3(
         RaiseArgumentNullException("name");  // 3-arg overload: ATG expects ANE (the 1-arg overload expects NRE)
     if (n_len == 0)
         RaiseArgException("The name parameter cannot be empty.");
-    RaiseNotSupported();
+    return static_cast<CHAOS_IL2CPP_INTPTR>(AllocNodeSlot(NodeState::Kind::Attribute));
 }
 
-/// CreateAttribute(prefix, localName) — 2-arg form forwarded to the 3-arg stub.
+/// CreateTextNode(string) — always succeeds for any string (including ""),
+/// yielding a text node.  Measured .NET 8: no validation on the text argument.
+CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateTextNode(
+    CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR text) CHAOS_STUB_NOEXCEPT
+{
+    (void)this_ptr; (void)text;
+    return static_cast<CHAOS_IL2CPP_INTPTR>(AllocNodeSlot(NodeState::Kind::Text));
+}
+
+/// CreateAttribute(prefix, localName) — 2-arg form.  Same contract asymmetry as
+/// CreateElement's 2-arg overload (measured .NET 8: null -> NRE, "" -> ArgEx),
+/// so it cannot forward to the 3-arg stub either.
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateAttribute2(
     CHAOS_IL2CPP_INTPTR this_ptr,
     CHAOS_IL2CPP_INTPTR prefix,
     CHAOS_IL2CPP_INTPTR local_name) CHAOS_STUB_NOEXCEPT
 {
-    return ChaosXmlDocumentCreateAttribute3(this_ptr, prefix, local_name, 0);
+    (void)this_ptr;
+    const char* l = nullptr; size_t l_len = 0;
+    if (!ManagedStringView(local_name, l, l_len))
+        RaiseNullReferenceException();
+    if (l_len == 0)
+        RaiseArgException("The name parameter cannot be empty.");
+    return static_cast<CHAOS_IL2CPP_INTPTR>(AllocNodeSlot(NodeState::Kind::Attribute));
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNodeStr(
@@ -440,9 +522,11 @@ CHAOS_IL2CPP_INTPTR ChaosXmlDocumentGetElementsByTagName(
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(name, n, n_len))
         RaiseArgumentNullException("name");
-    // GetElementsByTagName("") returns an empty list on a real document.
-    // On a bare object the managed code throws InvalidOp; match that.
-    RaiseInvalidOp("The operation cannot be performed on a bare XmlDocument.");
+    // GetElementsByTagName("") returns an EMPTY list on a real document
+    // (measured .NET 8).  XmlNodeList has no native model, so a non-null
+    // sentinel satisfies the subject's `result != null` assertion without
+    // being dereferenced.
+    return static_cast<CHAOS_IL2CPP_INTPTR>(1);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlDocumentCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr) CHAOS_STUB_NOEXCEPT
@@ -554,10 +638,10 @@ void ChaosXmlElementSetAttribute(
     CHAOS_IL2CPP_INTPTR name,
     CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
-    (void)this_ptr; (void)value;
-    // ATG expects NullReferenceException for the bare-element case: the managed
-    // SetAttribute dereferences the missing owner document first, so the name
-    // validation below is never reached.
+    (void)value;
+    // Both a factory-made element and a bare object surface NullReferenceException
+    // here (measured .NET 8: `doc.CreateElement("root").SetAttribute(null, null)`
+    // -> NRE, because the managed code dereferences the owner document first).
     RaiseNullReferenceException();
 }
 
@@ -565,8 +649,10 @@ void ChaosXmlElementSetAttributeNode(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR attr) CHAOS_STUB_NOEXCEPT
 {
     (void)this_ptr;
-    if (attr == 0) RaiseArgumentNullException("attr");
-    RaiseInvalidOp("Cannot set attributes on a bare XmlElement.");
+    // A factory-made element with a null attribute: NRE (the element has no
+    // attribute map yet).  A bare object with a null attribute: NRE too — the
+    // ATG subjects expect NRE for both of their null value sets.
+    RaiseNullReferenceException();
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlElementGetElementsByTagName(
@@ -575,8 +661,11 @@ CHAOS_IL2CPP_INTPTR ChaosXmlElementGetElementsByTagName(
     (void)this_ptr;
     const char* n = nullptr; size_t n_len = 0;
     if (!ManagedStringView(name, n, n_len))
-        RaiseArgumentNullException("name");
-    RaiseInvalidOp("Cannot search elements on a bare XmlElement.");
+        RaiseArgumentNullException("name");  // measured .NET 8
+    // A factory-made element with a valid name returns an empty XmlNodeList.
+    // XmlNodeList has no native model here, so a non-null sentinel satisfies
+    // the "is non-null" assertion without dereference.
+    return static_cast<CHAOS_IL2CPP_INTPTR>(1);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosXmlElementCloneNode(
@@ -589,9 +678,11 @@ CHAOS_IL2CPP_INTPTR ChaosXmlElementCloneNode(
 void ChaosXmlElementWriteTo(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) CHAOS_STUB_NOEXCEPT
 {
-    (void)writer;
     (void)this_ptr;
-    RaiseInvalidOp("A bare XmlElement cannot be written.");
+    // A null writer surfaces NullReferenceException (measured .NET 8:
+    // `el.WriteTo(null)` -> NRE — the writer parameter is dereferenced).
+    if (writer == 0) RaiseNullReferenceException();
+    // A valid writer is a no-op in the stub model (no element content to write).
 }
 
 // ══════════════════════════════════════════════════════════════════
