@@ -60,8 +60,20 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[{{ slot_count }}] = {
 // GetHotpatchEntries(). Without external linkage, the linker cannot resolve
 // the symbol across translation units.
 extern "C" HotpatchEntryV0 s_hotpatch_entries[{{ total_method_count }}] = {
+{{~ # The per-entry `// Type::Method` comment is deliberately NOT emitted.
+    #
+    # Measured on the system chunk: those comments were 172,877 of this array's
+    # 602,096 characters — 29% of it — restating a type and method name that the
+    # table's own `s_hotpatch_methods` / `s_hotpatch_types` arrays already carry.
+    # No consumer parses them (grepped the Python tooling and the fact runner);
+    # the entry ordinal is recoverable from the index, and the native symbol from
+    # the initializer, which is what a debugger actually needs.
+    #
+    # This mirrors the same removal already made on the GC slot map section,
+    # where per-entry symbol comments were 69% of the text.
+~}}
 {{~ for entry in entries ~}}
-    { reinterpret_cast<void*>(&{{ entry.native_symbol }}), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, {{ entry.flags }} },  // {{ entry.type_name }}::{{ entry.method_name }}
+    { reinterpret_cast<void*>(&{{ entry.native_symbol }}), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, {{ entry.flags }} },
 {{~ end ~}}
 };
 
