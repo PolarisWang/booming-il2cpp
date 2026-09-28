@@ -299,6 +299,30 @@ public sealed partial class NativeAotLoweringPlanner
         // GC crash (SEH access violation). All boxes go through
         // CHAOS_IL2CPP_NEW_GC. See boxing-to-object-array-crash fix.
 
+        // `box` on a REFERENCE (or interface) type is an identity operation —
+        // ECMA-335 III.4.1: the result is the object reference itself, and no new
+        // object is created.  Allocating a box here instead would hand every
+        // downstream null test a fresh non-null pointer.
+        //
+        // That is not a theoretical concern: Assert.AreEqual<T>(T,T,string) on a
+        // reference T compiles to
+        //     ldarg.0; box !!0; brtrue <both-non-null>
+        // so with an allocated box the brtrue is ALWAYS taken, the "both null"
+        // arm becomes unreachable, and AreEqual(null, null) falls through to
+        // Assert.Fail — throwing an AssertionException out of a comparison that
+        // .NET answers with "pass" (measured on system-xml-schema si=94/95,
+        // XmlSchemaTypeTests GetBuiltInSimpleType_1 / GetBuiltInComplexType_2).
+        //
+        // Re-pushing the consumed value is what the JIT does for a reference
+        // instantiation, and keeps the stack effect identical to the boxing path.
+        if (requiredTargetReference.TypeShape is AotCoreIrTypeShapeKind.ReferenceType
+            or AotCoreIrTypeShapeKind.InterfaceType)
+        {
+            string passthrough = ConsumeEvalStackValueExpression();
+            EmitEvalStackPush(builder, indentation, passthrough);
+            return;
+        }
+
         builder.AppendLine($"{indentation}{{");
         builder.AppendLine($"{indentation}    const auto chaos_value = {ConsumeEvalStackValueExpression()};");
         builder.AppendLine($"{indentation}    auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");

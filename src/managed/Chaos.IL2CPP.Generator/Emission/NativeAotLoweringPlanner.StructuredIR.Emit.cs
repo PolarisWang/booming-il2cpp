@@ -2524,6 +2524,14 @@ public sealed partial class NativeAotLoweringPlanner
 
         foreach (var pcCase in pcDispatch.Cases)
         {
+            // A pc-dispatch case is a fresh eval-stack frame but shares the
+            // method's STABLE slot namespace.  Reset the cursor to 0 so every
+            // case pushes onto the same canonical _sN names (see
+            // AllocatePushTarget's stable-name rule) — otherwise a value stored
+            // in case 1 (ceq result) is not visible to case 3 which consumes it
+            // via stloc/ldloc, and the null-compare chain reads a stale slot.
+            if (_state.Value!.ActiveStructuredSlotContext is { } pcCtx)
+                pcCtx.ResetForPcCase();
             builder.AppendLine(indentation + "    case " + pcCase.PcValue.ToString() + ":");
             builder.AppendLine(indentation + "    {");
 
@@ -2589,6 +2597,13 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine(indentation + "        break;");
         builder.AppendLine(indentation + "    }");
         builder.AppendLine(indentation + "}");
+        // A pc-dispatch method that reaches the end of its state machine with a
+        // non-negative exit (e.g. a `ret` case that only set chaos_pc = -1) must
+        // still RETURN from the C++ function, or the void method falls off the
+        // end into Undefined Behaviour — which a surrounding EH try treats as a
+        // thrown exception (see si=94/95's caught=true without any Assert.*).
+        if (method.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void)
+            builder.AppendLine(indentation + "    return;");
     }
 
     /// <summary>
@@ -2799,15 +2814,18 @@ public sealed partial class NativeAotLoweringPlanner
         {
             case "brtrue":
                 {
-                    string val = ctx.PeekValue();
-                    ctx.PopValue();
-                    return val;
+                    // brtrue pops an int32/ref; IL truth = nonzero. A generic !
+                    // flip (`!val`) would treat only 0 or 1 as "false", so a hook-returned
+                    // 2 (or any encoded truthy token) would fall out of the null-compare
+                    // chain — see the brfalse twins below. Normalize to a strict
+                    // nonzero test instead.
+                    string val = ctx.PeekValue(); ctx.PopValue();
+                    return val + " != 0";
                 }
             case "brfalse":
                 {
-                    string val = ctx.PeekValue();
-                    ctx.PopValue();
-                    return "!" + val;
+                    string val = ctx.PeekValue(); ctx.PopValue();
+                    return val + " == 0";
                 }
             case "brnull":
                 {

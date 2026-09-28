@@ -60,6 +60,18 @@ public sealed partial class NativeAotLoweringPlanner
         private readonly List<(string name, SlotType type)> _slotInfo = new();
 
         public int Depth => _depth;
+
+        /// <summary>
+        /// Reset the eval-stack cursor for a pc-dispatch case while KEEPING the
+        /// stable slot-name table.  Each case starts its push sequence at stack
+        /// index 0 of the method's slot namespace, so every case's first push
+        /// lands on _s0, and a value stored in a previous case at _sN is
+        /// delivered to the SAME _sN by the next case's matching push.
+        /// </summary>
+        public void ResetForPcCase()
+        {
+            _depth = 0;
+        }
         public int MaxIntSlots => _peakIntDepth;
         public int MaxFloat64Slots => _peakFloat64Depth;
         public int MaxWideSlots => _peakWideDepth;
@@ -70,14 +82,26 @@ public sealed partial class NativeAotLoweringPlanner
 
         public string AllocatePushTarget(SlotType type = SlotType.NativeInt)
         {
-            string slotName = type switch
+            // Stable-name allocation: if a slot was already pushed at this
+            // stack index in an earlier pc case, REUSE that exact name.  It is
+            // the value's canonical physical slot, so a stloc/ldloc across cases
+            // reads the same _sN on both sides instead of a fresh local name.
+            string slotName;
+            if (type == SlotType.NativeInt && _depth < _slotInfo.Count)
             {
-                SlotType.Float64 => FormatDoubleSlotName(_depth),
-                SlotType.Float32 => FormatFloatSlotName(_depth),
-                SlotType.Int64 => FormatInt64SlotName(_depth),
-                SlotType.WideValue => FormatWideSlotName(_peakWideDepth),
-                _ => FormatStructuredSlotName(_depth),
-            };
+                slotName = _slotInfo[_depth].name;
+            }
+            else
+            {
+                slotName = type switch
+                {
+                    SlotType.Float64 => FormatDoubleSlotName(_depth),
+                    SlotType.Float32 => FormatFloatSlotName(_depth),
+                    SlotType.Int64 => FormatInt64SlotName(_depth),
+                    SlotType.WideValue => FormatWideSlotName(_peakWideDepth),
+                    _ => FormatStructuredSlotName(_depth),
+                };
+            }
             // Track peak depth per type (depth+1 because depth is pre-push)
             int newDepth = _depth + 1;
             if (type == SlotType.Float64) _peakFloat64Depth = Math.Max(_peakFloat64Depth, newDepth);
