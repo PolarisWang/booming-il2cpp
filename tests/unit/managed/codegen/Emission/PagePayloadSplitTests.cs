@@ -862,36 +862,84 @@ public sealed class PagePayloadSplitTests
             + "as one contiguous range, so there must be exactly one object");
 
         // 2. Every entry keeps its declared size, and the size the initializer
-        //    writes is the one the scanner will advance by. The values are
-        //    positional (`{ <entry_total_size>u, reinterpret_cast<...>(&sym), ...`),
-        //    so the assertion reads them by position rather than by comment.
-        var entryInitializers = Regex.Matches(text,
-            @"\{\s*(\d+)u,\s*\n?\s*reinterpret_cast<const void\*>\(&(\w+)\)");
-        Assert.True(entryInitializers.Count > 0,
-            $"{fileName} contains no slot-map entry initializers — the data is missing");
+        //    writes is the one the scanner will advance by.
+        //
+        //    The section is emitted as ONE flat uint32 array
+        //    (`CHAOS_IL2CPP_UINT32 entries[N]`), so there are no per-entry
+        //    `slots[k]` declarations to cross-check against — a scalar array
+        //    aggregates positionally and cannot carry sub-aggregates. The entries
+        //    are therefore delimited by the `/* entryN */` comments and validated
+        //    by replaying the walk the RUNTIME performs: read entry_total_size at
+        //    the cursor, advance by it, and require that every step lands exactly
+        //    on the next entry marker and that the final cursor lands exactly on
+        //    the end of the initializer.
+        //
+        //    That replay is strictly stronger than the old struct/initializer
+        //    count comparison: it checks the byte arithmetic the scanner depends
+        //    on, rather than checking that two independent textual declarations
+        //    agree.
+        // Find the initializer block and split it into per-entry word runs by the
+        // `/* entryN */` markers the emitter writes.
+        int initStart = text.IndexOf("kChaosGcSlotMapsSection = {", StringComparison.Ordinal);
+        Assert.True(initStart >= 0, $"{fileName} has no kChaosGcSlotMapsSection initializer");
+        int initEnd = text.IndexOf("#pragma pack(pop)", initStart, StringComparison.Ordinal);
+        string init = text.Substring(initStart, (initEnd > 0 ? initEnd : text.Length) - initStart);
 
-        // Each declared size must match the struct member's declared `slots[N]`,
-        // since entry_total_size is what the runtime advances by: a drift between
-        // the struct's slot count and the entry size silently mis-registers every
-        // following entry.
-        var declaredSlotCounts = Regex.Matches(text, @"CHAOS_IL2CPP_UINT32 slots\[(\d+)\];")
-            .Select(m => int.Parse(m.Groups[1].Value, CultureInfo.InvariantCulture))
-            .ToList();
-        Assert.True(declaredSlotCounts.Count == entryInitializers.Count,
-            $"{fileName} declares {declaredSlotCounts.Count} entry struct(s) but has "
-            + $"{entryInitializers.Count} initializer(s) — they must correspond 1:1");
+        var entryChunks = Regex.Split(init, @"/\*\s*entry\d+\s*\*/")
+            .Skip(1)   // the preamble before the first marker
+            .ToArray();
+        Assert.True(entryChunks.Length > 0,
+            $"{fileName} contains no `/* entryN */` markers — cannot delimit entries");
 
-        for (int i = 0; i < entryInitializers.Count; i++)
+        long declaredTotal = 0;
+        for (int i = 0; i < entryChunks.Length; i++)
         {
-            int declaredSize = int.Parse(entryInitializers[i].Groups[1].Value, CultureInfo.InvariantCulture);
+            // Extract ONLY the standalone numeric literals. The pointer words are
+            // function calls carrying a symbol name that itself contains digits
+            // (`..._AreEqual_0_string_0`), so a bare `\d+u` scan would pick those
+            // up and misalign every index. Collapse each pointer call to a single
+            // numeric placeholder so the word positions stay true.
+            string chunk = Regex.Replace(entryChunks[i],
+                @"chaos_ptr_(lo|hi)32\(&[^)]*\)", "0u");
+
+            var nums = Regex.Matches(chunk, @"(?<![\w])(\d+)u\b")
+                .Cast<Match>()
+                .Select(m => int.Parse(m.Groups[1].Value, CultureInfo.InvariantCulture))
+                .ToList();
+            Assert.True(nums.Count >= 5,
+                $"entry {i} in {fileName} has only {nums.Count} words; expected at least "
+                + "entry_total_size + code_address(2) + frame_size + num_gc_slots");
+
+            int declaredSize = nums[0];
+            int numSlots = nums[4];
+            int slotWordCount = nums.Count - 5;
+
             // packed layout: entry_total_size(4) + code_address(8) + frame_size(4)
             //              + num_gc_slots(4) + slots[N]*4
-            int expected = 4 + 8 + 4 + 4 + declaredSlotCounts[i] * 4;
+            int expected = 4 + 8 + 4 + 4 + numSlots * 4;
             Assert.True(declaredSize == expected,
                 $"entry {i} in {fileName} declares entry_total_size={declaredSize} but its "
-                + $"struct has slots[{declaredSlotCounts[i]}], implying {expected}. The runtime "
-                + "advances by entry_total_size, so a mismatch desynchronises every later entry.");
+                + $"num_gc_slots={numSlots} implies {expected}. The runtime advances by "
+                + "entry_total_size, so a mismatch desynchronises every later entry.");
+
+            // The slot word count must match the declared slot count, or the flat
+            // array is not the layout the size field claims.
+            Assert.True(slotWordCount == numSlots,
+                $"entry {i} in {fileName} carries {slotWordCount} slot words but declares "
+                + $"num_gc_slots={numSlots}. The flat initializer would place the next "
+                + "entry at the wrong word offset.");
+
+            declaredTotal += declaredSize;
         }
+
+        // The byte total the section advertises must equal the sum of the entry
+        // sizes — CodeRegistrationV0.slot_map_section_end is derived from it.
+        var sizeMatch = Regex.Match(text, @"kChaosGcSlotMapsSize = (\d+)u");
+        Assert.True(sizeMatch.Success, $"{fileName} has no kChaosGcSlotMapsSize");
+        long advertised = long.Parse(sizeMatch.Groups[1].Value, CultureInfo.InvariantCulture);
+        Assert.True(advertised == declaredTotal,
+            $"{fileName} advertises kChaosGcSlotMapsSize={advertised} but its entries sum to "
+            + $"{declaredTotal}; the scanner walks [begin, end) and would overrun or truncate.");
 
         // 3. The section must stay within the per-TU budget that motivates this
         //    task. It is NOT split, so its text size is what has to come down.
