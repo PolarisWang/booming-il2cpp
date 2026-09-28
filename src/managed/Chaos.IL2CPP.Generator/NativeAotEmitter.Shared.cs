@@ -141,7 +141,7 @@ public sealed partial class NativeAotEmitter
         preamble.Append("using namespace chaos::il2cpp::runtime_core;\n");
         preamble.Append("using namespace chaos::il2cpp::jit;\n\n");
 
-        // extern "C" AOT method declarations. Payload sections such as the GC
+        // Extern "C" AOT method declarations. Payload sections such as the GC
         // slot map take the ADDRESS of these functions
         // (`&Chaos_..._generic`) and the method table references them too. They
         // used to share a translation unit with the emitter that declared them
@@ -149,18 +149,13 @@ public sealed partial class NativeAotEmitter
         // TU those declarations are no longer in scope and every reference fails
         // with C2065 — the roadmap's R1 (`漏改的 static 会在 Phase 2 编译期暴露`).
         //
-        // These must go in the preamble, before the section text: the slot map
-        // takes the functions' addresses inline, so a declaration appended after
-        // the content is a use-before-declaration (C2065) just the same.
-        if (templateModel.MethodDeclarations is { Count: > 0 })
-        {
-            foreach (var decl in templateModel.MethodDeclarations)
-            {
-                preamble.Append(decl);
-                preamble.Append('\n');
-            }
-            preamble.Append('\n');
-        }
+        // These are NOT emitted per payload TU any more; BuildSharedHeader emits
+        // them once. They previously dominated every payload TU: on the system
+        // chunk they measured 293,433 characters per TU (1,723 declarations),
+        // and across all 28 payload TUs 21,945,457 of 30,921,996 characters (71%)
+        // were this same block repeated, with TUs 12-19 each carrying an
+        // identical 766,607 — 2.19x the 350,000-char budget, so no section cut
+        // could ever bring a payload TU under budget.
 
         // Reflection object-model helpers. These are DEFINED in the object-model
         // section (page 0, "Virtual method table arrays") but CALLED from the
@@ -187,19 +182,22 @@ public sealed partial class NativeAotEmitter
         // vtable-slot tables the object model owns and CodeRegistration points
         // at). Collected by the planner at generation time, so the set is
         // complete — deriving it by scanning emitted text missed whole classes
-        // of symbol. Declarations go in the preamble because a section may take
-        // such a symbol's address inline in a const initializer, where a
-        // later-appearing declaration is a use-before-declaration.
-        if (templateModel.CrossSectionSymbols is { Count: > 0 })
-        {
-            preamble.Append("// Cross-section symbols (defined in a sibling payload section)\n");
-            foreach (var symbol in templateModel.CrossSectionSymbols)
-            {
-                preamble.Append(symbol.Declaration);
-                preamble.Append('\n');
-            }
-            preamble.Append('\n');
-        }
+        // of symbol.
+        //
+        // These are NOT emitted per payload TU any more; BuildSharedHeader emits
+        // them once. After MethodDeclarations moved out, this block became the
+        // largest remaining per-TU duplication: 470,056 characters on the system
+        // chunk, of which kRefl_params_* alone is 438,731 (2,095 declarations,
+        // 93%). That is 1.34x the 350,000-char budget by itself, so a payload TU
+        // carrying even a few hundred bytes of real content was still over.
+        //
+        // The declarations must stay visible at their use sites — a section may
+        // take such a symbol's address inline in a const initializer, where a
+        // later-appearing declaration is a use-before-declaration — but
+        // visibility does not require repetition. Every TU already includes the
+        // shared header (it is what supplies the TypeInfoV0 declarations), and
+        // BuildSharedHeader wraps these in the codegen namespace so the mangled
+        // name matches the definitions.
 
         sb.Insert(0, preamble.ToString());
 
@@ -233,6 +231,39 @@ public sealed partial class NativeAotEmitter
         else
         {
             sb.Append(code);
+        }
+
+        // ── extern "C" AOT method declarations ───────────────────────────
+        //
+        // These were emitted into EVERY payload TU's preamble, which duplicated
+        // ~293,433 characters per TU on the system chunk (1,723 declarations).
+        // Measured across all 28 payload TUs: 21,945,457 of 30,921,996 characters
+        // (71%) were these declarations, with TUs 12-19 each carrying an identical
+        // 766,607 — an order of magnitude more than the 350,000-char budget they
+        // were supposed to fit inside, so the repetition alone made the budget
+        // unreachable no matter how the sections were cut.
+        //
+        // The header is the right home: every payload TU includes it, page 0
+        // includes it, and this is exactly where the TypeInfoV0 declarations for
+        // the same cross-TU reason already live.
+        //
+        // `extern "C"` matters here and is why no namespace wrapper is needed
+        // (contrast CrossSectionSymbols below): C language linkage gives these an
+        // unmangled name, so declaring them at global scope and defining them
+        // inside the codegen namespace still produces ONE entity. Wrapping them
+        // would not break anything, but it is not required.
+        //
+        // Order is preserved from the planner: it is deterministic, and keeping it
+        // makes any diff against the previous per-TU layout readable.
+        if (templateModel.MethodDeclarations is { Count: > 0 })
+        {
+            sb.Append('\n');
+            sb.Append("// extern \"C\" AOT method declarations (single copy, shared by all TUs)\n");
+            foreach (var decl in templateModel.MethodDeclarations)
+            {
+                sb.Append(decl);
+                sb.Append('\n');
+            }
         }
 
         // Cross-section symbols must be visible to BOTH sides of the split: the
