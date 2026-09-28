@@ -1481,24 +1481,6 @@ public sealed partial class NativeAotLoweringPlanner
         var reflectionQueryCode = EmitReflectionQueryImage(methodsForLowering, metadataRegistration);
         if (!string.IsNullOrEmpty(reflectionQueryCode))
         {
-            // Per-type reflection data arrays go in BEFORE the image section: the
-            // image's `kReflTypes[]` initializer names them, and section order is
-            // the emission order the pager preserves. They are separate sections
-            // (and so separate TUs) because they are the bulk of this block and
-            // carry no ABI coupling — the runtime reaches them through
-            // `image->types[i]->methods[i]`, i.e. via pointers.
-            //
-            // Drained here rather than via AddDeferredPayloadSection: this call
-            // runs AFTER EmitPayloadSections has already drained and cleared the
-            // deferred list, so a deferred section would be dropped silently
-            // (measured: the data arrays went missing, the image TU referenced
-            // undefined symbols, and the build failed).
-            foreach (var dataSection in ReflectionQueryDataSections)
-            {
-                AddSection(dataSection.Name, dataSection.Content);
-            }
-            ReflectionQueryDataSections.Clear();
-
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(reflectionQueryCode);
             AddSection("reflection", reflectionQueryCode);

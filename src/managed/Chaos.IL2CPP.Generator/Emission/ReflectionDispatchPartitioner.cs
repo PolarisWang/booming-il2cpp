@@ -61,47 +61,8 @@ public static class ReflectionDispatchPartitioner
     /// thousands of tiny branches is slow to compile even when it is small. The
     /// two caps are independent: whichever binds first ends the part.
     /// </para>
-    ///
-    /// <para>
-    /// <b>Why this is below <c>PayloadSectionPartitioner.DefaultBudgetChars</c>.</b>
-    /// Both are 350,000 "per TU", but they measure different things: this one
-    /// bounds the <i>branch text accumulated into a part</i>, while the payload
-    /// budget bounds the <i>whole emitted section</i>. A part is the section
-    /// plus its wrapper — the <c>extern "C" &lt;ret&gt; name_partN(args) noexcept</c>
-    /// signature, the opening brace, the trailing <c>return 0;</c> and the
-    /// closing brace. At the system chunk that wrapper is a few hundred bytes,
-    /// and it is what made <c>chaos_reflection_get_parameters_b3_part4</c> land
-    /// at 350,106 against a 350,000 budget — an overshoot of 106 characters
-    /// whose only cause was measuring the payload against the branch budget.
-    ///
-    /// <para>
-    /// The subtraction is deliberate rather than a bare smaller number: it keeps
-    /// the two budgets tied together, so changing the payload budget does not
-    /// silently reintroduce the overshoot.
-    /// </para>
-    ///
-    /// A part may still overshoot this by up to one indivisible unit (a branch,
-    /// or a whole case block for <see cref="SplitCaseBlocks"/>); the margin
-    /// below absorbs the largest wrapper measured on the system chunk.
-    /// </para>
     /// </summary>
-    public const int DefaultCharsPerPart =
-        PayloadSectionPartitioner.DefaultBudgetChars - PartWrapperReserveChars;
-
-    /// <summary>
-    /// Characters reserved for the per-part function wrapper that
-    /// <see cref="SplitFlatChain"/> and <see cref="SplitCaseBlocks"/> add around
-    /// the branch text they are given.
-    ///
-    /// <para>
-    /// Measured on the system chunk: the longest generated name
-    /// (<c>chaos_reflection_get_parameters_b3_partNN</c>) plus its parameter list
-    /// and the fixed prologue/epilogue lines is well under 512 bytes. 4096 leaves
-    /// headroom for a longer function name or parameter list without being large
-    /// enough to matter against a 350,000-character budget.
-    /// </para>
-    /// </summary>
-    public const int PartWrapperReserveChars = 4_096;
+    public const int DefaultCharsPerPart = 350_000;
 
     /// <summary>
     /// One split-out <c>_partN</c> function: its suffix, full text, and branch count.
