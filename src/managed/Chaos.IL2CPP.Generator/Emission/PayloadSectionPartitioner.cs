@@ -175,8 +175,68 @@ public static class PayloadSectionPartitioner
     /// Maximum number of characters to accumulate into one translation unit.
     /// Mirrors <c>sizeThresholdChars</c> in <c>NativeAotEmitter.Shared.cs</c>,
     /// whose comment documents MSVC C1060 avoidance as its purpose.
+    ///
+    /// <para>
+    /// <b>This is a packing target, not a compile-ability ceiling.</b> It decides
+    /// where a TU is closed; it cannot make an indivisible section smaller. The
+    /// real ceiling is MSVC's and it is far away: C1060 was measured to trigger
+    /// around 15 MB / 448K lines, while the largest section on the system chunk is
+    /// ~0.71 MB / ~8K lines — roughly 17x of headroom.
+    ///
+    /// <para>
+    /// <b>Why the value was NOT simply raised (measured 2026-09-28).</b> Raising
+    /// it was tried and it broke the link: a higher budget lets the pager merge
+    /// sections that were previously in separate translation units, and the
+    /// cross-section declarations are collected per <i>section</i> (not per final
+    /// TU), so merging moved symbols into a TU where their `extern` declaration
+    /// no longer matched anything. 48 unresolved externals, all `kRefl*`. The
+    /// budget therefore stays at 350,000 and the sections that genuinely cannot be
+    /// split are recorded by name below.
+    /// </para>
+    ///
+    /// <para>
+    /// See <c>docs/dev/in-progress/page-payload-uniform-tu/ROOT-CAUSE-ANALYSIS-2026-09-28.md</c>.
+    /// </para>
     /// </summary>
     public const int DefaultBudgetChars = 350_000;
+
+    /// <summary>
+    /// Sections known to exceed <see cref="DefaultBudgetChars"/> on the system
+    /// chunk and that CANNOT be split, each with the reason it is indivisible.
+    ///
+    /// <para>
+    /// This list exists so the oversize is a <i>recorded, reviewed</i> fact rather
+    /// than a silent one: a TU over budget whose largest section is not listed
+    /// here emits <c>[OVERSIZE-UNLISTED]</c> to stderr (see
+    /// <see cref="WarnIfUnlistedOversize"/>), so growth is visible without
+    /// blocking the build on a shape the pager cannot fix.
+    /// </para>
+    ///
+    /// <para>
+    /// Every entry is a data table whose elements are addressed by a GLOBAL index
+    /// computed elsewhere (a match slot, a subject ordinal), so cutting it across
+    /// translation units would require a chunk-aware ABI — a change strictly
+    /// larger than the remaining overshoot it would remove.
+    /// </para>
+    /// </summary>
+    public static readonly IReadOnlySet<string> OversizedSectionAllowlist =
+        new HashSet<string>(StringComparer.Ordinal)
+        {
+            // 710,528 chars after the 2026-09-28 text slimming. Its entries array
+            // dominates, and its element order is load-bearing (s_hotpatch_slots
+            // hard-codes the entry index), so the table cannot be reordered or cut
+            // across TUs without an ABI change.
+            "hotpatch",
+            // 522,100 chars. kMethodTable / kDefaultArgThunks / s_hotpatch_entries
+            // share ONE global match-slot index domain (measured: kMethodTable[i]
+            // equals s_hotpatch_entries[i] for all 1720 indices), so they would have
+            // to be cut on a common grid — again an ABI change.
+            "dispatch",
+            // 440,279 chars. Per-type descriptor arrays reached through pointers
+            // from kReflTypes[]; the remaining bulk is per-entry string literals,
+            // which cannot be compressed without changing the descriptor schema.
+            "reflection",
+        };
 
     /// <summary>
     /// Groups sections into translation units, respecting the budget.
@@ -242,6 +302,9 @@ public static class PayloadSectionPartitioner
 
         var current = new List<PayloadSection>();
         long currentSize = 0;
+        // Diagnosis aid for the guard below: which section pushed the TU over.
+        string largestPieceName = string.Empty;
+        long largestPieceSize = 0;
 
         foreach (var piece in pieces)
         {
@@ -252,19 +315,61 @@ public static class PayloadSectionPartitioner
             // own group (the `current.Count > 0` guard).
             if (current.Count > 0 && currentSize + size > budgetChars)
             {
+                WarnIfUnlistedOversize(currentSize, largestPieceName, largestPieceSize);
                 groups.Add(current);
                 current = new List<PayloadSection>();
                 currentSize = 0;
+                largestPieceSize = 0;
+                largestPieceName = string.Empty;
             }
 
+            if (size > largestPieceSize) { largestPieceSize = size; largestPieceName = piece.Name; }
             current.Add(piece);
             currentSize += size;
         }
 
         if (current.Count > 0)
+        {
+            WarnIfUnlistedOversize(currentSize, largestPieceName, largestPieceSize);
             groups.Add(current);
+        }
 
         return groups;
+    }
+
+    /// <summary>
+    /// Reports a TU that exceeds the budget while the section responsible is not on
+    /// <see cref="OversizedSectionAllowlist"/>.
+    ///
+    /// <para>
+    /// <b>Why a warning, not an exception.</b> The overshoot is a property of the
+    /// input — one indivisible section larger than the budget — and the pager has
+    /// no alternative to offer; throwing would turn a known, documented shape into
+    /// a build failure with no way forward. What must not happen is the overshoot
+    /// going <i>unrecorded</i>, which is what this guards: a section that grows
+    /// past the budget without being added to the allowlist is a regression
+    /// someone needs to see.
+    /// </para>
+    /// </summary>
+    private static void WarnIfUnlistedOversize(long size, string largestPieceName, long largestPieceSize)
+    {
+        if (size <= DefaultBudgetChars || largestPieceName.Length == 0) return;
+
+        // The allowlist is keyed by SECTION name; a piece from a ByUnits section
+        // carries a "<section>.<i>" suffix, so strip that before comparing.
+        string rootName = largestPieceName;
+        int dot = rootName.LastIndexOf('.');
+        if (dot > 0 && int.TryParse(rootName.AsSpan(dot + 1), out _))
+            rootName = rootName.Substring(0, dot);
+
+        if (OversizedSectionAllowlist.Contains(rootName)) return;
+
+        Console.Error.WriteLine(
+            $"[OVERSIZE-UNLISTED] payload TU of {size} chars exceeds the {DefaultBudgetChars} "
+            + $"budget; its largest section is '{largestPieceName}' ({largestPieceSize} chars), "
+            + "which is NOT on OversizedSectionAllowlist. Either shrink it or add it with "
+            + "the reason it cannot be split. See "
+            + "docs/dev/in-progress/page-payload-uniform-tu/ROOT-CAUSE-ANALYSIS-2026-09-28.md");
     }
 
     /// <summary>
