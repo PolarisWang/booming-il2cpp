@@ -289,3 +289,101 @@ if (defMatch.Success) continue;   // 已有 () noexcept { 的定义 → 跳过�
   （读产物），而不是「编译是否通过」。
 - 这与项目记忆里 `[assert-complete-weak-stub-always-won]` 同属一类：
   **一个看似正面的信号，掩盖了缺陷只是换了形态。**
+
+---
+
+## 九、第三次推进（2026-09-28）—— 根因修复完成
+
+用 §8.4 建议的**带标记插桩**（三处声明生成点各插唯一 marker，只对
+`ToDateTime` 跑一次），一次定位到真凶，并顺链修复到根。
+
+### 9.1 插桩结果：唯一命中的是 C
+
+```
+[DECL-A] ×0    Methods.Remaining.cs:692   （subjectId 路径，从未执行）
+[DECL-B] ×0    Methods.Remaining.cs:922   （symbol 路径，从未执行）
+[DECL-C] ×5    NativeAotEmitter.Shared.cs:1135  ← 真正生效
+```
+
+命中 5 次 = 3 个 `ToDateTime` 重载 + 2 个 `ToDateTimeOffset` 重载，
+与 727 个 C2660「多参数 BCL 重载」完全吻合。
+
+**这解释了此前 5 轮为何全失败**：我一直在改 A/B（**从未执行**的代码）。
+
+### 9.2 完整根因链（7 层）
+
+```
+① XmlConvert.ToDateTime(string,string) 是【静态多参】方法
+      ↓
+② TryGetReceiverSlot(callee) → null（非实例方法）
+   → catchAllAbis = Array.Empty()  → helper 被【定义】为 (void)
+      ↓
+③ 调用点参数列表同样派生自这份空列表 → 发射 sym()，已压栈的操作数被丢弃
+      ↓
+④ AddExternalRuntimeStubs 正则扫产物文本（此时是 sym()）→ 数出 0
+   → 补一条 (void) 声明，与 ② 的定义互相印证（自反馈循环）
+      ↓
+⑤ shape registry 只注册了单参 ToDateTime(string)
+      ↓
+⑥ 双参重载无注册 → 落 catch-all
+      ↓
+⑦ native 侧只有单参 ChaosXmlConvertToDateTime(str)
+      ↓
+stub 走 ChaosExternalRuntimeFallback → 返回 0 且不抛异常
+      ↓
+subject 的 "AOT stub did not throw" 分支执行
+→ 落 catch-all 处理器 → 抛 "wrong exception type" 逃逸
+      ↓
+fact 记 caught=true / assertFailed=false   ← 1614 条 EUR 的主因
+```
+
+### 9.3 已修复（②③④ 层）— commit `25d0215fe`
+
+| 文件 | 改动 |
+|---|---|
+| `NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs` | `catchAllAbis` 的静态分支不再留空，改按 subjectId 推断 arity |
+| `NativeAotLoweringPlanner.ExceptionEmission.Utilities.cs` | 调用点 `actualArgCount` 增加 callee 推断（`TargetParameterCount` 对跨程序集调用恒为 null）|
+
+**为何必须修在这里**：`catchAllAbis` 是 helper **定义**与调用点**参数列表**的
+**单一来源**。前几轮分别去修声明侧 / 发射侧，都只能改动其中一侧，
+反而制造出「一侧对、一侧错」的 C2660。
+
+**产物实测**（`System.Xml.ReaderWriter/chunks/xml` 全量重建）：
+
+```
+DEF  (native-aot.generated.cpp)       (CHAOS_IL2CPP_INTPTR ..., ..._1)
+CALL (native-aot.page-0007.cpp)       (chaos_arg_0, chaos_arg_1)   ← 此前是 ()
+DECL (native-aot.generated.header.h)  (CHAOS_IL2CPP_INTPTR, ...)
+C2660: 727 → 0
+```
+
+### 9.4 未修复（⑤⑥⑦ 层）— 属 stub 覆盖缺口
+
+`ToDateTime` 的 subject 仍失败：**shape registry 只注册了单参
+`ToDateTime(System.String)`**；三个双参重载
+
+- `ToDateTime(string, string)`
+- `ToDateTime(string, string[])`      ← formats 数组
+- `ToDateTime(string, XmlDateTimeSerializationMode)`
+
+**均无注册**，且 native 侧只有单参 `ChaosXmlConvertToDateTime(str)`。
+补它需要**同时**补 shape 注册与 native 实现（`string[] formats` 的 BCL
+解析语义不平凡），性质是**测试覆盖补齐**，不是本缺陷的机制问题。
+
+### 9.5 本轮的方法论收获
+
+**带标记的插桩一次定论，胜过 5 轮代码阅读。**
+判据设计要点：marker 必须能**区分「哪一处真正生成了目标符号」**，
+所以插桩点要覆盖**全部候选**（本轮 3 处），且触发条件锁定到**单个符号**
+（`Contains("ToDateTime")`），避免被海量输出淹没。
+
+同手法在本项目已两次一次命中：本轮、以及 KNOWN-ISSUE-1 的 `[VT-STRIP]`。
+
+### 9.6 本轮的自身错误（记录以免重蹈）
+
+1. **提交混入其他会话的 3 个文件**（`GcSlotMap.cs` / `PagePayloadSplitTests.cs` /
+   删除一份 ABI 文档）—— 违反「commit 前必 `git diff --cached --name-only`」。
+   已 `git reset --soft` 拆开重提。
+2. **一度误判为回归**：System.Linq 等 3 个 assembly 失败。
+   对照实验（回退我的修复后同样失败，同为 `kRefl*` LNK1120）澄清其为
+   **其他会话未提交的 reflection WIP 混进构建**，与本次无关。
