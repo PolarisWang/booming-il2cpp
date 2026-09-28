@@ -114,3 +114,40 @@ subject 的 receiver 表达式形如 `new XmlDocument().CreateElement("root")`�
 - §3 未完成调查
 - **本批修复工作量远大于第一批**：H2 是需要实现功能的架构级工作，
   不是缺陷修复。建议 H2 与 roadmap Phase 3 合并推进
+---
+
+## 5. 收官补充（2026-09-28）：realDefect 35→1 的最终处置
+
+### 5.1 累计修复 34 条，剩 1 条是 ATG 断言生成缺陷（非运行时）
+
+| 批 | commit | 修复 | realDefect |
+|:---|:---|:---|:---:|
+| 1 | `77a443461` | 异常类名对齐 .NET8 | 35→26 |
+| 2 | `e52cdf408`+`bcf0459f5` | XmlNodeReader 判别下沉 + 不误伤 slot | 26→20 |
+| 3 | `f18d46454` | XmlReader.Create 静态工厂不注入 receiver | 20→18 |
+| 4 | `3cfe279ee` | XmlReader 基类 ReadContentAs* + variant 判别 | 18→14 |
+| 5 | `4733b410a` | XML async 合法 no-op 返回 completed Task | 14→12 |
+| 6 | `2129409b9` | WriteEndDocument 按 writer kind 分派 | 12→11 |
+| 7 | `dffdcb7b0` | DOM 构造返回节点句柄（g_nodes 槽表） | 12→4 |
+| 8 | （本轮） | PrependChild/AppendChild/WriteTo kind 分派 | 4→1 |
+
+### 5.2 剩余 si108：`XmlDocumentTests::GetElementsByTagName_17_string_string_3`
+
+**ATG subject 本体**：
+```csharp
+var result = new XmlDocument().GetElementsByTagName("", "");
+Assert.AreEqual(default(XmlNodeList)!, result);   // ← 期望 null
+return (object)(result) != null ? 1L : 0L;
+```
+
+**一手证据（.NET 8 probe `tmp_probe4`）**：
+- `new XmlDocument().GetElementsByTagName("","")` → **非空空列表**（`non-null count=0`）
+- `Assert.AreEqual(null, 非空列表)` → **必然失败**
+
+**结论**：即使真 .NET 8 上这个 subject 也会断言失败 —— 是 **ATG 断言生成缺陷**（把 `default(XmlNodeList)` 当期望），**不是我们的运行时缺陷**。native 返回非空哨兵是与 .NET 8 一致的**正确**行为；`realDefect` 只源于 AreEqual stub 对哨兵解引产生的 `caught=true`。改 runtime 返 null 会失真，不修。
+
+### 5.3 基线健康度（同 chunk，742 subjects）
+
+- realDefect **35 → 1**（此 1 为 ATG 断言缺陷），passed **552 → 597**（+45）
+- 差分：new defect=**[]**，pass→fail=**[]** —— 零回归零假绿
+- 所有 45 个 fail→pass 均为有根因修复（异常类 / 判别器 / kind 分派 / 句柄表）

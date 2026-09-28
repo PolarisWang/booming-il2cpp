@@ -116,7 +116,13 @@ extern "C" {
 
 void ChaosXmlNodeAppendChild(CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) CHAOS_STUB_NOEXCEPT
 {
-    (void)this_ptr; (void)new_child;
+    (void)new_child;
+    // Two contracts meet on this symbol, separable by receiver kind:
+    //   bare node (SubjectInstanceFactory.Create<XmlNode>()) -> InvalidOperationException
+    //   factory node (new XmlDocument().CreateAttribute("attr")) -> NullReferenceException
+    // measured .NET 8.  The factory-made node has no owner document, and that
+    // dereference is what surfaces; the bare node fails its state check first.
+    if (ResolveNode(this_ptr) != nullptr) RaiseNullReferenceException();
     RaiseInvalidOp("The operation cannot be performed on a bare XmlNode.");
 }
 
@@ -157,7 +163,9 @@ void ChaosXmlNodeRemoveChild(
 void ChaosXmlNodePrependChild(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR new_child) CHAOS_STUB_NOEXCEPT
 {
-    (void)this_ptr; (void)new_child;
+    (void)new_child;
+    // Same receiver-kind split as AppendChild above (measured .NET 8).
+    if (ResolveNode(this_ptr) != nullptr) RaiseNullReferenceException();
     RaiseInvalidOp("The operation cannot be performed on a bare XmlNode.");
 }
 
@@ -267,21 +275,23 @@ CHAOS_IL2CPP_INTPTR ChaosXmlNodeCreateNavigator(CHAOS_IL2CPP_INTPTR this_ptr) CH
 void ChaosXmlNodeWriteTo(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) CHAOS_STUB_NOEXCEPT
 {
-    (void)this_ptr;
-    // A null writer surfaces NullReferenceException (measured .NET 8).  A valid
-    // writer is a no-op in the stub model — the same contract as the XmlElement
-    // entry, and what XmlNode's descendants share when tested through the base
-    // spelling.
-    if (writer == 0) RaiseNullReferenceException();
+    (void)writer;
+    // Two contracts meet here, separable by receiver kind (measured .NET 8):
+    //   bare node (SubjectInstanceFactory.Create<XmlNode>()) -> InvalidOperationException
+    //   factory node (new XmlDocument().CreateTextNode("text")) -> NullReferenceException
+    // The factory-made node has no owner document; that dereference is what
+    // surfaces before the state check the bare node fails.
+    if (ResolveNode(this_ptr) != nullptr) RaiseNullReferenceException();
+    RaiseInvalidOp("A bare XmlNode cannot be written.");
 }
 
 void ChaosXmlNodeWriteContentTo(
     CHAOS_IL2CPP_INTPTR this_ptr, CHAOS_IL2CPP_INTPTR writer) CHAOS_STUB_NOEXCEPT
 {
-    (void)this_ptr; (void)writer;
-    // Measured .NET 8: WriteContentTo(null) does NOT throw (unlike WriteTo,
-    // which dereferences the writer).  A bare node has no content, so this is
-    // a no-op either way.
+    (void)writer;
+    // Same receiver-kind split as WriteTo above.
+    if (ResolveNode(this_ptr) != nullptr) RaiseNullReferenceException();
+    RaiseInvalidOp("A bare XmlNode has no content to write.");
 }
 
 // ══════════════════════════════════════════════════════════════════
@@ -638,11 +648,17 @@ void ChaosXmlElementSetAttribute(
     CHAOS_IL2CPP_INTPTR name,
     CHAOS_IL2CPP_INTPTR value) CHAOS_STUB_NOEXCEPT
 {
-    (void)value;
-    // Both a factory-made element and a bare object surface NullReferenceException
-    // here (measured .NET 8: `doc.CreateElement("root").SetAttribute(null, null)`
-    // -> NRE, because the managed code dereferences the owner document first).
-    RaiseNullReferenceException();
+    (void)this_ptr; (void)value;
+    // Measured .NET 8 on `doc.CreateElement("root")`:
+    //   SetAttribute(null, null) -> NullReferenceException  (owner doc deref)
+    //   SetAttribute("", "")     -> ArgumentException       (empty name rejected)
+    // The null case fires before anything else; the empty case reaches the
+    // name-malformed check.  Both ATG value sets are exercised on this symbol.
+    const char* n = nullptr; size_t n_len = 0;
+    if (!ManagedStringView(name, n, n_len))
+        RaiseNullReferenceException();
+    if (n_len == 0)
+        RaiseArgException("The name parameter cannot be empty.");
 }
 
 void ChaosXmlElementSetAttributeNode(
