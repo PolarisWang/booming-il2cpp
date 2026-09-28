@@ -325,9 +325,23 @@ public sealed partial class NativeAotLoweringPlanner
             // each as its raw pointer-sized value, which is what the external-runtime
             // ABI expects for a value it cannot type precisely.
             int abiCount = invocationTarget.ParameterAbis.Count;
-            int actualArgCount = (instruction?.TargetParameterCount is > 0)
+            // TargetParameterCount is often NOT populated for cross-assembly calls
+            // (verified on System.Xml.XmlConvert::ToDateTime:System.DateTime(String,String):
+            // the IR carries only `callee`, with TargetParameterCount/TargetSymbol/
+            // TargetReturnType all null).  Falling straight back to abiCount therefore
+            // reads 0 for a two-parameter callee, the call site emits `Symbol()`, and
+            // every operand that was already pushed is dropped on the floor.
+            //
+            // The callee string always carries the parameter list, so infer from it
+            // before giving up.
+            int actualArgCount = instruction?.TargetParameterCount is > 0
                 ? instruction.TargetParameterCount.Value
                 : abiCount;
+            if (actualArgCount <= abiCount && instruction?.Callee is { Length: > 0 } _calleeForArity)
+            {
+                int inferred = InferParameterCountFromSubjectId(_calleeForArity);
+                if (inferred > actualArgCount) actualArgCount = inferred;
+            }
             bool abiUnderreports = actualArgCount > abiCount;
 
             for (int i = abiCount - 1; i >= 0; i--)

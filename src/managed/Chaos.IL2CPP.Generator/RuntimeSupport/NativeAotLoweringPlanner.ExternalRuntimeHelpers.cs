@@ -706,9 +706,38 @@ public sealed partial class NativeAotLoweringPlanner
 		// Static methods keep the zero-arg form — their call sites genuinely
 		// push no receiver.
 		var catchAllReceiverSlot = TryGetReceiverSlot(callee);
-		var catchAllAbis = catchAllReceiverSlot == null
-			? Array.Empty<AotCoreIrAbiSlotArtifact>()
-			: new AotCoreIrAbiSlotArtifact[] { catchAllReceiverSlot };
+		// A STATIC callee that takes arguments must keep those arguments.
+		//
+		// This used to be a two-way split — receiver slot, or nothing — on the
+		// reasoning that "static methods keep the zero-arg form because their call
+		// sites genuinely push no receiver".  That holds for a static method with
+		// NO parameters, and is wrong for every other static method.  For
+		// `System.Xml.XmlConvert::ToDateTime:System.DateTime(System.String,System.String)`
+		// the slot is null, so the helper was DEFINED as `(void)`; the call site
+		// (also derived from this same empty list) then emitted `Symbol()`, dropping
+		// both operands that had already been pushed.  The callee never threw, the
+		// subject's "AOT stub did not throw" branch ran, control fell into the
+		// catch-all handler which threw "wrong exception type", and the fact layer
+		// recorded caught=true / assertFailed=false.
+		//
+		// Infer the real arity from the subject id (it carries the parameter list)
+		// and synthesize that many pointer-sized slots.  This is the single source
+		// both the helper DEFINITION and the call-site argument list derive from,
+		// so fixing it here keeps the two in agreement — which is what the previous
+		// attempts at the declaration/emission sites could not achieve.
+		AotCoreIrAbiSlotArtifact[] catchAllAbis;
+		if (catchAllReceiverSlot != null)
+		{
+			catchAllAbis = new AotCoreIrAbiSlotArtifact[] { catchAllReceiverSlot };
+		}
+		else
+		{
+			int catchAllArity = InferParameterCountFromSubjectId(callee);
+			catchAllAbis = catchAllArity > 0
+				? CreateLegacyAbiParameterSlots(catchAllArity)
+					.ToArray()
+				: Array.Empty<AotCoreIrAbiSlotArtifact>();
+		}
 		var catchAllSignature = FormatAbiSlotParameterSignature(catchAllAbis);
 		var catchAllRawArgs = catchAllReceiverSlot == null
 			? EmptyRawArgumentIndices
