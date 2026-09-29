@@ -1485,7 +1485,38 @@ public sealed partial class NativeAotLoweringPlanner
             moduleRegSb.Append(reflectionQueryCode);
             AddSection("reflection", reflectionQueryCode);
         }
-        else if (methodCount > 0)
+        // Drain the per-type data arrays (kReflMethods_* / kReflFields_* /
+        // kReflEvents_* DEFINITIONS) that EmitReflectionQueryImage parked in
+        // ReflectionQueryDataSections.
+        //
+        // That method runs AFTER _deferredPayloadSections has already been drained
+        // (hence the comment there: "a deferred section would be dropped
+        // silently"), so its data sections are returned through the field instead.
+        // Nobody ever read that field — the producers were populated, the
+        // consumer was missing.  The arrays were therefore referenced by
+        // kReflTypes[] but never defined, and the link failed with LNK2001 for
+        // every type that had reflection members (reproduced on System.Linq:
+        // "post-emission" occurred for 12 distinct kReflMethods_* with 0
+        // definitions anywhere in the output).
+        //
+        // Same rules as _deferredPayloadSections drain:
+        //   ≥500 methods → payload TUs ARE rendered from sections, so AddSection
+        //                  only (appending to moduleRegSb too would define the
+        //                  arrays twice → C2086).
+        //   <500         → payload NOT rendered, so append content to moduleRegSb
+        //                  too or the definitions vanish.
+        bool _reflPayloadWillRender = allMethods.Length >= NativeAotEmitter.PayloadSectioningThresholdMethods;
+        foreach (var _reflData in ReflectionQueryDataSections)
+        {
+            AddSection(_reflData.Name, _reflData.Content);
+            if (!_reflPayloadWillRender)
+            {
+                moduleRegSb.Append(Environment.NewLine);
+                moduleRegSb.Append(_reflData.Content);
+            }
+        }
+        ReflectionQueryDataSections.Clear();
+        if (string.IsNullOrEmpty(reflectionQueryCode) && methodCount > 0)
         {
             // When there are no reflection queries, emit a zero-initialized
             // kReflImage definition so the ModuleDescriptor's .image field

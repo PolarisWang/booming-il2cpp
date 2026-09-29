@@ -1,7 +1,4 @@
-// ── Reflection Query Image Descriptor ──────────────────────────
-// Used by ResolveSubjectId to resolve call_target via subjectId
-// matching during IR lowering of patched methods.
-
+// {{ section_label }}
 {{~ for type_group in type_groups ~}}
 {{~ if type_group.fields && type_group.fields.size > 0 ~}}
 static constexpr ReflectionQueryFieldDescriptor kReflFields_{{ type_group.safe_name }}[{{ type_group.fields.size }}] = {

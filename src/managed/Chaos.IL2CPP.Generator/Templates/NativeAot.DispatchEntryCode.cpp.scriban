@@ -14,53 +14,10 @@ static void (*kMethodTable[{{ methods_count }}])() = {
 // Each thunk supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
-//
-// The thunk body routes through a per-ARITY dispatcher rather than repeating a
-// full `reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, ...)>` at every entry.
-// Measured on the system chunk: that cast template alone was 111,672 of this
-// section's 191,863 characters — 58% of it — because all 1,720 entries spelled
-// out the same four signatures (0/1/2/3 pointer parameters). Four small helpers
-// carry the cast once each; the entries become short calls.
 static CHAOS_IL2CPP_UINT8 __g_null_instance = 0;
-
-// By-ref default: a zeroed pointer-sized buffer, allocated once for the whole
-// table. Previously each byref parameter inlined its own `[](){ static ...; }()`
-// lambda; hoisting it here keeps the per-entry text to a single identifier.
-static CHAOS_IL2CPP_UINT8 __g_byref_buffer[sizeof(CHAOS_IL2CPP_INTPTR)] = {};
-static CHAOS_IL2CPP_INTPTR __g_byref_slot =
-    reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_byref_buffer);
-
-// Cast `kMethodTable[slot]` to an N-pointer-parameter signature and invoke it.
-//
-// Measured on the system chunk: spelling the cast out at every entry cost
-// 111,672 of this section's 191,863 characters (58%) — the same four signatures
-// (0/1/2/3 pointer params) written 1,720 times. Emitting them once per arity and
-// calling through a short name removes that repetition without changing what is
-// called or with which arguments.
-//
-// Written out explicitly per arity rather than generated from a token-pasting
-// macro or a range loop: `##N` needs a second expansion level to reach
-// `CHAOS_PARAMS_##N`, and a descending range (`1..0` yields `[1, 0]`) would emit
-// two spurious parameters at arity 0. Either mistake produces a *silently
-// narrowed or widened* signature — which then surfaces as "too few arguments for
-// call" hundreds of lines away. Four literal definitions have neither failure
-// mode and read exactly as they compile.
-static inline void __chaos_invoke0(void (*fn)()) noexcept {
-    reinterpret_cast<void(*)()>(fn)();
-}
-static inline void __chaos_invoke1(void (*fn)(), CHAOS_IL2CPP_INTPTR) noexcept {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(fn)(0);
-}
-static inline void __chaos_invoke2(void (*fn)(), CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(fn)(0, 0);
-}
-static inline void __chaos_invoke3(void (*fn)(), CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) noexcept {
-    reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(fn)(0, 0, 0);
-}
-
 extern "C" void (*kDefaultArgThunks[{{ methods_count }}])() = {
 {{~ for method in methods ~}}
-    []() { {{~ if method.param_count == 0 ~}}kMethodTable[{{ method.index }}]();{{~ else ~}}__chaos_invoke{{ method.param_count }}(kMethodTable[{{ method.index }}]{{~ for param in method.params ~}}, {{~ if param.is_string && default_string_id != 0 ~}}chaos_make_string_id_value({{ default_string_id }}ULL){{~ else if param.is_this ~}}reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance){{~ else if param.is_byref ~}}__g_byref_slot{{~ else ~}}0{{~ end ~}}{{~ end ~}}){{~ end ~}}; },
+    []() { {{~ if method.param_count == 0 ~}}kMethodTable[{{ method.index }}]();{{~ else ~}}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{{~ for param in method.params offset:1 ~}}, CHAOS_IL2CPP_INTPTR{{~ end ~}})>(kMethodTable[{{ method.index }}])({{~ for param in method.params ~}}{{~ if param.is_string && default_string_id != 0 ~}}chaos_make_string_id_value({{ default_string_id }}ULL){{~ else if param.is_this ~}}reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance){{~ else if param.is_byref ~}}([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })(){{~ else ~}}0{{~ end ~}}{{~ if !for.last ~}}, {{~ end ~}}{{~ end ~}});{{~ end ~}} },
 {{~ end ~}}
 };
 

@@ -232,6 +232,10 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         var typeGroups = new List<object>();
+        // Parallel to typeGroups: the sanitized symbol suffix each group's arrays
+        // use. Kept as its own list because typeGroups holds anonymous objects and
+        // the cross-section declarations below need the name as a plain string.
+        var typeGroupSafeNames = new List<string>();
         foreach (var kvp in typeMethodMap)
         {
             var typeSubjectId = kvp.Key;
@@ -295,20 +299,163 @@ public sealed partial class NativeAotLoweringPlanner
                 events = eventEntries,
                 event_count = eventEntries.Length,
             });
+            typeGroupSafeNames.Add(safeName);
         }
 
         var typeGroupIndices = Enumerable.Range(0, typeIndexToMethods.Count).ToArray();
 
-        var model = new ScriptObject
+        // ── Split the per-type data arrays out of the image TU ───────────────
+        //
+        // The per-type arrays (kReflMethods_* / kReflFields_* / kReflEvents_*)
+        // are the bulk of this section — measured 421,470 of 436,884 characters on
+        // the system chunk, against a 350,000 per-TU budget. They can be moved to
+        // their own translation units with NO ABI change, because the runtime
+        // never indexes them directly: it reaches them through
+        // `image->types[i]->methods[i]`, and `kReflTypes[]` holds POINTERS to the
+        // type descriptors. As long as kReflTypes / kReflTypePtrs / kReflImage
+        // stay in one TU, a `kReflMethods_*` array may live anywhere.
+        //
+        // The descriptor image must stay whole: `kReflTypePtrs[i]` takes the
+        // address of `kReflTypes[i]` inside a const initializer, so a cut between
+        // them would be a use-before-declaration.
+        //
+        // These are returned to the caller rather than queued via
+        // AddDeferredPayloadSection: this method runs AFTER EmitPayloadSections has
+        // already drained and cleared the deferred list, so a deferred section
+        // would be dropped silently (measured: the data arrays went missing, the
+        // image TU referenced undefined symbols, and the build failed with a
+        // cascade MSVC reports only as "Build failed").
+        var dataSections = new List<(string Name, string Content)>();
+        if (typeGroups.Count > 0)
         {
+            var dataSb = new StringBuilder();
+            long dataBudget = PayloadSectionPartitioner.DefaultBudgetChars;
+            long dataChars = 0;
+            int dataBucket = 0;
+
+            void FlushTypeDataSection()
+            {
+                if (dataSb.Length == 0) return;
+                dataSections.Add(($"reflimagedata{dataBucket++}", dataSb.ToString()));
+                dataSb.Clear();
+                dataChars = 0;
+            }
+
+            for (int gi = 0; gi < typeGroups.Count; gi++)
+            {
+                // One group per render: the template iterates whatever list it is
+                // given, so a single-element list emits just that type's arrays and
+                // nothing else. Passing a subset of the descriptors is what makes
+                // the group's text its own cuttable unit.
+                var groupModel = new ScriptObject
+                {
+                    ["section_label"] = $"reflection query data arrays (bucket {dataBucket})",
+                    ["type_groups"] = new object[] { typeGroups[gi] },
+                    ["type_group_count"] = 0,
+                    ["type_group_indices"] = System.Array.Empty<int>(),
+                    ["assembly_name_literal"] = EscapeCppStringLiteral(_assemblyName),
+                };
+                string groupText = ScribanTemplateRenderer.RenderTemplate(
+                    NativeAotTemplateCatalog.GetReflectionQueryImageTemplate(), groupModel);
+                groupText = StripReflectionImageTail(groupText);
+                if (string.IsNullOrEmpty(groupText)) continue;
+
+                if (dataChars > 0 && dataChars + groupText.Length > dataBudget)
+                    FlushTypeDataSection();
+
+                dataSb.Append(groupText);
+                dataChars += groupText.Length;
+            }
+            FlushTypeDataSection();
+        }
+
+        // The descriptor image: kReflTypes + kReflTypePtrs + kReflImage, whole.
+        var imageModel = new ScriptObject
+        {
+            ["section_label"] = "reflection query image descriptor (kReflTypes / kReflTypePtrs / kReflImage)",
             ["type_groups"] = typeGroups,
             ["type_group_count"] = typeIndexToMethods.Count,
             ["type_group_indices"] = typeGroupIndices,
             ["assembly_name_literal"] = EscapeCppStringLiteral(_assemblyName),
         };
 
-        return ScribanTemplateRenderer.RenderTemplate(
-            NativeAotTemplateCatalog.GetReflectionQueryImageTemplate(), model);
+        string coreImage = ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetReflectionQueryImageTemplate(), imageModel);
+        coreImage = StripReflectionDataArrays(coreImage);
+
+        // The per-type arrays are now DEFINED in sibling payload sections, so the
+        // image TU needs declarations to compile its `kReflTypes[]` initializer.
+        // They are `static constexpr` at their definition site; declaring them
+        // here is what lets the image TU name them across the TU boundary.
+        foreach (var safe in typeGroupSafeNames)
+        {
+            RegisterCrossSectionSymbol(
+                $"kReflMethods_{safe}",
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor kReflMethods_{safe}[];",
+                needsExternalLinkage: false);
+            RegisterCrossSectionSymbol(
+                $"kReflFields_{safe}",
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryFieldDescriptor kReflFields_{safe}[];",
+                needsExternalLinkage: false);
+            RegisterCrossSectionSymbol(
+                $"kReflEvents_{safe}",
+                $"extern const chaos::il2cpp::runtime_core::ReflectionQueryEventDescriptor kReflEvents_{safe}[];",
+                needsExternalLinkage: false);
+        }
+
+        // Hand the data sections back through the out-parameter; the caller adds
+        // them to the payload list immediately before the image section, so the
+        // emitted order still matches the original text order.
+        foreach (var s in dataSections)
+            ReflectionQueryDataSections.Add(s);
+
+        return coreImage;
+    }
+
+    /// <summary>
+    /// Per-type reflection array sections produced by the last
+    /// <c>EmitReflectionQueryImage</c> call. The caller drains this into the
+    /// payload section list; it is a field because the emission happens after the
+    /// payload drain and there is no other channel to the section list.
+    /// </summary>
+    protected List<(string Name, string Content)> ReflectionQueryDataSections { get; } = new();
+
+    /// <summary>
+    /// Drops the descriptor-image portion from a rendered reflection-query
+    /// template, leaving only the per-type array definitions.
+    ///
+    /// <para>
+    /// The template renders both halves so a single render call can still produce
+    /// the whole section; the split path renders each type group alone (with an
+    /// empty descriptor list, so the descriptor block degenerates to its header
+    /// lines) and this trims that degenerate tail. Locating the marker rather than
+    /// counting lines keeps it correct if the template's tail changes.
+    /// </para>
+    /// </summary>
+    private static string StripReflectionImageTail(string rendered)
+    {
+        int at = rendered.IndexOf("extern const ReflectionQueryTypeDescriptor kReflTypes[", StringComparison.Ordinal);
+        return at < 0 ? rendered : rendered.Substring(0, at);
+    }
+
+    /// <summary>
+    /// Drops the per-type array definitions from a rendered reflection-query
+    /// template, leaving only the descriptor image.
+    ///
+    /// <para>
+    /// Counterpart of <see cref="StripReflectionImageTail"/>: the image TU must
+    /// not re-define the arrays that now live in sibling sections (C2086 against
+    /// the defining TU).
+    /// </para>
+    /// </summary>
+    private static string StripReflectionDataArrays(string rendered)
+    {
+        int at = rendered.IndexOf("extern const ReflectionQueryTypeDescriptor kReflTypes[", StringComparison.Ordinal);
+        if (at < 0) return rendered;
+        string header = "// ── Reflection Query Image Descriptor ──────────────────────────\n"
+            + "// Used by ResolveSubjectId to resolve call_target via subjectId\n"
+            + "// matching during IR lowering of patched methods.\n\n";
+        return header + rendered.Substring(at);
     }
 
 
