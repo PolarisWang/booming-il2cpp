@@ -1974,7 +1974,13 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                         if (!_dedup.Add(_sym)) continue;
                     }
                 }
-                _sb2.AppendLine(_line);
+                // Preserve the original line-ending bytes exactly: _line already
+                // retains its trailing '\r' (we split on '\n'), so AppendLine
+                // would add ANOTHER CRLF, inflating every line ending
+                // \r\n -> \r\r\n.  That desynchronizes VTableDataCode from
+                // the ObjectModelCode tail and breaks the emitter's suffix search
+                // (KNOWN-ISSUE-1), causing blind length cuts mid-declaration.
+                _sb2.Append(_line).Append('\n');
             }
             objectModelCode = _sb2.ToString().TrimEnd();
         }

@@ -11,7 +11,7 @@ namespace Chaos.IL2CPP.Generator;
 public sealed partial class NativeAotEmitter
 {
 
-    private static string BuildObjectModelSection(NativeAotTemplateModel templateModel)
+    private static string BuildObjectModelSection(NativeAotTemplateModel templateModel, bool stripVTableData)
     {
         // This is the small-model counterpart of the strip in
         // BuildGeneratedPageToBuilder.  Both must drop the trailing vtable block:
@@ -45,6 +45,14 @@ public sealed partial class NativeAotEmitter
         // vtable 数据是 objectModelBuilder 的最后一个 Append（Methods.cs:1874），
         // 但 ObjectModelCode 在 1895 行经 TrimEnd()，尾部空白被打掉，固定长度
         // 切片会切进 vtable 前的完整声明（KNOWN-ISSUE-1 根因）。用实际位置。
+        // vtable 尾部数据是否剥离由调用方决定：仅当 vtable 段会被独立发射为
+        // payload translation units（usePayloadSections=true，Methods>=500）时，
+        // 才把这里的后缀剥掉，避免与 payload TU 重复定义（C2086）。单 TU 小路径
+        // （Methods<500，usePayloadSections=false）没有 payload TU 承接 vtable 数据，
+        // 必须保留在 object model 中，否则 chaos_vtable_*/kSlots_* 只有引用没有
+        // 定义（LNK1120 12 unresolved externals）。
+        if (stripVTableData)
+        {
         int vtableStart = objectModelCode.LastIndexOf(vtableDataCode, StringComparison.Ordinal);
         if (vtableStart > 0 && vtableStart + vtableTailLength == objectModelCode.Length)
         {
@@ -56,6 +64,7 @@ public sealed partial class NativeAotEmitter
             // TrimEnd 吃掉尾部空白后的兜底：vtable(trim) 是后缀
             int cut = objectModelCode.Length - vtableDataCode.TrimEnd().Length;
             objectModelCode = objectModelCode[..cut];
+        }
         }
 
         var model = new ScriptObject
@@ -638,7 +647,8 @@ public sealed partial class NativeAotEmitter
                         perPageTypeDeclarations: pageTypeDecl,
                         perPageIncludes: pageIncludes,
                         includeMethodDeclarations: true,
-                        includeEntryFileScopeCode: true);
+                        includeEntryFileScopeCode: true,
+                        stripVTableData: usePayloadSections);
                     // Dedup type_id/mt symbols across all pages (C2374).
                     // Page 0 uses the StringBuilder path, so we must post-process.
                     string pageText = pageBuilder.ToString();
@@ -656,7 +666,9 @@ public sealed partial class NativeAotEmitter
                     string content = BuildGeneratedPage(
                         templateModel, pageMethods,
                         includeRegistration: isFirstPage && !usePayloadSections,
-                        includeObjectModel: isFirstPage);
+                        includeObjectModel: isFirstPage,
+                        includeEntryFileScopeCode: isFirstPage ? true : null,
+                        stripVTableData: usePayloadSections);
                     sources.Add(new NativeAotGeneratedSource
                     {
                         RelativePath = pageRelativePath,

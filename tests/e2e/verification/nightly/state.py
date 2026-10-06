@@ -118,6 +118,17 @@ def read_all_results(config, *, for_run_id: str | None = None):
 # Strict precedence narrow→broad, keyed on observable text (P1-4 / P2-5).
 def classify_exit(exit_code: int | None, tail_text: str) -> str:
     t = tail_text or ""
+
+    # 0. success: a zero exit code means the chunk pipeline ran every stage to
+    #    completion and all mandatory stages reported pass.  Text rules below
+    #    must NOT override it: non-fatal sub-builds (e.g. managed-benchmark's
+    #    net8.0 CombinedSubjects build failing with CS0234 for an assembly
+    #    absent from net8, then SKIP net8-jit) leave "error CS" lines in the
+    #    same run.log while the chunk itself still exits 0 (passed_with_errors
+    #    is non-fatal).  Check zero FIRST so a genuinely green chunk is never
+    #    re-classified as atg-combined-cs / csharp-error.
+    if exit_code == 0:
+        return "pass"
     # 1. native-codegen-missing-symbol: codegen emitted a reference to a type it
     #    didn't declare (e.g. chaos_type_... undeclared + C2065/C2440).
     if "chaos_type_" in t and ("undeclared identifier" in t or "C2065" in t):
@@ -150,9 +161,6 @@ def classify_exit(exit_code: int | None, tail_text: str) -> str:
     # 7. csharp-error: some other C# compile error not CombinedSubjects/ATG.
     if "error CS" in t:
         return "csharp-error"
-    # 8. success
-    if exit_code == 0:
-        return "pass"
     # 9. killed
     if exit_code in (-9, -15):
         return "killed"

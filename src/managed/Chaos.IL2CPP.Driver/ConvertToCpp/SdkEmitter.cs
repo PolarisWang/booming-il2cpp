@@ -537,6 +537,7 @@ internal sealed class SdkEmitter
             ("src/native/hot-update",    "chaos_hot_update"),
             ("src/native/diagnostics/eventpipe", "chaos_eventpipe"),
             ("src/native/jit",           "chaos_jit"),
+            ("src/native/net",         "chaos_net"),
             ("src/native/diagnostics/debugger",  "chaos_debugger"),
             // chaos_pal is intentionally excluded from the SDK; test builds
             // provide PAL function stubs via pal_stubs.cpp.  Create an empty

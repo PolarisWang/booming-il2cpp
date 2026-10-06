@@ -2,6 +2,8 @@
 #pragma once
 
 void ChaosStreamFlush(CHAOS_IL2CPP_INTPTR stream) noexcept;
+// S34 (NT-8): Stream::FlushAsync(CancellationToken) → already-completed Task (entry.cpp).
+CHAOS_IL2CPP_INTPTR ChaosStreamFlushAsync(CHAOS_IL2CPP_INTPTR stream, CHAOS_IL2CPP_INTPTR cancellationToken) noexcept;
 CHAOS_IL2CPP_INT64 ChaosStreamSeek(CHAOS_IL2CPP_INTPTR stream, CHAOS_IL2CPP_INT64 offset, CHAOS_IL2CPP_INT32 origin) noexcept;
 void ChaosStreamSetLength(CHAOS_IL2CPP_INTPTR stream, CHAOS_IL2CPP_INT64 value) noexcept;
 CHAOS_IL2CPP_INT64 ChaosStreamGetLength(CHAOS_IL2CPP_INTPTR stream) noexcept;
