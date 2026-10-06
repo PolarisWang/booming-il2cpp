@@ -136,6 +136,10 @@ public sealed partial class NativeAotLoweringPlanner
             RegisterInterlockedCompareExchange_1(registry);
             RegisterInterlockedCompareExchangeGeneric(registry);
             RegisterLazyInitializerEnsureInitializedGeneric(registry);
+            RegisterS31SocketSendStubs(registry);
+            RegisterS32AssertSocketErrorAreEqualStubs(registry);
+            RegisterS33SocketReceiveStubs(registry);
+            RegisterS34NetHighLevelStubs(registry);
 
         }
 

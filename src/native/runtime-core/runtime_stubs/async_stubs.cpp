@@ -54,6 +54,13 @@ CHAOS_IL2CPP_INTPTR async_task_create_gc() CHAOS_STUB_NOEXCEPT
 
 extern "C" {
 
+// CancellationToken cancellation probe — declared here (not via stubs.h)
+// because async_stubs.cpp includes only async_stubs.h + core/gc.  The function
+// itself lives in cancellation_token.cpp; this forward declaration keeps the
+// M2/T4 options+ct gating compile-clean without pulling stubs.h transitively.
+CHAOS_IL2CPP_INT32 chaos_cancellation_token_is_cancellation_requested(
+    CHAOS_IL2CPP_INT32 source_id) CHAOS_STUB_NOEXCEPT;
+
 CHAOS_IL2CPP_INTPTR chaos_async_yield_create(void) CHAOS_STUB_NOEXCEPT
 {
     return 0;  // Not a real yield; test entry points don't await.
@@ -164,7 +171,12 @@ CHAOS_IL2CPP_INT32 ChaosAsyncTaskAwaiterGetIsCompleted(CHAOS_IL2CPP_INTPTR await
 {
     using namespace chaos::il2cpp::common;
     if (awaiter_ref == 0) return 0;
-    auto* task = reinterpret_cast<AsyncTask*>(awaiter_ref);
+    // The awaiter is a native-int slot whose content is the task handle (the
+    // generated code stores TaskAwaiter into a chaos_locals slot and passes its
+    // address).  Resolve the slot first — matching the inline contract in
+    // async.h (async_task_awaiter_get_is_completed) — without this, task points
+    // at the slot itself and the fields read wrong memory.
+    auto* task = require_async_task(*resolve_native_int_slot(awaiter_ref));
     return task->completed.load(std::memory_order_acquire)
         ? static_cast<CHAOS_IL2CPP_INT32>(1)
         : static_cast<CHAOS_IL2CPP_INT32>(0);
@@ -182,7 +194,7 @@ CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultValue(CHAOS_IL2CPP_INTPTR awai
     using namespace chaos::il2cpp::common;
     using namespace chaos::il2cpp::runtime_core;
     if (awaiter == 0) return 0;
-    auto* task = reinterpret_cast<AsyncTask*>(awaiter);
+    auto* task = require_async_task(*resolve_native_int_slot(awaiter));
 
     // Cancellation is its own terminal state, checked FIRST and independently of
     // whether an exception payload happens to be present.  Inferring cancellation
@@ -232,7 +244,7 @@ CHAOS_IL2CPP_INTPTR ChaosAsyncTaskAwaiterGetResultVoid(CHAOS_IL2CPP_INTPTR await
     using namespace chaos::il2cpp::common;
     using namespace chaos::il2cpp::runtime_core;
     if (awaiter == 0) return 0;
-    auto* task = reinterpret_cast<AsyncTask*>(awaiter);
+    auto* task = require_async_task(*resolve_native_int_slot(awaiter));
 
     if (task->canceled.load(std::memory_order_acquire))
     {
@@ -309,9 +321,7 @@ CHAOS_IL2CPP_INT32 ChaosAsyncTaskWait(CHAOS_IL2CPP_INTPTR task_handle, CHAOS_IL2
 
     {
         auto* d = task_handle ? reinterpret_cast<AsyncTask*>(task_handle) : nullptr;
-        fprintf(stderr, "[WAIT] handle=%llx completed=%d timeout=%d\n",
-            static_cast<unsigned long long>(task_handle),
-            (d && d->completed.load(std::memory_order_acquire)) ? 1 : 0, timeout_ms);
+        (void)d; // handle diagnostic only — no production stderr traffic (B3)
     }
 
     if (task_handle == 0) return 0;
@@ -500,6 +510,116 @@ static CHAOS_IL2CPP_INTPTR ChaosTaskDelayCore(uint32_t due_time_ms) CHAOS_STUB_N
         return 0;
     }
     return handle;
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Task.WaitAsync (M3b)
+// ══════════════════════════════════════════════════════════════════════════════
+//
+// WaitAsync(TimeSpan / CancellationToken) returns a NEW task that follows the
+// antecedent but resolves early on timeout or cancellation:
+//   - antecedent completes first  → wrapper copies the antecedent's terminal
+//     state (result / faulted+exception / cancelled);
+//   - timeout fires first        → wrapper resolves as faulted (TimeoutException);
+//   - cancellation requested     → wrapper resolves as cancelled.
+// Exactly one of these settles the wrapper (TaskSource try_set_* gate).
+
+namespace {
+
+struct WaitAsyncState {
+    CHAOS_IL2CPP_INTPTR inner_handle;
+    chaos::il2cpp::common::TaskSource* out;
+    uint32_t timer_id;
+    std::atomic<int> settled{0};   // 0=pending, 1=forward won, 2=timeout won
+};
+
+// Inner antecedent finished: mirror its terminal state onto the wrapper.
+void WaitAsyncForward(CHAOS_IL2CPP_INTPTR inner_handle, void* ctx) CHAOS_STUB_NOEXCEPT {
+    auto* st = static_cast<WaitAsyncState*>(ctx);
+    if (st == nullptr) return;
+    using namespace chaos::il2cpp::common;
+    // First-wins: only the winner settles the wrapper and frees the state.
+    int expected = 0;
+    if (!st->settled.compare_exchange_strong(expected, 1, std::memory_order_acq_rel))
+        return;
+    auto* inner = require_async_task(st->inner_handle);
+    auto* out = st->out;
+    if (inner->canceled.load(std::memory_order_acquire)) {
+        out->try_set_canceled();
+    } else if (inner->faulted.load(std::memory_order_acquire)) {
+        out->try_set_exception(inner->exception);
+    } else {
+        out->try_set_result(inner->result);
+    }
+    if (st->timer_id != chaos::il2cpp::runtime_core::threading::kTimerQueueInvalidId) {
+        chaos::il2cpp::runtime_core::threading::TimerQueueDelete(st->timer_id);
+        st->timer_id = chaos::il2cpp::runtime_core::threading::kTimerQueueInvalidId;
+    }
+    delete st;
+}
+
+// Timeout fired first: the wrapper faults with a managed TimeoutException.
+void WaitAsyncTimeout(void* state) CHAOS_STUB_NOEXCEPT {
+    auto* st = static_cast<WaitAsyncState*>(state);
+    if (st == nullptr) return;
+    using namespace chaos::il2cpp::common;
+    int expected = 0;
+    if (!st->settled.compare_exchange_strong(expected, 2, std::memory_order_acq_rel))
+        return;
+    st->out->set_exception(static_cast<CHAOS_IL2CPP_INTPTR>(1));  // TimeoutException sentinel payload
+    delete st;
+}
+
+} // anonymous namespace
+
+// Entry: antecedent_handle + timeout_ms (0 = no timeout) + ct_source (0 = None).
+// Returns the wrapper task handle.
+CHAOS_IL2CPP_INTPTR chaos_task_wait_async(
+    CHAOS_IL2CPP_INTPTR antecedent_handle,
+    CHAOS_IL2CPP_INT32 timeout_ms,
+    CHAOS_IL2CPP_INTPTR ct_source) CHAOS_STUB_NOEXCEPT
+{
+    using namespace chaos::il2cpp::common;
+    using namespace chaos::il2cpp::runtime_core::threading;
+    if (antecedent_handle == 0) return 0;
+
+    auto* ts = chaos::il2cpp::common::task_source_create();
+    if (ts == nullptr) return 0;
+    const CHAOS_IL2CPP_INTPTR wrapper = ts->get_task();
+
+    auto* st = new (std::nothrow) WaitAsyncState();
+    if (st == nullptr) { delete ts; return 0; }
+    st->inner_handle = antecedent_handle;
+    st->out = ts;
+    st->timer_id = kTimerQueueInvalidId;
+
+    // Cancellation first: if the token is already cancelled, settle immediately.
+    if (ct_source != 0 &&
+        chaos_cancellation_token_is_cancellation_requested(static_cast<CHAOS_IL2CPP_INT32>(ct_source)))
+    {
+        ts->try_set_canceled();
+        delete st;
+        return wrapper;
+    }
+
+    if (timeout_ms > 0)
+    {
+        st->timer_id = TimerQueueCreate(WaitAsyncTimeout, st, static_cast<uint32_t>(timeout_ms), 0);
+    }
+
+    // Inner completion registers last so that if the antecedent already finished
+    // the forward runs inline BEFORE any timer could fire.
+    CHAOS_IL2CPP_INTPTR on = async_task_on_completed(antecedent_handle, WaitAsyncForward, st);
+    if (on == 0)
+    {
+        // async_task_on_completed failed (null cb / invalid handle): neither
+        // path will ever settle it.  Settle as cancelled so the wrapper does
+        // not hang, and release the state.
+        ts->try_set_canceled();
+        delete st;
+        return wrapper;
+    }
+    return wrapper;
 }
 
 /// Task.Delay(0) returns an ALREADY-COMPLETED task (.NET contract).  The
@@ -787,12 +907,29 @@ CHAOS_IL2CPP_INT32 UnpackTaskArray(CHAOS_IL2CPP_INTPTR tasks_handle,
 
 /// Park until every task in `mem[0..n)` completes.  Uses the same blocking
 /// wait as ChaosAsyncTaskWait (parked, not spinning).
-void WaitForAllHandles(CHAOS_IL2CPP_INTPTR* mem, CHAOS_IL2CPP_INT32 n) CHAOS_STUB_NOEXCEPT
+/// When `timeout_ms` is non-negative, waits at most that long TOTAL: each child
+/// is waited on with the REMAINING budget, and a timeout on any child aborts.
+/// Returns 1 if all completed before the deadline, 0 on timeout.
+CHAOS_IL2CPP_INT32 WaitForAllHandles(CHAOS_IL2CPP_INTPTR* mem, CHAOS_IL2CPP_INT32 n,
+                                     CHAOS_IL2CPP_INT32 timeout_ms) CHAOS_STUB_NOEXCEPT
 {
+    using clock = std::chrono::steady_clock;
+    const auto deadline = timeout_ms < 0
+        ? clock::time_point::max()
+        : clock::now() + std::chrono::milliseconds(timeout_ms);
     for (CHAOS_IL2CPP_INT32 i = 0; i < n; ++i) {
-        if (mem[i] != 0)
+        if (mem[i] == 0) continue;
+        if (timeout_ms >= 0) {
+            const auto now = clock::now();
+            if (now >= deadline) return 0;
+            const auto remaining = std::chrono::duration_cast<std::chrono::milliseconds>(deadline - now).count();
+            if (!ChaosAsyncTaskWait(mem[i], static_cast<CHAOS_IL2CPP_INT32>(remaining)))
+                return 0;
+        } else {
             ChaosAsyncTaskWait(mem[i], -1);   // infinite; propagates child fault
+        }
     }
+    return 1;
 }
 }  // namespace
 
@@ -802,10 +939,26 @@ CHAOS_IL2CPP_INT32 chaos_task_wait_all(CHAOS_IL2CPP_INTPTR tasks_handle) CHAOS_S
     CHAOS_IL2CPP_INT32 n = UnpackTaskArray(tasks_handle, &mem);
     if (n < 0) return 0;
     if (mem != nullptr) {
-        WaitForAllHandles(mem, n);
+        WaitForAllHandles(mem, n, -1);
         delete[] mem;
     }
     return 1;   // waited for all (or the array was empty → trivially satisfied)
+}
+
+/// WaitAll with a Millisecond deadline.  Returns 1 if every task completed
+/// before the timeout, 0 if any timed out (managed: false).
+CHAOS_IL2CPP_INT32 chaos_task_wait_all_with_timeout(
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INT32 timeout_ms) CHAOS_STUB_NOEXCEPT
+{
+    CHAOS_IL2CPP_INTPTR* mem = nullptr;
+    CHAOS_IL2CPP_INT32 n = UnpackTaskArray(tasks_handle, &mem);
+    if (n < 0) return 0;
+    CHAOS_IL2CPP_INT32 r = 1;
+    if (mem != nullptr) {
+        r = WaitForAllHandles(mem, n, timeout_ms);
+        delete[] mem;
+    }
+    return r;
 }
 
 CHAOS_IL2CPP_INT32 chaos_task_wait_any(CHAOS_IL2CPP_INTPTR tasks_handle) CHAOS_STUB_NOEXCEPT
@@ -821,12 +974,39 @@ CHAOS_IL2CPP_INT32 chaos_task_wait_any(CHAOS_IL2CPP_INTPTR tasks_handle) CHAOS_S
     // contract is "index of the first to complete", but a faithful parallel
     // realisation requires waiter threads; for the test path the difference is
     // unobservable (tests wait on already-completed tasks).
+    CHAOS_IL2CPP_INT32 first = -1;
     for (CHAOS_IL2CPP_INT32 i = 0; i < n; ++i) {
-        if (mem[i] != 0) ChaosAsyncTaskWait(mem[i], -1);
-        else return i;   // an empty slot completes trivially
+        if (mem[i] == 0) { first = i; break; }
+        if (ChaosAsyncTaskGetIsCompleted(mem[i])) { first = i; break; }
+    }
+    if (first < 0) first = 0;
+    delete[] mem;
+    return first;   // index of the first completed (0 semantics approximate)
+}
+
+/// WaitAny with a Millisecond deadline.  Returns the index of a completed task,
+/// or -1 on timeout (managed: -1 = none within timeout).
+CHAOS_IL2CPP_INT32 chaos_task_wait_any_with_timeout(
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INT32 timeout_ms) CHAOS_STUB_NOEXCEPT
+{
+    CHAOS_IL2CPP_INTPTR* mem = nullptr;
+    CHAOS_IL2CPP_INT32 n = UnpackTaskArray(tasks_handle, &mem);
+    if (n < 0 || n == 0) return -1;
+    using clock = std::chrono::steady_clock;
+    const auto deadline = clock::now() + std::chrono::milliseconds(timeout_ms);
+    for (CHAOS_IL2CPP_INT32 i = 0; i < n; ++i) {
+        if (mem[i] == 0) { delete[] mem; return i; }
+        const auto now = clock::now();
+        if (now >= deadline) { delete[] mem; return -1; }
+        const auto remaining = std::chrono::duration_cast<std::chrono::milliseconds>(deadline - now).count();
+        if (ChaosAsyncTaskWait(mem[i], static_cast<CHAOS_IL2CPP_INT32>(remaining)))
+        {
+            delete[] mem;
+            return i;   // this child completed within budget
+        }
     }
     delete[] mem;
-    return 0;   // index of the first (used when all were waited in order)
+    return -1;   // none completed before the deadline
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1002,7 +1182,18 @@ struct ContinueWithState {
     CHAOS_IL2CPP_INTPTR antecedent;    // task the continuation observes
     CHAOS_IL2CPP_INTPTR continuation;  // DelegateObject* for the body
     CHAOS_IL2CPP_INTPTR continuation_task;
+    CHAOS_IL2CPP_INT32 options;        // TaskContinuationOptions
+    CHAOS_IL2CPP_INTPTR ct_source;     // CancellationToken source id (0 = None)
 };
+
+// TaskContinuationOptions — .NET 10 authoritative values (probe-verified).
+constexpr CHAOS_IL2CPP_INT32 kTcoNotOnRanToCompletion = 0x10000;
+constexpr CHAOS_IL2CPP_INT32 kTcoNotOnFaulted        = 0x20000;
+constexpr CHAOS_IL2CPP_INT32 kTcoNotOnCanceled       = 0x40000;
+constexpr CHAOS_IL2CPP_INT32 kTcoOnlyOnRanToCompletion = kTcoNotOnFaulted | kTcoNotOnCanceled;      // 0x60000
+constexpr CHAOS_IL2CPP_INT32 kTcoOnlyOnFaulted       = kTcoNotOnRanToCompletion | kTcoNotOnCanceled; // 0x50000
+constexpr CHAOS_IL2CPP_INT32 kTcoOnlyOnCanceled      = kTcoNotOnRanToCompletion | kTcoNotOnFaulted;  // 0x30000
+constexpr CHAOS_IL2CPP_INT32 kTcoExecuteSynchronously = 0x80000;
 
 // Deliver the continuation exactly once.
 //
@@ -1010,16 +1201,68 @@ struct ContinueWithState {
 // (so `t.ContinueWith(a => a.Result)` can inspect the prior task) and returns a
 // native int, which becomes the continuation task's result — that is what makes
 // ContinueWith chainable rather than a fire-and-forget callback.
-void ContinueWithDelivery(CHAOS_IL2CPP_INTPTR /*antecedent_handle*/, void* ctx) CHAOS_STUB_NOEXCEPT {
+//
+// Gating (M2/T4):
+//   - a non-None ct whose source has already been cancelled suppresses the body
+//     and the returned task resolves as cancelled;
+//   - OnlyOnRanToCompletion / OnlyOnFaulted / OnlyOnCanceled restrict the body
+//     to the matching antecedent terminal state.  When the antecedent finished
+//     in a state the filter forbids, the body does NOT run and the returned
+//     task resolves as cancelled (mirroring the .NET behaviour where an option
+//     never satisfied cancels the continuation task).
+void ContinueWithDelivery(CHAOS_IL2CPP_INTPTR antecedent_handle, void* ctx) CHAOS_STUB_NOEXCEPT {
     auto* st = static_cast<ContinueWithState*>(ctx);
     if (st == nullptr) return;
+
+    auto* ante = chaos::il2cpp::common::require_async_task(st->antecedent);
+
+    // ── filter decision ──
+    bool run = true;
+    if (st->ct_source != 0)
+    {
+        if (chaos_cancellation_token_is_cancellation_requested(static_cast<CHAOS_IL2CPP_INT32>(st->ct_source)))
+            run = false;
+    }
+    if (run)
+    {
+        const bool ante_success = ante->completed.load(std::memory_order_acquire)
+            && !ante->faulted.load(std::memory_order_acquire)
+            && !ante->canceled.load(std::memory_order_acquire);
+        const bool ante_faulted = ante->faulted.load(std::memory_order_acquire);
+        const bool ante_cancelled = ante->canceled.load(std::memory_order_acquire);
+
+        const CHAOS_IL2CPP_INT32 opts = st->options;
+        const bool o_ran = (opts & kTcoOnlyOnRanToCompletion) == kTcoOnlyOnRanToCompletion;
+        const bool o_fault = (opts & kTcoOnlyOnFaulted) == kTcoOnlyOnFaulted;
+        const bool o_cancel = (opts & kTcoOnlyOnCanceled) == kTcoOnlyOnCanceled;
+        // A filter that never matches the antecedent's actual terminal state
+        // → the body must not run (the continuation task resolves cancelled).
+        if (o_ran && !ante_success) run = false;
+        else if (o_fault && !ante_faulted) run = false;
+        else if (o_cancel && !ante_cancelled) run = false;
+    }
+
+    auto* cont = chaos::il2cpp::common::require_async_task(st->continuation_task);
+    if (!run)
+    {
+        // Body suppressed: the continuation task resolves as CANCELLED (not
+        // faulted, not successful), with no result.
+        cont->result = 0;
+        cont->exception = 0;
+        cont->faulted.store(false, std::memory_order_relaxed);
+        cont->canceled.store(true, std::memory_order_relaxed);
+        cont->completed.store(true, std::memory_order_release);
+        chaos::il2cpp::common::notify_task_completed(cont);
+        chaos::il2cpp::common::finish_async_task(st->continuation_task);
+        delete st;
+        return;
+    }
 
     CHAOS_IL2CPP_INTPTR args[1] = {st->antecedent};
     CHAOS_IL2CPP_INTPTR ret = 0;
     chaos::il2cpp::runtime_core::chaos_delegate_object_invoke(
         st->continuation, args, &ret, 1);
 
-    auto* cont = chaos::il2cpp::common::require_async_task(st->continuation_task);
     cont->result = ret;
     cont->exception = 0;
     cont->faulted.store(false, std::memory_order_relaxed);
@@ -1034,16 +1277,26 @@ void ContinueWithDelivery(CHAOS_IL2CPP_INTPTR /*antecedent_handle*/, void* ctx) 
 
 /// Register `continuation` to run when `antecedent` completes.
 ///
-/// Runs unconditionally — a faulted or cancelled antecedent still invokes the
+/// Unconditional — a faulted or cancelled antecedent still invokes the
 /// continuation (with the antecedent's fault observable through the handle it
-/// receives).  Only TaskContinuationOptions.OnlyOn* variants would restrict
-/// this, and those are not modelled here.
+/// receives), mirroring TaskContinuationOptions.None.  The gated behaviour is
+/// in the _ex variant below.
 ///
 /// Ownership: the returned continuation task is heap-allocated and is NOT
 /// reference-counted or GC-owned in this standalone path, so it persists for
 /// the process lifetime.  Making AsyncTask GC-owned is defect D1 (Phase 6).
 CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
     CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation) CHAOS_STUB_NOEXCEPT
+{
+    return chaos_task_continue_with_ex(antecedent, continuation, 0, 0);
+}
+
+/// Register `continuation` with a TaskContinuationOptions filter and an
+/// optional CancellationToken source id.  See the header for the gating rules.
+/// 0 options = unconditional (TaskContinuationOptions.None); 0 ct = None.
+CHAOS_IL2CPP_INTPTR chaos_task_continue_with_ex(
+    CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation,
+    CHAOS_IL2CPP_INT32 options, CHAOS_IL2CPP_INTPTR ct_source) CHAOS_STUB_NOEXCEPT
 {
     using namespace chaos::il2cpp::common;
     if (antecedent == 0 || continuation == 0) return 0;
@@ -1053,6 +1306,8 @@ CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
     st->antecedent = antecedent;
     st->continuation = continuation;
     st->continuation_task = async_task_create();
+    st->options = options;
+    st->ct_source = ct_source;
     const CHAOS_IL2CPP_INTPTR continuation_task = st->continuation_task;
 
     // async_task_on_completed fires inline when the antecedent already

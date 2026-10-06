@@ -97,3 +97,59 @@ void    ChaosDelegateInitialize(CHAOS_IL2CPP_INTPTR delegate_obj, CHAOS_IL2CPP_I
 CHAOS_IL2CPP_INTPTR ChaosDelegateGetTarget(CHAOS_IL2CPP_INTPTR delegate_obj) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_delegate_combine(CHAOS_IL2CPP_INTPTR a, CHAOS_IL2CPP_INTPTR b) noexcept;
 CHAOS_IL2CPP_INTPTR chaos_delegate_remove(CHAOS_IL2CPP_INTPTR source, CHAOS_IL2CPP_INTPTR value) noexcept;
+CHAOS_IL2CPP_INT32 ChaosDbDataReaderExtensionsCanGetColumnSchema(CHAOS_IL2CPP_INTPTR reader) noexcept;
+
+// S31 — System.Net.Sockets.Socket::Send NativeBody wrappers (NT-2; see misc_stubs.cpp).
+// Placeholder semantics: return 0 without touching the socket (real winsock2 impl
+// lands in NT-3/NT-4 chaos_net).  The wrapper unpacks the managed byte[] via
+// get_managed_array before calling these, so `bytes` is a plain pointer + length.
+CHAOS_IL2CPP_INT32 ChaosSocketSendBytes(
+    CHAOS_IL2CPP_INTPTR socket,
+    const CHAOS_IL2CPP_UINT8* bytes,
+    CHAOS_IL2CPP_INTPTR byteLength,
+    CHAOS_IL2CPP_INT32 offset,
+    CHAOS_IL2CPP_INT32 size,
+    CHAOS_IL2CPP_INT32 flags) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosSocketSendBytesError(
+    CHAOS_IL2CPP_INTPTR socket,
+    const CHAOS_IL2CPP_UINT8* bytes,
+    CHAOS_IL2CPP_INTPTR byteLength,
+    CHAOS_IL2CPP_INT32 offset,
+    CHAOS_IL2CPP_INT32 size,
+    CHAOS_IL2CPP_INT32 flags,
+    CHAOS_IL2CPP_INT32* error) noexcept;
+
+// S33 - System.Net.Sockets.Socket::Receive NativeBody wrappers (NT-4; see misc_stubs.cpp).
+// Same contract as Send: receive into the caller-owned buffer, report SocketError
+// via *error, return 0 on failure / bytes received on success.
+CHAOS_IL2CPP_INT32 ChaosSocketReceiveBytes(
+    CHAOS_IL2CPP_INTPTR socket,
+    CHAOS_IL2CPP_UINT8* bytes,
+    CHAOS_IL2CPP_INTPTR byteLength,
+    CHAOS_IL2CPP_INT32 offset,
+    CHAOS_IL2CPP_INT32 size,
+    CHAOS_IL2CPP_INT32 flags) noexcept;
+
+CHAOS_IL2CPP_INT32 ChaosSocketReceiveBytesError(
+    CHAOS_IL2CPP_INTPTR socket,
+    CHAOS_IL2CPP_UINT8* bytes,
+    CHAOS_IL2CPP_INTPTR byteLength,
+    CHAOS_IL2CPP_INT32 offset,
+    CHAOS_IL2CPP_INT32 size,
+    CHAOS_IL2CPP_INT32 flags,
+    CHAOS_IL2CPP_INT32* error) noexcept;
+
+// S34 - System.Net.Sockets.UdpClient::SendAsync(byte[], int, IPEndPoint) NativeBody
+// wrapper target (NT-8).  Returns an ALREADY-COMPLETED Task<int> handle (result 0)
+// for the wire-free fact path; `bytes` is a plain pointer + length unpacked
+// from the managed array by the generated wrapper.
+CHAOS_IL2CPP_INTPTR ChaosUdpClientSendAsync(
+    CHAOS_IL2CPP_INTPTR client,
+    const CHAOS_IL2CPP_UINT8* bytes,
+    CHAOS_IL2CPP_INTPTR byteLength,
+    CHAOS_IL2CPP_INT32 count,
+    CHAOS_IL2CPP_INTPTR endpoint) noexcept;
+// S34 (NT-8): IPEndPoint::.ctor(IPAddress, Int32) — no-op (subject never reads endpoint fields).
+void ChaosIPEndPointCtor(CHAOS_IL2CPP_INTPTR instance, CHAOS_IL2CPP_INTPTR address, CHAOS_IL2CPP_INTPTR port) noexcept;
+

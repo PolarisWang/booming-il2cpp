@@ -118,6 +118,26 @@ CHAOS_IL2CPP_INTPTR chaos_tcs_try_set_result_void(CHAOS_IL2CPP_INTPTR tcs_handle
 // TimerQueue-backed delayed task completion (implemented in async_stubs.cpp).
 // Requires TimerQueueInitialize (via ThreadPoolInitialize / gate thread).
 CHAOS_IL2CPP_INTPTR chaos_task_delay_stub(CHAOS_IL2CPP_INT32 millisecondsTimeout) CHAOS_STUB_NOEXCEPT;
+
+// Task.WaitAsync (M3b) — new wrapper task following `antecedent`, resolving
+// early on `timeout_ms` (0 = none → TimeoutException fault) or an already-
+// cancelled `ct_source` (0 = None → cancelled).  The cancellation path settles
+// immediately when the token is already cancelled; a future-arriving cancel is
+// not polled (no registration) — documented boundary: only pre-cancelled tokens
+// and timeout/antecedent-progression are observed.
+CHAOS_IL2CPP_INTPTR chaos_task_wait_async(
+    CHAOS_IL2CPP_INTPTR antecedent_handle,
+    CHAOS_IL2CPP_INT32 timeout_ms,
+    CHAOS_IL2CPP_INTPTR ct_source) CHAOS_STUB_NOEXCEPT;
+
+// WaitAll / WaitAny with an optional Millisecond deadline (M4/G2).  -1 = the
+// plain infinite variant.  WaitAll returns 1 if all completed before the
+// deadline (0 on timeout); WaitAny returns the index of a completed task
+// (-1 on timeout / empty).
+CHAOS_IL2CPP_INT32 chaos_task_wait_all_with_timeout(
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INT32 timeout_ms) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INT32 chaos_task_wait_any_with_timeout(
+    CHAOS_IL2CPP_INTPTR tasks_handle, CHAOS_IL2CPP_INT32 timeout_ms) CHAOS_STUB_NOEXCEPT;
 CHAOS_IL2CPP_INTPTR chaos_task_delay_timespan_stub(CHAOS_IL2CPP_INT64 ticks) CHAOS_STUB_NOEXCEPT;
 
 // ── Task.WhenAll / WhenAny native combinators (Phase 3 P3-3) ──
@@ -210,7 +230,7 @@ CHAOS_IL2CPP_INTPTR chaos_parallel_for_range_int(
     CHAOS_IL2CPP_INT32 from, CHAOS_IL2CPP_INT32 to,
     CHAOS_IL2CPP_INTPTR action_delegate) CHAOS_STUB_NOEXCEPT;
 
-// ── Task.ContinueWith native combinator (Phase 2 P2-2) ──
+// ── Task.ContinueWith native combinator (Phase 2 P2-2 + M2/T4) ──
 // Registers `continuation` (a DelegateObject taking the antecedent task handle
 // and returning a native int) to run when `antecedent` completes — whether it
 // has already completed, faults, or is cancelled.  Returns a NEW task handle
@@ -218,8 +238,19 @@ CHAOS_IL2CPP_INTPTR chaos_parallel_for_range_int(
 //
 // The continuation is unconditional: it runs for a faulted or cancelled
 // antecedent too, so a cleanup/logging continuation is never silently dropped.
+//
+// The _ex variant gates the run on `options` (TaskContinuationOptions) and
+// `ct_source` (a CancellationToken source id, 0 = None):
+//   - a cancelled token suppresses the body (and the returned task resolves
+//     as cancelled);
+//   - OnlyOnRanToCompletion / OnlyOnFaulted / OnlyOnCanceled restrict the
+//     body to the matching antecedent terminal state (mismatch → the
+//     returned task resolves as cancelled, body never runs).
 CHAOS_IL2CPP_INTPTR chaos_task_continue_with(
     CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation) CHAOS_STUB_NOEXCEPT;
+CHAOS_IL2CPP_INTPTR chaos_task_continue_with_ex(
+    CHAOS_IL2CPP_INTPTR antecedent, CHAOS_IL2CPP_INTPTR continuation,
+    CHAOS_IL2CPP_INT32 options, CHAOS_IL2CPP_INTPTR ct_source) CHAOS_STUB_NOEXCEPT;
 
 // ── TaskFactory.ContinueWhenAll / ContinueWhenAny (Phase 2) ──
 // Compose the existing aggregate combinators with the ContinueWith delivery

@@ -40,6 +40,10 @@ target_link_libraries(chaos::runtime INTERFACE
     "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_hot_update${CMAKE_STATIC_LIBRARY_SUFFIX}"
     "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_eventpipe${CMAKE_STATIC_LIBRARY_SUFFIX}"
     "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_debugger${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_net${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "$<$<CXX_COMPILER_ID:MSVC>:ws2_32.lib>"
+    "$<$<CXX_COMPILER_ID:MSVC>:secur32.lib>"
+    "$<$<CXX_COMPILER_ID:MSVC>:crypt32.lib>"
     "$<$<CXX_COMPILER_ID:MSVC>:concrt.lib>"
     "$<$<CXX_COMPILER_ID:MSVC>:msvcprt.lib>"
 )
@@ -67,6 +71,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
       "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_hot_update${CMAKE_STATIC_LIBRARY_SUFFIX}"
       "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_eventpipe${CMAKE_STATIC_LIBRARY_SUFFIX}"
       "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_debugger${CMAKE_STATIC_LIBRARY_SUFFIX}"
+      "${CHAOS_SDK_ROOT}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}chaos_net${CMAKE_STATIC_LIBRARY_SUFFIX}"
       "-Wl,--end-group"
       "-lnuma"
       "-lpthread"

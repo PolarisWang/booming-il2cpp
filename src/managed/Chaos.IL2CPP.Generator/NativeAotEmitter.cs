@@ -242,7 +242,9 @@ public sealed partial class NativeAotEmitter
 
     private static string BuildGeneratedTranslationUnit(NativeAotTemplateModel templateModel)
     {
-        return BuildGeneratedPage(templateModel, templateModel.Methods, includeRegistration: true, includeObjectModel: true);
+        // 单 TU 小路径（Methods<500，usePayloadSections=false）：没有 payload TU 承接
+        // vtable 段，必须保留在 object model 里，因此显式禁止剥离（否则 LNK1120）。
+        return BuildGeneratedPage(templateModel, templateModel.Methods, includeRegistration: true, includeObjectModel: true, stripVTableData: false);
     }
 
     /// <summary>
@@ -259,7 +261,9 @@ public sealed partial class NativeAotEmitter
         NativeAotTemplateModel templateModel,
         IReadOnlyList<NativeAotMethodTemplateModel> pageMethods,
         bool includeRegistration,
-        bool includeObjectModel)
+        bool includeObjectModel,
+        bool? includeEntryFileScopeCode = null,
+        bool? stripVTableData = null)
     {
         var methodSections = pageMethods
             .Select(BuildMethodSection)
@@ -290,10 +294,10 @@ public sealed partial class NativeAotEmitter
         int objectModelLength = templateModel.ObjectModelCodeBuilder?.Length ?? templateModel.ObjectModelCode?.Length ?? 0;
         if (includeObjectModel && objectModelLength > 200_000)
         {
-            return BuildGeneratedPageDirect(templateModel, methodSections, includes, includeRegistration);
+            return BuildGeneratedPageDirect(templateModel, methodSections, includes, includeRegistration, includeEntryFileScopeCode ?? includeRegistration, stripVTableData ?? true);
         }
 
-        var objectModelSection = BuildObjectModelSection(templateModel);
+        var objectModelSection = BuildObjectModelSection(templateModel, stripVTableData ?? true);
 
         var model = new ScriptObject
         {
@@ -313,7 +317,7 @@ public sealed partial class NativeAotEmitter
                 ? ScribanTemplateRenderer.NormalizeIndentation(templateModel.ModuleRegistrationCode)
                 : "",
             [NativeAotTemplateCatalog.TranslationUnitNamespaceProperty] = templateModel.CodegenNamespace,
-            ["global_declarations"] = includeRegistration
+            ["global_declarations"] = (includeEntryFileScopeCode ?? includeRegistration)
                 ? templateModel.GlobalDeclarations + templateModel.EntryFunctionCode
                 : "",
             ["workload_abi"] = templateModel.WorkloadAbi,
@@ -460,7 +464,8 @@ public sealed partial class NativeAotEmitter
         string? perPageTypeDeclarations = null,
         IReadOnlyList<string>? perPageIncludes = null,
         bool? includeMethodDeclarations = null,
-        bool? includeEntryFileScopeCode = null)
+        bool? includeEntryFileScopeCode = null,
+        bool? stripVTableData = null)
     {
         var sb = BuildGeneratedPageSkeleton(templateModel, includes, includeRegistration,
             perPageTypeDeclarations, perPageIncludes, includeMethodDeclarations,
@@ -479,13 +484,42 @@ public sealed partial class NativeAotEmitter
             // thing would define every `chaos_vtable_*` and `kSlots_*` array twice
             // (C2086 redefinition against the payload TU).
             //
-            // The block is cut by LENGTH rather than by search: the data is always
-            // the model's tail, so no scan of a multi-MB buffer is needed.
-            int vtableTailLength = templateModel.VTableDataCode.Length;
+            // KNOWN-ISSUE-1 (large path): this block used to be cut by LENGTH
+            // (`omBuilder.Length - VTableDataCode.Length`) on the assumption that the
+            // vtable data is always the model's exact tail. It is NOT byte-exact in
+            // every build (Sockets leaked 113 chars of the first vtable group's
+            // extern "C" declaration into page 0 → C2143). Locate the vtable block by
+            // position over a bounded tail window instead, mirroring the fix in
+            // BuildObjectModelSection (small path).
+            //
+            // vtable 尾部数据剥离仅当 vtable 段被独立发射为 payload sections 时进行
+            // (stripVTableData=true，usePayloadSections=true，Methods>=500)：此时 page0
+            // 只渲染前缀，vtable 数据在 payload TU 里（避免与 payload TU 重复定义 C2086）。
+            // 单 TU 小路径 (Methods<500，usePayloadSections=false) 没有 payload TU 承接，
+            // 必须保留完整 vtable 定义（否则 chaos_vtable_*/kSlots_* 只有引用没有定义，
+            // LNK1120 12 unresolved externals）。
+            if (stripVTableData ?? true)
+            {
+            string vtableDataCode = templateModel.VTableDataCode ?? string.Empty;
+            int vtableTailLength = vtableDataCode.Length;
 
             if (templateModel.ObjectModelCodeBuilder is { } omBuilder)
             {
                 int keep = omBuilder.Length - vtableTailLength;
+                if (vtableTailLength > 0 && vtableTailLength <= omBuilder.Length)
+                {
+                    // VTableDataCode is the LAST thing appended to the builder, so the
+                    // vtable block start can be recovered from a bounded tail window
+                    // (never a full multi-GB ToString). If it is found, keep exactly up
+                    // to its start; otherwise fall back to the length cut.
+                    const int TailSearchSlack = 4096;
+                    int windowStart = Math.Max(0, omBuilder.Length - (vtableTailLength + TailSearchSlack));
+                    string tail = omBuilder.ToString(windowStart, omBuilder.Length - windowStart);
+                    int vtableIdx = tail.LastIndexOf(vtableDataCode, StringComparison.Ordinal);
+                    if (vtableIdx >= 0)
+                        keep = windowStart + vtableIdx;
+                }
+
                 int written = 0;
                 foreach (var chunk in omBuilder.GetChunks())
                 {
@@ -497,12 +531,44 @@ public sealed partial class NativeAotEmitter
             }
             else
             {
+                // String path: same position-aware strip as BuildObjectModelSection
+                // (LastIndexOf + TrimEnd fallback), then length cut as last resort.
                 string om = templateModel.ObjectModelCode;
-                sb.Append(vtableTailLength > 0 && vtableTailLength <= om.Length
-                    ? om.AsSpan(0, om.Length - vtableTailLength)
-                    : om.AsSpan());
+                if (vtableTailLength > 0 && vtableTailLength <= om.Length)
+                {
+                    // Locate the vtable block start (the first vtabled type's
+                    // extern declaration) rather than blind-cutting by length:
+                    // the object model keeps a complete extern decl between
+                    // generic-registration and the vtable arrays, so a fixed
+                    // length subtraction can land mid-declaration (KNOWN-ISSUE-1).
+                    int vtableStart = om.LastIndexOf(vtableDataCode, StringComparison.Ordinal);
+                    if (vtableStart > 0)
+                        sb.Append(om.AsSpan(0, vtableStart));
+                    else if (om.EndsWith(vtableDataCode.TrimEnd(), StringComparison.Ordinal))
+                        sb.Append(om.AsSpan(0, om.Length - vtableDataCode.TrimEnd().Length));
+                    else
+                        sb.Append(om.AsSpan(0, om.Length - vtableTailLength));
+                }
+                else
+                {
+                    sb.Append(om.AsSpan());
+                }
             }
             sb.Append('\n');
+            }
+            else
+            {
+                // 单 TU 小路径：保留完整 object model（含 vtable 数据）
+                if (templateModel.ObjectModelCodeBuilder is { } omBuilder)
+                {
+                    foreach (var chunk in omBuilder.GetChunks())
+                        sb.Append(chunk.Span);
+                }
+                else
+                {
+                    sb.Append(templateModel.ObjectModelCode);
+                }
+            }
         }
 
         // Module registration + generic registration (page 0 only)
@@ -569,12 +635,19 @@ public sealed partial class NativeAotEmitter
         NativeAotTemplateModel templateModel,
         string[] methodSections,
         List<string> includes,
-        bool includeRegistration)
+        bool includeRegistration,
+        bool? includeEntryFileScopeCode = null,
+        bool? stripVTableData = null)
     {
         var builder = BuildGeneratedPageToBuilder(
             templateModel, methodSections, includes,
-            includeRegistration, includeObjectModel: true);
-        return builder.ToString().TrimEnd();
+            includeRegistration, includeObjectModel: true,
+            includeEntryFileScopeCode: includeEntryFileScopeCode ?? true,
+            stripVTableData: stripVTableData ?? true);
+        string pageContent = builder.ToString().TrimEnd();
+        builder.Clear();
+        DeduplicateTypeIdMtSymbols(pageContent, builder);
+        return builder.ToString();
     }
 
     /// <summary>

@@ -645,15 +645,24 @@ public sealed partial class NativeAotLoweringPlanner
 			"System.OverflowException" => "System.ArithmeticException",
 			"System.ArithmeticException" => "System.SystemException",
 			"System.SystemException" => "System.Exception",
+			// System.Exception itself derives from System.Object.  Per-family
+			// verification builds never list System.Exception as a real reference
+			// type (it only enters through the raise/catch tables), so the general
+			// object-model path below does not fire and the emitted MethodTable
+			// parent was nullptr - catch(System.Object) could never match any
+			// exception chain.  Map it explicitly so per-family exception chains
+			// (NRE -> SystemException -> Exception -> Object) terminate at Object.
+			"System.Exception" => "System.Object",
 			_ => null,
 		};
 		if (baseName != null)
 		{
 			return "System.Private.CoreLib/" + baseName;
 		}
-		// Any other exception type derives directly from SystemException, EXCEPT
-		// System.Exception itself (which derives from Object and is handled by the
-		// general object-model path when it appears as a real reference type).
+		// Any other exception type derives directly from SystemException. (The
+		// System.Exception -> System.Object link is handled by the switch above;
+		// per-family verification fills it in because System.Exception never
+		// appears as a real reference type there.)
 		if (subjectIdDisplayName.EndsWith("Exception", StringComparison.Ordinal) &&
 			!string.Equals(subjectIdDisplayName, "System.Exception", StringComparison.Ordinal))
 		{

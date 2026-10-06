@@ -631,9 +631,10 @@ public sealed partial class NativeAotLoweringPlanner
 			return cached != null;
 		}
 
-		// === Simple forward shape dispatch (native function call wrapper) ===
+		// === Simple forward / native body shape dispatch (native function call wrapper) ===
 		if (_shapeRegistry.TryMatchShape(callee, out var shapeEntry) &&
-			shapeEntry.Kind == RuntimeHelperShapeRegistry.ShapeKind.SimpleForward)
+			(shapeEntry.Kind == RuntimeHelperShapeRegistry.ShapeKind.SimpleForward ||
+			shapeEntry.Kind == RuntimeHelperShapeRegistry.ShapeKind.NativeBody))
 		{
 			helperDefinition = CreateDefinitionFromShapeEntry(callee, shapeEntry);
 								_externalRuntimeHelperCache[callee] = helperDefinition;
@@ -725,19 +726,19 @@ public sealed partial class NativeAotLoweringPlanner
 		// both the helper DEFINITION and the call-site argument list derive from,
 		// so fixing it here keeps the two in agreement — which is what the previous
 		// attempts at the declaration/emission sites could not achieve.
-		AotCoreIrAbiSlotArtifact[] catchAllAbis;
+		// An instance callee's slot list is receiver + its managed parameters.
+		// The old receiver-only branch produced a 1-slot helper for every
+		// parameterised instance method, but the call site pushes receiver + N
+		// operands (EmitExternalRuntimeTableDispatch binds every slot and emits
+		// FormatAbiInvocationArgumentList) — C2660 against the 1-slot shim.
+		// Matches GitLab main netstack catch-all exactly.
+		int catchAllArity = InferParameterCountFromSubjectId(callee);
 		if (catchAllReceiverSlot != null)
-		{
-			catchAllAbis = new AotCoreIrAbiSlotArtifact[] { catchAllReceiverSlot };
-		}
-		else
-		{
-			int catchAllArity = InferParameterCountFromSubjectId(callee);
-			catchAllAbis = catchAllArity > 0
-				? CreateLegacyAbiParameterSlots(catchAllArity)
-					.ToArray()
-				: Array.Empty<AotCoreIrAbiSlotArtifact>();
-		}
+			catchAllArity++;   // receiver + parameters
+		AotCoreIrAbiSlotArtifact[] catchAllAbis = catchAllArity > 0
+			? CreateLegacyAbiParameterSlots(catchAllArity)
+				.ToArray()
+			: Array.Empty<AotCoreIrAbiSlotArtifact>();
 		var catchAllSignature = FormatAbiSlotParameterSignature(catchAllAbis);
 		var catchAllRawArgs = catchAllReceiverSlot == null
 			? EmptyRawArgumentIndices
@@ -947,14 +948,27 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			returnType = "CHAOS_IL2CPP_INTPTR";
 		}
-		var bodyLines = (entry.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void || ctorReturnsHandle)
-			? new[] { $"    return {entry.NativeFnSymbol}({args});" }
-			: new[] { $"    {entry.NativeFnSymbol}({args});" };
+		// NativeBody entries may supply custom wrapper body lines (e.g. to unpack a
+		// byte[] slot into (element pointer, length) before forwarding, or to wrap a
+		// delegate slot into a ChaosManagedHandle).  When WrapperBodyLines is null,
+		// fall back to the plain forward: call the native symbol with the ABI slots
+		// verbatim, returning its value for non-void returns.
+		var bodyLines = entry.WrapperBodyLines is { Count: > 0 }
+			? entry.WrapperBodyLines
+			: (entry.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void || ctorReturnsHandle)
+				? new[] { $"    return {entry.NativeFnSymbol}({args});" }
+				: new[] { $"    {entry.NativeFnSymbol}({args});" };
 		return new ExternalRuntimeHelperDefinition(callee, symbol,
 			RenderSimpleExternalRuntimeHelper(returnType, symbol, parameterSignature, bodyLines),
 			effectiveAbis, entry.ReturnAbi, effectiveRawArgs,
 			entry.ReferencedStaticFieldSubjectIds,
-			DirectNativeSymbol: entry.NativeFnSymbol,
+			// SimpleForward forwards directly to the native symbol.  NativeBody treats
+			// the generated wrapper as the translation point (ABI slots -> semantic
+			// arguments, e.g. byte[] -> (ptr,len) or delegate -> ChaosManagedHandle),
+			// so call sites must invoke the wrapper itself rather than the native fn.
+			DirectNativeSymbol: entry.Kind == RuntimeHelperShapeRegistry.ShapeKind.NativeBody
+				? symbol
+				: entry.NativeFnSymbol,
 			CtorReturnsNativeHandle: ctorReturnsHandle);
 	}
 
@@ -1144,6 +1158,12 @@ public sealed partial class NativeAotLoweringPlanner
 		"System.Collections.IEnumerator",
 		"IEnumerable",
 		"IEnumerator",
+		// Net-stack (NT-2+) — Socket instance methods (Send/Connect/Poll/…) are
+		// cross-assembly callees whose subject-id spelling is the bare short name
+		// "Socket" (e.g. "System.Net.Sockets/Socket::Send:..."), so the receiver
+		// slot must be injected for that spelling.
+		"Socket",
+		"System.Net.Sockets.Socket",
 	};
 
 	/// <summary>

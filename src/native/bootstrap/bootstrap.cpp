@@ -196,6 +196,30 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
     // Register T4 SEH vectored exception handler for native code exception dispatch.
     chaos::il2cpp::jit::RegisterJitSehHandler();
 
+    // ── Register AOT hotpatch dispatch table (unconditional) ──
+    //
+    // Hotpatch module registration must NOT depend on generic_type_count:
+    // chunks with no generic instantiations (e.g. System.Net.Http Headers)
+    // still export chaos_il2cpp_aot_hotpatch_module, and ApplyPatchFromMemoryEx
+    // resolves patch targets by name through HotpatchNameRegistry.  Without
+    // this registration every patch application fails Phase-1 lookup and the
+    // hotupdate stage reports 0 active patches (semantic_changed == 0).
+    if (g_bootstrap_state.metadata_registration != nullptr)
+    {
+        // Route the hotpatch dispatch table only (no generic data here).
+        chaos::il2cpp::runtime_core::ModuleLifecycleManager::Get()->RegisterAotModuleData(
+            chaos_il2cpp_aot_hotpatch_module,
+            nullptr);
+
+        // P1-B: Populate global method table from hotpatch dispatch entries.
+        // Must happen AFTER RegisterAotModuleData (which registers modules with
+        // HotpatchNameRegistry) so PopulateMethodTableFromHotpatch can iterate
+        // all registered modules' dispatch tables.  This enables the
+        // ResolveMethodTableByModuleSlot fallback in patch_method_lower.cpp
+        // for non-virtual calls where PrecacheCallTarget's hotpath missed.
+        chaos::il2cpp::method_table::PopulateMethodTableFromHotpatch();
+    }
+
     // ── Register AOT generic type instantiations and method contexts ──
     //
     // The codegen emits GenericTypeRegistrationEntryV0[] and
@@ -236,19 +260,11 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
             g_bootstrap_state.metadata_registration->method_aot_entry_args);
         aot_reg.method_aot_entry_arg_count = g_bootstrap_state.metadata_registration->method_aot_entry_arg_count;
 
-        // Route both hotpatch dispatch table and generic data through
-        // ModuleLifecycleManager for unified registration.
+        // Register generic data only; the hotpatch dispatch table is routed
+        // unconditionally above (survives generic_type_count == 0 chunks).
         chaos::il2cpp::runtime_core::ModuleLifecycleManager::Get()->RegisterAotModuleData(
-            chaos_il2cpp_aot_hotpatch_module,
+            nullptr,
             &aot_reg);
-
-        // P1-B: Populate global method table from hotpatch dispatch entries.
-        // Must happen AFTER RegisterAotModuleData (which registers modules with
-        // HotpatchNameRegistry) so PopulateMethodTableFromHotpatch can iterate
-        // all registered modules' dispatch tables.  This enables the
-        // ResolveMethodTableByModuleSlot fallback in patch_method_lower.cpp
-        // for non-virtual calls where PrecacheCallTarget's hotpath missed.
-        chaos::il2cpp::method_table::PopulateMethodTableFromHotpatch();
 
         // Register AOT method entries for runtime QueryAotMethod.
         if (aot_reg.method_aot_entry_count > 0u) {
