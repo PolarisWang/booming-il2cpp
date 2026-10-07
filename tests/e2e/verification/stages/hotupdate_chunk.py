@@ -646,7 +646,22 @@ def run_hotupdate_chunk(ctx: ChunkContext, stages: dict[str, StageResult]) -> St
                         # FP-8: Pass subject indices to align sentinel values with baseline.
                         hu_indices = metadata.get("hotupdateMethodIndices")
                         if hu_indices:
-                            extract_cmd.extend(["--subject-indices", ",".join(str(i) for i in hu_indices)])
+                            # Exclude PhantomSubject methods (no AOT body, e.g. marshaller
+                            # Free_2_void_0, VirtualMethodTableInfo.Deconstruct). They are
+                            # skipped by _regenerate_host_arrays, so including them here
+                            # makes patch.patchdata longer than the host arrays ->
+                            # ApplyPatchFromMemoryEx Phase-1 tail overflow (i >= method_count)
+                            # -> unresolvable -> transactional abort -> 0 patches applied.
+                            hu_methods = metadata.get("methods") or []
+                            patchable_indices = [
+                                i for i in hu_indices
+                                if i < len(hu_methods)
+                                and hu_methods[i].get("bodyAvailability") != "PhantomSubject"
+                            ]
+                            if not patchable_indices:
+                                # Defensive: metadata without bodyAvailability -> old behaviour.
+                                patchable_indices = hu_indices
+                            extract_cmd.extend(["--subject-indices", ",".join(str(i) for i in patchable_indices)])
                             extract_cmd.extend(["--subject-only"])
                         extract_result = subprocess.run(
                             extract_cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=120)
