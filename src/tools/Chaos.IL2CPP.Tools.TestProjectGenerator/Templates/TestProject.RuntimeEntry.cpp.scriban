@@ -282,7 +282,16 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchFromFile(const ch
         kPatchDataHostTypeNames,
         kPatchDataHostMethodNames,
         kPatchDataCount);
-    std::free(data);
+    // NOTE: do NOT free `data` here.  ApplyPatchFromMemoryEx borrows the
+    // buffer: the returned PatchContext keeps pointers into it
+    // (signature_blob / aot_core_ir_json / reg_ir_data are offsets resolved
+    // against the patch data header) for the whole hotupdate run.  Freeing it
+    // caused a heap-state-dependent use-after-free in CacheSignature during
+    // patched dispatch (security-cryptography-2 hotupdate: 788 assert
+    // failures that flipped with the debug heap).  Keep it alive for the
+    // process lifetime - this is a verification entry exe, so the leak is
+    // intentional.
+
     if (ctx == nullptr) {
         std::fprintf(stderr, "WARN: ApplyPatchFromMemoryEx returned null (no patches applied)\n");
     } else {

@@ -827,25 +827,36 @@ public sealed partial class NativeAotLoweringPlanner
                     Resolver: (planner, callee, typeArgs) =>
                     {
                         var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                        bool hasManagedArg = typeArgs != null && typeArgs.Count > 0;
-                        // Placeholder ignores the managed value; but the call site still
-                        // passes it, so model a native-int slot when a type arg exists.
-                        // Was CreateInt32AbiSlot (32-bit), but the managed arg is an object
-                        // reference (pointer-sized).  On 64-bit platforms, a 32-bit slot
-                        // would misalign the ABI layout relative to the non-intrinsic
-                        // C++ signature — use NativeInt for pointer-width correctness.
+                        // Arity must be derived from the callee SubjectId, not from
+                        // typeArgs: the helper DECLARATION is emitted through a
+                        // resolution where typeArgs is null on some paths, while the
+                        // call-site resolution carries [T].  Gating the ABI shape on
+                        // typeArgs produced a 0-param declaration paired with a
+                        // 1-arg call site (C2660, System.Runtime.InteropServices
+                        // global-ns).  ConvertToUnmanaged(T) always takes exactly
+                        // one managed value; size everything from the real arity.
+                        var paramTypes = GetMethodParameterTypesFromSubjectId(callee);
+                        var argCount = Math.Max(1, paramTypes.Count);
+                        var abiSlots = new List<AotCoreIrAbiSlotArtifact>();
+                        var paramSigParts = new List<string>();
+                        for (int i = 0; i < argCount; i++)
+                        {
+                            abiSlots.Add(CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType));
+                            paramSigParts.Add($"CHAOS_IL2CPP_INTPTR chaos_arg_{i}");
+                        }
+                        // Placeholder ignores the managed value; the args are
+                        // consumed off the eval stack and deliberately unused.
+                        var bodyLines = new List<string>();
+                        for (int i = 0; i < argCount; i++)
+                            bodyLines.Add($"    (void)chaos_arg_{i};");
+                        bodyLines.Add("    return ChaosComInterfaceMarshallerConvertToUnmanaged();");
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
-                            hasManagedArg ? "CHAOS_IL2CPP_INTPTR chaos_arg_0" : "",
-                        [
-                            "    return ChaosComInterfaceMarshallerConvertToUnmanaged();",
-                        ]);
+                            string.Join(", ", paramSigParts),
+                            bodyLines.ToArray());
                         return new GenericShapeResolution(src, symbol,
-                            hasManagedArg
-                                ? new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType))
-                                : Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(abiSlots.ToArray()),
                             CreateNativeIntAbiSlot(),  // returns void*/native pointer
-                            hasManagedArg ? new HashSet<int> { 0 } : EmptyRawArgumentIndices);
+                            new HashSet<int>(Enumerable.Range(0, argCount)));
                     }));
             }
 

@@ -1001,16 +1001,17 @@ CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetRuntimeInterfaceAsIntPtr(CHAOS_IL2
 
 // GetRuntimeInterfaceAsObject — not available in AOT, returns 0.
 //
-// Returns INTPTR (0) rather than void even though the managed member is void and
-// the real result is written through retSlot: the generated shape dispatch wraps
-// every helper in reinterpret_cast<CHAOS_IL2CPP_INTPTR>(...), which is
-// ill-formed over a void expression.  See the ABI note in async_stubs.h.
-CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2, CHAOS_IL2CPP_INTPTR retSlot) noexcept
+// Takes two INTPTR args to match the shape registry's SimpleForward arity
+// (GetRuntimeInterfaceAsObject: [Guid, Guid] -> object).  The generated forward
+// helper passes 2 args; a 3-arg (retSlot) stub caused C2660 at the call site.
+// Returns INTPTR (0) rather than void: the generated shape dispatch wraps every
+// helper in reinterpret_cast<CHAOS_IL2CPP_INTPTR>(...), which is ill-formed
+// over a void expression.  See the ABI note in async_stubs.h.
+CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetRuntimeInterfaceAsObject(CHAOS_IL2CPP_INTPTR q1, CHAOS_IL2CPP_INTPTR q2) noexcept
 {
-    (void)q1; (void)q2; (void)retSlot;
+    (void)q1; (void)q2;
     return 0;
 }
-
 // GetSystemVersion() → "v10.0.6"
 CHAOS_IL2CPP_INTPTR ChaosRuntimeEnvironmentGetSystemVersion(void) noexcept
 {
