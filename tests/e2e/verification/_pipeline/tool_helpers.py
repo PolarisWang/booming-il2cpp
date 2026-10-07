@@ -8,6 +8,7 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 import time
 from pathlib import Path
 
@@ -418,3 +419,55 @@ def detect_tfm(dll_path: Path) -> str:
     if m:
         return f"net{m.group(1)}.{m.group(2)}"
     return "net10.0"
+
+
+def tpg_build_dir(project_dir: Path, default_name: str = "build") -> Path:
+    """Return the cmake build directory TPG uses for a project dir.
+
+    TPG (Windows) relocates the cmake -B output out of the deep project tree
+    into %TEMP%\\chaos-tpg-builds\\<hash>\\build* to dodge MAX_PATH (FTK1011
+    FileTracker tlog failures), and records the choice in
+    <project_dir>/tpg-build-dir.txt.  Read that marker (single source of truth
+    — no C#/Python hash re-derivation) instead of re-computing; fall back to
+    the legacy in-tree <project_dir>/<default_name> when the marker is absent.
+    """
+    marker = project_dir / "tpg-build-dir.txt"
+    if marker.is_file():
+        try:
+            text = marker.read_text(encoding="utf-8").strip()
+            if text:
+                p = Path(text)
+                tail = _tpg_marker_tail(p)
+                if tail is not None:
+                    try:
+                        p.stat()
+                        ok = True
+                    except OSError:
+                        ok = False  # PermissionError or missing -> stale root
+                    if not ok:
+                        p = Path(tempfile.gettempdir()) / tail
+                        try:
+                            marker.write_text(str(p), encoding="utf-8")
+                        except OSError:
+                            pass
+                return p
+        except OSError:
+            pass
+    return project_dir / default_name
+
+
+def _tpg_marker_tail(p: Path):
+    """If p lives under a chaos-tpg-builds dir, return p relative to that dir
+    (chaos-tpg-builds\<hash>\<name>), else None."""
+    try:
+        parts = list(p.parts)
+    except OSError:
+        return None
+    idx = -1
+    for i, part in enumerate(parts):
+        if part.lower() == "chaos-tpg-builds":
+            idx = i
+            break
+    if idx >= 0 and idx < len(parts) - 1:
+        return Path(*parts[idx:])
+    return None

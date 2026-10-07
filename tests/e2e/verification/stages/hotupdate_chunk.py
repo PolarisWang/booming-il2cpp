@@ -35,7 +35,7 @@ _TESTING = str(Path(__file__).resolve().parents[3])
 if _TESTING not in sys.path:
     sys.path.insert(0, _TESTING)
 
-from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
+from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm, tpg_build_dir
 
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
@@ -114,9 +114,22 @@ def _build_patch_dll(patch_output: Path, patch_dll: Path, target_dll: Path | Non
         # party DLLs, etc.).
         dotnet_shared = os.path.join(
             os.environ.get("DOTNET_ROOT", "/usr/share/dotnet"), "shared")
+        # On Windows DOTNET_ROOT is usually unset, so the fallback is a Linux
+        # path that never matches a real target.  Detect the shared framework
+        # robustly: a DLL under <dotnet-root>/shared/<framework>/ (resolved via
+        # the actual dotnet binary when available, or by the literal path
+        # component regardless of platform).
+        real_dotnet_shared = None
+        _dotnet_exe = shutil.which("dotnet")
+        if _dotnet_exe:
+            real_dotnet_shared = os.path.join(
+                os.path.dirname(os.path.realpath(_dotnet_exe)), "shared")
         target_is_framework = (
             target_dll.stem == "System.Private.CoreLib" or
-            (dotnet_shared in str(target_dll))
+            (dotnet_shared in str(target_dll)) or
+            (real_dotnet_shared is not None
+             and real_dotnet_shared in str(target_dll)) or
+            "shared" in target_dll.parts
         )
         if not target_is_framework:
             # Reference the target DLL so patch code can resolve types
@@ -324,7 +337,7 @@ def _incremental_rebuild(ctx) -> bool:
         (cross-TU duplicate symbols are a hard error there; /FORCE:MULTIPLE is a
         cl.exe/link.exe feature). This is a legitimate SKIP, not a failure.
     """
-    build_dir = ctx.chunk_dir / "native" / "build"
+    build_dir = tpg_build_dir(ctx.chunk_dir / "native", "build")
     native_dir = ctx.chunk_dir / "native"
     src_file = native_dir / "patch-host-arrays.cpp"
     if not build_dir.exists() or not src_file.exists():

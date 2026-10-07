@@ -247,7 +247,9 @@ CHAOS_IL2CPP_INTPTR ChaosHmacMd5(CHAOS_IL2CPP_INTPTR key, CHAOS_IL2CPP_INTPTR da
 // ── RNG GetBytes(int) ──
 CHAOS_IL2CPP_INTPTR ChaosCngGetBytes(CHAOS_IL2CPP_INT32 count) noexcept
 {
-    if (count <= 0) return 0;
+    // .NET semantics: GetBytes(0) returns a non-null empty byte[] (Array.Empty<byte>);
+    // only a negative count is invalid (would throw ArgumentOutOfRangeException).
+    if (count < 0) return 0;
     // Allocate managed byte[] and fill with cryptographically strong random
     // bytes via the system-preferred RNG (mirrors ChaosCngFillRandom).
     auto result = alloc_byte_array(static_cast<CHAOS_IL2CPP_SIZE>(count));

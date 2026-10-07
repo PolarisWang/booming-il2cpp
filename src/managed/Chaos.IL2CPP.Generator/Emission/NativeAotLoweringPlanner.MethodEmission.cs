@@ -323,7 +323,22 @@ public sealed partial class NativeAotLoweringPlanner
         //
         // The scope is RAII, so the thread-local is restored on every exit path
         // (early return and exception unwind included).
-        if (MethodCallsAssemblyAccessor(instructions))
+        //
+        // C2712-guard: MSVC forbids __try (SEH) in any function that contains
+        // an object whose destructor requires object unwinding - and
+        // ChaosExecutingImageScope is exactly such an object.  Subject methods
+        // without EH regions are wrapped below in CHAOS_EH_TRY (SEH __try on
+        // Windows), so emitting the scope there breaks the build with C2712
+        // (observed in System.ComponentModel.TypeConverter/component-model and
+        // System.Runtime.InteropServices/global-ns).  For those methods skip the
+        // scope: GetExecutingAssembly/GetCallingAssembly then read the ambient
+        // TLS image (usually the harness's), the same fallback the subject had
+        // before the REF-RISK-7 scope was added.
+        bool _isSubjectMethod = method.SubjectId is not null &&
+            (method.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) ||
+             method.SubjectId.StartsWith("Chaos.TestFramework.Sdk/", StringComparison.Ordinal));
+        bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0 && (method.Instructions?.Any(i => i.Callee != null) == true);
+        if (MethodCallsAssemblyAccessor(instructions) && !_wrapInTryCatch)
         {
             builder.AppendLine("    ChaosExecutingImageScope chaos_executing_image_scope(");
             builder.AppendLine("        chaos_executing_image_handle());");
@@ -466,10 +481,6 @@ public sealed partial class NativeAotLoweringPlanner
         // the fallback throws a C++ exception — caught here, returning default.
         // Wrap subject methods w/o EH regions in try/catch to prevent
         // C++ exceptions from propagating to the fact-json __except handler.
-        bool _isSubjectMethod = method.SubjectId is not null &&
-            (method.SubjectId.StartsWith("CombinedSubjects/", StringComparison.Ordinal) ||
-             method.SubjectId.StartsWith("Chaos.TestFramework.Sdk/", StringComparison.Ordinal));
-        bool _wrapInTryCatch = _isSubjectMethod && method.ExceptionRegionCount == 0 && (method.Instructions?.Any(i => i.Callee != null) == true);
         // EH-RULE-1: go through the CHAOS_EH_* abstraction, never a bare C++
         // try/catch.  chaos/eh.h selects for the active mode:
         //   default  → try { } catch (const chaos_managed_exception&)

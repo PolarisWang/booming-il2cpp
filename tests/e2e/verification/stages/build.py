@@ -32,7 +32,7 @@ _TESTING = str(Path(__file__).resolve().parents[3])
 if _TESTING not in sys.path:
     sys.path.insert(0, _TESTING)
 
-from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm
+from _pipeline.tool_helpers import tool_dll, ensure_tool_built, detect_tfm, tpg_build_dir
 
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
@@ -885,6 +885,7 @@ def _finalize_jit_copy(jit_output: Path, native_dir: Path) -> bool:
     entry-jit.exe.  Returns True if a fresh JIT entry was installed, else False.
     """
     cands = [jit_output / "entry-jit.exe",
+             tpg_build_dir(jit_output, "build_jit") / "RelWithDebInfo" / "chaos_entry.exe",
              jit_output / "build_jit" / "RelWithDebInfo" / "chaos_entry.exe"]
     best = None
     for cand in cands:
@@ -1638,7 +1639,7 @@ def run_build(ctx: ChunkContext, stages: dict[str, StageResult]) -> StageResult:
     # -- Clean stale cmake build cache --
     # Prevents stale CMakeCache.txt from a previous run with a different source
     # layout (e.g., another chunk) from polluting this build.
-    native_build_dir = ctx.native_dir / "build"
+    native_build_dir = tpg_build_dir(ctx.native_dir, "build")
     if native_build_dir.exists():
         print(f"  [build] Cleaning stale cmake build dir: {native_build_dir}")
         shutil.rmtree(native_build_dir, ignore_errors=True)

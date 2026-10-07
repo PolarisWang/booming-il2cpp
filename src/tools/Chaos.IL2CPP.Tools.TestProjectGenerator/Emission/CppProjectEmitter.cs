@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Chaos.IL2CPP.Tools.TestProjectGenerator.Codegen;
@@ -321,6 +323,32 @@ public sealed class CppProjectEmitter
     }
 
     /// <summary>
+    /// <summary>
+    /// Resolve the cmake build directory (-B) for a project.
+    ///
+    /// On Windows the build dir is relocated out of the (deep) project tree into
+    /// %TEMP%\chaos-tpg-builds\&lt;hash&gt;\&lt;build|build_jit&gt;. CMake's compiler-ABI
+    /// probe (CMakeScratch\TryCompile-*) plus MSBuild FileTracker .tlog paths easily
+    /// exceed MAX_PATH (260) when the build dir sits under a deep artifacts tree,
+    /// failing configure with FTK1011 ("could not create the new file tracking log
+    /// file ... The system cannot find the path specified"). Sources stay in place
+    /// (projectDir) — only the -B output relocates (verified with both VS 2022 and
+    /// Ninja generators against a short -B root). Linux keeps the in-tree dir.
+    /// Override the root with %CHAOS_TPG_BUILD_ROOT%.
+    /// </summary>
+    private static string ResolveBuildDirectory(string projectDir, string buildDirName)
+    {
+        if (!OperatingSystem.IsWindows())
+            return Path.Combine(projectDir, buildDirName);
+
+        var root = Environment.GetEnvironmentVariable("CHAOS_TPG_BUILD_ROOT");
+        if (string.IsNullOrWhiteSpace(root))
+            root = Path.Combine(Path.GetTempPath(), "chaos-tpg-builds");
+        var key = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(projectDir)))[..12];
+        return Path.Combine(root, key, buildDirName);
+    }
+
+    /// <summary>
     /// Run cmake configure + build to produce the native executable.
     /// Returns the path to entry.exe on success, or null on failure.
     /// </summary>
@@ -401,7 +429,16 @@ public sealed class CppProjectEmitter
 
         // ── Separate build dirs for AOT vs JIT ──
         var buildDirName = isJit ? "build_jit" : "build";
-        var buildDir = new DirectoryInfo(Path.Combine(projectDir, buildDirName));
+        var buildDir = new DirectoryInfo(ResolveBuildDirectory(projectDir, buildDirName));
+        // Record the chosen build dir — single source of truth for out-of-process
+        // stages (nightly hotupdate incremental rebuild) that must reuse this
+        // cmake cache. Written even when the subsequent build fails, so the
+        // pipeline can still clean up the relocated directory.
+        try
+        {
+            File.WriteAllText(Path.Combine(projectDir, "tpg-build-dir.txt"), buildDir.FullName);
+        }
+        catch { /* best-effort */ }
         var cachePath = Path.Combine(buildDir.FullName, "CMakeCache.txt");
         var cmakeListsPath = Path.Combine(projectDir, "CMakeLists.txt");
         var needsConfigure = !File.Exists(cachePath);
@@ -590,6 +627,7 @@ public sealed class CppProjectEmitter
             "entry.exe",     // AOT binary — must survive JIT cleanup for subsequent pipeline stages
             "entry-aot.exe", // AOT backup — must survive JIT cleanup for restore
             "aot-core-ir.jdata", // JIT data file — must survive cleanup for runtime ChaosJitDataLoad
+            "tpg-build-dir.txt",	// build-dir marker — must survive for hotupdate incremental rebuild
             "CMakeLists.txt",       // needed by hotupdate rebuild
             "CMakePresets.json",    // needed by hotupdate rebuild
             "runtime-entry.cpp",             // needed by hotupdate cmake rebuild
