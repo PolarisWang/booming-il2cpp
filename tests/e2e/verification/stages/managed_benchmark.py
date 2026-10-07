@@ -136,6 +136,7 @@ _UNSAFE_BENCHMARK_PATTERNS: list[str] = [
     "Debug.Assert",                    # Debug.Assert(false) terminates on .NET Core in some configurations
     "Debug.Fail",                      # Debug.Fail() always terminates the process with "Assertion failed."
     "SpinWait.SpinUntil",              # SpinUntil(() => default(bool)) spins forever since condition always returns false
+    "Marshalling.ComObject",          # auto-generated Create<ComObject>() on GetUninitializedObject instance — ComObject.Finalize() NREs on a null vtable during GC (0xe0434352, all TFMs)
 ]
 
 
